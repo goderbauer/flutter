@@ -23,28 +23,77 @@ final RegExp ignorePattern = RegExp(r'// *ignore:');
 final RegExp ignoreForFilePattern = RegExp(r'// *ignore_for_file:');
 final RegExp asDynamicPattern = RegExp(r'as dynamic');
 
-Future<double> findCostsForFile(File file) async {
+class _CostTotals {
+  _CostTotals(this.item);
+
+  final String item;
+
+  double todoCost = 0.0;
+  double ignoreCost = 0.0;
+  double pythonCost = 0.0;
+  double skipCost = 0.0;
+  double ignoreForFileCost = 0.0;
+  double asDynamicCost = 0.0;
+
+  double get total => todoCost + ignoreCost + pythonCost + skipCost + ignoreForFileCost + asDynamicCost;
+
+  String _toCvsLine(String costtype, double cost) => '$costtype, $item, $cost';
+
+  String toCsv() {
+    return '${_toCvsLine('todoCost', todoCost)}\n'
+        '${_toCvsLine('ignoreCost', ignoreCost)}\n'
+        '${_toCvsLine('pythonCost', pythonCost)}\n'
+        '${_toCvsLine('skipCost', skipCost)}\n'
+        '${_toCvsLine('ignoreForFileCost', ignoreForFileCost)}\n'
+        '${_toCvsLine('asDynamicCost', asDynamicCost)}';}
+
+  static String cvsHeader() {
+    return 'costype,category,cost';
+  }
+}
+
+Map<String, _CostTotals> _costs = <String, _CostTotals>{};
+
+_CostTotals getTotalsForFile(String entry) {
+  if (entry.startsWith('examples/')) {
+    return _costs.putIfAbsent('examples', () => _CostTotals('examples'));
+  }
+  if (entry.startsWith('packages/flutter/lib/src/material/') || entry.startsWith('packages/flutter/test/material/')) {
+    return _costs.putIfAbsent('flutter/material', () => _CostTotals('flutter/material'));
+  }
+  if (entry.startsWith('packages/flutter/lib/src/cupertino/') || entry.startsWith('packages/flutter/test/cupertino/')) {
+    return _costs.putIfAbsent('flutter/cupertino', () => _CostTotals('flutter/cupertino'));
+  }
+  if (entry.startsWith('packages/flutter/')) {
+    return _costs.putIfAbsent('flutter/framework', () => _CostTotals('flutter/framework'));
+  }
+  if (entry.startsWith('packages/')) {
+    final String name = entry.split('/')[1];
+    return _costs.putIfAbsent(name, () => _CostTotals(name));
+  }
+  return _costs.putIfAbsent('other', () => _CostTotals('other'));
+}
+
+Future<void> findCostsForFile(File file, _CostTotals totals) async {
   if (path.extension(file.path) == '.py')
-    return pythonCost;
+    totals.pythonCost += pythonCost;
   if (path.extension(file.path) != '.dart' &&
       path.extension(file.path) != '.yaml' &&
       path.extension(file.path) != '.sh')
-    return 0.0;
+    return;
   final bool isTest = file.path.endsWith('_test.dart');
-  double total = 0.0;
   for (String line in await file.readAsLines()) {
     if (line.contains(todoPattern))
-      total += todoCost;
+      totals.todoCost += todoCost;
     if (line.contains(ignorePattern))
-      total += ignoreCost;
+      totals.ignoreCost += ignoreCost;
     if (line.contains(ignoreForFilePattern))
-      total += ignoreForFileCost;
+      totals.ignoreForFileCost += ignoreForFileCost;
     if (line.contains(asDynamicPattern))
-      total += asDynamicCost;
+      totals.asDynamicCost += asDynamicCost;
     if (isTest && line.contains('skip:'))
-      total += skipCost;
+      totals.skipCost += skipCost;
   }
-  return total;
 }
 
 Future<double> findCostsForRepo() async {
@@ -53,13 +102,19 @@ Future<double> findCostsForRepo() async {
     <String>['ls-files', '--full-name', flutterDirectory.path],
     workingDirectory: flutterDirectory.path,
   );
-  double total = 0.0;
-  await for (String entry in git.stdout.transform<String>(utf8.decoder).transform<String>(const LineSplitter()))
-    total += await findCostsForFile(File(path.join(flutterDirectory.path, entry)));
+  await for (String entry in git.stdout.transform<String>(utf8.decoder).transform<String>(const LineSplitter())) {
+    await findCostsForFile(File(path.join(flutterDirectory.path, entry)), getTotalsForFile(entry));
+  }
   final int gitExitCode = await git.exitCode;
   if (gitExitCode != 0)
     throw Exception('git exit with unexpected error code $gitExitCode');
-  return total;
+  print(_CostTotals.cvsHeader());
+  for (_CostTotals v in _costs.values) {
+    if (v.total != 0.0) {
+      print(v.toCsv());
+    }
+  }
+  return _costs.values.fold<double>(0.0, (double total, _CostTotals c) => total += c.total);
 }
 
 Future<int> countDependencies() async {
