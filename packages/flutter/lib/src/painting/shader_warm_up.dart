@@ -8,6 +8,9 @@ import 'dart:ui' as ui;
 
 import 'package:flutter/foundation.dart';
 
+import 'alignment.dart';
+import 'gradient.dart';
+
 /// Interface for drawing an image to warm up Skia shader compilations.
 ///
 /// When Skia first sees a certain type of draw operation on the GPU, it needs
@@ -215,5 +218,23 @@ class DefaultShaderWarmUp extends ShaderWarmUp {
       canvas.translate(drawCallSpacing, 0.0);
     }
     canvas.translate(0.0, drawCallSpacing);
+
+    const ui.Rect rect = ui.Rect.fromLTRB(10, 10, 320, 240);
+    final ui.Shader s = const LinearGradient(
+      begin: AlignmentDirectional(0.90, 0.0),
+      end: AlignmentDirectional.centerEnd,
+      colors: <ui.Color>[
+        ui.Color(0x00000000),
+        ui.Color(0x04000000),
+        ui.Color(0x12000000),
+        ui.Color(0x38000000),
+      ],
+      stops: <double>[0.0, 0.3, 0.6, 1.0],
+    ).createShader(rect, textDirection: ui.TextDirection.ltr);
+
+    canvas
+      ..save()
+      ..drawRect(rect, ui.Paint()..shader = s)
+      ..restore();
   }
 }
