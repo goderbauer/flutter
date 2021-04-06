@@ -4661,7 +4661,7 @@ class StatelessElement extends ComponentElement {
 class StatefulElement extends ComponentElement {
   /// Creates an element that uses the given widget as its configuration.
   StatefulElement(StatefulWidget widget)
-      : state = widget.createState(),
+      : _state = widget.createState(),
         super(widget) {
     assert(() {
       if (!state._debugTypesAreRight(widget)) {
@@ -4696,7 +4696,8 @@ class StatefulElement extends ComponentElement {
   /// There is a one-to-one relationship between [State] objects and the
   /// [StatefulElement] objects that hold them. The [State] objects are created
   /// by [StatefulElement] in [mount].
-  final State<StatefulWidget> state;
+  State<StatefulWidget> get state => _state!;
+  State<StatefulWidget>? _state;
 
   @override
   void reassemble() {
@@ -4811,6 +4812,7 @@ class StatefulElement extends ComponentElement {
       ]);
     }());
     state._element = null;
+    _state = null;
   }
 
   @override
