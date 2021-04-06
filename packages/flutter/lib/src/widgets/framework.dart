@@ -3085,8 +3085,8 @@ abstract class Element extends DiagnosticableTree implements BuildContext {
 
   /// The configuration for this element.
   @override
-  Widget get widget => _widget;
-  Widget _widget;
+  Widget get widget => _widget!;
+  Widget? _widget;
 
   /// The object that manages the lifecycle of this element.
   @override
@@ -3801,10 +3801,11 @@ abstract class Element extends DiagnosticableTree implements BuildContext {
     assert(depth != null);
     assert(owner != null);
     // Use the private property to avoid a CastError during hot reload.
-    final Key? key = _widget.key;
+    final Key? key = _widget!.key;
     if (key is GlobalKey) {
       owner!._unregisterGlobalKey(key, this);
     }
+    _widget = null;
     _lifecycleState = _ElementLifecycle.defunct;
   }
 
@@ -5705,13 +5706,14 @@ abstract class RenderObjectElement extends Element {
 
   @override
   void unmount() {
+    final RenderObjectWidget oldWidget = widget;
     super.unmount();
     assert(
       !renderObject.attached,
       'A RenderObject was still attached when attempting to unmount its '
       'RenderObjectElement: $renderObject',
     );
-    widget.didUnmountRenderObject(renderObject);
+    oldWidget.didUnmountRenderObject(renderObject);
   }
 
   void _updateParentData(ParentDataWidget<ParentData> parentDataWidget) {
