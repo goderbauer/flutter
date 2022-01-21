@@ -2,8 +2,10 @@
 // Use of this source code is governed by a BSD-style license that can be
 // found in the LICENSE file.
 
+import 'dart:developer';
 import 'dart:math' show min, max;
 import 'dart:ui' as ui show Paragraph, ParagraphBuilder, ParagraphConstraints, ParagraphStyle, PlaceholderAlignment, LineMetrics, TextHeightBehavior, TextStyle, BoxHeightStyle, BoxWidthStyle;
+import 'dart:ui';
 
 import 'package:flutter/foundation.dart';
 import 'package:flutter/services.dart';
@@ -452,7 +454,8 @@ class TextPainter {
     // textDirection hasn't yet been set.
     assert(textAlign != null);
     assert(textDirection != null || defaultTextDirection != null, 'TextPainter.textDirection must be set to a non-null value before using the TextPainter.');
-    return _text!.style?.getParagraphStyle(
+    Timeline.startSync('TextStyle.getParagraphStyle');
+    ui.ParagraphStyle? style = _text!.style?.getParagraphStyle(
       textAlign: textAlign,
       textDirection: textDirection ?? defaultTextDirection,
       textScaleFactor: textScaleFactor,
@@ -461,18 +464,25 @@ class TextPainter {
       ellipsis: _ellipsis,
       locale: _locale,
       strutStyle: _strutStyle,
-    ) ?? ui.ParagraphStyle(
-      textAlign: textAlign,
-      textDirection: textDirection ?? defaultTextDirection,
-      // Use the default font size to multiply by as RichText does not
-      // perform inheriting [TextStyle]s and would otherwise
-      // fail to apply textScaleFactor.
-      fontSize: _kDefaultFontSize * textScaleFactor,
-      maxLines: maxLines,
-      textHeightBehavior: _textHeightBehavior,
-      ellipsis: ellipsis,
-      locale: locale,
     );
+    Timeline.finishSync();
+    if (style == null) {
+      Timeline.startSync('default ParagraphStyle');
+      style = ui.ParagraphStyle(
+        textAlign: textAlign,
+        textDirection: textDirection ?? defaultTextDirection,
+        // Use the default font size to multiply by as RichText does not
+        // perform inheriting [TextStyle]s and would otherwise
+        // fail to apply textScaleFactor.
+        fontSize: _kDefaultFontSize * textScaleFactor,
+        maxLines: maxLines,
+        textHeightBehavior: _textHeightBehavior,
+        ellipsis: ellipsis,
+        locale: locale,
+      );
+      Timeline.finishSync();
+    }
+    return style;
   }
 
   ui.Paragraph? _layoutTemplate;
@@ -597,10 +607,24 @@ class TextPainter {
     if (text == null) {
       throw StateError('TextPainter.text must be set to a non-null value before using the TextPainter.');
     }
-    final ui.ParagraphBuilder builder = ui.ParagraphBuilder(_createParagraphStyle());
+    Timeline.startSync('_createParagraphStyle');
+    final ui.ParagraphStyle style = _createParagraphStyle();
+    Timeline.finishSync();
+
+    Timeline.startSync('ui.ParagraphBuilder');
+    final ui.ParagraphBuilder builder = ui.ParagraphBuilder(style);
+    Timeline.finishSync();
+
+    Timeline.startSync('InlineSpan.build');
     text.build(builder, textScaleFactor: textScaleFactor, dimensions: _placeholderDimensions);
+    Timeline.finishSync();
+
     _inlinePlaceholderScales = builder.placeholderScales;
+
+    Timeline.startSync('ParagraphBuilder.build');
     _paragraph = builder.build();
+    Timeline.finishSync();
+
     _rebuildParagraphForPaint = false;
   }
 
