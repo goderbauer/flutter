@@ -3,6 +3,7 @@
 // found in the LICENSE file.
 
 
+import 'dart:developer';
 import 'dart:ui' as ui show ParagraphStyle, TextStyle, StrutStyle, lerpDouble, Shadow, FontFeature, TextHeightBehavior, TextLeadingDistribution;
 
 import 'package:flutter/foundation.dart';
@@ -1210,7 +1211,8 @@ class TextStyle with Diagnosticable {
     final ui.TextLeadingDistribution? leadingDistribution = this.leadingDistribution;
     final ui.TextHeightBehavior? effectiveTextHeightBehavior = textHeightBehavior
       ?? (leadingDistribution == null ? null : ui.TextHeightBehavior(leadingDistribution: leadingDistribution));
-    return ui.ParagraphStyle(
+    Timeline.startSync('ui.ParagraphStyle');
+    final ui.ParagraphStyle style =  ui.ParagraphStyle(
       textAlign: textAlign,
       textDirection: textDirection,
       // Here, we establish the contents of this TextStyle as the paragraph's default font
@@ -1235,6 +1237,9 @@ class TextStyle with Diagnosticable {
       ellipsis: ellipsis,
       locale: locale,
     );
+    Timeline.finishSync();
+
+    return style;
   }
 
   /// Describe the difference between this style and another, in terms of how
