@@ -2,6 +2,8 @@
 // Use of this source code is governed by a BSD-style license that can be
 // found in the LICENSE file.
 
+// ignore_for_file: public_member_api_docs
+
 import 'dart:developer';
 
 import 'package:flutter/foundation.dart';
@@ -219,6 +221,18 @@ mixin RendererBinding on BindingBase, ServicesBinding, SchedulerBinding, Gesture
     renderView.prepareInitialFrame();
   }
   bool _debugIsRenderViewInitialized = false;
+
+  final List<PipelineOwner> _pipelineOwners = <PipelineOwner>[];
+
+  void addPipelineOwner(PipelineOwner pipelineOwner) {
+    assert(!_pipelineOwners.contains(pipelineOwner));
+    _pipelineOwners.add(pipelineOwner);
+  }
+
+  void removePipelineOwner(PipelineOwner pipelineOwner) {
+    assert(_pipelineOwners.contains(pipelineOwner));
+    _pipelineOwners.remove(pipelineOwner);
+  }
 
   /// The object that manages state about currently connected mice, for hover
   /// notification.

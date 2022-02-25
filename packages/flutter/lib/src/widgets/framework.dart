@@ -6059,6 +6059,7 @@ abstract class RenderObjectElement extends Element {
     assert(_ancestorRenderObjectElement == null);
     _slot = newSlot;
     _ancestorRenderObjectElement = _findAncestorRenderObjectElement();
+    assert(_ancestorRenderObjectElement != null, 'No ancestor RenderObjectElement available.');
     _ancestorRenderObjectElement?.insertRenderObjectChild(renderObject, newSlot);
     final ParentDataElement<ParentData>? parentDataElement = _findAncestorParentDataElement();
     if (parentDataElement != null) {
@@ -6190,10 +6191,7 @@ abstract class RenderObjectElement extends Element {
 ///
 /// Only root elements may have their owner set explicitly. All other
 /// elements inherit their owner from their parent.
-abstract class RootRenderObjectElement extends RenderObjectElement {
-  /// Initializes fields for subclasses.
-  RootRenderObjectElement(super.widget);
-
+mixin RootElementMixin on Element {
   /// Set the owner of the element. The owner will be propagated to all the
   /// descendants of this element.
   ///
@@ -6215,6 +6213,12 @@ abstract class RootRenderObjectElement extends RenderObjectElement {
     assert(parent == null);
     assert(newSlot == null);
     super.mount(parent, newSlot);
+    _dirty = false;
+  }
+
+  @override
+  void performRebuild() {
+    _dirty = false;
   }
 }
 

@@ -2,6 +2,8 @@
 // Use of this source code is governed by a BSD-style license that can be
 // found in the LICENSE file.
 
+// ignore_for_file: public_member_api_docs
+
 import 'dart:async';
 import 'dart:developer' as developer;
 import 'dart:ui' show AppLifecycleState, Locale, AccessibilityFeatures, FrameTiming, TimingsCallback, PlatformDispatcher;
@@ -938,11 +940,10 @@ mixin WidgetsBinding on BindingBase, ServicesBinding, SchedulerBinding, GestureB
   void attachRootWidget(Widget rootWidget) {
     final bool isBootstrapFrame = renderViewElement == null;
     _readyToProduceFrames = true;
-    _renderViewElement = RenderObjectToWidgetAdapter<RenderBox>(
-      container: renderView,
+    _renderViewElement = RootWidget(
       debugShortDescription: '[root]',
       child: rootWidget,
-    ).attachToRenderTree(buildOwner!, renderViewElement as RenderObjectToWidgetElement<RenderBox>?);
+    ).attach(buildOwner!, renderViewElement as RootElement?);
     if (isBootstrapFrame) {
       SchedulerBinding.instance.ensureVisualUpdate();
     }
@@ -1063,35 +1064,25 @@ void debugDumpApp() {
 /// [RenderObject] that the container expects as its child.
 ///
 /// Used by [runApp] to bootstrap applications.
-class RenderObjectToWidgetAdapter<T extends RenderObject> extends RenderObjectWidget {
+class RootWidget extends Widget {
   /// Creates a bridge from a [RenderObject] to an [Element] tree.
   ///
   /// Used by [WidgetsBinding] to attach the root widget to the [RenderView].
-  RenderObjectToWidgetAdapter({
+  const RootWidget({
     this.child,
-    required this.container,
     this.debugShortDescription,
-  }) : super(key: GlobalObjectKey(container));
+  }) : super(key: null); // TODO(goderbauer): figure out key.
 
   /// The widget below this widget in the tree.
   ///
   /// {@macro flutter.widgets.ProxyWidget.child}
   final Widget? child;
 
-  /// The [RenderObject] that is the parent of the [Element] created by this widget.
-  final RenderObjectWithChildMixin<T> container;
-
   /// A short description of this widget used by debugging aids.
   final String? debugShortDescription;
 
   @override
-  RenderObjectToWidgetElement<T> createElement() => RenderObjectToWidgetElement<T>(this);
-
-  @override
-  RenderObjectWithChildMixin<T> createRenderObject(BuildContext context) => container;
-
-  @override
-  void updateRenderObject(BuildContext context, RenderObject renderObject) { }
+  RootElement createElement() => RootElement(this);
 
   /// Inflate this widget and actually set the resulting [RenderObject] as the
   /// child of [container].
@@ -1100,7 +1091,7 @@ class RenderObjectToWidgetAdapter<T extends RenderObject> extends RenderObjectWi
   /// the given element will have an update scheduled to switch to this widget.
   ///
   /// Used by [runApp] to bootstrap applications.
-  RenderObjectToWidgetElement<T> attachToRenderTree(BuildOwner owner, [ RenderObjectToWidgetElement<T>? element ]) {
+  RootElement attach(BuildOwner owner, [ RootElement? element ]) {
     if (element == null) {
       owner.lockState(() {
         element = createElement();
@@ -1108,7 +1099,7 @@ class RenderObjectToWidgetAdapter<T extends RenderObject> extends RenderObjectWi
         element!.assignOwner(owner);
       });
       owner.buildScope(element!, () {
-        element!.mount(null, null);
+        element!.mount(/* parent */ null, /* newSlot */ null);
       });
     } else {
       element._newWidget = this;
@@ -1131,16 +1122,17 @@ class RenderObjectToWidgetAdapter<T extends RenderObject> extends RenderObjectWi
 /// whose container is the [RenderView] that connects to the Flutter engine. In
 /// this usage, it is normally instantiated by the bootstrapping logic in the
 /// [WidgetsFlutterBinding] singleton created by [runApp].
-class RenderObjectToWidgetElement<T extends RenderObject> extends RootRenderObjectElement {
+class RootElement extends Element with RootElementMixin {
   /// Creates an element that is hosted by a [RenderObject].
   ///
   /// The [RenderObject] created by this element is not automatically set as a
   /// child of the hosting [RenderObject]. To actually attach this element to
   /// the render tree, call [RenderObjectToWidgetAdapter.attachToRenderTree].
-  RenderObjectToWidgetElement(RenderObjectToWidgetAdapter<T> super.widget);
+  RootElement(RootWidget widget) : super(widget);
 
   Element? _child;
 
+  // TODO(goderbauer): do we need this?
   static const Object _rootChildSlot = Object();
 
   @override
@@ -1166,7 +1158,7 @@ class RenderObjectToWidgetElement<T extends RenderObject> extends RootRenderObje
   }
 
   @override
-  void update(RenderObjectToWidgetAdapter<T> newWidget) {
+  void update(RootWidget newWidget) {
     super.update(newWidget);
     assert(widget == newWidget);
     _rebuild();
@@ -1183,7 +1175,7 @@ class RenderObjectToWidgetElement<T extends RenderObject> extends RootRenderObje
       // due to a reassemble.
       final Widget newWidget = _newWidget!;
       _newWidget = null;
-      update(newWidget as RenderObjectToWidgetAdapter<T>);
+      update(newWidget as RootWidget);
     }
     super.performRebuild();
     assert(_newWidget == null);
@@ -1192,7 +1184,7 @@ class RenderObjectToWidgetElement<T extends RenderObject> extends RootRenderObje
   @pragma('vm:notify-debugger-on-exception')
   void _rebuild() {
     try {
-      _child = updateChild(_child, (widget as RenderObjectToWidgetAdapter<T>).child, _rootChildSlot);
+      _child = updateChild(_child, (widget as RootWidget).child, _rootChildSlot);
     } catch (exception, stack) {
       final FlutterErrorDetails details = FlutterErrorDetails(
         exception: exception,
@@ -1207,25 +1199,14 @@ class RenderObjectToWidgetElement<T extends RenderObject> extends RootRenderObje
   }
 
   @override
-  RenderObjectWithChildMixin<T> get renderObject => super.renderObject as RenderObjectWithChildMixin<T>;
-
-  @override
-  void insertRenderObjectChild(RenderObject child, Object? slot) {
-    assert(slot == _rootChildSlot);
-    assert(renderObject.debugValidateChild(child));
-    renderObject.child = child as T;
-  }
-
-  @override
-  void moveRenderObjectChild(RenderObject child, Object? oldSlot, Object? newSlot) {
+  RenderObject? get renderObject {
     assert(false);
+    return null;
   }
 
+  // This element doesn't have a build phase.
   @override
-  void removeRenderObjectChild(RenderObject child, Object? slot) {
-    assert(renderObject.child == child);
-    renderObject.child = null;
-  }
+  bool get debugDoingBuild => false;
 }
 
 /// A concrete binding for applications based on the Widgets framework.
