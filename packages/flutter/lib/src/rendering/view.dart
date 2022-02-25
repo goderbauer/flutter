@@ -54,7 +54,7 @@ class ViewConfiguration {
   String toString() => '$size at ${debugFormatDouble(devicePixelRatio)}x';
 }
 
-/// The root of the render tree.
+/// The root of a render tree.
 ///
 /// The view represents the total output surface of the render tree and handles
 /// bootstrapping the rendering pipeline. The view has a unique child
