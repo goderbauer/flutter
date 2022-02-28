@@ -1,5 +1,6 @@
 // ignore_for_file: public_member_api_docs
 
+import 'package:flutter/foundation.dart';
 import 'package:flutter/rendering.dart';
 
 import 'framework.dart';
@@ -23,13 +24,20 @@ class View extends SingleChildRenderObjectWidget {
 }
 
 class ViewElement extends SingleChildRenderObjectElement {
-  ViewElement(SingleChildRenderObjectWidget widget) : super(widget) {
-    print('creting veiw element');
-  }
+  ViewElement(SingleChildRenderObjectWidget widget) : super(widget);
 
   @override
   void attachRenderObject(Object? newSlot) {
-    // Internationally left empty since RenderView is a root of a render tree
-    // and hence has no parent to attach to.
+    // assert that we don't have a parent to attach to?
+    visitChildren((Element child) {
+      child.attachRenderObject(null);
+    });
+  }
+
+  @override
+  void detachRenderObject() {
+    visitChildren((Element child) {
+      child.detachRenderObject();
+    });
   }
 }
