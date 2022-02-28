@@ -5922,6 +5922,12 @@ abstract class RenderObjectElement extends Element {
   }
 
   @override
+  void activate() {
+    super.activate();
+    print('$this - activate');
+  }
+
+  @override
   void deactivate() {
     super.deactivate();
     print('$this - deactivate');
