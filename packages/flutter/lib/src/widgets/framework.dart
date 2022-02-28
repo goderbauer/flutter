@@ -5990,8 +5990,9 @@ abstract class RenderObjectElement extends Element {
   @override
   void deactivate() {
     super.deactivate();
+    print('$this - deactivate');
     assert(
-      !renderObject.attached,
+      !renderObject.attached || _ancestorRenderObjectElement == null,
       'A RenderObject was still attached when attempting to deactivate its '
       'RenderObjectElement: $renderObject',
     );
@@ -6006,8 +6007,9 @@ abstract class RenderObjectElement extends Element {
     );
     final RenderObjectWidget oldWidget = widget as RenderObjectWidget;
     super.unmount();
+    print('$this - unmount');
     assert(
-      !renderObject.attached,
+      !renderObject.attached || _ancestorRenderObjectElement == null,
       'A RenderObject was still attached when attempting to unmount its '
       'RenderObjectElement: $renderObject',
     );
@@ -6059,7 +6061,7 @@ abstract class RenderObjectElement extends Element {
     assert(_ancestorRenderObjectElement == null);
     _slot = newSlot;
     _ancestorRenderObjectElement = _findAncestorRenderObjectElement();
-    assert(_ancestorRenderObjectElement != null, 'No ancestor RenderObjectElement available.');
+    // assert(_ancestorRenderObjectElement != null, 'No ancestor RenderObjectElement available.');
     _ancestorRenderObjectElement?.insertRenderObjectChild(renderObject, newSlot);
     final ParentDataElement<ParentData>? parentDataElement = _findAncestorParentDataElement();
     if (parentDataElement != null) {
@@ -6069,6 +6071,7 @@ abstract class RenderObjectElement extends Element {
 
   @override
   void detachRenderObject() {
+    print('$this - detachRenderObject');
     if (_ancestorRenderObjectElement != null) {
       _ancestorRenderObjectElement!.removeRenderObjectChild(renderObject, slot);
       _ancestorRenderObjectElement = null;
