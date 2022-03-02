@@ -8,8 +8,36 @@ import 'package:flutter/rendering.dart';
 
 import 'framework.dart';
 
-class View extends SingleChildRenderObjectWidget {
-  View({
+class View extends StatelessWidget {
+  const View({
+    Key? key,
+    required this.view,
+    required this.child,
+  }) : super(key: key);
+
+  final Widget child;
+  final FlutterView view;
+
+  static FlutterView of(BuildContext context) {
+    final _ViewScope? viewScope = context.dependOnInheritedWidgetOfExactType<_ViewScope>();
+    assert(viewScope != null);
+    return viewScope!.view;
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return _ViewScope(
+      view: view,
+      child: _View(
+        view: view,
+        child: child,
+      ),
+    );
+  }
+}
+
+class _View extends SingleChildRenderObjectWidget {
+  _View({
     required this.view,
     required Widget child,
   }) : super(
@@ -44,12 +72,15 @@ class _ViewElement extends SingleChildRenderObjectElement {
 
   final PipelineOwner pipelineOwner = PipelineOwner(
     onNeedVisualUpdate: RendererBinding.instance.ensureVisualUpdate,
+    // TODO(goderbauer): onSemantics need to forward to scheduleInitialSemantics/clearSemantics of RenderView,
+    //   dispatched to all of them via the Binding? Who keeps globally track of whether semantics
+    //   are enabled/disabled for all render trees?
   );
 
   @override
   void mount(Element? parent, Object? newSlot) {
     super.mount(parent, newSlot);
-    RendererBinding.instance.addPipelineOwner(pipelineOwner, renderObject.compositeFrame);
+    RendererBinding.instance.addPipelineOwner(pipelineOwner, renderObject);
     renderObject.prepareInitialFrame();
   }
 
@@ -101,7 +132,8 @@ class MultiChildComponentElement extends Element {
   bool get debugDoingBuild => false;
 
   void _updateChildren() {
-    _children = updateChildren(_children, (widget as Collection).children, forgottenChildren: _forgottenChildren);
+    _children = updateChildren(_children, (widget as Collection).children,
+        forgottenChildren: _forgottenChildren);
     _forgottenChildren.clear();
     assert(_children.length == (widget as Collection).children.length);
   }
@@ -120,8 +152,9 @@ class MultiChildComponentElement extends Element {
   @override
   void visitChildren(ElementVisitor visitor) {
     for (final Element child in _children) {
-      if (!_forgottenChildren.contains(child))
+      if (!_forgottenChildren.contains(child)) {
         visitor(child);
+      }
     }
   }
 
@@ -137,5 +170,16 @@ class MultiChildComponentElement extends Element {
     assert(!_forgottenChildren.contains(child));
     _forgottenChildren.add(child);
     super.forgetChild(child);
+  }
+}
+
+class _ViewScope extends InheritedWidget {
+  const _ViewScope({Key? key, required this.view, required Widget child}) : super(key: key, child: child);
+
+  final FlutterView view;
+
+  @override
+  bool updateShouldNotify(_ViewScope oldWidget) {
+    return view != oldWidget.view;
   }
 }
