@@ -126,6 +126,12 @@ class MultiChildComponentElement extends Element {
   }
 
   @override
+  RenderObject? get renderObject {
+    // TODO(goderbauer): there are multiple renderObjects here.
+    return null;
+  }
+
+  @override
   void forgetChild(Element child) {
     assert(_children.contains(child));
     assert(!_forgottenChildren.contains(child));
