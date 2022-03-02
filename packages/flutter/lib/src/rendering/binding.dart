@@ -567,7 +567,7 @@ mixin RendererBinding on BindingBase, ServicesBinding, SchedulerBinding, Gesture
     assert(renderView != null);
     assert(result != null);
     assert(position != null);
-    renderView.hitTest(result, position: position);
+    (_pipelineOwners.keys.first.rootNode! as RenderView).hitTest(result, position: position);
     super.hitTest(result, position);
   }
 

@@ -3329,6 +3329,7 @@ abstract class Element extends DiagnosticableTree implements BuildContext {
   RenderObject? get renderObject {
     RenderObject? result;
     void visit(Element element) {
+      print('>>> ${describeIdentity(this)} processing ${describeIdentity(element)}');
       assert(result == null); // this verifies that there's only one child
       if (element._lifecycleState == _ElementLifecycle.defunct) {
         return;
