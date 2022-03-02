@@ -222,18 +222,6 @@ mixin RendererBinding on BindingBase, ServicesBinding, SchedulerBinding, Gesture
   }
   bool _debugIsRenderViewInitialized = false;
 
-  final Map<PipelineOwner, VoidCallback> _pipelineOwners = <PipelineOwner, VoidCallback>{};
-
-  void addPipelineOwner(PipelineOwner pipelineOwner, VoidCallback compositeFrame) {
-    assert(!_pipelineOwners.containsKey(pipelineOwner));
-    _pipelineOwners[pipelineOwner] = compositeFrame;
-  }
-
-  void removePipelineOwner(PipelineOwner pipelineOwner) {
-    assert(_pipelineOwners.containsKey(pipelineOwner));
-    _pipelineOwners.remove(pipelineOwner);
-  }
-
   /// The object that manages state about currently connected mice, for hover
   /// notification.
   MouseTracker get mouseTracker => _mouseTracker!;
@@ -251,6 +239,24 @@ mixin RendererBinding on BindingBase, ServicesBinding, SchedulerBinding, Gesture
   set renderView(RenderView value) {
     assert(value != null);
     _pipelineOwner.rootNode = value;
+  }
+
+  Iterable<PipelineOwner> get pipelineOwners => _pipelineOwners.keys;
+  final Map<PipelineOwner, RenderView> _pipelineOwners = <PipelineOwner, RenderView>{};
+
+  RenderView renderViewForOwner(PipelineOwner owner) {
+    assert(_pipelineOwners.containsKey(owner));
+    return _pipelineOwners[owner]!;
+  }
+
+  void addPipelineOwner(PipelineOwner pipelineOwner, RenderView renderView) {
+    assert(!_pipelineOwners.containsKey(pipelineOwner));
+    _pipelineOwners[pipelineOwner] = renderView;
+  }
+
+  void removePipelineOwner(PipelineOwner pipelineOwner) {
+    assert(_pipelineOwners.containsKey(pipelineOwner));
+    _pipelineOwners.remove(pipelineOwner);
   }
 
   /// Called when the system metrics change.
@@ -533,8 +539,8 @@ mixin RendererBinding on BindingBase, ServicesBinding, SchedulerBinding, Gesture
       owner.flushPaint();
     }
     if (sendFramesToEngine) {
-      for (final VoidCallback compositeFrame in _pipelineOwners.values) {
-        compositeFrame(); // this sends the bits to the GPU
+      for (final RenderView renderView in _pipelineOwners.values) {
+        renderView.compositeFrame(); // this sends the bits to the GPU
       }
       for (final PipelineOwner owner in _pipelineOwners.keys) {
         owner.flushSemantics(); // this also sends the semantics to the OS.
