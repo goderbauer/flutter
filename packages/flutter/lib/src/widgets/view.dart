@@ -1,5 +1,6 @@
 // ignore_for_file: public_member_api_docs
 
+import 'dart:collection';
 import 'dart:ui';
 
 import 'package:flutter/foundation.dart';
@@ -7,97 +8,128 @@ import 'package:flutter/rendering.dart';
 
 import 'framework.dart';
 
-class View extends StatefulWidget {
-  const View({Key? key, required this.child}) : super(key: key);
-
-  final Widget child;
-
-  @override
-  State<View> createState() => _ViewState();
-}
-
-class _ViewState extends State<View> {
-  late final PipelineOwner pipelineOwner;
-
-  late final RenderView renderView;
-
-  @override
-  void initState() {
-    super.initState();
-    // TODO(goderbauer): create a new backing view instead of hardcoding it here.
-    final FlutterView view = RendererBinding.instance.window;
-
-    final double devicePixelRatio = window.devicePixelRatio;
-    renderView = RenderView(window: view, configuration: ViewConfiguration(
-      size: window.physicalSize / devicePixelRatio,
-      devicePixelRatio: devicePixelRatio,
-    ));
-    pipelineOwner.rootNode = renderView;
-
-    pipelineOwner = PipelineOwner(
-      onNeedVisualUpdate: RendererBinding.instance.ensureVisualUpdate,
-      onCompositeFrame: renderView.compositeFrame,
-    );
-
-    RendererBinding.instance.addPipelineOwner(pipelineOwner);
-    renderView.prepareInitialFrame();
-  }
-
-  @override
-  void dispose() {
-    RendererBinding.instance.removePipelineOwner(pipelineOwner);
-    pipelineOwner.rootNode = null;
-    renderView.dispose();
-    super.dispose();
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    return _View(
-      renderView: renderView,
-      pipelineOwner: pipelineOwner,
-      child: widget.child,
-    );
-  }
-}
-
-class _View extends SingleChildRenderObjectWidget {
-  _View({
-    required this.renderView,
-    required this.pipelineOwner,
+class View extends SingleChildRenderObjectWidget {
+  View({
+    required this.view,
     required Widget child,
   }) : super(
-          key: GlobalObjectKey(renderView),
+          key: GlobalObjectKey(view),
           child: child,
         );
 
-  final RenderView renderView;
-  final PipelineOwner pipelineOwner;
+  final FlutterView view;
 
   @override
   SingleChildRenderObjectElement createElement() => _ViewElement(this);
 
   @override
-  RenderObject createRenderObject(BuildContext context) => renderView;
+  RenderObject createRenderObject(BuildContext context) {
+    final double devicePixelRatio = view.devicePixelRatio;
+    // TODO(goderbauer): Handle config updates.
+    return RenderView(
+      window: view,
+      configuration: ViewConfiguration(
+        size: view.physicalSize / devicePixelRatio,
+        devicePixelRatio: devicePixelRatio,
+      ),
+    );
+  }
 }
 
 class _ViewElement extends SingleChildRenderObjectElement {
   _ViewElement(SingleChildRenderObjectWidget widget) : super(widget);
 
   @override
+  RenderView get renderObject => super.renderObject as RenderView;
+
+  final PipelineOwner pipelineOwner = PipelineOwner(
+    onNeedVisualUpdate: RendererBinding.instance.ensureVisualUpdate,
+  );
+
+  @override
+  void mount(Element? parent, Object? newSlot) {
+    super.mount(parent, newSlot);
+    RendererBinding.instance.addPipelineOwner(pipelineOwner, renderObject.compositeFrame);
+    renderObject.prepareInitialFrame();
+  }
+
+  @override
+  void unmount() {
+    RendererBinding.instance.removePipelineOwner(pipelineOwner);
+    super.unmount();
+  }
+
+  @override
   void attachRenderObject(Object? newSlot) {
-    final _View widget = this.widget as _View;
-    // TODO(goderbauer): the second part shouldn't exist.
-    assert(widget.pipelineOwner.rootNode == null || widget.pipelineOwner.rootNode == widget.renderView);
-    widget.pipelineOwner.rootNode = widget.renderView;
+    assert(pipelineOwner.rootNode == null);
+    pipelineOwner.rootNode = renderObject;
     print('attach ${describeIdentity(this)}');
   }
 
   @override
   void detachRenderObject() {
-    final _View widget = this.widget as _View;
-    assert(widget.pipelineOwner.rootNode == widget.renderView);
-    widget.pipelineOwner.rootNode = null;
+    assert(pipelineOwner.rootNode == renderObject);
+    pipelineOwner.rootNode = null;
     print('detach ${describeIdentity(this)}');
+  }
+}
+
+// TODO(goderbauer): naming is hard.
+class Collection extends Widget {
+  const Collection({Key? key, required this.children}) : super(key: key);
+
+  final List<Widget> children;
+
+  @override
+  Element createElement() => MultiChildComponentElement(this);
+}
+
+class MultiChildComponentElement extends Element {
+  MultiChildComponentElement(Widget widget) : super(widget);
+
+  List<Element> _children = <Element>[];
+  final Set<Element> _forgottenChildren = HashSet<Element>();
+
+  @override
+  void mount(Element? parent, Object? newSlot) {
+    super.mount(parent, newSlot);
+    assert(_children.isEmpty);
+    _updateChildren();
+  }
+
+  @override
+  bool get debugDoingBuild => false;
+
+  void _updateChildren() {
+    _children = updateChildren(_children, (widget as Collection).children, forgottenChildren: _forgottenChildren);
+    _forgottenChildren.clear();
+    assert(_children.length == (widget as Collection).children.length);
+  }
+
+  @override
+  void performRebuild() {
+    // nothing to do here?
+  }
+
+  @override
+  void update(Widget newWidget) {
+    super.update(newWidget);
+    _updateChildren();
+  }
+
+  @override
+  void visitChildren(ElementVisitor visitor) {
+    for (final Element child in _children) {
+      if (!_forgottenChildren.contains(child))
+        visitor(child);
+    }
+  }
+
+  @override
+  void forgetChild(Element child) {
+    assert(_children.contains(child));
+    assert(!_forgottenChildren.contains(child));
+    _forgottenChildren.add(child);
+    super.forgetChild(child);
   }
 }
