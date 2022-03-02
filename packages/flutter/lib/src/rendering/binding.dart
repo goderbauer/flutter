@@ -159,7 +159,7 @@ mixin RendererBinding on BindingBase, ServicesBinding, SchedulerBinding, Gesture
       registerServiceExtension(
         name: 'debugDumpRenderTree',
         callback: (Map<String, String> parameters) async {
-          final String data = RendererBinding.instance.renderView.toStringDeep();
+          final String data = RendererBinding.instance._pipelineOwners.keys.map((PipelineOwner owner) => (owner.rootNode as DiagnosticableTree?)?.toStringDeep()).join('\n\n');
           return <String, Object>{
             'data': data,
           };
@@ -222,15 +222,15 @@ mixin RendererBinding on BindingBase, ServicesBinding, SchedulerBinding, Gesture
   }
   bool _debugIsRenderViewInitialized = false;
 
-  final List<PipelineOwner> _pipelineOwners = <PipelineOwner>[];
+  final Map<PipelineOwner, VoidCallback> _pipelineOwners = <PipelineOwner, VoidCallback>{};
 
-  void addPipelineOwner(PipelineOwner pipelineOwner) {
-    assert(!_pipelineOwners.contains(pipelineOwner));
-    _pipelineOwners.add(pipelineOwner);
+  void addPipelineOwner(PipelineOwner pipelineOwner, VoidCallback compositeFrame) {
+    assert(!_pipelineOwners.containsKey(pipelineOwner));
+    _pipelineOwners[pipelineOwner] = compositeFrame;
   }
 
   void removePipelineOwner(PipelineOwner pipelineOwner) {
-    assert(_pipelineOwners.contains(pipelineOwner));
+    assert(_pipelineOwners.containsKey(pipelineOwner));
     _pipelineOwners.remove(pipelineOwner);
   }
 
@@ -523,13 +523,22 @@ mixin RendererBinding on BindingBase, ServicesBinding, SchedulerBinding, Gesture
   // When editing the above, also update widgets/binding.dart's copy.
   @protected
   void drawFrame() {
-    assert(renderView != null);
-    pipelineOwner.flushLayout();
-    pipelineOwner.flushCompositingBits();
-    pipelineOwner.flushPaint();
+    for (final PipelineOwner owner in _pipelineOwners.keys) {
+      owner.flushLayout();
+    }
+    for (final PipelineOwner owner in _pipelineOwners.keys) {
+      owner.flushCompositingBits();
+    }
+    for (final PipelineOwner owner in _pipelineOwners.keys) {
+      owner.flushPaint();
+    }
     if (sendFramesToEngine) {
-      renderView.compositeFrame(); // this sends the bits to the GPU
-      pipelineOwner.flushSemantics(); // this also sends the semantics to the OS.
+      for (final VoidCallback compositeFrame in _pipelineOwners.values) {
+        compositeFrame(); // this sends the bits to the GPU
+      }
+      for (final PipelineOwner owner in _pipelineOwners.keys) {
+        owner.flushSemantics(); // this also sends the semantics to the OS.
+      }
       _firstFrameSent = true;
     }
   }
