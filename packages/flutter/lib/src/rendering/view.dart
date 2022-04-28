@@ -232,7 +232,8 @@ class RenderView extends RenderObject with RenderObjectWithChildMixin<RenderBox>
       final ui.Scene scene = layer!.buildScene(builder);
       if (automaticSystemUiAdjustment)
         _updateSystemChrome();
-      _window.render(scene);
+      print('Rendering to $viewId');
+      _window.render(scene, viewId);
       scene.dispose();
       assert(() {
         if (debugRepaintRainbowEnabled || debugRepaintTextRainbowEnabled)
@@ -245,6 +246,8 @@ class RenderView extends RenderObject with RenderObjectWithChildMixin<RenderBox>
       }
     }
   }
+
+  static int viewId = 0;
 
   void _updateSystemChrome() {
     // Take overlay style from the place where a system status bar and system
