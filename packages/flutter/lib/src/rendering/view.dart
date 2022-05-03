@@ -232,7 +232,7 @@ class RenderView extends RenderObject with RenderObjectWithChildMixin<RenderBox>
       final ui.Scene scene = layer!.buildScene(builder);
       if (automaticSystemUiAdjustment)
         _updateSystemChrome();
-      print('Rendering to $viewId');
+      // print('Rendering to $viewId');
       _window.render(scene, viewId);
       scene.dispose();
       assert(() {
