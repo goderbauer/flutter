@@ -229,11 +229,12 @@ class RenderView extends RenderObject with RenderObjectWithChildMixin<RenderBox>
     }
     try {
       final ui.SceneBuilder builder = ui.SceneBuilder();
-      final ui.Scene scene = layer!.buildScene(builder);
+      final ui.FlutterView view = RendererBinding.instance.platformDispatcher.views.firstWhere((ui.FlutterView w) => w.toString().startsWith('FlutterView($viewId,'));
+      final ui.Scene scene = layer!.buildScene(builder, view.physicalSize, view.devicePixelRatio);
       if (automaticSystemUiAdjustment)
         _updateSystemChrome();
       // print('Rendering to $viewId');
-      _window.render(scene, viewId);
+      view.render(scene, viewId);
       scene.dispose();
       assert(() {
         if (debugRepaintRainbowEnabled || debugRepaintTextRainbowEnabled)

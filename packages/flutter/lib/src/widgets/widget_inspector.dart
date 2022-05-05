@@ -602,7 +602,8 @@ class _ScreenshotPaintingContext extends PaintingContext {
     // We must build the regular scene before we can build the screenshot
     // scene as building the screenshot scene assumes addToScene has already
     // been called successfully for all layers in the regular scene.
-    repaintBoundary.debugLayer!.buildScene(ui.SceneBuilder());
+    // TODO(goderbauer): do bounds need to be adjusted for pizelRation?
+    repaintBoundary.debugLayer!.buildScene(ui.SceneBuilder(), renderBounds.size, pixelRatio);
 
     return data.containerLayer.toImage(renderBounds, pixelRatio: pixelRatio);
   }
