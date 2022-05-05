@@ -234,7 +234,7 @@ class RenderView extends RenderObject with RenderObjectWithChildMixin<RenderBox>
       if (automaticSystemUiAdjustment)
         _updateSystemChrome();
       // print('Rendering to $viewId');
-      view.render(scene, viewId);
+      view.render(scene);
       scene.dispose();
       assert(() {
         if (debugRepaintRainbowEnabled || debugRepaintTextRainbowEnabled)
