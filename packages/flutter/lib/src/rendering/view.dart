@@ -4,7 +4,7 @@
 
 import 'dart:developer';
 import 'dart:io' show Platform;
-import 'dart:ui' as ui show Scene, SceneBuilder, FlutterView;
+import 'dart:ui' as ui show Scene, SceneBuilder, FlutterView, PlatformDispatcher;
 
 import 'package:flutter/foundation.dart';
 import 'package:flutter/services.dart';
@@ -229,12 +229,11 @@ class RenderView extends RenderObject with RenderObjectWithChildMixin<RenderBox>
     }
     try {
       final ui.SceneBuilder builder = ui.SceneBuilder();
-      final ui.FlutterView view = RendererBinding.instance.platformDispatcher.views.firstWhere((ui.FlutterView w) => w.toString().startsWith('FlutterView($viewId,'));
-      final ui.Scene scene = layer!.buildScene(builder, view.physicalSize, view.devicePixelRatio);
+      final ui.Scene scene = layer!.buildScene(builder, _view.physicalSize, _view.devicePixelRatio);
       if (automaticSystemUiAdjustment)
         _updateSystemChrome();
       // print('Rendering to $viewId');
-      view.render(scene);
+      _view.render(scene);
       scene.dispose();
       assert(() {
         if (debugRepaintRainbowEnabled || debugRepaintTextRainbowEnabled)
@@ -248,7 +247,20 @@ class RenderView extends RenderObject with RenderObjectWithChildMixin<RenderBox>
     }
   }
 
-  static int viewId = 0;
+  ui.FlutterView _view = ui.PlatformDispatcher.instance.views.last;
+
+  set viewId(int value) {
+    final ui.FlutterView view = ui.PlatformDispatcher.instance.views.firstWhere((ui.FlutterView view) => view.viewId == value);
+    if (view == _view) {
+      return;
+    }
+    _view = view;
+    final double devicePixelRatio = _view.devicePixelRatio;
+    configuration = ViewConfiguration(
+      size: _view.physicalSize / devicePixelRatio,
+      devicePixelRatio: devicePixelRatio,
+    );
+  }
 
   void _updateSystemChrome() {
     // Take overlay style from the place where a system status bar and system

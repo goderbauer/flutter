@@ -8,6 +8,7 @@ import 'dart:ui' show Brightness;
 
 import 'package:flutter/foundation.dart';
 import 'package:flutter/gestures.dart';
+import 'package:flutter/rendering.dart';
 
 import 'basic.dart';
 import 'binding.dart';
@@ -829,7 +830,7 @@ class MediaQuery extends InheritedWidget {
     Key? key,
     required Widget child,
   }) {
-    return _MediaQueryFromWindow(
+    return MediaQueryFromWindow(
       key: key,
       child: child,
     );
@@ -986,12 +987,12 @@ enum NavigationMode {
 ///
 ///  * [MediaQuery], which establishes a subtree in which media queries resolve
 ///    to a [MediaQueryData].
-class _MediaQueryFromWindow extends StatefulWidget {
-  /// Creates a [_MediaQueryFromWindow] that provides a [MediaQuery] to its
+class MediaQueryFromWindow extends StatefulWidget {
+  /// Creates a [MediaQueryFromWindow] that provides a [MediaQuery] to its
   /// descendants using the `window` to keep [MediaQueryData] up to date.
   ///
   /// The [child] must not be null.
-  const _MediaQueryFromWindow({
+  const MediaQueryFromWindow({
     super.key,
     required this.child,
   });
@@ -1000,14 +1001,24 @@ class _MediaQueryFromWindow extends StatefulWidget {
   final Widget child;
 
   @override
-  State<_MediaQueryFromWindow> createState() => _MediaQueryFromWindowState();
+  State<MediaQueryFromWindow> createState() => MediaQueryFromWindowState();
 }
 
-class _MediaQueryFromWindowState extends State<_MediaQueryFromWindow> with WidgetsBindingObserver {
+class MediaQueryFromWindowState extends State<MediaQueryFromWindow> with WidgetsBindingObserver {
   @override
   void initState() {
     super.initState();
     WidgetsBinding.instance.addObserver(this);
+  }
+
+  int _viewId = 0;
+
+  void selectView(int viewId) {
+    setState(() {
+      print('requested: $viewId');
+      _viewId = viewId;
+    });
+    context.findAncestorRenderObjectOfType<RenderView>()!.viewId = viewId;
   }
 
   // ACCESSIBILITY
@@ -1051,7 +1062,7 @@ class _MediaQueryFromWindowState extends State<_MediaQueryFromWindow> with Widge
 
   @override
   Widget build(BuildContext context) {
-    MediaQueryData data = MediaQueryData.fromWindow(WidgetsBinding.instance.window);
+    MediaQueryData data = MediaQueryData.fromWindow(ui.PlatformDispatcher.instance.views.firstWhere((ui.FlutterView view) => view.viewId == _viewId));
     if (!kReleaseMode) {
       data = data.copyWith(platformBrightness: debugBrightnessOverride);
     }
