@@ -229,7 +229,7 @@ class RenderView extends RenderObject with RenderObjectWithChildMixin<RenderBox>
     }
     try {
       final ui.SceneBuilder builder = ui.SceneBuilder();
-      final ui.Scene scene = layer!.buildScene(builder, _configuration.devicePixelRatio, _configuration.size);
+      final ui.Scene scene = layer!.buildScene(builder, _window.devicePixelRatio, _window.physicalSize);
       if (automaticSystemUiAdjustment) {
         _updateSystemChrome();
       }
