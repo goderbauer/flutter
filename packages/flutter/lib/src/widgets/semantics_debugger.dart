@@ -57,8 +57,9 @@ class _SemanticsDebuggerState extends State<SemanticsDebugger> with WidgetsBindi
     // static here because we might not be in a tree that's attached to that
     // binding. Instead, we should find a way to get to the PipelineOwner from
     // the BuildContext.
-    _client = _SemanticsClient(WidgetsBinding.instance.pipelineOwner)
-      ..addListener(_update);
+    // TODO(window): Figure out semantics.
+    // _client = _SemanticsClient(WidgetsBinding.instance.pipelineOwner)
+    //   ..addListener(_update);
     WidgetsBinding.instance.addObserver(this);
   }
 
@@ -151,7 +152,8 @@ class _SemanticsDebuggerState extends State<SemanticsDebugger> with WidgetsBindi
 
   // TODO(abarth): This shouldn't be a static. We should get the pipeline owner
   // from [context] somehow.
-  PipelineOwner get _pipelineOwner => WidgetsBinding.instance.pipelineOwner;
+  // TODO(window): Figure out semantics.
+  PipelineOwner get _pipelineOwner => Object() as PipelineOwner; // WidgetsBinding.instance.pipelineOwner;
 
   @override
   Widget build(BuildContext context) {
