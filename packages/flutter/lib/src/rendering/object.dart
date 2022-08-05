@@ -1016,6 +1016,10 @@ class PipelineOwner {
         // relayout boundary back.
         _shouldMergeDirtyNodes = false;
       }
+      for (final PipelineOwner child in _children) {
+        child.flushLayout();
+      }
+      assert(_nodesNeedingLayout.isEmpty);
     } finally {
       _shouldMergeDirtyNodes = false;
       assert(() {
@@ -1071,6 +1075,10 @@ class PipelineOwner {
       }
     }
     _nodesNeedingCompositingBitsUpdate.clear();
+    for (final PipelineOwner child in _children) {
+      child.flushCompositingBits();
+    }
+    assert(_nodesNeedingCompositingBitsUpdate.isEmpty);
     if (!kReleaseMode) {
       Timeline.finishSync();
     }
@@ -1134,6 +1142,9 @@ class PipelineOwner {
             node._skippedPaintingOnLayer();
           }
         }
+      }
+      for (final PipelineOwner child in _children) {
+        child.flushCompositingBits();
       }
       assert(_nodesNeedingPaint.isEmpty);
     } finally {
@@ -1235,6 +1246,9 @@ class PipelineOwner {
         }
       }
       _semanticsOwner!.sendSemanticsUpdate();
+      for (final PipelineOwner child in _children) {
+        child.flushSemantics();
+      }
     } finally {
       assert(_nodesNeedingSemantics.isEmpty);
       assert(() {
@@ -1246,7 +1260,50 @@ class PipelineOwner {
       }
     }
   }
+
+  // Child Management
+
+  final Set<PipelineOwner> _children = <PipelineOwner>{};
+
+  /// Adds `child` to this [PipelineOwner].
+  ///
+  /// During the phases of frame production (see [RendererBinding.drawFrame]),
+  /// the parent [PipelineOwner] will complete a phase first for the node it
+  /// owns directly before invoking the flush method corresponding to the current
+  /// phase on its child PipelineOwners. For example, during layout, the parent
+  /// [PipelineOwner] will first lay out its own nodes before calling
+  /// [flushLayout] on its children. During paint, it will first paint its own
+  /// nodes before calling [flushPaint] on its children. This order also applies
+  /// for all the other phases.
+  ///
+  /// No assumptions must be made about the order in which child PipelineOwners
+  /// are flushed.
+  ///
+  /// To remove a child, call [dropChild].
+  void adoptChild(PipelineOwner child) {
+    assert(!_children.contains(child));
+    _children.add(child);
+  }
+
+  /// Removes a child [PipelineOwner] previously added via [addChild].
+  ///
+  /// This node will cease to call the flush methods on the `child` during frame
+  /// production.
+  void dropChild(PipelineOwner child) {
+    assert(_children.contains(child));
+    _children.remove(child);
+  }
+
+  /// Calls visitor for each immediate child of this pipeline owner.
+  void visitChildren(PipelineOwnerVisitor visitor) {
+    _children.forEach(visitor);
+  }
 }
+
+/// Signature for the callback to [PipelineOwner.visitChildren].
+///
+/// The argument is the child being visited.
+typedef PipelineOwnerVisitor = void Function(PipelineOwner owner);
 
 /// An object in the render tree.
 ///

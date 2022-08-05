@@ -362,7 +362,7 @@ mixin GestureBinding on BindingBase implements HitTestable, HitTestDispatcher, H
     if (event is PointerDownEvent || event is PointerSignalEvent || event is PointerHoverEvent || event is PointerPanZoomStartEvent) {
       assert(!_hitTests.containsKey(event.pointer));
       hitTestResult = HitTestResult();
-      hitTest(hitTestResult, event.position);
+      hitTest(hitTestResult, event.position, 'viewId'); // TODO(window): get this from the event
       if (event is PointerDownEvent || event is PointerPanZoomStartEvent) {
         _hitTests[event.pointer] = hitTestResult;
       }
@@ -398,7 +398,7 @@ mixin GestureBinding on BindingBase implements HitTestable, HitTestDispatcher, H
 
   /// Determine which [HitTestTarget] objects are located at a given position.
   @override // from HitTestable
-  void hitTest(HitTestResult result, Offset position) {
+  void hitTest(HitTestResult result, Offset position, [Object? viewId]) {
     result.add(HitTestEntry(this));
   }
 

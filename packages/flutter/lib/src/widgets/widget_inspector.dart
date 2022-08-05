@@ -1067,12 +1067,13 @@ mixin WidgetInspectorService {
             debugOnProfilePaint = _onPaint;
             // Trigger an immediate paint so the user has some baseline painting
             // stats to view.
-            void markTreeNeedsPaint(RenderObject renderObject) {
-              renderObject.markNeedsPaint();
-              renderObject.visitChildren(markTreeNeedsPaint);
-            }
-            final RenderObject root = RendererBinding.instance.renderView;
-            markTreeNeedsPaint(root);
+            // TODO(window): ??
+            // void markTreeNeedsPaint(RenderObject renderObject) {
+            //   renderObject.markNeedsPaint();
+            //   renderObject.visitChildren(markTreeNeedsPaint);
+            // }
+            // final RenderObject root = RendererBinding.instance.renderView;
+            // markTreeNeedsPaint(root);
           } else {
             debugOnProfilePaint = null;
           }
@@ -1810,7 +1811,9 @@ mixin WidgetInspectorService {
   }
 
   Map<String, Object?>? _getRootRenderObject(String groupName) {
-    return _nodeToJson(RendererBinding.instance.renderView.toDiagnosticsNode(), InspectorSerializationDelegate(groupName: groupName, service: this));
+    return null;
+    // TODO(window): ??
+    // return _nodeToJson(RendererBinding.instance.renderView.toDiagnosticsNode(), InspectorSerializationDelegate(groupName: groupName, service: this));
   }
 
   /// Returns a JSON representation of the subtree rooted at the

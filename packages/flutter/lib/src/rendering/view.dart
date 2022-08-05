@@ -71,7 +71,7 @@ class RenderView extends RenderObject with RenderObjectWithChildMixin<RenderBox>
     required ui.FlutterView window,
   }) : assert(configuration != null),
        _configuration = configuration,
-       _window = window {
+       _view = window {
     this.child = child;
   }
 
@@ -101,7 +101,21 @@ class RenderView extends RenderObject with RenderObjectWithChildMixin<RenderBox>
     markNeedsLayout();
   }
 
-  final ui.FlutterView _window;
+  /// Foo
+  void updateConfiguration() {
+    final double devicePixelRatio = _view.devicePixelRatio;
+    configuration = ViewConfiguration(
+      size: _view.physicalSize / devicePixelRatio,
+      devicePixelRatio: devicePixelRatio,
+    );
+    // TODO(window): Do we still need the constructor arg and the setter?
+  }
+
+  /// The [FlutterView] into which this [RenderView] renders its content.
+  ///
+  /// The view must not change for the life time of this [RenderView].
+  Object get viewId => _view.viewId;
+  final ui.FlutterView _view;
 
   /// Whether Flutter should automatically compute the desired system UI.
   ///
@@ -232,7 +246,7 @@ class RenderView extends RenderObject with RenderObjectWithChildMixin<RenderBox>
       if (automaticSystemUiAdjustment) {
         _updateSystemChrome();
       }
-      _window.render(scene);
+      _view.render(scene);
       scene.dispose();
       assert(() {
         if (debugRepaintRainbowEnabled || debugRepaintTextRainbowEnabled) {
@@ -276,7 +290,7 @@ class RenderView extends RenderObject with RenderObjectWithChildMixin<RenderBox>
       bounds.center.dx,
       // The vertical center of the system status bar. The system status bar
       // height is kept as top window padding.
-      _window.padding.top / 2.0,
+      _view.padding.top / 2.0,
     );
     // Center of the navigation bar
     final Offset bottom = Offset(
@@ -287,7 +301,7 @@ class RenderView extends RenderObject with RenderObjectWithChildMixin<RenderBox>
       // from the bottom because available pixels are in (0..bottom) range.
       // I.e. for a device with 1920 height, bound.bottom is 1920, but the most
       // bottom drawn pixel is at 1919 position.
-      bounds.bottom - 1.0 - _window.padding.bottom / 2.0,
+      bounds.bottom - 1.0 - _view.padding.bottom / 2.0,
     );
     final SystemUiOverlayStyle? upperOverlayStyle = layer!.find<SystemUiOverlayStyle>(top);
     // Only android has a customizable system navigation bar.
@@ -337,10 +351,10 @@ class RenderView extends RenderObject with RenderObjectWithChildMixin<RenderBox>
       properties.add(DiagnosticsNode.message('debug mode enabled - ${kIsWeb ? 'Web' :  Platform.operatingSystem}'));
       return true;
     }());
-    properties.add(DiagnosticsProperty<Size>('window size', _window.physicalSize, tooltip: 'in physical pixels'));
-    properties.add(DoubleProperty('device pixel ratio', _window.devicePixelRatio, tooltip: 'physical pixels per logical pixel'));
+    properties.add(DiagnosticsProperty<Size>('window size', _view.physicalSize, tooltip: 'in physical pixels'));
+    properties.add(DoubleProperty('device pixel ratio', _view.devicePixelRatio, tooltip: 'physical pixels per logical pixel'));
     properties.add(DiagnosticsProperty<ViewConfiguration>('configuration', configuration, tooltip: 'in logical pixels'));
-    if (_window.platformDispatcher.semanticsEnabled) {
+    if (_view.platformDispatcher.semanticsEnabled) {
       properties.add(DiagnosticsNode.message('semantics enabled'));
     }
   }

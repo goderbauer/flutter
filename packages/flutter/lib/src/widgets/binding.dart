@@ -938,11 +938,12 @@ mixin WidgetsBinding on BindingBase, ServicesBinding, SchedulerBinding, GestureB
   void attachRootWidget(Widget rootWidget) {
     final bool isBootstrapFrame = renderViewElement == null;
     _readyToProduceFrames = true;
-    _renderViewElement = RenderObjectToWidgetAdapter<RenderBox>(
-      container: renderView,
-      debugShortDescription: '[root]',
-      child: rootWidget,
-    ).attachToRenderTree(buildOwner!, renderViewElement as RenderObjectToWidgetElement<RenderBox>?);
+    // TODO(window): This needs to be reworked
+    // _renderViewElement = RenderObjectToWidgetAdapter<RenderBox>(
+    //   container: renderView,
+    //   debugShortDescription: '[root]',
+    //   child: rootWidget,
+    // ).attachToRenderTree(buildOwner!, renderViewElement as RenderObjectToWidgetElement<RenderBox>?);
     if (isBootstrapFrame) {
       SchedulerBinding.instance.ensureVisualUpdate();
     }
