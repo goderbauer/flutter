@@ -262,7 +262,7 @@ void main() {
     object.paint(context, Offset.zero);
     expect(calledBack, false);
 
-    root.buildScene(ui.SceneBuilder()).dispose();
+    root.buildScene(ui.SceneBuilder(), 0, Size.zero).dispose();
     expect(calledBack, true);
   });
 }

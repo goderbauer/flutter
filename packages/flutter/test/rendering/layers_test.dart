@@ -149,7 +149,7 @@ void main() {
     expect(f.debugSubtreeNeedsAddToScene, false);
     expect(g.debugSubtreeNeedsAddToScene, true);
 
-    a.buildScene(SceneBuilder());
+    a.buildScene(SceneBuilder(), 0, Size.zero);
     for (final ContainerLayer layer in allLayers) {
       expect(layer.debugSubtreeNeedsAddToScene, false);
     }
@@ -543,14 +543,14 @@ void main() {
     parent.append(child);
 
     // This renders the layers and generates engine layers.
-    parent.buildScene(SceneBuilder());
+    parent.buildScene(SceneBuilder(), 0, Size.zero);
 
     // Causes grandChild to pass its engine layer as `oldLayer`
     grandChild.toImage(const Rect.fromLTRB(0, 0, 10, 10));
 
     // Ensure we can render the same scene again after rendering an interior
     // layer.
-    parent.buildScene(SceneBuilder());
+    parent.buildScene(SceneBuilder(), 0, Size.zero);
   }, skip: isBrowser); // TODO(yjbanov): `toImage` doesn't work on the Web: https://github.com/flutter/flutter/issues/49857
 
   test('PictureLayer does not let you call dispose unless refcount is 0', () {
@@ -821,7 +821,7 @@ void main() {
       fail('Should not have called back');
     })();
 
-    root.buildScene(SceneBuilder()).dispose();
+    root.buildScene(SceneBuilder(), 0, Size.zero).dispose();
   });
 
   test('Observe layer tree composition - not retained', () {
@@ -843,7 +843,7 @@ void main() {
 
     expect(compositedB1, false);
 
-    root.buildScene(SceneBuilder()).dispose();
+    root.buildScene(SceneBuilder(), 0, Size.zero).dispose();
 
     expect(compositedB1, true);
   });
@@ -880,7 +880,7 @@ void main() {
 
     expect(compositedB1, false);
 
-    root.buildScene(builder).dispose();
+    root.buildScene(builder, 0, Size.zero).dispose();
 
     expect(compositedB1, true);
   });
@@ -913,7 +913,7 @@ void main() {
 
     expect(compositedB1, false);
 
-    root.buildScene(SceneBuilder()).dispose();
+    root.buildScene(SceneBuilder(), 0, Size.zero).dispose();
 
     expect(compositedB1, true);
   });
