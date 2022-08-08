@@ -775,7 +775,7 @@ abstract class TestWidgetsFlutterBinding extends BindingBase
       // directly called again.
       DiagnosticsNode treeDump;
       try {
-        treeDump = renderViewElement?.toDiagnosticsNode() ?? DiagnosticsNode.message('<no tree>');
+        treeDump = rootElement?.toDiagnosticsNode() ?? DiagnosticsNode.message('<no tree>');
         // We try to stringify the tree dump here (though we immediately discard the result) because
         // we want to make sure that if it can't be serialised, we replace it with a message that
         // says the tree could not be serialised. Otherwise, the real exception might get obscured
@@ -1188,7 +1188,7 @@ class AutomatedTestWidgetsFlutterBinding extends TestWidgetsFlutterBinding {
     assert(inTest);
     try {
       debugBuildingDirtyElements = true;
-      buildOwner!.buildScope(renderViewElement!);
+      buildOwner!.buildScope(rootElement!);
       if (_phase != EnginePhase.build) {
         assert(renderView != null);
         pipelineOwner.flushLayout();
@@ -1860,7 +1860,7 @@ class _LiveTestRenderView extends RenderView {
   _LiveTestRenderView({
     required super.configuration,
     required this.onNeedPaint,
-    required super.window,
+    required super.view,
   });
 
   @override

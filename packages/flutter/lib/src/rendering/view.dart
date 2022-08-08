@@ -68,12 +68,10 @@ class RenderView extends RenderObject with RenderObjectWithChildMixin<RenderBox>
   /// The [configuration] must not be null.
   RenderView({
     RenderBox? child,
-    required ViewConfiguration configuration,
-    required ui.FlutterView window,
-  }) : assert(configuration != null),
-       _configuration = configuration,
-       _view = window {
+    required ui.FlutterView view,
+  }) : _view = view {
     this.child = child;
+    updateConfiguration();
   }
 
   /// The current layout size of the view.
@@ -82,12 +80,13 @@ class RenderView extends RenderObject with RenderObjectWithChildMixin<RenderBox>
 
   /// The constraints used for the root layout.
   ViewConfiguration get configuration => _configuration;
-  ViewConfiguration _configuration;
+  late ViewConfiguration _configuration;
 
   /// The configuration is initially set by the `configuration` argument
   /// passed to the constructor.
   ///
   /// Always call [prepareInitialFrame] before changing the configuration.
+  // TODO(window): DO we need this setter?
   set configuration(ViewConfiguration value) {
     assert(value != null);
     if (configuration == value) {
@@ -109,7 +108,6 @@ class RenderView extends RenderObject with RenderObjectWithChildMixin<RenderBox>
       size: _view.physicalSize / devicePixelRatio,
       devicePixelRatio: devicePixelRatio,
     );
-    // TODO(window): Do we still need the constructor arg and the setter?
   }
 
   /// The [FlutterView] into which this [RenderView] renders its content.

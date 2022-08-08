@@ -1049,7 +1049,7 @@ class ContainerLayer extends Layer {
   // `PipelineOwner` or other singleton level is because this method can be used
   // both to render the whole layer tree (e.g. a normal application frame) and
   // to render a subtree (e.g. `OffsetLayer.toImage`).
-  ui.Scene buildScene(ui.SceneBuilder builder, double? devicePixelRatio, Size? physicalSize) {
+  ui.Scene buildScene(ui.SceneBuilder builder, double devicePixelRatio, Size physicalSize) {
     updateSubtreeNeedsAddToScene();
     addToScene(builder);
     if (subtreeHasCompositionCallbacks) {
@@ -1059,7 +1059,7 @@ class ContainerLayer extends Layer {
     // because `addToScene` calls children's `addToScene` methods, which may
     // mark this layer as dirty.
     _needsAddToScene = false;
-    final ui.Scene scene = builder.build( /* devicePixelRatio, physicalSize */);
+    final ui.Scene scene = builder.build(devicePixelRatio, physicalSize);
     return scene;
   }
 
