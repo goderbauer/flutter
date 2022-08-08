@@ -1412,7 +1412,7 @@ class OffsetLayer extends ContainerLayer {
     );
     transform.scale(pixelRatio, pixelRatio);
     builder.pushTransform(transform.storage);
-    final ui.Scene scene = buildScene(builder);
+    final ui.Scene scene = buildScene(builder, pixelRatio, bounds.size);
 
     try {
       // Size is rounded up to the next pixel to make sure we don't clip off

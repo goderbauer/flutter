@@ -1102,7 +1102,7 @@ class PipelineOwner {
         }
       }
       for (final PipelineOwner child in _children) {
-        child.flushCompositingBits();
+        child.flushPaint();
       }
       assert(_nodesNeedingPaint.isEmpty);
     } finally {

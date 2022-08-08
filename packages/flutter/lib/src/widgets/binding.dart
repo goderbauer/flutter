@@ -1032,7 +1032,7 @@ mixin WidgetsBinding on BindingBase, ServicesBinding, SchedulerBinding, GestureB
 ///  * [WidgetsBinding.handleBeginFrame], which pumps the widget pipeline to
 ///    ensure the widget, element, and render trees are all built.
 void runApp(Widget app) {
-  runPlainApp(TopLevelView(
+  runPlainApp(View(
     view: PlatformDispatcher.instance.views.first,
     child: app,
   ));

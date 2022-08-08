@@ -6,18 +6,19 @@ import 'package:flutter/rendering.dart';
 
 import 'framework.dart';
 
-class TopLevelView extends SingleChildRenderObjectWidget {
-  TopLevelView({
+class View extends SingleChildRenderObjectWidget {
+  const View({
+    super.key,
     required this.view,
     required super.child,
   }) : super(
-    key: GlobalObjectKey(view),
+    // key: GlobalObjectKey(view),
   );
 
   final FlutterView view;
 
   @override
-  SingleChildRenderObjectElement createElement() => _TopLevelViewElement(this);
+  SingleChildRenderObjectElement createElement() => _ViewElement(this);
 
   @override
   RenderObject createRenderObject(BuildContext context) {
@@ -27,8 +28,8 @@ class TopLevelView extends SingleChildRenderObjectWidget {
   }
 }
 
-class _TopLevelViewElement extends SingleChildRenderObjectElement {
-  _TopLevelViewElement(super.widget);
+class _ViewElement extends SingleChildRenderObjectElement {
+  _ViewElement(super.widget);
 
   @override
   RenderView get renderObject => super.renderObject as RenderView;
@@ -39,8 +40,9 @@ class _TopLevelViewElement extends SingleChildRenderObjectElement {
 
   @override
   void mount(Element? parent, Object? newSlot) {
-    super.mount(parent, newSlot);
+    // TODO(window): Assert that we're the start of a render tree.
     RendererBinding.instance.rootPipelineOwner.adoptChild(pipelineOwner);
+    super.mount(parent, newSlot);
     renderObject.prepareInitialFrame();
   }
 

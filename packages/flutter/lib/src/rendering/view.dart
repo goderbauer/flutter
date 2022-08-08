@@ -71,7 +71,7 @@ class RenderView extends RenderObject with RenderObjectWithChildMixin<RenderBox>
     required ui.FlutterView view,
   }) : _view = view {
     this.child = child;
-    updateConfiguration();
+    _configuration = _createViewConfiguration();
   }
 
   /// The current layout size of the view.
@@ -103,8 +103,12 @@ class RenderView extends RenderObject with RenderObjectWithChildMixin<RenderBox>
 
   /// Foo
   void updateConfiguration() {
+    configuration = _createViewConfiguration();
+  }
+
+  ViewConfiguration _createViewConfiguration() {
     final double devicePixelRatio = _view.devicePixelRatio;
-    configuration = ViewConfiguration(
+    return ViewConfiguration(
       size: _view.physicalSize / devicePixelRatio,
       devicePixelRatio: devicePixelRatio,
     );
