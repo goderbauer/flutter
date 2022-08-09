@@ -362,3 +362,11 @@ class RenderView extends RenderObject with RenderObjectWithChildMixin<RenderBox>
     }
   }
 }
+
+///
+abstract class RenderViewManager {
+  ///
+  void addRenderView(RenderView view);
+  ///
+  void removeRenderView(RenderView view);
+}

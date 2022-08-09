@@ -1040,8 +1040,16 @@ void runApp(Widget app) {
 
 ///
 void runPlainApp(Widget app) {
-  WidgetsFlutterBinding.ensureInitialized()
-    ..scheduleAttachRootWidget(app)
+  final WidgetsBinding binding = WidgetsFlutterBinding.ensureInitialized();
+  final Widget wrappedApp = ViewHooks(
+    hooks: ViewHooksData(
+      pipelineOwner: binding.rootPipelineOwner,
+      renderViewManager: binding,
+    ),
+    child: app,
+  );
+  binding
+    ..scheduleAttachRootWidget(wrappedApp)
     ..scheduleWarmUpFrame();
 }
 

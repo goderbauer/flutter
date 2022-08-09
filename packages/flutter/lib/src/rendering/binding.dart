@@ -22,7 +22,7 @@ export 'package:flutter/gestures.dart' show HitTestResult;
 // late BuildContext context;
 
 /// The glue between the render tree and the Flutter engine.
-mixin RendererBinding on BindingBase, ServicesBinding, SchedulerBinding, GestureBinding, SemanticsBinding, HitTestable {
+mixin RendererBinding on BindingBase, ServicesBinding, SchedulerBinding, GestureBinding, SemanticsBinding, HitTestable implements RenderViewManager {
   @override
   void initInstances() {
     super.initInstances();
@@ -229,6 +229,7 @@ mixin RendererBinding on BindingBase, ServicesBinding, SchedulerBinding, Gesture
   /// of its descendants.
   ///
   /// To remove a RenderView from the binding, call [removeRenderView].
+  @override
   void addRenderView(RenderView view) {
     assert(!_viewIdToRenderView.containsValue(view));
     assert(!_viewIdToRenderView.containsKey(view.viewId));
@@ -251,6 +252,7 @@ mixin RendererBinding on BindingBase, ServicesBinding, SchedulerBinding, Gesture
 
   /// Removes a [RenderView] previously added with [addRenderView] from the
   /// binding.
+  @override
   void removeRenderView(RenderView view) {
     assert(_viewIdToRenderView[view.viewId] == view);
     _viewIdToRenderView.remove(view.viewId);
