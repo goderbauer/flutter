@@ -880,10 +880,10 @@ class PipelineOwner {
   /// created separately from the binding to drive off-screen render objects
   /// through the rendering pipeline.
   PipelineOwner({
-    this.onNeedVisualUpdate,
+    VoidCallback? onNeedVisualUpdate,
     this.onSemanticsOwnerCreated,
     this.onSemanticsOwnerDisposed,
-  });
+  }) : _onNeedVisualUpdate = onNeedVisualUpdate;
 
   /// Called when a render object associated with this pipeline owner wishes to
   /// update its visual appearance.
@@ -892,7 +892,8 @@ class PipelineOwner {
   /// various stages of the pipeline. This function might be called multiple
   /// times in quick succession. Implementations should take care to discard
   /// duplicate calls quickly.
-  final VoidCallback? onNeedVisualUpdate;
+  VoidCallback? get onNeedVisualUpdate => _onNeedVisualUpdate;
+  VoidCallback? _onNeedVisualUpdate;
 
   /// Called whenever this pipeline owner creates a semantics object.
   ///
@@ -1241,6 +1242,13 @@ class PipelineOwner {
   void adoptChild(PipelineOwner child) {
     assert(!_children.contains(child));
     _children.add(child);
+
+    void updateSettings(PipelineOwner child) {
+      assert(child.onNeedVisualUpdate == null);
+      child._onNeedVisualUpdate = onNeedVisualUpdate;
+      child.visitChildren(updateSettings);
+    }
+    updateSettings(child);
   }
 
   /// Removes a child [PipelineOwner] previously added via [addChild].
@@ -1250,6 +1258,13 @@ class PipelineOwner {
   void dropChild(PipelineOwner child) {
     assert(_children.contains(child));
     _children.remove(child);
+
+    void updateSettings(PipelineOwner child) {
+      assert(child.onNeedVisualUpdate == onNeedVisualUpdate);
+      child._onNeedVisualUpdate = null;
+      child.visitChildren(updateSettings);
+    }
+    updateSettings(child);
   }
 
   /// Calls visitor for each immediate child of this pipeline owner.

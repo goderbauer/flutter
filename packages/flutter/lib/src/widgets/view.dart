@@ -22,11 +22,7 @@ class View extends StatefulWidget {
 
 class _ViewState extends State<View> {
   // Pulled out of _ViewElement so we can configure ViewHooks.
-  final PipelineOwner _pipelineOwner = PipelineOwner(
-    // TODO(goderbauer): This static access is annoying. Grab it from ViewHooks.pipelineOwner? How about updating it?
-    // Alternative: Adopt child could copy it from its parent if it is null.
-    onNeedVisualUpdate: RendererBinding.instance.ensureVisualUpdate,
-  );
+  final PipelineOwner _pipelineOwner = PipelineOwner();
 
   @override
   Widget build(BuildContext context) {
