@@ -1041,8 +1041,8 @@ void runApp(Widget app) {
 ///
 void runPlainApp(Widget app) {
   final WidgetsBinding binding = WidgetsFlutterBinding.ensureInitialized();
-  final Widget wrappedApp = ViewHooks(
-    hooks: ViewHooksData(
+  final Widget wrappedApp = ViewScope(
+    hooks: ViewHooks(
       pipelineOwner: binding.rootPipelineOwner,
       renderViewManager: binding,
     ),

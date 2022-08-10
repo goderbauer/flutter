@@ -13,6 +13,15 @@ class View extends StatefulWidget {
     required this.child,
   });
 
+  static FlutterView of(BuildContext context) {
+    return maybeOf(context)!;
+  }
+
+  static FlutterView? maybeOf(BuildContext context) {
+    assert(context != null);
+    return context.dependOnInheritedWidgetOfExactType<ViewScope>()!.view;
+  }
+
   final FlutterView view;
   final Widget child;
 
@@ -21,18 +30,28 @@ class View extends StatefulWidget {
 }
 
 class _ViewState extends State<View> {
-  // Pulled out of _ViewElement so we can configure ViewHooks.
+  // Pulled out of _ViewElement so we can configure ViewScope.
   final PipelineOwner _pipelineOwner = PipelineOwner();
+
+  late ViewHooks _ancestorHooks;
+  late ViewHooks _descendantHooks;
+
+  @override
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+    _ancestorHooks = ViewHooks.of(context);
+    _descendantHooks = _ancestorHooks.copyWith(pipelineOwner: _pipelineOwner);
+  }
 
   @override
   Widget build(BuildContext context) {
-    final ViewHooksData hooks = ViewHooks.of(context);
     return _View(
       view: widget.view,
-      hooks: hooks,
+      hooks: _ancestorHooks,
       pipelineOwner: _pipelineOwner,
-      child: ViewHooks(
-        hooks: hooks.copyWith(pipelineOwner: _pipelineOwner),
+      child: ViewScope(
+        view: widget.view,
+        hooks: _descendantHooks,
         child: widget.child,
       ),
     );
@@ -40,7 +59,7 @@ class _ViewState extends State<View> {
 }
 
 class _View extends SingleChildRenderObjectWidget {
-  // TODO(window): consider keying this or View with the provided FlutterView?
+  // TODO(window): consider keying this or View with the provided FlutterView? Or implement updateRenderObject for changing views.
   const _View({
     required this.view,
     required this.hooks,
@@ -49,7 +68,7 @@ class _View extends SingleChildRenderObjectWidget {
   });
 
   final FlutterView view;
-  final ViewHooksData hooks;
+  final ViewHooks hooks;
   final PipelineOwner pipelineOwner;
 
   @override
@@ -69,10 +88,6 @@ class _ViewElement extends SingleChildRenderObjectElement {
   @override
   RenderView get renderObject => super.renderObject as RenderView;
 
-  // TODO(goderbauer): inline these casts.
-  ViewHooksData get _hooks => (widget as _View).hooks;
-  PipelineOwner get _pipelineOwner => (widget as _View).pipelineOwner;
-
   @override
   void mount(Element? parent, Object? newSlot) {
     assert(() {
@@ -86,7 +101,8 @@ class _ViewElement extends SingleChildRenderObjectElement {
       });
       return noRenderAncestor;
     }());
-    _hooks.pipelineOwner.adoptChild(_pipelineOwner);
+    final _View viewWidget = widget as _View;
+    viewWidget.hooks.pipelineOwner.adoptChild(viewWidget.pipelineOwner);
     super.mount(parent, newSlot);
     renderObject.prepareInitialFrame();
     // TODO(goderbauer): semantics.
@@ -94,33 +110,37 @@ class _ViewElement extends SingleChildRenderObjectElement {
 
   @override
   void unmount() {
-    _hooks.pipelineOwner.dropChild(_pipelineOwner);
+    final _View viewWidget = widget as _View;
+    viewWidget.hooks.pipelineOwner.dropChild(viewWidget.pipelineOwner);
     super.unmount();
   }
 
   @override
   void attachRenderObject(Object? newSlot) {
-    assert(_pipelineOwner.rootNode == null);
-    _pipelineOwner.rootNode = renderObject;
-    _hooks.renderViewManager.addRenderView(renderObject);
+    final _View viewWidget = widget as _View;
+    assert(viewWidget.pipelineOwner.rootNode == null);
+    viewWidget.pipelineOwner.rootNode = renderObject;
+    viewWidget.hooks.renderViewManager.addRenderView(renderObject);
   }
 
   @override
   void detachRenderObject() {
-    assert(_pipelineOwner.rootNode == renderObject);
-    _hooks.renderViewManager.removeRenderView(renderObject);
-    _pipelineOwner.rootNode = null;
+    final _View viewWidget = widget as _View;
+    assert(viewWidget.pipelineOwner.rootNode == renderObject);
+    viewWidget.hooks.renderViewManager.removeRenderView(renderObject);
+    viewWidget.pipelineOwner.rootNode = null;
   }
 
   @override
   void update(_View oldWidget) {
     super.update(oldWidget);
-    assert(oldWidget.pipelineOwner == _pipelineOwner);
-    final ViewHooksData oldHooks = oldWidget.hooks;
-    final ViewHooksData newHooks = _hooks;
+    final _View viewWidget = widget as _View;
+    assert(oldWidget.pipelineOwner == viewWidget.pipelineOwner);
+    final ViewHooks oldHooks = oldWidget.hooks;
+    final ViewHooks newHooks = viewWidget.hooks;
     if (oldHooks.pipelineOwner != newHooks.pipelineOwner) {
-      oldHooks.pipelineOwner.dropChild(_pipelineOwner);
-      newHooks.pipelineOwner.adoptChild(_pipelineOwner);
+      oldHooks.pipelineOwner.dropChild(viewWidget.pipelineOwner);
+      newHooks.pipelineOwner.adoptChild(viewWidget.pipelineOwner);
     }
     if (oldHooks.renderViewManager != newHooks.renderViewManager) {
       oldHooks.renderViewManager.addRenderView(renderObject);
@@ -130,44 +150,54 @@ class _ViewElement extends SingleChildRenderObjectElement {
   }
 }
 
-class ViewHooks extends InheritedWidget {
-  const ViewHooks({
+// TODO(goderbauer): consider an InheritedModel?
+class ViewScope extends InheritedWidget {
+  const ViewScope({
     super.key,
+    this.view,
     required this.hooks,
     required super.child,
   });
 
-  static ViewHooksData of(BuildContext context) {
-    assert(context != null);
-    return context.dependOnInheritedWidgetOfExactType<ViewHooks>()!.hooks;
-  }
-
-  final ViewHooksData hooks;
+  final FlutterView? view;
+  final ViewHooks hooks;
 
   @override
-  bool updateShouldNotify(ViewHooks oldWidget) => hooks != oldWidget.hooks;
+  bool updateShouldNotify(ViewScope oldWidget) => view != oldWidget.view || hooks != oldWidget.hooks;
 }
 
 @immutable
-class ViewHooksData {
-  const ViewHooksData({required this.renderViewManager, required this.pipelineOwner});
+class ViewHooks {
+  const ViewHooks({
+    required this.renderViewManager,
+    required this.pipelineOwner,
+  });
+
+  static ViewHooks of(BuildContext context) {
+    assert(context != null);
+    return context.dependOnInheritedWidgetOfExactType<ViewScope>()!.hooks;
+  }
 
   final RenderViewManager renderViewManager;
   final PipelineOwner pipelineOwner;
 
-  ViewHooksData copyWith({RenderViewManager? renderViewManager, PipelineOwner? pipelineOwner}) {
+  ViewHooks copyWith({
+    RenderViewManager? renderViewManager,
+    PipelineOwner? pipelineOwner,
+  }) {
     assert(renderViewManager != null || pipelineOwner != null);
-    return ViewHooksData(
+    return ViewHooks(
       renderViewManager: renderViewManager ?? this.renderViewManager,
       pipelineOwner: pipelineOwner ?? this.pipelineOwner,
     );
-}
+  }
+
   @override
   int get hashCode => Object.hash(renderViewManager, pipelineOwner);
 
   @override
   bool operator ==(Object other) {
-    return other is ViewHooksData
+    return other is ViewHooks
         && renderViewManager == other.renderViewManager
         && pipelineOwner == other.pipelineOwner;
   }
