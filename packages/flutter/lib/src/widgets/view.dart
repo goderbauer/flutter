@@ -23,6 +23,8 @@ class View extends StatefulWidget {
     return context.dependOnInheritedWidgetOfExactType<ViewScope>()!.view;
   }
 
+  static Object viewSlot = Object();
+
   final FlutterView view;
   final Widget child;
 
@@ -92,9 +94,9 @@ class _ViewElement extends SingleChildRenderObjectElement {
   @override
   void mount(Element? parent, Object? newSlot) {
     assert(() {
-      // if (newSlot == _AnchoredViewElement.viewSlot) {
-      //   return true;
-      // }
+      if (newSlot == View.viewSlot) {
+        return true;
+      }
       bool noRenderAncestor = parent is! RenderObjectElement;
       parent?.visitAncestorElements((Element ancestor) {
         if (ancestor is RenderObjectElement) {
@@ -207,6 +209,9 @@ class ViewHooks {
   }
 }
 
+// TODO(window): CHeck that proper error is thrown when ViewStages.children or
+//   SideViewStages.sideStages want to attach render object to parent.
+
 class ViewStages extends MultiChildComponentWidget {
   const ViewStages({
     super.key,
@@ -214,7 +219,7 @@ class ViewStages extends MultiChildComponentWidget {
   }) : assert(children.length > 0);
 
   @override
-  Element createElement() => MultiChildComponentElement(this);
+  MultiChildComponentElement createElement() => MultiChildComponentElement(this);
 }
 
 // TODO(window): Move MultiChildComponentWidget and MultiChildComponentElement to framework.dart.
@@ -222,9 +227,12 @@ abstract class MultiChildComponentWidget extends Widget {
   const MultiChildComponentWidget({
     super.key,
     required this.children,
-  }) : assert(children.length > 0);
+  });
 
   final List<Widget> children;
+
+  @override
+  MultiChildComponentElement createElement();
 }
 
 class MultiChildComponentElement extends Element {
@@ -250,14 +258,15 @@ class MultiChildComponentElement extends Element {
 
   @override
   void performRebuild() {
-    _children = updateChildren(_children, (widget as MultiChildComponentWidget).children, forgottenChildren: _forgottenChildren);
+    final List<Widget> children = (widget as MultiChildComponentWidget).children;
+    // TODO(goderbauer): slot treatment...
+    _children = updateChildren(_children, children, forgottenChildren: _forgottenChildren, slots: List<Object>.generate(children.length, (_) => View.viewSlot));
     _forgottenChildren.clear();
     super.performRebuild(); // clears the dirty flag
   }
 
   @override
   void forgetChild(Element child) {
-    assert(_children.contains(child));
     assert(!_forgottenChildren.contains(child));
     _forgottenChildren.add(child);
     super.forgetChild(child);
@@ -274,103 +283,55 @@ class MultiChildComponentElement extends Element {
   }
 }
 
+// Acts like a ProxyWidget for [child] and like a [ViewStages] for sideViews.
+class ViewSideStages extends MultiChildComponentWidget {
+  const ViewSideStages({
+    super.key,
+    required this.child,
+    List<Widget> sideViews = const <Widget>[],
+  }) : super(children: sideViews);
 
-// class SideViewStages extends Widget {
-//   const SideViewStages({
-//     super.key,
-//     required this.child,
-//     required this.sideViews,
-//   });
-//
-//   final Widget child;
-//   final List<Widget> sideViews;
-// }
+  final Widget child;
+  List<Widget> get sideViews => children;
 
-// /////////// View Anchor /////////
-//
-// class AnchoredView extends StatelessWidget {
-//   const AnchoredView({
-//     super.key,
-//     required this.view,
-//     required this.viewContent,
-//     required this.child,
-//   });
-//
-//   final FlutterView view;
-//   final Widget viewContent;
-//   final Widget child;
-//
-//   @override
-//   Widget build(BuildContext context) {
-//     return _AnchoredView(
-//       view: View(
-//         view: view,
-//         child: viewContent,
-//       ),
-//       child: child,
-//     );
-//   }
-// }
-//
-//
-// class _AnchoredView extends ProxyWidget {
-//   const _AnchoredView({
-//     required this.view,
-//     required super.child,
-//   });
-//
-//   final View view;
-//
-//   @override
-//   Element createElement() => _AnchoredViewElement(this);
-// }
-//
-// // enum _AnchoredViewSlots {
-// //   child,
-// //   view,
-// // }
-//
-// // Acts like a Proxy Element/Widget for `child`.
-// class _AnchoredViewElement extends ProxyElement {
-//   _AnchoredViewElement(super.widget);
-//
-//   static Object viewSlot = Object();
-//
-//   @override
-//   void notifyClients(_AnchoredView oldWidget) {
-//     // nothing to do
-//   }
-//
-//   Element? _viewElement;
-//
-//   @override
-//   void mount(Element? parent, Object? newSlot) {
-//     assert(_viewElement == null);
-//     super.mount(parent, newSlot);
-//     assert(_viewElement != null);
-//   }
-//
-//   @override
-//   void performRebuild() {
-//     super.performRebuild();
-     // TODO(window): Try catch? See super implementation.
-//     _viewElement = updateChild(_viewElement, (widget as _AnchoredView).view, viewSlot);
-//   }
-//
-//   @override
-//   void forgetChild(Element child) {
-//     if (child == _viewElement) {
-//       _viewElement = null;
-//     }
-     // TODO(window): Cannot call this if child == _viewElement. But must call super for some debug checks.
-//     super.forgetChild(child);
-//   }
-//
-//   @override
-//   void visitChildren(ElementVisitor visitor) {
-//     super.visitChildren(visitor);
-//     if (_viewElement != null) {
-//       visitor(_viewElement!);
-//     }
-//   }
-// }
+  @override
+  MultiChildComponentElement createElement() => _ViewSideStagesElement(this);
+}
+
+class _ViewSideStagesElement extends MultiChildComponentElement {
+  _ViewSideStagesElement(super.widget);
+
+  Element? _child;
+
+  @override
+  void mount(Element? parent, Object? newSlot) {
+    assert(_child == null);
+    super.mount(parent, newSlot);
+    assert(_child != null);
+  }
+
+  @override
+  void update(Widget newWidget) {
+    super.update(newWidget);
+    assert(_child != null);
+  }
+
+  @override
+  void performRebuild() {
+    _child = updateChild(_child, (widget as ViewSideStages).child, slot);
+    super.performRebuild();
+  }
+
+  @override
+  void forgetChild(Element child) {
+    if (child == _child) {
+      _child = null;
+    }
+    super.forgetChild(child);
+  }
+
+  @override
+  RenderObject? get renderObject {
+    return _child?.renderObject;
+  }
+}
