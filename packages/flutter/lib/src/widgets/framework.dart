@@ -6221,11 +6221,6 @@ mixin RootElementMixin on Element {
     super.mount(parent, newSlot);
     _dirty = false;
   }
-
-  @override
-  void performRebuild() {
-    _dirty = false;
-  }
 }
 
 /// An [Element] that uses a [LeafRenderObjectWidget] as its configuration.
