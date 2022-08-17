@@ -223,6 +223,7 @@ class ViewStages extends MultiChildComponentWidget {
 }
 
 // TODO(window): Move MultiChildComponentWidget and MultiChildComponentElement to framework.dart.
+//   On second thought: the slot thing may make this too specific.
 abstract class MultiChildComponentWidget extends Widget {
   const MultiChildComponentWidget({
     super.key,
@@ -270,6 +271,15 @@ class MultiChildComponentElement extends Element {
     assert(!_forgottenChildren.contains(child));
     _forgottenChildren.add(child);
     super.forgetChild(child);
+  }
+
+  @override
+  void visitChildren(ElementVisitor visitor) {
+    for (final Element child in _children) {
+      if (!_forgottenChildren.contains(child)) {
+        visitor(child);
+      }
+    }
   }
 
   @override
@@ -328,6 +338,14 @@ class _ViewSideStagesElement extends MultiChildComponentElement {
       _child = null;
     }
     super.forgetChild(child);
+  }
+
+  @override
+  void visitChildren(ElementVisitor visitor) {
+    if (_child != null) {
+      visitor(_child!);
+    }
+    super.visitChildren(visitor);
   }
 
   @override
