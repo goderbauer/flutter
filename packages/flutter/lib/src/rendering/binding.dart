@@ -267,7 +267,7 @@ mixin RendererBinding on BindingBase, ServicesBinding, SchedulerBinding, Gesture
     bool forceFrame = false;
     for (final RenderView view in _viewIdToRenderView.values) {
       forceFrame = forceFrame || view.child != null;
-      renderView.updateConfiguration();
+      view.updateConfiguration();
     }
     if (forceFrame) {
       scheduleForcedFrame();
@@ -375,26 +375,26 @@ mixin RendererBinding on BindingBase, ServicesBinding, SchedulerBinding, Gesture
 
   void _handlePersistentFrameCallback(Duration timeStamp) {
     drawFrame();
-    _scheduleMouseTrackerUpdate();
+    // _scheduleMouseTrackerUpdate();
   }
 
-  bool _debugMouseTrackerUpdateScheduled = false;
-  void _scheduleMouseTrackerUpdate() {
-    assert(!_debugMouseTrackerUpdateScheduled);
-    assert(() {
-      _debugMouseTrackerUpdateScheduled = true;
-      return true;
-    }());
-    // TODO(window): figure out mouse tracker.
-    // SchedulerBinding.instance.addPostFrameCallback((Duration duration) {
-    //   assert(_debugMouseTrackerUpdateScheduled);
-    //   assert(() {
-    //     _debugMouseTrackerUpdateScheduled = false;
-    //     return true;
-    //   }());
-    //   _mouseTracker!.updateAllDevices(renderView.hitTestMouseTrackers);
-    // });
-  }
+  // TODO(window): figure out mouse tracker.
+  // bool _debugMouseTrackerUpdateScheduled = false;
+  // void _scheduleMouseTrackerUpdate() {
+  //   assert(!_debugMouseTrackerUpdateScheduled);
+  //   assert(() {
+  //     _debugMouseTrackerUpdateScheduled = true;
+  //     return true;
+  //   }());
+  //   // SchedulerBinding.instance.addPostFrameCallback((Duration duration) {
+  //   //   assert(_debugMouseTrackerUpdateScheduled);
+  //   //   assert(() {
+  //   //     _debugMouseTrackerUpdateScheduled = false;
+  //   //     return true;
+  //   //   }());
+  //   //   _mouseTracker!.updateAllDevices(renderView.hitTestMouseTrackers);
+  //   // });
+  // }
 
   int _firstFrameDeferredCount = 0;
   bool _firstFrameSent = false;

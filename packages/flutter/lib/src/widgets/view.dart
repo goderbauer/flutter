@@ -1,5 +1,6 @@
 // ignore_for_file: public_member_api_docs
 
+import 'dart:collection';
 import 'dart:ui';
 
 import 'package:flutter/rendering.dart';
@@ -91,9 +92,9 @@ class _ViewElement extends SingleChildRenderObjectElement {
   @override
   void mount(Element? parent, Object? newSlot) {
     assert(() {
-      if (newSlot == _AnchoredViewElement.viewSlot) {
-        return true;
-      }
+      // if (newSlot == _AnchoredViewElement.viewSlot) {
+      //   return true;
+      // }
       bool noRenderAncestor = parent is! RenderObjectElement;
       parent?.visitAncestorElements((Element ancestor) {
         if (ancestor is RenderObjectElement) {
@@ -206,91 +207,170 @@ class ViewHooks {
   }
 }
 
-/////////// View Anchor /////////
-
-class AnchoredView extends StatelessWidget {
-  const AnchoredView({
+class ViewStages extends MultiChildComponentWidget {
+  const ViewStages({
     super.key,
-    required this.view,
-    required this.viewContent,
-    required this.child,
-  });
-
-  final FlutterView view;
-  final Widget viewContent;
-  final Widget child;
+    required super.children,
+  }) : assert(children.length > 0);
 
   @override
-  Widget build(BuildContext context) {
-    return _AnchoredView(
-      view: View(
-        view: view,
-        child: viewContent,
-      ),
-      child: child,
-    );
-  }
+  Element createElement() => MultiChildComponentElement(this);
 }
 
+// TODO(window): Move MultiChildComponentWidget and MultiChildComponentElement to framework.dart.
+abstract class MultiChildComponentWidget extends Widget {
+  const MultiChildComponentWidget({
+    super.key,
+    required this.children,
+  }) : assert(children.length > 0);
 
-class _AnchoredView extends ProxyWidget {
-  const _AnchoredView({
-    required this.view,
-    required super.child,
-  });
-
-  final View view;
-
-  @override
-  Element createElement() => _AnchoredViewElement(this);
+  final List<Widget> children;
 }
 
-// enum _AnchoredViewSlots {
-//   child,
-//   view,
-// }
+class MultiChildComponentElement extends Element {
+  MultiChildComponentElement(super.widget);
 
-// Acts like a Proxy Element/Widget for `child`.
-class _AnchoredViewElement extends ProxyElement {
-  _AnchoredViewElement(super.widget);
-
-  static Object viewSlot = Object();
-
-  @override
-  void notifyClients(_AnchoredView oldWidget) {
-    // nothing to do
-  }
-
-  Element? _viewElement;
+  List<Element> _children = <Element>[];
+  final Set<Element> _forgottenChildren = HashSet<Element>();
 
   @override
   void mount(Element? parent, Object? newSlot) {
-    assert(_viewElement == null);
     super.mount(parent, newSlot);
-    assert(_viewElement != null);
+    assert(_children.isEmpty);
+    rebuild();
+    assert(_children.length == (widget as MultiChildComponentWidget).children.length);
+  }
+
+  @override
+  void update(Widget newWidget) {
+    super.update(newWidget);
+    rebuild(force: true);
+    assert(_children.length == (widget as MultiChildComponentWidget).children.length);
   }
 
   @override
   void performRebuild() {
-    super.performRebuild();
-    // TODO(window): Try catch? See super implementation.
-    _viewElement = updateChild(_viewElement, (widget as _AnchoredView).view, viewSlot);
+    _children = updateChildren(_children, (widget as MultiChildComponentWidget).children, forgottenChildren: _forgottenChildren);
+    _forgottenChildren.clear();
+    super.performRebuild(); // clears the dirty flag
   }
 
   @override
   void forgetChild(Element child) {
-    if (child == _viewElement) {
-      _viewElement = null;
-    }
-    // TODO(window): Cannot call this if child == _viewElement. But must call super for some debug checks.
+    assert(_children.contains(child));
+    assert(!_forgottenChildren.contains(child));
+    _forgottenChildren.add(child);
     super.forgetChild(child);
   }
 
   @override
-  void visitChildren(ElementVisitor visitor) {
-    super.visitChildren(visitor);
-    if (_viewElement != null) {
-      visitor(_viewElement!);
-    }
+  bool get debugDoingBuild => false; // This element does not have a concept of "building".
+
+  @override
+  // TODO(window): Update documentation.
+  RenderObject? get renderObject {
+    // Nothing above this widget has an associated render object.
+    return null;
   }
 }
+
+
+// class SideViewStages extends Widget {
+//   const SideViewStages({
+//     super.key,
+//     required this.child,
+//     required this.sideViews,
+//   });
+//
+//   final Widget child;
+//   final List<Widget> sideViews;
+// }
+
+// /////////// View Anchor /////////
+//
+// class AnchoredView extends StatelessWidget {
+//   const AnchoredView({
+//     super.key,
+//     required this.view,
+//     required this.viewContent,
+//     required this.child,
+//   });
+//
+//   final FlutterView view;
+//   final Widget viewContent;
+//   final Widget child;
+//
+//   @override
+//   Widget build(BuildContext context) {
+//     return _AnchoredView(
+//       view: View(
+//         view: view,
+//         child: viewContent,
+//       ),
+//       child: child,
+//     );
+//   }
+// }
+//
+//
+// class _AnchoredView extends ProxyWidget {
+//   const _AnchoredView({
+//     required this.view,
+//     required super.child,
+//   });
+//
+//   final View view;
+//
+//   @override
+//   Element createElement() => _AnchoredViewElement(this);
+// }
+//
+// // enum _AnchoredViewSlots {
+// //   child,
+// //   view,
+// // }
+//
+// // Acts like a Proxy Element/Widget for `child`.
+// class _AnchoredViewElement extends ProxyElement {
+//   _AnchoredViewElement(super.widget);
+//
+//   static Object viewSlot = Object();
+//
+//   @override
+//   void notifyClients(_AnchoredView oldWidget) {
+//     // nothing to do
+//   }
+//
+//   Element? _viewElement;
+//
+//   @override
+//   void mount(Element? parent, Object? newSlot) {
+//     assert(_viewElement == null);
+//     super.mount(parent, newSlot);
+//     assert(_viewElement != null);
+//   }
+//
+//   @override
+//   void performRebuild() {
+//     super.performRebuild();
+     // TODO(window): Try catch? See super implementation.
+//     _viewElement = updateChild(_viewElement, (widget as _AnchoredView).view, viewSlot);
+//   }
+//
+//   @override
+//   void forgetChild(Element child) {
+//     if (child == _viewElement) {
+//       _viewElement = null;
+//     }
+     // TODO(window): Cannot call this if child == _viewElement. But must call super for some debug checks.
+//     super.forgetChild(child);
+//   }
+//
+//   @override
+//   void visitChildren(ElementVisitor visitor) {
+//     super.visitChildren(visitor);
+//     if (_viewElement != null) {
+//       visitor(_viewElement!);
+//     }
+//   }
+// }
