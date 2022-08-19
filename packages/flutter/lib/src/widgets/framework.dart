@@ -6217,7 +6217,6 @@ mixin RootElementMixin on Element {
   void mount(Element? parent, Object? newSlot) {
     // Root elements should never have parents.
     assert(parent == null);
-    assert(newSlot == null);
     super.mount(parent, newSlot);
     _dirty = false;
   }

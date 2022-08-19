@@ -94,20 +94,7 @@ class _ViewElement extends SingleChildRenderObjectElement {
 
   @override
   void mount(Element? parent, Object? newSlot) {
-    assert(() {
-      if (newSlot == View.viewSlot) {
-        return true;
-      }
-      bool noRenderAncestor = parent is! RenderObjectElement;
-      parent?.visitAncestorElements((Element ancestor) {
-        if (ancestor is RenderObjectElement) {
-          noRenderAncestor = false;
-          return false;
-        }
-        return true;
-      });
-      return noRenderAncestor;
-    }());
+    assert(newSlot == View.viewSlot);
     final _View viewWidget = widget as _View;
     viewWidget.hooks.pipelineOwner.adoptChild(viewWidget.pipelineOwner);
     super.mount(parent, newSlot); // calls attachRenderObject().
@@ -124,6 +111,7 @@ class _ViewElement extends SingleChildRenderObjectElement {
 
   @override
   void attachRenderObject(Object? newSlot) {
+    assert(newSlot == View.viewSlot);
     final _View viewWidget = widget as _View;
     assert(viewWidget.pipelineOwner.rootNode == null);
     viewWidget.pipelineOwner.rootNode = renderObject;
@@ -237,6 +225,13 @@ class SideStageManager extends _BaseStageManager {
   Widget get child => _child!;
 }
 
+// This element has the makings of a MultiChildComponentElement (i.e. a
+// ComponentElement that can manage more then one child, similar to
+// MultiChildRenderObjectElement vs. RenderObjectElement). In theory, this
+// functionality could be factored out into a (reusable)
+// MultiChildComponentElement, but it is not clear what one would reuse this
+// for. So, for the time being, Flutter does not offer a public
+// MultiChildComponentElement.
 class _StageManagerElement extends Element {
   _StageManagerElement(super.widget);
 
@@ -277,7 +272,12 @@ class _StageManagerElement extends Element {
     _childElement = updateChild(_childElement, (widget as _BaseStageManager)._child, slot);
 
     final List<Widget> stages = (widget as _BaseStageManager)._stages;
-    _stageElements = updateChildren(_stageElements, stages, forgottenChildren: _forgottenStageElements, slots: List<Object>.generate(stages.length, (_) => View.viewSlot));
+    _stageElements = updateChildren(
+      _stageElements,
+      stages,
+      forgottenChildren: _forgottenStageElements,
+      slots: List<Object>.generate(stages.length, (_) => View.viewSlot),
+    );
     _forgottenStageElements.clear();
 
     super.performRebuild(); // clears the dirty flag

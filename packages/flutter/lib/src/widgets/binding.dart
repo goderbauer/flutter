@@ -1098,7 +1098,7 @@ class RootWidget extends Widget {
         element!.assignOwner(owner);
       });
       owner.buildScope(element!, () {
-        element!.mount(/* parent */ null, /* newSlot */ null);
+        element!.mount(/* parent */ null, View.viewSlot);
       });
     } else {
       element._newWidget = this;
