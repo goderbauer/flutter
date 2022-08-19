@@ -3,6 +3,7 @@
 import 'dart:collection';
 import 'dart:ui';
 
+import 'package:flutter/foundation.dart';
 import 'package:flutter/rendering.dart';
 
 import 'framework.dart';
@@ -351,5 +352,20 @@ class _ViewSideStagesElement extends MultiChildComponentElement {
   @override
   RenderObject? get renderObject {
     return _child?.renderObject;
+  }
+
+  @override
+  List<DiagnosticsNode> debugDescribeChildren() {
+    final List<DiagnosticsNode> children = <DiagnosticsNode>[
+      if (_child != null)
+        _child!.toDiagnosticsNode(),
+    ];
+    super.visitChildren((Element child) {
+      children.add(child.toDiagnosticsNode(
+        name: 'sidestage',
+        style: DiagnosticsTreeStyle.offstage,
+      ));
+    });
+    return children;
   }
 }
