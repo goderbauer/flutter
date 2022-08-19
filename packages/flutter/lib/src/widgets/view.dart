@@ -64,6 +64,7 @@ class _ViewState extends State<View> {
 
 class _View extends SingleChildRenderObjectWidget {
   // TODO(window): consider keying this or View with the provided FlutterView? Or implement updateRenderObject for changing views.
+  // global keying would also mean that there can only be one view widget attached to a view in the tree, which would be good.
   const _View({
     required this.view,
     required this.hooks,
@@ -198,7 +199,7 @@ class ViewHooks {
   }
 }
 
-// TODO(window): CHeck that proper error is thrown when ViewStages.children or
+// TODO(window): Check that proper error is thrown when ViewStages.children or
 //   SideViewStages.sideStages want to attach render object to parent.
 
 abstract class _BaseStageManager extends Widget {
@@ -218,8 +219,24 @@ class StageManager extends _BaseStageManager {
   List<Widget> get stages => _stages;
 }
 
-class SideStageManager extends _BaseStageManager {
-  const SideStageManager({super.key, required super.stages, required Widget super.child});
+class SideStageManager extends StatelessWidget {
+  const SideStageManager({super.key, required this.stages, required this.child});
+
+  final Widget child;
+  final List<Widget> stages;
+
+  @override
+  Widget build(BuildContext context) {
+    final ViewHooks hooks = ViewHooks.of(context);
+    return _SideStageManager(
+      stages: stages.map((Widget stage) => ViewScope(hooks: hooks, child: stage)).toList(),
+      child: child,
+    );
+  }
+}
+
+class _SideStageManager extends _BaseStageManager {
+  const _SideStageManager({required super.stages, required Widget super.child});
 
   List<Widget> get stages => _stages;
   Widget get child => _child!;
