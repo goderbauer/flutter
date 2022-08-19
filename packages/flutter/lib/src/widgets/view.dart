@@ -213,71 +213,96 @@ class ViewHooks {
 // TODO(window): CHeck that proper error is thrown when ViewStages.children or
 //   SideViewStages.sideStages want to attach render object to parent.
 
-class ViewStages extends MultiChildComponentWidget {
-  const ViewStages({
-    super.key,
-    required super.children,
-  }) : assert(children.length > 0);
+abstract class _BaseStageManager extends Widget {
+  const _BaseStageManager({super.key, required List<Widget> stages, Widget? child}) : _stages = stages, _child = child;
+
+  // It is up to the subclasses to make the relevant properties public.
+  final Widget? _child;
+  final List<Widget> _stages;
 
   @override
-  MultiChildComponentElement createElement() => MultiChildComponentElement(this);
+  Element createElement() => _StageManagerElement(this);
 }
 
-// TODO(window): Move MultiChildComponentWidget and MultiChildComponentElement to framework.dart.
-//   On second thought: the slot thing may make this too specific.
-abstract class MultiChildComponentWidget extends Widget {
-  const MultiChildComponentWidget({
-    super.key,
-    required this.children,
-  });
+class StageManager extends _BaseStageManager {
+  const StageManager({super.key, required super.stages}) : assert(stages.length > 0);
 
-  final List<Widget> children;
-
-  @override
-  MultiChildComponentElement createElement();
+  List<Widget> get stages => _stages;
 }
 
-class MultiChildComponentElement extends Element {
-  MultiChildComponentElement(super.widget);
+class SideStageManager extends _BaseStageManager {
+  const SideStageManager({super.key, required super.stages, required Widget super.child});
 
-  List<Element> _children = <Element>[];
-  final Set<Element> _forgottenChildren = HashSet<Element>();
+  List<Widget> get stages => _stages;
+  Widget get child => _child!;
+}
+
+class _StageManagerElement extends Element {
+  _StageManagerElement(super.widget);
+
+  List<Element> _stageElements = <Element>[];
+  final Set<Element> _forgottenStageElements = HashSet<Element>();
+
+  // This is always null for the [StageManager] and always non-null for the [SideStageManager].
+  Element? _childElement;
+
+  bool _debugAssertChildren() {
+    // Each stage widget must have a corresponding element.
+    assert(_stageElements.length == (widget as _BaseStageManager)._stages.length);
+    // Iff there is a child widget, it must have a corresponding element.
+    assert((_childElement == null) == ((widget as _BaseStageManager)._child == null));
+    // The child element is not also a stage element.
+    assert(!_stageElements.contains(_childElement));
+    return true;
+  }
 
   @override
   void mount(Element? parent, Object? newSlot) {
     super.mount(parent, newSlot);
-    assert(_children.isEmpty);
+    assert(_stageElements.isEmpty);
+    assert(_childElement == null);
     rebuild();
-    assert(_children.length == (widget as MultiChildComponentWidget).children.length);
+    assert(_debugAssertChildren());
   }
 
   @override
   void update(Widget newWidget) {
     super.update(newWidget);
     rebuild(force: true);
-    assert(_children.length == (widget as MultiChildComponentWidget).children.length);
+    assert(_debugAssertChildren());
   }
 
   @override
   void performRebuild() {
-    final List<Widget> children = (widget as MultiChildComponentWidget).children;
-    // TODO(goderbauer): slot treatment...
-    _children = updateChildren(_children, children, forgottenChildren: _forgottenChildren, slots: List<Object>.generate(children.length, (_) => View.viewSlot));
-    _forgottenChildren.clear();
+    _childElement = updateChild(_childElement, (widget as _BaseStageManager)._child, slot);
+
+    final List<Widget> stages = (widget as _BaseStageManager)._stages;
+    _stageElements = updateChildren(_stageElements, stages, forgottenChildren: _forgottenStageElements, slots: List<Object>.generate(stages.length, (_) => View.viewSlot));
+    _forgottenStageElements.clear();
+
     super.performRebuild(); // clears the dirty flag
+    assert(_debugAssertChildren());
   }
 
   @override
   void forgetChild(Element child) {
-    assert(!_forgottenChildren.contains(child));
-    _forgottenChildren.add(child);
+    if (child == _childElement) {
+      _childElement = null;
+    } else {
+      assert(_stageElements.contains(child));
+      assert(!_forgottenStageElements.contains(child));
+      _forgottenStageElements.add(child);
+    }
     super.forgetChild(child);
   }
 
   @override
   void visitChildren(ElementVisitor visitor) {
-    for (final Element child in _children) {
-      if (!_forgottenChildren.contains(child)) {
+    if (_childElement != null) {
+      visitor(_childElement!);
+    }
+    for (final Element child in _stageElements) {
+      if (!_forgottenStageElements.contains(child)) {
         visitor(child);
       }
     }
@@ -289,83 +314,27 @@ class MultiChildComponentElement extends Element {
   @override
   // TODO(window): Update documentation.
   RenderObject? get renderObject {
-    // Nothing above this widget has an associated render object.
-    return null;
-  }
-}
-
-// Acts like a ProxyWidget for [child] and like a [ViewStages] for sideViews.
-class ViewSideStages extends MultiChildComponentWidget {
-  const ViewSideStages({
-    super.key,
-    required this.child,
-    List<Widget> sideViews = const <Widget>[],
-  }) : super(children: sideViews);
-
-  final Widget child;
-  List<Widget> get sideViews => children;
-
-  @override
-  MultiChildComponentElement createElement() => _ViewSideStagesElement(this);
-}
-
-class _ViewSideStagesElement extends MultiChildComponentElement {
-  _ViewSideStagesElement(super.widget);
-
-  Element? _child;
-
-  @override
-  void mount(Element? parent, Object? newSlot) {
-    assert(_child == null);
-    super.mount(parent, newSlot);
-    assert(_child != null);
-  }
-
-  @override
-  void update(Widget newWidget) {
-    super.update(newWidget);
-    assert(_child != null);
-  }
-
-  @override
-  void performRebuild() {
-    _child = updateChild(_child, (widget as ViewSideStages).child, slot);
-    super.performRebuild();
-  }
-
-  @override
-  void forgetChild(Element child) {
-    if (child == _child) {
-      _child = null;
-    }
-    super.forgetChild(child);
-  }
-
-  @override
-  void visitChildren(ElementVisitor visitor) {
-    if (_child != null) {
-      visitor(_child!);
-    }
-    super.visitChildren(visitor);
-  }
-
-  @override
-  RenderObject? get renderObject {
-    return _child?.renderObject;
+    // If we don't have a _childElement (i.e. we are a [StageManager]) this
+    // returns null on purpose because nothing above this element has an
+    // associated render object. (The render tree starts with a [View] and
+    // [StageManager] is there to create multiple stages for views.)
+    return _childElement?.renderObject;
   }
 
   @override
   List<DiagnosticsNode> debugDescribeChildren() {
-    final List<DiagnosticsNode> children = <DiagnosticsNode>[
-      if (_child != null)
-        _child!.toDiagnosticsNode(),
-    ];
-    super.visitChildren((Element child) {
-      children.add(child.toDiagnosticsNode(
-        name: 'sidestage',
+    final List<DiagnosticsNode> children = <DiagnosticsNode>[];
+    String childName = 'stage';
+    if (_childElement != null) {
+      children.add(_childElement!.toDiagnosticsNode());
+      childName = 'sidestage';
+    }
+    for (int i = 0; i < _stageElements.length; i++) {
+      children.add(_stageElements[i].toDiagnosticsNode(
+        name: '$childName ${i + 1}',
         style: DiagnosticsTreeStyle.offstage,
       ));
-    });
+    }
     return children;
   }
 }
