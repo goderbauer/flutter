@@ -147,6 +147,7 @@ class _ViewElement extends SingleChildRenderObjectElement {
 }
 
 // TODO(goderbauer): consider an InheritedModel?
+//   Or break up into two separate InheritedWidget for hooks and views
 class ViewScope extends InheritedWidget {
   const ViewScope({
     super.key,
