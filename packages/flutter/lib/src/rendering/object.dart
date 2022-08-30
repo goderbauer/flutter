@@ -3,7 +3,7 @@
 // found in the LICENSE file.
 
 import 'dart:developer';
-import 'dart:ui' as ui show PictureRecorder;
+import 'dart:ui' as ui show PictureRecorder, SemanticsUpdate;
 
 import 'package:flutter/animation.dart';
 import 'package:flutter/foundation.dart';
@@ -881,8 +881,7 @@ class PipelineOwner {
   /// through the rendering pipeline.
   PipelineOwner({
     VoidCallback? onNeedVisualUpdate,
-    this.onSemanticsOwnerCreated,
-    this.onSemanticsOwnerDisposed,
+    this.onSemanticsUpdate,
   }) : _onNeedVisualUpdate = onNeedVisualUpdate;
 
   /// Called when a render object associated with this pipeline owner wishes to
@@ -895,16 +894,8 @@ class PipelineOwner {
   VoidCallback? get onNeedVisualUpdate => _onNeedVisualUpdate;
   VoidCallback? _onNeedVisualUpdate;
 
-  /// Called whenever this pipeline owner creates a semantics object.
   ///
-  /// Typical implementations will schedule the creation of the initial
-  /// semantics tree.
-  final VoidCallback? onSemanticsOwnerCreated;
-
-  /// Called whenever this pipeline owner disposes its semantics owner.
-  ///
-  /// Typical implementations will tear down the semantics tree.
-  final VoidCallback? onSemanticsOwnerDisposed;
+  final SemanticsUpdateCallback? onSemanticsUpdate;
 
   /// Calls [onNeedVisualUpdate] if [onNeedVisualUpdate] is not null.
   ///
@@ -1153,10 +1144,13 @@ class PipelineOwner {
     _outstandingSemanticsHandles += 1;
     if (_outstandingSemanticsHandles == 1) {
       assert(_semanticsOwner == null);
-      _semanticsOwner = SemanticsOwner();
-      onSemanticsOwnerCreated?.call();
+      _semanticsOwner = SemanticsOwner(onSemanticsUpdate: onSemanticsUpdate ?? _defaultHandleSemanticsUpdate);
     }
     return SemanticsHandle._(this, listener);
+  }
+
+  void _defaultHandleSemanticsUpdate(ui.SemanticsUpdate _) {
+    assert(false, '$this was requested to send a SemanticsUpdate, but no onSemanticsUpdate handler was specified.');
   }
 
   void _didDisposeSemanticsHandle() {
@@ -1165,7 +1159,6 @@ class PipelineOwner {
     if (_outstandingSemanticsHandles == 0) {
       _semanticsOwner!.dispose();
       _semanticsOwner = null;
-      onSemanticsOwnerDisposed?.call();
     }
   }
 

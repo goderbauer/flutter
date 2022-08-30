@@ -3024,6 +3024,9 @@ class _TraversalSortNode implements Comparable<_TraversalSortNode> {
   }
 }
 
+///
+typedef SemanticsUpdateCallback = void Function(ui.SemanticsUpdate update);
+
 /// Owns [SemanticsNode] objects and notifies listeners of changes to the
 /// render tree semantics.
 ///
@@ -3031,6 +3034,12 @@ class _TraversalSortNode implements Comparable<_TraversalSortNode> {
 /// obtain a [SemanticsHandle]. This will create a [SemanticsOwner] if
 /// necessary.
 class SemanticsOwner extends ChangeNotifier {
+  ///
+  SemanticsOwner({required this.onSemanticsUpdate});
+
+  ///
+  final SemanticsUpdateCallback onSemanticsUpdate;
+
   final Set<SemanticsNode> _dirtyNodes = <SemanticsNode>{};
   final Map<int, SemanticsNode> _nodes = <int, SemanticsNode>{};
   final Set<SemanticsNode> _detachedNodes = <SemanticsNode>{};
@@ -3048,7 +3057,7 @@ class SemanticsOwner extends ChangeNotifier {
     super.dispose();
   }
 
-  /// Update the semantics using [dart:ui.PlatformDispatcher.updateSemantics].
+  /// Update the semantics using [onSemanticsUpdate].
   void sendSemanticsUpdate() {
     if (_dirtyNodes.isEmpty) {
       return;
@@ -3097,7 +3106,7 @@ class SemanticsOwner extends ChangeNotifier {
       final CustomSemanticsAction action = CustomSemanticsAction.getAction(actionId)!;
       builder.updateCustomAction(id: actionId, label: action.label, hint: action.hint, overrideId: action.action?.index ?? -1);
     }
-    SemanticsBinding.instance.platformDispatcher.updateSemantics(builder.build());
+    onSemanticsUpdate(builder.build());
     notifyListeners();
   }
 

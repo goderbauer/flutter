@@ -35,7 +35,9 @@ class View extends StatefulWidget {
 
 class _ViewState extends State<View> {
   // Pulled out of _ViewElement so we can configure ViewScope.
-  final PipelineOwner _pipelineOwner = PipelineOwner();
+  late final PipelineOwner _pipelineOwner = PipelineOwner(
+    onSemanticsUpdate: _handleSemanticsUpdate,
+  );
 
   late ViewHooks _ancestorHooks;
   late ViewHooks _descendantHooks;
@@ -45,6 +47,10 @@ class _ViewState extends State<View> {
     super.didChangeDependencies();
     _ancestorHooks = ViewHooks.of(context);
     _descendantHooks = _ancestorHooks.copyWith(pipelineOwner: _pipelineOwner);
+  }
+
+  void _handleSemanticsUpdate(SemanticsUpdate update) {
+    widget.view.updateSemantics(update);
   }
 
   @override

@@ -698,7 +698,7 @@ void main() {
   });
 
   test('Semantics id does not repeat', () {
-    final SemanticsOwner owner = SemanticsOwner();
+    final SemanticsOwner owner = SemanticsOwner(onSemanticsUpdate: (_) { });
     const int expectId = 1400;
     SemanticsNode? nodeToRemove;
     for (int i = 0; i < kMaxFrameworkAccessibilityIdentifier; i++) {
