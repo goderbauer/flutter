@@ -22,7 +22,8 @@ TestWidgetsFlutterBinding ensureInitialized([@visibleForTesting Map<String, Stri
   if (environment.containsKey('FLUTTER_TEST') && environment['FLUTTER_TEST'] != 'false') {
     return AutomatedTestWidgetsFlutterBinding.ensureInitialized();
   }
-  return LiveTestWidgetsFlutterBinding.ensureInitialized();
+  throw UnsupportedError('Live tests are not implemented.');
+  // return LiveTestWidgetsFlutterBinding.ensureInitialized();
 }
 
 /// Setup mocking of the global [HttpClient].

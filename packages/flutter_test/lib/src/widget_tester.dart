@@ -500,11 +500,7 @@ Future<void> expectLater(
 /// For convenience, instances of this class (such as the one provided by
 /// `testWidgets`) can be used as the `vsync` for `AnimationController` objects.
 class WidgetTester extends WidgetController implements HitTestDispatcher, TickerProvider {
-  WidgetTester._(super.binding) {
-    if (binding is LiveTestWidgetsFlutterBinding) {
-      (binding as LiveTestWidgetsFlutterBinding).deviceEventDispatcher = this;
-    }
-  }
+  WidgetTester._(super.binding);
 
   /// The description string of the test currently being run.
   String get testDescription => _testDescription;
@@ -541,12 +537,32 @@ class WidgetTester extends WidgetController implements HitTestDispatcher, Ticker
   /// See also [LiveTestWidgetsFlutterBindingFramePolicy], which affects how
   /// this method works when the test is run with `flutter run`.
   Future<void> pumpWidget(
+      Widget widget, [
+        Duration? duration,
+        EnginePhase phase = EnginePhase.sendSemanticsUpdate,
+      ]) {
+    final Widget wrappedWidget = View(
+      view: binding.platformDispatcher.views.first,
+      child: widget,
+    );
+    return pumpPlainWidget(wrappedWidget, duration, phase);
+  }
+
+  ///
+  Future<void> pumpPlainWidget(
     Widget widget, [
     Duration? duration,
     EnginePhase phase = EnginePhase.sendSemanticsUpdate,
   ]) {
+    final Widget wrappedWidget = ViewHooksScope(
+      hooks: ViewHooks(
+        pipelineOwner: binding.rootPipelineOwner,
+        renderViewManager: binding,
+      ),
+      child: widget,
+    );
     return TestAsyncUtils.guard<void>(() {
-      binding.attachRootWidget(widget);
+      binding.attachRootWidget(wrappedWidget);
       binding.scheduleFrame();
       return binding.pump(duration, phase);
     });
@@ -620,12 +636,6 @@ class WidgetTester extends WidgetController implements HitTestDispatcher, Ticker
   /// Similarly to [pump], this doesn't actually wait for `duration`, just
   /// advances the clock.
   Future<void> pumpBenchmark(Duration duration) async {
-    assert(() {
-      final TestWidgetsFlutterBinding widgetsBinding = binding;
-      return widgetsBinding is LiveTestWidgetsFlutterBinding &&
-             widgetsBinding.framePolicy == LiveTestWidgetsFlutterBindingFramePolicy.benchmark;
-    }());
-
     dynamic caughtException;
     void handleError(dynamic error, StackTrace stackTrace) => caughtException ??= error;
 
@@ -649,19 +659,6 @@ class WidgetTester extends WidgetController implements HitTestDispatcher, Ticker
     assert(duration > Duration.zero);
     assert(timeout != null);
     assert(timeout > Duration.zero);
-    assert(() {
-      final WidgetsBinding binding = this.binding;
-      if (binding is LiveTestWidgetsFlutterBinding &&
-          binding.framePolicy == LiveTestWidgetsFlutterBindingFramePolicy.benchmark) {
-        test_package.fail(
-          'When using LiveTestWidgetsFlutterBindingFramePolicy.benchmark, '
-          'hasScheduledFrame is never set to true. This means that pumpAndSettle() '
-          'cannot be used, because it has no way to know if the application has '
-          'stopped registering new frames.',
-        );
-      }
-      return true;
-    }());
     return TestAsyncUtils.guard<int>(() async {
       final DateTime endTime = binding.clock.fromNowBy(timeout);
       int count = 0;
