@@ -29,17 +29,12 @@ mixin RendererBinding on BindingBase, ServicesBinding, SchedulerBinding, Gesture
     _instance = this;
     _rootPipelineOwner = PipelineOwner(
       onNeedVisualUpdate: ensureVisualUpdate,
-      // TODO(window): Figure out semantics.
-      // onSemanticsOwnerCreated: _handleSemanticsOwnerCreated,
-      // onSemanticsOwnerDisposed: _handleSemanticsOwnerDisposed,
+      semanticsCoordinator: semanticsCoordinator,
     );
     platformDispatcher
       ..onMetricsChanged = handleMetricsChanged
       ..onTextScaleFactorChanged = handleTextScaleFactorChanged
-      ..onPlatformBrightnessChanged = handlePlatformBrightnessChanged
-      ..onSemanticsEnabledChanged = _handleSemanticsEnabledChanged
-      ..onSemanticsAction = _handleSemanticsAction;
-    _handleSemanticsEnabledChanged();
+      ..onPlatformBrightnessChanged = handlePlatformBrightnessChanged;
     addPersistentFrameCallback(_handlePersistentFrameCallback);
     initMouseTracker();
     if (kIsWeb) {
@@ -316,8 +311,6 @@ mixin RendererBinding on BindingBase, ServicesBinding, SchedulerBinding, Gesture
   @protected
   void handlePlatformBrightnessChanged() { }
 
-  SemanticsHandle? _semanticsHandle;
-
   /// Creates a [MouseTracker] which manages state about currently connected
   /// mice, for hover notification.
   ///
@@ -342,35 +335,15 @@ mixin RendererBinding on BindingBase, ServicesBinding, SchedulerBinding, Gesture
     super.dispatchEvent(event, hitTestResult);
   }
 
-  void _handleSemanticsEnabledChanged() {
-    setSemanticsEnabled(platformDispatcher.semanticsEnabled);
-  }
-
-  /// Whether the render tree associated with this binding should produce a tree
-  /// of [SemanticsNode] objects.
-  void setSemanticsEnabled(bool enabled) {
-    // TODO(window): figure out semantics.
-    if (enabled) {
-      // _semanticsHandle ??= _pipelineOwner.ensureSemantics();
-    } else {
-      _semanticsHandle?.dispose();
-      _semanticsHandle = null;
-    }
+  @override // from SemanticsBinding
+  void performSemanticsAction(int viewId, int nodeId, SemanticsAction action, Object? args) {
+    _viewIdToRenderView[viewId]!.owner!.semanticsOwner?.performAction(nodeId, action, args);
   }
 
   void _handleWebFirstFrame(Duration _) {
     assert(kIsWeb);
     const MethodChannel methodChannel = MethodChannel('flutter/service_worker');
     methodChannel.invokeMethod<void>('first-frame');
-  }
-
-  void _handleSemanticsAction(int id, SemanticsAction action, ByteData? args) {
-    // TODO(window): figure out semantics.
-    // _pipelineOwner.semanticsOwner?.performAction(
-    //   id,
-    //   action,
-    //   args != null ? const StandardMessageCodec().decodeMessage(args) : null,
-    // );
   }
 
   void _handlePersistentFrameCallback(Duration timeStamp) {
@@ -593,7 +566,7 @@ void debugDumpLayerTree() {
 String? _collectSemanticsTrees(DebugSemanticsDumpOrder childOrder) {
   return <String?>[
     for (final RenderView renderView in RendererBinding.instance.renderViews)
-      renderView.debugSemantics?.toStringDeep(childOrder: childOrder) ?? 'Semantics not collected.',
+      renderView.debugSemantics?.toStringDeep(childOrder: childOrder) ?? 'Semantics not collected for $renderView.',
   ].join('\n\n');
 }
 

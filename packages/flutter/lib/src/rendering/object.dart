@@ -799,48 +799,23 @@ typedef RenderObjectVisitor = void Function(RenderObject child);
 /// Used by [RenderObject.invokeLayoutCallback].
 typedef LayoutCallback<T extends Constraints> = void Function(T constraints);
 
-/// A reference to the semantics tree.
-///
-/// The framework maintains the semantics tree (used for accessibility and
-/// indexing) only when there is at least one client holding an open
-/// [SemanticsHandle].
-///
-/// The framework notifies the client that it has updated the semantics tree by
-/// calling the [listener] callback. When the client no longer needs the
-/// semantics tree, the client can call [dispose] on the [SemanticsHandle],
-/// which stops these callbacks and closes the [SemanticsHandle]. When all the
-/// outstanding [SemanticsHandle] objects are closed, the framework stops
-/// updating the semantics tree.
-///
-/// To obtain a [SemanticsHandle], call [PipelineOwner.ensureSemantics] on the
-/// [PipelineOwner] for the render tree from which you wish to read semantics.
-/// You can obtain the [PipelineOwner] using the [RenderObject.owner] property.
-class SemanticsHandle {
-  SemanticsHandle._(PipelineOwner owner, this.listener)
-      : assert(owner != null),
-        _owner = owner {
+class _WrappedSemanticsHandle implements SemanticsHandle {
+  _WrappedSemanticsHandle(SemanticsOwner owner, SemanticsHandle handle, this.listener) : _owner = owner, _handle = handle {
     if (listener != null) {
-      _owner.semanticsOwner!.addListener(listener!);
+      _owner.addListener(listener!);
     }
   }
 
-  final PipelineOwner _owner;
-
-  /// The callback that will be notified when the semantics tree updates.
+  final SemanticsOwner _owner;
+  final SemanticsHandle _handle;
   final VoidCallback? listener;
 
-  /// Closes the semantics handle and stops calling [listener] when the
-  /// semantics updates.
-  ///
-  /// When all the outstanding [SemanticsHandle] objects for a given
-  /// [PipelineOwner] are closed, the [PipelineOwner] will stop updating the
-  /// semantics tree.
-  @mustCallSuper
+  @override
   void dispose() {
     if (listener != null) {
-      _owner.semanticsOwner!.removeListener(listener!);
+      _owner.removeListener(listener!);
     }
-    _owner._didDisposeSemanticsHandle();
+    _handle.dispose();
   }
 }
 
@@ -873,6 +848,7 @@ class SemanticsHandle {
 /// are visible on screen. You can create other pipeline owners to manage
 /// off-screen objects, which can flush their pipelines independently of the
 /// on-screen render objects.
+// TODO(window): update docs to talk about disposing if you pass in a semanticsCoordinator.
 class PipelineOwner {
   /// Creates a pipeline owner.
   ///
@@ -882,7 +858,10 @@ class PipelineOwner {
   PipelineOwner({
     VoidCallback? onNeedVisualUpdate,
     this.onSemanticsUpdate,
-  }) : _onNeedVisualUpdate = onNeedVisualUpdate;
+    SemanticsCoordinator? semanticsCoordinator,
+  }) : _onNeedVisualUpdate = onNeedVisualUpdate, _semanticsCoordinator = semanticsCoordinator {
+    _semanticsCoordinator?.addListener(_handleSemanticsChanged);
+  }
 
   /// Called when a render object associated with this pipeline owner wishes to
   /// update its visual appearance.
@@ -896,6 +875,7 @@ class PipelineOwner {
 
   ///
   final SemanticsUpdateCallback? onSemanticsUpdate;
+  final SemanticsCoordinator? _semanticsCoordinator;
 
   /// Calls [onNeedVisualUpdate] if [onNeedVisualUpdate] is not null.
   ///
@@ -1121,45 +1101,43 @@ class PipelineOwner {
   SemanticsOwner? get semanticsOwner => _semanticsOwner;
   SemanticsOwner? _semanticsOwner;
 
-  /// The number of clients registered to listen for semantics.
-  ///
-  /// The number is increased whenever [ensureSemantics] is called and decreased
-  /// when [SemanticsHandle.dispose] is called.
-  int get debugOutstandingSemanticsHandles => _outstandingSemanticsHandles;
-  int _outstandingSemanticsHandles = 0;
-
   /// Opens a [SemanticsHandle] and calls [listener] whenever the semantics tree
   /// updates.
   ///
   /// The [PipelineOwner] updates the semantics tree only when there are clients
   /// that wish to use the semantics tree. These clients express their interest
   /// by holding [SemanticsHandle] objects that notify them whenever the
-  /// semantics tree updates.
+  /// semantics tree managed by the [semanticsOwner] of this [PipelineOwner]
+  /// updates.
   ///
   /// Clients can close their [SemanticsHandle] by calling
-  /// [SemanticsHandle.dispose]. Once all the outstanding [SemanticsHandle]
-  /// objects for a given [PipelineOwner] are closed, the [PipelineOwner] stops
-  /// maintaining the semantics tree.
+  /// [SemanticsHandle.dispose].
+  ///
+  /// This method must only be called if the [PipelineOwner] is configured with
+  /// a [SemanticsCoordinator], who keeps track of all outstanding
+  /// [SemanticsHandle]s. Once all the outstanding [SemanticsHandle]
+  /// objects for a given [SemanticsCoordinator] are closed, the [PipelineOwner]
+  /// stops maintaining the semantics tree.
   SemanticsHandle ensureSemantics({ VoidCallback? listener }) {
-    _outstandingSemanticsHandles += 1;
-    if (_outstandingSemanticsHandles == 1) {
+    assert(_semanticsCoordinator != null);
+    final SemanticsHandle handle = _semanticsCoordinator!.ensureSemantics();
+    assert(_semanticsOwner != null);
+    return _WrappedSemanticsHandle(_semanticsOwner!, handle, listener);
+  }
+
+  void _handleSemanticsChanged() {
+    if (_semanticsCoordinator!.enabled) {
       assert(_semanticsOwner == null);
       _semanticsOwner = SemanticsOwner(onSemanticsUpdate: onSemanticsUpdate ?? _defaultHandleSemanticsUpdate);
+    } else {
+      assert(_semanticsOwner != null);
+      _semanticsOwner!.dispose();
+      _semanticsOwner = null;
     }
-    return SemanticsHandle._(this, listener);
   }
 
   void _defaultHandleSemanticsUpdate(ui.SemanticsUpdate _) {
     assert(false, '$this was requested to send a SemanticsUpdate, but no onSemanticsUpdate handler was specified.');
-  }
-
-  void _didDisposeSemanticsHandle() {
-    assert(_semanticsOwner != null);
-    _outstandingSemanticsHandles -= 1;
-    if (_outstandingSemanticsHandles == 0) {
-      _semanticsOwner!.dispose();
-      _semanticsOwner = null;
-    }
   }
 
   bool _debugDoingSemantics = false;
@@ -1263,6 +1241,15 @@ class PipelineOwner {
   /// Calls visitor for each immediate child of this pipeline owner.
   void visitChildren(PipelineOwnerVisitor visitor) {
     _children.forEach(visitor);
+  }
+
+  /// Release any resources held by this pipeline owner.
+  ///
+  /// The object is no longer usable after this method is called.
+  @mustCallSuper
+  void dispose() {
+    // TODO(window): Add disposed checks.
+    _semanticsCoordinator?.removeListener(_handleSemanticsChanged);
   }
 }
 

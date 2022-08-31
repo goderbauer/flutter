@@ -2,22 +2,59 @@
 // Use of this source code is governed by a BSD-style license that can be
 // found in the LICENSE file.
 
-import 'dart:ui' as ui show AccessibilityFeatures, SemanticsUpdateBuilder;
+import 'dart:ui' as ui show AccessibilityFeatures, SemanticsUpdateBuilder, SemanticsAction;
 
 import 'package:flutter/foundation.dart';
+import 'package:flutter/services.dart';
 
 import 'debug.dart';
 
-export 'dart:ui' show AccessibilityFeatures;
+export 'dart:ui' show AccessibilityFeatures, SemanticsAction;
 
 /// The glue between the semantics layer and the Flutter engine.
-// TODO(zanderso): move the remaining semantic related bindings here.
 mixin SemanticsBinding on BindingBase {
   @override
   void initInstances() {
     super.initInstances();
     _instance = this;
     _accessibilityFeatures = platformDispatcher.accessibilityFeatures;
+    platformDispatcher
+      ..onSemanticsEnabledChanged = _handleSemanticsEnabledChanged
+      ..onSemanticsAction = _handleSemanticsAction;
+    _handleSemanticsEnabledChanged();
+  }
+
+  ///
+  final SemanticsCoordinator semanticsCoordinator = SemanticsCoordinator._();
+
+  SemanticsHandle? _semanticsHandle;
+
+  void _handleSemanticsEnabledChanged() {
+    setSemanticsEnabled(platformDispatcher.semanticsEnabled);
+  }
+
+  void _handleSemanticsAction(int id, ui.SemanticsAction action, ByteData? args) {
+    performSemanticsAction(
+      0, // TODO(window): this needs to come from the engine.
+      id,
+      action,
+      args != null ? const StandardMessageCodec().decodeMessage(args) : null,
+    );
+  }
+
+  ///
+  @protected
+  void performSemanticsAction(int viewId, int nodeId, ui.SemanticsAction action, Object? args);
+
+  /// Whether the render tree associated with this binding should produce a tree
+  /// of [SemanticsNode] objects.
+  void setSemanticsEnabled(bool enabled) {
+    if (enabled) {
+      _semanticsHandle ??= semanticsCoordinator.ensureSemantics();
+    } else {
+      _semanticsHandle?.dispose();
+      _semanticsHandle = null;
+    }
   }
 
   /// The current [SemanticsBinding], if one has been created.
@@ -70,5 +107,66 @@ mixin SemanticsBinding on BindingBase {
       return true;
     }());
     return value;
+  }
+}
+
+/// A reference to the semantics tree.
+///
+/// The framework maintains the semantics tree (used for accessibility and
+/// indexing) only when there is at least one client holding an open
+/// [SemanticsHandle].
+///
+/// The framework notifies the client that it has updated the semantics tree by
+/// calling the [listener] callback. When the client no longer needs the
+/// semantics tree, the client can call [dispose] on the [SemanticsHandle],
+/// which stops these callbacks and closes the [SemanticsHandle]. When all the
+/// outstanding [SemanticsHandle] objects are closed, the framework stops
+/// updating the semantics tree.
+///
+/// To obtain a [SemanticsHandle], call [PipelineOwner.ensureSemantics] on the
+/// [PipelineOwner] for the render tree from which you wish to read semantics.
+/// You can obtain the [PipelineOwner] using the [RenderObject.owner] property.
+// TODO(window): Update the doc above.
+class SemanticsHandle {
+  SemanticsHandle._(SemanticsCoordinator coordinator)
+      : assert(coordinator != null),
+        _coordinator = coordinator;
+
+  final SemanticsCoordinator _coordinator;
+
+  ///
+  @mustCallSuper
+  void dispose() {
+    _coordinator._didDisposeSemanticsHandle();
+  }
+}
+
+///
+class SemanticsCoordinator extends ChangeNotifier {
+  SemanticsCoordinator._();
+
+  ///
+  bool get enabled => _outstandingHandles > 0;
+
+  int _outstandingHandles = 0;
+
+  ///
+  SemanticsHandle ensureSemantics() {
+    assert(_outstandingHandles >= 0);
+    _outstandingHandles++;
+    assert(_outstandingHandles > 0);
+    if (_outstandingHandles == 1) {
+      notifyListeners();
+    }
+    return SemanticsHandle._(this);
+  }
+
+  void _didDisposeSemanticsHandle() {
+    assert(_outstandingHandles > 0);
+    _outstandingHandles--;
+    assert(_outstandingHandles >= 0);
+    if (_outstandingHandles == 0) {
+      notifyListeners();
+    }
   }
 }

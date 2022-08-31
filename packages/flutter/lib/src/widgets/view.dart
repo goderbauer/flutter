@@ -50,7 +50,15 @@ class _ViewState extends State<View> {
   }
 
   void _handleSemanticsUpdate(SemanticsUpdate update) {
-    widget.view.updateSemantics(update);
+    // TODO(window): Move semantics to FlutterView.
+    PlatformDispatcher.instance.updateSemantics(update);
+    // widget.view.updateSemantics(update);
+  }
+
+  @override
+  void dispose() {
+    super.dispose();
+    _pipelineOwner.dispose();
   }
 
   @override
