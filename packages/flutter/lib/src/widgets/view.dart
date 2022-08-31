@@ -79,14 +79,12 @@ class _ViewState extends State<View> {
 }
 
 class _View extends SingleChildRenderObjectWidget {
-  // TODO(window): consider keying this or View with the provided FlutterView? Or implement updateRenderObject for changing views.
-  // global keying would also mean that there can only be one view widget attached to a view in the tree, which would be good.
   _View({
     required this.view,
     required this.hooks,
     required this.pipelineOwner,
     required super.child,
-  }) : super(key: GlobalObjectKey(view));
+  }) : super(key: GlobalObjectKey(view)); // Ensures that there can only be one View widget for a FlutterView in the tree.
 
   final FlutterView view;
   final ViewHooks hooks;
