@@ -925,7 +925,7 @@ mixin WidgetsBinding on BindingBase, ServicesBinding, SchedulerBinding, GestureB
       attachRootWidget(rootWidget);
     });
   }
-  
+
   /// Takes a widget and attaches it to the [rootElement], creating it if
   /// necessary.
   ///
@@ -1041,7 +1041,7 @@ void runApp(Widget app) {
 ///
 void runPlainApp(Widget app) {
   final WidgetsBinding binding = WidgetsFlutterBinding.ensureInitialized();
-  final Widget wrappedApp = ViewScope(
+  final Widget wrappedApp = ViewHooksScope(
     hooks: ViewHooks(
       pipelineOwner: binding.rootPipelineOwner,
       renderViewManager: binding,
@@ -1074,9 +1074,10 @@ void debugDumpApp() {
 class RootWidget extends Widget {
   ///
   const RootWidget({
+    super.key,
     this.child,
     this.debugShortDescription,
-  }) : super(key: null); // TODO(window): Do we need a key?
+  });
 
   /// The widget below this widget in the tree.
   ///

@@ -81,29 +81,20 @@ class RenderView extends RenderObject with RenderObjectWithChildMixin<RenderBox>
   /// The constraints used for the root layout.
   ViewConfiguration get configuration => _configuration;
   late ViewConfiguration _configuration;
-
-  /// The configuration is initially set by the `configuration` argument
-  /// passed to the constructor.
-  ///
-  /// Always call [prepareInitialFrame] before changing the configuration.
-  // TODO(window): DO we need this setter?
-  set configuration(ViewConfiguration value) {
-    assert(value != null);
-    if (configuration == value) {
+  
+  /// Foo
+  void updateConfiguration() {
+    final ViewConfiguration newConfig = _createViewConfiguration();
+    if (configuration == newConfig) {
       return;
     }
     final ViewConfiguration oldConfiguration = _configuration;
-    _configuration = value;
+    _configuration = newConfig;
     if (oldConfiguration.toMatrix() != _configuration.toMatrix()) {
       replaceRootLayer(_updateMatricesAndCreateNewRootLayer());
     }
     assert(_rootTransform != null);
     markNeedsLayout();
-  }
-
-  /// Foo
-  void updateConfiguration() {
-    configuration = _createViewConfiguration();
   }
 
   ViewConfiguration _createViewConfiguration() {

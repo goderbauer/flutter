@@ -69,8 +69,10 @@ class _ViewState extends State<View> {
       pipelineOwner: _pipelineOwner,
       child: ViewScope(
         view: widget.view,
-        hooks: _descendantHooks,
-        child: widget.child,
+        child: ViewHooksScope(
+          hooks: _descendantHooks,
+          child: widget.child,
+        ),
       ),
     );
   }
@@ -79,12 +81,12 @@ class _ViewState extends State<View> {
 class _View extends SingleChildRenderObjectWidget {
   // TODO(window): consider keying this or View with the provided FlutterView? Or implement updateRenderObject for changing views.
   // global keying would also mean that there can only be one view widget attached to a view in the tree, which would be good.
-  const _View({
+  _View({
     required this.view,
     required this.hooks,
     required this.pipelineOwner,
     required super.child,
-  });
+  }) : super(key: GlobalObjectKey(view));
 
   final FlutterView view;
   final ViewHooks hooks;
@@ -99,6 +101,9 @@ class _View extends SingleChildRenderObjectWidget {
       view: view,
     );
   }
+
+  // No need to implement updateRenderObject: The widget uses the view as a
+  // GlobalKey, so we never need to update the RenderObject with a new view.
 }
 
 class _ViewElement extends SingleChildRenderObjectElement {
@@ -114,7 +119,9 @@ class _ViewElement extends SingleChildRenderObjectElement {
     viewWidget.hooks.pipelineOwner.adoptChild(viewWidget.pipelineOwner);
     super.mount(parent, newSlot); // calls attachRenderObject().
     renderObject.prepareInitialFrame();
-    // TODO(goderbauer): semantics.
+    if (viewWidget.pipelineOwner.semanticsCoordinator?.enabled ?? false) {
+      renderObject.scheduleInitialSemantics();
+    }
   }
 
   @override
@@ -160,21 +167,30 @@ class _ViewElement extends SingleChildRenderObjectElement {
   }
 }
 
-// TODO(goderbauer): consider an InheritedModel?
-//   Or break up into two separate InheritedWidget for hooks and views
 class ViewScope extends InheritedWidget {
   const ViewScope({
     super.key,
-    this.view,
-    required this.hooks,
+    required this.view,
     required super.child,
   });
 
   final FlutterView? view;
+
+  @override
+  bool updateShouldNotify(ViewScope oldWidget) => view != oldWidget.view;
+}
+
+class ViewHooksScope extends InheritedWidget {
+  const ViewHooksScope({
+    super.key,
+    required this.hooks,
+    required super.child,
+  });
+
   final ViewHooks hooks;
 
   @override
-  bool updateShouldNotify(ViewScope oldWidget) => view != oldWidget.view || hooks != oldWidget.hooks;
+  bool updateShouldNotify(ViewHooksScope oldWidget) => hooks != oldWidget.hooks;
 }
 
 @immutable
@@ -186,7 +202,7 @@ class ViewHooks {
 
   static ViewHooks of(BuildContext context) {
     assert(context != null);
-    return context.dependOnInheritedWidgetOfExactType<ViewScope>()!.hooks;
+    return context.dependOnInheritedWidgetOfExactType<ViewHooksScope>()!.hooks;
   }
 
   final RenderViewManager renderViewManager;
@@ -242,9 +258,11 @@ class SideStageManager extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final ViewHooks hooks = ViewHooks.of(context);
     return _SideStageManager(
-      stages: stages.map((Widget stage) => ViewScope(hooks: hooks, child: stage)).toList(),
+      stages: <Widget>[
+        for (Widget stage in stages)
+          ViewScope(view: null, child: stage),
+      ],
       child: child,
     );
   }
