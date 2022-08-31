@@ -148,6 +148,8 @@ class SemanticsCoordinator extends ChangeNotifier {
   ///
   bool get enabled => _outstandingHandles > 0;
 
+  ///
+  int get debugOutstandingSemanticsHandles => _outstandingHandles;
   int _outstandingHandles = 0;
 
   ///

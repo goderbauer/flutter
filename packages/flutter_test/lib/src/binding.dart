@@ -1576,7 +1576,7 @@ class LiveTestWidgetsFlutterBinding extends TestWidgetsFlutterBinding {
     renderView = _LiveTestRenderView(
       configuration: createViewConfiguration(),
       onNeedPaint: _handleViewNeedsPaint,
-      window: window,
+      view: platformDispatcher.views.first,
     );
     renderView.prepareInitialFrame();
   }
