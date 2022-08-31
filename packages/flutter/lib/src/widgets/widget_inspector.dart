@@ -1062,13 +1062,11 @@ mixin WidgetInspectorService {
             debugOnProfilePaint = _onPaint;
             // Trigger an immediate paint so the user has some baseline painting
             // stats to view.
-            // TODO(window): ??
-            // void markTreeNeedsPaint(RenderObject renderObject) {
-            //   renderObject.markNeedsPaint();
-            //   renderObject.visitChildren(markTreeNeedsPaint);
-            // }
-            // final RenderObject root = RendererBinding.instance.renderView;
-            // markTreeNeedsPaint(root);
+            void markTreeNeedsPaint(RenderObject renderObject) {
+              renderObject.markNeedsPaint();
+              renderObject.visitChildren(markTreeNeedsPaint);
+            }
+            RendererBinding.instance.renderViews.forEach(markTreeNeedsPaint);
           } else {
             debugOnProfilePaint = null;
           }
@@ -1738,9 +1736,13 @@ mixin WidgetInspectorService {
   }
 
   Map<String, Object?>? _getRootRenderObject(String groupName) {
-    return null;
-    // TODO(window): ??
-    // return _nodeToJson(RendererBinding.instance.renderView.toDiagnosticsNode(), InspectorSerializationDelegate(groupName: groupName, service: this));
+    // TODO(goderbauer): This currently only returns the first renderView.
+    //   Need to add an API that allows specifying a viewId or an API that
+    //   returns all renderViews, depending on how DevTools wants to use this.
+    return _nodeToJson(
+      RendererBinding.instance.renderViews.first.toDiagnosticsNode(),
+      InspectorSerializationDelegate(groupName: groupName, service: this),
+    );
   }
 
   /// Returns a JSON representation of the subtree rooted at the
