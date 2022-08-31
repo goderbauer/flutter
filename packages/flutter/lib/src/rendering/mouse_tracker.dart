@@ -26,7 +26,7 @@ export 'package:flutter/services.dart' show
 ///
 /// It is used by the [MouseTracker] to fetch annotations for the mouse
 /// position.
-typedef MouseDetectorAnnotationFinder = HitTestResult Function(Offset offset);
+typedef MouseDetectorAnnotationFinder = HitTestResult Function(Offset offset, Object viewId);
 
 // Various states of a connected mouse device used by [MouseTracker].
 class _MouseState {
@@ -263,7 +263,8 @@ class MouseTracker extends ChangeNotifier {
       return LinkedHashMap<MouseTrackerAnnotation, Matrix4>();
     }
 
-    return _hitTestResultToAnnotations(hitTest(globalPosition));
+    // TODO(goderbauer): Get viewId from state.latestEvent.
+    return _hitTestResultToAnnotations(hitTest(globalPosition, /* viewId */ 0));
   }
 
   // A callback that is called on the update of a device.

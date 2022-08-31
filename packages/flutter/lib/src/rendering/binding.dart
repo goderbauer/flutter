@@ -325,15 +325,19 @@ mixin RendererBinding on BindingBase, ServicesBinding, SchedulerBinding, Gesture
 
   @override // from GestureBinding
   void dispatchEvent(PointerEvent event, HitTestResult? hitTestResult) {
-    // TODO(window): Figure out mouse tracker.
-    // _mouseTracker!.updateWithEvent(
-    //   event,
-    //   // Enter and exit events should be triggered with or without buttons
-    //   // pressed. When the button is pressed, normal hit test uses a cached
-    //   // result, but MouseTracker requires that the hit test is re-executed to
-    //   // update the hovering events.
-    //   () => (hitTestResult == null || event is PointerMoveEvent) ? renderView.hitTestMouseTrackers(event.position) : hitTestResult,
-    // );
+    HitTestResult getResults() {
+      // Enter and exit events should be triggered with or without buttons
+      // pressed. When the button is pressed, normal hit test uses a cached
+      // result, but MouseTracker requires that the hit test is re-executed to
+      // update the hovering events.
+      if (hitTestResult == null || event is PointerMoveEvent) {
+        return _mouseHitTest(event.position, /* viewId */ 0); // TODO(window): Get the viewId from the event.
+      }
+      return hitTestResult;
+    }
+
+    _mouseTracker!.updateWithEvent(event, getResults);
+
     super.dispatchEvent(event, hitTestResult);
   }
 
@@ -362,26 +366,29 @@ mixin RendererBinding on BindingBase, ServicesBinding, SchedulerBinding, Gesture
 
   void _handlePersistentFrameCallback(Duration timeStamp) {
     drawFrame();
-    // _scheduleMouseTrackerUpdate();
+    _scheduleMouseTrackerUpdate();
   }
 
-  // TODO(window): figure out mouse tracker.
-  // bool _debugMouseTrackerUpdateScheduled = false;
-  // void _scheduleMouseTrackerUpdate() {
-  //   assert(!_debugMouseTrackerUpdateScheduled);
-  //   assert(() {
-  //     _debugMouseTrackerUpdateScheduled = true;
-  //     return true;
-  //   }());
-  //   // SchedulerBinding.instance.addPostFrameCallback((Duration duration) {
-  //   //   assert(_debugMouseTrackerUpdateScheduled);
-  //   //   assert(() {
-  //   //     _debugMouseTrackerUpdateScheduled = false;
-  //   //     return true;
-  //   //   }());
-  //   //   _mouseTracker!.updateAllDevices(renderView.hitTestMouseTrackers);
-  //   // });
-  // }
+  bool _debugMouseTrackerUpdateScheduled = false;
+  void _scheduleMouseTrackerUpdate() {
+    assert(!_debugMouseTrackerUpdateScheduled);
+    assert(() {
+      _debugMouseTrackerUpdateScheduled = true;
+      return true;
+    }());
+    SchedulerBinding.instance.addPostFrameCallback((Duration duration) {
+      assert(_debugMouseTrackerUpdateScheduled);
+      assert(() {
+        _debugMouseTrackerUpdateScheduled = false;
+        return true;
+      }());
+      _mouseTracker!.updateAllDevices(_mouseHitTest);
+    });
+  }
+
+  HitTestResult _mouseHitTest(Offset offset, Object viewId) {
+    return _viewIdToRenderView[viewId]?.hitTestMouseTrackers(offset) ?? HitTestResult();
+  }
 
   int _firstFrameDeferredCount = 0;
   bool _firstFrameSent = false;
