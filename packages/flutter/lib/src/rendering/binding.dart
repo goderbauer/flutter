@@ -42,6 +42,7 @@ mixin RendererBinding on BindingBase, ServicesBinding, SchedulerBinding, Gesture
     }
   }
 
+  // TODO(window): Figure out what to do here.
   /// This is just here to silence warnings from tests.
   PipelineOwner get pipelineOwner => throw UnimplementedError();
   /// This is just here to silence warnings from tests.

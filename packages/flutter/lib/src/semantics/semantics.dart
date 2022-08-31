@@ -3035,10 +3035,10 @@ typedef SemanticsUpdateCallback = void Function(ui.SemanticsUpdate update);
 /// necessary.
 class SemanticsOwner extends ChangeNotifier {
   ///
-  SemanticsOwner({required this.onSemanticsUpdate});
+  SemanticsOwner({required SemanticsUpdateCallback onSemanticsUpdate}) : _onSemanticsUpdate = onSemanticsUpdate;
 
   ///
-  final SemanticsUpdateCallback onSemanticsUpdate;
+  final SemanticsUpdateCallback _onSemanticsUpdate;
 
   final Set<SemanticsNode> _dirtyNodes = <SemanticsNode>{};
   final Map<int, SemanticsNode> _nodes = <int, SemanticsNode>{};
@@ -3057,7 +3057,8 @@ class SemanticsOwner extends ChangeNotifier {
     super.dispose();
   }
 
-  /// Update the semantics using [onSemanticsUpdate].
+  /// Update the semantics using the [SemanticsUpdateCallback] provided to the
+  /// constructor.
   void sendSemanticsUpdate() {
     if (_dirtyNodes.isEmpty) {
       return;
@@ -3106,7 +3107,7 @@ class SemanticsOwner extends ChangeNotifier {
       final CustomSemanticsAction action = CustomSemanticsAction.getAction(actionId)!;
       builder.updateCustomAction(id: actionId, label: action.label, hint: action.hint, overrideId: action.action?.index ?? -1);
     }
-    onSemanticsUpdate(builder.build());
+    _onSemanticsUpdate(builder.build());
     notifyListeners();
   }
 

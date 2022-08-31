@@ -857,9 +857,9 @@ class PipelineOwner {
   /// through the rendering pipeline.
   PipelineOwner({
     VoidCallback? onNeedVisualUpdate,
-    this.onSemanticsUpdate,
+    SemanticsUpdateCallback? onSemanticsUpdate,
     SemanticsCoordinator? semanticsCoordinator,
-  }) : _onNeedVisualUpdate = onNeedVisualUpdate, _semanticsCoordinator = semanticsCoordinator {
+  }) : _onNeedVisualUpdate = onNeedVisualUpdate, _semanticsCoordinator = semanticsCoordinator, _onSemanticsUpdate = onSemanticsUpdate {
     _semanticsCoordinator?.addListener(_handleSemanticsChanged);
   }
 
@@ -874,8 +874,11 @@ class PipelineOwner {
   VoidCallback? _onNeedVisualUpdate;
 
   ///
-  final SemanticsUpdateCallback? onSemanticsUpdate;
-  final SemanticsCoordinator? _semanticsCoordinator;
+  final SemanticsUpdateCallback? _onSemanticsUpdate;
+
+  ///
+  SemanticsCoordinator? get semanticsCoordinator => _semanticsCoordinator;
+  SemanticsCoordinator? _semanticsCoordinator;
 
   /// Calls [onNeedVisualUpdate] if [onNeedVisualUpdate] is not null.
   ///
@@ -1128,7 +1131,7 @@ class PipelineOwner {
   void _handleSemanticsChanged() {
     if (_semanticsCoordinator!.enabled) {
       assert(_semanticsOwner == null);
-      _semanticsOwner = SemanticsOwner(onSemanticsUpdate: onSemanticsUpdate ?? _defaultHandleSemanticsUpdate);
+      _semanticsOwner = SemanticsOwner(onSemanticsUpdate: _onSemanticsUpdate ?? _defaultHandleSemanticsUpdate);
     } else {
       assert(_semanticsOwner != null);
       _semanticsOwner!.dispose();
@@ -1216,7 +1219,9 @@ class PipelineOwner {
 
     void updateSettings(PipelineOwner child) {
       assert(child.onNeedVisualUpdate == null);
+      assert(child.semanticsCoordinator == null);
       child._onNeedVisualUpdate = onNeedVisualUpdate;
+      child._semanticsCoordinator = semanticsCoordinator;
       child.visitChildren(updateSettings);
     }
     updateSettings(child);
@@ -1232,7 +1237,9 @@ class PipelineOwner {
 
     void updateSettings(PipelineOwner child) {
       assert(child.onNeedVisualUpdate == onNeedVisualUpdate);
+      assert(child.semanticsCoordinator == null);
       child._onNeedVisualUpdate = null;
+      child._semanticsCoordinator = null;
       child.visitChildren(updateSettings);
     }
     updateSettings(child);
