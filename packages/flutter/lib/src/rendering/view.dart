@@ -197,12 +197,11 @@ class RenderView extends RenderObject with RenderObjectWithChildMixin<RenderBox>
     return true;
   }
 
-  /// Determines the set of mouse tracker annotations at the given position.
+  /// Determines the set of [HitTestEntry]s at the given position.
   ///
   /// See also:
   ///
-  ///  * [Layer.findAllAnnotations], which is used by this method to find all
-  ///    [AnnotatedRegionLayer]s annotated for mouse tracking.
+  ///  * [hitTest], which this method uses internally.
   HitTestResult hitTestMouseTrackers(Offset position) {
     assert(position != null);
     final BoxHitTestResult result = BoxHitTestResult();
