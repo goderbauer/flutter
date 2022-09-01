@@ -542,7 +542,7 @@ class WidgetTester extends WidgetController implements HitTestDispatcher, Ticker
         EnginePhase phase = EnginePhase.sendSemanticsUpdate,
       ]) {
     final Widget wrappedWidget = View(
-      view: binding.platformDispatcher.views.first,
+      view: binding.view,
       child: widget,
     );
     return pumpPlainWidget(wrappedWidget, duration, phase);

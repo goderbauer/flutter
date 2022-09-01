@@ -156,6 +156,9 @@ abstract class TestWidgetsFlutterBinding extends BindingBase
     debugDisableShadows = disableShadows;
   }
 
+  ///
+  TestView get view => _window;
+
   @override
   TestWindow get window => _window;
   final TestWindow _window;
@@ -443,16 +446,6 @@ abstract class TestWidgetsFlutterBinding extends BindingBase
       _surfaceSize = size;
       handleMetricsChanged();
     });
-  }
-
-  @override
-  ViewConfiguration createViewConfiguration() {
-    final double devicePixelRatio = window.devicePixelRatio;
-    final Size size = _surfaceSize ?? window.physicalSize / devicePixelRatio;
-    return ViewConfiguration(
-      size: size,
-      devicePixelRatio: devicePixelRatio,
-    );
   }
 
   /// Acts as if the application went idle.
@@ -1190,17 +1183,19 @@ class AutomatedTestWidgetsFlutterBinding extends TestWidgetsFlutterBinding {
       debugBuildingDirtyElements = true;
       buildOwner!.buildScope(rootElement!);
       if (_phase != EnginePhase.build) {
-        assert(renderView != null);
-        pipelineOwner.flushLayout();
+        assert(renderViews.isNotEmpty);
+        rootPipelineOwner.flushLayout();
         if (_phase != EnginePhase.layout) {
-          pipelineOwner.flushCompositingBits();
+          rootPipelineOwner.flushCompositingBits();
           if (_phase != EnginePhase.compositingBits) {
-            pipelineOwner.flushPaint();
+            rootPipelineOwner.flushPaint();
             if (_phase != EnginePhase.paint && sendFramesToEngine) {
               _firstFrameSent = true;
-              renderView.compositeFrame(); // this sends the bits to the GPU
+              for (final RenderView view in renderViews) {
+                view.compositeFrame(); // this sends the bits to the GPU
+              }
               if (_phase != EnginePhase.composite) {
-                pipelineOwner.flushSemantics();
+                rootPipelineOwner.flushSemantics();
                 assert(_phase == EnginePhase.flushSemantics ||
                        _phase == EnginePhase.sendSemanticsUpdate);
               }

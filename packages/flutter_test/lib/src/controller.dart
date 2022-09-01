@@ -236,7 +236,8 @@ abstract class WidgetController {
   }
 
   /// Returns a list of all the [Layer] objects in the rendering.
-  List<Layer> get layers => _walkLayers(binding.renderView.debugLayer!).toList();
+  // TODO(window): This only works on the first render tree.
+  List<Layer> get layers => _walkLayers(binding.renderViews.first.debugLayer!).toList();
   Iterable<Layer> _walkLayers(Layer layer) sync* {
     TestAsyncUtils.guardSync();
     yield layer;
@@ -918,10 +919,11 @@ abstract class WidgetController {
       );
     }
     final RenderBox box = element.renderObject! as RenderBox;
+    final RenderView renderView = element.findAncestorRenderObjectOfType<RenderView>()!;
     final Offset location = box.localToGlobal(sizeToPoint(box.size));
     if (warnIfMissed) {
       final HitTestResult result = HitTestResult();
-      binding.hitTest(result, location);
+      binding.hitTest(result, location, renderView.viewId);
       bool found = false;
       for (final HitTestEntry entry in result.path) {
         if (entry.target == box) {
@@ -931,8 +933,8 @@ abstract class WidgetController {
       }
       if (!found) {
         bool outOfBounds = false;
-        if (binding.renderView != null && binding.renderView.size != null) {
-          outOfBounds = !(Offset.zero & binding.renderView.size).contains(location);
+        if (renderView.size != null) {
+          outOfBounds = !(Offset.zero & renderView.size).contains(location);
         }
         if (hitTestWarningShouldBeFatal) {
           throw FlutterError.fromParts(<DiagnosticsNode>[
@@ -940,7 +942,7 @@ abstract class WidgetController {
             ErrorDescription('A call to $callee() with finder "$finder" derived an Offset ($location) that would not hit test on the specified widget.'),
             ErrorHint('Maybe the widget is actually off-screen, or another widget is obscuring it, or the widget cannot receive pointer events.'),
             if (outOfBounds)
-              ErrorHint('Indeed, $location is outside the bounds of the root of the render tree, ${binding.renderView.size}.'),
+              ErrorHint('Indeed, $location is outside the bounds of the root of the render tree, ${renderView.size}.'),
             box.toDiagnosticsNode(name: 'The finder corresponds to this RenderBox', style: DiagnosticsTreeStyle.singleLine),
             ErrorDescription('The hit test result at that offset is: $result'),
             ErrorDescription('If you expected this target not to be able to receive pointer events, pass "warnIfMissed: false" to "$callee()".'),
@@ -951,7 +953,7 @@ abstract class WidgetController {
           '\n'
           'Warning: A call to $callee() with finder "$finder" derived an Offset ($location) that would not hit test on the specified widget.\n'
           'Maybe the widget is actually off-screen, or another widget is obscuring it, or the widget cannot receive pointer events.\n'
-          '${outOfBounds ? "Indeed, $location is outside the bounds of the root of the render tree, ${binding.renderView.size}.\n" : ""}'
+          '${outOfBounds ? "Indeed, $location is outside the bounds of the root of the render tree, ${renderView.size}.\n" : ""}'
           'The finder corresponds to this RenderBox: $box\n'
           'The hit test result at that offset is: $result\n'
           '${StackTrace.current}'
@@ -1156,7 +1158,7 @@ abstract class WidgetController {
   /// Will throw a [StateError] if the finder returns more than one element or
   /// if no semantics are found or are not enabled.
   SemanticsNode getSemantics(Finder finder) {
-    if (binding.pipelineOwner.semanticsOwner == null) {
+    if (!binding.semanticsCoordinator.enabled) {
       throw StateError('Semantics are not enabled.');
     }
     final Iterable<Element> candidates = finder.evaluate();
@@ -1183,7 +1185,7 @@ abstract class WidgetController {
   ///
   /// The handle must be disposed at the end of the test.
   SemanticsHandle ensureSemantics() {
-    return binding.pipelineOwner.ensureSemantics();
+    return binding.semanticsCoordinator.ensureSemantics();
   }
 
   /// Given a widget `W` specified by [finder] and a [Scrollable] widget `S` in

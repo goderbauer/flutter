@@ -7,6 +7,180 @@ import 'dart:ui' as ui hide window;
 
 import 'package:flutter/foundation.dart';
 
+///
+class TestView implements ui.FlutterView {
+  ///
+  TestView({
+    required ui.FlutterView view,
+  }) : _view = view,
+        platformDispatcher = TestPlatformDispatcher(platformDispatcher: view.platformDispatcher);
+
+  final ui.FlutterView _view;
+
+  @override
+  final TestPlatformDispatcher platformDispatcher;
+
+  @override
+  double get devicePixelRatio => _devicePixelRatio ?? _view.devicePixelRatio;
+  double? _devicePixelRatio;
+  /// Hides the real device pixel ratio and reports the given [devicePixelRatio]
+  /// instead.
+  set devicePixelRatioTestValue(double devicePixelRatio) { // ignore: avoid_setters_without_getters
+    _devicePixelRatio = devicePixelRatio;
+    platformDispatcher.onMetricsChanged?.call();
+  }
+  /// Deletes any existing test device pixel ratio and returns to using the real
+  /// device pixel ratio.
+  void clearDevicePixelRatioTestValue() {
+    _devicePixelRatio = null;
+    platformDispatcher.onMetricsChanged?.call();
+  }
+
+  @override
+  ui.Size get physicalSize => _physicalSizeTestValue ?? _view.physicalSize;
+  ui.Size? _physicalSizeTestValue;
+  /// Hides the real physical size and reports the given [physicalSizeTestValue]
+  /// instead.
+  set physicalSizeTestValue (ui.Size physicalSizeTestValue) { // ignore: avoid_setters_without_getters
+    _physicalSizeTestValue = physicalSizeTestValue;
+    platformDispatcher.onMetricsChanged?.call();
+  }
+  /// Deletes any existing test physical size and returns to using the real
+  /// physical size.
+  void clearPhysicalSizeTestValue() {
+    _physicalSizeTestValue = null;
+    platformDispatcher.onMetricsChanged?.call();
+  }
+
+  @override
+  ui.Rect get physicalGeometry => _physicalGeometry ?? _view.physicalGeometry;
+  ui.Rect? _physicalGeometry;
+  set physicalGeometry(ui.Rect physicalGeometryTestValue) { // ignore: avoid_setters_without_getters
+    _physicalGeometry = physicalGeometryTestValue;
+    platformDispatcher.onMetricsChanged?.call();
+  }
+  /// Deletes any existing test physical geometry and returns to using the real
+  /// physical size.
+  void clearPhysicalGeometryTestValue() {
+    _physicalSizeTestValue = null;
+    platformDispatcher.onMetricsChanged?.call();
+  }
+
+  @override
+  ui.WindowPadding get viewInsets => _viewInsetsTestValue ?? _view.viewInsets;
+  ui.WindowPadding? _viewInsetsTestValue;
+  /// Hides the real view insets and reports the given [viewInsetsTestValue]
+  /// instead.
+  set viewInsetsTestValue(ui.WindowPadding viewInsetsTestValue) { // ignore: avoid_setters_without_getters
+    _viewInsetsTestValue = viewInsetsTestValue;
+    platformDispatcher.onMetricsChanged?.call();
+  }
+  /// Deletes any existing test view insets and returns to using the real view
+  /// insets.
+  void clearViewInsetsTestValue() {
+    _viewInsetsTestValue = null;
+    platformDispatcher.onMetricsChanged?.call();
+  }
+
+  @override
+  ui.WindowPadding get viewPadding => _viewPaddingTestValue ?? _view.padding;
+  ui.WindowPadding? _viewPaddingTestValue;
+  /// Hides the real view padding and reports the given [paddingTestValue]
+  /// instead.
+  set viewPaddingTestValue(ui.WindowPadding viewPaddingTestValue) { // ignore: avoid_setters_without_getters
+    _viewPaddingTestValue = viewPaddingTestValue;
+    platformDispatcher.onMetricsChanged?.call();
+  }
+  /// Deletes any existing test view padding and returns to using the real
+  /// viewPadding.
+  void clearViewPaddingTestValue() {
+    _viewPaddingTestValue = null;
+    platformDispatcher.onMetricsChanged?.call();
+  }
+
+  @override
+  ui.WindowPadding get padding => _paddingTestValue ?? _view.padding;
+  ui.WindowPadding? _paddingTestValue;
+  /// Hides the real padding and reports the given [paddingTestValue] instead.
+  set paddingTestValue(ui.WindowPadding paddingTestValue) { // ignore: avoid_setters_without_getters
+    _paddingTestValue = paddingTestValue;
+    platformDispatcher.onMetricsChanged?.call();
+  }
+  /// Deletes any existing test padding and returns to using the real padding.
+  void clearPaddingTestValue() {
+    _paddingTestValue = null;
+    platformDispatcher.onMetricsChanged?.call();
+  }
+
+  @override
+  List<ui.DisplayFeature> get displayFeatures => _displayFeaturesTestValue ?? _view.displayFeatures;
+  List<ui.DisplayFeature>? _displayFeaturesTestValue;
+  /// Hides the real displayFeatures and reports the given [displayFeaturesTestValue] instead.
+  set displayFeaturesTestValue(List<ui.DisplayFeature> displayFeaturesTestValue) { // ignore: avoid_setters_without_getters
+    _displayFeaturesTestValue = displayFeaturesTestValue;
+    platformDispatcher.onMetricsChanged?.call();
+  }
+  /// Deletes any existing test padding and returns to using the real padding.
+  void clearDisplayFeaturesTestValue() {
+    _displayFeaturesTestValue = null;
+    platformDispatcher.onMetricsChanged?.call();
+  }
+
+  @override
+  ui.WindowPadding get systemGestureInsets => _systemGestureInsetsTestValue ?? _view.systemGestureInsets;
+  ui.WindowPadding? _systemGestureInsetsTestValue;
+  /// Hides the real system gesture insets and reports the given [systemGestureInsetsTestValue] instead.
+  set systemGestureInsetsTestValue(ui.WindowPadding systemGestureInsetsTestValue) { // ignore: avoid_setters_without_getters
+    _systemGestureInsetsTestValue = systemGestureInsetsTestValue;
+    platformDispatcher.onMetricsChanged?.call();
+  }
+  /// Deletes any existing test system gesture insets and returns to using the real system gesture insets.
+  void clearSystemGestureInsetsTestValue() {
+    _systemGestureInsetsTestValue = null;
+    platformDispatcher.onMetricsChanged?.call();
+  }
+
+  @override
+  void render(ui.Scene scene) {
+    _view.render(scene);
+  }
+
+  @override
+  ui.ViewConfiguration get viewConfiguration => _viewConfiguration ?? _view.viewConfiguration;
+  ui.ViewConfiguration? _viewConfiguration;
+  /// Hide the real view configuration and report the provided [value] instead.
+  set viewConfigurationTestValue(ui.ViewConfiguration? value) { // ignore: avoid_setters_without_getters
+    _viewConfiguration = value;
+    platformDispatcher.onMetricsChanged?.call();
+  }
+
+  /// Delete any test value properties that have been set on this [TestWindow]
+  /// as well as its [platformDispatcher].
+  ///
+  /// After calling this, the real [SingletonFlutterWindow] and
+  /// [ui.PlatformDispatcher] values are reported again.
+  ///
+  /// If desired, clearing of properties can be done on an individual basis,
+  /// e.g., [clearLocaleTestValue()].
+  @mustCallSuper
+  void clearAllTestValues() {
+    clearDevicePixelRatioTestValue();
+    clearPaddingTestValue();
+    clearDisplayFeaturesTestValue();
+    clearPhysicalSizeTestValue();
+    clearViewInsetsTestValue();
+    platformDispatcher.clearAllTestValues();
+  }
+
+  /// This gives us some grace time when the dart:ui side adds something to
+  /// [FlutterView], and makes things easier when we do rolls to give
+  /// us time to catch up.
+  @override
+  dynamic noSuchMethod(Invocation invocation) {
+    return null;
+  }
+}
+
 /// [SingletonFlutterWindow] that wraps another [SingletonFlutterWindow] and
 /// allows faking of some properties for testing purposes.
 ///
@@ -52,125 +226,14 @@ import 'package:flutter/foundation.dart';
 ///   * [TestPlatformDispatcher], which wraps a [PlatformDispatcher] for
 ///     testing purposes and is used by the [platformDispatcher] property of
 ///     this class.
-class TestWindow implements ui.SingletonFlutterWindow {
+class TestWindow extends TestView implements ui.SingletonFlutterWindow {
   /// Constructs a [TestWindow] that defers all behavior to the given
   /// [dart:ui.SingletonFlutterWindow] unless explicitly overridden for test purposes.
   TestWindow({
     required ui.SingletonFlutterWindow window,
-  }) : _window = window,
-       platformDispatcher = TestPlatformDispatcher(platformDispatcher: window.platformDispatcher);
+  }) : super(view: window);
 
-  /// The [dart:ui.SingletonFlutterWindow] that is wrapped by this [TestWindow].
-  final ui.SingletonFlutterWindow _window;
-
-  @override
-  final TestPlatformDispatcher platformDispatcher;
-
-  @override
-  double get devicePixelRatio => _devicePixelRatio ?? _window.devicePixelRatio;
-  double? _devicePixelRatio;
-  /// Hides the real device pixel ratio and reports the given [devicePixelRatio]
-  /// instead.
-  set devicePixelRatioTestValue(double devicePixelRatio) { // ignore: avoid_setters_without_getters
-    _devicePixelRatio = devicePixelRatio;
-    onMetricsChanged?.call();
-  }
-  /// Deletes any existing test device pixel ratio and returns to using the real
-  /// device pixel ratio.
-  void clearDevicePixelRatioTestValue() {
-    _devicePixelRatio = null;
-    onMetricsChanged?.call();
-  }
-
-  @override
-  ui.Size get physicalSize => _physicalSizeTestValue ?? _window.physicalSize;
-  ui.Size? _physicalSizeTestValue;
-  /// Hides the real physical size and reports the given [physicalSizeTestValue]
-  /// instead.
-  set physicalSizeTestValue (ui.Size physicalSizeTestValue) { // ignore: avoid_setters_without_getters
-    _physicalSizeTestValue = physicalSizeTestValue;
-    onMetricsChanged?.call();
-  }
-  /// Deletes any existing test physical size and returns to using the real
-  /// physical size.
-  void clearPhysicalSizeTestValue() {
-    _physicalSizeTestValue = null;
-    onMetricsChanged?.call();
-  }
-
-  @override
-  ui.WindowPadding get viewInsets => _viewInsetsTestValue ??  _window.viewInsets;
-  ui.WindowPadding? _viewInsetsTestValue;
-  /// Hides the real view insets and reports the given [viewInsetsTestValue]
-  /// instead.
-  set viewInsetsTestValue(ui.WindowPadding viewInsetsTestValue) { // ignore: avoid_setters_without_getters
-    _viewInsetsTestValue = viewInsetsTestValue;
-    onMetricsChanged?.call();
-  }
-  /// Deletes any existing test view insets and returns to using the real view
-  /// insets.
-  void clearViewInsetsTestValue() {
-    _viewInsetsTestValue = null;
-    onMetricsChanged?.call();
-  }
-
-  @override
-  ui.WindowPadding get viewPadding => _viewPaddingTestValue ?? _window.padding;
-  ui.WindowPadding? _viewPaddingTestValue;
-  /// Hides the real view padding and reports the given [paddingTestValue]
-  /// instead.
-  set viewPaddingTestValue(ui.WindowPadding viewPaddingTestValue) { // ignore: avoid_setters_without_getters
-    _viewPaddingTestValue = viewPaddingTestValue;
-    onMetricsChanged?.call();
-  }
-  /// Deletes any existing test view padding and returns to using the real
-  /// viewPadding.
-  void clearViewPaddingTestValue() {
-    _viewPaddingTestValue = null;
-    onMetricsChanged?.call();
-  }
-
-  @override
-  ui.WindowPadding get padding => _paddingTestValue ?? _window.padding;
-  ui.WindowPadding? _paddingTestValue;
-  /// Hides the real padding and reports the given [paddingTestValue] instead.
-  set paddingTestValue(ui.WindowPadding paddingTestValue) { // ignore: avoid_setters_without_getters
-    _paddingTestValue = paddingTestValue;
-    onMetricsChanged?.call();
-  }
-  /// Deletes any existing test padding and returns to using the real padding.
-  void clearPaddingTestValue() {
-    _paddingTestValue = null;
-    onMetricsChanged?.call();
-  }
-
-  @override
-  List<ui.DisplayFeature> get displayFeatures => _displayFeaturesTestValue ?? _window.displayFeatures;
-  List<ui.DisplayFeature>? _displayFeaturesTestValue;
-  /// Hides the real displayFeatures and reports the given [displayFeaturesTestValue] instead.
-  set displayFeaturesTestValue(List<ui.DisplayFeature> displayFeaturesTestValue) { // ignore: avoid_setters_without_getters
-    _displayFeaturesTestValue = displayFeaturesTestValue;
-    onMetricsChanged?.call();
-  }
-  /// Deletes any existing test padding and returns to using the real padding.
-  void clearDisplayFeaturesTestValue() {
-    _displayFeaturesTestValue = null;
-    onMetricsChanged?.call();
-  }
-
-  @override
-  ui.WindowPadding get systemGestureInsets => _systemGestureInsetsTestValue ?? _window.systemGestureInsets;
-  ui.WindowPadding? _systemGestureInsetsTestValue;
-  /// Hides the real system gesture insets and reports the given [systemGestureInsetsTestValue] instead.
-  set systemGestureInsetsTestValue(ui.WindowPadding systemGestureInsetsTestValue) { // ignore: avoid_setters_without_getters
-    _systemGestureInsetsTestValue = systemGestureInsetsTestValue;
-    onMetricsChanged?.call();
-  }
-  /// Deletes any existing test system gesture insets and returns to using the real system gesture insets.
-  void clearSystemGestureInsetsTestValue() {
-    _systemGestureInsetsTestValue = null;
-    onMetricsChanged?.call();
-  }
+  ui.SingletonFlutterWindow get _window => _view as ui.SingletonFlutterWindow;
 
   @override
   ui.VoidCallback? get onMetricsChanged => platformDispatcher.onMetricsChanged;
@@ -442,16 +505,6 @@ class TestWindow implements ui.SingletonFlutterWindow {
   }
 
   @override
-  ui.ViewConfiguration get viewConfiguration => _viewConfiguration ?? _window.viewConfiguration;
-  ui.ViewConfiguration? _viewConfiguration;
-
-  /// Hide the real view configuration and report the provided [value] instead.
-  set viewConfigurationTestValue(ui.ViewConfiguration? value) { // ignore: avoid_setters_without_getters
-    _viewConfiguration = value;
-    onMetricsChanged?.call();
-  }
-
-  @override
   ui.VoidCallback? get onAccessibilityFeaturesChanged => platformDispatcher.onAccessibilityFeaturesChanged;
   @override
   set onAccessibilityFeaturesChanged(ui.VoidCallback? callback) {
@@ -490,23 +543,6 @@ class TestWindow implements ui.SingletonFlutterWindow {
   @override
   set onPlatformMessage(ui.PlatformMessageCallback? callback) {
     platformDispatcher.onPlatformMessage = callback;
-  }
-
-  /// Delete any test value properties that have been set on this [TestWindow]
-  /// as well as its [platformDispatcher].
-  ///
-  /// After calling this, the real [SingletonFlutterWindow] and
-  /// [ui.PlatformDispatcher] values are reported again.
-  ///
-  /// If desired, clearing of properties can be done on an individual basis,
-  /// e.g., [clearLocaleTestValue()].
-  void clearAllTestValues() {
-    clearDevicePixelRatioTestValue();
-    clearPaddingTestValue();
-    clearDisplayFeaturesTestValue();
-    clearPhysicalSizeTestValue();
-    clearViewInsetsTestValue();
-    platformDispatcher.clearAllTestValues();
   }
 
   /// This gives us some grace time when the dart:ui side adds something to
