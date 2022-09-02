@@ -35,7 +35,6 @@ mixin RendererBinding on BindingBase, ServicesBinding, SchedulerBinding, Gesture
       ..onMetricsChanged = handleMetricsChanged
       ..onTextScaleFactorChanged = handleTextScaleFactorChanged
       ..onPlatformBrightnessChanged = handlePlatformBrightnessChanged;
-    semanticsCoordinator.addListener(_handleSemanticsChanged);
     addPersistentFrameCallback(_handlePersistentFrameCallback);
     initMouseTracker();
     if (kIsWeb) {
@@ -344,18 +343,6 @@ mixin RendererBinding on BindingBase, ServicesBinding, SchedulerBinding, Gesture
   @override // from SemanticsBinding
   void performSemanticsAction(int viewId, int nodeId, SemanticsAction action, Object? args) {
     _viewIdToRenderView[viewId]!.owner!.semanticsOwner?.performAction(nodeId, action, args);
-  }
-
-  void _handleSemanticsChanged() {
-    if (semanticsCoordinator.enabled) {
-      for (final RenderView view in _viewIdToRenderView.values) {
-        view.scheduleInitialSemantics();
-      }
-    } else {
-      for (final RenderView view in _viewIdToRenderView.values) {
-        view.clearSemantics();
-      }
-    }
   }
 
   void _handleWebFirstFrame(Duration _) {

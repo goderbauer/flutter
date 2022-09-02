@@ -857,10 +857,12 @@ class PipelineOwner {
   /// through the rendering pipeline.
   PipelineOwner({
     VoidCallback? onNeedVisualUpdate,
+    this.onSemanticsOwnerCreated,
+    this.onSemanticsOwnerDisposed,
     SemanticsUpdateCallback? onSemanticsUpdate,
     SemanticsCoordinator? semanticsCoordinator,
-  }) : _onNeedVisualUpdate = onNeedVisualUpdate, _semanticsCoordinator = semanticsCoordinator, _onSemanticsUpdate = onSemanticsUpdate {
-    _semanticsCoordinator?.addListener(_handleSemanticsChanged);
+  }) : _onNeedVisualUpdate = onNeedVisualUpdate, _onSemanticsUpdate = onSemanticsUpdate {
+    _replaceSemanticsCoordinator(semanticsCoordinator);
   }
 
   /// Called when a render object associated with this pipeline owner wishes to
@@ -873,12 +875,36 @@ class PipelineOwner {
   VoidCallback? get onNeedVisualUpdate => _onNeedVisualUpdate;
   VoidCallback? _onNeedVisualUpdate;
 
+  /// Called whenever this pipeline owner creates a semantics object.
+  ///
+  /// Typical implementations will schedule the creation of the initial
+  /// semantics tree.
+  final VoidCallback? onSemanticsOwnerCreated;
+
+  /// Called whenever this pipeline owner disposes its semantics owner.
+  ///
+  /// Typical implementations will tear down the semantics tree.
+  final VoidCallback? onSemanticsOwnerDisposed;
+
   ///
   final SemanticsUpdateCallback? _onSemanticsUpdate;
 
   ///
   SemanticsCoordinator? get semanticsCoordinator => _semanticsCoordinator;
   SemanticsCoordinator? _semanticsCoordinator;
+  void _replaceSemanticsCoordinator(SemanticsCoordinator? value) {
+    if (semanticsCoordinator == value) {
+      return;
+    }
+    final bool wasEnabled = semanticsCoordinator?.enabled ?? false;
+    semanticsCoordinator?.removeListener(_handleSemanticsChanged);
+    _semanticsCoordinator = value;
+    semanticsCoordinator?.addListener(_handleSemanticsChanged);
+    final bool isEnabled = semanticsCoordinator?.enabled ?? false;
+    if (wasEnabled != isEnabled) {
+      _handleSemanticsChanged();
+    }
+  }
 
   /// Calls [onNeedVisualUpdate] if [onNeedVisualUpdate] is not null.
   ///
@@ -1122,20 +1148,22 @@ class PipelineOwner {
   /// objects for a given [SemanticsCoordinator] are closed, the [PipelineOwner]
   /// stops maintaining the semantics tree.
   SemanticsHandle ensureSemantics({ VoidCallback? listener }) {
-    assert(_semanticsCoordinator != null);
-    final SemanticsHandle handle = _semanticsCoordinator!.ensureSemantics();
+    assert(semanticsCoordinator != null);
+    final SemanticsHandle handle = semanticsCoordinator!.ensureSemantics();
     assert(_semanticsOwner != null);
     return _WrappedSemanticsHandle(_semanticsOwner!, handle, listener);
   }
 
   void _handleSemanticsChanged() {
-    if (_semanticsCoordinator!.enabled) {
+    if (semanticsCoordinator?.enabled ?? false) {
       assert(_semanticsOwner == null);
       _semanticsOwner = SemanticsOwner(onSemanticsUpdate: _onSemanticsUpdate ?? _defaultHandleSemanticsUpdate);
+      onSemanticsOwnerCreated?.call();
     } else {
       assert(_semanticsOwner != null);
       _semanticsOwner!.dispose();
       _semanticsOwner = null;
+      onSemanticsOwnerDisposed?.call();
     }
   }
 
@@ -1220,9 +1248,10 @@ class PipelineOwner {
     void updateSettings(PipelineOwner child) {
       assert(child.onNeedVisualUpdate == null);
       assert(child.semanticsCoordinator == null);
-      child._onNeedVisualUpdate = onNeedVisualUpdate;
-      child._semanticsCoordinator = semanticsCoordinator;
-      child.visitChildren(updateSettings);
+      child
+        .._onNeedVisualUpdate = onNeedVisualUpdate
+        .._replaceSemanticsCoordinator(semanticsCoordinator)
+        ..visitChildren(updateSettings);
     }
     updateSettings(child);
   }
@@ -1237,10 +1266,11 @@ class PipelineOwner {
 
     void updateSettings(PipelineOwner child) {
       assert(child.onNeedVisualUpdate == onNeedVisualUpdate);
-      assert(child.semanticsCoordinator == null);
-      child._onNeedVisualUpdate = null;
-      child._semanticsCoordinator = null;
-      child.visitChildren(updateSettings);
+      assert(child.semanticsCoordinator == semanticsCoordinator);
+      child
+        .._onNeedVisualUpdate = null
+        .._replaceSemanticsCoordinator(null)
+        ..visitChildren(updateSettings);
     }
     updateSettings(child);
   }
@@ -1256,7 +1286,7 @@ class PipelineOwner {
   @mustCallSuper
   void dispose() {
     // TODO(window): Add disposed checks.
-    _semanticsCoordinator?.removeListener(_handleSemanticsChanged);
+    semanticsCoordinator?.removeListener(_handleSemanticsChanged);
   }
 }
 

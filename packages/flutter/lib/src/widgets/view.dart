@@ -36,7 +36,9 @@ class View extends StatefulWidget {
 class _ViewState extends State<View> {
   // Pulled out of _ViewElement so we can configure ViewScope.
   late final PipelineOwner _pipelineOwner = PipelineOwner(
+    onSemanticsOwnerCreated: _handleSemanticsOwnerCreated,
     onSemanticsUpdate: _handleSemanticsUpdate,
+    onSemanticsOwnerDisposed: _handleSemanticsOwnerDisposed,
   );
 
   late ViewHooks _ancestorHooks;
@@ -47,6 +49,15 @@ class _ViewState extends State<View> {
     super.didChangeDependencies();
     _ancestorHooks = ViewHooks.of(context);
     _descendantHooks = _ancestorHooks.copyWith(pipelineOwner: _pipelineOwner);
+  }
+
+  void _handleSemanticsOwnerCreated() {
+    (_pipelineOwner.rootNode as RenderView?)?.scheduleInitialSemantics();
+    // If the rootNode is not set yet, initial semantics are scheduled in _ViewElement.mount right after the rootNode is set.
+  }
+
+  void _handleSemanticsOwnerDisposed() {
+    (_pipelineOwner.rootNode as RenderView?)?.clearSemantics();
   }
 
   void _handleSemanticsUpdate(SemanticsUpdate update) {
