@@ -9,11 +9,10 @@ import 'package:flutter/rendering.dart';
 import 'framework.dart';
 
 class View extends StatefulWidget {
-  const View({
-    super.key,
+  View({
     required this.view,
     required this.child,
-  });
+  }) : super(key: GlobalObjectKey(view)); // Ensures that there can only be one View widget for a FlutterView in the tree.;
 
   static FlutterView of(BuildContext context) {
     return maybeOf(context)!;
@@ -90,12 +89,12 @@ class _ViewState extends State<View> {
 }
 
 class _View extends SingleChildRenderObjectWidget {
-  _View({
+  const _View({
     required this.view,
     required this.hooks,
     required this.pipelineOwner,
     required super.child,
-  }) : super(key: GlobalObjectKey(view)); // Ensures that there can only be one View widget for a FlutterView in the tree.
+  });
 
   final FlutterView view;
   final ViewHooks hooks;

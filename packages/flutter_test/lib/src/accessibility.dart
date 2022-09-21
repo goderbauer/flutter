@@ -282,6 +282,7 @@ class MinimumTextContrastGuideline extends AccessibilityGuideline {
 
   @override
   Future<Evaluation> evaluate(WidgetTester tester) async {
+    // TODO(window): These all assume a single a11y tree...
     final SemanticsNode root = tester.binding.pipelineOwner.semanticsOwner!.rootSemanticsNode!;
     final RenderView renderView = tester.binding.renderView;
     final OffsetLayer layer = renderView.debugLayer! as OffsetLayer;

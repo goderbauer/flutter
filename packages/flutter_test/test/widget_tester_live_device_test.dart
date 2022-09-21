@@ -1,19 +1,19 @@
-// // Copyright 2014 The Flutter Authors. All rights reserved.
-// // Use of this source code is governed by a BSD-style license that can be
-// // found in the LICENSE file.
-//
+// Copyright 2014 The Flutter Authors. All rights reserved.
+// Use of this source code is governed by a BSD-style license that can be
+// found in the LICENSE file.
+
 // import 'package:flutter/foundation.dart';
 // import 'package:flutter/material.dart';
 // import 'package:flutter_test/flutter_test.dart';
-//
-// // Only check the initial lines of the message, since the message walks the
-// // entire widget tree back, and any changes to the widget tree break these
-// // tests if we check the entire message.
+
+// Only check the initial lines of the message, since the message walks the
+// entire widget tree back, and any changes to the widget tree break these
+// tests if we check the entire message.
 // void _expectStartsWith(List<String?> actual, List<String?> matcher) {
 //   expect(actual.sublist(0, matcher.length), equals(matcher));
 // }
-//
-// void main() {
+
+void main() {
 //   final _MockLiveTestWidgetsFlutterBinding binding = _MockLiveTestWidgetsFlutterBinding();
 //
 //   testWidgets('Should print message on pointer events', (WidgetTester tester) async {
@@ -113,8 +113,8 @@
 //       await tester.binding.setSurfaceSize(originalSize);
 //     }
 //   });
-// }
-//
+}
+
 // class _MockLiveTestWidgetsFlutterBinding extends LiveTestWidgetsFlutterBinding {
 //   @override
 //   void handlePointerEventForSource(

@@ -638,12 +638,15 @@ class _HitTestableFinder extends ChainedFinder {
     for (final Element candidate in parentCandidates) {
       final RenderBox box = candidate.renderObject! as RenderBox;
       final Offset absoluteOffset = box.localToGlobal(alignment.alongSize(box.size));
-      final HitTestResult hitResult = HitTestResult();
-      WidgetsBinding.instance.hitTest(hitResult, absoluteOffset);
-      for (final HitTestEntry entry in hitResult.path) {
-        if (entry.target == candidate.renderObject) {
-          yield candidate;
-          break;
+      for (final RenderView view in WidgetsBinding.instance.renderViews) {
+        final HitTestResult hitResult = HitTestResult();
+        // TODO(window): The viewId param should be required.
+        WidgetsBinding.instance.hitTest(hitResult, absoluteOffset, view.viewId);
+        for (final HitTestEntry entry in hitResult.path) {
+          if (entry.target == candidate.renderObject) {
+            yield candidate;
+            break;
+          }
         }
       }
     }

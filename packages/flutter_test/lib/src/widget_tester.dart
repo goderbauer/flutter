@@ -686,8 +686,18 @@ class WidgetTester extends WidgetController implements HitTestDispatcher, Ticker
     assert(maxDuration != null);
     // The interval following the last frame doesn't have to be within the fullDuration.
     Duration elapsed = Duration.zero;
+    final Widget wrappedTarget = ViewHooksScope(
+      hooks: ViewHooks(
+        pipelineOwner: binding.rootPipelineOwner,
+        renderViewManager: binding,
+      ),
+      child: View(
+        view: binding.view,
+        child: target,
+      ),
+    );
     return TestAsyncUtils.guard<void>(() async {
-      binding.attachRootWidget(target);
+      binding.attachRootWidget(wrappedTarget);
       binding.scheduleFrame();
       while (elapsed < maxDuration) {
         await binding.pump(interval);
@@ -715,7 +725,7 @@ class WidgetTester extends WidgetController implements HitTestDispatcher, Ticker
     runApp(Container(key: UniqueKey()));
     await pump();
     binding.restorationManager.restoreFrom(restorationData);
-    return pumpWidget(widget);
+    return pumpPlainWidget(widget);
   }
 
   /// Retrieves the current restoration data from the [RestorationManager].

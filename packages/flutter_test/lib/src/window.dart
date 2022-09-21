@@ -7,13 +7,15 @@ import 'dart:ui' as ui hide window;
 
 import 'package:flutter/foundation.dart';
 
+// TODO(window): Provide a way to create test views that are not based on a real view.
+
 ///
 class TestView implements ui.FlutterView {
   ///
   TestView({
     required ui.FlutterView view,
   }) : _view = view,
-        platformDispatcher = TestPlatformDispatcher(platformDispatcher: view.platformDispatcher);
+       platformDispatcher = TestPlatformDispatcher(platformDispatcher: view.platformDispatcher);
 
   final ui.FlutterView _view;
 

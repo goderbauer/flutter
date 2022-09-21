@@ -1168,7 +1168,7 @@ class RootElement extends Element with RootElementMixin {
   @pragma('vm:notify-debugger-on-exception')
   void _rebuild() {
     try {
-      _child = updateChild(_child, (widget as RootWidget).child, null);
+      _child = updateChild(_child, (widget as RootWidget).child, slot);
     } catch (exception, stack) {
       final FlutterErrorDetails details = FlutterErrorDetails(
         exception: exception,
