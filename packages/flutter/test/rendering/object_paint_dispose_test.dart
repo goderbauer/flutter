@@ -21,7 +21,7 @@ void main() {
       ),
     ));
 
-    final List<Layer> layers = tester.binding.renderView.debugLayer!.depthFirstIterateChildren();
+    final List<Layer> layers = tester.binding.renderViews.first.debugLayer!.depthFirstIterateChildren();
 
     final RenderObject renderObject = key.currentContext!.findRenderObject()!;
 

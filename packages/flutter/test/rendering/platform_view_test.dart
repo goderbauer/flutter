@@ -47,7 +47,7 @@ void main() {
         child: platformViewRenderBox,
       );
       int semanticsUpdateCount = 0;
-      final SemanticsHandle semanticsHandle = TestRenderingFlutterBinding.instance.pipelineOwner.ensureSemantics(
+      final SemanticsHandle semanticsHandle = TestRenderingFlutterBinding.instance.semanticsCoordinator.ensureSemantics(
           listener: () {
             ++semanticsUpdateCount;
           },

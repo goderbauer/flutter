@@ -143,23 +143,25 @@ class TestRenderingFlutterBinding extends BindingBase with SchedulerBinding, Ser
       _errors.add(details);
     };
     try {
-      pipelineOwner.flushLayout();
+      rootPipelineOwner.flushLayout();
       if (phase == EnginePhase.layout) {
         return;
       }
-      pipelineOwner.flushCompositingBits();
+      rootPipelineOwner.flushCompositingBits();
       if (phase == EnginePhase.compositingBits) {
         return;
       }
-      pipelineOwner.flushPaint();
+      rootPipelineOwner.flushPaint();
       if (phase == EnginePhase.paint) {
         return;
       }
-      renderView.compositeFrame();
+      for (final RenderView view in renderViews) {
+        view.compositeFrame();
+      }
       if (phase == EnginePhase.composite) {
         return;
       }
-      pipelineOwner.flushSemantics();
+      rootPipelineOwner.flushSemantics();
       if (phase == EnginePhase.flushSemantics) {
         return;
       }

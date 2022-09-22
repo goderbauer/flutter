@@ -1,7 +1,7 @@
-// // Copyright 2014 The Flutter Authors. All rights reserved.
-// // Use of this source code is governed by a BSD-style license that can be
-// // found in the LICENSE file.
-//
+// Copyright 2014 The Flutter Authors. All rights reserved.
+// Use of this source code is governed by a BSD-style license that can be
+// found in the LICENSE file.
+
 // import 'package:flutter/widgets.dart';
 // import 'package:flutter_test/flutter_test.dart';
 //
@@ -30,8 +30,8 @@
 //     super.handleDrawFrame();
 //   }
 // }
-//
-// void main() {
+
+void main() {
 //   late TestBinding binding;
 //
 //   setUp(() {
@@ -71,4 +71,4 @@
 //       mayRunWithAsserts: true,
 //     );
 //   }, skip: isBrowser); // https://github.com/flutter/flutter/issues/87871
-// }
+}

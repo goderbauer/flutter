@@ -1,15 +1,15 @@
-// // Copyright 2014 The Flutter Authors. All rights reserved.
-// // Use of this source code is governed by a BSD-style license that can be
-// // found in the LICENSE file.
-//
-// // This file is run as part of a reduced test set in CI on Mac and Windows
-// // machines.
-// @Tags(<String>['reduced-test-set'])
-//
+// Copyright 2014 The Flutter Authors. All rights reserved.
+// Use of this source code is governed by a BSD-style license that can be
+// found in the LICENSE file.
+
+// This file is run as part of a reduced test set in CI on Mac and Windows
+// machines.
+@Tags(<String>['reduced-test-set'])
+
 // import 'package:flutter/material.dart';
-// import 'package:flutter_test/flutter_test.dart';
-//
-// void main() {
+import 'package:flutter_test/flutter_test.dart';
+
+void main() {
 //   /*
 //    * Here lies golden tests for packages/flutter_test/lib/src/binding.dart
 //    * because [matchesGoldenFile] does not use Skia Gold in its native package.
@@ -132,4 +132,4 @@
 //       matchesGoldenFile('LiveBinding.press.animation.2.png'),
 //     );
 //   }, skip: isBrowser); // https://github.com/flutter/flutter/issues/56001
-// }
+}

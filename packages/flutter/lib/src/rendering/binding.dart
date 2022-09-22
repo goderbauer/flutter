@@ -44,6 +44,9 @@ mixin RendererBinding on BindingBase, ServicesBinding, SchedulerBinding, Gesture
 
   // TODO(window): Figure out what to do here.
   /// This is just here to silence warnings from tests.
+  // TODO(window): This is mostly used to:
+  //   * access the semanticsOwner to call performAction on it.
+  //   * (sometimes): To register a listener on the semanticsOwner
   PipelineOwner get pipelineOwner => throw UnimplementedError();
   /// This is just here to silence warnings from tests.
   RenderView get renderView => throw UnimplementedError();

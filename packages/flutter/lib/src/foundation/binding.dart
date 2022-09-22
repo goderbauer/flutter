@@ -193,6 +193,7 @@ abstract class BindingBase {
   /// provides access to the one and only window.
   // TODO(gspencergoog): remove the preceding note once multi-window support is
   // active.
+  @Deprecated('TODO')
   ui.SingletonFlutterWindow get window => ui.window;
 
   /// The [ui.PlatformDispatcher] to which this binding is bound.

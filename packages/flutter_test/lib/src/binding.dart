@@ -160,6 +160,7 @@ abstract class TestWidgetsFlutterBinding extends BindingBase
   TestView get view => _window;
 
   @override
+  @Deprecated('TODO')
   TestWindow get window => _window;
   final TestWindow _window;
 

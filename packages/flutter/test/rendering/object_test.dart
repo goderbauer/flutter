@@ -165,7 +165,7 @@ void main() {
     // renderObject1 paints the leader layer first.
     final LeaderLayerRenderObject renderObject1 = LeaderLayerRenderObject();
     renderObject1.layerLink = layerLink;
-    renderObject1.attach(TestRenderingFlutterBinding.instance.pipelineOwner);
+    renderObject1.attach(TestRenderingFlutterBinding.instance.rootPipelineOwner);
     final OffsetLayer rootLayer1 = OffsetLayer();
     rootLayer1.attach(renderObject1);
     renderObject1.scheduleInitialPaint(rootLayer1);
@@ -174,7 +174,7 @@ void main() {
     final LeaderLayerRenderObject renderObject2 = LeaderLayerRenderObject();
     final OffsetLayer rootLayer2 = OffsetLayer();
     rootLayer2.attach(renderObject2);
-    renderObject2.attach(TestRenderingFlutterBinding.instance.pipelineOwner);
+    renderObject2.attach(TestRenderingFlutterBinding.instance.rootPipelineOwner);
     renderObject2.scheduleInitialPaint(rootLayer2);
     renderObject2.layout(const BoxConstraints.tightForFinite());
     TestRenderingFlutterBinding.instance.pumpCompleteFrame();
@@ -206,7 +206,7 @@ void main() {
     // renderObject1 paints the leader layer first.
     final LeaderLayerRenderObject renderObject1 = LeaderLayerRenderObject();
     renderObject1.layerLink = layerLink;
-    renderObject1.attach(TestRenderingFlutterBinding.instance.pipelineOwner);
+    renderObject1.attach(TestRenderingFlutterBinding.instance.rootPipelineOwner);
     final OffsetLayer rootLayer1 = OffsetLayer();
     rootLayer1.attach(renderObject1);
     renderObject1.scheduleInitialPaint(rootLayer1);
@@ -216,7 +216,7 @@ void main() {
     renderObject2.layerLink = layerLink;
     final OffsetLayer rootLayer2 = OffsetLayer();
     rootLayer2.attach(renderObject2);
-    renderObject2.attach(TestRenderingFlutterBinding.instance.pipelineOwner);
+    renderObject2.attach(TestRenderingFlutterBinding.instance.rootPipelineOwner);
     renderObject2.scheduleInitialPaint(rootLayer2);
     renderObject2.layout(const BoxConstraints.tightForFinite());
     TestRenderingFlutterBinding.instance.pumpCompleteFrame();

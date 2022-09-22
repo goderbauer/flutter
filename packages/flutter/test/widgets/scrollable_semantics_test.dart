@@ -377,23 +377,23 @@ void main() {
     );
 
     // Start with semantics off.
-    expect(tester.binding.pipelineOwner.semanticsOwner, isNull);
+    expect(tester.binding.semanticsCoordinator.enabled, isFalse);
 
     // Semantics on
     semantics = SemanticsTester(tester);
     await tester.pumpAndSettle();
-    expect(tester.binding.pipelineOwner.semanticsOwner, isNotNull);
+    expect(tester.binding.semanticsCoordinator.enabled, isTrue);
     expect(semantics, hasSemantics(expectedSemantics, ignoreId: true, ignoreRect: true, ignoreTransform: true));
 
     // Semantics off
     semantics.dispose();
     await tester.pumpAndSettle();
-    expect(tester.binding.pipelineOwner.semanticsOwner, isNull);
+    expect(tester.binding.semanticsCoordinator.enabled, isFalse);
 
     // Semantics on
     semantics = SemanticsTester(tester);
     await tester.pumpAndSettle();
-    expect(tester.binding.pipelineOwner.semanticsOwner, isNotNull);
+    expect(tester.binding.semanticsCoordinator.enabled, isTrue);
     expect(semantics, hasSemantics(expectedSemantics, ignoreId: true, ignoreRect: true, ignoreTransform: true));
 
     semantics.dispose();

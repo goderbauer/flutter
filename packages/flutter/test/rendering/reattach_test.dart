@@ -135,7 +135,7 @@ void main() {
   test('objects can be detached and re-attached: semantics (no change)', () {
     final TestTree testTree = TestTree();
     int semanticsUpdateCount = 0;
-    final SemanticsHandle semanticsHandle = TestRenderingFlutterBinding.instance.pipelineOwner.ensureSemantics(
+    final SemanticsHandle semanticsHandle = TestRenderingFlutterBinding.instance.semanticsCoordinator.ensureSemantics(
       listener: () {
         ++semanticsUpdateCount;
       },
@@ -158,7 +158,7 @@ void main() {
   test('objects can be detached and re-attached: semantics (with change)', () {
     final TestTree testTree = TestTree();
     int semanticsUpdateCount = 0;
-    final SemanticsHandle semanticsHandle = TestRenderingFlutterBinding.instance.pipelineOwner.ensureSemantics(
+    final SemanticsHandle semanticsHandle = TestRenderingFlutterBinding.instance.semanticsCoordinator.ensureSemantics(
       listener: () {
         ++semanticsUpdateCount;
       },

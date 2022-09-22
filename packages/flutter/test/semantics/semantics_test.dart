@@ -271,7 +271,7 @@ void main() {
     });
 
     test('after markNeedsSemanticsUpdate() all render objects between two semantic boundaries are asked for annotations', () {
-      TestRenderingFlutterBinding.instance.pipelineOwner.ensureSemantics();
+      TestRenderingFlutterBinding.instance.semanticsCoordinator.ensureSemantics();
 
       TestRender middle;
       final TestRender root = TestRender(

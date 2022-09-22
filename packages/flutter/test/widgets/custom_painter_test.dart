@@ -294,22 +294,22 @@ void _defineTests() {
     ));
 
     // Start with semantics off.
-    expect(tester.binding.pipelineOwner.semanticsOwner, isNull);
+    expect(tester.binding.semanticsCoordinator.enabled, isFalse);
 
     // Semantics on
     SemanticsTester semantics = SemanticsTester(tester);
     await tester.pumpAndSettle();
-    expect(tester.binding.pipelineOwner.semanticsOwner, isNotNull);
+    expect(tester.binding.semanticsCoordinator.enabled, isTrue);
 
     // Semantics off
     semantics.dispose();
     await tester.pumpAndSettle();
-    expect(tester.binding.pipelineOwner.semanticsOwner, isNull);
+    expect(tester.binding.semanticsCoordinator.enabled, isFalse);
 
     // Semantics on
     semantics = SemanticsTester(tester);
     await tester.pumpAndSettle();
-    expect(tester.binding.pipelineOwner.semanticsOwner, isNotNull);
+    expect(tester.binding.semanticsCoordinator.enabled, isTrue);
 
     semantics.dispose();
   }, semanticsEnabled: false);
