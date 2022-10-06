@@ -294,7 +294,7 @@ mixin GestureBinding on BindingBase implements HitTestable, HitTestDispatcher, H
     if (_pendingPointerEvents.isEmpty && !locked) {
       scheduleMicrotask(_flushPointerEventQueue);
     }
-    _pendingPointerEvents.addFirst(PointerCancelEvent(pointer: pointer));
+    _pendingPointerEvents.addFirst(PointerCancelEvent(pointer: pointer)); // TODO(window): what ID here?
   }
 
   void _flushPointerEventQueue() {
@@ -352,7 +352,7 @@ mixin GestureBinding on BindingBase implements HitTestable, HitTestDispatcher, H
     if (event is PointerDownEvent || event is PointerSignalEvent || event is PointerHoverEvent || event is PointerPanZoomStartEvent) {
       assert(!_hitTests.containsKey(event.pointer));
       hitTestResult = HitTestResult();
-      hitTest(hitTestResult, event.position, 0); // TODO(window): get this from the event
+      hitTest(hitTestResult, event.position, event.viewId);
       if (event is PointerDownEvent || event is PointerPanZoomStartEvent) {
         _hitTests[event.pointer] = hitTestResult;
       }

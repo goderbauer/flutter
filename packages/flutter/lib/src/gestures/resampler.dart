@@ -72,6 +72,7 @@ class PointerEventResampler {
       tilt: event.tilt,
       synthesized: event.synthesized,
       embedderId: event.embedderId,
+      viewId: event.viewId,
     );
   }
 
@@ -106,6 +107,7 @@ class PointerEventResampler {
       platformData: event.platformData,
       synthesized: event.synthesized,
       embedderId: event.embedderId,
+      viewId: event.viewId,
     );
   }
 

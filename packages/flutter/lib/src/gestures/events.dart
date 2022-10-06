@@ -265,6 +265,7 @@ abstract class PointerEvent with Diagnosticable {
     this.synthesized = false,
     this.transform,
     this.original,
+    this.viewId = 0,
   });
 
   /// Unique identifier that ties the [PointerEvent] to the embedder event that created it.
@@ -503,6 +504,9 @@ abstract class PointerEvent with Diagnosticable {
   /// space. The [original] property can be used to determine if all those
   /// transformed events actually originated from the same pointer interaction.
   final PointerEvent? original;
+
+  ///
+  final int viewId;
 
   /// Transforms the event from the global coordinate space into the coordinate
   /// space of an event receiver.
@@ -752,6 +756,9 @@ abstract class _TransformedPointerEvent extends _AbstractPointerEvent with Diagn
     untransformedEndPosition: position,
     transformedEndPosition: localPosition,
   );
+
+  @override
+  int get viewId => original.viewId;
 }
 
 mixin _CopyPointerAddedEvent on PointerEvent {
@@ -795,6 +802,7 @@ mixin _CopyPointerAddedEvent on PointerEvent {
       orientation: orientation ?? this.orientation,
       tilt: tilt ?? this.tilt,
       embedderId: embedderId ?? this.embedderId,
+      viewId: viewId,
     ).transformed(transform);
   }
 }
@@ -823,6 +831,7 @@ class PointerAddedEvent extends PointerEvent with _PointerEventDescription, _Cop
     super.orientation,
     super.tilt,
     super.embedderId,
+    super.viewId,
   }) : super(
          pressure: 0.0,
        );
@@ -888,6 +897,7 @@ mixin _CopyPointerRemovedEvent on PointerEvent {
       radiusMin: radiusMin ?? this.radiusMin,
       radiusMax: radiusMax ?? this.radiusMax,
       embedderId: embedderId ?? this.embedderId,
+      viewId: viewId,
     ).transformed(transform);
   }
 }
@@ -914,6 +924,7 @@ class PointerRemovedEvent extends PointerEvent with _PointerEventDescription, _C
     super.radiusMax,
     PointerRemovedEvent? super.original,
     super.embedderId,
+    super.viewId,
   }) : super(
          pressure: 0.0,
        );
@@ -988,6 +999,7 @@ mixin _CopyPointerHoverEvent on PointerEvent {
       tilt: tilt ?? this.tilt,
       synthesized: synthesized ?? this.synthesized,
       embedderId: embedderId ?? this.embedderId,
+      viewId: viewId,
     ).transformed(transform);
   }
 }
@@ -1030,6 +1042,7 @@ class PointerHoverEvent extends PointerEvent with _PointerEventDescription, _Cop
     super.tilt,
     super.synthesized,
     super.embedderId,
+    super.viewId,
   }) : super(
          down: false,
          pressure: 0.0,
@@ -1105,6 +1118,7 @@ mixin _CopyPointerEnterEvent on PointerEvent {
       tilt: tilt ?? this.tilt,
       synthesized: synthesized ?? this.synthesized,
       embedderId: embedderId ?? this.embedderId,
+      viewId: viewId,
     ).transformed(transform);
   }
 }
@@ -1148,6 +1162,7 @@ class PointerEnterEvent extends PointerEvent with _PointerEventDescription, _Cop
     super.down,
     super.synthesized,
     super.embedderId,
+    super.viewId,
   }) : super(
          pressure: 0.0,
        );
@@ -1177,6 +1192,7 @@ class PointerEnterEvent extends PointerEvent with _PointerEventDescription, _Cop
     tilt: event.tilt,
     down: event.down,
     synthesized: event.synthesized,
+    viewId: event.viewId,
   ).transformed(event.transform);
 
   @override
@@ -1249,6 +1265,7 @@ mixin _CopyPointerExitEvent on PointerEvent {
       tilt: tilt ?? this.tilt,
       synthesized: synthesized ?? this.synthesized,
       embedderId: embedderId ?? this.embedderId,
+      viewId: viewId,
     ).transformed(transform);
   }
 }
@@ -1292,6 +1309,7 @@ class PointerExitEvent extends PointerEvent with _PointerEventDescription, _Copy
     super.down,
     super.synthesized,
     super.embedderId,
+    super.viewId,
   }) : super(
          pressure: 0.0,
        );
@@ -1321,6 +1339,7 @@ class PointerExitEvent extends PointerEvent with _PointerEventDescription, _Copy
     tilt: event.tilt,
     down: event.down,
     synthesized: event.synthesized,
+    viewId: event.viewId,
   ).transformed(event.transform);
 
   @override
@@ -1393,6 +1412,7 @@ mixin _CopyPointerDownEvent on PointerEvent {
       orientation: orientation ?? this.orientation,
       tilt: tilt ?? this.tilt,
       embedderId: embedderId ?? this.embedderId,
+      viewId: viewId,
     ).transformed(transform);
   }
 }
@@ -1427,6 +1447,7 @@ class PointerDownEvent extends PointerEvent with _PointerEventDescription, _Copy
     super.orientation,
     super.tilt,
     super.embedderId,
+    super.viewId,
   }) : super(
          down: true,
          distance: 0.0,
@@ -1503,6 +1524,7 @@ mixin _CopyPointerMoveEvent on PointerEvent {
       tilt: tilt ?? this.tilt,
       synthesized: synthesized ?? this.synthesized,
       embedderId: embedderId ?? this.embedderId,
+      viewId: viewId,
     ).transformed(transform);
   }
 }
@@ -1543,6 +1565,7 @@ class PointerMoveEvent extends PointerEvent with _PointerEventDescription, _Copy
     super.platformData,
     super.synthesized,
     super.embedderId,
+    super.viewId,
   }) : super(
          down: true,
          distance: 0.0,
@@ -1620,6 +1643,7 @@ mixin _CopyPointerUpEvent on PointerEvent {
       orientation: orientation ?? this.orientation,
       tilt: tilt ?? this.tilt,
       embedderId: embedderId ?? this.embedderId,
+      viewId: viewId,
     ).transformed(transform);
   }
 }
@@ -1657,6 +1681,7 @@ class PointerUpEvent extends PointerEvent with _PointerEventDescription, _CopyPo
     super.orientation,
     super.tilt,
     super.embedderId,
+    super.viewId,
   }) : super(
          down: false,
        );
@@ -1706,6 +1731,7 @@ abstract class PointerSignalEvent extends PointerEvent {
     super.device,
     super.position,
     super.embedderId,
+    super.viewId,
   });
 }
 
@@ -1745,6 +1771,7 @@ mixin _CopyPointerScrollEvent on PointerEvent {
       position: position ?? this.position,
       scrollDelta: scrollDelta,
       embedderId: embedderId ?? this.embedderId,
+      viewId: viewId,
     ).transformed(transform);
   }
 }
@@ -1771,6 +1798,7 @@ class PointerScrollEvent extends PointerSignalEvent with _PointerEventDescriptio
     super.position,
     this.scrollDelta = Offset.zero,
     super.embedderId,
+    super.viewId,
   }) : assert(timeStamp != null),
        assert(kind != null),
        assert(device != null),
@@ -1850,6 +1878,7 @@ mixin _CopyPointerPanZoomStartEvent on PointerEvent {
       device: device ?? this.device,
       position: position ?? this.position,
       embedderId: embedderId ?? this.embedderId,
+      viewId: viewId,
     ).transformed(transform);
   }
 }
@@ -1872,6 +1901,7 @@ class PointerPanZoomStartEvent extends PointerEvent with _PointerEventDescriptio
     super.position,
     super.embedderId,
     super.synthesized,
+    super.viewId,
   }) : assert(timeStamp != null),
        assert(kind != null),
        assert(device != null),
@@ -1958,6 +1988,7 @@ mixin _CopyPointerPanZoomUpdateEvent on PointerEvent {
       panDelta: panDelta ?? this.panDelta,
       scale: scale ?? this.scale,
       rotation: rotation ?? this.rotation,
+      viewId: viewId,
     ).transformed(transform);
   }
 }
@@ -1984,6 +2015,7 @@ class PointerPanZoomUpdateEvent extends PointerEvent with _PointerEventDescripti
     this.scale = 1.0,
     this.rotation = 0.0,
     super.synthesized,
+    super.viewId,
   }) : assert(timeStamp != null),
        assert(kind != null),
        assert(device != null),
@@ -2086,6 +2118,7 @@ mixin _CopyPointerPanZoomEndEvent on PointerEvent {
       device: device ?? this.device,
       position: position ?? this.position,
       embedderId: embedderId ?? this.embedderId,
+      viewId: viewId,
     ).transformed(transform);
   }
 }
@@ -2108,6 +2141,7 @@ class PointerPanZoomEndEvent extends PointerEvent with _PointerEventDescription,
     super.position,
     super.embedderId,
     super.synthesized,
+    super.viewId,
   }) : assert(timeStamp != null),
        assert(kind != null),
        assert(device != null),
@@ -2185,6 +2219,7 @@ mixin _CopyPointerCancelEvent on PointerEvent {
       orientation: orientation ?? this.orientation,
       tilt: tilt ?? this.tilt,
       embedderId: embedderId ?? this.embedderId,
+      viewId: viewId,
     ).transformed(transform);
   }
 }
@@ -2219,6 +2254,7 @@ class PointerCancelEvent extends PointerEvent with _PointerEventDescription, _Co
     super.orientation,
     super.tilt,
     super.embedderId,
+    super.viewId,
   }) : super(
          down: false,
          pressure: 0.0,

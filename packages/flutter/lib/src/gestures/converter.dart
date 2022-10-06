@@ -78,6 +78,7 @@ class PointerEventConverter {
                     orientation: datum.orientation,
                     tilt: datum.tilt,
                     embedderId: datum.embedderId,
+                    viewId: datum.viewId,
                   );
                 case ui.PointerChange.hover:
                   return PointerHoverEvent(
@@ -101,6 +102,7 @@ class PointerEventConverter {
                     tilt: datum.tilt,
                     synthesized: datum.synthesized,
                     embedderId: datum.embedderId,
+                    viewId: datum.viewId,
                   );
                 case ui.PointerChange.down:
                   return PointerDownEvent(
@@ -123,6 +125,7 @@ class PointerEventConverter {
                     orientation: datum.orientation,
                     tilt: datum.tilt,
                     embedderId: datum.embedderId,
+                    viewId: datum.viewId,
                   );
                 case ui.PointerChange.move:
                   return PointerMoveEvent(
@@ -148,6 +151,7 @@ class PointerEventConverter {
                     platformData: datum.platformData,
                     synthesized: datum.synthesized,
                     embedderId: datum.embedderId,
+                    viewId: datum.viewId,
                   );
                 case ui.PointerChange.up:
                   return PointerUpEvent(
@@ -171,6 +175,7 @@ class PointerEventConverter {
                     orientation: datum.orientation,
                     tilt: datum.tilt,
                     embedderId: datum.embedderId,
+                    viewId: datum.viewId,
                   );
                 case ui.PointerChange.cancel:
                   return PointerCancelEvent(
@@ -193,6 +198,7 @@ class PointerEventConverter {
                     orientation: datum.orientation,
                     tilt: datum.tilt,
                     embedderId: datum.embedderId,
+                    viewId: datum.viewId,
                   );
                 case ui.PointerChange.remove:
                   return PointerRemovedEvent(
@@ -207,6 +213,7 @@ class PointerEventConverter {
                     radiusMin: radiusMin,
                     radiusMax: radiusMax,
                     embedderId: datum.embedderId,
+                    viewId: datum.viewId,
                   );
                 case ui.PointerChange.panZoomStart:
                   return PointerPanZoomStartEvent(
@@ -217,6 +224,7 @@ class PointerEventConverter {
                     position: position,
                     embedderId: datum.embedderId,
                     synthesized: datum.synthesized,
+                    viewId: datum.viewId,
                   );
                 case ui.PointerChange.panZoomUpdate:
                   final Offset pan =
@@ -235,6 +243,7 @@ class PointerEventConverter {
                     rotation: datum.rotation,
                     embedderId: datum.embedderId,
                     synthesized: datum.synthesized,
+                    viewId: datum.viewId,
                   );
                 case ui.PointerChange.panZoomEnd:
                   return PointerPanZoomEndEvent(
@@ -245,6 +254,7 @@ class PointerEventConverter {
                     position: position,
                     embedderId: datum.embedderId,
                     synthesized: datum.synthesized,
+                    viewId: datum.viewId,
                   );
               }
             case ui.PointerSignalKind.scroll:
@@ -257,6 +267,7 @@ class PointerEventConverter {
                 position: position,
                 scrollDelta: scrollDelta,
                 embedderId: datum.embedderId,
+                viewId: datum.viewId,
               );
             case ui.PointerSignalKind.unknown:
               // This branch should already have 'unknown' filtered out, but
