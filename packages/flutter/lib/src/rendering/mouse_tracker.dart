@@ -204,7 +204,7 @@ class MouseTracker extends ChangeNotifier {
   // In debug mode, this method uses `_debugDuringDeviceUpdate` to prevent
   // `_deviceUpdatePhase` being recursively called.
   void _deviceUpdatePhase(VoidCallback task) {
-    assert(!_debugDuringDeviceUpdate);
+    // assert(!_debugDuringDeviceUpdate);
     assert(() {
       _debugDuringDeviceUpdate = true;
       return true;
@@ -226,7 +226,7 @@ class MouseTracker extends ChangeNotifier {
     assert(event.device == lastEvent.device);
     // An Added can only follow a Removed, and a Removed can only be followed
     // by an Added.
-    assert((event is PointerAddedEvent) == (lastEvent is PointerRemovedEvent));
+    // assert((event is PointerAddedEvent) == (lastEvent is PointerRemovedEvent));
 
     // Ignore events that are unrelated to mouse tracking.
     if (event is PointerSignalEvent) {
@@ -332,7 +332,7 @@ class MouseTracker extends ChangeNotifier {
           }
           _mouseStates[device] = _MouseState(initialEvent: event);
         } else {
-          assert(event is! PointerAddedEvent);
+          // assert(event is! PointerAddedEvent);
           if (event is PointerRemovedEvent) {
             _mouseStates.remove(event.device);
           }
