@@ -1788,21 +1788,21 @@ class LiveTestWidgetsFlutterBinding extends TestWidgetsFlutterBinding {
     }
   }
 
-  void _initRenderView() {
-    renderView = _LiveTestRenderView(
-      configuration: createViewConfiguration(),
-      onNeedPaint: _handleViewNeedsPaint,
-      view: platformDispatcher.implicitView!,
-    );
-    renderView.prepareInitialFrame();
-  }
-
-  _LiveTestRenderView get _liveTestRenderView => super.renderView as _LiveTestRenderView;
-
-  void _handleViewNeedsPaint() {
-    _viewNeedsPaint = true;
-    renderView.markNeedsPaint();
-  }
+  // void _initRenderView() {
+  //   renderView = _LiveTestRenderView(
+  //     configuration: createViewConfiguration(),
+  //     onNeedPaint: _handleViewNeedsPaint,
+  //     view: platformDispatcher.implicitView!,
+  //   );
+  //   renderView.prepareInitialFrame();
+  // }
+  //
+  // _LiveTestRenderView get _liveTestRenderView => super.renderView as _LiveTestRenderView;
+  //
+  // void _handleViewNeedsPaint() {
+  //   _viewNeedsPaint = true;
+  //   renderView.markNeedsPaint();
+  // }
 
   /// An object to which real device events should be routed.
   ///
@@ -1827,20 +1827,20 @@ class LiveTestWidgetsFlutterBinding extends TestWidgetsFlutterBinding {
   void handlePointerEvent(PointerEvent event) {
     switch (pointerEventSource) {
       case TestBindingEventSource.test:
-        final _LiveTestPointerRecord? record = _liveTestRenderView._pointers[event.pointer];
-        if (record != null) {
-          record.position = event.position;
-          if (!event.down) {
-            record.decay = _kPointerDecay;
-          }
-          _handleViewNeedsPaint();
-        } else if (event.down) {
-          _liveTestRenderView._pointers[event.pointer] = _LiveTestPointerRecord(
-            event.pointer,
-            event.position,
-          );
-          _handleViewNeedsPaint();
-        }
+        // final _LiveTestPointerRecord? record = _liveTestRenderView._pointers[event.pointer];
+        // if (record != null) {
+        //   record.position = event.position;
+        //   if (!event.down) {
+        //     record.decay = _kPointerDecay;
+        //   }
+        //   _handleViewNeedsPaint();
+        // } else if (event.down) {
+        //   _liveTestRenderView._pointers[event.pointer] = _LiveTestPointerRecord(
+        //     event.pointer,
+        //     event.position,
+        //   );
+        //   _handleViewNeedsPaint();
+        // }
         super.handlePointerEvent(event);
       case TestBindingEventSource.device:
         if (shouldPropagateDevicePointerEvents) {
@@ -1950,7 +1950,7 @@ class LiveTestWidgetsFlutterBinding extends TestWidgetsFlutterBinding {
   }) {
     assert(!inTest);
     _inTest = true;
-    _liveTestRenderView._setDescription(description);
+    // _liveTestRenderView._setDescription(description);
     return _runTest(testBody, invariantTester, description);
   }
 
@@ -1997,7 +1997,8 @@ class LiveTestWidgetsFlutterBinding extends TestWidgetsFlutterBinding {
 
   @override
   Offset globalToLocal(Offset point) {
-    final Matrix4 transform = _liveTestRenderView.configuration.toHitTestMatrix();
+    // ignore: deprecated_member_use
+    final Matrix4 transform = (renderView.configuration as TestViewConfiguration).toHitTestMatrix();
     final double det = transform.invert();
     assert(det != 0.0);
     final Offset result = MatrixUtils.transformPoint(transform, point);
@@ -2006,7 +2007,8 @@ class LiveTestWidgetsFlutterBinding extends TestWidgetsFlutterBinding {
 
   @override
   Offset localToGlobal(Offset point) {
-    final Matrix4 transform = _liveTestRenderView.configuration.toHitTestMatrix();
+    // ignore: deprecated_member_use
+    final Matrix4 transform = (renderView.configuration as TestViewConfiguration).toHitTestMatrix();
     return MatrixUtils.transformPoint(transform, point);
   }
 }
@@ -2085,88 +2087,88 @@ class TestViewConfiguration extends ViewConfiguration {
   String toString() => 'TestViewConfiguration';
 }
 
-const int _kPointerDecay = -2;
-
-class _LiveTestPointerRecord {
-  _LiveTestPointerRecord(
-    this.pointer,
-    this.position,
-  ) : color = HSVColor.fromAHSV(0.8, (35.0 * pointer) % 360.0, 1.0, 1.0).toColor(),
-      decay = 1;
-  final int pointer;
-  final Color color;
-  Offset position;
-  int decay; // >0 means down, <0 means up, increases by one each time, removed at 0
-}
-
-class _LiveTestRenderView extends RenderView {
-  _LiveTestRenderView({
-    required super.configuration,
-    required this.onNeedPaint,
-    required super.view,
-  });
-
-  @override
-  TestViewConfiguration get configuration => super.configuration as TestViewConfiguration;
-  @override
-  set configuration(covariant TestViewConfiguration value) { super.configuration = value; }
-
-  final VoidCallback onNeedPaint;
-
-  final Map<int, _LiveTestPointerRecord> _pointers = <int, _LiveTestPointerRecord>{};
-
-  TextPainter? _label;
-  static const TextStyle _labelStyle = TextStyle(
-    fontFamily: 'sans-serif',
-    fontSize: 10.0,
-  );
-  void _setDescription(String value) {
-    if (value.isEmpty) {
-      _label = null;
-      return;
-    }
-    // TODO(ianh): Figure out if the test name is actually RTL.
-    _label ??= TextPainter(textAlign: TextAlign.left, textDirection: TextDirection.ltr);
-    _label!.text = TextSpan(text: value, style: _labelStyle);
-    _label!.layout();
-    onNeedPaint();
-  }
-
-  @override
-  void paint(PaintingContext context, Offset offset) {
-    assert(offset == Offset.zero);
-    super.paint(context, offset);
-    if (_pointers.isNotEmpty) {
-      final double radius = configuration.size.shortestSide * 0.05;
-      final Path path = Path()
-        ..addOval(Rect.fromCircle(center: Offset.zero, radius: radius))
-        ..moveTo(0.0, -radius * 2.0)
-        ..lineTo(0.0, radius * 2.0)
-        ..moveTo(-radius * 2.0, 0.0)
-        ..lineTo(radius * 2.0, 0.0);
-      final Canvas canvas = context.canvas;
-      final Paint paint = Paint()
-        ..strokeWidth = radius / 10.0
-        ..style = PaintingStyle.stroke;
-      bool dirty = false;
-      for (final int pointer in _pointers.keys) {
-        final _LiveTestPointerRecord record = _pointers[pointer]!;
-        paint.color = record.color.withOpacity(record.decay < 0 ? (record.decay / (_kPointerDecay - 1)) : 1.0);
-        canvas.drawPath(path.shift(record.position), paint);
-        if (record.decay < 0) {
-          dirty = true;
-        }
-        record.decay += 1;
-      }
-      _pointers
-        .keys
-        .where((int pointer) => _pointers[pointer]!.decay == 0)
-        .toList()
-        .forEach(_pointers.remove);
-      if (dirty) {
-        scheduleMicrotask(onNeedPaint);
-      }
-    }
-    _label?.paint(context.canvas, offset - const Offset(0.0, 10.0));
-  }
-}
+// const int _kPointerDecay = -2;
+//
+// class _LiveTestPointerRecord {
+//   _LiveTestPointerRecord(
+//     this.pointer,
+//     this.position,
+//   ) : color = HSVColor.fromAHSV(0.8, (35.0 * pointer) % 360.0, 1.0, 1.0).toColor(),
+//       decay = 1;
+//   final int pointer;
+//   final Color color;
+//   Offset position;
+//   int decay; // >0 means down, <0 means up, increases by one each time, removed at 0
+// }
+//
+// class _LiveTestRenderView extends RenderView {
+//   _LiveTestRenderView({
+//     required super.configuration,
+//     required this.onNeedPaint,
+//     required super.view,
+//   });
+//
+//   @override
+//   TestViewConfiguration get configuration => super.configuration as TestViewConfiguration;
+//   @override
+//   set configuration(covariant TestViewConfiguration value) { super.configuration = value; }
+//
+//   final VoidCallback onNeedPaint;
+//
+//   final Map<int, _LiveTestPointerRecord> _pointers = <int, _LiveTestPointerRecord>{};
+//
+//   TextPainter? _label;
+//   static const TextStyle _labelStyle = TextStyle(
+//     fontFamily: 'sans-serif',
+//     fontSize: 10.0,
+//   );
+//   void _setDescription(String value) {
+//     if (value.isEmpty) {
+//       _label = null;
+//       return;
+//     }
+//     // TODO(ianh): Figure out if the test name is actually RTL.
+//     _label ??= TextPainter(textAlign: TextAlign.left, textDirection: TextDirection.ltr);
+//     _label!.text = TextSpan(text: value, style: _labelStyle);
+//     _label!.layout();
+//     onNeedPaint();
+//   }
+//
+//   @override
+//   void paint(PaintingContext context, Offset offset) {
+//     assert(offset == Offset.zero);
+//     super.paint(context, offset);
+//     if (_pointers.isNotEmpty) {
+//       final double radius = configuration.size.shortestSide * 0.05;
+//       final Path path = Path()
+//         ..addOval(Rect.fromCircle(center: Offset.zero, radius: radius))
+//         ..moveTo(0.0, -radius * 2.0)
+//         ..lineTo(0.0, radius * 2.0)
+//         ..moveTo(-radius * 2.0, 0.0)
+//         ..lineTo(radius * 2.0, 0.0);
+//       final Canvas canvas = context.canvas;
+//       final Paint paint = Paint()
+//         ..strokeWidth = radius / 10.0
+//         ..style = PaintingStyle.stroke;
+//       bool dirty = false;
+//       for (final int pointer in _pointers.keys) {
+//         final _LiveTestPointerRecord record = _pointers[pointer]!;
+//         paint.color = record.color.withOpacity(record.decay < 0 ? (record.decay / (_kPointerDecay - 1)) : 1.0);
+//         canvas.drawPath(path.shift(record.position), paint);
+//         if (record.decay < 0) {
+//           dirty = true;
+//         }
+//         record.decay += 1;
+//       }
+//       _pointers
+//         .keys
+//         .where((int pointer) => _pointers[pointer]!.decay == 0)
+//         .toList()
+//         .forEach(_pointers.remove);
+//       if (dirty) {
+//         scheduleMicrotask(onNeedPaint);
+//       }
+//     }
+//     _label?.paint(context.canvas, offset - const Offset(0.0, 10.0));
+//   }
+// }
