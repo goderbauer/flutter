@@ -116,6 +116,7 @@ mixin SemanticsBinding on BindingBase {
       nodeId: id,
       type: action,
       arguments: args != null ? const StandardMessageCodec().decodeMessage(args) : null,
+      viewId: 0, // TODO(goderbauer): get this from native.
     ));
   }
 
@@ -189,13 +190,16 @@ class SemanticsActionEvent {
   /// Creates a [SemanticsActionEvent].
   ///
   /// The [type] and [nodeId] are required.
-  const SemanticsActionEvent({required this.type, required this.nodeId, this.arguments});
+  const SemanticsActionEvent({required this.type, required this.nodeId, required this.viewId, this.arguments});
 
   /// The type of action to be performed.
   final ui.SemanticsAction type;
 
   /// The id of the [SemanticsNode] on which the action is to be performed.
   final int nodeId;
+
+  ///
+  final int viewId;
 
   /// Optional arguments for the action.
   final Object? arguments;
