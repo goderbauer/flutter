@@ -46,6 +46,7 @@ abstract final class PointerEventConverter {
   /// from physical coordinates to logical pixels. See the discussion at
   /// [PointerEvent] for more details on the [PointerEvent] coordinate space.
   static Iterable<PointerEvent> expand(Iterable<ui.PointerData> data, double devicePixelRatio) {
+    // TODO(goderbauer): This method needs to set the viewId of each PointerEvent and consider the dpr from the right view.
     return data
         .where((ui.PointerData datum) => datum.signalKind != ui.PointerSignalKind.unknown)
         .map<PointerEvent?>((ui.PointerData datum) {

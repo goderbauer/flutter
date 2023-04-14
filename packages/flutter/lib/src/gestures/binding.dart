@@ -306,11 +306,11 @@ mixin GestureBinding on BindingBase implements HitTestable, HitTestDispatcher, H
   ///
   /// The pointer event will be dispatched before the next pointer event and
   /// before the end of the microtask but not within this function call.
-  void cancelPointer(int pointer) {
+  void cancelPointer({ required int pointer, required int viewId }) {
     if (_pendingPointerEvents.isEmpty && !locked) {
       scheduleMicrotask(_flushPointerEventQueue);
     }
-    _pendingPointerEvents.addFirst(PointerCancelEvent(pointer: pointer));
+    _pendingPointerEvents.addFirst(PointerCancelEvent(pointer: pointer, viewId: viewId));
   }
 
   void _flushPointerEventQueue() {
@@ -368,7 +368,7 @@ mixin GestureBinding on BindingBase implements HitTestable, HitTestDispatcher, H
     if (event is PointerDownEvent || event is PointerSignalEvent || event is PointerHoverEvent || event is PointerPanZoomStartEvent) {
       assert(!_hitTests.containsKey(event.pointer), 'Pointer of ${event.toString(minLevel: DiagnosticLevel.debug)} unexpectedly has a HitTestResult associated with it.');
       hitTestResult = HitTestResult();
-      hitTest(hitTestResult, event.position);
+      hitTest(hitTestResult, event.position, event.viewId);
       if (event is PointerDownEvent || event is PointerPanZoomStartEvent) {
         _hitTests[event.pointer] = hitTestResult;
       }
@@ -403,7 +403,7 @@ mixin GestureBinding on BindingBase implements HitTestable, HitTestDispatcher, H
 
   /// Determine which [HitTestTarget] objects are located at a given position.
   @override // from HitTestable
-  void hitTest(HitTestResult result, Offset position) {
+  void hitTest(HitTestResult result, Offset position, int viewId) {
     result.add(HitTestEntry(this));
   }
 

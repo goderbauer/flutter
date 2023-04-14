@@ -573,13 +573,13 @@ abstract class TestWidgetsFlutterBinding extends BindingBase
   /// one.
   ///
   /// For definitions for coordinate spaces, see [TestWidgetsFlutterBinding].
-  Offset globalToLocal(Offset point) => point;
+  Offset globalToLocal(Offset point, int viewId) => point;
 
   /// Convert the given point from the local coordinate space to the global
   /// one.
   ///
   /// For definitions for coordinate spaces, see [TestWidgetsFlutterBinding].
-  Offset localToGlobal(Offset point) => point;
+  Offset localToGlobal(Offset point, int viewId) => point;
 
   /// The source of the current pointer event.
   ///
@@ -1851,7 +1851,7 @@ class LiveTestWidgetsFlutterBinding extends TestWidgetsFlutterBinding {
           // The pointer events received with this source has a global position
           // (see [handlePointerEventForSource]). Transform it to the local
           // coordinate space used by the testing widgets.
-          final PointerEvent localEvent = event.copyWith(position: globalToLocal(event.position));
+          final PointerEvent localEvent = event.copyWith(position: globalToLocal(event.position, event.viewId));
           withPointerEventSource(TestBindingEventSource.device,
             () => super.handlePointerEvent(localEvent)
           );
@@ -1996,9 +1996,8 @@ class LiveTestWidgetsFlutterBinding extends TestWidgetsFlutterBinding {
   }
 
   @override
-  Offset globalToLocal(Offset point) {
-    // ignore: deprecated_member_use
-    final Matrix4 transform = (renderView.configuration as TestViewConfiguration).toHitTestMatrix();
+  Offset globalToLocal(Offset point, int viewId) {
+    final Matrix4 transform = (renderViews.firstWhere((RenderView r) => r.flutterView.viewId == viewId).configuration as TestViewConfiguration).toHitTestMatrix();
     final double det = transform.invert();
     assert(det != 0.0);
     final Offset result = MatrixUtils.transformPoint(transform, point);
@@ -2006,9 +2005,8 @@ class LiveTestWidgetsFlutterBinding extends TestWidgetsFlutterBinding {
   }
 
   @override
-  Offset localToGlobal(Offset point) {
-    // ignore: deprecated_member_use
-    final Matrix4 transform = (renderView.configuration as TestViewConfiguration).toHitTestMatrix();
+  Offset localToGlobal(Offset point, int viewId) {
+    final Matrix4 transform = (renderViews.firstWhere((RenderView r) => r.flutterView.viewId == viewId) as TestViewConfiguration).toHitTestMatrix();
     return MatrixUtils.transformPoint(transform, point);
   }
 }
