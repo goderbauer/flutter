@@ -20,7 +20,7 @@ abstract interface class HitTestable {
   ///
   /// If this given position hits this object, consider adding a [HitTestEntry]
   /// to the given hit test result.
-  void hitTest(HitTestResult result, Offset position);
+  void hitTest(HitTestResult result, Offset position, int viewId);
 }
 
 /// An object that can dispatch events.

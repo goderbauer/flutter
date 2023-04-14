@@ -554,9 +554,9 @@ mixin RendererBinding on BindingBase, ServicesBinding, SchedulerBinding, Gesture
   }
 
   @override
-  void hitTest(HitTestResult result, Offset position) {
-    renderView.hitTest(result, position: position);
-    super.hitTest(result, position);
+  void hitTest(HitTestResult result, Offset position, int viewId) {
+    _viewIdToRenderView[viewId]?.hitTest(result, position: position);
+    super.hitTest(result, position, viewId);
   }
 
   Future<void> _forceRepaint() {

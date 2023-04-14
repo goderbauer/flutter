@@ -1238,9 +1238,10 @@ abstract class WidgetController {
   }
 
   /// Forwards the given location to the binding's hitTest logic.
-  HitTestResult hitTestOnBinding(Offset location) {
+  HitTestResult hitTestOnBinding(Offset location, { int? viewId }) {
+    viewId ??= view.viewId as int;
     final HitTestResult result = HitTestResult();
-    binding.hitTest(result, location);
+    binding.hitTest(result, location, viewId);
     return result;
   }
 
@@ -1360,8 +1361,9 @@ abstract class WidgetController {
     final RenderBox box = element.renderObject! as RenderBox;
     final Offset location = box.localToGlobal(sizeToPoint(box.size));
     if (warnIfMissed) {
+      final FlutterView view = viewOf(finder);
       final HitTestResult result = HitTestResult();
-      binding.hitTest(result, location);
+      binding.hitTest(result, location, view.viewId as int);
       bool found = false;
       for (final HitTestEntry entry in result.path) {
         if (entry.target == box) {
@@ -1370,7 +1372,6 @@ abstract class WidgetController {
         }
       }
       if (!found) {
-        final FlutterView view = viewOf(finder);
         final RenderView renderView = binding.renderViews.firstWhere((RenderView r) => r.flutterView == view);
         bool outOfBounds = false;
         outOfBounds = !(Offset.zero & renderView.size).contains(location);
