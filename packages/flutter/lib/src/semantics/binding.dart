@@ -20,7 +20,7 @@ mixin SemanticsBinding on BindingBase {
     _accessibilityFeatures = platformDispatcher.accessibilityFeatures;
     platformDispatcher
       ..onSemanticsEnabledChanged = _handleSemanticsEnabledChanged
-      ..onSemanticsAction = _handleSemanticsAction
+      ..onSemanticsActionEvent = performSemanticsAction
       ..onAccessibilityFeaturesChanged = handleAccessibilityFeaturesChanged;
     _handleSemanticsEnabledChanged();
   }
@@ -109,15 +109,6 @@ mixin SemanticsBinding on BindingBase {
       _semanticsHandle?.dispose();
       _semanticsHandle = null;
     }
-  }
-
-  void _handleSemanticsAction(int id, ui.SemanticsAction action, ByteData? args) {
-    performSemanticsAction(SemanticsActionEvent(
-      nodeId: id,
-      type: action,
-      arguments: args != null ? const StandardMessageCodec().decodeMessage(args) : null,
-      viewId: 0, // TODO(goderbauer): get this from native.
-    ));
   }
 
   /// Called whenever the platform requests an action to be performed on a
@@ -229,3 +220,18 @@ class SemanticsHandle {
     _onDispose();
   }
 }
+
+// TODO(goderbauer): This needs to move to the engine.
+extension _PlatformDispatcherExtention on PlatformDispatcher {
+  set onSemanticsActionEvent(_SemanticsActionEventCallback value) {
+    onSemanticsAction = (int nodeId, ui.SemanticsAction action, ByteData? args) {
+      value(SemanticsActionEvent(
+        type: action,
+        arguments: args != null ? const StandardMessageCodec().decodeMessage(args) : null,
+        nodeId: nodeId,
+        viewId: 0,
+      ));
+    };
+  }
+}
+typedef _SemanticsActionEventCallback = void Function(SemanticsActionEvent event);

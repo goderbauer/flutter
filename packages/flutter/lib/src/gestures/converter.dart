@@ -31,6 +31,17 @@ int _synthesiseDownButtons(int buttons, PointerDeviceKind kind) {
       return buttons == 0 ? kPrimaryButton : buttons;
   }
 }
+/// Signature for a callback that returns the device pixel ratio of a
+/// [FlutterView] identified by the provided `viewId`.
+///
+/// Returns null if no view with the provided ID exists.
+///
+/// Used by [PointerEventConverter.expand].
+///
+/// See also:
+///
+///  * [FlutterView.devicePixelRatio] for an explanation of device pixel ratio.
+typedef DevicePixelRatioGetter = double? Function(int viewId);
 
 /// Converts from engine pointer data to framework pointer events.
 ///
@@ -41,15 +52,18 @@ abstract final class PointerEventConverter {
   /// Expand the given packet of pointer data into a sequence of framework
   /// pointer events.
   ///
-  /// The `devicePixelRatio` argument (usually given the value from
-  /// [dart:ui.FlutterView.devicePixelRatio]) is used to convert the incoming data
+  /// The [DevicePixelRatioGetter] argument is used to convert the incoming data
   /// from physical coordinates to logical pixels. See the discussion at
   /// [PointerEvent] for more details on the [PointerEvent] coordinate space.
-  static Iterable<PointerEvent> expand(Iterable<ui.PointerData> data, double devicePixelRatio) {
-    // TODO(goderbauer): This method needs to set the viewId of each PointerEvent and consider the dpr from the right view.
+  static Iterable<PointerEvent> expand(Iterable<ui.PointerData> data, DevicePixelRatioGetter devicePixelRatioGetter) {
     return data
         .where((ui.PointerData datum) => datum.signalKind != ui.PointerSignalKind.unknown)
         .map<PointerEvent?>((ui.PointerData datum) {
+          final double? devicePixelRatio = devicePixelRatioGetter(datum.viewId);
+          if (devicePixelRatio == null) {
+            // View doesn't exist anymore.
+            return null;
+          }
           final Offset position = Offset(datum.physicalX, datum.physicalY) / devicePixelRatio;
           final Offset delta = Offset(datum.physicalDeltaX, datum.physicalDeltaY) / devicePixelRatio;
           final double radiusMinor = _toLogicalPixels(datum.radiusMinor, devicePixelRatio);
@@ -77,6 +91,7 @@ abstract final class PointerEventConverter {
                     orientation: datum.orientation,
                     tilt: datum.tilt,
                     embedderId: datum.embedderId,
+                    viewId: datum.viewId,
                   );
                 case ui.PointerChange.hover:
                   return PointerHoverEvent(
@@ -100,6 +115,7 @@ abstract final class PointerEventConverter {
                     tilt: datum.tilt,
                     synthesized: datum.synthesized,
                     embedderId: datum.embedderId,
+                    viewId: datum.viewId,
                   );
                 case ui.PointerChange.down:
                   return PointerDownEvent(
@@ -122,6 +138,7 @@ abstract final class PointerEventConverter {
                     orientation: datum.orientation,
                     tilt: datum.tilt,
                     embedderId: datum.embedderId,
+                    viewId: datum.viewId,
                   );
                 case ui.PointerChange.move:
                   return PointerMoveEvent(
@@ -147,6 +164,7 @@ abstract final class PointerEventConverter {
                     platformData: datum.platformData,
                     synthesized: datum.synthesized,
                     embedderId: datum.embedderId,
+                    viewId: datum.viewId,
                   );
                 case ui.PointerChange.up:
                   return PointerUpEvent(
@@ -170,6 +188,7 @@ abstract final class PointerEventConverter {
                     orientation: datum.orientation,
                     tilt: datum.tilt,
                     embedderId: datum.embedderId,
+                    viewId: datum.viewId,
                   );
                 case ui.PointerChange.cancel:
                   return PointerCancelEvent(
@@ -192,6 +211,7 @@ abstract final class PointerEventConverter {
                     orientation: datum.orientation,
                     tilt: datum.tilt,
                     embedderId: datum.embedderId,
+                    viewId: datum.viewId,
                   );
                 case ui.PointerChange.remove:
                   return PointerRemovedEvent(
@@ -206,6 +226,7 @@ abstract final class PointerEventConverter {
                     radiusMin: radiusMin,
                     radiusMax: radiusMax,
                     embedderId: datum.embedderId,
+                    viewId: datum.viewId,
                   );
                 case ui.PointerChange.panZoomStart:
                   return PointerPanZoomStartEvent(
@@ -215,6 +236,7 @@ abstract final class PointerEventConverter {
                     position: position,
                     embedderId: datum.embedderId,
                     synthesized: datum.synthesized,
+                    viewId: datum.viewId,
                   );
                 case ui.PointerChange.panZoomUpdate:
                   final Offset pan =
@@ -232,6 +254,7 @@ abstract final class PointerEventConverter {
                     rotation: datum.rotation,
                     embedderId: datum.embedderId,
                     synthesized: datum.synthesized,
+                    viewId: datum.viewId,
                   );
                 case ui.PointerChange.panZoomEnd:
                   return PointerPanZoomEndEvent(
@@ -241,6 +264,7 @@ abstract final class PointerEventConverter {
                     position: position,
                     embedderId: datum.embedderId,
                     synthesized: datum.synthesized,
+                    viewId: datum.viewId,
                   );
               }
             case ui.PointerSignalKind.scroll:
@@ -256,6 +280,7 @@ abstract final class PointerEventConverter {
                 position: position,
                 scrollDelta: scrollDelta,
                 embedderId: datum.embedderId,
+                viewId: datum.viewId,
               );
             case ui.PointerSignalKind.scrollInertiaCancel:
               return PointerScrollInertiaCancelEvent(
@@ -264,6 +289,7 @@ abstract final class PointerEventConverter {
                 device: datum.device,
                 position: position,
                 embedderId: datum.embedderId,
+                viewId: datum.viewId,
               );
             case ui.PointerSignalKind.scale:
               return PointerScaleEvent(
@@ -273,6 +299,7 @@ abstract final class PointerEventConverter {
                 position: position,
                 embedderId: datum.embedderId,
                 scale: datum.scale,
+                viewId: datum.viewId,
               );
             case ui.PointerSignalKind.unknown:
             default: // ignore: no_default_cases, to allow adding a new [PointerSignalKind] - PointerStylusAuxiliaryAction
@@ -286,4 +313,9 @@ abstract final class PointerEventConverter {
   }
 
   static double _toLogicalPixels(double physicalPixels, double devicePixelRatio) => physicalPixels / devicePixelRatio;
+}
+
+// TODO(goderbauer): This needs to move to the engine.
+extension _PointerDataExtention on ui.PointerData {
+  int get viewId => 0;
 }
