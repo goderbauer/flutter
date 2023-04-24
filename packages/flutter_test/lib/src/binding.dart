@@ -2006,7 +2006,7 @@ class LiveTestWidgetsFlutterBinding extends TestWidgetsFlutterBinding {
 
   @override
   Offset localToGlobal(Offset point, int viewId) {
-    final Matrix4 transform = (renderViews.firstWhere((RenderView r) => r.flutterView.viewId == viewId) as TestViewConfiguration).toHitTestMatrix();
+    final Matrix4 transform = (renderViews.firstWhere((RenderView r) => r.flutterView.viewId == viewId).configuration as TestViewConfiguration).toHitTestMatrix();
     return MatrixUtils.transformPoint(transform, point);
   }
 }
