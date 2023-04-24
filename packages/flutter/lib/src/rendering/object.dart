@@ -989,7 +989,7 @@ class PipelineOwner {
         return true;
       }());
       Timeline.startSync(
-        'LAYOUT',
+        'LAYOUT$_debugRootSuffixForTimelineEventNames',
         arguments: debugTimelineArguments,
       );
     }
@@ -1076,7 +1076,7 @@ class PipelineOwner {
   /// [flushPaint].
   void flushCompositingBits() {
     if (!kReleaseMode) {
-      Timeline.startSync('UPDATING COMPOSITING BITS');
+      Timeline.startSync('UPDATING COMPOSITING BITS$_debugRootSuffixForTimelineEventNames');
     }
     _nodesNeedingCompositingBitsUpdate.sort((RenderObject a, RenderObject b) => a.depth - b.depth);
     for (final RenderObject node in _nodesNeedingCompositingBitsUpdate) {
@@ -1125,7 +1125,7 @@ class PipelineOwner {
         return true;
       }());
       Timeline.startSync(
-        'PAINT',
+        'PAINT$_debugRootSuffixForTimelineEventNames',
         arguments: debugTimelineArguments,
       );
     }
@@ -1252,7 +1252,7 @@ class PipelineOwner {
       return;
     }
     if (!kReleaseMode) {
-      Timeline.startSync('SEMANTICS');
+      Timeline.startSync('SEMANTICS$_debugRootSuffixForTimelineEventNames');
     }
     assert(_semanticsOwner != null);
     assert(() {
@@ -1284,6 +1284,9 @@ class PipelineOwner {
     }
   }
 
+  @override
+  String toString() => describeIdentity(this);
+
   // TREE MANAGEMENT
 
   final Set<PipelineOwner> _children = <PipelineOwner>{};
@@ -1294,6 +1297,8 @@ class PipelineOwner {
     child._debugParent = parent;
     return true;
   }
+
+  String get _debugRootSuffixForTimelineEventNames => _debugParent == null ? '' : ' (root)';
 
   /// Mark this [PipelineOwner] as attached to the given [PipelineManifold].
   ///
@@ -1356,7 +1361,9 @@ class PipelineOwner {
     assert(!_children.contains(child));
     assert(_debugAllowChildListModifications, 'Cannot modify child list after layout.');
     _children.add(child);
-    assert(_debugSetParent(child, this));
+    if (!kReleaseMode) {
+      _debugSetParent(child, this);
+    }
     if (_manifold != null) {
       child.attach(_manifold!);
     }
@@ -1374,7 +1381,9 @@ class PipelineOwner {
     assert(_children.contains(child));
     assert(_debugAllowChildListModifications, 'Cannot modify child list after layout.');
     _children.remove(child);
-    assert(_debugSetParent(child, null));
+    if (!kReleaseMode) {
+      _debugSetParent(child, null);
+    }
     if (_manifold != null) {
       child.detach();
     }
