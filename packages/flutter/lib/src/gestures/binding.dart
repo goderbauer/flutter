@@ -2,10 +2,9 @@
 // Use of this source code is governed by a BSD-style license that can be
 // found in the LICENSE file.
 
-
 import 'dart:async';
 import 'dart:collection';
-import 'dart:ui' as ui show PointerDataPacket;
+import 'dart:ui' as ui show FlutterView, PointerDataPacket;
 
 import 'package:flutter/foundation.dart';
 import 'package:flutter/scheduler.dart';
@@ -288,7 +287,7 @@ mixin GestureBinding on BindingBase implements HitTestable, HitTestDispatcher, H
     // We convert pointer data to logical pixels so that e.g. the touch slop can be
     // defined in a device-independent manner.
     try {
-      _pendingPointerEvents.addAll(PointerEventConverter.expand(packet.data, platformDispatcher.implicitView!.devicePixelRatio));
+      _pendingPointerEvents.addAll(PointerEventConverter.expand(packet.data, _devicePixelRatioByViewId));
       if (!locked) {
         _flushPointerEventQueue();
       }
@@ -300,6 +299,10 @@ mixin GestureBinding on BindingBase implements HitTestable, HitTestDispatcher, H
         context: ErrorDescription('while handling a pointer data packet'),
       ));
     }
+  }
+
+  double? _devicePixelRatioByViewId(int viewId) {
+    return platformDispatcher.viewWithId(viewId)?.devicePixelRatio;
   }
 
   /// Dispatch a [PointerCancelEvent] for the given pointer soon.
@@ -569,4 +572,16 @@ class FlutterErrorDetailsForPointerEventDispatcher extends FlutterErrorDetails {
   /// The target object itself is given by the [HitTestEntry.target] property of
   /// the hitTestEntry object.
   final HitTestEntry? hitTestEntry;
+}
+
+// TODO(goderbauer): This needs to move to the engine.
+extension _PlatformDispatcherExtention on PlatformDispatcher {
+  ui.FlutterView? viewWithId(int viewId) {
+    for (final ui.FlutterView view in views) {
+      if (view.viewId == viewId) {
+        return view;
+      }
+    }
+    return null;
+  }
 }
