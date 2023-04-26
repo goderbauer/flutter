@@ -244,7 +244,9 @@ class RenderView extends RenderObject with RenderObjectWithChildMixin<RenderBox>
       Timeline.startSync('COMPOSITING');
     }
     try {
-      final ui.SceneBuilder builder = ui.SceneBuilder();
+      // TODO(goderbauer): Prototype engine requires view ID here...
+      final ui.SceneBuilder builder = ui.SceneBuilder(flutterView.viewId);
+      // final ui.SceneBuilder builder = ui.SceneBuilder();
       final ui.Scene scene = layer!.buildScene(builder);
       if (automaticSystemUiAdjustment) {
         _updateSystemChrome();
