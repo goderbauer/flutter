@@ -214,6 +214,12 @@ class RenderView extends RenderObject with RenderObjectWithChildMixin<RenderBox>
     if (child != null) {
       context.paintChild(child!, offset);
     }
+    assert(() {
+      for (final DebugPaintCallback paintCallback in _debugPaintCallbacks) {
+        paintCallback(context, offset, this);
+      }
+      return true;
+    }());
   }
 
   @override
@@ -232,7 +238,7 @@ class RenderView extends RenderObject with RenderObjectWithChildMixin<RenderBox>
     }
     try {
       // TODO(goderbauer): Prototype engine requires view ID here...
-      final ui.SceneBuilder builder = ui.SceneBuilder(flutterView.viewId);
+      final ui.SceneBuilder builder = ui.SceneBuilder(/*flutterView.viewId*/);
       // final ui.SceneBuilder builder = ui.SceneBuilder();
       final ui.Scene scene = layer!.buildScene(builder);
       if (automaticSystemUiAdjustment) {
@@ -385,7 +391,22 @@ class RenderView extends RenderObject with RenderObjectWithChildMixin<RenderBox>
       properties.add(DiagnosticsNode.message('semantics enabled'));
     }
   }
+
+  static final List<DebugPaintCallback> _debugPaintCallbacks = <DebugPaintCallback>[];
+
+  ///
+  static void debugAddPaintCallback(DebugPaintCallback callback) {
+    _debugPaintCallbacks.add(callback);
+  }
+
+  ///
+  static void debugRemovePaintCallback(DebugPaintCallback callback) {
+    _debugPaintCallbacks.remove(callback);
+  }
 }
+
+///
+typedef DebugPaintCallback = void Function(PaintingContext context, Offset offset, RenderView renderView);
 
 ///
 abstract class RenderViewRepository {
