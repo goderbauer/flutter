@@ -86,8 +86,7 @@ void main() {
         '   introduces a MediaQuery.\n'
       ),
     );
-  }, skip: true); // [intended] enable when we have RawView.
-  // TODO(goderbauer): investiagete why this makes all following tests fail.
+  });
 
   testWidgets('MediaQuery.of finds a MediaQueryData when there is one', (WidgetTester tester) async {
     bool tested = false;
@@ -125,7 +124,7 @@ void main() {
       ),
     );
     expect(tested, isTrue);
-  }, skip: true); // [intended] enable when we have RawView.
+  });
 
   testWidgets('MediaQuery.maybeOf finds a MediaQueryData when there is one', (WidgetTester tester) async {
     bool tested = false;
@@ -316,7 +315,7 @@ void main() {
     expect(data.navigationMode, NavigationMode.traditional);
     expect(data.gestureSettings, DeviceGestureSettings.fromView(tester.view));
     expect(data.displayFeatures, tester.view.displayFeatures);
-  }, skip: true); // [intended] enable when we have RawView.
+  });
 
   testWidgets('MediaQuery.fromView updates on notifications (no parent data)', (WidgetTester tester) async {
     addTearDown(() => tester.platformDispatcher.clearAllTestValues());
@@ -376,7 +375,7 @@ void main() {
     await tester.pump();
     expect(data.devicePixelRatio, 55);
     expect(rebuildCount, 5);
-  }, skip: true); // [intended] enable when we have RawView.
+  });
 
   testWidgets('MediaQuery.fromView updates on notifications (with parent data)', (WidgetTester tester) async {
     addTearDown(() => tester.platformDispatcher.clearAllTestValues());
@@ -1469,7 +1468,15 @@ void main() {
 }
 
 Future<void> pumpWidgetWithoutViewWrapper({required WidgetTester tester, required  Widget widget}) {
-  tester.binding.attachRootWidget(widget);
+  tester.binding.attachRootWidget(Builder(
+    builder: (BuildContext context) {
+      return RawView(
+        view: tester.view,
+        hooks: ViewHooks.of(context),
+        builder: (_, __) => widget,
+      );
+    },
+  ));
   tester.binding.scheduleFrame();
   return tester.binding.pump();
 }
