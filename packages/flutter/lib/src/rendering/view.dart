@@ -99,6 +99,9 @@ class RenderView extends RenderObject with RenderObjectWithChildMixin<RenderBox>
     markNeedsLayout();
   }
 
+  /// Whether [configuration] has been set.
+  bool get hasConfiguration => _configuration != null;
+
   /// The [FlutterView] into which this [RenderView] will render.
   ui.FlutterView get flutterView => _view;
   final ui.FlutterView _view;
@@ -237,9 +240,7 @@ class RenderView extends RenderObject with RenderObjectWithChildMixin<RenderBox>
       Timeline.startSync('COMPOSITING');
     }
     try {
-      // TODO(goderbauer): Prototype engine requires view ID here...
-      final ui.SceneBuilder builder = ui.SceneBuilder(/*flutterView.viewId*/);
-      // final ui.SceneBuilder builder = ui.SceneBuilder();
+      final ui.SceneBuilder builder = ui.SceneBuilder();
       final ui.Scene scene = layer!.buildScene(builder);
       if (automaticSystemUiAdjustment) {
         _updateSystemChrome();
