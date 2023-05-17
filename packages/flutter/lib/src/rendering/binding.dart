@@ -22,6 +22,21 @@ export 'package:flutter/gestures.dart' show HitTestResult;
 // Examples can assume:
 // late BuildContext context;
 
+class _MouseTrackerDelegateImpl implements MouseTrackerDelegate {
+  _MouseTrackerDelegateImpl(RendererBinding binding) : _binding = binding;
+
+  @override
+  HitTestResult hitTest(Object viewId, Offset offset) {
+    final RenderView? renderView = _binding._viewIdToRenderView[viewId];
+    if (renderView == null) {
+      return HitTestResult();
+    }
+    return renderView.hitTestMouseTrackers(offset);
+  }
+
+  final RendererBinding _binding;
+}
+
 /// The glue between the render tree and the Flutter engine.
 mixin RendererBinding on BindingBase, ServicesBinding, SchedulerBinding, GestureBinding, SemanticsBinding, HitTestable implements RenderViewRepository {
   @override
@@ -408,7 +423,7 @@ mixin RendererBinding on BindingBase, ServicesBinding, SchedulerBinding, Gesture
   @visibleForTesting
   void initMouseTracker([MouseTracker? tracker]) {
     _mouseTracker?.dispose();
-    _mouseTracker = tracker ?? MouseTracker();
+    _mouseTracker = tracker ?? MouseTracker(_MouseTrackerDelegateImpl(this));
   }
 
   @override // from GestureBinding
@@ -453,7 +468,7 @@ mixin RendererBinding on BindingBase, ServicesBinding, SchedulerBinding, Gesture
         _debugMouseTrackerUpdateScheduled = false;
         return true;
       }());
-      _mouseTracker!.updateAllDevices(renderView.hitTestMouseTrackers);
+      _mouseTracker!.updateAllDevices();
     });
   }
 
