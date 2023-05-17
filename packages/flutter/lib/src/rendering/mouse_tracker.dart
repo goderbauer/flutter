@@ -361,7 +361,7 @@ class MouseTracker extends ChangeNotifier {
   /// made.
   void updateAllDevices() {
     _deviceUpdatePhase(() {
-      _mouseStates.forEach((int device, _MouseState dirtyState) {
+      for (final _MouseState dirtyState in _mouseStates.values) {
         final PointerEvent lastEvent = dirtyState.latestEvent;
         final LinkedHashMap<MouseTrackerAnnotation, Matrix4> nextAnnotations = _findAnnotations(dirtyState);
         final LinkedHashMap<MouseTrackerAnnotation, Matrix4> lastAnnotations = dirtyState.replaceAnnotations(nextAnnotations);
@@ -371,7 +371,7 @@ class MouseTracker extends ChangeNotifier {
           nextAnnotations: nextAnnotations,
           previousEvent: lastEvent,
         ));
-      });
+      };
     });
   }
 
