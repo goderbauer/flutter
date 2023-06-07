@@ -438,7 +438,6 @@ class RenderView extends RenderObject with RenderObjectWithChildMixin<RenderBox>
   }
 }
 
-
 /// A callback for painting a debug overlay on top of the provided [RenderView].
 ///
 /// Used by [RenderView.debugAddPaintCallback] and

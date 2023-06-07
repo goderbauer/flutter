@@ -511,6 +511,9 @@ class TestPlatformDispatcher implements PlatformDispatcher {
   Iterable<TestFlutterView> get views => _testViews.values;
 
   @override
+  FlutterView? view({required int id}) => _testViews[id];
+
+  @override
   Iterable<TestDisplay> get displays => _testDisplays.values;
 
   void _updateViewsAndDisplays() {
