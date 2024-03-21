@@ -603,6 +603,10 @@ class BoxConstraints extends Constraints {
     );
   }
 
+  ViewConstraints toViewConstraints() {
+    return ViewConstraints(minWidth: minWidth, maxWidth: maxWidth, minHeight: minHeight, maxHeight: maxHeight);
+  }
+
   @override
   bool operator ==(Object other) {
     assert(debugAssertIsValid());
