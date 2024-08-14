@@ -476,7 +476,7 @@ void main() {
   });
 
   testWidgets('Primary and secondary long press callbacks should work together in GestureDetector', (WidgetTester tester) async {
-    bool primaryLongPress = false, secondaryLongPress = false;
+    var primaryLongPress = false, secondaryLongPress = false;
 
     await tester.pumpWidget(
       Container(

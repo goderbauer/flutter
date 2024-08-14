@@ -1163,7 +1163,7 @@ class RenderParagraph extends RenderBox with ContainerRenderObjectMixin<RenderBo
     var placeholderIndex = 0;
     var childIndex = 0;
     RenderBox? child = firstChild;
-    final newChildCache = <Key, SemanticsNode>{};
+    final LinkedHashMap<Key, SemanticsNode> newChildCache = LinkedHashMap();
     _cachedCombinedSemanticsInfos ??= combineSemanticsInfo(_semanticsInfo!);
     for (final InlineSpanSemanticsInformation info in _cachedCombinedSemanticsInfos!) {
       final selection = TextSelection(
