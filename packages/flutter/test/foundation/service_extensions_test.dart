@@ -92,7 +92,7 @@ class TestServiceExtensionsBinding extends BindingBase
   }
 
   Future<void> flushMicrotasks() {
-    final Completer<void> completer = Completer<void>();
+    final completer = Completer<void>();
     Timer.run(completer.complete);
     return completer.future;
   }
@@ -101,7 +101,7 @@ class TestServiceExtensionsBinding extends BindingBase
 late TestServiceExtensionsBinding binding;
 
 Future<Map<String, dynamic>> hasReassemble(Future<Map<String, dynamic>> pendingResult) async {
-  bool completed = false;
+  var completed = false;
   pendingResult.whenComplete(() { completed = true; });
   expect(binding.frameScheduled, isFalse);
   await binding.flushMicrotasks();
@@ -116,13 +116,13 @@ Future<Map<String, dynamic>> hasReassemble(Future<Map<String, dynamic>> pendingR
 }
 
 void main() {
-  final Set<String> testedExtensions = <String>{}; // Add the name of an extension to this set in the test where it is tested.
-  final List<String?> console = <String?>[];
+  final testedExtensions = <String>{}; // Add the name of an extension to this set in the test where it is tested.
+  final console = <String?>[];
   late PipelineOwner owner;
 
   setUpAll(() async {
     binding = TestServiceExtensionsBinding();
-    final RenderView view = RenderView(view: binding.platformDispatcher.views.single);
+    final view = RenderView(view: binding.platformDispatcher.views.single);
     owner = PipelineOwner(onSemanticsUpdate: (ui.SemanticsUpdate _) { })
       ..rootNode = view;
     binding.rootPipelineOwner.adoptChild(owner);
@@ -166,7 +166,7 @@ void main() {
   tearDownAll(() async {
     // See widget_inspector_test.dart for tests of the ext.flutter.inspector
     // service extensions included in this count.
-    int widgetInspectorExtensionCount = 29;
+    var widgetInspectorExtensionCount = 29;
     if (WidgetInspectorService.instance.isWidgetCreationTracked()) {
       // Some inspector extensions are only exposed if widget creation locations
       // are tracked.
@@ -177,13 +177,13 @@ void main() {
     // The following service extensions are disabled in web:
     // 1. exit
     // 2. showPerformanceOverlay
-    const int disabledExtensions = kIsWeb ? 2 : 0;
+    const disabledExtensions = kIsWeb ? 2 : 0;
 
     // The expected number of registered service extensions in the Flutter
     // framework, excluding any that are for the widget inspector (see
     // widget_inspector_test.dart for tests of the ext.flutter.inspector service
     // extensions). Any test counted here must be tested in this file!
-    const int serviceExtensionCount = 30;
+    const serviceExtensionCount = 30;
 
     expect(binding.extensions.length, serviceExtensionCount + widgetInspectorExtensionCount - disabledExtensions);
     expect(testedExtensions, hasLength(serviceExtensionCount));
@@ -1034,7 +1034,7 @@ void main() {
   test('Service extensions - brightnessOverride', () async {
     Map<String, dynamic> result;
     result = await binding.testExtension(FoundationServiceExtensions.brightnessOverride.name, <String, String>{});
-    final String brightnessValue = result['value'] as String;
+    final brightnessValue = result['value'] as String;
 
     expect(brightnessValue, 'Brightness.light');
 
@@ -1044,7 +1044,7 @@ void main() {
   test('Service extensions - activeDevToolsServerAddress', () async {
     Map<String, dynamic> result;
     result = await binding.testExtension(FoundationServiceExtensions.activeDevToolsServerAddress.name, <String, String>{});
-    String serverAddress = result['value'] as String;
+    var serverAddress = result['value'] as String;
     expect(serverAddress, '');
     result = await binding.testExtension(FoundationServiceExtensions.activeDevToolsServerAddress.name, <String, String>{'value': 'http://127.0.0.1:9101'});
     serverAddress = result['value'] as String;
@@ -1059,7 +1059,7 @@ void main() {
   test('Service extensions - connectedVmServiceUri', () async {
     Map<String, dynamic> result;
     result = await binding.testExtension(FoundationServiceExtensions.connectedVmServiceUri.name, <String, String>{});
-    String serverAddress = result['value'] as String;
+    var serverAddress = result['value'] as String;
     expect(serverAddress, '');
     result = await binding.testExtension(FoundationServiceExtensions.connectedVmServiceUri.name, <String, String>{'value': 'http://127.0.0.1:54669/kMUMseKAnog=/'});
     serverAddress = result['value'] as String;

@@ -38,8 +38,8 @@ class _TestSliverPersistentHeaderDelegate extends SliverPersistentHeaderDelegate
 }
 
 void main() {
-  const TextStyle textStyle = TextStyle();
-  const Color cursorColor = Color.fromARGB(0xFF, 0xFF, 0x00, 0x00);
+  const textStyle = TextStyle();
+  const cursorColor = Color.fromARGB(0xFF, 0xFF, 0x00, 0x00);
 
   late TextEditingController controller;
   late FocusNode focusNode;
@@ -55,7 +55,7 @@ void main() {
   });
 
   testWidgets('tapping on a partly visible editable brings it fully on screen', (WidgetTester tester) async {
-    final ScrollController scrollController = ScrollController();
+    final scrollController = ScrollController();
     addTearDown(scrollController.dispose);
 
     await tester.pumpWidget(MaterialApp(
@@ -93,7 +93,7 @@ void main() {
   });
 
   testWidgets('tapping on a partly visible editable brings it fully on screen with scrollInsets', (WidgetTester tester) async {
-    final ScrollController scrollController = ScrollController();
+    final scrollController = ScrollController();
     addTearDown(scrollController.dispose);
 
     await tester.pumpWidget(MaterialApp(
@@ -138,7 +138,7 @@ void main() {
   });
 
   testWidgets('editable comes back on screen when entering text while it is off-screen', (WidgetTester tester) async {
-    final ScrollController scrollController = ScrollController(initialScrollOffset: 100.0);
+    final scrollController = ScrollController(initialScrollOffset: 100.0);
     addTearDown(scrollController.dispose);
 
     await tester.pumpWidget(MaterialApp(
@@ -185,7 +185,7 @@ void main() {
 
   testWidgets('entering text does not scroll when scrollPhysics.allowImplicitScrolling = false', (WidgetTester tester) async {
     // regression test for https://github.com/flutter/flutter/issues/19523
-    final ScrollController scrollController = ScrollController(initialScrollOffset: 100.0);
+    final scrollController = ScrollController(initialScrollOffset: 100.0);
     addTearDown(scrollController.dispose);
 
     await tester.pumpWidget(MaterialApp(
@@ -233,7 +233,7 @@ void main() {
 
   testWidgets('entering text does not scroll a surrounding PageView', (WidgetTester tester) async {
     // regression test for https://github.com/flutter/flutter/issues/19523
-    final PageController pageController = PageController(initialPage: 1);
+    final pageController = PageController(initialPage: 1);
     addTearDown(pageController.dispose);
 
     await tester.pumpWidget(
@@ -280,7 +280,7 @@ void main() {
   });
 
   testWidgets('focused multi-line editable scrolls caret back into view when typing', (WidgetTester tester) async {
-    final ScrollController scrollController = ScrollController();
+    final scrollController = ScrollController();
     addTearDown(scrollController.dispose);
     controller.text = "Start${'\n' * 39}End";
 
@@ -315,7 +315,7 @@ void main() {
     expect(scrollController.offset, 0.0);
 
     // Enter text at end, which is off-screen.
-    final String textToEnter = '${controller.text} HELLO';
+    final textToEnter = '${controller.text} HELLO';
     tester.testTextInput.updateEditingValue(TextEditingValue(
       text: textToEnter,
       selection: TextSelection.collapsed(offset: textToEnter.length),
@@ -329,9 +329,9 @@ void main() {
   });
 
   testWidgets('focused multi-line editable does not scroll to old position when non-collapsed selection set', (WidgetTester tester) async {
-    final ScrollController scrollController = ScrollController();
+    final scrollController = ScrollController();
     addTearDown(scrollController.dispose);
-    final String text = "Start${'\n' * 39}End";
+    final text = "Start${'\n' * 39}End";
     controller.value = TextEditingValue(text: text, selection: TextSelection.collapsed(offset: text.length - 3));
 
     await tester.pumpWidget(MaterialApp(
@@ -380,9 +380,9 @@ void main() {
   });
 
   testWidgets('scrolls into view with scrollInserts after the keyboard pops up', (WidgetTester tester) async {
-    final ScrollController scrollController = ScrollController();
+    final scrollController = ScrollController();
     addTearDown(scrollController.dispose);
-    const Key container = Key('container');
+    const container = Key('container');
 
     await tester.pumpWidget(MaterialApp(
       home: Align(
@@ -425,9 +425,9 @@ void main() {
     'A pinned persistent header should not scroll when its descendant EditableText gains focus',
     (WidgetTester tester) async {
       // Regression test for https://github.com/flutter/flutter/issues/25507.
-      final ScrollController scrollController = ScrollController();
+      final scrollController = ScrollController();
       addTearDown(scrollController.dispose);
-      const Key headerKey = Key('header');
+      const headerKey = Key('header');
 
       await tester.pumpWidget(
         MaterialApp(
@@ -486,10 +486,10 @@ void main() {
     'A pinned persistent header should not scroll when its descendant EditableText gains focus (no animation)',
     (WidgetTester tester) async {
       // Regression test for https://github.com/flutter/flutter/issues/25507.
-      final ScrollController scrollController = ScrollController();
+      final scrollController = ScrollController();
       addTearDown(scrollController.dispose);
 
-      const Key headerKey = Key('header');
+      const headerKey = Key('header');
       await tester.pumpWidget(
         MaterialApp(
           home: Center(
@@ -546,7 +546,7 @@ void main() {
 
   void testShowCaretOnScreen({ required bool readOnly }) {
     group('EditableText._showCaretOnScreen, readOnly=$readOnly', () {
-      final TextInputFormatter rejectEverythingFormatter = TextInputFormatter.withFunction((TextEditingValue old, TextEditingValue value) => old);
+      final rejectEverythingFormatter = TextInputFormatter.withFunction((TextEditingValue old, TextEditingValue value) => old);
 
       bool isCaretOnScreen(WidgetTester tester) {
         final EditableTextState state = tester.state<EditableTextState>(
@@ -591,9 +591,9 @@ void main() {
       testWidgets('focus-triggered showCaretOnScreen', (WidgetTester tester) async {
         controller.text = 'a' * 100;
         controller.selection = const TextSelection.collapsed(offset: 100);
-        final ScrollController scrollController = ScrollController();
+        final scrollController = ScrollController();
         addTearDown(scrollController.dispose);
-        final ScrollController editableScrollController = ScrollController();
+        final editableScrollController = ScrollController();
         addTearDown(editableScrollController.dispose);
 
         await tester.pumpWidget(
@@ -622,9 +622,9 @@ void main() {
       testWidgets('selection-triggered showCaretOnScreen: virtual keyboard', (WidgetTester tester) async {
         controller.text = 'a' * 100;
         controller.selection = const TextSelection.collapsed(offset: 80);
-        final ScrollController scrollController = ScrollController();
+        final scrollController = ScrollController();
         addTearDown(scrollController.dispose);
-        final ScrollController editableScrollController = ScrollController();
+        final editableScrollController = ScrollController();
         addTearDown(editableScrollController.dispose);
 
         await tester.pumpWidget(
@@ -682,9 +682,9 @@ void main() {
       testWidgets('selection-triggered showCaretOnScreen: text selection delegate', (WidgetTester tester) async {
         controller.text = 'a' * 100;
         controller.selection = const TextSelection.collapsed(offset: 80);
-        final ScrollController scrollController = ScrollController();
+        final scrollController = ScrollController();
         addTearDown(scrollController.dispose);
-        final ScrollController editableScrollController = ScrollController();
+        final editableScrollController = ScrollController();
         addTearDown(editableScrollController.dispose);
 
         await tester.pumpWidget(
@@ -748,7 +748,7 @@ void main() {
       testWidgets('does NOT randomly trigger when cursor blinks', (WidgetTester tester) async {
         controller.text = 'a' * 100;
         controller.selection = const TextSelection.collapsed(offset: 0);
-        final ScrollController editableScrollController = ScrollController();
+        final editableScrollController = ScrollController();
         addTearDown(editableScrollController.dispose);
         final bool deterministicCursor = EditableText.debugDeterministicCursor;
         EditableText.debugDeterministicCursor = false;

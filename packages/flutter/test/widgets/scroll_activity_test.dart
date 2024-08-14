@@ -16,7 +16,7 @@ List<Widget> children(int n) {
 
 void main() {
   testWidgets('Scrolling with list view changes, leaving the overscroll', (WidgetTester tester) async {
-    final ScrollController controller = ScrollController();
+    final controller = ScrollController();
     addTearDown(controller.dispose);
     await tester.pumpWidget(MaterialApp(home: ListView(controller: controller, children: children(30))));
     final double thirty = controller.position.maxScrollExtent;
@@ -31,7 +31,7 @@ void main() {
   });
 
   testWidgets('Scrolling with list view changes, remaining overscrolled', (WidgetTester tester) async {
-    final ScrollController controller = ScrollController();
+    final controller = ScrollController();
     addTearDown(controller.dispose);
     await tester.pumpWidget(MaterialApp(home: ListView(controller: controller, children: children(30))));
     final double thirty = controller.position.maxScrollExtent;
@@ -133,7 +133,7 @@ void main() {
   });
 
   testWidgets('Pointer is not ignored during trackpad scrolling.', (WidgetTester tester) async {
-    final ScrollController controller = ScrollController();
+    final controller = ScrollController();
     addTearDown(controller.dispose);
     int? lastTapped;
     int? lastHovered;
@@ -251,7 +251,7 @@ class _PageView62209State extends State<PageView62209> {
   @override
   void initState() {
     super.initState();
-    for (int i = 0; i < 5; i++) {
+    for (var i = 0; i < 5; i++) {
       _pages.add(Carousel62209Page(
         key: Key('$_nextPageNum'),
         number: _nextPageNum++,
@@ -327,7 +327,7 @@ class _Carousel62209State extends State<Carousel62209> {
     super.didUpdateWidget(oldWidget);
     if (!_jumpingToPage) {
       int newPage = -1;
-      for (int i = 0; i < widget.pages.length; i++) {
+      for (var i = 0; i < widget.pages.length; i++) {
         if (widget.pages[i].number == _pages[_currentPage].number) {
           newPage = i;
         }

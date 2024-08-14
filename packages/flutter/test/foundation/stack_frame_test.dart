@@ -66,7 +66,7 @@ void main() {
     void overflow(int seed) {
       overflow(seed + 1);
     }
-    bool overflowed = false;
+    var overflowed = false;
     try {
       overflow(1);
     } on StackOverflowError catch (e, stack) {
@@ -90,7 +90,7 @@ void main() {
   });
 
   test('Can parse web constructor invocation with unknown class name', () {
-    const String stackTraceLine = '#32     new (http://localhost:42191/dart-sdk/lib/async/stream_controller.dart:880:9)';
+    const stackTraceLine = '#32     new (http://localhost:42191/dart-sdk/lib/async/stream_controller.dart:880:9)';
     expect(
       StackFrame.fromStackTraceLine(stackTraceLine),
       const StackFrame(

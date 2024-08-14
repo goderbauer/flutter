@@ -792,7 +792,7 @@ mixin LocalHistoryRoute<T> on Route<T> {
     _localHistory ??= <LocalHistoryEntry>[];
     final bool wasEmpty = _localHistory!.isEmpty;
     _localHistory!.add(entry);
-    bool internalStateChanged = false;
+    var internalStateChanged = false;
     if (entry.impliesAppBarDismissal) {
       internalStateChanged = _entriesImpliesAppBarDismissal == 0;
       _entriesImpliesAppBarDismissal += 1;
@@ -809,7 +809,7 @@ mixin LocalHistoryRoute<T> on Route<T> {
   void removeLocalHistoryEntry(LocalHistoryEntry entry) {
     assert(entry._owner == this);
     assert(_localHistory!.contains(entry));
-    bool internalStateChanged = false;
+    var internalStateChanged = false;
     if (_localHistory!.remove(entry) && entry.impliesAppBarDismissal) {
       _entriesImpliesAppBarDismissal -= 1;
       internalStateChanged = _entriesImpliesAppBarDismissal == 0;
@@ -860,7 +860,7 @@ mixin LocalHistoryRoute<T> on Route<T> {
       assert(entry._owner == this);
       entry._owner = null;
       entry._notifyRemoved();
-      bool internalStateChanged = false;
+      var internalStateChanged = false;
       if (entry.impliesAppBarDismissal) {
         _entriesImpliesAppBarDismissal -= 1;
         internalStateChanged = _entriesImpliesAppBarDismissal == 0;
@@ -976,7 +976,7 @@ class _ModalScopeState<T> extends State<_ModalScope<T>> {
   @override
   void initState() {
     super.initState();
-    final List<Listenable> animations = <Listenable>[
+    final animations = <Listenable>[
       if (widget.route.animation != null) widget.route.animation!,
       if (widget.route.secondaryAnimation != null) widget.route.secondaryAnimation!,
     ];
@@ -1751,7 +1751,7 @@ abstract class ModalRoute<T> extends TransitionRoute<T> with LocalHistoryRoute<T
   Future<RoutePopDisposition> willPop() async {
     final _ModalScopeState<T>? scope = _scopeKey.currentState;
     assert(scope != null);
-    for (final WillPopCallback callback in List<WillPopCallback>.of(_willPopCallbacks)) {
+    for (final callback in List<WillPopCallback>.of(_willPopCallbacks)) {
       if (!await callback()) {
         return RoutePopDisposition.doNotPop;
       }
@@ -1875,7 +1875,7 @@ abstract class ModalRoute<T> extends TransitionRoute<T> with LocalHistoryRoute<T
     if (!isCurrent) {
       return;
     }
-    final NavigationNotification notification = NavigationNotification(
+    final notification = NavigationNotification(
       // canPop indicates that the originator of the Notification can handle a
       // pop. In the case of PopScope, it handles pops when canPop is
       // false. Hence the seemingly backward logic here.
@@ -2178,7 +2178,7 @@ class RouteObserver<R extends Route<dynamic>> extends NavigatorObserver {
   /// subscribed to multiple types, this will unregister it (once) from each type.
   void unsubscribe(RouteAware routeAware) {
     final List<R> routes = _listeners.keys.toList();
-    for (final R route in routes) {
+    for (final route in routes) {
       final Set<RouteAware>? subscribers = _listeners[route];
       if (subscribers != null) {
         subscribers.remove(routeAware);

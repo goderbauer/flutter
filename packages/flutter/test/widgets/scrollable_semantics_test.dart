@@ -45,16 +45,16 @@ void main() {
   testWidgets('showOnScreen works in scrollable', (WidgetTester tester) async {
     semantics = SemanticsTester(tester); // enables semantics tree generation
 
-    const double kItemHeight = 40.0;
+    const kItemHeight = 40.0;
 
-    final List<Widget> containers = List<Widget>.generate(80, (int i) => MergeSemantics(
+    final containers = List<Widget>.generate(80, (int i) => MergeSemantics(
       child: SizedBox(
         height: kItemHeight,
         child: Text('container $i', textDirection: TextDirection.ltr),
       ),
     ));
 
-    final ScrollController scrollController = ScrollController(
+    final scrollController = ScrollController(
       initialScrollOffset: kItemHeight / 2,
     );
     addTearDown(scrollController.dispose);
@@ -84,17 +84,17 @@ void main() {
   testWidgets('showOnScreen works with pinned app bar and sliver list', (WidgetTester tester) async {
     semantics = SemanticsTester(tester); // enables semantics tree generation
 
-    const double kItemHeight = 100.0;
-    const double kExpandedAppBarHeight = 56.0;
+    const kItemHeight = 100.0;
+    const kExpandedAppBarHeight = 56.0;
 
-    final List<Widget> containers = List<Widget>.generate(80, (int i) => MergeSemantics(
+    final containers = List<Widget>.generate(80, (int i) => MergeSemantics(
       child: SizedBox(
         height: kItemHeight,
         child: Text('container $i'),
       ),
     ));
 
-    final ScrollController scrollController = ScrollController(
+    final scrollController = ScrollController(
       initialScrollOffset: kItemHeight / 2,
     );
     addTearDown(scrollController.dispose);
@@ -147,12 +147,12 @@ void main() {
   testWidgets('showOnScreen works with pinned app bar and individual slivers', (WidgetTester tester) async {
     semantics = SemanticsTester(tester); // enables semantics tree generation
 
-    const double kItemHeight = 100.0;
-    const double kExpandedAppBarHeight = 256.0;
+    const kItemHeight = 100.0;
+    const kExpandedAppBarHeight = 256.0;
 
 
-    final List<Widget> children = <Widget>[];
-    final List<Widget> slivers = List<Widget>.generate(30, (int i) {
+    final children = <Widget>[];
+    final slivers = List<Widget>.generate(30, (int i) {
       final Widget child = MergeSemantics(
         child: SizedBox(
           height: 72.0,
@@ -165,7 +165,7 @@ void main() {
       );
     });
 
-    final ScrollController scrollController = ScrollController(
+    final scrollController = ScrollController(
       initialScrollOffset: 2.5 * kItemHeight,
     );
     addTearDown(scrollController.dispose);
@@ -309,7 +309,7 @@ void main() {
   testWidgets('Semantics tree is populated mid-scroll', (WidgetTester tester) async {
     semantics = SemanticsTester(tester);
 
-    final List<Widget> children = List<Widget>.generate(80, (int i) => SizedBox(
+    final children = List<Widget>.generate(80, (int i) => SizedBox(
       height: 40.0,
       child: Text('Item $i'),
     ));
@@ -346,7 +346,7 @@ void main() {
       ),
     );
 
-    final TestSemantics expectedSemantics = TestSemantics.root(
+    final expectedSemantics = TestSemantics.root(
       children: <TestSemantics>[
         TestSemantics.rootChild(
           children: <TestSemantics>[
@@ -402,7 +402,7 @@ void main() {
 
   group('showOnScreen', () {
 
-    const double kItemHeight = 100.0;
+    const kItemHeight = 100.0;
 
     late List<Widget> children;
     late ScrollController scrollController;
@@ -487,7 +487,7 @@ void main() {
   });
 
   group('showOnScreen with negative children', () {
-    const double kItemHeight = 100.0;
+    const kItemHeight = 100.0;
 
     late List<Widget> children;
     late ScrollController scrollController;
@@ -624,7 +624,7 @@ void main() {
     assert(hiddenNodes.length >= 3);
 
     // Scroll to end -> beginning -> middle to test both directions.
-    final List<SemanticsNode> targetNodes = <SemanticsNode>[
+    final targetNodes = <SemanticsNode>[
       hiddenNodes.last,
       hiddenNodes.first,
       hiddenNodes[hiddenNodes.length ~/ 2],
@@ -632,7 +632,7 @@ void main() {
 
     expect(nodeGlobalRect(innerListPane), nodeGlobalRect(outerListPane));
 
-    for (final SemanticsNode node in targetNodes) {
+    for (final node in targetNodes) {
       tester.binding.pipelineOwner.semanticsOwner!.performAction(node.id, SemanticsAction.showOnScreen);
       await tester.pumpAndSettle();
 

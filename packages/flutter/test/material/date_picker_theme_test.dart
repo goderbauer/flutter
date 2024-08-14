@@ -9,7 +9,7 @@ import 'package:flutter/services.dart';
 import 'package:flutter_test/flutter_test.dart';
 
 void main() {
-  const DatePickerThemeData datePickerTheme = DatePickerThemeData(
+  const datePickerTheme = DatePickerThemeData(
     backgroundColor: Color(0xfffffff0),
     elevation: 6,
     shadowColor: Color(0xfffffff1),
@@ -94,8 +94,8 @@ void main() {
     return tester.widget<TextButton>(find.widgetWithText(TextButton, text)).style!;
   }
 
-  const Size wideWindowSize = Size(1920.0, 1080.0);
-  const Size narrowWindowSize = Size(1070.0, 1770.0);
+  const wideWindowSize = Size(1920.0, 1080.0);
+  const narrowWindowSize = Size(1070.0, 1770.0);
 
   test('DatePickerThemeData copyWith, ==, hashCode basics', () {
     expect(const DatePickerThemeData(), const DatePickerThemeData().copyWith());
@@ -103,12 +103,12 @@ void main() {
   });
 
   test('DatePickerThemeData lerp special cases', () {
-    const DatePickerThemeData data = DatePickerThemeData();
+    const data = DatePickerThemeData();
     expect(identical(DatePickerThemeData.lerp(data, data, 0.5), data), true);
   });
 
   test('DatePickerThemeData defaults', () {
-    const DatePickerThemeData theme = DatePickerThemeData();
+    const theme = DatePickerThemeData();
     expect(theme.backgroundColor, null);
     expect(theme.elevation, null);
     expect(theme.shadowColor, null);
@@ -300,7 +300,7 @@ void main() {
   });
 
   testWidgets('Default DatePickerThemeData debugFillProperties', (WidgetTester tester) async {
-    final DiagnosticPropertiesBuilder builder = DiagnosticPropertiesBuilder();
+    final builder = DiagnosticPropertiesBuilder();
     const DatePickerThemeData().debugFillProperties(builder);
 
     final List<String> description = builder.properties
@@ -312,7 +312,7 @@ void main() {
   });
 
   testWidgets('DatePickerThemeData implements debugFillProperties', (WidgetTester tester) async {
-    final DiagnosticPropertiesBuilder builder = DiagnosticPropertiesBuilder();
+    final builder = DiagnosticPropertiesBuilder();
 
     datePickerTheme.debugFillProperties(builder);
 
@@ -416,7 +416,7 @@ void main() {
 
     final Text day24 = tester.widget<Text>(find.text('24')); // DatePickerDialog.currentDate
     final ShapeDecoration day24Decoration = findDayDecoration(tester, '24')!;
-    final OutlinedBorder day24Shape = day24Decoration.shape as OutlinedBorder;
+    final day24Shape = day24Decoration.shape as OutlinedBorder;
     expect(day24.style?.fontSize, datePickerTheme.dayStyle?.fontSize);
     expect(day24.style?.color, datePickerTheme.todayForegroundColor?.resolve(<MaterialState>{}));
     expect(day24Decoration.color, datePickerTheme.todayBackgroundColor?.resolve(<MaterialState>{}));
@@ -815,7 +815,7 @@ void main() {
     await tester.pumpAndSettle();
 
     // Focus day selection.
-    for (int i = 0; i < 5; i++) {
+    for (var i = 0; i < 5; i++) {
       await tester.sendKeyEvent(LogicalKeyboardKey.tab);
       await tester.pumpAndSettle();
     }
@@ -897,7 +897,7 @@ void main() {
     await tester.pumpAndSettle();
 
     // Focus year selection.
-    for (int i = 0; i < 3; i++) {
+    for (var i = 0; i < 3; i++) {
       await tester.sendKeyEvent(LogicalKeyboardKey.tab);
       await tester.pumpAndSettle();
     }

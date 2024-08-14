@@ -39,7 +39,7 @@ void main() {
   });
 
   testWidgets('Stepper tap callback test', (WidgetTester tester) async {
-    int index = 0;
+    var index = 0;
 
     await tester.pumpWidget(
       MaterialApp(
@@ -215,8 +215,8 @@ void main() {
   });
 
   testWidgets('Material2 - Stepper button test', (WidgetTester tester) async {
-    bool continuePressed = false;
-    bool cancelPressed = false;
+    var continuePressed = false;
+    var cancelPressed = false;
 
     await tester.pumpWidget(
       MaterialApp(
@@ -259,8 +259,8 @@ void main() {
   });
 
   testWidgets('Material3 - Stepper button test', (WidgetTester tester) async {
-    bool continuePressed = false;
-    bool cancelPressed = false;
+    var continuePressed = false;
+    var cancelPressed = false;
 
     await tester.pumpWidget(
       MaterialApp(
@@ -303,7 +303,7 @@ void main() {
   });
 
   testWidgets('Stepper disabled step test', (WidgetTester tester) async {
-    int index = 0;
+    var index = 0;
 
     await tester.pumpWidget(
       MaterialApp(
@@ -446,12 +446,12 @@ void main() {
   });
 
   testWidgets('Stepper custom controls test', (WidgetTester tester) async {
-    bool continuePressed = false;
+    var continuePressed = false;
     void setContinue() {
       continuePressed = true;
     }
 
-    bool canceledPressed = false;
+    var canceledPressed = false;
     void setCanceled() {
       canceledPressed = true;
     }
@@ -526,7 +526,7 @@ void main() {
 
 testWidgets('Stepper custom indexed controls test', (WidgetTester tester) async {
 
-    int currentStep = 0;
+    var currentStep = 0;
     void setContinue() {
       currentStep += 1;
     }
@@ -823,7 +823,7 @@ testWidgets('Stepper custom indexed controls test', (WidgetTester tester) async 
   });
 
   testWidgets('Stepper header title should not overflow', (WidgetTester tester) async {
-    const String longText =
+    const longText =
         'A long long long long long long long long long long long long text';
 
     await tester.pumpWidget(
@@ -849,7 +849,7 @@ testWidgets('Stepper custom indexed controls test', (WidgetTester tester) async 
   });
 
   testWidgets('Stepper header subtitle should not overflow', (WidgetTester tester) async {
-    const String longText =
+    const longText =
         'A long long long long long long long long long long long long text';
 
     await tester.pumpWidget(
@@ -903,13 +903,13 @@ testWidgets('Stepper custom indexed controls test', (WidgetTester tester) async 
 
     const OutlinedBorder buttonShape = RoundedRectangleBorder(borderRadius: BorderRadius.all(Radius.circular(2)));
 
-    final ThemeData themeLight = ThemeData(useMaterial3: false);
+    final themeLight = ThemeData(useMaterial3: false);
     await tester.pumpWidget(buildFrame(themeLight));
 
-    const String continueStr = 'CONTINUE';
-    const String cancelStr = 'CANCEL';
-    const Rect continueButtonRect = Rect.fromLTRB(24.0, 212.0, 168.0, 260.0);
-    const Rect cancelButtonRect = Rect.fromLTRB(176.0, 212.0, 292.0, 260.0);
+    const continueStr = 'CONTINUE';
+    const cancelStr = 'CANCEL';
+    const continueButtonRect = Rect.fromLTRB(24.0, 212.0, 168.0, 260.0);
+    const cancelButtonRect = Rect.fromLTRB(176.0, 212.0, 292.0, 260.0);
     expect(buttonMaterial(continueStr).color!.value, 0xff2196f3);
     expect(buttonMaterial(continueStr).textStyle!.color!.value, 0xffffffff);
     expect(buttonMaterial(continueStr).shape, buttonShape);
@@ -920,7 +920,7 @@ testWidgets('Stepper custom indexed controls test', (WidgetTester tester) async 
     expect(buttonMaterial(cancelStr).shape, buttonShape);
     expect(tester.getRect(find.widgetWithText(TextButton, cancelStr)), cancelButtonRect);
 
-    final ThemeData themeDark = ThemeData.dark(useMaterial3: false);
+    final themeDark = ThemeData.dark(useMaterial3: false);
     await tester.pumpWidget(buildFrame(themeDark));
     await tester.pumpAndSettle(); // Complete the theme animation.
 
@@ -963,13 +963,13 @@ testWidgets('Stepper custom indexed controls test', (WidgetTester tester) async 
 
     const OutlinedBorder buttonShape = RoundedRectangleBorder(borderRadius: BorderRadius.all(Radius.circular(2)));
 
-    final ThemeData themeLight = ThemeData(useMaterial3: true);
+    final themeLight = ThemeData(useMaterial3: true);
     await tester.pumpWidget(buildFrame(themeLight));
 
-    const String continueStr = 'Continue';
-    const String cancelStr = 'Cancel';
-    const Rect continueButtonRect = Rect.fromLTRB(24.0, 212.0, 168.8, 260.0);
-    const Rect cancelButtonRect = Rect.fromLTRB(176.8, 212.0, 293.4, 260.0);
+    const continueStr = 'Continue';
+    const cancelStr = 'Cancel';
+    const continueButtonRect = Rect.fromLTRB(24.0, 212.0, 168.8, 260.0);
+    const cancelButtonRect = Rect.fromLTRB(176.8, 212.0, 293.4, 260.0);
     expect(buttonMaterial(continueStr).color!.value, themeLight.colorScheme.primary.value);
     expect(buttonMaterial(continueStr).textStyle!.color!.value, 0xffffffff);
     expect(buttonMaterial(continueStr).shape, buttonShape);
@@ -986,7 +986,7 @@ testWidgets('Stepper custom indexed controls test', (WidgetTester tester) async 
       rectMoreOrLessEquals(cancelButtonRect, epsilon: 0.001),
     );
 
-    final ThemeData themeDark = ThemeData.dark(useMaterial3: true);
+    final themeDark = ThemeData.dark(useMaterial3: true);
     await tester.pumpWidget(buildFrame(themeDark));
     await tester.pumpAndSettle(); // Complete the theme animation.
 
@@ -1031,18 +1031,18 @@ testWidgets('Stepper custom indexed controls test', (WidgetTester tester) async 
       );
     }
 
-    final ThemeData themeLight = ThemeData(useMaterial3: false);
+    final themeLight = ThemeData(useMaterial3: false);
     await tester.pumpWidget(buildFrame(themeLight));
 
-    const String continueStr = 'CONTINUE';
-    const String cancelStr = 'CANCEL';
+    const continueStr = 'CONTINUE';
+    const cancelStr = 'CANCEL';
     expect(buttonMaterial(continueStr).color!.value, 0);
     expect(buttonMaterial(continueStr).textStyle!.color!.value, 0x61000000);
 
     expect(buttonMaterial(cancelStr).color!.value, 0);
     expect(buttonMaterial(cancelStr).textStyle!.color!.value, 0x61000000);
 
-    final ThemeData themeDark = ThemeData.dark(useMaterial3: false);
+    final themeDark = ThemeData.dark(useMaterial3: false);
     await tester.pumpWidget(buildFrame(themeDark));
     await tester.pumpAndSettle(); // Complete the theme animation.
 
@@ -1077,12 +1077,12 @@ testWidgets('Stepper custom indexed controls test', (WidgetTester tester) async 
       );
     }
 
-    final ThemeData themeLight = ThemeData(useMaterial3: true);
+    final themeLight = ThemeData(useMaterial3: true);
     final ColorScheme colorsLight = themeLight.colorScheme;
     await tester.pumpWidget(buildFrame(themeLight));
 
-    const String continueStr = 'Continue';
-    const String cancelStr = 'Cancel';
+    const continueStr = 'Continue';
+    const cancelStr = 'Cancel';
     expect(buttonMaterial(continueStr).color!.value, 0);
     expect(
       buttonMaterial(continueStr).textStyle!.color!.value,
@@ -1095,7 +1095,7 @@ testWidgets('Stepper custom indexed controls test', (WidgetTester tester) async 
       colorsLight.onSurface.withOpacity(0.38).value,
     );
 
-    final ThemeData themeDark = ThemeData.dark(useMaterial3: true);
+    final themeDark = ThemeData.dark(useMaterial3: true);
     final ColorScheme colorsDark = themeDark.colorScheme;
     await tester.pumpWidget(buildFrame(themeDark));
     await tester.pumpAndSettle(); // Complete the theme animation.
@@ -1143,7 +1143,7 @@ testWidgets('Stepper custom indexed controls test', (WidgetTester tester) async 
   });
 
   testWidgets('ScrollController is passed to the stepper listview', (WidgetTester tester) async {
-    final ScrollController controller = ScrollController();
+    final controller = ScrollController();
     addTearDown(() => controller.dispose());
     for (final StepperType type in StepperType.values) {
       await tester.pumpWidget(
@@ -1220,7 +1220,7 @@ testWidgets('Stepper custom indexed controls test', (WidgetTester tester) async 
   });
 
   testWidgets('Stepper custom elevation', (WidgetTester tester) async {
-     const double elevation = 4.0;
+     const elevation = 4.0;
 
      await tester.pumpWidget(
        MaterialApp(
@@ -1288,7 +1288,7 @@ testWidgets('Stepper custom indexed controls test', (WidgetTester tester) async 
   testWidgets('Stepper horizontal preserves state', (WidgetTester tester) async {
     const Color untappedColor = Colors.blue;
     const Color tappedColor = Colors.red;
-    int index = 0;
+    var index = 0;
 
     Widget buildFrame() {
       return MaterialApp(
@@ -1394,7 +1394,7 @@ testWidgets('Stepper custom indexed controls test', (WidgetTester tester) async 
    });
 
   testWidgets('Stepper with Alternative Label', (WidgetTester tester) async {
-    int index = 0;
+    var index = 0;
     late TextStyle bodyLargeStyle;
     late TextStyle bodyMediumStyle;
     late TextStyle bodySmallStyle;
@@ -1480,7 +1480,7 @@ testWidgets('Stepper custom indexed controls test', (WidgetTester tester) async 
   testWidgets('Stepper Connector Style', (WidgetTester tester) async {
     const Color selectedColor = Colors.black;
     const Color disabledColor = Colors.white;
-    int index = 0;
+    var index = 0;
 
     await tester.pumpWidget(
       MaterialApp(
@@ -1617,7 +1617,7 @@ testWidgets('Stepper custom indexed controls test', (WidgetTester tester) async 
   });
 
   testWidgets('StepStyle test', (WidgetTester tester) async {
-    final StepStyle stepStyle = StepStyle(
+    final stepStyle = StepStyle(
       color: Colors.white,
       errorColor: Colors.orange,
       connectorColor: Colors.red,

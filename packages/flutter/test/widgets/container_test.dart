@@ -12,7 +12,7 @@ import 'package:flutter_test/flutter_test.dart';
 
 void main() {
   group('Container control tests:', () {
-    final Container container = Container(
+    final container = Container(
       alignment: Alignment.bottomRight,
       padding: const EdgeInsets.all(7.0),
       // uses color, not decoration:
@@ -639,7 +639,7 @@ void main() {
   });
 
   testWidgets('giving clipBehaviour not a Clip.None, will add a ClipPath to the tree', (WidgetTester tester) async {
-    final Container container = Container(
+    final container = Container(
       clipBehavior: Clip.hardEdge,
       decoration: const BoxDecoration(
         borderRadius: BorderRadius.all(Radius.circular(1)),
@@ -686,7 +686,7 @@ void main() {
   });
 
   testWidgets('Container is hittable only when having decorations', (WidgetTester tester) async {
-    bool tapped = false;
+    var tapped = false;
     await tester.pumpWidget(GestureDetector(
       onTap: () { tapped = true; },
       child: Container(
@@ -755,7 +755,7 @@ void main() {
   });
 
   testWidgets('using clipBehaviour and shadow, should not clip the shadow', (WidgetTester tester) async {
-    final Container container = Container(
+    final container = Container(
       clipBehavior: Clip.hardEdge,
       decoration: const BoxDecoration(
         borderRadius: BorderRadius.all(Radius.circular(30)),

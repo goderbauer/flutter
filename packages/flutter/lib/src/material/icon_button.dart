@@ -719,7 +719,7 @@ class IconButton extends StatelessWidget {
         effectiveIcon = selectedIcon!;
       }
 
-      Widget iconButton = effectiveIcon;
+      var iconButton = effectiveIcon;
       if (tooltip != null) {
         iconButton = Tooltip(
           message: tooltip,

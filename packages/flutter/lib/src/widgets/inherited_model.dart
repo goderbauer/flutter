@@ -153,7 +153,7 @@ abstract class InheritedModel<T> extends InheritedWidget {
     results.add(model);
 
     assert(model.widget is T);
-    final T modelWidget = model.widget as T;
+    final modelWidget = model.widget as T;
     if (modelWidget.isSupportedAspect(aspect)) {
       return;
     }
@@ -192,15 +192,15 @@ abstract class InheritedModel<T> extends InheritedWidget {
 
     // Create a dependency on all of the type T ancestor models up until
     // a model is found for which isSupportedAspect(aspect) is true.
-    final List<InheritedElement> models = <InheritedElement>[];
+    final models = <InheritedElement>[];
     _findModels<T>(context, aspect, models);
     if (models.isEmpty) {
       return null;
     }
 
     final InheritedElement lastModel = models.last;
-    for (final InheritedElement model in models) {
-      final T value = context.dependOnInheritedElement(model, aspect: aspect) as T;
+    for (final model in models) {
+      final value = context.dependOnInheritedElement(model, aspect: aspect) as T;
       if (model == lastModel) {
         return value;
       }
@@ -218,7 +218,7 @@ class InheritedModelElement<T> extends InheritedElement {
 
   @override
   void updateDependencies(Element dependent, Object? aspect) {
-    final Set<T>? dependencies = getDependencies(dependent) as Set<T>?;
+    final dependencies = getDependencies(dependent) as Set<T>?;
     if (dependencies != null && dependencies.isEmpty) {
       return;
     }
@@ -233,7 +233,7 @@ class InheritedModelElement<T> extends InheritedElement {
 
   @override
   void notifyDependent(InheritedModel<T> oldWidget, Element dependent) {
-    final Set<T>? dependencies = getDependencies(dependent) as Set<T>?;
+    final dependencies = getDependencies(dependent) as Set<T>?;
     if (dependencies == null) {
       return;
     }

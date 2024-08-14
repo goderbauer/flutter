@@ -66,7 +66,7 @@ class TestSemanticsEvent extends SemanticsEvent {
 
   @override
   Map<String, dynamic> getDataMap() {
-    final Map<String, dynamic> result = <String, dynamic>{};
+    final result = <String, dynamic>{};
     if (text != null) {
       result['text'] = text;
     }

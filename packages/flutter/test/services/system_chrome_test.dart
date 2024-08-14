@@ -10,7 +10,7 @@ void main() {
   TestWidgetsFlutterBinding.ensureInitialized();
 
   testWidgets('SystemChrome overlay style test', (WidgetTester tester) async {
-    final List<MethodCall> log = <MethodCall>[];
+    final log = <MethodCall>[];
 
     TestDefaultBinaryMessengerBinding.instance.defaultBinaryMessenger.setMockMethodCallHandler(SystemChannels.platform, (MethodCall methodCall) async {
       log.add(methodCall);
@@ -68,7 +68,7 @@ void main() {
   });
 
   test('setPreferredOrientations control test', () async {
-    final List<MethodCall> log = <MethodCall>[];
+    final log = <MethodCall>[];
 
     TestDefaultBinaryMessengerBinding.instance.defaultBinaryMessenger.setMockMethodCallHandler(SystemChannels.platform, (MethodCall methodCall) async {
       log.add(methodCall);
@@ -87,7 +87,7 @@ void main() {
   });
 
   test('setApplicationSwitcherDescription control test', () async {
-    final List<MethodCall> log = <MethodCall>[];
+    final log = <MethodCall>[];
 
     TestDefaultBinaryMessengerBinding.instance.defaultBinaryMessenger.setMockMethodCallHandler(SystemChannels.platform, (MethodCall methodCall) async {
       log.add(methodCall);
@@ -122,7 +122,7 @@ void main() {
 
 
   test('setEnabledSystemUIMode control test', () async {
-    final List<MethodCall> log = <MethodCall>[];
+    final log = <MethodCall>[];
 
     TestDefaultBinaryMessengerBinding.instance.defaultBinaryMessenger.setMockMethodCallHandler(SystemChannels.platform, (MethodCall methodCall) async {
       log.add(methodCall);
@@ -151,7 +151,7 @@ void main() {
   });
 
   test('setEnabledSystemUIMode passes correct overlays for manual configuration', () async {
-    final List<MethodCall> log = <MethodCall>[];
+    final log = <MethodCall>[];
 
     TestDefaultBinaryMessengerBinding.instance.defaultBinaryMessenger.setMockMethodCallHandler(SystemChannels.platform, (MethodCall methodCall) async {
       log.add(methodCall);
@@ -168,7 +168,7 @@ void main() {
   });
 
   test('setSystemUIChangeCallback control test', () async {
-    final List<MethodCall> log = <MethodCall>[];
+    final log = <MethodCall>[];
 
     TestDefaultBinaryMessengerBinding.instance.defaultBinaryMessenger.setMockMethodCallHandler(SystemChannels.platform, (MethodCall methodCall) async {
       log.add(methodCall);
@@ -187,7 +187,7 @@ void main() {
   });
 
   test('toString works as intended', () async {
-    const SystemUiOverlayStyle systemUiOverlayStyle = SystemUiOverlayStyle();
+    const systemUiOverlayStyle = SystemUiOverlayStyle();
 
     expect(systemUiOverlayStyle.toString(), 'SystemUiOverlayStyle({'
       'systemNavigationBarColor: null, '

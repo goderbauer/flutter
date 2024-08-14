@@ -56,26 +56,26 @@ class ChangeNotifierInherited extends InheritedNotifier<ChangeNotifier> {
 
 void main() {
   testWidgets('Inherited notifies dependents', (WidgetTester tester) async {
-    final List<TestInherited> log = <TestInherited>[];
+    final log = <TestInherited>[];
 
-    final Builder builder = Builder(
+    final builder = Builder(
       builder: (BuildContext context) {
         log.add(context.dependOnInheritedWidgetOfExactType<TestInherited>()!);
         return Container();
       },
     );
 
-    final TestInherited first = TestInherited(child: builder);
+    final first = TestInherited(child: builder);
     await tester.pumpWidget(first);
 
     expect(log, equals(<TestInherited>[first]));
 
-    final TestInherited second = TestInherited(shouldNotify: false, child: builder);
+    final second = TestInherited(shouldNotify: false, child: builder);
     await tester.pumpWidget(second);
 
     expect(log, equals(<TestInherited>[first]));
 
-    final TestInherited third = TestInherited(child: builder);
+    final third = TestInherited(child: builder);
     await tester.pumpWidget(third);
 
     expect(log, equals(<TestInherited>[first, third]));
@@ -83,7 +83,7 @@ void main() {
 
   testWidgets('Update inherited when reparenting state', (WidgetTester tester) async {
     final GlobalKey globalKey = GlobalKey();
-    final List<TestInherited> log = <TestInherited>[];
+    final log = <TestInherited>[];
 
     TestInherited build() {
       return TestInherited(
@@ -112,7 +112,7 @@ void main() {
   });
 
   testWidgets('Update inherited when removing node', (WidgetTester tester) async {
-    final List<String> log = <String>[];
+    final log = <String>[];
 
     await tester.pumpWidget(
       ValueInherited(
@@ -168,7 +168,7 @@ void main() {
 
   testWidgets('Update inherited when removing node and child has global key', (WidgetTester tester) async {
 
-    final List<String> log = <String>[];
+    final log = <String>[];
 
     final Key key = GlobalKey();
 
@@ -231,7 +231,7 @@ void main() {
   });
 
   testWidgets('Update inherited when removing node and child has global key with constant child', (WidgetTester tester) async {
-    final List<int> log = <int>[];
+    final log = <int>[];
 
     final Key key = GlobalKey();
 
@@ -291,7 +291,7 @@ void main() {
 
   testWidgets('Update inherited when removing node and child has global key with constant child, minimised', (WidgetTester tester) async {
 
-    final List<int> log = <int>[];
+    final log = <int>[];
 
     final Widget child = Builder(
       key: GlobalKey(),
@@ -366,7 +366,7 @@ void main() {
   });
 
   testWidgets("Inherited widget doesn't notify descendants when descendant did not previously fail to find a match and had no dependencies", (WidgetTester tester) async {
-    int buildCount = 0;
+    var buildCount = 0;
 
     final Widget inner = Container(
       key: GlobalKey(),
@@ -393,7 +393,7 @@ void main() {
   });
 
   testWidgets('Inherited widget does notify descendants when descendant did not previously fail to find a match but did have other dependencies', (WidgetTester tester) async {
-    int buildCount = 0;
+    var buildCount = 0;
 
     final Widget inner = Container(
       key: GlobalKey(),
@@ -424,9 +424,9 @@ void main() {
   });
 
   testWidgets("BuildContext.getInheritedWidgetOfExactType doesn't create a dependency", (WidgetTester tester) async {
-    int buildCount = 0;
+    var buildCount = 0;
     final GlobalKey<void> inheritedKey = GlobalKey();
-    final ChangeNotifier notifier = ChangeNotifier();
+    final notifier = ChangeNotifier();
     addTearDown(notifier.dispose);
 
     final Widget builder = Builder(
@@ -452,9 +452,9 @@ void main() {
 
   testWidgets('initState() dependency on Inherited asserts', (WidgetTester tester) async {
     // This is a regression test for https://github.com/flutter/flutter/issues/5491
-    bool exceptionCaught = false;
+    var exceptionCaught = false;
 
-    final TestInherited parent = TestInherited(child: ExpectFail(() {
+    final parent = TestInherited(child: ExpectFail(() {
       exceptionCaught = true;
     }));
     await tester.pumpWidget(parent);
@@ -463,8 +463,8 @@ void main() {
   });
 
   testWidgets('InheritedNotifier', (WidgetTester tester) async {
-    int buildCount = 0;
-    final ChangeNotifier notifier = ChangeNotifier();
+    var buildCount = 0;
+    final notifier = ChangeNotifier();
     addTearDown(notifier.dispose);
 
     final Widget builder = Builder(

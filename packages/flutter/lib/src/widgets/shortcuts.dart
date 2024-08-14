@@ -52,7 +52,7 @@ class KeySet<T extends KeyboardKey> {
     T? key3,
     T? key4,
   ])  : _keys = HashSet<T>()..add(key1) {
-    int count = 1;
+    var count = 1;
     if (key2 != null) {
       _keys.add(key2);
       assert(() {
@@ -589,9 +589,9 @@ class SingleActivator with Diagnosticable, MenuSerializableShortcut implements S
   /// [debugDescribeKeys] returns an empty string.
   @override
   String debugDescribeKeys() {
-    String result = '';
+    var result = '';
     assert(() {
-      final List<String> keys = <String>[
+      final keys = <String>[
         if (control) 'Control',
         if (alt) 'Alt',
         if (meta) 'Meta',
@@ -757,9 +757,9 @@ class CharacterActivator with Diagnosticable, MenuSerializableShortcut implement
 
   @override
   String debugDescribeKeys() {
-    String result = '';
+    var result = '';
     assert(() {
-      final List<String> keys = <String>[
+      final keys = <String>[
         if (alt) 'Alt',
         if (control) 'Control',
         if (meta) 'Meta',
@@ -846,7 +846,7 @@ class ShortcutManager with Diagnosticable, ChangeNotifier {
   }
 
   static Map<LogicalKeyboardKey?, List<_ActivatorIntentPair>> _indexShortcuts(Map<ShortcutActivator, Intent> source) {
-    final Map<LogicalKeyboardKey?, List<_ActivatorIntentPair>> result = <LogicalKeyboardKey?, List<_ActivatorIntentPair>>{};
+    final result = <LogicalKeyboardKey?, List<_ActivatorIntentPair>>{};
     source.forEach((ShortcutActivator activator, Intent intent) {
       // This intermediate variable is necessary to comply with Dart analyzer.
       final Iterable<LogicalKeyboardKey?>? nullableTriggers = activator.triggers;
@@ -1321,7 +1321,7 @@ class ShortcutRegistry with ChangeNotifier {
   ShortcutRegistryEntry addAll(Map<ShortcutActivator, Intent> value) {
     assert(ChangeNotifier.debugAssertNotDisposed(this));
     assert(value.isNotEmpty, 'Cannot register an empty map of shortcuts');
-    final ShortcutRegistryEntry entry = ShortcutRegistryEntry._(this);
+    final entry = ShortcutRegistryEntry._(this);
     _registeredShortcuts[entry] = value;
     assert(_debugCheckForDuplicates());
     _notifyListenersNextFrame();
@@ -1436,7 +1436,7 @@ class ShortcutRegistry with ChangeNotifier {
   }
 
   bool _debugCheckForDuplicates() {
-    final Map<ShortcutActivator, ShortcutRegistryEntry?> previous = <ShortcutActivator, ShortcutRegistryEntry?>{};
+    final previous = <ShortcutActivator, ShortcutRegistryEntry?>{};
     for (final MapEntry<ShortcutRegistryEntry, Map<ShortcutActivator, Intent>> tokenEntry in _registeredShortcuts.entries) {
       for (final ShortcutActivator shortcut in tokenEntry.value.keys) {
         if (previous.containsKey(shortcut)) {

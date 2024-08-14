@@ -96,8 +96,8 @@ void main() {
   });
 
   testWidgets('Verify that a BottomSheet can be rebuilt with ScaffoldFeatureController.setState()', (WidgetTester tester) async {
-    final GlobalKey<ScaffoldState> scaffoldKey = GlobalKey<ScaffoldState>();
-    int buildCount = 0;
+    final scaffoldKey = GlobalKey<ScaffoldState>();
+    var buildCount = 0;
 
     await tester.pumpWidget(MaterialApp(
       home: Scaffold(
@@ -154,7 +154,7 @@ void main() {
   });
 
   testWidgets('Verify that a scrollable BottomSheet can be dismissed', (WidgetTester tester) async {
-    final GlobalKey<ScaffoldState> scaffoldKey = GlobalKey<ScaffoldState>();
+    final scaffoldKey = GlobalKey<ScaffoldState>();
 
     await tester.pumpWidget(MaterialApp(
       home: Scaffold(
@@ -186,7 +186,7 @@ void main() {
   });
 
   testWidgets('Verify DraggableScrollableSheet.shouldCloseOnMinExtent == false prevents dismissal', (WidgetTester tester) async {
-    final GlobalKey<ScaffoldState> scaffoldKey = GlobalKey<ScaffoldState>();
+    final scaffoldKey = GlobalKey<ScaffoldState>();
 
     await tester.pumpWidget(MaterialApp(
       home: Scaffold(
@@ -224,7 +224,7 @@ void main() {
   });
 
   testWidgets('Verify that a BottomSheet animates non-linearly', (WidgetTester tester) async {
-    final GlobalKey<ScaffoldState> scaffoldKey = GlobalKey<ScaffoldState>();
+    final scaffoldKey = GlobalKey<ScaffoldState>();
 
     await tester.pumpWidget(MaterialApp(
       home: Scaffold(
@@ -259,7 +259,7 @@ void main() {
   });
 
   testWidgets('Verify that a scrollControlled BottomSheet can be dismissed', (WidgetTester tester) async {
-    final GlobalKey<ScaffoldState> scaffoldKey = GlobalKey<ScaffoldState>();
+    final scaffoldKey = GlobalKey<ScaffoldState>();
 
     await tester.pumpWidget(MaterialApp(
       home: Scaffold(
@@ -409,7 +409,7 @@ void main() {
   });
 
   testWidgets('Verify that a scrollable BottomSheet hides the fab when scrolled up', (WidgetTester tester) async {
-    final GlobalKey<ScaffoldState> scaffoldKey = GlobalKey<ScaffoldState>();
+    final scaffoldKey = GlobalKey<ScaffoldState>();
 
     await tester.pumpWidget(MaterialApp(
       home: Scaffold(
@@ -470,7 +470,7 @@ void main() {
       ),
     ));
 
-    int buildCount = 0;
+    var buildCount = 0;
     showBottomSheet(
       context: key.currentContext!,
       builder: (BuildContext context) {
@@ -613,9 +613,9 @@ void main() {
   );
 
   testWidgets('Verify that visual properties are passed through', (WidgetTester tester) async {
-    final GlobalKey<ScaffoldState> scaffoldKey = GlobalKey<ScaffoldState>();
+    final scaffoldKey = GlobalKey<ScaffoldState>();
     const Color color = Colors.pink;
-    const double elevation = 9.0;
+    const elevation = 9.0;
     const ShapeBorder shape = BeveledRectangleBorder(borderRadius: BorderRadius.all(Radius.circular(12)));
     const Clip clipBehavior = Clip.antiAlias;
 

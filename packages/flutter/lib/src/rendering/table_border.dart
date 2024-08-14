@@ -38,7 +38,7 @@ class TableBorder {
     BorderStyle style = BorderStyle.solid,
     BorderRadius borderRadius = BorderRadius.zero,
   }) {
-    final BorderSide side = BorderSide(color: color, width: width, style: style);
+    final side = BorderSide(color: color, width: width, style: style);
     return TableBorder(top: side, right: side, bottom: side, left: side, horizontalInside: side, verticalInside: side, borderRadius: borderRadius);
   }
 
@@ -211,8 +211,8 @@ class TableBorder {
     assert(columns.isEmpty || (columns.first >= 0.0 && columns.last <= rect.width));
 
     if (columns.isNotEmpty || rows.isNotEmpty) {
-      final Paint paint = Paint();
-      final Path path = Path();
+      final paint = Paint();
+      final path = Path();
 
       if (columns.isNotEmpty) {
         switch (verticalInside.style) {
@@ -255,7 +255,7 @@ class TableBorder {
     } else {
       final RRect outer = borderRadius.toRRect(rect);
       final RRect inner = outer.deflate(top.width);
-      final Paint paint = Paint()..color = top.color;
+      final paint = Paint()..color = top.color;
       canvas.drawDRRect(outer, inner, paint);
     }
   }

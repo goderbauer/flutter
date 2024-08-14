@@ -549,7 +549,7 @@ class CheckboxListTile extends StatelessWidget {
 
     final ThemeData theme = Theme.of(context);
     final CheckboxThemeData checkboxTheme = CheckboxTheme.of(context);
-    final Set<MaterialState> states = <MaterialState>{
+    final states = <MaterialState>{
       if (selected) MaterialState.selected,
     };
     final Color effectiveActiveColor = activeColor

@@ -7,8 +7,8 @@ import 'package:flutter_test/flutter_test.dart';
 
 void main() {
   testWidgets('Animates forward when built', (WidgetTester tester) async {
-    final List<int> values = <int>[];
-    int endCount = 0;
+    final values = <int>[];
+    var endCount = 0;
     await tester.pumpWidget(
       TweenAnimationBuilder<int>(
         duration: const Duration(seconds: 1),
@@ -38,8 +38,8 @@ void main() {
   });
 
   testWidgets('No initial animation when begin=null', (WidgetTester tester) async {
-    final List<int> values = <int>[];
-    int endCount = 0;
+    final values = <int>[];
+    var endCount = 0;
     await tester.pumpWidget(
       TweenAnimationBuilder<int>(
         duration: const Duration(seconds: 1),
@@ -62,8 +62,8 @@ void main() {
 
 
   testWidgets('No initial animation when begin=end', (WidgetTester tester) async {
-    final List<int> values = <int>[];
-    int endCount = 0;
+    final values = <int>[];
+    var endCount = 0;
     await tester.pumpWidget(
       TweenAnimationBuilder<int>(
         duration: const Duration(seconds: 1),
@@ -85,7 +85,7 @@ void main() {
   });
 
   testWidgets('Replace tween animates new tween', (WidgetTester tester) async {
-    final List<int> values = <int>[];
+    final values = <int>[];
     Widget buildWidget({required IntTween tween}) {
       return TweenAnimationBuilder<int>(
         duration: const Duration(seconds: 1),
@@ -113,7 +113,7 @@ void main() {
   });
 
   testWidgets('Curve is respected', (WidgetTester tester) async {
-    final List<int> values = <int>[];
+    final values = <int>[];
     Widget buildWidget({required IntTween tween, required Curve curve}) {
       return TweenAnimationBuilder<int>(
         duration: const Duration(seconds: 1),
@@ -143,7 +143,7 @@ void main() {
   });
 
   testWidgets('Duration is respected', (WidgetTester tester) async {
-    final List<int> values = <int>[];
+    final values = <int>[];
     Widget buildWidget({required IntTween tween, required Duration duration}) {
       return TweenAnimationBuilder<int>(
         tween: tween,
@@ -190,7 +190,7 @@ void main() {
 
   group('Change tween gapless while', () {
     testWidgets('running forward', (WidgetTester tester) async {
-      final List<int> values = <int>[];
+      final values = <int>[];
       Widget buildWidget({required IntTween tween}) {
         return TweenAnimationBuilder<int>(
           tween: tween,
@@ -225,7 +225,7 @@ void main() {
     });
 
     testWidgets('running forward and then reverse with same tween instance', (WidgetTester tester) async {
-      final List<int> values = <int>[];
+      final values = <int>[];
       Widget buildWidget({required IntTween tween}) {
         return TweenAnimationBuilder<int>(
           tween: tween,
@@ -237,8 +237,8 @@ void main() {
         );
       }
 
-      final IntTween tween1 = IntTween(begin: 0, end: 100);
-      final IntTween tween2 = IntTween(begin: 200, end: 300);
+      final tween1 = IntTween(begin: 0, end: 100);
+      final tween2 = IntTween(begin: 200, end: 300);
 
       await tester.pumpWidget(buildWidget(
         tween: tween1,
@@ -255,7 +255,7 @@ void main() {
   });
 
   testWidgets('Changing tween while gapless tween change is in progress', (WidgetTester tester) async {
-    final List<int> values = <int>[];
+    final values = <int>[];
     Widget buildWidget({required IntTween tween}) {
       return TweenAnimationBuilder<int>(
         tween: tween,
@@ -267,9 +267,9 @@ void main() {
       );
     }
 
-    final IntTween tween1 = IntTween(begin: 0, end: 100);
-    final IntTween tween2 = IntTween(begin: 200, end: 300);
-    final IntTween tween3 = IntTween(begin: 400, end: 501);
+    final tween1 = IntTween(begin: 0, end: 100);
+    final tween2 = IntTween(begin: 200, end: 300);
+    final tween3 = IntTween(begin: 400, end: 501);
 
     await tester.pumpWidget(buildWidget(
       tween: tween1,
@@ -295,7 +295,7 @@ void main() {
   });
 
   testWidgets('Changing curve while no animation is running does not trigger animation', (WidgetTester tester) async {
-    final List<int> values = <int>[];
+    final values = <int>[];
     Widget buildWidget({required Curve curve}) {
       return TweenAnimationBuilder<int>(
         tween: IntTween(begin: 0, end: 100),
@@ -324,7 +324,7 @@ void main() {
   });
 
   testWidgets('Setting same tween and direction does not trigger animation', (WidgetTester tester) async {
-    final List<int> values = <int>[];
+    final values = <int>[];
     Widget buildWidget({required IntTween tween}) {
       return TweenAnimationBuilder<int>(
         tween: tween,
@@ -353,7 +353,7 @@ void main() {
   });
 
   testWidgets('Setting same tween and direction while gapless animation is in progress works', (WidgetTester tester) async {
-    final List<int> values = <int>[];
+    final values = <int>[];
     Widget buildWidget({required IntTween tween}) {
       return TweenAnimationBuilder<int>(
         tween: tween,
@@ -389,7 +389,7 @@ void main() {
   });
 
   testWidgets('Works with nullable tweens', (WidgetTester tester) async {
-    final List<Size?> values = <Size?>[];
+    final values = <Size?>[];
     await tester.pumpWidget(
       TweenAnimationBuilder<Size?>(
         duration: const Duration(seconds: 1),

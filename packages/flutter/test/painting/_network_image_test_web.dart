@@ -18,7 +18,7 @@ void runTests() {
 
   testWidgets('loads an image from the network with headers',
       (WidgetTester tester) async {
-    final TestHttpRequest testHttpRequest = TestHttpRequest()
+    final testHttpRequest = TestHttpRequest()
       ..status = 200
       ..mockEvent = MockEvent('load', web.Event('test error'))
       ..response = (Uint8List.fromList(kTransparentImage)).buffer;
@@ -27,12 +27,12 @@ void runTests() {
       return testHttpRequest.getMock() as web_shim.XMLHttpRequest;
     };
 
-    const Map<String, String> headers = <String, String>{
+    const headers = <String, String>{
       'flutter': 'flutter',
       'second': 'second',
     };
 
-    final Image image = Image.network(
+    final image = Image.network(
       'https://www.example.com/images/frame.png',
       headers: headers,
     );
@@ -44,7 +44,7 @@ void runTests() {
 
   testWidgets('loads an image from the network with unsuccessful HTTP code',
       (WidgetTester tester) async {
-    final TestHttpRequest testHttpRequest = TestHttpRequest()
+    final testHttpRequest = TestHttpRequest()
       ..status = 404
       ..mockEvent = MockEvent('error', web.Event('test error'));
 
@@ -53,12 +53,12 @@ void runTests() {
       return testHttpRequest.getMock() as web_shim.XMLHttpRequest;
     };
 
-    const Map<String, String> headers = <String, String>{
+    const headers = <String, String>{
       'flutter': 'flutter',
       'second': 'second',
     };
 
-    final Image image = Image.network(
+    final image = Image.network(
       'https://www.example.com/images/frame2.png',
       headers: headers,
     );
@@ -69,7 +69,7 @@ void runTests() {
 
   testWidgets('loads an image from the network with empty response',
       (WidgetTester tester) async {
-    final TestHttpRequest testHttpRequest = TestHttpRequest()
+    final testHttpRequest = TestHttpRequest()
       ..status = 200
       ..mockEvent = MockEvent('load', web.Event('test error'))
       ..response = (Uint8List.fromList(<int>[])).buffer;
@@ -78,12 +78,12 @@ void runTests() {
       return testHttpRequest.getMock() as web_shim.XMLHttpRequest;
     };
 
-    const Map<String, String> headers = <String, String>{
+    const headers = <String, String>{
       'flutter': 'flutter',
       'second': 'second',
     };
 
-    final Image image = Image.network(
+    final image = Image.network(
       'https://www.example.com/images/frame3.png',
       headers: headers,
     );

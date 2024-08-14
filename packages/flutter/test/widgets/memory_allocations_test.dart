@@ -37,8 +37,8 @@ void main() {
   });
 
   testWidgets('State dispatches events in debug mode', (WidgetTester tester) async {
-    bool stateCreated = false;
-    bool stateDisposed = false;
+    var stateCreated = false;
+    var stateDisposed = false;
 
     expect(ma.hasListeners, false);
 
@@ -75,7 +75,7 @@ class _TestElement extends RenderObjectElement with RootElementMixin {
   _TestElement(): super(_TestLeafRenderObjectWidget());
 
   void makeInactive() {
-    final FocusManager newFocusManager = FocusManager();
+    final newFocusManager = FocusManager();
     assignOwner(BuildOwner(focusManager: newFocusManager));
     mount(null, null);
     deactivate();
@@ -131,9 +131,9 @@ class _EventStats {
 
 /// Create and dispose Flutter objects to fire memory allocation events.
 Future<_EventStats> _activateFlutterObjectsAndReturnCountOfEvents() async {
-  final _EventStats result = _EventStats();
+  final result = _EventStats();
 
-  final _TestElement element = _TestElement(); result.creations++;
+  final element = _TestElement(); result.creations++;
   final RenderObject renderObject = _TestRenderObject(); result.creations++;
 
   element.makeInactive(); result.creations += 4; // 1 for the new BuildOwner, 1 for the new FocusManager, 1 for the new FocusScopeNode, 1 for the new _HighlightModeManager

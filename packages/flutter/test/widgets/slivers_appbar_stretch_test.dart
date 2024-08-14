@@ -9,7 +9,7 @@ import 'package:flutter_test/flutter_test.dart';
 void main() {
   group('SliverAppBar - Stretch', () {
     testWidgets('fills overscroll', (WidgetTester tester) async {
-      const Key anchor = Key('drag');
+      const anchor = Key('drag');
       await tester.pumpWidget(
         MaterialApp(
           home: CustomScrollView(
@@ -44,7 +44,7 @@ void main() {
     });
 
     testWidgets('fills overscroll after reverse direction input - scrolling header', (WidgetTester tester) async {
-      const Key anchor = Key('drag');
+      const anchor = Key('drag');
       await tester.pumpWidget(
         MaterialApp(
           home: CustomScrollView(
@@ -93,7 +93,7 @@ void main() {
     });
 
     testWidgets('fills overscroll after reverse direction input - floating header', (WidgetTester tester) async {
-      const Key anchor = Key('drag');
+      const anchor = Key('drag');
       await tester.pumpWidget(
         MaterialApp(
           home: CustomScrollView(
@@ -143,7 +143,7 @@ void main() {
     });
 
     testWidgets('does not stretch without overscroll physics', (WidgetTester tester) async {
-      const Key anchor = Key('drag');
+      const anchor = Key('drag');
       await tester.pumpWidget(
         MaterialApp(
           home: CustomScrollView(
@@ -178,8 +178,8 @@ void main() {
     });
 
     testWidgets('default trigger offset', (WidgetTester tester) async {
-      bool didTrigger = false;
-      const Key anchor = Key('drag');
+      var didTrigger = false;
+      const anchor = Key('drag');
       await tester.pumpWidget(
         MaterialApp(
           home: CustomScrollView(
@@ -216,8 +216,8 @@ void main() {
     });
 
     testWidgets('custom trigger offset', (WidgetTester tester) async {
-      bool didTrigger = false;
-      const Key anchor = Key('drag');
+      var didTrigger = false;
+      const anchor = Key('drag');
       await tester.pumpWidget(
         MaterialApp(
           home: CustomScrollView(
@@ -255,8 +255,8 @@ void main() {
     });
 
     testWidgets('stretch callback not triggered without overscroll physics', (WidgetTester tester) async {
-      bool didTrigger = false;
-      const Key anchor = Key('drag');
+      var didTrigger = false;
+      const anchor = Key('drag');
       await tester.pumpWidget(
         MaterialApp(
           home: CustomScrollView(
@@ -326,7 +326,7 @@ void main() {
 
   group('SliverAppBar - Stretch, Pinned', () {
     testWidgets('fills overscroll', (WidgetTester tester) async {
-      const Key anchor = Key('drag');
+      const anchor = Key('drag');
       await tester.pumpWidget(
         MaterialApp(
           home: CustomScrollView(
@@ -361,7 +361,7 @@ void main() {
     });
 
     testWidgets('does not stretch without overscroll physics', (WidgetTester tester) async {
-      const Key anchor = Key('drag');
+      const anchor = Key('drag');
       await tester.pumpWidget(
         MaterialApp(
           home: CustomScrollView(
@@ -398,7 +398,7 @@ void main() {
 
   group('SliverAppBar - Stretch, Floating', () {
     testWidgets('fills overscroll', (WidgetTester tester) async {
-      const Key anchor = Key('drag');
+      const anchor = Key('drag');
       await tester.pumpWidget(
         MaterialApp(
           home: CustomScrollView(
@@ -433,7 +433,7 @@ void main() {
     });
 
     testWidgets('does not fill overscroll without proper physics', (WidgetTester tester) async {
-      const Key anchor = Key('drag');
+      const anchor = Key('drag');
       await tester.pumpWidget(
         MaterialApp(
           home: CustomScrollView(
@@ -470,7 +470,7 @@ void main() {
 
   group('SliverAppBar - Stretch, Floating, Pinned', () {
     testWidgets('fills overscroll', (WidgetTester tester) async {
-      const Key anchor = Key('drag');
+      const anchor = Key('drag');
       await tester.pumpWidget(
         MaterialApp(
           home: CustomScrollView(
@@ -506,7 +506,7 @@ void main() {
     });
 
     testWidgets('does not fill overscroll without proper physics', (WidgetTester tester) async {
-      const Key anchor = Key('drag');
+      const anchor = Key('drag');
       await tester.pumpWidget(
         MaterialApp(
           home: CustomScrollView(

@@ -15,10 +15,10 @@ const CupertinoDynamicColor _kScrollbarColor = CupertinoDynamicColor.withBrightn
 );
 
 void main() {
-  const Duration kScrollbarTimeToFade = Duration(milliseconds: 1200);
-  const Duration kScrollbarFadeDuration = Duration(milliseconds: 250);
-  const Duration kScrollbarResizeDuration = Duration(milliseconds: 100);
-  const Duration kLongPressDuration = Duration(milliseconds: 100);
+  const kScrollbarTimeToFade = Duration(milliseconds: 1200);
+  const kScrollbarFadeDuration = Duration(milliseconds: 250);
+  const kScrollbarResizeDuration = Duration(milliseconds: 100);
+  const kLongPressDuration = Duration(milliseconds: 100);
 
   testWidgets('Scrollbar never goes away until finger lift', (WidgetTester tester) async {
     await tester.pumpWidget(
@@ -96,7 +96,7 @@ void main() {
   });
 
   testWidgets('Scrollbar thumb can be dragged with long press', (WidgetTester tester) async {
-    final ScrollController scrollController = ScrollController();
+    final scrollController = ScrollController();
     addTearDown(scrollController.dispose);
     await tester.pumpWidget(
       Directionality(
@@ -116,7 +116,7 @@ void main() {
     expect(scrollController.offset, 0.0);
 
     // Scroll a bit.
-    const double scrollAmount = 10.0;
+    const scrollAmount = 10.0;
     final TestGesture scrollGesture = await tester.startGesture(tester.getCenter(find.byType(SingleChildScrollView)));
     // Scroll down by swiping up.
     await scrollGesture.moveBy(const Offset(0.0, -scrollAmount));
@@ -131,7 +131,7 @@ void main() {
     await scrollGesture.up();
     await tester.pump();
 
-    int hapticFeedbackCalls = 0;
+    var hapticFeedbackCalls = 0;
     tester.binding.defaultBinaryMessenger.setMockMethodCallHandler(SystemChannels.platform, (MethodCall methodCall) async {
       if (methodCall.method == 'HapticFeedback.vibrate') {
         hapticFeedbackCalls += 1;
@@ -169,7 +169,7 @@ void main() {
   });
 
   testWidgets('Scrollbar thumb can be dragged with long press - reverse', (WidgetTester tester) async {
-    final ScrollController scrollController = ScrollController();
+    final scrollController = ScrollController();
     addTearDown(scrollController.dispose);
     await tester.pumpWidget(
       Directionality(
@@ -192,7 +192,7 @@ void main() {
     expect(scrollController.offset, 0.0);
 
     // Scroll a bit.
-    const double scrollAmount = 10.0;
+    const scrollAmount = 10.0;
     final TestGesture scrollGesture = await tester.startGesture(tester.getCenter(find.byType(SingleChildScrollView)));
     // Scroll up by swiping down.
     await scrollGesture.moveBy(const Offset(0.0, scrollAmount));
@@ -207,7 +207,7 @@ void main() {
     await scrollGesture.up();
     await tester.pump();
 
-    int hapticFeedbackCalls = 0;
+    var hapticFeedbackCalls = 0;
     tester.binding.defaultBinaryMessenger.setMockMethodCallHandler(SystemChannels.platform, (MethodCall methodCall) async {
       if (methodCall.method == 'HapticFeedback.vibrate') {
         hapticFeedbackCalls += 1;
@@ -254,7 +254,7 @@ void main() {
     const double scaleFactor = 2;
     final Size screenSize = tester.view.physicalSize / tester.view.devicePixelRatio;
 
-    final ScrollController scrollController = ScrollController();
+    final scrollController = ScrollController();
     addTearDown(scrollController.dispose);
     await tester.pumpWidget(
       Directionality(
@@ -284,7 +284,7 @@ void main() {
 
     // Scroll a bit to cause the scrollbar thumb to be shown;
     // undo the scroll to put the thumb back at the top.
-    const double scrollAmount = 10.0;
+    const scrollAmount = 10.0;
     final TestGesture scrollGesture = await tester.startGesture(tester.getCenter(find.byType(SingleChildScrollView)));
     await scrollGesture.moveBy(const Offset(0.0, -scrollAmount));
     await tester.pump();
@@ -362,13 +362,13 @@ void main() {
       }
 
       await tester.pumpWidget(viewWithScroll());
-      final AssertionError exception = tester.takeException() as AssertionError;
+      final exception = tester.takeException() as AssertionError;
       expect(exception, isAssertionError);
     },
   );
 
   testWidgets('When thumbVisibility is true, must pass a controller or find PrimaryScrollController that is attached to a scroll view', (WidgetTester tester) async {
-      final ScrollController controller = ScrollController();
+      final controller = ScrollController();
       addTearDown(controller.dispose);
       Widget viewWithScroll() {
         return Directionality(
@@ -422,13 +422,13 @@ void main() {
       }
 
       await tester.pumpWidget(viewWithScroll());
-      final AssertionError exception = tester.takeException() as AssertionError;
+      final exception = tester.takeException() as AssertionError;
       expect(exception, isAssertionError);
     },
   );
 
   testWidgets('When thumbVisibility is true, must pass a controller or find PrimaryScrollController that is attached to a scroll view', (WidgetTester tester) async {
-      final ScrollController controller = ScrollController();
+      final controller = ScrollController();
       addTearDown(controller.dispose);
       Widget viewWithScroll() {
         return Directionality(
@@ -463,7 +463,7 @@ void main() {
   );
 
   testWidgets('On first render with thumbVisibility: true, the thumb shows with PrimaryScrollController', (WidgetTester tester) async {
-      final ScrollController controller = ScrollController();
+      final controller = ScrollController();
       addTearDown(controller.dispose);
       Widget viewWithScroll() {
         return Directionality(
@@ -498,7 +498,7 @@ void main() {
   );
 
   testWidgets('On first render with thumbVisibility: true, the thumb shows', (WidgetTester tester) async {
-    final ScrollController controller = ScrollController();
+    final controller = ScrollController();
     addTearDown(controller.dispose);
     Widget viewWithScroll() {
       return Directionality(
@@ -532,7 +532,7 @@ void main() {
   });
 
   testWidgets('On first render with thumbVisibility: true, the thumb shows with PrimaryScrollController', (WidgetTester tester) async {
-      final ScrollController controller = ScrollController();
+      final controller = ScrollController();
       addTearDown(controller.dispose);
       Widget viewWithScroll() {
         return Directionality(
@@ -567,7 +567,7 @@ void main() {
   );
 
   testWidgets('On first render with thumbVisibility: true, the thumb shows', (WidgetTester tester) async {
-    final ScrollController controller = ScrollController();
+    final controller = ScrollController();
     addTearDown(controller.dispose);
     Widget viewWithScroll() {
       return Directionality(
@@ -601,7 +601,7 @@ void main() {
   });
 
   testWidgets('On first render with thumbVisibility: false, the thumb is hidden', (WidgetTester tester) async {
-    final ScrollController controller = ScrollController();
+    final controller = ScrollController();
     addTearDown(controller.dispose);
     Widget viewWithScroll() {
       return Directionality(
@@ -630,9 +630,9 @@ void main() {
   });
 
   testWidgets('With thumbVisibility: true, fling a scroll. While it is still scrolling, set thumbVisibility: false. The thumb should not fade out until the scrolling stops.', (WidgetTester tester) async {
-      final ScrollController controller = ScrollController();
+      final controller = ScrollController();
       addTearDown(controller.dispose);
-      bool thumbVisibility = true;
+      var thumbVisibility = true;
       Widget viewWithScroll() {
         return StatefulBuilder(
           builder: (BuildContext context, StateSetter setState) {
@@ -690,9 +690,9 @@ void main() {
   testWidgets(
     'With thumbVisibility: false, set thumbVisibility: true. The thumb should be always shown directly',
     (WidgetTester tester) async {
-      final ScrollController controller = ScrollController();
+      final controller = ScrollController();
       addTearDown(controller.dispose);
-      bool thumbVisibility = false;
+      var thumbVisibility = false;
       Widget viewWithScroll() {
         return StatefulBuilder(
           builder: (BuildContext context, StateSetter setState) {
@@ -746,9 +746,9 @@ void main() {
     'With thumbVisibility: false, fling a scroll. While it is still scrolling, set thumbVisibility: true. '
     'The thumb should not fade even after the scrolling stops',
     (WidgetTester tester) async {
-      final ScrollController controller = ScrollController();
+      final controller = ScrollController();
       addTearDown(controller.dispose);
-      bool thumbVisibility = false;
+      var thumbVisibility = false;
       Widget viewWithScroll() {
         return StatefulBuilder(
           builder: (BuildContext context, StateSetter setState) {
@@ -814,9 +814,9 @@ void main() {
     'Toggling thumbVisibility while not scrolling fades the thumb in/out. '
     'This works even when you have never scrolled at all yet',
     (WidgetTester tester) async {
-      final ScrollController controller = ScrollController();
+      final controller = ScrollController();
       addTearDown(controller.dispose);
-      bool thumbVisibility = true;
+      var thumbVisibility = true;
       Widget viewWithScroll() {
         return StatefulBuilder(
           builder: (BuildContext context, StateSetter setState) {
@@ -867,7 +867,7 @@ void main() {
   );
 
   testWidgets('Scrollbar thumb can be dragged with long press - horizontal axis', (WidgetTester tester) async {
-    final ScrollController scrollController = ScrollController();
+    final scrollController = ScrollController();
     addTearDown(scrollController.dispose);
     await tester.pumpWidget(
       Directionality(
@@ -889,7 +889,7 @@ void main() {
     expect(scrollController.offset, 0.0);
 
     // Scroll a bit.
-    const double scrollAmount = 10.0;
+    const scrollAmount = 10.0;
     final TestGesture scrollGesture = await tester.startGesture(tester.getCenter(find.byType(SingleChildScrollView)));
     // Scroll right by swiping left.
     await scrollGesture.moveBy(const Offset(-scrollAmount, 0.0));
@@ -904,7 +904,7 @@ void main() {
     await scrollGesture.up();
     await tester.pump();
 
-    int hapticFeedbackCalls = 0;
+    var hapticFeedbackCalls = 0;
     tester.binding.defaultBinaryMessenger.setMockMethodCallHandler(SystemChannels.platform, (MethodCall methodCall) async {
       if (methodCall.method == 'HapticFeedback.vibrate') {
         hapticFeedbackCalls += 1;
@@ -942,7 +942,7 @@ void main() {
   });
 
   testWidgets('Scrollbar thumb can be dragged with long press - horizontal axis, reverse', (WidgetTester tester) async {
-    final ScrollController scrollController = ScrollController();
+    final scrollController = ScrollController();
     addTearDown(scrollController.dispose);
     await tester.pumpWidget(
       Directionality(
@@ -965,7 +965,7 @@ void main() {
     expect(scrollController.offset, 0.0);
 
     // Scroll a bit.
-    const double scrollAmount = 10.0;
+    const scrollAmount = 10.0;
     final TestGesture scrollGesture = await tester.startGesture(tester.getCenter(find.byType(SingleChildScrollView)));
     // Scroll right by swiping right.
     await scrollGesture.moveBy(const Offset(scrollAmount, 0.0));
@@ -980,7 +980,7 @@ void main() {
     await scrollGesture.up();
     await tester.pump();
 
-    int hapticFeedbackCalls = 0;
+    var hapticFeedbackCalls = 0;
     tester.binding.defaultBinaryMessenger.setMockMethodCallHandler(SystemChannels.platform, (MethodCall methodCall) async {
       if (methodCall.method == 'HapticFeedback.vibrate') {
         hapticFeedbackCalls += 1;
@@ -1018,7 +1018,7 @@ void main() {
   });
 
   testWidgets('Tapping the track area pages the Scroll View except on iOS', (WidgetTester tester) async {
-    final ScrollController scrollController = ScrollController();
+    final scrollController = ScrollController();
     addTearDown(scrollController.dispose);
     await tester.pumpWidget(
       Directionality(
@@ -1078,7 +1078,7 @@ void main() {
   }, variant: TargetPlatformVariant.all(excluding: <TargetPlatform>{TargetPlatform.iOS}));
 
   testWidgets('Tapping the track area does not page the Scroll View on iOS', (WidgetTester tester) async {
-    final ScrollController scrollController = ScrollController();
+    final scrollController = ScrollController();
     addTearDown(scrollController.dispose);
     await tester.pumpWidget(
       Directionality(
@@ -1135,7 +1135,7 @@ void main() {
   }, variant: TargetPlatformVariant.only(TargetPlatform.iOS));
 
   testWidgets('Throw if interactive with the bar when no position attached', (WidgetTester tester) async {
-    final ScrollController scrollController = ScrollController();
+    final scrollController = ScrollController();
     addTearDown(scrollController.dispose);
 
     await tester.pumpWidget(
@@ -1180,9 +1180,9 @@ void main() {
   });
 
   testWidgets('Interactive scrollbars should have a valid scroll controller', (WidgetTester tester) async {
-    final ScrollController primaryScrollController = ScrollController();
+    final primaryScrollController = ScrollController();
     addTearDown(primaryScrollController.dispose);
-    final ScrollController scrollController = ScrollController();
+    final scrollController = ScrollController();
     addTearDown(scrollController.dispose);
 
     await tester.pumpWidget(
@@ -1208,7 +1208,7 @@ void main() {
 
     await tester.pumpAndSettle();
 
-    AssertionError? exception = tester.takeException() as AssertionError?;
+    var exception = tester.takeException() as AssertionError?;
     // The scrollbar is not visible and cannot be interacted with, so no assertion.
     expect(exception, isNull);
     // Scroll to trigger the scrollbar to come into view.
@@ -1224,7 +1224,7 @@ void main() {
 
   testWidgets('Simultaneous dragging and pointer scrolling does not cause a crash', (WidgetTester tester) async {
     // Regression test for https://github.com/flutter/flutter/issues/70105
-    final ScrollController scrollController = ScrollController();
+    final scrollController = ScrollController();
     addTearDown(scrollController.dispose);
     await tester.pumpWidget(
       CupertinoApp(
@@ -1240,7 +1240,7 @@ void main() {
         ),
       ),
     );
-    const double scrollAmount = 10.0;
+    const scrollAmount = 10.0;
 
     await tester.pumpAndSettle();
     expect(
@@ -1274,7 +1274,7 @@ void main() {
     );
 
     // Execute a pointer scroll while dragging (drag gesture has not come up yet)
-    final TestPointer pointer = TestPointer(1, ui.PointerDeviceKind.mouse);
+    final pointer = TestPointer(1, ui.PointerDeviceKind.mouse);
     pointer.hover(const Offset(793.0, 15.0));
     await tester.sendEventToBinding(pointer.scroll(const Offset(0.0, 20.0)));
     await tester.pumpAndSettle();
@@ -1335,7 +1335,7 @@ void main() {
   });
 
   testWidgets('CupertinoScrollbar scrollOrientation works correctly', (WidgetTester tester) async {
-    final ScrollController scrollController = ScrollController();
+    final scrollController = ScrollController();
     addTearDown(scrollController.dispose);
 
     await tester.pumpWidget(

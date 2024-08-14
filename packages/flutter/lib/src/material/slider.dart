@@ -704,7 +704,7 @@ class _SliderState extends State<Slider> with TickerProviderStateMixin {
       _SliderAdjustmentType.right => directionality == TextDirection.ltr,
     };
 
-    final _RenderSlider slider = _renderObjectKey.currentContext!.findRenderObject()! as _RenderSlider;
+    final slider = _renderObjectKey.currentContext!.findRenderObject()! as _RenderSlider;
     return shouldIncrease ? slider.increaseAction() : slider.decreaseAction();
   }
 
@@ -798,7 +798,7 @@ class _SliderState extends State<Slider> with TickerProviderStateMixin {
     const ShowValueIndicator defaultShowValueIndicator = ShowValueIndicator.onlyForDiscrete;
     const SliderInteraction defaultAllowedInteraction = SliderInteraction.tapAndSlide;
 
-    final Set<MaterialState> states = <MaterialState>{
+    final states = <MaterialState>{
       if (!_enabled) MaterialState.disabled,
       if (_hovering) MaterialState.hovered,
       if (_focused) MaterialState.focused,
@@ -1101,7 +1101,7 @@ class _RenderSlider extends RenderBox with RelayoutWhenSystemFontsChangeMixin {
         _hovering = hovering,
         _allowedInteraction = allowedInteraction {
     _updateLabelPainter();
-    final GestureArenaTeam team = GestureArenaTeam();
+    final team = GestureArenaTeam();
     _drag = HorizontalDragGestureRecognizer()
       ..team = team
       ..onStart = _handleDragStart
@@ -1665,7 +1665,7 @@ class _RenderSlider extends RenderBox with RelayoutWhenSystemFontsChangeMixin {
     // greater than the thumb radius to ensure the thumb is drawn within the track.
     final Size thumbSize = _sliderTheme.thumbShape!.getPreferredSize(isInteractive, isDiscrete);
     final double thumbPadding = (padding > thumbSize.width / 2 ? padding / 2 : 0);
-    final Offset thumbCenter = Offset(
+    final thumbCenter = Offset(
       clampDouble(
         thumbPosition,
         trackRect.left + thumbPadding,
@@ -1718,12 +1718,12 @@ class _RenderSlider extends RenderBox with RelayoutWhenSystemFontsChangeMixin {
       // If the tick marks would be too dense, don't bother painting them.
       if (adjustedTrackWidth / divisions! >= 3.0 * tickMarkWidth) {
         final double dy = trackRect.center.dy;
-        for (int i = 0; i <= divisions!; i++) {
+        for (var i = 0; i <= divisions!; i++) {
           final double value = i / divisions!;
           // The ticks are mapped to be within the track, so the tick mark width
           // must be subtracted from the track width.
           final double dx = trackRect.left + value * adjustedTrackWidth + padding / 2;
-          final Offset tickMarkOffset = Offset(dx, dy);
+          final tickMarkOffset = Offset(dx, dy);
           _sliderTheme.tickMarkShape!.paint(
             context,
             tickMarkOffset,

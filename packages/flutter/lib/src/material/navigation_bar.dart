@@ -365,9 +365,9 @@ class NavigationDestination extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final _NavigationDestinationInfo info = _NavigationDestinationInfo.of(context);
-    const Set<MaterialState> selectedState = <MaterialState>{MaterialState.selected};
-    const Set<MaterialState> unselectedState = <MaterialState>{};
-    const Set<MaterialState> disabledState = <MaterialState>{MaterialState.disabled};
+    const selectedState = <MaterialState>{MaterialState.selected};
+    const unselectedState = <MaterialState>{};
+    const disabledState = <MaterialState>{MaterialState.disabled};
 
     final NavigationBarThemeData navigationBarTheme = NavigationBarTheme.of(context);
     final NavigationBarThemeData defaults = _defaultsFor(context);
@@ -424,7 +424,7 @@ class NavigationDestination extends StatelessWidget {
         final TextStyle? effectiveDisabledLabelTextStyle = navigationBarTheme.labelTextStyle?.resolve(disabledState)
           ?? defaults.labelTextStyle!.resolve(disabledState);
 
-        final TextStyle? textStyle = enabled
+        final textStyle = enabled
           ? animation.isForwardOrCompleted
             ? effectiveSelectedLabelTextStyle
             : effectiveUnselectedLabelTextStyle
@@ -567,7 +567,7 @@ class _IndicatorInkWell extends InkResponse {
   @override
   RectCallback? getRectCallback(RenderBox referenceBox) {
     return () {
-      final RenderBox iconBox = iconKey.currentContext!.findRenderObject()! as RenderBox;
+      final iconBox = iconKey.currentContext!.findRenderObject()! as RenderBox;
       final Rect iconRect = iconBox.localToGlobal(Offset.zero) & iconBox.size;
       return referenceBox.globalToLocal(iconRect.topLeft) & iconBox.size;
     };

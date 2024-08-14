@@ -27,7 +27,7 @@ Widget _buildScroller({ required List<String> log }) {
 
 void main() {
   Completer<void> animateTo(WidgetTester tester, double newScrollOffset, { required Duration duration }) {
-    final Completer<void> completer = Completer<void>();
+    final completer = Completer<void>();
     final ScrollableState scrollable = tester.state(find.byType(Scrollable));
     scrollable.position.animateTo(newScrollOffset, duration: duration, curve: Curves.linear).whenComplete(completer.complete);
     return completer;
@@ -39,7 +39,7 @@ void main() {
   }
 
   testWidgets('Scroll event drag', (WidgetTester tester) async {
-    final List<String> log = <String>[];
+    final log = <String>[];
     await tester.pumpWidget(_buildScroller(log: log));
 
     expect(log, equals(<String>[]));
@@ -58,7 +58,7 @@ void main() {
   });
 
   testWidgets('Scroll animateTo', (WidgetTester tester) async {
-    final List<String> log = <String>[];
+    final log = <String>[];
     await tester.pumpWidget(_buildScroller(log: log));
 
     expect(log, equals(<String>[]));
@@ -75,7 +75,7 @@ void main() {
   });
 
   testWidgets('Scroll jumpTo', (WidgetTester tester) async {
-    final List<String> log = <String>[];
+    final log = <String>[];
     await tester.pumpWidget(_buildScroller(log: log));
 
     expect(log, equals(<String>[]));
@@ -86,7 +86,7 @@ void main() {
   });
 
   testWidgets('Scroll jumpTo during animation', (WidgetTester tester) async {
-    final List<String> log = <String>[];
+    final log = <String>[];
     await tester.pumpWidget(_buildScroller(log: log));
 
     expect(log, equals(<String>[]));
@@ -111,7 +111,7 @@ void main() {
   });
 
   testWidgets('Scroll scrollTo during animation', (WidgetTester tester) async {
-    final List<String> log = <String>[];
+    final log = <String>[];
     await tester.pumpWidget(_buildScroller(log: log));
 
     expect(log, equals(<String>[]));
@@ -135,7 +135,7 @@ void main() {
   });
 
   testWidgets('fling, fling generates two start/end pairs', (WidgetTester tester) async {
-    final List<String> log = <String>[];
+    final log = <String>[];
     await tester.pumpWidget(_buildScroller(log: log));
 
     // The ideal behavior here would be a single start/end pair, but for
@@ -158,7 +158,7 @@ void main() {
   });
 
   testWidgets('fling, pause, fling generates two start/end pairs', (WidgetTester tester) async {
-    final List<String> log = <String>[];
+    final log = <String>[];
     await tester.pumpWidget(_buildScroller(log: log));
 
     expect(log, equals(<String>[]));
@@ -177,7 +177,7 @@ void main() {
   });
 
   testWidgets('fling up ends', (WidgetTester tester) async {
-    final List<String> log = <String>[];
+    final log = <String>[];
     await tester.pumpWidget(_buildScroller(log: log));
 
     expect(log, equals(<String>[]));

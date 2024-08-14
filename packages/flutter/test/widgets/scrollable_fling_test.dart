@@ -97,7 +97,7 @@ void main() {
   });
 
   testWidgets('fling and tap to stop', (WidgetTester tester) async {
-    final List<String> log = <String>[];
+    final log = <String>[];
     await tester.pumpWidget(
       Directionality(
         textDirection: TextDirection.ltr,
@@ -127,7 +127,7 @@ void main() {
   });
 
   testWidgets('fling and wait and tap', (WidgetTester tester) async {
-    final List<String> log = <String>[];
+    final log = <String>[];
     await tester.pumpWidget(
       Directionality(
         textDirection: TextDirection.ltr,

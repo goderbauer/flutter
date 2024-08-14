@@ -197,7 +197,7 @@ void main() {
 
     final Size size = tester.getSize(find.text('Page 1'));
 
-    for (int i = 0; i < 150; i++) {
+    for (var i = 0; i < 150; i++) {
       await tester.pump(const Duration(milliseconds: 1));
       expect(flying(tester, find.text('Page 1')), findsNWidgets(2));
       expect(tester.getSize(flying(tester, find.text('Page 1')).first), size);
@@ -662,7 +662,7 @@ void main() {
 
   testWidgets('Middle is shown if alwaysShowMiddle is false but the nav bar is collapsed', (WidgetTester tester) async {
     const Widget userMiddle = Placeholder();
-    final ScrollController scrollController = ScrollController();
+    final scrollController = ScrollController();
     addTearDown(scrollController.dispose);
 
     await tester.pumpWidget(
@@ -1186,7 +1186,7 @@ void main() {
 
     Size? previousSize;
 
-    for (int i = 0; i < 150; i++) {
+    for (var i = 0; i < 150; i++) {
       await tester.pump(const Duration(milliseconds: 1));
       expect(flying(tester, find.text('Page 2')), findsOneWidget);
       final Size size = tester.getSize(flying(tester, find.text('Page 2')));
@@ -1283,8 +1283,8 @@ void main() {
   });
 
   testWidgets('Components are not unnecessarily rebuilt during transitions', (WidgetTester tester) async {
-    int bottomBuildTimes = 0;
-    int topBuildTimes = 0;
+    var bottomBuildTimes = 0;
+    var topBuildTimes = 0;
     await startTransitionBetween(
       tester,
       from: CupertinoNavigationBar(
@@ -1396,7 +1396,7 @@ void main() {
     await tester.pump(const Duration(milliseconds: 50));
 
     final TextScaler scaler = tester.firstWidget<RichText>(flying(tester, find.byType(RichText))).textScaler;
-    final List<double> fontSizes = List<double>.generate(100, (int index) => index / 3 + 1);
+    final fontSizes = List<double>.generate(100, (int index) => index / 3 + 1);
     expect(fontSizes.map(scaler.scale), fontSizes);
   });
 

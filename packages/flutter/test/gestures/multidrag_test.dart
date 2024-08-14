@@ -14,15 +14,15 @@ void main() {
   TestWidgetsFlutterBinding.ensureInitialized();
 
   testGesture('MultiDrag: moving before delay rejects', (GestureTester tester) {
-    final DelayedMultiDragGestureRecognizer drag = DelayedMultiDragGestureRecognizer();
+    final drag = DelayedMultiDragGestureRecognizer();
 
-    bool didStartDrag = false;
+    var didStartDrag = false;
     drag.onStart = (Offset position) {
       didStartDrag = true;
       return TestDrag();
     };
 
-    final TestPointer pointer = TestPointer(5);
+    final pointer = TestPointer(5);
     final PointerDownEvent down = pointer.down(const Offset(10.0, 10.0));
     drag.addPointer(down);
     tester.closeArena(5);
@@ -39,15 +39,15 @@ void main() {
   });
 
   testGesture('MultiDrag: delay triggers', (GestureTester tester) {
-    final DelayedMultiDragGestureRecognizer drag = DelayedMultiDragGestureRecognizer();
+    final drag = DelayedMultiDragGestureRecognizer();
 
-    bool didStartDrag = false;
+    var didStartDrag = false;
     drag.onStart = (Offset position) {
       didStartDrag = true;
       return TestDrag();
     };
 
-    final TestPointer pointer = TestPointer(5);
+    final pointer = TestPointer(5);
     final PointerDownEvent down = pointer.down(const Offset(10.0, 10.0));
     drag.addPointer(down);
     tester.closeArena(5);
@@ -64,17 +64,17 @@ void main() {
   });
 
   testGesture('MultiDrag: can filter based on device kind', (GestureTester tester) {
-    final DelayedMultiDragGestureRecognizer drag = DelayedMultiDragGestureRecognizer(
+    final drag = DelayedMultiDragGestureRecognizer(
       supportedDevices: <PointerDeviceKind>{ PointerDeviceKind.touch },
     );
 
-    bool didStartDrag = false;
+    var didStartDrag = false;
     drag.onStart = (Offset position) {
       didStartDrag = true;
       return TestDrag();
     };
 
-    final TestPointer mousePointer = TestPointer(5, PointerDeviceKind.mouse);
+    final mousePointer = TestPointer(5, PointerDeviceKind.mouse);
     final PointerDownEvent down = mousePointer.down(const Offset(10.0, 10.0));
     drag.addPointer(down);
     tester.closeArena(5);
@@ -95,18 +95,18 @@ void main() {
   test('allowedButtonsFilter should work the same when null or not specified', () {
     // Regression test for https://github.com/flutter/flutter/pull/122227
 
-    final ImmediateMultiDragGestureRecognizer recognizer1 = ImmediateMultiDragGestureRecognizer();
+    final recognizer1 = ImmediateMultiDragGestureRecognizer();
     // ignore: avoid_redundant_argument_values
-    final ImmediateMultiDragGestureRecognizer recognizer2 = ImmediateMultiDragGestureRecognizer(allowedButtonsFilter: null);
+    final recognizer2 = ImmediateMultiDragGestureRecognizer(allowedButtonsFilter: null);
 
     // We want to test _allowedButtonsFilter, which is called in this method.
-    const PointerDownEvent allowedPointer = PointerDownEvent(timeStamp: Duration(days: 10));
+    const allowedPointer = PointerDownEvent(timeStamp: Duration(days: 10));
     // ignore: invalid_use_of_protected_member
     expect(recognizer1.isPointerAllowed(allowedPointer), true);
     // ignore: invalid_use_of_protected_member
     expect(recognizer2.isPointerAllowed(allowedPointer), true);
 
-    const PointerDownEvent rejectedPointer = PointerDownEvent(timeStamp: Duration(days: 10), buttons: kMiddleMouseButton);
+    const rejectedPointer = PointerDownEvent(timeStamp: Duration(days: 10), buttons: kMiddleMouseButton);
     // ignore: invalid_use_of_protected_member
     expect(recognizer1.isPointerAllowed(rejectedPointer), false);
     // ignore: invalid_use_of_protected_member

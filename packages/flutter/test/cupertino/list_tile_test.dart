@@ -482,7 +482,7 @@ void main() {
 
   testWidgets('onTap with delay does not throw an exception', (WidgetTester tester) async {
     const Widget title = Text('CupertinoListTile');
-    bool showTile = true;
+    var showTile = true;
 
     Future<void> onTap() async {
       showTile = false;

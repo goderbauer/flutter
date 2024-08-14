@@ -247,7 +247,7 @@ abstract class Action<T extends Intent> with Diagnosticable {
   bool isEnabled(T intent) => isActionEnabled;
 
   bool _isEnabled(T intent, BuildContext? context) {
-    final Action<T> self = this;
+    final self = this;
     if (self is ContextAction<T>) {
       return self.isEnabled(intent, context);
     }
@@ -339,7 +339,7 @@ abstract class Action<T extends Intent> with Diagnosticable {
   Object? invoke(T intent);
 
   Object? _invoke(T intent, BuildContext? context) {
-    final Action<T> self = this;
+    final self = this;
     if (self is ContextAction<T>) {
       return self.invoke(intent, context);
     }
@@ -407,8 +407,8 @@ abstract class Action<T extends Intent> with Diagnosticable {
 
     // Make a local copy so that a listener can unregister while the list is
     // being iterated over.
-    final List<ActionListenerCallback> localListeners = List<ActionListenerCallback>.of(_listeners);
-    for (final ActionListenerCallback listener in localListeners) {
+    final localListeners = List<ActionListenerCallback>.of(_listeners);
+    for (final listener in localListeners) {
       InformationCollector? collector;
       assert(() {
         collector = () => <DiagnosticsNode>[
@@ -881,7 +881,7 @@ class Actions extends StatefulWidget {
     );
 
     _visitActionsAncestors(context, (InheritedElement element) {
-      final _ActionsScope actions = element.widget as _ActionsScope;
+      final actions = element.widget as _ActionsScope;
       final Action<T>? result = _castAction(actions, intent: intent);
       if (result != null) {
         context.dependOnInheritedElement(element);
@@ -910,7 +910,7 @@ class Actions extends StatefulWidget {
     );
 
     _visitActionsAncestors(context, (InheritedElement element) {
-      final _ActionsScope actions = element.widget as _ActionsScope;
+      final actions = element.widget as _ActionsScope;
       final Action<T>? result = _castAction(actions, intent: intent);
       if (result != null) {
         action = result;
@@ -966,7 +966,7 @@ class Actions extends StatefulWidget {
     Object? returnValue;
 
     final bool actionFound = _visitActionsAncestors(context, (InheritedElement element) {
-      final _ActionsScope actions = element.widget as _ActionsScope;
+      final actions = element.widget as _ActionsScope;
       final Action<T>? result = _castAction(actions, intent: intent);
       if (result != null && result._isEnabled(intent, context)) {
         // Invoke the action we found using the relevant dispatcher from the Actions
@@ -1014,7 +1014,7 @@ class Actions extends StatefulWidget {
   ) {
     Object? returnValue;
     _visitActionsAncestors(context, (InheritedElement element) {
-      final _ActionsScope actions = element.widget as _ActionsScope;
+      final actions = element.widget as _ActionsScope;
       final Action<T>? result = _castAction(actions, intent: intent);
       if (result != null && result._isEnabled(intent, context)) {
         // Invoke the action we found using the relevant dispatcher from the Actions
@@ -1062,10 +1062,10 @@ class _ActionsState extends State<Actions> {
     final Set<Action<Intent>> removedActions = listenedActions!.difference(widgetActions);
     final Set<Action<Intent>> addedActions = widgetActions.difference(listenedActions!);
 
-    for (final Action<Intent> action in removedActions) {
+    for (final action in removedActions) {
       action.removeActionListener(_handleActionChanged);
     }
-    for (final Action<Intent> action in addedActions) {
+    for (final action in addedActions) {
       action.addActionListener(_handleActionChanged);
     }
     listenedActions = widgetActions;

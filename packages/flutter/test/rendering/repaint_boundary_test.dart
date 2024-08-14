@@ -36,13 +36,13 @@ void main() {
   test('Repaint boundary can get new parent after markNeedsCompositingBitsUpdate', () {
     // Regression test for https://github.com/flutter/flutter/issues/24029.
 
-    final RenderRepaintBoundary repaintBoundary = RenderRepaintBoundary();
+    final repaintBoundary = RenderRepaintBoundary();
     layout(repaintBoundary, phase: EnginePhase.flushSemantics);
 
     repaintBoundary.markNeedsCompositingBitsUpdate();
 
     TestRenderingFlutterBinding.instance.renderView.child = null;
-    final RenderPadding padding = RenderPadding(
+    final padding = RenderPadding(
       padding: const EdgeInsets.all(50),
     );
     TestRenderingFlutterBinding.instance.renderView.child = padding;
@@ -51,8 +51,8 @@ void main() {
   });
 
   test('Framework creates an OffsetLayer for a repaint boundary', () {
-    final _TestRepaintBoundary repaintBoundary = _TestRepaintBoundary();
-    final RenderOpacity opacity = RenderOpacity(
+    final repaintBoundary = _TestRepaintBoundary();
+    final opacity = RenderOpacity(
       child: repaintBoundary,
     );
     layout(opacity, phase: EnginePhase.flushSemantics);
@@ -60,8 +60,8 @@ void main() {
   });
 
   test('Framework does not create an OffsetLayer for a non-repaint boundary', () {
-    final _TestNonCompositedBox nonCompositedBox = _TestNonCompositedBox();
-    final RenderOpacity opacity = RenderOpacity(
+    final nonCompositedBox = _TestNonCompositedBox();
+    final opacity = RenderOpacity(
       child: nonCompositedBox,
     );
     layout(opacity, phase: EnginePhase.flushSemantics);
@@ -69,8 +69,8 @@ void main() {
   });
 
   test('Framework allows a non-repaint boundary to create own layer', () {
-    final _TestCompositedBox compositedBox = _TestCompositedBox();
-    final RenderOpacity opacity = RenderOpacity(
+    final compositedBox = _TestCompositedBox();
+    final opacity = RenderOpacity(
       child: compositedBox,
     );
     layout(opacity, phase: EnginePhase.flushSemantics);
@@ -78,8 +78,8 @@ void main() {
   });
 
   test('Framework ensures repaint boundary layer is not overwritten', () {
-    final _TestRepaintBoundaryThatOverwritesItsLayer faultyRenderObject = _TestRepaintBoundaryThatOverwritesItsLayer();
-    final RenderOpacity opacity = RenderOpacity(
+    final faultyRenderObject = _TestRepaintBoundaryThatOverwritesItsLayer();
+    final opacity = RenderOpacity(
       child: faultyRenderObject,
     );
 

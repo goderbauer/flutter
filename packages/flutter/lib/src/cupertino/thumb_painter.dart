@@ -76,7 +76,7 @@ class CupertinoThumbPainter {
   /// Consider using [radius] and [extension] when deciding how large a
   /// rectangle to use for the thumb.
   void paint(Canvas canvas, Rect rect) {
-    final RRect rrect = RRect.fromRectAndRadius(
+    final rrect = RRect.fromRectAndRadius(
       rect,
       Radius.circular(rect.shortestSide / 2.0),
     );

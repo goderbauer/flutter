@@ -209,7 +209,7 @@ class _CalendarDatePickerState extends State<CalendarDatePicker> {
       assert(_selectedDate != null);
       _announcedInitialDate = true;
       final bool isToday = DateUtils.isSameDay(widget.currentDate, _selectedDate);
-      final String semanticLabelSuffix = isToday ? ', ${_localizations.currentDateLabel}' : '';
+      final semanticLabelSuffix = isToday ? ', ${_localizations.currentDateLabel}' : '';
       SemanticsService.announce(
         '${_localizations.formatFullDate(_selectedDate!)}$semanticLabelSuffix',
         _textDirection,
@@ -287,7 +287,7 @@ class _CalendarDatePickerState extends State<CalendarDatePicker> {
         case TargetPlatform.macOS:
         case TargetPlatform.windows:
           final bool isToday = DateUtils.isSameDay(widget.currentDate, _selectedDate);
-          final String semanticLabelSuffix = isToday ? ', ${_localizations.currentDateLabel}' : '';
+          final semanticLabelSuffix = isToday ? ', ${_localizations.currentDateLabel}' : '';
           SemanticsService.announce(
             '${_localizations.selectedDateLabel} ${_localizations.formatFullDate(_selectedDate!)}$semanticLabelSuffix',
             _textDirection,
@@ -621,15 +621,15 @@ class _MonthPickerState extends State<_MonthPicker> {
 
     // Can we use the preferred day in this month?
     if (preferredDay <= daysInMonth) {
-      final DateTime newFocus = DateTime(month.year, month.month, preferredDay);
+      final newFocus = DateTime(month.year, month.month, preferredDay);
       if (_isSelectable(newFocus)) {
         return newFocus;
       }
     }
 
     // Start at the 1st and take the first selectable date.
-    for (int day = 1; day <= daysInMonth; day++) {
-      final DateTime newFocus = DateTime(month.year, month.month, day);
+    for (var day = 1; day <= daysInMonth; day++) {
+      final newFocus = DateTime(month.year, month.month, day);
       if (_isSelectable(newFocus)) {
         return newFocus;
       }
@@ -961,7 +961,7 @@ class _DayPickerState extends State<_DayPicker> {
   ///     4 5 6 7 8 9 10
   ///
   List<Widget> _dayHeaders(TextStyle? headerStyle, MaterialLocalizations localizations) {
-    final List<Widget> result = <Widget>[];
+    final result = <Widget>[];
     for (int i = localizations.firstDayOfWeekIndex; result.length < DateTime.daysPerWeek; i = (i + 1) % DateTime.daysPerWeek) {
       final String weekday = localizations.narrowWeekdays[i];
       result.add(ExcludeSemantics(
@@ -996,7 +996,7 @@ class _DayPickerState extends State<_DayPicker> {
       if (day < 1) {
         dayItems.add(const SizedBox.shrink());
       } else {
-        final DateTime dayToBuild = DateTime(year, month, day);
+        final dayToBuild = DateTime(year, month, day);
         final bool isDisabled =
           dayToBuild.isAfter(widget.lastDate) ||
           dayToBuild.isBefore(widget.firstDate) ||
@@ -1082,9 +1082,9 @@ class _DayState extends State<_Day> {
     }
 
     final MaterialLocalizations localizations = MaterialLocalizations.of(context);
-    final String semanticLabelSuffix = widget.isToday ? ', ${localizations.currentDateLabel}' : '';
+    final semanticLabelSuffix = widget.isToday ? ', ${localizations.currentDateLabel}' : '';
 
-    final Set<MaterialState> states = <MaterialState>{
+    final states = <MaterialState>{
       if (widget.isDisabled) MaterialState.disabled,
       if (widget.isSelectedDay) MaterialState.selected,
     };
@@ -1097,7 +1097,7 @@ class _DayState extends State<_Day> {
       (Set<MaterialState> states) => effectiveValue((DatePickerThemeData? theme) => theme?.dayOverlayColor?.resolve(states)),
     );
     final OutlinedBorder dayShape = resolve<OutlinedBorder?>((DatePickerThemeData? theme) => theme?.dayShape, states)!;
-    final ShapeDecoration decoration = widget.isToday
+    final decoration = widget.isToday
       ? ShapeDecoration(
           color: dayBackgroundColor,
           shape: dayShape.copyWith(
@@ -1310,7 +1310,7 @@ class _YearPickerState extends State<YearPicker> {
     final double decorationHeight = 36.0 * textScaleFactor;
     final double decorationWidth = 72.0 * textScaleFactor;
 
-    final Set<MaterialState> states = <MaterialState>{
+    final states = <MaterialState>{
       if (isDisabled) MaterialState.disabled,
       if (isSelected) MaterialState.selected,
     };
@@ -1329,7 +1329,7 @@ class _YearPickerState extends State<YearPicker> {
         border = Border.fromBorderSide(todayBorder.copyWith(color: textColor));
       }
     }
-    final BoxDecoration decoration = BoxDecoration(
+    final decoration = BoxDecoration(
       border: border,
       color: background,
       borderRadius: BorderRadius.circular(decorationHeight / 2),
@@ -1355,7 +1355,7 @@ class _YearPickerState extends State<YearPicker> {
         child: yearItem,
       );
     } else {
-      DateTime date = DateTime(year, widget.selectedDate?.month ?? DateTime.january);
+      var date = DateTime(year, widget.selectedDate?.month ?? DateTime.january);
       if (date.isBefore(DateTime(widget.firstDate.year, widget.firstDate.month))) {
         // Ignore firstDate.day because we're just working in years and months here.
         assert(date.year == widget.firstDate.year);

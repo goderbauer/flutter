@@ -7,7 +7,7 @@ import 'package:flutter_test/flutter_test.dart';
 
 void main() {
   test('StrutStyle diagnostics test', () {
-    const StrutStyle s0 = StrutStyle(
+    const s0 = StrutStyle(
       fontFamily: 'Serif',
       fontSize: 14,
     );
@@ -16,7 +16,7 @@ void main() {
       equals('StrutStyle(family: Serif, size: 14.0)'),
     );
 
-    const StrutStyle s1 = StrutStyle(
+    const s1 = StrutStyle(
       fontFamily: 'Serif',
       fontSize: 14,
       forceStrutHeight: true,
@@ -29,7 +29,7 @@ void main() {
       equals('StrutStyle(family: Serif, size: 14.0, <strut height forced>)'),
     );
 
-    const StrutStyle s2 = StrutStyle(
+    const s2 = StrutStyle(
       fontFamily: 'Serif',
       fontSize: 14,
       forceStrutHeight: false,
@@ -39,13 +39,13 @@ void main() {
       equals('StrutStyle(family: Serif, size: 14.0, <strut height normal>)'),
     );
 
-    const StrutStyle s3 = StrutStyle();
+    const s3 = StrutStyle();
     expect(
       s3.toString(),
       equals('StrutStyle'),
     );
 
-    const StrutStyle s4 = StrutStyle(
+    const s4 = StrutStyle(
       forceStrutHeight: false,
     );
     expect(
@@ -53,7 +53,7 @@ void main() {
       equals('StrutStyle(<strut height normal>)'),
     );
 
-    const StrutStyle s5 = StrutStyle(
+    const s5 = StrutStyle(
       forceStrutHeight: true,
     );
     expect(

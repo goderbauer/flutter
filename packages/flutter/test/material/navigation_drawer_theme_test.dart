@@ -14,12 +14,12 @@ void main() {
 
   test('NavigationDrawerThemeData lerp special cases', () {
     expect(NavigationDrawerThemeData.lerp(null, null, 0), null);
-    const NavigationDrawerThemeData data = NavigationDrawerThemeData();
+    const data = NavigationDrawerThemeData();
     expect(identical(NavigationDrawerThemeData.lerp(data, data, 0.5), data), true);
   });
 
   testWidgets('Default debugFillProperties', (WidgetTester tester) async {
-    final DiagnosticPropertiesBuilder builder = DiagnosticPropertiesBuilder();
+    final builder = DiagnosticPropertiesBuilder();
     const NavigationDrawerThemeData().debugFillProperties(builder);
 
     final List<String> description = builder.properties
@@ -31,7 +31,7 @@ void main() {
   });
 
   testWidgets('NavigationDrawerThemeData implements debugFillProperties', (WidgetTester tester) async {
-    final DiagnosticPropertiesBuilder builder = DiagnosticPropertiesBuilder();
+    final builder = DiagnosticPropertiesBuilder();
     const NavigationDrawerThemeData(
       tileHeight: 50,
       backgroundColor: Color(0x00000099),
@@ -69,8 +69,8 @@ void main() {
   testWidgets(
     'NavigationDrawerThemeData values are used when no NavigationDrawer properties are specified',
     (WidgetTester tester) async {
-      final GlobalKey<ScaffoldState> scaffoldKey = GlobalKey<ScaffoldState>();
-      const NavigationDrawerThemeData navigationDrawerTheme = NavigationDrawerThemeData(
+      final scaffoldKey = GlobalKey<ScaffoldState>();
+      const navigationDrawerTheme = NavigationDrawerThemeData(
         backgroundColor: Color(0x00000001),
         elevation: 7.0,
         shadowColor: Color(0x00000002),
@@ -137,8 +137,8 @@ void main() {
   testWidgets(
     'NavigationDrawer values take priority over NavigationDrawerThemeData values when both properties are specified',
     (WidgetTester tester) async {
-      final GlobalKey<ScaffoldState> scaffoldKey = GlobalKey<ScaffoldState>();
-      const NavigationDrawerThemeData navigationDrawerTheme = NavigationDrawerThemeData(
+      final scaffoldKey = GlobalKey<ScaffoldState>();
+      const navigationDrawerTheme = NavigationDrawerThemeData(
         backgroundColor: Color(0x00000001),
         elevation: 7.0,
         shadowColor: Color(0x00000002),
@@ -148,12 +148,12 @@ void main() {
         labelTextStyle:MaterialStatePropertyAll<TextStyle>(TextStyle(fontSize: 7.0)),
         iconTheme: MaterialStatePropertyAll<IconThemeData>(IconThemeData(color: Color(0x00000005))),
       );
-      const Color backgroundColor = Color(0x00000009);
-      const double elevation = 14.0;
-      const Color shadowColor = Color(0x00000008);
-      const Color surfaceTintColor = Color(0x00000007);
-      const RoundedRectangleBorder indicatorShape = RoundedRectangleBorder(borderRadius: BorderRadius.all(Radius.circular(32.0)));
-      const Color indicatorColor = Color(0x00000006);
+      const backgroundColor = Color(0x00000009);
+      const elevation = 14.0;
+      const shadowColor = Color(0x00000008);
+      const surfaceTintColor = Color(0x00000007);
+      const indicatorShape = RoundedRectangleBorder(borderRadius: BorderRadius.all(Radius.circular(32.0)));
+      const indicatorColor = Color(0x00000006);
 
       await tester.pumpWidget(
         _buildWidget(
@@ -197,15 +197,15 @@ void main() {
   });
 
   testWidgets('Local NavigationDrawerTheme takes priority over ThemeData.navigationDrawerTheme', (WidgetTester tester) async {
-    final GlobalKey<ScaffoldState> scaffoldKey = GlobalKey<ScaffoldState>();
-    const Color backgroundColor = Color(0x00000009);
-    const double elevation = 7.0;
-    const Color shadowColor = Color(0x00000008);
-    const Color surfaceTintColor = Color(0x00000007);
-    const Color iconColor = Color(0x00000006);
-    const TextStyle labelStyle = TextStyle(fontSize: 7.0);
+    final scaffoldKey = GlobalKey<ScaffoldState>();
+    const backgroundColor = Color(0x00000009);
+    const elevation = 7.0;
+    const shadowColor = Color(0x00000008);
+    const surfaceTintColor = Color(0x00000007);
+    const iconColor = Color(0x00000006);
+    const labelStyle = TextStyle(fontSize: 7.0);
     const ShapeBorder indicatorShape = CircleBorder();
-    const Color indicatorColor = Color(0x00000005);
+    const indicatorColor = Color(0x00000005);
 
     await tester.pumpWidget(
       _buildWidget(

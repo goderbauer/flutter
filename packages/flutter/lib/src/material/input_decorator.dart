@@ -293,7 +293,7 @@ class _Shaker extends AnimatedWidget {
   Animation<double> get animation => listenable as Animation<double>;
 
   double get translateX {
-    const double shakeDelta = 4.0;
+    const shakeDelta = 4.0;
     final double t = animation.value;
     return shakeDelta * switch (t) {
       <= 0.25 => -t,
@@ -1002,7 +1002,7 @@ class _RenderDecoration extends RenderBox with SlottedContainerRenderObjectMixin
     final Size prefixSize = prefix == null ? Size.zero : layoutChild(prefix, contentConstraints);
     final Size suffixSize = suffix == null ? Size.zero : layoutChild(suffix, contentConstraints);
 
-    final EdgeInsetsDirectional accessoryHorizontalInsets = EdgeInsetsDirectional.only(
+    final accessoryHorizontalInsets = EdgeInsetsDirectional.only(
       start: iconWidth + prefixSize.width + (prefixIcon == null ? contentPadding.start : prefixIconSize.width),
       end: suffixSize.width + (suffixIcon == null ? contentPadding.end : suffixIconSize.width),
     );
@@ -1130,7 +1130,7 @@ class _RenderDecoration extends RenderBox with SlottedContainerRenderObjectMixin
       final double outlineCenterBaseline = inputInternalBaseline
         + baselineAdjustment / 2.0
         + (containerHeight - inputHeight) / 2.0;
-      final double outlineTopBaseline = topInputBaseline;
+      final outlineTopBaseline = topInputBaseline;
       final double outlineBottomBaseline = topInputBaseline + maxVerticalOffset;
       baseline = _interpolateThree(
         outlineTopBaseline,
@@ -1193,7 +1193,7 @@ class _RenderDecoration extends RenderBox with SlottedContainerRenderObjectMixin
   }
 
   double _lineHeight(double width, List<RenderBox?> boxes) {
-    double height = 0.0;
+    var height = 0.0;
     for (final RenderBox? box in boxes) {
       if (box == null) {
         continue;
@@ -1317,7 +1317,7 @@ class _RenderDecoration extends RenderBox with SlottedContainerRenderObjectMixin
 
     final RenderBox? container = this.container;
     if (container != null) {
-      final BoxConstraints containerConstraints = BoxConstraints.tightFor(
+      final containerConstraints = BoxConstraints.tightFor(
         height: layout.containerHeight,
         width: overallWidth - _boxSize(icon).width,
       );
@@ -1444,7 +1444,7 @@ class _RenderDecoration extends RenderBox with SlottedContainerRenderObjectMixin
       // _BorderContainer's x and is independent of label's x.
       switch (textDirection) {
         case TextDirection.rtl:
-          double offsetToPrefixIcon = 0.0;
+          var offsetToPrefixIcon = 0.0;
           if (prefixIcon != null && !decoration.alignLabelWithHint) {
             offsetToPrefixIcon = material3 ? _boxSize(prefixIcon).width - contentPadding.end : 0;
           }
@@ -1456,7 +1456,7 @@ class _RenderDecoration extends RenderBox with SlottedContainerRenderObjectMixin
           // The value of _InputBorderGap.start is relative to the origin of the
           // _BorderContainer which is inset by the icon's width. Although, when
           // floating label is centered, it's already relative to _BorderContainer.
-          double offsetToPrefixIcon = 0.0;
+          var offsetToPrefixIcon = 0.0;
           if (prefixIcon != null && !decoration.alignLabelWithHint) {
             offsetToPrefixIcon = material3 ? (-_boxSize(prefixIcon).width + contentPadding.start) : 0;
           }
@@ -1582,7 +1582,7 @@ class _RenderDecoration extends RenderBox with SlottedContainerRenderObjectMixin
   }
 
   ChildSemanticsConfigurationsResult _childSemanticsConfigurationDelegate(List<SemanticsConfiguration> childConfigs) {
-    final ChildSemanticsConfigurationsResultBuilder builder = ChildSemanticsConfigurationsResultBuilder();
+    final builder = ChildSemanticsConfigurationsResultBuilder();
     List<SemanticsConfiguration>? prefixMergeGroup;
     List<SemanticsConfiguration>? suffixMergeGroup;
     for (final SemanticsConfiguration childConfig in childConfigs) {
@@ -2255,7 +2255,7 @@ class _InputDecoratorState extends State<InputDecorator> with TickerProviderStat
     }
 
     final bool decorationIsDense = decoration.isDense ?? false;
-    final double iconSize = decorationIsDense ? 18.0 : 24.0;
+    final iconSize = decorationIsDense ? 18.0 : 24.0;
 
     final Widget? icon = decoration.icon == null ? null :
       MouseRegion(
@@ -2431,7 +2431,7 @@ class _InputDecoratorState extends State<InputDecorator> with TickerProviderStat
           : const EdgeInsetsDirectional.fromSTEB(12.0, 24.0, 12.0, 16.0));
     }
 
-    final _Decorator decorator = _Decorator(
+    final decorator = _Decorator(
       decoration: _Decoration(
         contentPadding: contentPadding,
         isCollapsed: decoration.isCollapsed ?? themeData.inputDecorationTheme.isCollapsed,
@@ -3780,7 +3780,7 @@ class InputDecoration {
 
   @override
   int get hashCode {
-    final List<Object?> values = <Object?>[
+    final values = <Object?>[
       icon,
       iconColor,
       label,
@@ -3840,7 +3840,7 @@ class InputDecoration {
 
   @override
   String toString() {
-    final List<String> description = <String>[
+    final description = <String>[
       if (icon != null) 'icon: $icon',
       if (iconColor != null) 'iconColor: $iconColor',
       if (label != null) 'label: $label',
@@ -4564,7 +4564,7 @@ class InputDecorationTheme with Diagnosticable {
   @override
   void debugFillProperties(DiagnosticPropertiesBuilder properties) {
     super.debugFillProperties(properties);
-    const InputDecorationTheme defaultTheme = InputDecorationTheme();
+    const defaultTheme = InputDecorationTheme();
     properties.add(DiagnosticsProperty<TextStyle>('labelStyle', labelStyle, defaultValue: defaultTheme.labelStyle));
     properties.add(DiagnosticsProperty<TextStyle>('floatingLabelStyle', floatingLabelStyle, defaultValue: defaultTheme.floatingLabelStyle));
     properties.add(DiagnosticsProperty<TextStyle>('helperStyle', helperStyle, defaultValue: defaultTheme.helperStyle));

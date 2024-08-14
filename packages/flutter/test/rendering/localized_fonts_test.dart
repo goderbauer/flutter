@@ -27,7 +27,7 @@ void main() {
           ],
           home: Builder(
             builder: (BuildContext context) {
-              const String character = '骨';
+              const character = '骨';
               final TextStyle style = Theme.of(context).textTheme.displayMedium!;
               return Scaffold(
                 body: Container(
@@ -73,7 +73,7 @@ void main() {
           ],
           home: Builder(
             builder: (BuildContext context) {
-              const String character = '骨';
+              const character = '骨';
               final TextStyle style = Theme.of(context).textTheme.displayMedium!;
               return Scaffold(
                 body: Container(
@@ -118,7 +118,7 @@ void main() {
           ],
           home: Builder(
             builder: (BuildContext context) {
-              const String character = '骨';
+              const character = '骨';
               final TextStyle style = Theme.of(context).textTheme.displayMedium!;
               return Scaffold(
                 body: Container(
@@ -170,7 +170,7 @@ void main() {
           ],
           home: Builder(
             builder: (BuildContext context) {
-              const String character = '骨';
+              const character = '骨';
               final TextStyle style = Theme.of(context).textTheme.displayMedium!;
               return Scaffold(
                 body: Container(
@@ -222,7 +222,7 @@ void main() {
           ],
           home: Builder(
             builder: (BuildContext context) {
-              const String character = '骨';
+              const character = '骨';
               final TextStyle style = Theme.of(context).textTheme.displayMedium!;
               return Scaffold(
                 body: Container(
@@ -266,7 +266,7 @@ void main() {
           ],
           home: Builder(
             builder: (BuildContext context) {
-              const String character = '骨';
+              const character = '骨';
               final TextStyle style = Theme.of(context).textTheme.displayMedium!;
               return Scaffold(
                 body: Container(

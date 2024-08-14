@@ -42,7 +42,7 @@ class StatefulWrapperState extends State<StatefulWrapper> {
 
 void main() {
   testWidgets('Moving global key inside a LayoutBuilder', (WidgetTester tester) async {
-    final GlobalKey<StatefulWrapperState> key = GlobalKey<StatefulWrapperState>();
+    final key = GlobalKey<StatefulWrapperState>();
     await tester.pumpWidget(
       LayoutBuilder(builder: (BuildContext context, BoxConstraints constraints) {
         return Wrapper(
@@ -100,7 +100,7 @@ void main() {
   });
 
   testWidgets('Moving global key inside a SliverLayoutBuilder', (WidgetTester tester) async {
-    final GlobalKey<StatefulWrapperState> key = GlobalKey<StatefulWrapperState>();
+    final key = GlobalKey<StatefulWrapperState>();
 
     await tester.pumpWidget(
       Directionality(

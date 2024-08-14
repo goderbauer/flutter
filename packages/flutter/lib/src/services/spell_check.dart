@@ -147,12 +147,12 @@ class DefaultSpellCheckService implements SpellCheckService {
   /// and that both list of [SuggestionSpan]s apply to the same text.
   static List<SuggestionSpan> mergeResults(
       List<SuggestionSpan> oldResults, List<SuggestionSpan> newResults) {
-    final List<SuggestionSpan> mergedResults = <SuggestionSpan>[];
+    final mergedResults = <SuggestionSpan>[];
 
     SuggestionSpan oldSpan;
     SuggestionSpan newSpan;
-    int oldSpanPointer = 0;
-    int newSpanPointer = 0;
+    var oldSpanPointer = 0;
+    var newSpanPointer = 0;
 
     while (oldSpanPointer < oldResults.length &&
         newSpanPointer < newResults.length) {
@@ -197,7 +197,7 @@ class DefaultSpellCheckService implements SpellCheckService {
       return null;
     }
 
-    List<SuggestionSpan> suggestionSpans = <SuggestionSpan>[
+    var suggestionSpans = <SuggestionSpan>[
       for (final Map<dynamic, dynamic> resultMap in rawResults.cast<Map<dynamic, dynamic>>())
         SuggestionSpan(
           TextRange(start: resultMap['startIndex'] as int, end: resultMap['endIndex'] as int),

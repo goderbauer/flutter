@@ -75,17 +75,17 @@ class _DropdownMenuPainter extends CustomPainter {
   @override
   void paint(Canvas canvas, Size size) {
     final double selectedItemOffset = getSelectedItemOffset();
-    final Tween<double> top = Tween<double>(
+    final top = Tween<double>(
       begin: clampDouble(selectedItemOffset, 0.0, math.max(size.height - _kMenuItemHeight, 0.0)),
       end: 0.0,
     );
 
-    final Tween<double> bottom = Tween<double>(
+    final bottom = Tween<double>(
       begin: clampDouble(top.begin! + _kMenuItemHeight, math.min(_kMenuItemHeight, size.height), size.height),
       end: size.height,
     );
 
-    final Rect rect = Rect.fromLTRB(0.0, top.evaluate(resize), size.width, bottom.evaluate(resize));
+    final rect = Rect.fromLTRB(0.0, top.evaluate(resize), size.width, bottom.evaluate(resize));
 
     _painter.paint(canvas, rect.topLeft, ImageConfiguration(size: rect.size));
   }
@@ -305,7 +305,7 @@ class _DropdownMenuState<T> extends State<_DropdownMenu<T>> {
     assert(debugCheckHasMaterialLocalizations(context));
     final MaterialLocalizations localizations = MaterialLocalizations.of(context);
     final _DropdownRoute<T> route = widget.route;
-    final List<Widget> children = <Widget>[
+    final children = <Widget>[
       for (int itemIndex = 0; itemIndex < route.items.length; ++itemIndex)
         _DropdownMenuItemButton<T>(
           route: widget.route,
@@ -1358,7 +1358,7 @@ class _DropdownButtonState<T> extends State<DropdownButton<T>> with WidgetsBindi
     }
 
     assert(widget.items!.where((DropdownMenuItem<T> item) => item.value == widget.value).length == 1);
-    for (int itemIndex = 0; itemIndex < widget.items!.length; itemIndex++) {
+    for (var itemIndex = 0; itemIndex < widget.items!.length; itemIndex++) {
       if (widget.items![itemIndex].value == widget.value) {
         _selectedIndex = itemIndex;
         return;
@@ -1374,7 +1374,7 @@ class _DropdownButtonState<T> extends State<DropdownButton<T>> with WidgetsBindi
       ? _kAlignedMenuMargin
       : _kUnalignedMenuMargin;
 
-    final List<_MenuItem<T>> menuItems = <_MenuItem<T>>[
+    final menuItems = <_MenuItem<T>>[
     for (int index = 0; index < widget.items!.length; index += 1)
       _MenuItem<T>(
         item: widget.items![index],
@@ -1398,7 +1398,7 @@ class _DropdownButtonState<T> extends State<DropdownButton<T>> with WidgetsBindi
 
     final NavigatorState navigator = Navigator.of(context);
     assert(_dropdownRoute == null);
-    final RenderBox itemBox = context.findRenderObject()! as RenderBox;
+    final itemBox = context.findRenderObject()! as RenderBox;
     final Rect itemRect = itemBox.localToGlobal(Offset.zero, ancestor: navigator.context.findRenderObject()) & itemBox.size;
     _dropdownRoute = _DropdownRoute<T>(
       items: menuItems,
@@ -1484,7 +1484,7 @@ class _DropdownButtonState<T> extends State<DropdownButton<T>> with WidgetsBindi
     // We should explicitly type the items list to be a list of <Widget>,
     // otherwise, no explicit type adding items maybe trigger a crash/failure
     // when hint and selectedItemBuilder are provided.
-    final List<Widget> items = widget.selectedItemBuilder == null
+    final items = widget.selectedItemBuilder == null
       ? (widget.items != null ? List<Widget>.of(widget.items!) : <Widget>[])
       : List<Widget>.of(widget.selectedItemBuilder!(context));
 
@@ -1525,7 +1525,7 @@ class _DropdownButtonState<T> extends State<DropdownButton<T>> with WidgetsBindi
       );
     }
 
-    const Icon defaultIcon = Icon(Icons.arrow_drop_down);
+    const defaultIcon = Icon(Icons.arrow_drop_down);
 
     Widget result = DefaultTextStyle(
       style: _enabled ? _textStyle! : _textStyle!.copyWith(color: Theme.of(context).disabledColor),
@@ -1555,7 +1555,7 @@ class _DropdownButtonState<T> extends State<DropdownButton<T>> with WidgetsBindi
     );
 
     if (!DropdownButtonHideUnderline.at(context)) {
-      final double bottom = (widget.isDense || widget.itemHeight == null) ? 0.0 : 8.0;
+      final bottom = (widget.isDense || widget.itemHeight == null) ? 0.0 : 8.0;
       result = Stack(
         children: <Widget>[
           result,
@@ -1684,7 +1684,7 @@ class DropdownButtonFormField<T> extends FormField<T> {
           initialValue: value,
           autovalidateMode: autovalidateMode ?? AutovalidateMode.disabled,
           builder: (FormFieldState<T> field) {
-            final _DropdownButtonFormFieldState<T> state = field as _DropdownButtonFormFieldState<T>;
+            final state = field as _DropdownButtonFormFieldState<T>;
             final InputDecoration decorationArg =  decoration ?? InputDecoration(focusColor: focusColor);
             final InputDecoration effectiveDecoration = decorationArg.applyDefaults(
               Theme.of(field.context).inputDecorationTheme,

@@ -50,7 +50,7 @@ void main() {
   testWidgets('Check onstage/offstage handling around transitions', (WidgetTester tester) async {
     final GlobalKey containerKey1 = GlobalKey();
     final GlobalKey containerKey2 = GlobalKey();
-    final Map<String, WidgetBuilder> routes = <String, WidgetBuilder>{
+    final routes = <String, WidgetBuilder>{
       '/': (_) => Container(key: containerKey1, child: const Text('Home')),
       '/settings': (_) => Container(key: containerKey2, child: const Text('Settings')),
     };
@@ -132,8 +132,8 @@ void main() {
   testWidgets('Check back gesture disables Heroes', (WidgetTester tester) async {
     final GlobalKey containerKey1 = GlobalKey();
     final GlobalKey containerKey2 = GlobalKey();
-    const String kHeroTag = 'hero';
-    final Map<String, WidgetBuilder> routes = <String, WidgetBuilder>{
+    const kHeroTag = 'hero';
+    final routes = <String, WidgetBuilder>{
       '/': (_) => Scaffold(
         key: containerKey1,
         body: const ColoredBox(
@@ -201,7 +201,7 @@ void main() {
   testWidgets("Check back gesture doesn't start during transitions", (WidgetTester tester) async {
     final GlobalKey containerKey1 = GlobalKey();
     final GlobalKey containerKey2 = GlobalKey();
-    final Map<String, WidgetBuilder> routes = <String, WidgetBuilder>{
+    final routes = <String, WidgetBuilder>{
       '/': (_) => Scaffold(key: containerKey1, body: const Text('Home')),
       '/settings': (_) => Scaffold(key: containerKey2, body: const Text('Settings')),
     };
@@ -245,7 +245,7 @@ void main() {
   testWidgets('Check back gesture with a persistent bottom sheet showing', (WidgetTester tester) async {
     final GlobalKey containerKey1 = GlobalKey();
     final GlobalKey containerKey2 = GlobalKey();
-    final Map<String, WidgetBuilder> routes = <String, WidgetBuilder>{
+    final routes = <String, WidgetBuilder>{
       '/': (_) => Scaffold(key: containerKey1, body: const Text('Home')),
       '/sheet': (_) => PersistentBottomSheetTest(key: containerKey2),
     };
@@ -276,7 +276,7 @@ void main() {
     expect(find.text('Sheet'), isOnstage);
 
     // Show the bottom sheet.
-    final PersistentBottomSheetTestState sheet = containerKey2.currentState! as PersistentBottomSheetTestState;
+    final sheet = containerKey2.currentState! as PersistentBottomSheetTestState;
     sheet.showBottomSheet();
 
     await tester.pump(const Duration(seconds: 1));
@@ -296,7 +296,7 @@ void main() {
   }, variant: const TargetPlatformVariant(<TargetPlatform>{ TargetPlatform.iOS,  TargetPlatform.macOS }));
 
   testWidgets('Test completed future', (WidgetTester tester) async {
-    final Map<String, WidgetBuilder> routes = <String, WidgetBuilder>{
+    final routes = <String, WidgetBuilder>{
       '/': (_) => const Center(child: Text('home')),
       '/next': (_) => const Center(child: Text('next')),
     };
@@ -308,12 +308,12 @@ void main() {
       builder: (BuildContext context) => const Center(child: Text('page')),
     );
 
-    int popCount = 0;
+    var popCount = 0;
     route.popped.whenComplete(() {
       popCount += 1;
     });
 
-    int completeCount = 0;
+    var completeCount = 0;
     route.completed.whenComplete(() {
       completeCount += 1;
     });

@@ -143,7 +143,7 @@ class NavigationDrawer extends StatelessWidget {
     final int totalNumberOfDestinations =
         children.whereType<NavigationDrawerDestination>().toList().length;
 
-    int destinationIndex = 0;
+    var destinationIndex = 0;
     Widget wrapChild(Widget child, int index) => _SelectableAnimatedBuilder(
         duration: const Duration(milliseconds: 500),
         isSelected: index == selectedIndex,
@@ -160,7 +160,7 @@ class NavigationDrawer extends StatelessWidget {
           );
         });
 
-    final List<Widget> wrappedChildren = <Widget>[
+    final wrappedChildren = <Widget>[
       for (final Widget child in children)
         if (child is! NavigationDrawerDestination) child
         else wrapChild(child, destinationIndex++),
@@ -235,11 +235,11 @@ class NavigationDrawerDestination extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    const Set<MaterialState> selectedState = <MaterialState>{
+    const selectedState = <MaterialState>{
       MaterialState.selected
     };
-    const Set<MaterialState> unselectedState = <MaterialState>{};
-    const Set<MaterialState> disabledState = <MaterialState>{
+    const unselectedState = <MaterialState>{};
+    const disabledState = <MaterialState>{
       MaterialState.disabled
     };
 
@@ -350,7 +350,7 @@ class _NavigationDestinationBuilder extends StatelessWidget {
     final NavigationDrawerThemeData navigationDrawerTheme = NavigationDrawerTheme.of(context);
     final NavigationDrawerThemeData defaults = _NavigationDrawerDefaultsM3(context);
 
-    final Row destinationBody = Row(
+    final destinationBody = Row(
       children: <Widget>[
         const SizedBox(width: 16),
         buildIcon(context),

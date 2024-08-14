@@ -17,7 +17,7 @@ void main() {
   });
 
   testWidgets('should handle having no title', (WidgetTester tester) async {
-    final Title widget = Title(
+    final widget = Title(
       color: const Color(0xFF00FF00),
       child: Container(),
     );
@@ -34,7 +34,7 @@ void main() {
   });
 
   testWidgets('should not pass "null" to setApplicationSwitcherDescription', (WidgetTester tester) async {
-    final List<MethodCall> log = <MethodCall>[];
+    final log = <MethodCall>[];
 
     tester.binding.defaultBinaryMessenger.setMockMethodCallHandler(SystemChannels.platform, (MethodCall methodCall) async {
       log.add(methodCall);

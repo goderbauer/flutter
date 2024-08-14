@@ -25,7 +25,7 @@ void main() {
     //                                                           | 10
     //                                                           |
     //                                     --------------------------------------- 'ground'
-    final SemanticsTester semantics = SemanticsTester(tester);
+    final semantics = SemanticsTester(tester);
     await tester.pumpWidget(const MaterialApp(
       home: Column(
         children: <Widget>[
@@ -101,7 +101,7 @@ void main() {
     // Same as 'SemanticsNodes overlapping in z', but the order of children
     // is reversed
 
-    final SemanticsTester semantics = SemanticsTester(tester);
+    final semantics = SemanticsTester(tester);
     await tester.pumpWidget(const MaterialApp(
       home: Column(
         children: <Widget>[
@@ -174,7 +174,7 @@ void main() {
   });
 
   testWidgets('single node thickness', (WidgetTester tester) async {
-    final SemanticsTester semantics = SemanticsTester(tester);
+    final semantics = SemanticsTester(tester);
 
     await tester.pumpWidget(const MaterialApp(
         home: Center(
@@ -194,7 +194,7 @@ void main() {
   });
 
   testWidgets('force-merge', (WidgetTester tester) async {
-    final SemanticsTester semantics = SemanticsTester(tester);
+    final semantics = SemanticsTester(tester);
 
     await tester.pumpWidget(MaterialApp(
         home: Card(
@@ -248,7 +248,7 @@ void main() {
   });
 
   testWidgets('force-merge with inversed children', (WidgetTester tester) async {
-    final SemanticsTester semantics = SemanticsTester(tester);
+    final semantics = SemanticsTester(tester);
 
     await tester.pumpWidget(MaterialApp(
         home: Card(

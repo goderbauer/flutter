@@ -576,7 +576,7 @@ class RenderListWheelViewport
   }
 
   double _getIntrinsicCrossAxis(_ChildSizingFunction childSize) {
-    double extent = 0.0;
+    var extent = 0.0;
     RenderBox? child = firstChild;
     while (child != null) {
       extent = math.max(extent, childSize(child));
@@ -628,7 +628,7 @@ class RenderListWheelViewport
   ///
   /// This relies on the [childManager] maintaining [ListWheelParentData.index].
   int indexOf(RenderBox child) {
-    final ListWheelParentData childParentData = child.parentData! as ListWheelParentData;
+    final childParentData = child.parentData! as ListWheelParentData;
     assert(childParentData.index != null);
     return childParentData.index!;
   }
@@ -655,7 +655,7 @@ class RenderListWheelViewport
 
   void _layoutChild(RenderBox child, BoxConstraints constraints, int index) {
     child.layout(constraints, parentUsesSize: true);
-    final ListWheelParentData childParentData = child.parentData! as ListWheelParentData;
+    final childParentData = child.parentData! as ListWheelParentData;
     // Centers the child horizontally.
     final double crossPosition = size.width / 2.0 - child.size.width / 2.0;
     childParentData.offset = Offset(crossPosition, indexToScrollOffset(index));
@@ -766,7 +766,7 @@ class RenderListWheelViewport
 
     // Relayout all active children.
     RenderBox? child = firstChild;
-    int index = currentFirstIndex;
+    var index = currentFirstIndex;
     while (child != null) {
       _layoutChild(child, childConstraints, index++);
       child = childAfter(child);
@@ -850,7 +850,7 @@ class RenderListWheelViewport
   void _paintAllChildren(PaintingContext context, Offset offset, { bool? center }) {
     RenderBox? childToPaint = firstChild;
     while (childToPaint != null) {
-      final ListWheelParentData childParentData = childToPaint.parentData! as ListWheelParentData;
+      final childParentData = childToPaint.parentData! as ListWheelParentData;
       _paintTransformedChild(childToPaint, context, offset, childParentData.offset, center: center);
       childToPaint = childAfter(childToPaint);
     }
@@ -893,7 +893,7 @@ class RenderListWheelViewport
     );
 
     // Offset that helps painting everything in the center (e.g. angle = 0).
-    final Offset offsetToCenter = Offset(
+    final offsetToCenter = Offset(
       untransformedPaintingCoordinates.dx,
       -_topScrollMarginExtent,
     );
@@ -939,19 +939,19 @@ class RenderListWheelViewport
     final bool isBeforeMagnifierBottomLine = untransformedPaintingCoordinates.dy
         <= magnifierBottomLinePosition;
 
-    final Rect centerRect = Rect.fromLTWH(
+    final centerRect = Rect.fromLTWH(
       0.0,
       magnifierTopLinePosition,
       size.width,
       _itemExtent * _magnification,
     );
-    final Rect topHalfRect = Rect.fromLTWH(
+    final topHalfRect = Rect.fromLTWH(
       0.0,
       0.0,
       size.width,
       magnifierTopLinePosition,
     );
-    final Rect bottomHalfRect = Rect.fromLTWH(
+    final bottomHalfRect = Rect.fromLTWH(
       0.0,
       magnifierBottomLinePosition,
       size.width,
@@ -1037,7 +1037,7 @@ class RenderListWheelViewport
       painter,
     );
 
-    final ListWheelParentData childParentData = child.parentData! as ListWheelParentData;
+    final childParentData = child.parentData! as ListWheelParentData;
     // Save the final transform that accounts both for the offset and cylindrical transform.
     final Matrix4 transform = _centerOriginTransform(cylindricalTransform)
       ..translate(paintOriginOffset.dx, paintOriginOffset.dy);
@@ -1047,7 +1047,7 @@ class RenderListWheelViewport
   /// Return the Matrix4 transformation that would zoom in content in the
   /// magnified area.
   Matrix4 _magnifyTransform() {
-    final Matrix4 magnify = Matrix4.identity();
+    final magnify = Matrix4.identity();
     magnify.translate(size.width * (-_offAxisFraction + 0.5), size.height / 2);
     magnify.scale(_magnification, _magnification, _magnification);
     magnify.translate(-size.width * (-_offAxisFraction + 0.5), -size.height / 2);
@@ -1057,7 +1057,7 @@ class RenderListWheelViewport
   /// Apply incoming transformation with the transformation's origin at the
   /// viewport's center or horizontally off to the side based on offAxisFraction.
   Matrix4 _centerOriginTransform(Matrix4 originalMatrix) {
-    final Matrix4 result = Matrix4.identity();
+    final result = Matrix4.identity();
     final Offset centerOriginTranslation = Alignment.center.alongSize(size);
     result.translate(
       centerOriginTranslation.dx * (-_offAxisFraction * 2 + 1),
@@ -1080,7 +1080,7 @@ class RenderListWheelViewport
 
   @override
   void applyPaintTransform(RenderBox child, Matrix4 transform) {
-    final ListWheelParentData parentData = child.parentData! as ListWheelParentData;
+    final parentData = child.parentData! as ListWheelParentData;
     final Matrix4? paintTransform = parentData.transform;
     if (paintTransform != null) {
       transform.multiply(paintTransform);
@@ -1099,7 +1099,7 @@ class RenderListWheelViewport
   bool hitTestChildren(BoxHitTestResult result, { required Offset position }) {
     RenderBox? child = lastChild;
     while (child != null) {
-      final ListWheelParentData childParentData = child.parentData! as ListWheelParentData;
+      final childParentData = child.parentData! as ListWheelParentData;
       final Matrix4? transform = childParentData.transform;
       // Skip not painted children
       if (transform != null) {
@@ -1144,7 +1144,7 @@ class RenderListWheelViewport
       child = child.parent!;
     }
 
-    final ListWheelParentData parentData = child.parentData! as ListWheelParentData;
+    final parentData = child.parentData! as ListWheelParentData;
     final double targetOffset = parentData.offset.dy; // the so-called "centerPosition"
 
     final Matrix4 transform = target.getTransformTo(child);

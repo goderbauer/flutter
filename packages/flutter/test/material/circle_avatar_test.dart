@@ -30,8 +30,8 @@ void main() {
 
     final RenderConstrainedBox box = tester.renderObject(find.byType(CircleAvatar));
     expect(box.size, equals(const Size(100.0, 100.0)));
-    final RenderDecoratedBox child = box.child! as RenderDecoratedBox;
-    final BoxDecoration decoration = child.decoration as BoxDecoration;
+    final child = box.child! as RenderDecoratedBox;
+    final decoration = child.decoration as BoxDecoration;
     expect(decoration.color, equals(backgroundColor));
 
     final RenderParagraph paragraph = tester.renderObject(find.text('Z'));
@@ -52,8 +52,8 @@ void main() {
 
     final RenderConstrainedBox box = tester.renderObject(find.byType(CircleAvatar));
     expect(box.size, equals(const Size(100.0, 100.0)));
-    final RenderDecoratedBox child = box.child! as RenderDecoratedBox;
-    final BoxDecoration decoration = child.decoration as BoxDecoration;
+    final child = box.child! as RenderDecoratedBox;
+    final decoration = child.decoration as BoxDecoration;
     expect(decoration.color, equals(backgroundColor));
 
     final RenderParagraph paragraph = tester.renderObject(find.text('Z'));
@@ -72,8 +72,8 @@ void main() {
 
     final RenderConstrainedBox box = tester.renderObject(find.byType(CircleAvatar));
     expect(box.size, equals(const Size(100.0, 100.0)));
-    final RenderDecoratedBox child = box.child! as RenderDecoratedBox;
-    final BoxDecoration decoration = child.decoration as BoxDecoration;
+    final child = box.child! as RenderDecoratedBox;
+    final decoration = child.decoration as BoxDecoration;
     expect(decoration.image!.fit, equals(BoxFit.cover));
   });
 
@@ -89,15 +89,15 @@ void main() {
 
     final RenderConstrainedBox box = tester.renderObject(find.byType(CircleAvatar));
     expect(box.size, equals(const Size(100.0, 100.0)));
-    final RenderDecoratedBox child = box.child! as RenderDecoratedBox;
-    final BoxDecoration decoration = child.decoration as BoxDecoration;
+    final child = box.child! as RenderDecoratedBox;
+    final decoration = child.decoration as BoxDecoration;
     expect(decoration.image!.fit, equals(BoxFit.cover));
   });
 
   testWidgets('CircleAvatar backgroundImage is used as a fallback for foregroundImage', (WidgetTester tester) async {
     addTearDown(imageCache.clear);
-    final ErrorImageProvider errorImage = ErrorImageProvider();
-    bool caughtForegroundImageError = false;
+    final errorImage = ErrorImageProvider();
+    var caughtForegroundImageError = false;
     await tester.pumpWidget(
       wrap(
         child: RepaintBoundary(
@@ -114,8 +114,8 @@ void main() {
     expect(caughtForegroundImageError, true);
     final RenderConstrainedBox box = tester.renderObject(find.byType(CircleAvatar));
     expect(box.size, equals(const Size(100.0, 100.0)));
-    final RenderDecoratedBox child = box.child! as RenderDecoratedBox;
-    final BoxDecoration decoration = child.decoration as BoxDecoration;
+    final child = box.child! as RenderDecoratedBox;
+    final decoration = child.decoration as BoxDecoration;
     expect(decoration.image!.fit, equals(BoxFit.cover));
     await expectLater(
       find.byType(CircleAvatar),
@@ -134,12 +134,12 @@ void main() {
       ),
     );
 
-    final ThemeData fallback = ThemeData.fallback();
+    final fallback = ThemeData.fallback();
 
     final RenderConstrainedBox box = tester.renderObject(find.byType(CircleAvatar));
     expect(box.size, equals(const Size(40.0, 40.0)));
-    final RenderDecoratedBox child = box.child! as RenderDecoratedBox;
-    final BoxDecoration decoration = child.decoration as BoxDecoration;
+    final child = box.child! as RenderDecoratedBox;
+    final decoration = child.decoration as BoxDecoration;
     expect(decoration.color, equals(fallback.primaryColorDark));
 
     final RenderParagraph paragraph = tester.renderObject(find.text('Z'));
@@ -147,7 +147,7 @@ void main() {
   });
 
   testWidgets('Material3 - CircleAvatar default colors', (WidgetTester tester) async {
-    final ThemeData theme = ThemeData();
+    final theme = ThemeData();
     await tester.pumpWidget(
       wrap(
         child: Theme(
@@ -160,8 +160,8 @@ void main() {
     );
 
     final RenderConstrainedBox box = tester.renderObject(find.byType(CircleAvatar));
-    final RenderDecoratedBox child = box.child! as RenderDecoratedBox;
-    final BoxDecoration decoration = child.decoration as BoxDecoration;
+    final child = box.child! as RenderDecoratedBox;
+    final decoration = child.decoration as BoxDecoration;
     expect(decoration.color, equals(theme.colorScheme.primaryContainer));
 
     final RenderParagraph paragraph = tester.renderObject(find.text('Z'));
@@ -228,8 +228,8 @@ void main() {
 
     final RenderConstrainedBox box = tester.renderObject(find.byType(CircleAvatar));
     expect(box.size, equals(const Size(100.0, 100.0)));
-    final RenderDecoratedBox child = box.child! as RenderDecoratedBox;
-    final BoxDecoration decoration = child.decoration as BoxDecoration;
+    final child = box.child! as RenderDecoratedBox;
+    final decoration = child.decoration as BoxDecoration;
     expect(decoration.color, equals(backgroundColor));
 
     final RenderParagraph paragraph = tester.renderObject(find.text('Z'));
@@ -250,8 +250,8 @@ void main() {
 
     final RenderConstrainedBox box = tester.renderObject(find.byType(CircleAvatar));
     expect(box.size, equals(const Size(100.0, 100.0)));
-    final RenderDecoratedBox child = box.child! as RenderDecoratedBox;
-    final BoxDecoration decoration = child.decoration as BoxDecoration;
+    final child = box.child! as RenderDecoratedBox;
+    final decoration = child.decoration as BoxDecoration;
     expect(decoration.color, equals(backgroundColor));
 
     final RenderParagraph paragraph = tester.renderObject(find.text('Z'));
@@ -273,8 +273,8 @@ void main() {
 
     final RenderConstrainedBox box = tester.renderObject(find.byType(CircleAvatar));
     expect(box.size, equals(const Size(100.0, 100.0)));
-    final RenderDecoratedBox child = box.child! as RenderDecoratedBox;
-    final BoxDecoration decoration = child.decoration as BoxDecoration;
+    final child = box.child! as RenderDecoratedBox;
+    final decoration = child.decoration as BoxDecoration;
     expect(decoration.color, equals(backgroundColor));
 
     final RenderParagraph paragraph = tester.renderObject(find.text('Z'));
@@ -287,7 +287,7 @@ void main() {
     // can be deleted.
 
     testWidgets('Material2 - CircleAvatar default colors with light theme', (WidgetTester tester) async {
-      final ThemeData theme = ThemeData(useMaterial3: false, primaryColor: Colors.grey.shade100);
+      final theme = ThemeData(useMaterial3: false, primaryColor: Colors.grey.shade100);
       await tester.pumpWidget(
         wrap(
           child: Theme(
@@ -300,8 +300,8 @@ void main() {
       );
 
       final RenderConstrainedBox box = tester.renderObject(find.byType(CircleAvatar));
-      final RenderDecoratedBox child = box.child! as RenderDecoratedBox;
-      final BoxDecoration decoration = child.decoration as BoxDecoration;
+      final child = box.child! as RenderDecoratedBox;
+      final decoration = child.decoration as BoxDecoration;
       expect(decoration.color, equals(theme.primaryColorLight));
 
       final RenderParagraph paragraph = tester.renderObject(find.text('Z'));
@@ -309,7 +309,7 @@ void main() {
     });
 
     testWidgets('Material2 - CircleAvatar default colors with dark theme', (WidgetTester tester) async {
-      final ThemeData theme = ThemeData(useMaterial3: false, primaryColor: Colors.grey.shade800);
+      final theme = ThemeData(useMaterial3: false, primaryColor: Colors.grey.shade800);
       await tester.pumpWidget(
         wrap(
           child: Theme(
@@ -322,8 +322,8 @@ void main() {
       );
 
       final RenderConstrainedBox box = tester.renderObject(find.byType(CircleAvatar));
-      final RenderDecoratedBox child = box.child! as RenderDecoratedBox;
-      final BoxDecoration decoration = child.decoration as BoxDecoration;
+      final child = box.child! as RenderDecoratedBox;
+      final decoration = child.decoration as BoxDecoration;
       expect(decoration.color, equals(theme.primaryColorDark));
 
       final RenderParagraph paragraph = tester.renderObject(find.text('Z'));

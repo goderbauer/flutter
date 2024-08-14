@@ -112,9 +112,9 @@ Widget buildTest({
 void main() {
   testWidgets('ScrollDirection test', (WidgetTester tester) async {
     // Regression test for https://github.com/flutter/flutter/issues/107101
-    final List<ScrollDirection> receivedResult = <ScrollDirection>[];
-    const List<ScrollDirection> expectedReverseResult = <ScrollDirection>[ScrollDirection.reverse, ScrollDirection.idle];
-    const List<ScrollDirection> expectedForwardResult = <ScrollDirection>[ScrollDirection.forward, ScrollDirection.idle];
+    final receivedResult = <ScrollDirection>[];
+    const expectedReverseResult = <ScrollDirection>[ScrollDirection.reverse, ScrollDirection.idle];
+    const expectedForwardResult = <ScrollDirection>[ScrollDirection.forward, ScrollDirection.idle];
 
     await tester.pumpWidget(MaterialApp(
       home: Scaffold(
@@ -193,7 +193,7 @@ void main() {
     expect(renderObject.clipBehavior, equals(Clip.hardEdge));
 
     // 2nd, check that the painting context has received the default clip behavior.
-    final TestClipPaintingContext context = TestClipPaintingContext();
+    final context = TestClipPaintingContext();
     renderObject.paint(context, Offset.zero);
     expect(context.clipBehavior, equals(Clip.hardEdge));
 
@@ -217,7 +217,7 @@ void main() {
     final Key innerKey = UniqueKey();
     final GlobalKey<NestedScrollViewState> outerKey = GlobalKey();
 
-    final ScrollController outerController = ScrollController();
+    final outerController = ScrollController();
     addTearDown(outerController.dispose);
 
     Widget build() {
@@ -281,7 +281,7 @@ void main() {
     // Which better conveys the intent of the test
     // The value is not equal to 2000 due to BouncingScrollPhysics of the inner Scrollable
     const double endPosition = -1974.0862087158384;
-    const Duration nextFrame = Duration(microseconds: 16666);
+    const nextFrame = Duration(microseconds: 16666);
 
     // Assert positions after over-scrolling
     expect(outer.offset, 0.0);
@@ -300,7 +300,7 @@ void main() {
     expect(inner.offset, endPosition + 600);
 
     double currentOffset = inner.offset;
-    int maxNumberOfSteps = 100;
+    var maxNumberOfSteps = 100;
 
     while (inner.offset < 0) {
       maxNumberOfSteps--;
@@ -329,11 +329,11 @@ void main() {
     final Key innerKey = UniqueKey();
     final GlobalKey<NestedScrollViewState> outerKey = GlobalKey();
 
-    final ScrollController outerController = ScrollController();
+    final outerController = ScrollController();
     addTearDown(outerController.dispose);
 
-    const Duration frame = Duration(milliseconds: 16);
-    bool tapped = false;
+    const frame = Duration(milliseconds: 16);
+    var tapped = false;
 
     Widget build() {
       return Directionality(
@@ -387,7 +387,7 @@ void main() {
     // Over-scroll the inner Scrollable to the top
     await tester.fling(find.byKey(innerKey), const Offset(0, 200), 2000);
 
-    for (int i = 0; i < 5; i++) {
+    for (var i = 0; i < 5; i++) {
       await tester.pump(frame);
     }
 
@@ -416,11 +416,11 @@ void main() {
     final Key innerKey = UniqueKey();
     final GlobalKey<NestedScrollViewState> outerKey = GlobalKey();
 
-    final ScrollController outerController = ScrollController();
+    final outerController = ScrollController();
     addTearDown(outerController.dispose);
 
-    const Duration frame = Duration(milliseconds: 16);
-    bool tapped = false;
+    const frame = Duration(milliseconds: 16);
+    var tapped = false;
 
     Widget build() {
       return Directionality(
@@ -475,7 +475,7 @@ void main() {
     // Fling to somewhere in the middle of the outer Scrollable
     await tester.fling(find.byKey(innerKey), const Offset(0, -200), 2000);
 
-    for (int i = 0; i < 3; i++) {
+    for (var i = 0; i < 3; i++) {
       await tester.pump(frame);
     }
 
@@ -506,7 +506,7 @@ void main() {
     // Fling the scrollable further
     await tester.fling(find.byKey(innerKey), const Offset(0, -200), 2000);
 
-    for (int i = 0; i < 3; i++) {
+    for (var i = 0; i < 3; i++) {
       await tester.pump(frame);
     }
 
@@ -535,11 +535,11 @@ void main() {
     final Key innerKey = UniqueKey();
     final GlobalKey<NestedScrollViewState> outerKey = GlobalKey();
 
-    final ScrollController outerController = ScrollController();
+    final outerController = ScrollController();
     addTearDown(outerController.dispose);
 
-    const Duration frame = Duration(milliseconds: 16);
-    bool tapped = false;
+    const frame = Duration(milliseconds: 16);
+    var tapped = false;
 
     Widget build() {
       return Directionality(
@@ -594,7 +594,7 @@ void main() {
     // Fling to somewhere in the middle of the outer Scrollable
     await tester.fling(find.byKey(innerKey), const Offset(0, -2000), 2000);
 
-    for (int i = 0; i < 10; i++) {
+    for (var i = 0; i < 10; i++) {
       await tester.pump(frame);
     }
 
@@ -610,7 +610,7 @@ void main() {
 
     double settleOffset = inner.offset;
 
-    for (int i = 0; i < 5; i++) {
+    for (var i = 0; i < 5; i++) {
       await tester.pump(frame);
       await tester.pump(frame); // Pump a second frame to ensure the Scrollable has a chance to move
 
@@ -760,7 +760,7 @@ void main() {
   });
 
   testWidgets('NestedScrollView with a ScrollController', (WidgetTester tester) async {
-    final ScrollController controller = ScrollController(
+    final controller = ScrollController(
       initialScrollOffset: 50.0,
     );
     addTearDown(controller.dispose);
@@ -838,7 +838,7 @@ void main() {
   });
 
   testWidgets('Three NestedScrollViews with one ScrollController', (WidgetTester tester) async {
-    final TrackingScrollController controller = TrackingScrollController();
+    final controller = TrackingScrollController();
     addTearDown(controller.dispose);
     expect(controller.mostRecentlyUpdatedPosition, isNull);
     expect(controller.initialScrollOffset, 0.0);
@@ -982,8 +982,8 @@ void main() {
 
   testWidgets('NestedScrollView and internal scrolling', (WidgetTester tester) async {
     debugDisableShadows = false;
-    const List<String> tabs = <String>['Hello', 'World'];
-    int buildCount = 0;
+    const tabs = <String>['Hello', 'World'];
+    var buildCount = 0;
     await tester.pumpWidget(
       MaterialApp(theme: ThemeData(useMaterial3: false), home: Material(child:
         // THE FOLLOWING SECTION IS FROM THE NestedScrollView DOCUMENTATION
@@ -1108,9 +1108,9 @@ void main() {
       if (object is RenderPhysicalModel || object is RenderPhysicalShape) {
         return object;
       }
-      final List<RenderObject> children = <RenderObject>[];
+      final children = <RenderObject>[];
       object.visitChildren(children.add);
-      for (final RenderObject child in children) {
+      for (final child in children) {
         final Object? result = dfsFindPhysicalLayer(child);
         if (result != null) {
           return result;
@@ -1127,7 +1127,7 @@ void main() {
       expect(physicalModel.elevation, equals(elevation));
     }
 
-    int expectedBuildCount = 0;
+    var expectedBuildCount = 0;
     expectedBuildCount += 1;
     expect(buildCount, expectedBuildCount);
     expect(find.text('Item 2'), findsOneWidget);
@@ -1406,7 +1406,7 @@ void main() {
 
       double appBarHeight = tester.renderObject<RenderBox>(find.byType(AppBar)).size.height;
       expect(appBarHeight, 104.0);
-      final double scrollExtent = appBarHeight;
+      final scrollExtent = appBarHeight;
       expect(globalKey.currentState!.outerController.offset, 0.0);
       expect(globalKey.currentState!.innerController.offset, 0.0);
 
@@ -1500,7 +1500,7 @@ void main() {
         scrollExtent - appBarHeight,
       );
 
-      final TestPointer testPointer = TestPointer(3, ui.PointerDeviceKind.trackpad);
+      final testPointer = TestPointer(3, ui.PointerDeviceKind.trackpad);
       await tester.sendEventToBinding(testPointer.addPointer(
         location: Offset(0.0, appBarHeight + 1.0)
       ));
@@ -1548,7 +1548,7 @@ void main() {
 
       double appBarHeight = tester.renderObject<RenderBox>(find.byType(AppBar)).size.height;
       expect(appBarHeight, 200.0);
-      final double scrollExtent = appBarHeight;
+      final scrollExtent = appBarHeight;
       expect(globalKey.currentState!.outerController.offset, 0.0);
       expect(globalKey.currentState!.innerController.offset, 0.0);
 
@@ -1605,7 +1605,7 @@ void main() {
       'NestedScrollViewState.outerController should correspond to NestedScrollView.controller',
       (WidgetTester tester) async {
         final GlobalKey<NestedScrollViewState> globalKey = GlobalKey();
-        final ScrollController scrollController = ScrollController();
+        final scrollController = ScrollController();
         addTearDown(scrollController.dispose);
 
         await tester.pumpWidget(buildTest(
@@ -1877,7 +1877,7 @@ void main() {
       bool extentLessThan = false,
       required bool visible,
     }) {
-      final RenderSliver target = key.currentContext!.findRenderObject()! as RenderSliver;
+      final target = key.currentContext!.findRenderObject()! as RenderSliver;
       final SliverGeometry geometry = target.geometry!;
       expect(target.parent, isA<RenderSliverOverlapAbsorber>());
       expect(geometry.visible, visible);
@@ -2007,7 +2007,7 @@ void main() {
       ));
 
       final Offset scrollEventLocation = tester.getCenter(find.byType(NestedScrollView));
-      final TestPointer testPointer = TestPointer(1, ui.PointerDeviceKind.mouse);
+      final testPointer = TestPointer(1, ui.PointerDeviceKind.mouse);
       // Create a hover event so that |testPointer| has a location when generating the scroll.
       testPointer.hover(scrollEventLocation);
 
@@ -2064,7 +2064,7 @@ void main() {
       ));
 
       final Offset scrollEventLocation = tester.getCenter(find.byType(NestedScrollView));
-      final TestPointer testPointer = TestPointer(1, ui.PointerDeviceKind.mouse);
+      final testPointer = TestPointer(1, ui.PointerDeviceKind.mouse);
       // Create a hover event so that |testPointer| has a location when generating the scroll.
       testPointer.hover(scrollEventLocation);
 
@@ -2119,7 +2119,7 @@ void main() {
       ));
 
       final Offset scrollEventLocation = tester.getCenter(find.byType(NestedScrollView));
-      final TestPointer testPointer = TestPointer(1, ui.PointerDeviceKind.mouse);
+      final testPointer = TestPointer(1, ui.PointerDeviceKind.mouse);
       // Create a hover event so that |testPointer| has a location when generating the scroll.
       testPointer.hover(scrollEventLocation);
 
@@ -2566,7 +2566,7 @@ void main() {
       ));
 
       final Offset scrollEventLocation = tester.getCenter(find.byType(NestedScrollView));
-      final TestPointer testPointer = TestPointer(1, ui.PointerDeviceKind.mouse);
+      final testPointer = TestPointer(1, ui.PointerDeviceKind.mouse);
       // Create a hover event so that |testPointer| has a location when generating the scroll.
       testPointer.hover(scrollEventLocation);
 
@@ -2627,7 +2627,7 @@ void main() {
       ));
 
       final Offset scrollEventLocation = tester.getCenter(find.byType(NestedScrollView));
-      final TestPointer testPointer = TestPointer(1, ui.PointerDeviceKind.mouse);
+      final testPointer = TestPointer(1, ui.PointerDeviceKind.mouse);
       // Create a hover event so that |testPointer| has a location when generating the scroll.
       testPointer.hover(scrollEventLocation);
 
@@ -2712,7 +2712,7 @@ void main() {
     testWidgets('overscroll, hold for 0 velocity, and release', (WidgetTester tester) async {
       // Dragging into an overscroll and holding so that when released, the
       // ballistic scroll activity has a 0 velocity.
-      final ScrollController controller = ScrollController();
+      final controller = ScrollController();
       addTearDown(controller.dispose);
       await tester.pumpWidget(buildBallisticTest(controller));
       // Last item of the inner scroll view.
@@ -2740,7 +2740,7 @@ void main() {
     testWidgets('overscroll, release, and tap', (WidgetTester tester) async {
       // Tapping while an inner ballistic scroll activity is in progress will
       // trigger a secondary ballistic scroll activity with a 0 velocity.
-      final ScrollController controller = ScrollController();
+      final controller = ScrollController();
       addTearDown(controller.dispose);
       await tester.pumpWidget(buildBallisticTest(controller));
       // Last item of the inner scroll view.
@@ -2827,12 +2827,12 @@ void main() {
   }, variant: const TargetPlatformVariant(<TargetPlatform>{ TargetPlatform.iOS,  TargetPlatform.macOS }));
 
   testWidgets('Scroll pointer signal should not cause overscroll.', (WidgetTester tester) async {
-    final ScrollController controller = ScrollController();
+    final controller = ScrollController();
     addTearDown(controller.dispose);
     await tester.pumpWidget(buildTest(controller: controller));
 
     final Offset scrollEventLocation = tester.getCenter(find.byType(NestedScrollView));
-    final TestPointer testPointer = TestPointer(1, ui.PointerDeviceKind.mouse);
+    final testPointer = TestPointer(1, ui.PointerDeviceKind.mouse);
     // Create a hover event so that |testPointer| has a location when generating the scroll.
     testPointer.hover(scrollEventLocation);
 
@@ -2861,7 +2861,7 @@ void main() {
     );
 
     // Regression test for https://github.com/flutter/flutter/issues/55362
-    final TestPointer testPointer = TestPointer(1, ui.PointerDeviceKind.mouse);
+    final testPointer = TestPointer(1, ui.PointerDeviceKind.mouse);
     // The offset is the responsibility of innerPosition.
     testPointer.hover(const Offset(0, 201));
 
@@ -2894,7 +2894,7 @@ void main() {
     (WidgetTester tester) async {
       ScrollDirection? lastUserScrollingDirection;
 
-      final ScrollController controller = ScrollController();
+      final controller = ScrollController();
       addTearDown(controller.dispose);
       await tester.pumpWidget(buildTest(controller: controller));
 
@@ -2909,7 +2909,7 @@ void main() {
       expect(lastUserScrollingDirection, ScrollDirection.reverse);
 
       final Offset scrollEventLocation = tester.getCenter(find.byType(NestedScrollView));
-      final TestPointer testPointer = TestPointer(1, ui.PointerDeviceKind.mouse);
+      final testPointer = TestPointer(1, ui.PointerDeviceKind.mouse);
       // Create a hover event so that |testPointer| has a location when generating the scroll.
       testPointer.hover(scrollEventLocation);
       await tester.sendEventToBinding(testPointer.scroll(const Offset(0.0, 20.0)));
@@ -2971,7 +2971,7 @@ void main() {
 
   // Regression test of https://github.com/flutter/flutter/issues/74372
   testWidgets('ScrollPosition can be accessed during `_updatePosition()`', (WidgetTester tester) async {
-    final ScrollController controller = ScrollController();
+    final controller = ScrollController();
     addTearDown(controller.dispose);
     late ScrollPosition position;
 
@@ -3065,9 +3065,9 @@ void main() {
   });
 
   testWidgets('NestedScrollViewCoordinator.pointerScroll dispatches correct scroll notifications', (WidgetTester tester) async {
-    int scrollEnded = 0;
-    int scrollStarted = 0;
-    bool isScrolled = false;
+    var scrollEnded = 0;
+    var scrollStarted = 0;
+    var isScrolled = false;
 
     await tester.pumpWidget(MaterialApp(
       home: NotificationListener<ScrollNotification>(
@@ -3114,7 +3114,7 @@ void main() {
     ));
 
     final Offset scrollEventLocation = tester.getCenter(find.byType(NestedScrollView));
-    final TestPointer testPointer = TestPointer(1, ui.PointerDeviceKind.mouse);
+    final testPointer = TestPointer(1, ui.PointerDeviceKind.mouse);
     // Create a hover event so that |testPointer| has a location when generating the scroll.
     testPointer.hover(scrollEventLocation);
     await tester.sendEventToBinding(testPointer.scroll(const Offset(0.0, 300.0)));
@@ -3353,7 +3353,7 @@ void main() {
         ),
       );
     }
-    final List<Object> exceptions = <Object>[];
+    final exceptions = <Object>[];
     final FlutterExceptionHandler? oldHandler = FlutterError.onError;
     FlutterError.onError = (FlutterErrorDetails details) {
       exceptions.add(details.exception);

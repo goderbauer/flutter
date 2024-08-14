@@ -10,7 +10,7 @@ import 'package:flutter_test/flutter_test.dart';
 import 'semantics_tester.dart';
 
 Future<void> test(WidgetTester tester, double offset, { double anchor = 0.0 }) {
-  final ViewportOffset viewportOffset = ViewportOffset.fixed(offset);
+  final viewportOffset = ViewportOffset.fixed(offset);
   addTearDown(viewportOffset.dispose);
   return tester.pumpWidget(
     Directionality(
@@ -49,7 +49,7 @@ Future<void> testSliverFixedExtentList(WidgetTester tester, List<String> items) 
               },
               childCount : items.length,
               findChildIndexCallback: (Key key) {
-                final ValueKey<String> valueKey = key as ValueKey<String>;
+                final valueKey = key as ValueKey<String>;
                 return items.indexOf(valueKey.value);
               },
             ),
@@ -235,8 +235,8 @@ void main() {
     // Regression test for https://github.com/flutter/flutter/issues/138749.
     // The bug happens when items in between first and last item changed while
     // the sliver layout only display a item in the middle of the list.
-    final List<int> items = <int>[0, 1, 2, 3, 4, 5];
-    final List<int> replacedItems = <int>[0, 2, 9, 10, 11, 12, 5];
+    final items = <int>[0, 1, 2, 3, 4, 5];
+    final replacedItems = <int>[0, 2, 9, 10, 11, 12, 5];
     Future<void> pumpSliverGrid(bool replace) async {
       await tester.pumpWidget(
         Center(
@@ -295,7 +295,7 @@ void main() {
   });
 
   testWidgets('SliverFixedExtentList correctly clears garbage', (WidgetTester tester) async {
-    final List<String> items = <String>['1', '2', '3', '4', '5', '6'];
+    final items = <String>['1', '2', '3', '4', '5', '6'];
     await testSliverFixedExtentList(tester, items);
     // Keep alive widgets require 1 frame to notify their parents. Pumps in between
     // drags to ensure widgets are kept alive.
@@ -336,13 +336,13 @@ void main() {
   });
 
   testWidgets('SliverFixedExtentList handles underflow when its children changes', (WidgetTester tester) async {
-    final List<String> items = <String>['1', '2', '3', '4', '5', '6'];
-    final List<String> initializedChild = <String>[];
-    List<Widget> children = <Widget>[
+    final items = <String>['1', '2', '3', '4', '5', '6'];
+    final initializedChild = <String>[];
+    var children = <Widget>[
       for (final String item in items)
         StateInitSpy(item, () => initializedChild.add(item), key: ValueKey<String>(item)),
     ];
-    final ScrollController controller = ScrollController(initialScrollOffset: 5400);
+    final controller = ScrollController(initialScrollOffset: 5400);
     addTearDown(controller.dispose);
 
     await tester.pumpWidget(
@@ -473,7 +473,7 @@ void main() {
     'SliverList can handle inaccurate scroll offset due to changes in children list',
       (WidgetTester tester) async {
       // Regression test for https://github.com/flutter/flutter/pull/59888.
-      bool skip = true;
+      var skip = true;
       Widget buildItem(BuildContext context, int index) {
         return !skip || index.isEven
           ? Card(
@@ -612,23 +612,23 @@ void main() {
   );
 
   testWidgets('Can override ErrorWidget.build', (WidgetTester tester) async {
-    const Text errorText = Text('error');
+    const errorText = Text('error');
     final ErrorWidgetBuilder oldBuilder = ErrorWidget.builder;
     ErrorWidget.builder = (FlutterErrorDetails details) => errorText;
-    final SliverChildBuilderDelegate builderThrowsDelegate = SliverChildBuilderDelegate(
+    final builderThrowsDelegate = SliverChildBuilderDelegate(
       (_, __) => throw 'builder',
       addAutomaticKeepAlives: false,
       addRepaintBoundaries: false,
       addSemanticIndexes: false,
     );
-    final KeyedSubtree wrapped = builderThrowsDelegate.build(_NullBuildContext(), 0)! as KeyedSubtree;
+    final wrapped = builderThrowsDelegate.build(_NullBuildContext(), 0)! as KeyedSubtree;
     expect(wrapped.child, errorText);
     expect(tester.takeException(), 'builder');
     ErrorWidget.builder = oldBuilder;
   });
 
   testWidgets('SliverFixedExtentList with SliverChildBuilderDelegate auto-correct scroll offset - super fast', (WidgetTester tester) async {
-    final ScrollController controller = ScrollController(initialScrollOffset: 600);
+    final controller = ScrollController(initialScrollOffset: 600);
     addTearDown(controller.dispose);
 
     await tester.pumpWidget(
@@ -677,7 +677,7 @@ void main() {
   });
 
   testWidgets('SliverFixedExtentList with SliverChildBuilderDelegate auto-correct scroll offset - reasonable', (WidgetTester tester) async {
-    final ScrollController controller = ScrollController(initialScrollOffset: 600);
+    final controller = ScrollController(initialScrollOffset: 600);
     addTearDown(controller.dispose);
 
     await tester.pumpWidget(
@@ -729,7 +729,7 @@ void main() {
 
   group('SliverOffstage - ', () {
     testWidgets('offstage true', (WidgetTester tester) async {
-      final SemanticsTester semantics = SemanticsTester(tester);
+      final semantics = SemanticsTester(tester);
       await tester.pumpWidget(boilerPlate(
         const SliverOffstage(
           sliver: SliverToBoxAdapter(
@@ -748,7 +748,7 @@ void main() {
     });
 
     testWidgets('offstage false', (WidgetTester tester) async {
-      final SemanticsTester semantics = SemanticsTester(tester);
+      final semantics = SemanticsTester(tester);
       await tester.pumpWidget(boilerPlate(
         const SliverOffstage(
           offstage: false,
@@ -770,7 +770,7 @@ void main() {
 
   group('SliverOpacity - ', () {
     testWidgets('painting & semantics', (WidgetTester tester) async {
-      final SemanticsTester semantics = SemanticsTester(tester);
+      final semantics = SemanticsTester(tester);
 
       // Opacity 1.0: Semantics and painting
       await tester.pumpWidget(boilerPlate(
@@ -892,8 +892,8 @@ void main() {
 
   group('SliverIgnorePointer - ', () {
     testWidgets('ignores pointer events', (WidgetTester tester) async {
-      final SemanticsTester semantics = SemanticsTester(tester);
-      final List<String> events = <String>[];
+      final semantics = SemanticsTester(tester);
+      final events = <String>[];
       await tester.pumpWidget(boilerPlate(
         SliverIgnorePointer(
           ignoringSemantics: false,
@@ -914,8 +914,8 @@ void main() {
     });
 
     testWidgets('ignores semantics', (WidgetTester tester) async {
-      final SemanticsTester semantics = SemanticsTester(tester);
-      final List<String> events = <String>[];
+      final semantics = SemanticsTester(tester);
+      final events = <String>[];
       await tester.pumpWidget(boilerPlate(
         SliverIgnorePointer(
           ignoring: false,
@@ -937,7 +937,7 @@ void main() {
     });
 
     testWidgets('ignoring only block semantics actions', (WidgetTester tester) async {
-      final SemanticsTester semantics = SemanticsTester(tester);
+      final semantics = SemanticsTester(tester);
       await tester.pumpWidget(boilerPlate(
         SliverIgnorePointer(
           sliver: SliverToBoxAdapter(
@@ -953,8 +953,8 @@ void main() {
     });
 
     testWidgets('ignores pointer events & semantics', (WidgetTester tester) async {
-      final SemanticsTester semantics = SemanticsTester(tester);
-      final List<String> events = <String>[];
+      final semantics = SemanticsTester(tester);
+      final events = <String>[];
       await tester.pumpWidget(boilerPlate(
         SliverIgnorePointer(
           ignoringSemantics: true,
@@ -975,8 +975,8 @@ void main() {
     });
 
     testWidgets('ignores nothing', (WidgetTester tester) async {
-      final SemanticsTester semantics = SemanticsTester(tester);
-      final List<String> events = <String>[];
+      final semantics = SemanticsTester(tester);
+      final events = <String>[];
       await tester.pumpWidget(boilerPlate(
         SliverIgnorePointer(
           ignoring: false,
@@ -1025,8 +1025,8 @@ void main() {
 
   testWidgets('SliverGrid children can be arbitrarily placed', (WidgetTester tester) async {
     // Regression test for https://github.com/flutter/flutter/issues/64006
-    int firstTapped = 0;
-    int secondTapped = 0;
+    var firstTapped = 0;
+    var secondTapped = 0;
     final Key key = UniqueKey();
     await tester.pumpWidget(MaterialApp(
       home: Scaffold(
@@ -1082,8 +1082,8 @@ void main() {
   });
 
   testWidgets('SliverList.builder can build children', (WidgetTester tester) async {
-    int firstTapped = 0;
-    int secondTapped = 0;
+    var firstTapped = 0;
+    var secondTapped = 0;
     final Key key = UniqueKey();
     await tester.pumpWidget(MaterialApp(
       home: Scaffold(
@@ -1120,8 +1120,8 @@ void main() {
   });
 
   testWidgets('SliverList.builder can build children', (WidgetTester tester) async {
-    int firstTapped = 0;
-    int secondTapped = 0;
+    var firstTapped = 0;
+    var secondTapped = 0;
     final Key key = UniqueKey();
     await tester.pumpWidget(MaterialApp(
       home: Scaffold(
@@ -1158,8 +1158,8 @@ void main() {
   });
 
   testWidgets('SliverList.separated can build children', (WidgetTester tester) async {
-    int firstTapped = 0;
-    int secondTapped = 0;
+    var firstTapped = 0;
+    var secondTapped = 0;
     final Key key = UniqueKey();
     await tester.pumpWidget(MaterialApp(
       home: Scaffold(
@@ -1217,8 +1217,8 @@ void main() {
   });
 
   testWidgets('SliverList.list can build children', (WidgetTester tester) async {
-    int firstTapped = 0;
-    int secondTapped = 0;
+    var firstTapped = 0;
+    var secondTapped = 0;
     final Key key = UniqueKey();
     await tester.pumpWidget(MaterialApp(
       home: Scaffold(
@@ -1259,8 +1259,8 @@ void main() {
   });
 
   testWidgets('SliverFixedExtentList.builder can build children', (WidgetTester tester) async {
-    int firstTapped = 0;
-    int secondTapped = 0;
+    var firstTapped = 0;
+    var secondTapped = 0;
     final Key key = UniqueKey();
     await tester.pumpWidget(MaterialApp(
       home: Scaffold(
@@ -1297,8 +1297,8 @@ void main() {
   });
 
     testWidgets('SliverList.list can build children', (WidgetTester tester) async {
-    int firstTapped = 0;
-    int secondTapped = 0;
+    var firstTapped = 0;
+    var secondTapped = 0;
     final Key key = UniqueKey();
     await tester.pumpWidget(MaterialApp(
       home: Scaffold(
@@ -1340,8 +1340,8 @@ void main() {
   });
 
   testWidgets('SliverGrid.builder can build children', (WidgetTester tester) async {
-    int firstTapped = 0;
-    int secondTapped = 0;
+    var firstTapped = 0;
+    var secondTapped = 0;
     final Key key = UniqueKey();
     await tester.pumpWidget(MaterialApp(
       home: Scaffold(
@@ -1380,7 +1380,7 @@ void main() {
 
   testWidgets('SliverGridRegularTileLayout.computeMaxScrollOffset handles 0 children', (WidgetTester tester) async {
     // Regression test for https://github.com/flutter/flutter/issues/59663
-    final ScrollController controller = ScrollController();
+    final controller = ScrollController();
     addTearDown(controller.dispose);
 
     // SliverGridDelegateWithFixedCrossAxisCount

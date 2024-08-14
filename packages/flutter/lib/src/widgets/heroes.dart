@@ -272,7 +272,7 @@ class Hero extends StatefulWidget {
     bool isUserGestureTransition,
     NavigatorState navigator,
   ) {
-    final Map<Object, _HeroState> result = <Object, _HeroState>{};
+    final result = <Object, _HeroState>{};
 
     void inviteHero(StatefulElement hero, Object tag) {
       assert(() {
@@ -289,8 +289,8 @@ class Hero extends StatefulWidget {
         }
         return true;
       }());
-      final Hero heroWidget = hero.widget as Hero;
-      final _HeroState heroState = hero.state as _HeroState;
+      final heroWidget = hero.widget as Hero;
+      final heroState = hero.state as _HeroState;
       if (!isUserGestureTransition || heroWidget.transitionOnUserGestures) {
         result[tag] = heroState;
       } else {
@@ -303,7 +303,7 @@ class Hero extends StatefulWidget {
     void visitor(Element element) {
       final Widget widget = element.widget;
       if (widget is Hero) {
-        final StatefulElement hero = element as StatefulElement;
+        final hero = element as StatefulElement;
         final Object tag = widget.tag;
         if (Navigator.of(hero) == navigator) {
           inviteHero(hero, tag);
@@ -367,7 +367,7 @@ class _HeroState extends State<Hero> {
   void startFlight({ bool shouldIncludedChildInPlaceholder = false }) {
     _shouldIncludeChild = shouldIncludedChildInPlaceholder;
     assert(mounted);
-    final RenderBox box = context.findRenderObject()! as RenderBox;
+    final box = context.findRenderObject()! as RenderBox;
     assert(box.hasSize);
     setState(() {
       _placeholderSize = box.size;
@@ -476,7 +476,7 @@ class _HeroFlightManifest {
   // render object's coordinate space.
   static Rect _boundingBoxFor(BuildContext context, BuildContext? ancestorContext) {
     assert(ancestorContext != null);
-    final RenderBox box = context.findRenderObject()! as RenderBox;
+    final box = context.findRenderObject()! as RenderBox;
     assert(box.hasSize && box.size.isFinite);
     return MatrixUtils.transformRect(
       box.getTransformTo(ancestorContext?.findRenderObject()),
@@ -568,7 +568,7 @@ class _HeroFlight {
       child: shuttle,
       builder: (BuildContext context, Widget? child) {
         final Rect rect = heroRectTween.evaluate(_proxyAnimation)!;
-        final RelativeRect offsets = RelativeRect.fromSize(rect, manifest.navigatorSize);
+        final offsets = RelativeRect.fromSize(rect, manifest.navigatorSize);
         return Positioned(
           top: offsets.top,
           right: offsets.right,
@@ -887,7 +887,7 @@ class HeroController extends NavigatorObserver {
 
     // Treat these invalidated flights as dismissed. Calling _handleAnimationUpdate
     // will also remove the flight from _flights.
-    for (final _HeroFlight flight in invalidFlights) {
+    for (final flight in invalidFlights) {
       flight._handleAnimationUpdate(AnimationStatus.dismissed);
     }
   }
@@ -1046,7 +1046,7 @@ class HeroController extends NavigatorObserver {
     BuildContext fromHeroContext,
     BuildContext toHeroContext,
   ) {
-    final Hero toHero = toHeroContext.widget as Hero;
+    final toHero = toHeroContext.widget as Hero;
 
     final MediaQueryData? toMediaQueryData = MediaQuery.maybeOf(toHeroContext);
     final MediaQueryData? fromMediaQueryData = MediaQuery.maybeOf(fromHeroContext);

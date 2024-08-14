@@ -65,8 +65,8 @@ void main() {
     currentMode = initialEntryMode;
   });
 
-  const Size wideWindowSize = Size(1920.0, 1080.0);
-  const Size narrowWindowSize = Size(1070.0, 1770.0);
+  const wideWindowSize = Size(1920.0, 1080.0);
+  const narrowWindowSize = Size(1070.0, 1770.0);
 
   Future<void> prepareDatePicker(
     WidgetTester tester,
@@ -139,8 +139,8 @@ void main() {
         addTearDown(tester.view.reset);
         await prepareDatePicker(tester, (Future<DateTime?> date) async {}, useMaterial3: true);
       }
-      const Size calendarLandscapeDialogSize = Size(496.0, 346.0);
-      const Size calendarPortraitDialogSizeM3 = Size(328.0, 512.0);
+      const calendarLandscapeDialogSize = Size(496.0, 346.0);
+      const calendarPortraitDialogSizeM3 = Size(328.0, 512.0);
 
       // Test landscape layout.
       await showPicker(tester, wideWindowSize);
@@ -160,7 +160,7 @@ void main() {
     });
 
     testWidgets('Default dialog properties', (WidgetTester tester) async {
-      final ThemeData theme = ThemeData(useMaterial3: true);
+      final theme = ThemeData(useMaterial3: true);
       await prepareDatePicker(tester, (Future<DateTime?> date) async {
         final Material dialogMaterial = tester.widget<Material>(
           find.descendant(of: find.byType(Dialog),
@@ -528,8 +528,8 @@ void main() {
     });
 
     testWidgets('uses nested navigator if useRootNavigator is false', (WidgetTester tester) async {
-      final _DatePickerObserver rootObserver = _DatePickerObserver();
-      final _DatePickerObserver nestedObserver = _DatePickerObserver();
+      final rootObserver = _DatePickerObserver();
+      final nestedObserver = _DatePickerObserver();
 
       await tester.pumpWidget(MaterialApp(
         navigatorObservers: <NavigatorObserver>[rootObserver],
@@ -566,7 +566,7 @@ void main() {
 
     testWidgets('honors DialogTheme for shape and elevation', (WidgetTester tester) async {
       // Test that the defaults work
-      const DialogTheme datePickerDefaultDialogTheme = DialogTheme(
+      const datePickerDefaultDialogTheme = DialogTheme(
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.all(Radius.circular(4.0)),
         ),
@@ -602,7 +602,7 @@ void main() {
       expect(defaultDialogMaterial.elevation, datePickerDefaultDialogTheme.elevation);
 
       // Test that it honors ThemeData.dialogTheme settings
-      const DialogTheme customDialogTheme = DialogTheme(
+      const customDialogTheme = DialogTheme(
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.all(Radius.circular(40.0)),
         ),
@@ -834,7 +834,7 @@ void main() {
       final Finder subHeaderText = find.text('January 2016');
       final Finder cancelButtonText = find.text('Cancel');
       final Finder okButtonText = find.text('OK');
-      const EdgeInsets insetPadding = EdgeInsets.symmetric(horizontal: 16.0, vertical: 24.0);
+      const insetPadding = EdgeInsets.symmetric(horizontal: 16.0, vertical: 24.0);
 
       tester.view.physicalSize = wideWindowSize;
       addTearDown(tester.view.reset);
@@ -1261,7 +1261,7 @@ void main() {
       today = DateTime(2016, 1, 2);
       await prepareDatePicker(tester, (Future<DateTime?> date) async {
         await tester.pump();
-        const Color todayColor = Color(0xff2196f3); // default primary color
+        const todayColor = Color(0xff2196f3); // default primary color
         expect(
           Material.of(tester.element(find.text('2'))),
           // The current day should be painted with a circle outline
@@ -1272,7 +1272,7 @@ void main() {
 
     testWidgets('Date picker dayOverlayColor resolves pressed state', (WidgetTester tester) async {
       today = DateTime(2023, 5, 4);
-      final ThemeData theme = ThemeData();
+      final theme = ThemeData();
       final bool material3 = theme.useMaterial3;
       await prepareDatePicker(tester, (Future<DateTime?> date) async {
         await tester.pump();
@@ -1322,9 +1322,9 @@ void main() {
         addTearDown(tester.view.reset);
         tester.view.physicalSize = const Size(400, 800);
         tester.view.devicePixelRatio = 1.0;
-        final List<double> scales = <double>[0.88, 1.0, 2.0];
+        final scales = <double>[0.88, 1.0, 2.0];
 
-        for (final double scale in scales) {
+        for (final scale in scales) {
           await tester.pumpWidget(
             MaterialApp(
               home: MediaQuery(
@@ -1535,9 +1535,9 @@ void main() {
         addTearDown(tester.view.reset);
         tester.view.physicalSize = const Size(400, 800);
         tester.view.devicePixelRatio = 1.0;
-        final List<double> scales = <double>[0.88, 1.0, 2.0];
+        final scales = <double>[0.88, 1.0, 2.0];
 
-        for (final double scale in scales) {
+        for (final scale in scales) {
           await tester.pumpWidget(
             MaterialApp(
               home: MediaQuery(
@@ -1617,7 +1617,7 @@ void main() {
     testWidgets('input mode', (WidgetTester tester) async {
       // Fill the clipboard so that the Paste option is available in the text
       // selection menu.
-      final MockClipboard mockClipboard = MockClipboard();
+      final mockClipboard = MockClipboard();
       tester.binding.defaultBinaryMessenger.setMockMethodCallHandler(SystemChannels.platform, mockClipboard.handleMethodCall);
       await Clipboard.setData(const ClipboardData(text: 'Clipboard data'));
       addTearDown(() => tester.binding.defaultBinaryMessenger.setMockMethodCallHandler(SystemChannels.platform, null));
@@ -1872,12 +1872,12 @@ void main() {
     // Regression tests for https://github.com/flutter/flutter/issues/17745
 
     // Common screen size roughly based on a Pixel 1
-    const Size kCommonScreenSizePortrait = Size(1070, 1770);
-    const Size kCommonScreenSizeLandscape = Size(1770, 1070);
+    const kCommonScreenSizePortrait = Size(1070, 1770);
+    const kCommonScreenSizeLandscape = Size(1770, 1070);
 
     // Small screen size based on a LG K130
-    const Size kSmallScreenSizePortrait = Size(320, 521);
-    const Size kSmallScreenSizeLandscape = Size(521, 320);
+    const kSmallScreenSizePortrait = Size(320, 521);
+    const kSmallScreenSizeLandscape = Size(521, 320);
 
     Future<void> showPicker(WidgetTester tester, Size size, [double textScaleFactor = 1.0]) async {
       tester.view.physicalSize = size;
@@ -2167,8 +2167,8 @@ void main() {
     // Regression test for https://github.com/flutter/flutter/issues/122056
 
     // Common screen size roughly based on a Pixel 1
-    const Size kCommonScreenSizePortrait = Size(1070, 1770);
-    const Size kCommonScreenSizeLandscape = Size(1770, 1070);
+    const kCommonScreenSizePortrait = Size(1070, 1770);
+    const kCommonScreenSizeLandscape = Size(1770, 1070);
 
     Future<void> showPicker(WidgetTester tester, Size size) async {
       addTearDown(tester.view.reset);
@@ -2206,10 +2206,10 @@ void main() {
           addTearDown(tester.view.reset);
           await prepareDatePicker(tester, (Future<DateTime?> date) async {});
         }
-        const Size wideWindowSize = Size(1920.0, 1080.0);
-        const Size narrowWindowSize = Size(1070.0, 1770.0);
-        const Size calendarLandscapeDialogSize = Size(496.0, 346.0);
-        const Size calendarPortraitDialogSizeM2 = Size(330.0, 518.0);
+        const wideWindowSize = Size(1920.0, 1080.0);
+        const narrowWindowSize = Size(1070.0, 1770.0);
+        const calendarLandscapeDialogSize = Size(496.0, 346.0);
+        const calendarPortraitDialogSizeM2 = Size(330.0, 518.0);
 
         // Test landscape layout.
         await showPicker(tester, wideWindowSize);
@@ -2229,7 +2229,7 @@ void main() {
       });
 
       testWidgets('Default dialog properties', (WidgetTester tester) async {
-        final ThemeData theme = ThemeData(useMaterial3: false);
+        final theme = ThemeData(useMaterial3: false);
         await prepareDatePicker(tester, (Future<DateTime?> date) async {
           final Material dialogMaterial = tester.widget<Material>(
             find.descendant(of: find.byType(Dialog),
@@ -2331,7 +2331,7 @@ class _RestorableDatePickerDialogTestWidgetState extends State<_RestorableDatePi
     return DialogRoute<DateTime>(
       context: context,
       builder: (BuildContext context) {
-        final Map<dynamic, dynamic> args = arguments! as Map<dynamic, dynamic>;
+        final args = arguments! as Map<dynamic, dynamic>;
         return DatePickerDialog(
           restorationId: 'date_picker_dialog',
           initialEntryMode: DatePickerEntryMode.values[args['datePickerEntryMode'] as int],
@@ -2347,7 +2347,7 @@ class _RestorableDatePickerDialogTestWidgetState extends State<_RestorableDatePi
   Widget build(BuildContext context) {
     final DateTime selectedDateTime = _selectedDate.value;
     // Example: "25/7/1994"
-    final String selectedDateTimeString = '${selectedDateTime.day}/${selectedDateTime.month}/${selectedDateTime.year}';
+    final selectedDateTimeString = '${selectedDateTime.day}/${selectedDateTime.month}/${selectedDateTime.year}';
     return Scaffold(
       body: Center(
         child: Column(

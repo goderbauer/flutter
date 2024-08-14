@@ -8,7 +8,7 @@ import 'package:flutter_test/flutter_test.dart';
 
 void main() {
   testWidgets('SliverFillViewport control test', (WidgetTester tester) async {
-    final List<Widget> children = List<Widget>.generate(20, (int i) {
+    final children = List<Widget>.generate(20, (int i) {
       return ColoredBox(color: Colors.green, child: Text('$i', textDirection: TextDirection.ltr));
     });
 
@@ -159,7 +159,7 @@ void main() {
   });
 
   testWidgets('SliverFillViewport padding test', (WidgetTester tester) async {
-    final SliverChildListDelegate delegate = SliverChildListDelegate(
+    final delegate = SliverChildListDelegate(
       <Widget>[
         const Text('0'),
       ],

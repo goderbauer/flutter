@@ -13,7 +13,7 @@ import 'package:flutter_test/flutter_test.dart';
 import '../widgets/process_text_utils.dart';
 
 Offset textOffsetToPosition(RenderParagraph paragraph, int offset) {
-  const Rect caret = Rect.fromLTWH(0.0, 0.0, 2.0, 20.0);
+  const caret = Rect.fromLTWH(0.0, 0.0, 2.0, 20.0);
   final Offset localOffset = paragraph.getOffsetForCaret(TextPosition(offset: offset), caret);
   return paragraph.localToGlobal(localOffset);
 }
@@ -130,7 +130,7 @@ void main() {
   );
 
   testWidgets('builds the default context menu by default', (WidgetTester tester) async {
-    final FocusNode focusNode = FocusNode();
+    final focusNode = FocusNode();
     addTearDown(focusNode.dispose);
 
     await tester.pumpWidget(
@@ -163,7 +163,7 @@ void main() {
 
   testWidgets('builds a custom context menu if provided', (WidgetTester tester) async {
     final GlobalKey key = GlobalKey();
-    final FocusNode focusNode = FocusNode();
+    final focusNode = FocusNode();
     addTearDown(focusNode.dispose);
 
     await tester.pumpWidget(
@@ -203,12 +203,12 @@ void main() {
   );
 
   testWidgets('Text processing actions are added to the toolbar', (WidgetTester tester) async {
-    final MockProcessTextHandler mockProcessTextHandler = MockProcessTextHandler();
+    final mockProcessTextHandler = MockProcessTextHandler();
     TestWidgetsFlutterBinding.ensureInitialized().defaultBinaryMessenger
         .setMockMethodCallHandler(SystemChannels.processText, mockProcessTextHandler.handleMethodCall);
     addTearDown(() => tester.binding.defaultBinaryMessenger.setMockMethodCallHandler(SystemChannels.processText, null));
 
-    final FocusNode focusNode = FocusNode();
+    final focusNode = FocusNode();
     addTearDown(focusNode.dispose);
 
     await tester.pumpWidget(
@@ -289,7 +289,7 @@ void main() {
   });
 
   testWidgets('stopping drag of end handle will show the toolbar', (WidgetTester tester) async {
-    final FocusNode focusNode = FocusNode();
+    final focusNode = FocusNode();
     addTearDown(focusNode.dispose);
 
     // Regression test for https://github.com/flutter/flutter/issues/119314

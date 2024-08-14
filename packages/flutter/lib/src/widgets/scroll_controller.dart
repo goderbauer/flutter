@@ -232,7 +232,7 @@ class ScrollController extends ChangeNotifier {
   /// value was out of range.
   void jumpTo(double value) {
     assert(_positions.isNotEmpty, 'ScrollController not attached to any scroll views.');
-    for (final ScrollPosition position in List<ScrollPosition>.of(_positions)) {
+    for (final position in List<ScrollPosition>.of(_positions)) {
       position.jumpTo(value);
     }
   }
@@ -310,7 +310,7 @@ class ScrollController extends ChangeNotifier {
 
   @override
   String toString() {
-    final List<String> description = <String>[];
+    final description = <String>[];
     debugFillDescription(description);
     return '${describeIdentity(this)}(${description.join(", ")})';
   }

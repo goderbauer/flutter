@@ -36,7 +36,7 @@ class LinkedScrollController extends ScrollController {
   @override
   void attach(ScrollPosition position) {
     assert(position is LinkedScrollPosition, 'A LinkedScrollController must only be used with LinkedScrollPositions.');
-    final LinkedScrollPosition linkedPosition = position as LinkedScrollPosition;
+    final linkedPosition = position as LinkedScrollPosition;
     assert(linkedPosition.owner == this, 'A LinkedScrollPosition cannot change controllers once created.');
     super.attach(position);
     _parent?.attach(position);
@@ -144,7 +144,7 @@ class LinkedScrollPosition extends ScrollPositionWithSingleContext {
       return;
     }
 
-    double beforeOverscroll = 0.0;
+    var beforeOverscroll = 0.0;
     if (owner.canLinkWithBefore && (value < minScrollExtent)) {
       final double delta = value - minScrollExtent;
       _beforeActivities ??= HashSet<LinkedScrollActivity>();
@@ -155,7 +155,7 @@ class LinkedScrollPosition extends ScrollPositionWithSingleContext {
       assert(beforeOverscroll <= 0.0);
     }
 
-    double afterOverscroll = 0.0;
+    var afterOverscroll = 0.0;
     if (owner.canLinkWithAfter && (value > maxScrollExtent)) {
       final double delta = value - maxScrollExtent;
       _afterActivities ??= HashSet<LinkedScrollActivity>();
@@ -184,7 +184,7 @@ class LinkedScrollPosition extends ScrollPositionWithSingleContext {
     if (this.activity is! LinkedScrollActivity) {
       beginActivity(LinkedScrollActivity(this));
     }
-    final LinkedScrollActivity? activity = this.activity as LinkedScrollActivity?;
+    final activity = this.activity as LinkedScrollActivity?;
     activity!.link(driver);
     return activity;
   }

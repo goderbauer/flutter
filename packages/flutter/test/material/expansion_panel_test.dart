@@ -320,7 +320,7 @@ void main() {
   });
 
   testWidgets('Open/close animations', (WidgetTester tester) async {
-    const Duration kSizeAnimationDuration = Duration(milliseconds: 1000);
+    const kSizeAnimationDuration = Duration(milliseconds: 1000);
     // The MaterialGaps animate in using kThemeAnimationDuration (hardcoded),
     // which should be less than our test size animation length. So we can assume that they
     // appear immediately. Here we just verify that our assumption is true.
@@ -438,7 +438,7 @@ void main() {
       ),
     ];
 
-    final ExpansionPanelList expansionListRadio = ExpansionPanelList.radio(
+    final expansionListRadio = ExpansionPanelList.radio(
       children: demoItemsRadio,
     );
 
@@ -510,7 +510,7 @@ void main() {
     expect(find.text('F'), findsNothing);
 
 
-    final List<ExpansionPanel> demoItems = <ExpansionPanel>[
+    final demoItems = <ExpansionPanel>[
       ExpansionPanel(
         headerBuilder: (BuildContext context, bool isExpanded) {
           return Text(isExpanded ? 'B' : 'A');
@@ -531,7 +531,7 @@ void main() {
       ),
     ];
 
-    final ExpansionPanelList expansionList = ExpansionPanelList(
+    final expansionList = ExpansionPanelList(
       children: demoItems,
     );
 
@@ -577,8 +577,8 @@ void main() {
       ),
     ];
 
-    final List<Map<String, dynamic>> callbackHistory = <Map<String, dynamic>>[];
-    final ExpansionPanelList expansionListRadio = ExpansionPanelList.radio(
+    final callbackHistory = <Map<String, dynamic>>[];
+    final expansionListRadio = ExpansionPanelList.radio(
       expansionCallback: (int index, bool isExpanded) {
         callbackHistory.add(<String, dynamic>{
           'index': index,
@@ -648,10 +648,10 @@ void main() {
       ),
     ];
 
-    final List<Map<String, dynamic>> callbackHistory = <Map<String, dynamic>>[];
+    final callbackHistory = <Map<String, dynamic>>[];
     Map<String, dynamic> callbackResults;
 
-    final ExpansionPanelList expansionListRadio = ExpansionPanelList.radio(
+    final expansionListRadio = ExpansionPanelList.radio(
       expansionCallback: (int index, bool isExpanded) {
         callbackHistory.add(<String, dynamic>{
           'index': index,
@@ -705,8 +705,8 @@ void main() {
 
   testWidgets('ExpansionPanelList.radio callback displays true or false based on the visibility of a list item',  (WidgetTester tester) async {
     late int lastExpanded;
-    bool topElementExpanded = false;
-    bool bottomElementExpanded = false;
+    var topElementExpanded = false;
+    var bottomElementExpanded = false;
 
     final List<ExpansionPanel> demoItemsRadio = <ExpansionPanelRadio>[
       // topElement
@@ -727,7 +727,7 @@ void main() {
       ),
     ];
 
-    final ExpansionPanelList expansionListRadio = ExpansionPanelList.radio(
+    final expansionListRadio = ExpansionPanelList.radio(
       children: demoItemsRadio,
       expansionCallback: (int index, bool isExpanded)
       {
@@ -802,8 +802,8 @@ void main() {
     'didUpdateWidget accounts for toggling between ExpansionPanelList '
     'and ExpansionPaneList.radio',
     (WidgetTester tester) async {
-      bool isRadioList = false;
-      final List<bool> panelExpansionState = <bool>[
+      var isRadioList = false;
+      final panelExpansionState = <bool>[
         false,
         false,
         false,
@@ -993,7 +993,7 @@ void main() {
     await tester.tap(find.byType(ExpandIcon).at(1));
     await tester.pumpAndSettle();
 
-    final List<bool> panelExpansionState = <bool>[false, false];
+    final panelExpansionState = <bool>[false, false];
 
     await tester.pumpWidget(
       StatefulBuilder(
@@ -1053,11 +1053,11 @@ void main() {
   });
 
   testWidgets('Material2 - Panel header has semantics, canTapOnHeader = false', (WidgetTester tester) async {
-    const Key expandedKey = Key('expanded');
-    const Key collapsedKey = Key('collapsed');
-    const DefaultMaterialLocalizations localizations = DefaultMaterialLocalizations();
+    const expandedKey = Key('expanded');
+    const collapsedKey = Key('collapsed');
+    const localizations = DefaultMaterialLocalizations();
     final SemanticsHandle handle = tester.ensureSemantics();
-    final List<ExpansionPanel> demoItems = <ExpansionPanel>[
+    final demoItems = <ExpansionPanel>[
       ExpansionPanel(
         headerBuilder: (BuildContext context, bool isExpanded) {
           return const Text('Expanded', key: expandedKey);
@@ -1073,7 +1073,7 @@ void main() {
       ),
     ];
 
-    final ExpansionPanelList expansionList = ExpansionPanelList(
+    final expansionList = ExpansionPanelList(
       children: demoItems,
     );
 
@@ -1140,11 +1140,11 @@ void main() {
   });
 
   testWidgets('Material3 - Panel header has semantics, canTapOnHeader = false', (WidgetTester tester) async {
-    const Key expandedKey = Key('expanded');
-    const Key collapsedKey = Key('collapsed');
-    const DefaultMaterialLocalizations localizations = DefaultMaterialLocalizations();
+    const expandedKey = Key('expanded');
+    const collapsedKey = Key('collapsed');
+    const localizations = DefaultMaterialLocalizations();
     final SemanticsHandle handle = tester.ensureSemantics();
-    final List<ExpansionPanel> demoItems = <ExpansionPanel>[
+    final demoItems = <ExpansionPanel>[
       ExpansionPanel(
         headerBuilder: (BuildContext context, bool isExpanded) {
           return const Text('Expanded', key: expandedKey);
@@ -1160,7 +1160,7 @@ void main() {
       ),
     ];
 
-    final ExpansionPanelList expansionList = ExpansionPanelList(
+    final expansionList = ExpansionPanelList(
       children: demoItems,
     );
 
@@ -1235,10 +1235,10 @@ void main() {
   });
 
   testWidgets('Panel header has semantics, canTapOnHeader = true', (WidgetTester tester) async {
-    const Key expandedKey = Key('expanded');
-    const Key collapsedKey = Key('collapsed');
+    const expandedKey = Key('expanded');
+    const collapsedKey = Key('collapsed');
     final SemanticsHandle handle = tester.ensureSemantics();
-    final List<ExpansionPanel> demoItems = <ExpansionPanel>[
+    final demoItems = <ExpansionPanel>[
       ExpansionPanel(
         headerBuilder: (BuildContext context, bool isExpanded) {
           return const Text('Expanded', key: expandedKey);
@@ -1256,7 +1256,7 @@ void main() {
       ),
     ];
 
-    final ExpansionPanelList expansionList = ExpansionPanelList(
+    final expansionList = ExpansionPanelList(
       children: demoItems,
     );
 
@@ -1290,7 +1290,7 @@ void main() {
   });
 
   testWidgets('Ensure canTapOnHeader is false by default',  (WidgetTester tester) async {
-    final ExpansionPanel expansionPanel = ExpansionPanel(
+    final expansionPanel = ExpansionPanel(
       headerBuilder: (BuildContext context, bool isExpanded) => const Text('Demo'),
       body: const SizedBox(height: 100.0),
     );
@@ -1299,8 +1299,8 @@ void main() {
   });
 
   testWidgets('Toggle ExpansionPanelRadio when tapping header and canTapOnHeader is true',  (WidgetTester tester) async {
-    const Key firstPanelKey = Key('firstPanelKey');
-    const Key secondPanelKey = Key('secondPanelKey');
+    const firstPanelKey = Key('firstPanelKey');
+    const secondPanelKey = Key('secondPanelKey');
 
     final List<ExpansionPanel> demoItemsRadio = <ExpansionPanelRadio>[
       ExpansionPanelRadio(
@@ -1321,7 +1321,7 @@ void main() {
       ),
     ];
 
-    final ExpansionPanelList expansionListRadio = ExpansionPanelList.radio(
+    final expansionListRadio = ExpansionPanelList.radio(
       children: demoItemsRadio,
     );
 
@@ -1359,8 +1359,8 @@ void main() {
   });
 
   testWidgets('Toggle ExpansionPanel when tapping header and canTapOnHeader is true',  (WidgetTester tester) async {
-    const Key firstPanelKey = Key('firstPanelKey');
-    const Key secondPanelKey = Key('secondPanelKey');
+    const firstPanelKey = Key('firstPanelKey');
+    const secondPanelKey = Key('secondPanelKey');
 
     await tester.pumpWidget(
       const MaterialApp(
@@ -1418,8 +1418,8 @@ void main() {
   });
 
   testWidgets('Do not toggle ExpansionPanel when tapping header and canTapOnHeader is false',  (WidgetTester tester) async {
-    const Key firstPanelKey = Key('firstPanelKey');
-    const Key secondPanelKey = Key('secondPanelKey');
+    const firstPanelKey = Key('firstPanelKey');
+    const secondPanelKey = Key('secondPanelKey');
 
     await tester.pumpWidget(
       const MaterialApp(
@@ -1458,8 +1458,8 @@ void main() {
   });
 
   testWidgets('Do not toggle ExpansionPanelRadio when tapping header and canTapOnHeader is false',  (WidgetTester tester) async {
-    const Key firstPanelKey = Key('firstPanelKey');
-    const Key secondPanelKey = Key('secondPanelKey');
+    const firstPanelKey = Key('firstPanelKey');
+    const secondPanelKey = Key('secondPanelKey');
 
     final List<ExpansionPanel> demoItemsRadio = <ExpansionPanelRadio>[
       ExpansionPanelRadio(
@@ -1478,7 +1478,7 @@ void main() {
       ),
     ];
 
-    final ExpansionPanelList expansionListRadio = ExpansionPanelList.radio(
+    final expansionListRadio = ExpansionPanelList.radio(
       children: demoItemsRadio,
     );
 
@@ -1516,7 +1516,7 @@ void main() {
   });
 
   testWidgets('Correct default header padding', (WidgetTester tester) async {
-    const Key firstPanelKey = Key('firstPanelKey');
+    const firstPanelKey = Key('firstPanelKey');
 
     await tester.pumpWidget(
       const MaterialApp(
@@ -1554,7 +1554,7 @@ void main() {
 
   // Regression test for https://github.com/flutter/flutter/issues/5848.
   testWidgets('The AnimatedContainer and IconButton have the same height of 48px', (WidgetTester tester) async {
-    const Key firstPanelKey = Key('firstPanelKey');
+    const firstPanelKey = Key('firstPanelKey');
 
     await tester.pumpWidget(
       const MaterialApp(
@@ -1579,7 +1579,7 @@ void main() {
   });
 
   testWidgets("The AnimatedContainer's height is at least kMinInteractiveDimension", (WidgetTester tester) async {
-    const Key firstPanelKey = Key('firstPanelKey');
+    const firstPanelKey = Key('firstPanelKey');
 
     await tester.pumpWidget(
       const MaterialApp(
@@ -1602,7 +1602,7 @@ void main() {
   });
 
   testWidgets('Correct custom header padding', (WidgetTester tester) async {
-    const Key firstPanelKey = Key('firstPanelKey');
+    const firstPanelKey = Key('firstPanelKey');
 
     await tester.pumpWidget(
       const MaterialApp(
@@ -1650,7 +1650,7 @@ void main() {
     ));
 
     final DecoratedBox decoratedBox = tester.widget(find.byType(DecoratedBox).last);
-    final BoxDecoration decoration = decoratedBox.decoration as BoxDecoration;
+    final decoration = decoratedBox.decoration as BoxDecoration;
 
     // For the last DecoratedBox, we will have a Border.top with the provided dividerColor.
     expect(decoration.border!.top.color, dividerColor);
@@ -1683,7 +1683,7 @@ void main() {
     ));
 
     final DecoratedBox decoratedBox = tester.widget(find.byType(DecoratedBox).last);
-    final BoxDecoration boxDecoration = decoratedBox.decoration as BoxDecoration;
+    final boxDecoration = decoratedBox.decoration as BoxDecoration;
 
     // For the last DecoratedBox, we will have a Border.top with the provided dividerColor.
     expect(boxDecoration.border!.top.color, dividerColor);
@@ -2025,7 +2025,7 @@ void main() {
   });
 
   testWidgets('ExpandIcon.disabledColor uses expandIconColor color when canTapOnHeader is true', (WidgetTester tester) async {
-    const Color expandIconColor = Color(0xff0000ff);
+    const expandIconColor = Color(0xff0000ff);
 
     Widget buildWidget({ bool canTapOnHeader = false }) {
       return MaterialApp(

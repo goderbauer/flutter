@@ -9,7 +9,7 @@ import 'package:flutter_test/flutter_test.dart';
 
 void main() {
   testWidgets('CarouselView defaults', (WidgetTester tester) async {
-    final ThemeData theme = ThemeData();
+    final theme = ThemeData();
     final ColorScheme colorScheme = theme.colorScheme;
 
     await tester.pumpWidget(
@@ -42,7 +42,7 @@ void main() {
 
   testWidgets('CarouselView items customization', (WidgetTester tester) async {
     final Key key = UniqueKey();
-    final ThemeData theme = ThemeData();
+    final theme = ThemeData();
 
     await tester.pumpWidget(
       MaterialApp(
@@ -112,7 +112,7 @@ void main() {
     // On focused.
     final Element inkWellElement = tester.element(find.descendant(of: carouselViewMaterial, matching: find.byType(InkWell)));
     expect(inkWellElement.widget, isA<InkWell>());
-    final InkWell inkWell = inkWellElement.widget as InkWell;
+    final inkWell = inkWellElement.widget as InkWell;
 
     const MaterialState state = MaterialState.focused;
 
@@ -121,9 +121,9 @@ void main() {
   });
 
   testWidgets('CarouselView respects onTap', (WidgetTester tester) async {
-    final List<Key> keys = List<Key>.generate(10, (_) => UniqueKey());
-    final ThemeData theme = ThemeData();
-    int tapIndex = 0;
+    final keys = List<Key>.generate(10, (_) => UniqueKey());
+    final theme = ThemeData();
+    var tapIndex = 0;
 
     await tester.pumpWidget(
       MaterialApp(
@@ -256,7 +256,7 @@ void main() {
   });
 
   testWidgets('CarouselController initialItem', (WidgetTester tester) async {
-    final CarouselController controller = CarouselController(initialItem: 5);
+    final controller = CarouselController(initialItem: 5);
     addTearDown(controller.dispose);
 
     await tester.pumpWidget(
@@ -293,7 +293,7 @@ void main() {
   });
 
   testWidgets('CarouselView.weighted respects CarouselController.initialItem', (WidgetTester tester) async {
-    final CarouselController controller = CarouselController(initialItem: 5);
+    final controller = CarouselController(initialItem: 5);
     addTearDown(controller.dispose);
 
     await tester.pumpWidget(
@@ -330,7 +330,7 @@ void main() {
   });
 
   testWidgets('The initialItem should be the first item with expanded size(max extent)', (WidgetTester tester) async {
-    final CarouselController controller = CarouselController(initialItem: 5);
+    final controller = CarouselController(initialItem: 5);
     addTearDown(controller.dispose);
 
     await tester.pumpWidget(
@@ -933,7 +933,7 @@ void main() {
     final Rect rect0 = tester.getRect(getItem(0));
     expect(rect0, const Rect.fromLTRB(240.0, 0.0, 560.0, 600.0));
 
-    for (int i = 0; i < 7; i++) {
+    for (var i = 0; i < 7; i++) {
       await tester.drag(find.byType(CarouselView), const Offset(-80.0, 0.0));
       await tester.pumpAndSettle();
     }
@@ -944,7 +944,7 @@ void main() {
     expect(tester.getRect(getItem(9)), const Rect.fromLTRB(720.0, 0.0, 800.0, 600.0));
 
     // Keep snapping twice. Item 9 should be fully expanded to the max size.
-    for (int i = 0; i < 2; i++) {
+    for (var i = 0; i < 2; i++) {
       await tester.drag(find.byType(CarouselView), const Offset(-80.0, 0.0));
       await tester.pumpAndSettle();
     }
@@ -953,7 +953,7 @@ void main() {
   });
 
   testWidgets('The initialItem stays when the flexWeights is updated', (WidgetTester tester) async {
-    final CarouselController controller = CarouselController(initialItem: 3);
+    final controller = CarouselController(initialItem: 3);
     addTearDown(controller.dispose);
 
     Widget buildCarousel(List<int> flexWeights) {
@@ -977,7 +977,7 @@ void main() {
     await tester.pumpAndSettle();
 
     expect(find.text('Item 0'), findsNothing);
-    for (int i = 1; i <= 5; i++) {
+    for (var i = 1; i <= 5; i++) {
       expect(find.text('Item $i'), findsOneWidget);
     }
     Rect rect3 = tester.getRect(getItem(3));
@@ -1001,7 +1001,7 @@ void main() {
   });
 
   testWidgets('The item that currently occupies max weight stays when the flexWeights is updated', (WidgetTester tester) async {
-    final CarouselController controller = CarouselController(initialItem: 3);
+    final controller = CarouselController(initialItem: 3);
     addTearDown(controller.dispose);
 
     Widget buildCarousel(List<int> flexWeights) {
@@ -1033,7 +1033,7 @@ void main() {
     await tester.pumpAndSettle();
 
     expect(find.text('Item 1'), findsNothing);
-    for (int i = 2; i <= 6; i++) {
+    for (var i = 2; i <= 6; i++) {
       expect(find.text('Item $i'), findsOneWidget);
     }
     Rect rect4 = tester.getRect(getItem(4));
@@ -1050,7 +1050,7 @@ void main() {
   });
 
   testWidgets('The initialItem stays when the itemExtent is updated', (WidgetTester tester) async {
-    final CarouselController controller = CarouselController(initialItem: 3);
+    final controller = CarouselController(initialItem: 3);
     addTearDown(controller.dispose);
 
     Widget buildCarousel(double itemExtent) {
@@ -1110,7 +1110,7 @@ void main() {
     );
     await tester.pumpAndSettle();
 
-    for (int i = 0; i < 5; i++) {
+    for (var i = 0; i < 5; i++) {
       expect(getItem(i), findsOneWidget);
     }
 
@@ -1139,7 +1139,7 @@ void main() {
 
     // The sum of the first 5 items during transition is less than the screen width.
     double sum = 0;
-    for (int i = 0; i < 5; i++) {
+    for (var i = 0; i < 5; i++) {
       sum += tester.getRect(getItem(i)).width;
     }
     expect(sum, lessThan(MediaQuery.of(tester.element(find.byType(CarouselView))).size.width));
@@ -1152,7 +1152,7 @@ void main() {
 
   testWidgets('Updating CarouselView does not cause exception', (WidgetTester tester) async {
     // Regression test for https://github.com/flutter/flutter/issues/152787
-    bool isLight = true;
+    var isLight = true;
     await tester.pumpWidget(
       StatefulBuilder(
         builder: (BuildContext context, StateSetter setState) {

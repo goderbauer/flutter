@@ -202,7 +202,7 @@ void main() {
     });
 
     test('dispose clears focusCallbacks', () async {
-      bool didFocus = false;
+      var didFocus = false;
       viewsController.registerViewType('webview');
       final AndroidViewController viewController = PlatformViewsService.initAndroidView(
         id: 0,
@@ -245,7 +245,7 @@ void main() {
 
     test('OnPlatformViewCreated callback', () async {
       viewsController.registerViewType('webview');
-      final List<int> createdViews = <int>[];
+      final createdViews = <int>[];
       void callback(int id) { createdViews.add(id); }
 
       final AndroidViewController controller1 = PlatformViewsService.initAndroidView(
@@ -428,11 +428,11 @@ void main() {
   });
 
   test('toString works as intended', () async {
-    const AndroidPointerProperties androidPointerProperties = AndroidPointerProperties(id: 0, toolType: 0);
+    const androidPointerProperties = AndroidPointerProperties(id: 0, toolType: 0);
     expect(androidPointerProperties.toString(), 'AndroidPointerProperties(id: 0, toolType: 0)');
 
-    const double zero = 0.0;
-    const AndroidPointerCoords androidPointerCoords = AndroidPointerCoords(
+    const zero = 0.0;
+    const androidPointerCoords = AndroidPointerCoords(
       orientation: zero,
       pressure: zero,
       size: zero,
@@ -454,7 +454,7 @@ void main() {
       'y: $zero)',
     );
 
-    final AndroidMotionEvent androidMotionEvent = AndroidMotionEvent(
+    final androidMotionEvent = AndroidMotionEvent(
       downTime: 0,
       eventTime: 0,
       action: 0,

@@ -13,9 +13,9 @@ import 'semantics_tester.dart';
 void main() {
   testWidgets('SliverReorderableList works well when having gestureSettings', (WidgetTester tester) async {
     // Regression test for https://github.com/flutter/flutter/issues/103404
-    const int itemCount = 5;
-    int onReorderCallCount = 0;
-    final List<int> items = List<int>.generate(itemCount, (int index) => index);
+    const itemCount = 5;
+    var onReorderCallCount = 0;
+    final items = List<int>.generate(itemCount, (int index) => index);
 
     void handleReorder(int fromIndex, int toIndex) {
       onReorderCallCount += 1;
@@ -69,10 +69,10 @@ void main() {
   });
 
   testWidgets('SliverReorderableList item has correct semantics', (WidgetTester tester) async {
-    final SemanticsTester semantics = SemanticsTester(tester);
-    const int itemCount = 5;
-    int onReorderCallCount = 0;
-    final List<int> items = List<int>.generate(itemCount, (int index) => index);
+    final semantics = SemanticsTester(tester);
+    const itemCount = 5;
+    var onReorderCallCount = 0;
+    final items = List<int>.generate(itemCount, (int index) => index);
 
     void handleReorder(int fromIndex, int toIndex) {
       onReorderCallCount += 1;
@@ -129,8 +129,8 @@ void main() {
   });
 
   testWidgets('SliverReorderableList custom semantics action has correct label', (WidgetTester tester) async {
-    const int itemCount = 5;
-    final List<int> items = List<int>.generate(itemCount, (int index) => index);
+    const itemCount = 5;
+    final items = List<int>.generate(itemCount, (int index) => index);
     // The list has five elements of height 100
     await tester.pumpWidget(
       MaterialApp(
@@ -168,8 +168,8 @@ void main() {
 
   // Regression test for https://github.com/flutter/flutter/issues/100451
   testWidgets('SliverReorderableList.builder respects findChildIndexCallback', (WidgetTester tester) async {
-    bool finderCalled = false;
-    int itemCount = 7;
+    var finderCalled = false;
+    var itemCount = 7;
     late StateSetter stateSetter;
 
     await tester.pumpWidget(
@@ -208,7 +208,7 @@ void main() {
 
   // Regression test for https://github.com/flutter/flutter/issues/88191
   testWidgets('Do not crash when dragging with two fingers simultaneously', (WidgetTester tester) async {
-    final List<int> items = List<int>.generate(3, (int index) => index);
+    final items = List<int>.generate(3, (int index) => index);
     void handleReorder(int fromIndex, int toIndex) {
       if (toIndex > fromIndex) {
         toIndex -= 1;
@@ -254,7 +254,7 @@ void main() {
   });
 
   testWidgets('negative itemCount should assert', (WidgetTester tester) async {
-    final List<int> items = <int>[1, 2, 3];
+    final items = <int>[1, 2, 3];
     await tester.pumpWidget(MaterialApp(
       home: StatefulBuilder(
         builder: (BuildContext outerContext, StateSetter setState) {
@@ -286,7 +286,7 @@ void main() {
   });
 
   testWidgets('zero itemCount should not build widget', (WidgetTester tester) async {
-    final List<int> items = <int>[1, 2, 3];
+    final items = <int>[1, 2, 3];
     await tester.pumpWidget(MaterialApp(
       home: StatefulBuilder(
         builder: (BuildContext outerContext, StateSetter setState) {
@@ -333,7 +333,7 @@ void main() {
   });
 
   testWidgets('SliverReorderableList, drag and drop, fixed height items', (WidgetTester tester) async {
-    final List<int> items = List<int>.generate(8, (int index) => index);
+    final items = List<int>.generate(8, (int index) => index);
 
     Future<void> pressDragRelease(Offset start, Offset delta) async {
       final TestGesture drag = await tester.startGesture(start);
@@ -399,8 +399,8 @@ void main() {
   });
 
   testWidgets('SliverReorderableList, items inherit DefaultTextStyle, IconTheme', (WidgetTester tester) async {
-    const Color textColor = Color(0xffffffff);
-    const Color iconColor = Color(0xff0000ff);
+    const textColor = Color(0xffffffff);
+    const iconColor = Color(0xff0000ff);
 
     TextStyle getIconStyle() {
       return tester.widget<RichText>(
@@ -452,7 +452,7 @@ void main() {
   });
 
   testWidgets('SliverReorderableList - custom proxyDecorator', (WidgetTester tester) async {
-    const ValueKey<String> fadeTransitionKey = ValueKey<String>('reordered-fade');
+    const fadeTransitionKey = ValueKey<String>('reordered-fade');
 
     await tester.pumpWidget(
       TestList(
@@ -465,7 +465,7 @@ void main() {
           return AnimatedBuilder(
             animation: animation,
             builder: (BuildContext context, Widget? child) {
-              final Tween<double> fadeValues = Tween<double>(begin: 1.0, end: 0.5);
+              final fadeValues = Tween<double>(begin: 1.0, end: 0.5);
               final Animation<double> fadeAnimation = animation.drive(fadeValues);
               return FadeTransition(
                 key: fadeTransitionKey,
@@ -625,7 +625,7 @@ void main() {
 
   testWidgets('SliverReorderableList - properly animates the drop in a reversed list', (WidgetTester tester) async {
     // Regression test for https://github.com/flutter/flutter/issues/110949
-    final List<int> items = List<int>.generate(8, (int index) => index);
+    final items = List<int>.generate(8, (int index) => index);
 
     Future<void> pressDragRelease(Offset start, Offset delta) async {
       final TestGesture drag = await tester.startGesture(start);
@@ -676,7 +676,7 @@ void main() {
 
   testWidgets('SliverReorderableList - properly animates the drop at starting position in a reversed list', (WidgetTester tester) async {
     // Regression test for https://github.com/flutter/flutter/issues/84625
-    final List<int> items = List<int>.generate(8, (int index) => index);
+    final items = List<int>.generate(8, (int index) => index);
 
     Future<void> pressDragRelease(Offset start, Offset delta) async {
       final TestGesture drag = await tester.startGesture(start);
@@ -718,7 +718,7 @@ void main() {
   });
 
   testWidgets('SliverReorderableList calls onReorderStart and onReorderEnd correctly', (WidgetTester tester) async {
-    final List<int> items = List<int>.generate(8, (int index) => index);
+    final items = List<int>.generate(8, (int index) => index);
     int? startIndex, endIndex;
     final Finder item0 = find.textContaining('item 0');
 
@@ -769,7 +769,7 @@ void main() {
   });
 
   testWidgets('ReorderableList calls onReorderStart and onReorderEnd correctly', (WidgetTester tester) async {
-    final List<int> items = List<int>.generate(8, (int index) => index);
+    final items = List<int>.generate(8, (int index) => index);
     int? startIndex, endIndex;
     final Finder item0 = find.textContaining('item 0');
 
@@ -842,7 +842,7 @@ void main() {
 
 
   testWidgets('ReorderableList asserts on both non-null itemExtent and prototypeItem', (WidgetTester tester) async {
-    final List<int> numbers = <int>[0,1,2];
+    final numbers = <int>[0,1,2];
     expect(() => ReorderableList(
       itemBuilder: (BuildContext context, int index) {
         return SizedBox(
@@ -862,7 +862,7 @@ void main() {
   });
 
   testWidgets('SliverReorderableList asserts on both non-null itemExtent and prototypeItem', (WidgetTester tester) async {
-    final List<int> numbers = <int>[0,1,2];
+    final numbers = <int>[0,1,2];
     expect(() => SliverReorderableList(
       itemBuilder: (BuildContext context, int index) {
         return SizedBox(
@@ -882,7 +882,7 @@ void main() {
   });
 
   testWidgets('if itemExtent is non-null, children have same extent in the scroll direction', (WidgetTester tester) async {
-    final List<int> numbers = <int>[0,1,2];
+    final numbers = <int>[0,1,2];
 
     await tester.pumpWidget(
       MaterialApp(
@@ -927,7 +927,7 @@ void main() {
   });
 
   testWidgets('if prototypeItem is non-null, children have same extent in the scroll direction', (WidgetTester tester) async {
-    final List<int> numbers = <int>[0,1,2];
+    final numbers = <int>[0,1,2];
 
     await tester.pumpWidget(
         MaterialApp(
@@ -970,9 +970,9 @@ void main() {
 
   group('ReorderableDragStartListener', () {
     testWidgets('It should allow the item to be dragged when enabled is true', (WidgetTester tester) async {
-      const int itemCount = 5;
-      int onReorderCallCount = 0;
-      final List<int> items = List<int>.generate(itemCount, (int index) => index);
+      const itemCount = 5;
+      var onReorderCallCount = 0;
+      final items = List<int>.generate(itemCount, (int index) => index);
 
       void handleReorder(int fromIndex, int toIndex) {
         onReorderCallCount += 1;
@@ -1016,9 +1016,9 @@ void main() {
     });
 
     testWidgets('It should not allow the item to be dragged when enabled is false', (WidgetTester tester) async {
-      const int itemCount = 5;
-      int onReorderCallCount = 0;
-      final List<int> items = List<int>.generate(itemCount, (int index) => index);
+      const itemCount = 5;
+      var onReorderCallCount = 0;
+      final items = List<int>.generate(itemCount, (int index) => index);
 
       void handleReorder(int fromIndex, int toIndex) {
         onReorderCallCount += 1;
@@ -1065,9 +1065,9 @@ void main() {
 
   group('ReorderableDelayedDragStartListener', () {
     testWidgets('It should allow the item to be dragged when enabled is true', (WidgetTester tester) async {
-      const int itemCount = 5;
-      int onReorderCallCount = 0;
-      final List<int> items = List<int>.generate(itemCount, (int index) => index);
+      const itemCount = 5;
+      var onReorderCallCount = 0;
+      final items = List<int>.generate(itemCount, (int index) => index);
 
       void handleReorder(int fromIndex, int toIndex) {
         onReorderCallCount += 1;
@@ -1112,9 +1112,9 @@ void main() {
     });
 
     testWidgets('It should not allow the item to be dragged when enabled is false', (WidgetTester tester) async {
-      const int itemCount = 5;
-      int onReorderCallCount = 0;
-      final List<int> items = List<int>.generate(itemCount, (int index) => index);
+      const itemCount = 5;
+      var onReorderCallCount = 0;
+      final items = List<int>.generate(itemCount, (int index) => index);
 
       void handleReorder(int fromIndex, int toIndex) {
         onReorderCallCount += 1;
@@ -1161,8 +1161,8 @@ void main() {
 
   testWidgets('SliverReorderableList properly disposes items', (WidgetTester tester) async {
     // Regression test for https://github.com/flutter/flutter/issues/105010
-    const int itemCount = 5;
-    final List<int> items = List<int>.generate(itemCount, (int index) => index);
+    const itemCount = 5;
+    final items = List<int>.generate(itemCount, (int index) => index);
 
     await tester.pumpWidget(
       MaterialApp(
@@ -1242,8 +1242,8 @@ void main() {
     }
 
     Future<double> pumpListAndDrag({required double autoScrollerVelocityScalar}) async {
-      final List<int> items = List<int>.generate(10, (int index) => index);
-      final ScrollController scrollController = ScrollController();
+      final items = List<int>.generate(10, (int index) => index);
+      final scrollController = ScrollController();
       addTearDown(scrollController.dispose);
 
       await tester.pumpWidget(
@@ -1314,8 +1314,8 @@ void main() {
 
   testWidgets('Null check error when dragging and dropping last element into last index with reverse:true', (WidgetTester tester) async {
     // Regression test for https://github.com/flutter/flutter/issues/132077
-    const int itemCount = 5;
-    final List<String> items = List<String>.generate(itemCount, (int index) => 'Item ${index+1}');
+    const itemCount = 5;
+    final items = List<String>.generate(itemCount, (int index) => 'Item ${index+1}');
 
     await tester.pumpWidget(
       MaterialApp(
@@ -1409,7 +1409,7 @@ void main() {
   testWidgets('Tests the correctness of the drop animation in various scenarios', (WidgetTester tester) async {
     // Regression test for https://github.com/flutter/flutter/issues/138994
     late Size screenSize;
-    final List<double> itemSizes = <double>[20, 50, 30, 80, 100, 30];
+    final itemSizes = <double>[20, 50, 30, 80, 100, 30];
     Future<void> pumpFor(bool reverse, Axis scrollDirection) async {
       await tester.pumpWidget(
         MaterialApp(
@@ -1452,7 +1452,7 @@ void main() {
     Future<void> testMove(int from, int to, {bool reverse = false, Axis scrollDirection = Axis.vertical}) async {
       await pumpFor(reverse, scrollDirection);
       final double targetOffset = (List<double>.of(itemSizes)..removeAt(from)).sublist(0, to).sum;
-      final Offset targetPosition = reverse
+      final targetPosition = reverse
         ? (scrollDirection == Axis.vertical
             ? Offset(0, screenSize.height - targetOffset - itemSizes[from])
             : Offset(screenSize.width - targetOffset - itemSizes[from], 0))
@@ -1469,14 +1469,14 @@ void main() {
       expect(tester.getTopLeft(find.text('$from')), targetPosition);
       await tester.pumpAndSettle();
     }
-    final List<(int,int)> testCases = <(int,int)>[
+    final testCases = <(int,int)>[
       (3, 1),
       (3, 3),
       (3, 5),
       (0, 5),
       (5, 0),
     ];
-    for (final (int, int) element in testCases) {
+    for (final element in testCases) {
       await testMove(element.$1, element.$2);
       await testMove(element.$1, element.$2, reverse: true);
       await testMove(element.$1, element.$2, scrollDirection: Axis.horizontal);
@@ -1530,7 +1530,7 @@ void main() {
   });
 
   testWidgets('The item being dragged will not be affected by layout constraints.', (WidgetTester tester) async {
-    final Map<int, BoxConstraints> itemLayoutConstraints = <int, BoxConstraints>{};
+    final itemLayoutConstraints = <int, BoxConstraints>{};
     await tester.pumpWidget(
       MaterialApp(
         home: Scaffold(
@@ -1560,7 +1560,7 @@ void main() {
         ),
       ),
     );
-    final Map<int, BoxConstraints> preDragLayoutConstraints = Map<int, BoxConstraints>.of(itemLayoutConstraints);
+    final preDragLayoutConstraints = Map<int, BoxConstraints>.of(itemLayoutConstraints);
     itemLayoutConstraints.clear();
     final TestGesture drag = await tester.startGesture(tester.getCenter(find.text('0')));
     await tester.pump(kLongPressTimeout);

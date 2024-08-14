@@ -12,7 +12,7 @@ import '../widgets/semantics_tester.dart';
 
 void main() {
   testWidgets('InkWell gestures control test', (WidgetTester tester) async {
-    final List<String> log = <String>[];
+    final log = <String>[];
 
     await tester.pumpWidget(Directionality(
       textDirection: TextDirection.ltr,
@@ -80,7 +80,7 @@ void main() {
 
   testWidgets('InkWell only onTapDown enables gestures', (WidgetTester tester) async {
     // Regression test for https://github.com/flutter/flutter/issues/96030
-    bool downTapped = false;
+    var downTapped = false;
     await tester.pumpWidget(Directionality(
       textDirection: TextDirection.ltr,
       child: Material(
@@ -99,7 +99,7 @@ void main() {
   });
 
   testWidgets('InkWell invokes activation actions when expected', (WidgetTester tester) async {
-    final List<String> log = <String>[];
+    final log = <String>[];
 
     await tester.pumpWidget(Directionality(
       textDirection: TextDirection.ltr,
@@ -215,7 +215,7 @@ void main() {
 
   testWidgets('ink response changes color on focus', (WidgetTester tester) async {
     FocusManager.instance.highlightStrategy = FocusHighlightStrategy.alwaysTraditional;
-    final FocusNode focusNode = FocusNode(debugLabel: 'Ink Focus');
+    final focusNode = FocusNode(debugLabel: 'Ink Focus');
     await tester.pumpWidget(
       Material(
         child: Directionality(
@@ -255,7 +255,7 @@ void main() {
     // Same test as 'ink well changes color on focus' except that the
     // hover color is specified with the overlayColor parameter.
     FocusManager.instance.highlightStrategy = FocusHighlightStrategy.alwaysTraditional;
-    final FocusNode focusNode = FocusNode(debugLabel: 'Ink Focus');
+    final focusNode = FocusNode(debugLabel: 'Ink Focus');
     await tester.pumpWidget(
       Material(
         child: Directionality(
@@ -301,7 +301,7 @@ void main() {
   });
 
   testWidgets('ink well changes color on pressed with overlayColor', (WidgetTester tester) async {
-    const Color pressedColor = Color(0xffdd00ff);
+    const pressedColor = Color(0xffdd00ff);
 
     await tester.pumpWidget(Material(
       child: Directionality(
@@ -336,8 +336,8 @@ void main() {
 
   testWidgets('ink response splashColor matches splashColor parameter', (WidgetTester tester) async {
     FocusManager.instance.highlightStrategy = FocusHighlightStrategy.alwaysTouch;
-    final FocusNode focusNode = FocusNode(debugLabel: 'Ink Focus');
-    const Color splashColor = Color(0xffff0000);
+    final focusNode = FocusNode(debugLabel: 'Ink Focus');
+    const splashColor = Color(0xffff0000);
     await tester.pumpWidget(MaterialApp(
       theme: ThemeData(useMaterial3: false),
       home: Material(
@@ -378,8 +378,8 @@ void main() {
     // parameter' except that the splash color is specified with the
     // overlayColor parameter.
     FocusManager.instance.highlightStrategy = FocusHighlightStrategy.alwaysTouch;
-    final FocusNode focusNode = FocusNode(debugLabel: 'Ink Focus');
-    const Color splashColor = Color(0xffff0000);
+    final focusNode = FocusNode(debugLabel: 'Ink Focus');
+    const splashColor = Color(0xffff0000);
     await tester.pumpWidget(MaterialApp(
       theme: ThemeData(useMaterial3: false),
       home: Material(
@@ -425,7 +425,7 @@ void main() {
 
   testWidgets('ink response uses radius for focus highlight', (WidgetTester tester) async {
     FocusManager.instance.highlightStrategy = FocusHighlightStrategy.alwaysTraditional;
-    final FocusNode focusNode = FocusNode(debugLabel: 'Ink Focus');
+    final focusNode = FocusNode(debugLabel: 'Ink Focus');
     await tester.pumpWidget(
       Material(
         child: Directionality(
@@ -456,7 +456,7 @@ void main() {
 
   testWidgets('InkWell uses borderRadius for focus highlight', (WidgetTester tester) async {
     FocusManager.instance.highlightStrategy = FocusHighlightStrategy.alwaysTraditional;
-    final FocusNode focusNode = FocusNode(debugLabel: 'Ink Focus');
+    final focusNode = FocusNode(debugLabel: 'Ink Focus');
     await tester.pumpWidget(
       Material(
         child: Directionality(
@@ -530,7 +530,7 @@ void main() {
 
   testWidgets('InkWell customBorder clips for focus highlight', (WidgetTester tester) async {
     FocusManager.instance.highlightStrategy = FocusHighlightStrategy.alwaysTraditional;
-    final FocusNode focusNode = FocusNode(debugLabel: 'Ink Focus');
+    final focusNode = FocusNode(debugLabel: 'Ink Focus');
     await tester.pumpWidget(
       Material(
         child: Directionality(
@@ -565,8 +565,8 @@ void main() {
     expect(inkFeatures, paintsExactlyCountTimes(#drawRRect, 1));
 
     // Create a rounded rectangle path with a radius that makes it similar to the custom border circle.
-    const Rect expectedClipRect = Rect.fromLTRB(0, 0, 100, 100);
-    final Path expectedClipPath = Path()
+    const expectedClipRect = Rect.fromLTRB(0, 0, 100, 100);
+    final expectedClipPath = Path()
       ..addRRect(RRect.fromRectAndRadius(
           expectedClipRect,
           const Radius.circular(50.0),
@@ -619,8 +619,8 @@ void main() {
     expect(inkFeatures, paintsExactlyCountTimes(#drawRRect, 1));
 
     // Create a rounded rectangle path with a radius that makes it similar to the custom border circle.
-    const Rect expectedClipRect = Rect.fromLTRB(0, 0, 100, 100);
-    final Path expectedClipPath = Path()
+    const expectedClipRect = Rect.fromLTRB(0, 0, 100, 100);
+    final expectedClipPath = Path()
       ..addRRect(RRect.fromRectAndRadius(
           expectedClipRect,
           const Radius.circular(50.0),
@@ -638,7 +638,7 @@ void main() {
 
 testWidgets('InkResponse radius can be updated', (WidgetTester tester) async {
     FocusManager.instance.highlightStrategy = FocusHighlightStrategy.alwaysTraditional;
-    final FocusNode focusNode = FocusNode(debugLabel: 'Ink Focus');
+    final focusNode = FocusNode(debugLabel: 'Ink Focus');
     Widget boilerplate(double radius) {
       return Material(
         child: Directionality(
@@ -677,7 +677,7 @@ testWidgets('InkResponse radius can be updated', (WidgetTester tester) async {
 
   testWidgets('InkResponse highlightShape can be updated', (WidgetTester tester) async {
     FocusManager.instance.highlightStrategy = FocusHighlightStrategy.alwaysTraditional;
-    final FocusNode focusNode = FocusNode(debugLabel: 'Ink Focus');
+    final focusNode = FocusNode(debugLabel: 'Ink Focus');
     Widget boilerplate(BoxShape shape) {
       return Material(
         child: Directionality(
@@ -719,7 +719,7 @@ testWidgets('InkResponse radius can be updated', (WidgetTester tester) async {
 
   testWidgets('InkWell borderRadius can be updated', (WidgetTester tester) async {
     FocusManager.instance.highlightStrategy = FocusHighlightStrategy.alwaysTraditional;
-    final FocusNode focusNode = FocusNode(debugLabel: 'Ink Focus');
+    final focusNode = FocusNode(debugLabel: 'Ink Focus');
     Widget boilerplate(BorderRadius borderRadius) {
       return Material(
         child: Directionality(
@@ -765,7 +765,7 @@ testWidgets('InkResponse radius can be updated', (WidgetTester tester) async {
 
   testWidgets('InkWell customBorder can be updated', (WidgetTester tester) async {
     FocusManager.instance.highlightStrategy = FocusHighlightStrategy.alwaysTraditional;
-    final FocusNode focusNode = FocusNode(debugLabel: 'Ink Focus');
+    final focusNode = FocusNode(debugLabel: 'Ink Focus');
     Widget boilerplate(BorderRadius borderRadius) {
       return Material(
         child: Directionality(
@@ -798,8 +798,8 @@ testWidgets('InkResponse radius can be updated', (WidgetTester tester) async {
     await tester.pumpAndSettle();
     expect(inkFeatures, paintsExactlyCountTimes(#clipPath, 1));
 
-    const Rect expectedClipRect = Rect.fromLTRB(0, 0, 100, 100);
-    Path expectedClipPath = Path()
+    const expectedClipRect = Rect.fromLTRB(0, 0, 100, 100);
+    var expectedClipPath = Path()
       ..addRRect(RRect.fromRectAndRadius(
           expectedClipRect,
           const Radius.circular(20),
@@ -833,7 +833,7 @@ testWidgets('InkResponse radius can be updated', (WidgetTester tester) async {
 
   testWidgets('InkWell splash customBorder can be updated', (WidgetTester tester) async {
     // Regression test for https://github.com/flutter/flutter/issues/121626.
-    final FocusNode focusNode = FocusNode(debugLabel: 'Ink Focus');
+    final focusNode = FocusNode(debugLabel: 'Ink Focus');
     Widget boilerplate(BorderRadius borderRadius) {
       return MaterialApp(
         theme: ThemeData(useMaterial3: false),
@@ -869,8 +869,8 @@ testWidgets('InkResponse radius can be updated', (WidgetTester tester) async {
     await tester.pump(const Duration(milliseconds: 200)); // Unconfirmed splash is well underway.
     expect(inkFeatures, paintsExactlyCountTimes(#clipPath, 2)); // Splash and highlight.
 
-    const Rect expectedClipRect = Rect.fromLTRB(0, 0, 100, 100);
-    Path expectedClipPath = Path()
+    const expectedClipRect = Rect.fromLTRB(0, 0, 100, 100);
+    var expectedClipPath = Path()
       ..addRRect(RRect.fromRectAndRadius(
           expectedClipRect,
           const Radius.circular(20),
@@ -922,7 +922,7 @@ testWidgets('InkResponse radius can be updated', (WidgetTester tester) async {
 
   testWidgets("ink response doesn't change color on focus when on touch device", (WidgetTester tester) async {
     FocusManager.instance.highlightStrategy = FocusHighlightStrategy.alwaysTouch;
-    final FocusNode focusNode = FocusNode(debugLabel: 'Ink Focus');
+    final focusNode = FocusNode(debugLabel: 'Ink Focus');
     await tester.pumpWidget(Material(
       child: Directionality(
         textDirection: TextDirection.ltr,
@@ -1167,7 +1167,7 @@ testWidgets('InkResponse radius can be updated', (WidgetTester tester) async {
   });
 
   testWidgets('excludeFromSemantics', (WidgetTester tester) async {
-    final SemanticsTester semantics = SemanticsTester(tester);
+    final semantics = SemanticsTester(tester);
 
     await tester.pumpWidget(Directionality(
       textDirection: TextDirection.ltr,
@@ -1197,7 +1197,7 @@ testWidgets('InkResponse radius can be updated', (WidgetTester tester) async {
 
   testWidgets("ink response doesn't focus when disabled", (WidgetTester tester) async {
     FocusManager.instance.highlightStrategy = FocusHighlightStrategy.alwaysTouch;
-    final FocusNode focusNode = FocusNode(debugLabel: 'Ink Focus');
+    final focusNode = FocusNode(debugLabel: 'Ink Focus');
     final GlobalKey childKey = GlobalKey();
     await tester.pumpWidget(
       Material(
@@ -1234,7 +1234,7 @@ testWidgets('InkResponse radius can be updated', (WidgetTester tester) async {
 
   testWidgets('ink response accepts focus when disabled in directional navigation mode', (WidgetTester tester) async {
     FocusManager.instance.highlightStrategy = FocusHighlightStrategy.alwaysTouch;
-    final FocusNode focusNode = FocusNode(debugLabel: 'Ink Focus');
+    final focusNode = FocusNode(debugLabel: 'Ink Focus');
     final GlobalKey childKey = GlobalKey();
     await tester.pumpWidget(
       Material(
@@ -1281,9 +1281,9 @@ testWidgets('InkResponse radius can be updated', (WidgetTester tester) async {
 
   testWidgets("ink response doesn't hover when disabled", (WidgetTester tester) async {
     FocusManager.instance.highlightStrategy = FocusHighlightStrategy.alwaysTouch;
-    final FocusNode focusNode = FocusNode(debugLabel: 'Ink Focus');
+    final focusNode = FocusNode(debugLabel: 'Ink Focus');
     final GlobalKey childKey = GlobalKey();
-    bool hovering = false;
+    var hovering = false;
     await tester.pumpWidget(
       Material(
         child: Directionality(
@@ -1820,7 +1820,7 @@ testWidgets('InkResponse radius can be updated', (WidgetTester tester) async {
   });
 
   testWidgets('disabled and hovered inkwell responds to mouse-exit', (WidgetTester tester) async {
-    int onHoverCount = 0;
+    var onHoverCount = 0;
     late bool hover;
 
     Widget buildFrame({ required bool enabled }) {
@@ -2012,7 +2012,7 @@ testWidgets('InkResponse radius can be updated', (WidgetTester tester) async {
   });
 
   testWidgets('InkWell highlight should not survive after [onTapDown, onDoubleTap] sequence', (WidgetTester tester) async {
-    final List<String> log = <String>[];
+    final log = <String>[];
 
     await tester.pumpWidget(Directionality(
       textDirection: TextDirection.ltr,
@@ -2053,7 +2053,7 @@ testWidgets('InkResponse radius can be updated', (WidgetTester tester) async {
   });
 
   testWidgets('InkWell splash should not survive after [onTapDown, onTapDown, onTapCancel, onDoubleTap] sequence', (WidgetTester tester) async {
-    final List<String> log = <String>[];
+    final log = <String>[];
 
     await tester.pumpWidget(Directionality(
       textDirection: TextDirection.ltr,
@@ -2098,7 +2098,7 @@ testWidgets('InkResponse radius can be updated', (WidgetTester tester) async {
   });
 
   testWidgets('InkWell disposes statesController', (WidgetTester tester) async {
-    int tapCount = 0;
+    var tapCount = 0;
     Widget buildFrame(MaterialStatesController? statesController) {
       return MaterialApp(
         home: Scaffold(
@@ -2113,9 +2113,9 @@ testWidgets('InkResponse radius can be updated', (WidgetTester tester) async {
       );
     }
 
-    final MaterialStatesController controller = MaterialStatesController();
+    final controller = MaterialStatesController();
     addTearDown(controller.dispose);
-    int pressedCount = 0;
+    var pressedCount = 0;
     controller.addListener(() {
       if (controller.value.contains(MaterialState.pressed)) {
         pressedCount += 1;
@@ -2180,7 +2180,7 @@ testWidgets('InkResponse radius can be updated', (WidgetTester tester) async {
   });
 
   testWidgets('InkWell secondary tap test', (WidgetTester tester) async {
-    final List<String> log = <String>[];
+    final log = <String>[];
 
     await tester.pumpWidget(Directionality(
       textDirection: TextDirection.ltr,
@@ -2243,7 +2243,7 @@ testWidgets('InkResponse radius can be updated', (WidgetTester tester) async {
   });
 
   testWidgets('try out hoverDuration property', (WidgetTester tester) async {
-    final List<String> log = <String>[];
+    final log = <String>[];
 
     await tester.pumpWidget(Directionality(
       textDirection: TextDirection.ltr,
@@ -2268,7 +2268,7 @@ testWidgets('InkResponse radius can be updated', (WidgetTester tester) async {
 
   testWidgets('InkWell activation action does not end immediately', (WidgetTester tester) async {
     // Regression test for https://github.com/flutter/flutter/issues/132377.
-    final MaterialStatesController controller = MaterialStatesController();
+    final controller = MaterialStatesController();
 
     await tester.pumpWidget(Directionality(
       textDirection: TextDirection.ltr,

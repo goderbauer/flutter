@@ -93,12 +93,12 @@ class LinearBorderEdge {
 
   @override
   String toString() {
-    final StringBuffer s = StringBuffer('${objectRuntimeType(this, 'LinearBorderEdge')}(');
+    final s = StringBuffer('${objectRuntimeType(this, 'LinearBorderEdge')}(');
     if (size != 1.0 ) {
       s.write('size: $size');
     }
     if (alignment != 0) {
-      final String comma = size != 1.0 ? ', ' : '';
+      final comma = size != 1.0 ? ', ' : '';
       s.write('${comma}alignment: $alignment');
     }
     s.write(')');
@@ -293,8 +293,8 @@ class LinearBorder extends OutlinedBorder {
     final EdgeInsets insets = dimensions.resolve(textDirection);
     final bool rtl = textDirection == TextDirection.rtl;
 
-    final Path path = Path();
-    final Paint paint = Paint()
+    final path = Path();
+    final paint = Paint()
       ..strokeWidth = 0.0;
 
     void drawEdge(Rect rect, Color color) {
@@ -317,22 +317,22 @@ class LinearBorder extends OutlinedBorder {
     }
 
     if (start != null && start!.size != 0.0 && side.style != BorderStyle.none) {
-      final Rect insetRect = Rect.fromLTWH(rect.left, rect.top + insets.top, rect.width, rect.height - insets.vertical);
+      final insetRect = Rect.fromLTWH(rect.left, rect.top + insets.top, rect.width, rect.height - insets.vertical);
       final double x = rtl ? rect.right - insets.right : rect.left;
       final double width = rtl ? insets.right : insets.left;
       final double height = insetRect.height * start!.size;
       final double y = (insetRect.height - height) * ((start!.alignment + 1.0) / 2.0);
-      final Rect r = Rect.fromLTWH(x, y, width, height);
+      final r = Rect.fromLTWH(x, y, width, height);
       drawEdge(r, side.color);
     }
 
     if (end != null && end!.size != 0.0 && side.style != BorderStyle.none) {
-      final Rect insetRect = Rect.fromLTWH(rect.left, rect.top + insets.top, rect.width, rect.height - insets.vertical);
+      final insetRect = Rect.fromLTWH(rect.left, rect.top + insets.top, rect.width, rect.height - insets.vertical);
       final double x = rtl ? rect.left : rect.right - insets.right;
       final double width = rtl ? insets.left : insets.right;
       final double height = insetRect.height * end!.size;
       final double y = (insetRect.height - height) * ((end!.alignment + 1.0) / 2.0);
-      final Rect r = Rect.fromLTWH(x, y, width, height);
+      final r = Rect.fromLTWH(x, y, width, height);
       drawEdge(r, side.color);
     }
 
@@ -340,7 +340,7 @@ class LinearBorder extends OutlinedBorder {
       final double width = rect.width * top!.size;
       final double startX = (rect.width - width) * ((top!.alignment + 1.0) / 2.0);
       final double x = rtl ? rect.width - startX - width : startX;
-      final Rect r = Rect.fromLTWH(x, rect.top, width, insets.top);
+      final r = Rect.fromLTWH(x, rect.top, width, insets.top);
       drawEdge(r, side.color);
     }
 
@@ -348,7 +348,7 @@ class LinearBorder extends OutlinedBorder {
       final double width = rect.width * bottom!.size;
       final double startX = (rect.width - width) * ((bottom!.alignment + 1.0) / 2.0);
       final double x = rtl ? rect.width - startX - width: startX;
-      final Rect r = Rect.fromLTWH(x, rect.bottom - insets.bottom, width, side.width);
+      final r = Rect.fromLTWH(x, rect.bottom - insets.bottom, width, side.width);
       drawEdge(r, side.color);
     }
   }
@@ -378,7 +378,7 @@ class LinearBorder extends OutlinedBorder {
       return 'LinearBorder.none';
     }
 
-    final StringBuffer s = StringBuffer('${objectRuntimeType(this, 'LinearBorder')}(side: $side');
+    final s = StringBuffer('${objectRuntimeType(this, 'LinearBorder')}(side: $side');
 
     if (start != null ) {
       s.write(', start: $start');

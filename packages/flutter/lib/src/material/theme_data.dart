@@ -827,7 +827,7 @@ class ThemeData with Diagnosticable {
   Adaptation<T>? getAdaptation<T>() => adaptationMap[T] as Adaptation<T>?;
 
   static Map<Type, Adaptation<Object>> _createAdaptationMap(Iterable<Adaptation<Object>> adaptations) {
-    final Map<Type, Adaptation<Object>> adaptationMap = <Type, Adaptation<Object>>{
+    final adaptationMap = <Type, Adaptation<Object>>{
       for (final Adaptation<Object> adaptation in adaptations)
         adaptation.type: adaptation
     };
@@ -1663,7 +1663,7 @@ class ThemeData with Diagnosticable {
     // doesn't say what value to use, but 0.15 seemed close to what the Material
     // Design spec shows for its color palette on
     // <https://material.io/go/design-theming#color-color-palette>.
-    const double kThreshold = 0.15;
+    const kThreshold = 0.15;
     if ((relativeLuminance + 0.05) * (relativeLuminance + 0.05) > kThreshold) {
       return Brightness.light;
     }
@@ -1901,7 +1901,7 @@ class ThemeData with Diagnosticable {
 
   @override
   int get hashCode {
-    final List<Object?> values = <Object?>[
+    final values = <Object?>[
       // For the sanity of the reader, make sure these properties are in the same
       // order in every place that they are separated by section comments (e.g.
       // GENERAL CONFIGURATION). Each section except for deprecations should be
@@ -2003,7 +2003,7 @@ class ThemeData with Diagnosticable {
   @override
   void debugFillProperties(DiagnosticPropertiesBuilder properties) {
     super.debugFillProperties(properties);
-    final ThemeData defaultData = ThemeData.fallback();
+    final defaultData = ThemeData.fallback();
     // For the sanity of the reader, make sure these properties are in the same
     // order in every place that they are separated by section comments (e.g.
     // GENERAL CONFIGURATION). Each section except for deprecations should be
@@ -2465,7 +2465,7 @@ class VisualDensity with Diagnosticable {
     // The number of logical pixels represented by an increase or decrease in
     // density by one. The Material Design guidelines say to increment/decrement
     // sizes in terms of four pixel increments.
-    const double interval = 4.0;
+    const interval = 4.0;
 
     return Offset(horizontal, vertical) * interval;
   }

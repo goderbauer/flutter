@@ -66,12 +66,12 @@ final ShapeBorder _defaultM3DialogShape =  RoundedRectangleBorder(borderRadius: 
 
 void main() {
 
-  final ThemeData material3Theme = ThemeData(useMaterial3: true, brightness: Brightness.dark);
-  final ThemeData material2Theme = ThemeData(useMaterial3: false, brightness: Brightness.dark);
+  final material3Theme = ThemeData(useMaterial3: true, brightness: Brightness.dark);
+  final material2Theme = ThemeData(useMaterial3: false, brightness: Brightness.dark);
 
   testWidgets('Dialog is scrollable', (WidgetTester tester) async {
-    bool didPressOk = false;
-    final AlertDialog dialog = AlertDialog(
+    var didPressOk = false;
+    final dialog = AlertDialog(
       content: Container(
         height: 5000.0,
         width: 300.0,
@@ -98,7 +98,7 @@ void main() {
 
   testWidgets('Dialog background color from AlertDialog', (WidgetTester tester) async {
     const Color customColor = Colors.pink;
-    const AlertDialog dialog = AlertDialog(
+    const dialog = AlertDialog(
       backgroundColor: customColor,
       actions: <Widget>[ ],
     );
@@ -112,14 +112,14 @@ void main() {
   });
 
   testWidgets('Dialog background defaults to ColorScheme.surfaceContainerHigh', (WidgetTester tester) async {
-    final ThemeData theme = ThemeData(
+    final theme = ThemeData(
       colorScheme: ThemeData().colorScheme.copyWith(
         surface: Colors.orange,
         background: Colors.green,
         surfaceContainerHigh: Colors.red,
       )
     );
-    const Dialog dialog = Dialog(
+    const dialog = Dialog(
       child: SizedBox(
         width: 200,
         height: 200
@@ -135,7 +135,7 @@ void main() {
   });
 
   testWidgets('Material2 - Dialog Defaults', (WidgetTester tester) async {
-    const AlertDialog dialog = AlertDialog(
+    const dialog = AlertDialog(
       title: Text('Title'),
       content: Text('Y'),
       actions: <Widget>[ ],
@@ -157,7 +157,7 @@ void main() {
   });
 
   testWidgets('Material3 - Dialog Defaults', (WidgetTester tester) async {
-    const AlertDialog dialog = AlertDialog(
+    const dialog = AlertDialog(
       title: Text('Title'),
       content: Text('Y'),
       actions: <Widget>[ ],
@@ -174,7 +174,7 @@ void main() {
   });
 
   testWidgets('Material2 - Dialog.fullscreen Defaults', (WidgetTester tester) async {
-    const String dialogTextM2 = 'Fullscreen Dialog - M2';
+    const dialogTextM2 = 'Fullscreen Dialog - M2';
 
     await tester.pumpWidget(_buildAppWithDialog(
       theme: material2Theme,
@@ -199,7 +199,7 @@ void main() {
   });
 
   testWidgets('Material3 - Dialog.fullscreen Defaults', (WidgetTester tester) async {
-    const String dialogTextM3 = 'Fullscreen Dialog - M3';
+    const dialogTextM3 = 'Fullscreen Dialog - M3';
 
     await tester.pumpWidget(_buildAppWithDialog(
       theme: material3Theme,
@@ -224,10 +224,10 @@ void main() {
   });
 
   testWidgets('Custom dialog elevation', (WidgetTester tester) async {
-    const double customElevation = 12.0;
-    const Color shadowColor = Color(0xFF000001);
-    const Color surfaceTintColor = Color(0xFF000002);
-    const AlertDialog dialog = AlertDialog(
+    const customElevation = 12.0;
+    const shadowColor = Color(0xFF000001);
+    const surfaceTintColor = Color(0xFF000002);
+    const dialog = AlertDialog(
       actions: <Widget>[ ],
       elevation: customElevation,
       shadowColor: shadowColor,
@@ -245,9 +245,9 @@ void main() {
   });
 
   testWidgets('Custom Title Text Style', (WidgetTester tester) async {
-    const String titleText = 'Title';
-    const TextStyle titleTextStyle = TextStyle(color: Colors.pink);
-    const AlertDialog dialog = AlertDialog(
+    const titleText = 'Title';
+    const titleTextStyle = TextStyle(color: Colors.pink);
+    const dialog = AlertDialog(
       title: Text(titleText),
       titleTextStyle: titleTextStyle,
       actions: <Widget>[ ],
@@ -262,9 +262,9 @@ void main() {
   });
 
   testWidgets('Custom Content Text Style', (WidgetTester tester) async {
-    const String contentText = 'Content';
-    const TextStyle contentTextStyle = TextStyle(color: Colors.pink);
-    const AlertDialog dialog = AlertDialog(
+    const contentText = 'Content';
+    const contentTextStyle = TextStyle(color: Colors.pink);
+    const dialog = AlertDialog(
       content: Text(contentText),
       contentTextStyle: contentTextStyle,
       actions: <Widget>[ ],
@@ -279,7 +279,7 @@ void main() {
   });
 
   testWidgets('AlertDialog custom clipBehavior', (WidgetTester tester) async {
-    const AlertDialog dialog = AlertDialog(
+    const dialog = AlertDialog(
       actions: <Widget>[],
       clipBehavior: Clip.antiAlias,
     );
@@ -293,7 +293,7 @@ void main() {
   });
 
   testWidgets('SimpleDialog custom clipBehavior', (WidgetTester tester) async {
-    const SimpleDialog dialog = SimpleDialog(
+    const dialog = SimpleDialog(
       clipBehavior: Clip.antiAlias,
       children: <Widget>[],
     );
@@ -307,9 +307,9 @@ void main() {
   });
 
   testWidgets('Custom dialog shape', (WidgetTester tester) async {
-    const RoundedRectangleBorder customBorder =
+    const customBorder =
       RoundedRectangleBorder(borderRadius: BorderRadius.all(Radius.circular(16.0)));
-    const AlertDialog dialog = AlertDialog(
+    const dialog = AlertDialog(
       actions: <Widget>[ ],
       shape: customBorder,
     );
@@ -323,8 +323,8 @@ void main() {
   });
 
   testWidgets('Null dialog shape', (WidgetTester tester) async {
-    final ThemeData theme = ThemeData();
-    const AlertDialog dialog = AlertDialog(
+    final theme = ThemeData();
+    const dialog = AlertDialog(
       actions: <Widget>[ ],
     );
     await tester.pumpWidget(_buildAppWithDialog(dialog, theme: theme));
@@ -338,7 +338,7 @@ void main() {
 
   testWidgets('Rectangular dialog shape', (WidgetTester tester) async {
     const ShapeBorder customBorder = Border();
-    const AlertDialog dialog = AlertDialog(
+    const dialog = AlertDialog(
       actions: <Widget>[ ],
       shape: customBorder,
     );
@@ -352,7 +352,7 @@ void main() {
   });
 
   testWidgets('Custom dialog alignment', (WidgetTester tester) async {
-    const AlertDialog dialog = AlertDialog(
+    const dialog = AlertDialog(
       actions: <Widget>[ ],
       alignment: Alignment.bottomLeft,
     );
@@ -412,7 +412,7 @@ void main() {
   });
 
   testWidgets('Can show dialog using navigator global key', (WidgetTester tester) async {
-    final GlobalKey<NavigatorState> navigator = GlobalKey<NavigatorState>();
+    final navigator = GlobalKey<NavigatorState>();
     await tester.pumpWidget(
       MaterialApp(
         navigatorKey: navigator,
@@ -452,8 +452,8 @@ void main() {
   });
 
   testWidgets('Custom padding on SimpleDialogOption', (WidgetTester tester) async {
-    const EdgeInsets customPadding = EdgeInsets.fromLTRB(4, 10, 8, 6);
-    final SimpleDialog dialog = SimpleDialog(
+    const customPadding = EdgeInsets.fromLTRB(4, 10, 8, 6);
+    final dialog = SimpleDialog(
       title: const Text('Title'),
       children: <Widget>[
         SimpleDialogOption(
@@ -570,8 +570,8 @@ void main() {
   });
 
   testWidgets('Dialog hides underlying semantics tree', (WidgetTester tester) async {
-    final SemanticsTester semantics = SemanticsTester(tester);
-    const String buttonText = 'A button covered by dialog overlay';
+    final semantics = SemanticsTester(tester);
+    const buttonText = 'A button covered by dialog overlay';
     await tester.pumpWidget(
       const MaterialApp(
         home: Material(
@@ -589,7 +589,7 @@ void main() {
 
     final BuildContext context = tester.element(find.text(buttonText));
 
-    const String alertText = 'A button in an overlay alert';
+    const alertText = 'A button in an overlay alert';
     showDialog<void>(
       context: context,
       builder: (BuildContext context) {
@@ -606,7 +606,7 @@ void main() {
   });
 
   testWidgets('AlertDialog.actionsPadding defaults', (WidgetTester tester) async {
-    final AlertDialog dialog = AlertDialog(
+    final dialog = AlertDialog(
       title: const Text('title'),
       content: const Text('content'),
       actions: <Widget>[
@@ -639,7 +639,7 @@ void main() {
   });
 
   testWidgets('AlertDialog.actionsPadding surrounds actions with padding', (WidgetTester tester) async {
-    final AlertDialog dialog = AlertDialog(
+    final dialog = AlertDialog(
       title: const Text('title'),
       content: const Text('content'),
       actions: <Widget>[
@@ -678,7 +678,7 @@ void main() {
     final GlobalKey key1 = GlobalKey();
     final GlobalKey key2 = GlobalKey();
 
-    final AlertDialog dialog = AlertDialog(
+    final dialog = AlertDialog(
       title: const Text('title'),
       content: const Text('content'),
       actions: <Widget>[
@@ -736,7 +736,7 @@ void main() {
     final GlobalKey key1 = GlobalKey();
     final GlobalKey key2 = GlobalKey();
 
-    final AlertDialog dialog = AlertDialog(
+    final dialog = AlertDialog(
       title: const Text('title'),
       content: const Text('content'),
       actions: <Widget>[
@@ -794,7 +794,7 @@ void main() {
     final GlobalKey key1 = GlobalKey();
     final GlobalKey key2 = GlobalKey();
 
-    final AlertDialog dialog = AlertDialog(
+    final dialog = AlertDialog(
       title: const Text('title'),
       content: const Text('content'),
       actions: <Widget>[
@@ -855,8 +855,8 @@ void main() {
   });
 
   group('Dialog children padding is correct', () {
-    final List<double> textScaleFactors = <double>[0.5, 1.0, 1.5, 2.0, 3.0];
-    final Map<double, double> paddingScaleFactors = <double, double>{
+    final textScaleFactors = <double>[0.5, 1.0, 1.5, 2.0, 3.0];
+    final paddingScaleFactors = <double, double>{
       0.5: 1.0,
       1.0: 1.0,
       1.5: 2.0 / 3.0,
@@ -977,13 +977,13 @@ void main() {
       'content',
       key: contentKey,
     );
-    final List<Widget> actions = <Widget>[
+    final actions = <Widget>[
       ElevatedButton(
         onPressed: () {},
         child: const Text('button'),
       ),
     ];
-    final List<Widget> children = <Widget>[
+    final children = <Widget>[
       SimpleDialogOption(
         key: childrenKey,
         child: const Text('child'),
@@ -991,9 +991,9 @@ void main() {
       ),
     ];
 
-    for (final double textScaleFactor in textScaleFactors) {
+    for (final textScaleFactor in textScaleFactors) {
       testWidgets('AlertDialog padding is correct when only icon and actions are specified [textScaleFactor]=$textScaleFactor', (WidgetTester tester) async {
-        final AlertDialog dialog = AlertDialog(
+        final dialog = AlertDialog(
           icon: icon,
           actions: actions,
         );
@@ -1045,7 +1045,7 @@ void main() {
       });
 
       testWidgets('AlertDialog padding is correct when only icon, title and actions are specified [textScaleFactor]=$textScaleFactor', (WidgetTester tester) async {
-        final AlertDialog dialog = AlertDialog(
+        final dialog = AlertDialog(
           icon: icon,
           title: title,
           actions: actions,
@@ -1115,9 +1115,9 @@ void main() {
         );
       });
 
-      for (final bool isM3 in <bool>[true, false]) {
+      for (final isM3 in <bool>[true, false]) {
         testWidgets('AlertDialog padding is correct when only icon, content and actions are specified [textScaleFactor]=$textScaleFactor [isM3]=$isM3', (WidgetTester tester) async {
-          final AlertDialog dialog = AlertDialog(
+          final dialog = AlertDialog(
             icon: icon,
             content: content,
             actions: actions,
@@ -1189,7 +1189,7 @@ void main() {
       }
 
       testWidgets('AlertDialog padding is correct when only title and actions are specified [textScaleFactor]=$textScaleFactor', (WidgetTester tester) async {
-        final AlertDialog dialog = AlertDialog(
+        final dialog = AlertDialog(
           title: title,
           actions: actions,
         );
@@ -1241,7 +1241,7 @@ void main() {
       });
 
       testWidgets('AlertDialog padding is correct when only content and actions are specified [textScaleFactor]=$textScaleFactor', (WidgetTester tester) async {
-        final AlertDialog dialog = AlertDialog(
+        final dialog = AlertDialog(
           content: content,
           actions: actions,
         );
@@ -1293,7 +1293,7 @@ void main() {
       });
 
       testWidgets('AlertDialog padding is correct when title, content, and actions are specified [textScaleFactor]=$textScaleFactor', (WidgetTester tester) async {
-        final AlertDialog dialog = AlertDialog(
+        final dialog = AlertDialog(
           title: title,
           content: content,
           actions: actions,
@@ -1364,7 +1364,7 @@ void main() {
       });
 
       testWidgets('SimpleDialog padding is correct when only children are specified [textScaleFactor]=$textScaleFactor', (WidgetTester tester) async {
-        final SimpleDialog dialog = SimpleDialog(
+        final dialog = SimpleDialog(
           children: children,
         );
 
@@ -1397,7 +1397,7 @@ void main() {
       });
 
       testWidgets('SimpleDialog padding is correct when title and children are specified [textScaleFactor]=$textScaleFactor', (WidgetTester tester) async {
-        final SimpleDialog dialog = SimpleDialog(
+        final dialog = SimpleDialog(
           title: title,
           children: children,
         );
@@ -1454,7 +1454,7 @@ void main() {
     final GlobalKey key1 = GlobalKey();
     final GlobalKey key2 = GlobalKey();
 
-    final AlertDialog dialog = AlertDialog(
+    final dialog = AlertDialog(
       title: const Text('title'),
       content: const Text('content'),
       actions: <Widget>[
@@ -1489,7 +1489,7 @@ void main() {
     final GlobalKey key1 = GlobalKey();
     final GlobalKey key2 = GlobalKey();
 
-    final AlertDialog dialog = AlertDialog(
+    final dialog = AlertDialog(
       title: const Text('title'),
       content: const Text('content'),
       actions: <Widget>[
@@ -1522,7 +1522,7 @@ void main() {
     final GlobalKey key1 = GlobalKey();
     final GlobalKey key2 = GlobalKey();
 
-    final AlertDialog dialog = AlertDialog(
+    final dialog = AlertDialog(
       title: const Text('title'),
       content: const Text('content'),
       actions: <Widget>[
@@ -1556,7 +1556,7 @@ void main() {
     final GlobalKey key1 = GlobalKey();
     final GlobalKey key2 = GlobalKey();
 
-    final AlertDialog dialog = AlertDialog(
+    final dialog = AlertDialog(
       title: const Text('title'),
       content: const Text('content'),
       actions: <Widget>[
@@ -1677,7 +1677,7 @@ void main() {
 
   testWidgets('Dialog insetPadding added to outside of dialog', (WidgetTester tester) async {
     // The default testing screen (800, 600)
-    const Rect screenRect = Rect.fromLTRB(0.0, 0.0, 800.0, 600.0);
+    const screenRect = Rect.fromLTRB(0.0, 0.0, 800.0, 600.0);
 
     // Test with no padding.
     await tester.pumpWidget(
@@ -1716,7 +1716,7 @@ void main() {
 
   // Regression test for https://github.com/flutter/flutter/issues/78229.
   testWidgets('AlertDialog has correct semantics for content in iOS', (WidgetTester tester) async {
-    final SemanticsTester semantics = SemanticsTester(tester);
+    final semantics = SemanticsTester(tester);
 
     await tester.pumpWidget(
       MaterialApp(
@@ -1796,7 +1796,7 @@ void main() {
   });
 
   testWidgets('AlertDialog widget always contains alert route semantics for android', (WidgetTester tester) async {
-    final SemanticsTester semantics = SemanticsTester(tester);
+    final semantics = SemanticsTester(tester);
 
     await tester.pumpWidget(
       MaterialApp(
@@ -1852,7 +1852,7 @@ void main() {
   });
 
   testWidgets('SimpleDialog does not introduce additional node', (WidgetTester tester) async {
-    final SemanticsTester semantics = SemanticsTester(tester);
+    final semantics = SemanticsTester(tester);
 
     await tester.pumpWidget(
       MaterialApp(
@@ -1895,7 +1895,7 @@ void main() {
 
   // Regression test for https://github.com/flutter/flutter/issues/78229.
   testWidgets('SimpleDialog has correct semantics for title in iOS', (WidgetTester tester) async {
-    final SemanticsTester semantics = SemanticsTester(tester);
+    final semantics = SemanticsTester(tester);
 
     await tester.pumpWidget(
       MaterialApp(
@@ -1968,8 +1968,8 @@ void main() {
   });
 
   testWidgets('Dismissible.confirmDismiss defers to an AlertDialog', (WidgetTester tester) async {
-    final GlobalKey<ScaffoldState> scaffoldKey = GlobalKey<ScaffoldState>();
-    final List<int> dismissedItems = <int>[];
+    final scaffoldKey = GlobalKey<ScaffoldState>();
+    final dismissedItems = <int>[];
 
     // Dismiss is confirmed IFF confirmDismiss() returns true.
     Future<bool?> confirmDismiss (DismissDirection dismissDirection) async {
@@ -2177,8 +2177,8 @@ void main() {
   });
 
   testWidgets('showDialog uses root navigator by default', (WidgetTester tester) async {
-    final DialogObserver rootObserver = DialogObserver();
-    final DialogObserver nestedObserver = DialogObserver();
+    final rootObserver = DialogObserver();
+    final nestedObserver = DialogObserver();
 
     await tester.pumpWidget(MaterialApp(
       navigatorObservers: <NavigatorObserver>[rootObserver],
@@ -2212,8 +2212,8 @@ void main() {
   });
 
   testWidgets('showDialog uses nested navigator if useRootNavigator is false', (WidgetTester tester) async {
-    final DialogObserver rootObserver = DialogObserver();
-    final DialogObserver nestedObserver = DialogObserver();
+    final rootObserver = DialogObserver();
+    final nestedObserver = DialogObserver();
 
     await tester.pumpWidget(MaterialApp(
       navigatorObservers: <NavigatorObserver>[rootObserver],
@@ -2277,7 +2277,7 @@ void main() {
     expect(error, isNotNull);
     expect(error, isFlutterError);
     if (error is FlutterError) {
-      final ErrorSummary summary = error.diagnostics.first as ErrorSummary;
+      final summary = error.diagnostics.first as ErrorSummary;
       expect(summary.toString(), 'This BuildContext is no longer valid.');
     }
   });
@@ -2402,7 +2402,7 @@ void main() {
   group('AlertDialog.scrollable: ', () {
     testWidgets('Title is scrollable', (WidgetTester tester) async {
       final Key titleKey = UniqueKey();
-      final AlertDialog dialog = AlertDialog(
+      final dialog = AlertDialog(
         title: Container(
           key: titleKey,
           color: Colors.green,
@@ -2422,7 +2422,7 @@ void main() {
 
     testWidgets('Content is scrollable', (WidgetTester tester) async {
       final Key contentKey = UniqueKey();
-      final AlertDialog dialog = AlertDialog(
+      final dialog = AlertDialog(
         content: Container(
           key: contentKey,
           color: Colors.orange,
@@ -2443,7 +2443,7 @@ void main() {
     testWidgets('Title and content are scrollable', (WidgetTester tester) async {
       final Key titleKey = UniqueKey();
       final Key contentKey = UniqueKey();
-      final AlertDialog dialog = AlertDialog(
+      final dialog = AlertDialog(
         title: Container(
           key: titleKey,
           color: Colors.green,
@@ -2501,7 +2501,7 @@ void main() {
     );
 
     final BuildContext context = tester.element(find.text('Go'));
-    const RouteSettings exampleSetting = RouteSettings(name: 'simple');
+    const exampleSetting = RouteSettings(name: 'simple');
 
     final Future<int?> result = showDialog<int>(
       context: context,
@@ -2534,7 +2534,7 @@ void main() {
   });
 
   testWidgets('showDialog - custom barrierLabel', (WidgetTester tester) async {
-    final SemanticsTester semantics = SemanticsTester(tester);
+    final semantics = SemanticsTester(tester);
 
     await tester.pumpWidget(
       MaterialApp(
@@ -2657,11 +2657,11 @@ void main() {
   });
 
   testWidgets('Uses closed loop focus traversal', (WidgetTester tester) async {
-    final FocusNode okNode = FocusNode();
-    final FocusNode cancelNode = FocusNode();
+    final okNode = FocusNode();
+    final cancelNode = FocusNode();
 
     Future<bool> nextFocus() async {
-      final bool result = Actions.invoke(
+      final result = Actions.invoke(
         primaryFocus!.context!,
         const NextFocusIntent(),
       )! as bool;
@@ -2670,7 +2670,7 @@ void main() {
     }
 
     Future<bool> previousFocus() async {
-      final bool result = Actions.invoke(
+      final result = Actions.invoke(
         primaryFocus!.context!,
         const PreviousFocusIntent(),
       )! as bool;
@@ -2678,7 +2678,7 @@ void main() {
       return result;
     }
 
-    final AlertDialog dialog = AlertDialog(
+    final dialog = AlertDialog(
       content: const Text('Test dialog'),
       actions: <Widget>[
         TextButton(
@@ -2728,7 +2728,7 @@ void main() {
   });
 
   testWidgets('Adaptive AlertDialog shows correct widget on each platform', (WidgetTester tester) async {
-    final AlertDialog dialog = AlertDialog.adaptive(
+    final dialog = AlertDialog.adaptive(
       content: Container(
         height: 5000.0,
         width: 300.0,
@@ -2742,7 +2742,7 @@ void main() {
       ],
     );
 
-    for (final TargetPlatform platform in <TargetPlatform>[ TargetPlatform.iOS, TargetPlatform.macOS ]) {
+    for (final platform in <TargetPlatform>[ TargetPlatform.iOS, TargetPlatform.macOS ]) {
       await tester.pumpWidget(_buildAppWithDialog(dialog, theme: ThemeData(platform: platform)));
       await tester.pumpAndSettle();
 
@@ -2755,7 +2755,7 @@ void main() {
       await tester.pumpAndSettle();
     }
 
-    for (final TargetPlatform platform in <TargetPlatform>[ TargetPlatform.android, TargetPlatform.fuchsia, TargetPlatform.linux, TargetPlatform.windows ]) {
+    for (final platform in <TargetPlatform>[ TargetPlatform.android, TargetPlatform.fuchsia, TargetPlatform.linux, TargetPlatform.windows ]) {
       await tester.pumpWidget(_buildAppWithDialog(dialog, theme: ThemeData(platform: platform)));
       await tester.pumpAndSettle();
 
@@ -2830,13 +2830,13 @@ void main() {
   });
 
   testWidgets('Uses open focus traversal when overridden', (WidgetTester tester) async {
-    final FocusNode okNode = FocusNode();
+    final okNode = FocusNode();
     addTearDown(okNode.dispose);
-    final FocusNode cancelNode = FocusNode();
+    final cancelNode = FocusNode();
     addTearDown(cancelNode.dispose);
 
     Future<bool> nextFocus() async {
-      final bool result = Actions.invoke(
+      final result = Actions.invoke(
         primaryFocus!.context!,
         const NextFocusIntent(),
       )! as bool;
@@ -2844,7 +2844,7 @@ void main() {
       return result;
     }
 
-    final AlertDialog dialog = AlertDialog(
+    final dialog = AlertDialog(
       content: const Text('Test dialog'),
       actions: <Widget>[
         TextButton(
@@ -2881,17 +2881,17 @@ void main() {
   });
 
   testWidgets('Dialog.insetPadding is nullable', (WidgetTester tester) async {
-    const Dialog dialog = Dialog();
+    const dialog = Dialog();
     expect(dialog.insetPadding, isNull);
   });
 
   testWidgets('AlertDialog.insetPadding is nullable', (WidgetTester tester) async {
-    const AlertDialog alertDialog = AlertDialog();
+    const alertDialog = AlertDialog();
     expect(alertDialog.insetPadding, isNull);
   });
 
   testWidgets('SimpleDialog.insetPadding is nullable', (WidgetTester tester) async {
-    const SimpleDialog simpleDialog = SimpleDialog();
+    const simpleDialog = SimpleDialog();
     expect(simpleDialog.insetPadding, isNull);
   });
 }

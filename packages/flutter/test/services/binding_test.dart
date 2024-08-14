@@ -65,7 +65,7 @@ class TestBinding extends BindingBase with SchedulerBinding, ServicesBinding {
 }
 
 void main() {
-  final TestBinding binding = TestBinding();
+  final binding = TestBinding();
 
   test('Adds rootBundle LICENSES to LicenseRegistry', () async {
     binding.defaultBinaryMessenger.setMockMessageHandler('flutter/assets', (ByteData? message) async {
@@ -94,7 +94,7 @@ void main() {
   });
 
   test('didHaveMemoryPressure clears asset caches', () async {
-    int flutterAssetsCallCount = 0;
+    var flutterAssetsCallCount = 0;
     binding.defaultBinaryMessenger.setMockMessageHandler('flutter/assets', (ByteData? message) async {
       flutterAssetsCallCount += 1;
       return ByteData.sublistView(utf8.encode('test_asset_data'));
@@ -130,7 +130,7 @@ void main() {
   });
 
   test('Calling exitApplication sends a method call to the engine', () async {
-    bool sentMessage = false;
+    var sentMessage = false;
     MethodCall? methodCall;
     binding.defaultBinaryMessenger.setMockMessageHandler('flutter/platform', (ByteData? message) async {
       methodCall = const JSONMethodCodec().decodeMethodCall(message);
@@ -145,8 +145,8 @@ void main() {
   });
 
   test('Default handleRequestAppExit returns exit', () async {
-    const MethodCall incomingCall = MethodCall('System.requestAppExit', <dynamic>[<String, dynamic>{'type': 'cancelable'}]);
-    bool receivedReply = false;
+    const incomingCall = MethodCall('System.requestAppExit', <dynamic>[<String, dynamic>{'type': 'cancelable'}]);
+    var receivedReply = false;
     Map<String, dynamic>? result;
     await binding.defaultBinaryMessenger.handlePlatformMessage('flutter/platform', const JSONMethodCodec().encodeMethodCall(incomingCall),
       (ByteData? message) async {
@@ -171,7 +171,7 @@ void main() {
   });
 
   test('Default handleViewFocusChanged propagates event', () async {
-    const ViewFocusEvent event = ViewFocusEvent(
+    const event = ViewFocusEvent(
       viewId: 0,
       direction: ViewFocusDirection.forward,
       state: ViewFocusState.focused);

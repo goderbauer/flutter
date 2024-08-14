@@ -34,7 +34,7 @@ void main() {
 
   testWidgets('Slider does not move when tapped (LTR)', (WidgetTester tester) async {
     final Key sliderKey = UniqueKey();
-    double value = 0.0;
+    var value = 0.0;
 
     await tester.pumpWidget(
       CupertinoApp(
@@ -70,7 +70,7 @@ void main() {
 
   testWidgets('Slider does not move when tapped (RTL)', (WidgetTester tester) async {
     final Key sliderKey = UniqueKey();
-    double value = 0.0;
+    var value = 0.0;
 
     await tester.pumpWidget(
       CupertinoApp(
@@ -106,8 +106,8 @@ void main() {
 
   testWidgets('Slider calls onChangeStart once when interaction begins', (WidgetTester tester) async {
     final Key sliderKey = UniqueKey();
-    double value = 0.0;
-    int numberOfTimesOnChangeStartIsCalled = 0;
+    var value = 0.0;
+    var numberOfTimesOnChangeStartIsCalled = 0;
 
     await tester.pumpWidget(
       CupertinoApp(
@@ -147,8 +147,8 @@ void main() {
 
   testWidgets('Slider calls onChangeEnd once after interaction has ended', (WidgetTester tester) async {
     final Key sliderKey = UniqueKey();
-    double value = 0.0;
-    int numberOfTimesOnChangeEndIsCalled = 0;
+    var value = 0.0;
+    var numberOfTimesOnChangeEndIsCalled = 0;
 
     await tester.pumpWidget(
       CupertinoApp(
@@ -188,7 +188,7 @@ void main() {
 
   testWidgets('Slider moves when dragged (LTR)', (WidgetTester tester) async {
     final Key sliderKey = UniqueKey();
-    double value = 0.0;
+    var value = 0.0;
     late double startValue;
     late double endValue;
 
@@ -242,7 +242,7 @@ void main() {
 
   testWidgets('Slider moves when dragged (RTL)', (WidgetTester tester) async {
     final Key sliderKey = UniqueKey();
-    double value = 0.0;
+    var value = 0.0;
     late double startValue;
     late double endValue;
 
@@ -295,7 +295,7 @@ void main() {
   });
 
   testWidgets('Slider Semantics', (WidgetTester tester) async {
-    final SemanticsTester semantics = SemanticsTester(tester);
+    final semantics = SemanticsTester(tester);
 
     await tester.pumpWidget(
       MediaQuery(
@@ -360,7 +360,7 @@ void main() {
 
   testWidgets('Slider Semantics can be updated', (WidgetTester tester) async {
     final SemanticsHandle handle = tester.ensureSemantics();
-    double value = 0.5;
+    var value = 0.5;
     await tester.pumpWidget(
       CupertinoApp(
         home: Directionality(
@@ -464,7 +464,7 @@ void main() {
   });
 
   testWidgets('Themes can be overridden by dynamic colors', (WidgetTester tester) async {
-    const CupertinoDynamicColor activeColor = CupertinoDynamicColor(
+    const activeColor = CupertinoDynamicColor(
       color: Color(0x00000001),
       darkColor: Color(0x00000002),
       elevatedColor: Color(0x00000003),
@@ -617,7 +617,7 @@ void main() {
 
   testWidgets('Hovering over Cupertino slider thumb updates cursor to clickable on Web', (WidgetTester tester) async {
     final Key sliderKey = UniqueKey();
-    double value = 0.0;
+    var value = 0.0;
 
     await tester.pumpWidget(
       CupertinoApp(

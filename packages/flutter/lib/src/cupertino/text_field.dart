@@ -113,7 +113,7 @@ class _CupertinoTextFieldSelectionGestureDetectorBuilder extends TextSelectionGe
     // this handler. If the clear button widget recognizes the up event,
     // then do not handle it.
     if (_state._clearGlobalKey.currentContext != null) {
-      final RenderBox renderBox = _state._clearGlobalKey.currentContext!.findRenderObject()! as RenderBox;
+      final renderBox = _state._clearGlobalKey.currentContext!.findRenderObject()! as RenderBox;
       final Offset localOffset = renderBox.globalToLocal(details.globalPosition);
       if (renderBox.hitTest(BoxHitTestResult(), position: localOffset)) {
         return;
@@ -1288,8 +1288,8 @@ class _CupertinoTextFieldState extends State<CupertinoTextField> with Restoratio
     }
 
     final bool enabled = widget.enabled;
-    final Offset cursorOffset = Offset(_iOSHorizontalCursorOffsetPixels / MediaQuery.devicePixelRatioOf(context), 0);
-    final List<TextInputFormatter> formatters = <TextInputFormatter>[
+    final cursorOffset = Offset(_iOSHorizontalCursorOffsetPixels / MediaQuery.devicePixelRatioOf(context), 0);
+    final formatters = <TextInputFormatter>[
       ...?widget.inputFormatters,
       if (widget.maxLength != null)
         LengthLimitingTextInputFormatter(
@@ -1324,7 +1324,7 @@ class _CupertinoTextFieldState extends State<CupertinoTextField> with Restoratio
     final Color? decorationColor = CupertinoDynamicColor.maybeResolve(widget.decoration?.color, context);
 
     final BoxBorder? border = widget.decoration?.border;
-    Border? resolvedBorder = border as Border?;
+    var resolvedBorder = border as Border?;
     if (border is Border) {
       BorderSide resolveBorderSide(BorderSide side) {
         return side == BorderSide.none

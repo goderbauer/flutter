@@ -9,7 +9,7 @@ import 'feedback_tester.dart';
 import 'semantics_tester.dart';
 
 void main () {
-  const Duration kWaitDuration = Duration(seconds: 1);
+  const kWaitDuration = Duration(seconds: 1);
 
   late FeedbackTester feedback;
 
@@ -27,7 +27,7 @@ void main () {
     setUp(() {
       semanticEvents = <Map<String, Object>>[];
       TestDefaultBinaryMessengerBinding.instance.defaultBinaryMessenger.setMockDecodedMessageHandler<dynamic>(SystemChannels.accessibility, (dynamic message) async {
-        final Map<dynamic, dynamic> typedMessage = message as Map<dynamic, dynamic>;
+        final typedMessage = message as Map<dynamic, dynamic>;
         semanticEvents.add(typedMessage.cast<String, Object>());
       });
     });
@@ -37,7 +37,7 @@ void main () {
     });
 
     testWidgets('forTap', (WidgetTester tester) async {
-      final SemanticsTester semanticsTester = SemanticsTester(tester);
+      final semanticsTester = SemanticsTester(tester);
 
       await tester.pumpWidget(TestWidget(
         tapHandler: (BuildContext context) {
@@ -66,9 +66,9 @@ void main () {
     });
 
     testWidgets('forTap Wrapper', (WidgetTester tester) async {
-      final SemanticsTester semanticsTester = SemanticsTester(tester);
+      final semanticsTester = SemanticsTester(tester);
 
-      int callbackCount = 0;
+      var callbackCount = 0;
       void callback() {
         callbackCount++;
       }
@@ -101,7 +101,7 @@ void main () {
     });
 
     testWidgets('forLongPress', (WidgetTester tester) async {
-      final SemanticsTester semanticsTester = SemanticsTester(tester);
+      final semanticsTester = SemanticsTester(tester);
 
       await tester.pumpWidget(TestWidget(
         longPressHandler: (BuildContext context) {
@@ -129,8 +129,8 @@ void main () {
     });
 
     testWidgets('forLongPress Wrapper', (WidgetTester tester) async {
-      final SemanticsTester semanticsTester = SemanticsTester(tester);
-      int callbackCount = 0;
+      final semanticsTester = SemanticsTester(tester);
+      var callbackCount = 0;
       void callback() {
         callbackCount++;
       }

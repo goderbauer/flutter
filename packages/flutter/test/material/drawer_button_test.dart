@@ -30,7 +30,7 @@ void main() {
 
   testWidgets('DrawerButton onPressed overrides default end drawer open behaviour',
       (WidgetTester tester) async {
-    bool customCallbackWasCalled = false;
+    var customCallbackWasCalled = false;
     await tester.pumpWidget(
       MaterialApp(
         home: Scaffold(
@@ -287,7 +287,7 @@ void main() {
 
   testWidgets('EndDrawerButton onPressed overrides default end drawer open behaviour',
       (WidgetTester tester) async {
-    bool customCallbackWasCalled = false;
+    var customCallbackWasCalled = false;
     await tester.pumpWidget(
       MaterialApp(
         home: Scaffold(

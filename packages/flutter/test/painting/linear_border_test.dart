@@ -65,7 +65,7 @@ void main() {
   test('LinearBorder copyWith, ==, hashCode', () {
     expect(LinearBorder.none, LinearBorder.none.copyWith());
     expect(LinearBorder.none.hashCode, LinearBorder.none.copyWith().hashCode);
-    const BorderSide side = BorderSide(width: 10.0, color: Color(0xff123456));
+    const side = BorderSide(width: 10.0, color: Color(0xff123456));
     expect(LinearBorder.none.copyWith(side: side), const LinearBorder(side: side));
   });
 
@@ -77,14 +77,14 @@ void main() {
 
   test('LinearBorderEdge.lerp identical a,b', () {
     expect(LinearBorderEdge.lerp(null, null, 0), null);
-    const LinearBorderEdge edge = LinearBorderEdge();
+    const edge = LinearBorderEdge();
     expect(identical(LinearBorderEdge.lerp(edge, edge, 0.5), edge), true);
   });
 
   test('LinearBorderEdge, LinearBorder toString()', () {
     expect(const LinearBorderEdge(size: 0.5, alignment: -0.5).toString(), 'LinearBorderEdge(size: 0.5, alignment: -0.5)');
     expect(LinearBorder.none.toString(), 'LinearBorder.none');
-    const BorderSide side = BorderSide(width: 10.0, color: Color(0xff123456));
+    const side = BorderSide(width: 10.0, color: Color(0xff123456));
     expect(const LinearBorder(side: side).toString(), 'LinearBorder(side: BorderSide(color: Color(0xff123456), width: 10.0))');
     expect(
       const LinearBorder(
@@ -106,7 +106,7 @@ void main() {
   );
 
   test('LinearBorder.start()', () {
-    final LinearBorder border = LinearBorder.start(side: borderSide);
+    final border = LinearBorder.start(side: borderSide);
     expect(
       (Canvas canvas) => border.paint(canvas, canvasRect, textDirection: TextDirection.ltr),
       paints
@@ -128,7 +128,7 @@ void main() {
   });
 
   test('LinearBorder.end()', () {
-    final LinearBorder border = LinearBorder.end(side: borderSide);
+    final border = LinearBorder.end(side: borderSide);
     expect(
       (Canvas canvas) => border.paint(canvas, canvasRect, textDirection: TextDirection.ltr),
       paints
@@ -150,7 +150,7 @@ void main() {
   });
 
   test('LinearBorder.top()', () {
-    final LinearBorder border = LinearBorder.top(side: borderSide);
+    final border = LinearBorder.top(side: borderSide);
     expect(
       (Canvas canvas) => border.paint(canvas, canvasRect, textDirection: TextDirection.ltr),
       paints
@@ -163,7 +163,7 @@ void main() {
   });
 
   test('LinearBorder.bottom()', () {
-    final LinearBorder border = LinearBorder.bottom(side: borderSide);
+    final border = LinearBorder.bottom(side: borderSide);
     expect(
       (Canvas canvas) => border.paint(canvas, canvasRect, textDirection: TextDirection.ltr),
       paints

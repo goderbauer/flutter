@@ -10,7 +10,7 @@ import 'package:leak_tracker_flutter_testing/leak_tracker_flutter_testing.dart';
 void main() {
   testWidgets('ErrorWidget displays actual error when throwing during build', (WidgetTester tester) async {
     final Key container = UniqueKey();
-    const String errorText = 'Oh no, there was a crash!!1';
+    const errorText = 'Oh no, there was a crash!!1';
 
     await tester.pumpWidget(
       Container(

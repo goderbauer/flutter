@@ -61,7 +61,7 @@ class NetworkImage
     // Ownership of this controller is handed off to [_loadAsync]; it is that
     // method's responsibility to close the controller's stream when the image
     // has been loaded or an error is thrown.
-    final StreamController<ImageChunkEvent> chunkEvents =
+    final chunkEvents =
         StreamController<ImageChunkEvent>();
 
     return MultiFrameImageStreamCompleter(
@@ -78,7 +78,7 @@ class NetworkImage
     // Ownership of this controller is handed off to [_loadAsync]; it is that
     // method's responsibility to close the controller's stream when the image
     // has been loaded or an error is thrown.
-    final StreamController<ImageChunkEvent> chunkEvents = StreamController<ImageChunkEvent>();
+    final chunkEvents = StreamController<ImageChunkEvent>();
 
     return MultiFrameImageStreamCompleter(
       chunkEvents: chunkEvents.stream,
@@ -118,7 +118,7 @@ class NetworkImage
     // We use a different method when headers are set because the
     // `ui_web.createImageCodecFromUrl` method is not capable of handling headers.
     if (isSkiaWeb || containsNetworkImageHeaders) {
-      final Completer<web.XMLHttpRequest> completer =
+      final completer =
           Completer<web.XMLHttpRequest>();
       final web.XMLHttpRequest request = httpRequestFactory();
 

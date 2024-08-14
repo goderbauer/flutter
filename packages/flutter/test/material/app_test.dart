@@ -42,7 +42,7 @@ void main() {
   });
 
   testWidgets('Focus handling', (WidgetTester tester) async {
-    final FocusNode focusNode = FocusNode();
+    final focusNode = FocusNode();
     addTearDown(focusNode.dispose);
 
     await tester.pumpWidget(MaterialApp(
@@ -57,7 +57,7 @@ void main() {
   });
 
   testWidgets('Can place app inside FocusScope', (WidgetTester tester) async {
-    final FocusScopeNode focusScopeNode = FocusScopeNode();
+    final focusScopeNode = FocusScopeNode();
     addTearDown(focusScopeNode.dispose);
 
     await tester.pumpWidget(FocusScope(
@@ -94,7 +94,7 @@ void main() {
   });
 
   testWidgets('Do not rebuild page during a route transition', (WidgetTester tester) async {
-    int buildCounter = 0;
+    var buildCounter = 0;
     await tester.pumpWidget(
       MaterialApp(
         home: Builder(
@@ -139,7 +139,7 @@ void main() {
   });
 
   testWidgets('Do rebuild the home page if it changes', (WidgetTester tester) async {
-    int buildCounter = 0;
+    var buildCounter = 0;
     await tester.pumpWidget(
       MaterialApp(
         home: Builder(
@@ -167,7 +167,7 @@ void main() {
   });
 
   testWidgets('Do not rebuild the home page if it does not actually change', (WidgetTester tester) async {
-    int buildCounter = 0;
+    var buildCounter = 0;
     final Widget home = Builder(
       builder: (BuildContext context) {
         ++buildCounter;
@@ -189,8 +189,8 @@ void main() {
   });
 
   testWidgets('Do rebuild pages that come from the routes table if the MaterialApp changes', (WidgetTester tester) async {
-    int buildCounter = 0;
-    final Map<String, WidgetBuilder> routes = <String, WidgetBuilder>{
+    var buildCounter = 0;
+    final routes = <String, WidgetBuilder>{
       '/': (BuildContext context) {
         ++buildCounter;
         return const Placeholder();
@@ -291,7 +291,7 @@ void main() {
   });
 
   testWidgets('Two-step initial route', (WidgetTester tester) async {
-    final Map<String, WidgetBuilder> routes = <String, WidgetBuilder>{
+    final routes = <String, WidgetBuilder>{
       '/': (BuildContext context) => const Text('route "/"'),
       '/a': (BuildContext context) => const Text('route "/a"'),
       '/a/b': (BuildContext context) => const Text('route "/a/b"'),
@@ -311,7 +311,7 @@ void main() {
   });
 
   testWidgets('Initial route with missing step', (WidgetTester tester) async {
-    final Map<String, WidgetBuilder> routes = <String, WidgetBuilder>{
+    final routes = <String, WidgetBuilder>{
       '/': (BuildContext context) => const Text('route "/"'),
       '/a': (BuildContext context) => const Text('route "/a"'),
       '/a/b': (BuildContext context) => const Text('route "/a/b"'),
@@ -336,7 +336,7 @@ void main() {
   });
 
   testWidgets('Make sure initialRoute is only used the first time', (WidgetTester tester) async {
-    final Map<String, WidgetBuilder> routes = <String, WidgetBuilder>{
+    final routes = <String, WidgetBuilder>{
       '/': (BuildContext context) => const Text('route "/"'),
       '/a': (BuildContext context) => const Text('route "/a"'),
       '/b': (BuildContext context) => const Text('route "/b"'),
@@ -373,7 +373,7 @@ void main() {
   testWidgets('onGenerateRoute / onUnknownRoute',
   experimentalLeakTesting: LeakTesting.settings.withIgnoredAll(), // leaking by design because of exception
   (WidgetTester tester) async {
-    final List<String> log = <String>[];
+    final log = <String>[];
     await tester.pumpWidget(
       MaterialApp(
         onGenerateRoute: (RouteSettings settings) {
@@ -410,8 +410,8 @@ void main() {
     addTearDown(tester.platformDispatcher.clearAllTestValues);
     addTearDown(tester.view.reset);
 
-    int routeBuildCount = 0;
-    int dependentBuildCount = 0;
+    var routeBuildCount = 0;
+    var dependentBuildCount = 0;
 
     await tester.pumpWidget(WidgetsApp(
       color: const Color.fromARGB(255, 255, 255, 255),
@@ -477,7 +477,7 @@ void main() {
   });
 
   testWidgets('MaterialApp.navigatorKey', (WidgetTester tester) async {
-    final GlobalKey<NavigatorState> key = GlobalKey<NavigatorState>();
+    final key = GlobalKey<NavigatorState>();
     await tester.pumpWidget(MaterialApp(
       navigatorKey: key,
       color: const Color(0xFF112233),
@@ -860,8 +860,8 @@ void main() {
   });
 
   testWidgets('MaterialApp animates theme changes', (WidgetTester tester) async {
-    final ThemeData lightTheme = ThemeData.light();
-    final ThemeData darkTheme = ThemeData.dark();
+    final lightTheme = ThemeData.light();
+    final darkTheme = ThemeData.dark();
     await tester.pumpWidget(
       MaterialApp(
         theme: lightTheme,
@@ -900,9 +900,9 @@ void main() {
   });
 
   testWidgets('MaterialApp theme animation can be turned off', (WidgetTester tester) async {
-    final ThemeData lightTheme = ThemeData.light();
-    final ThemeData darkTheme = ThemeData.dark();
-    int scaffoldRebuilds = 0;
+    final lightTheme = ThemeData.light();
+    final darkTheme = ThemeData.dark();
+    var scaffoldRebuilds = 0;
 
     final Widget scaffold = Builder(
       builder: (BuildContext context) {
@@ -983,7 +983,7 @@ void main() {
   testWidgets('Material2 - MaterialApp provides default overscroll color', (WidgetTester tester) async {
     Future<void> slowDrag(WidgetTester tester, Offset start, Offset offset) async {
       final TestGesture gesture = await tester.startGesture(start);
-      for (int index = 0; index < 10; index += 1) {
+      for (var index = 0; index < 10; index += 1) {
         await gesture.moveBy(offset);
         await tester.pump(const Duration(milliseconds: 20));
       }
@@ -992,9 +992,9 @@ void main() {
 
     // The overscroll color should be a transparent version of the colorScheme's
     // secondary color.
-    const Color secondaryColor = Color(0xff008800);
+    const secondaryColor = Color(0xff008800);
     final Color glowSecondaryColor = secondaryColor.withOpacity(0.05);
-    final ThemeData theme = ThemeData.from(
+    final theme = ThemeData.from(
       useMaterial3: false,
       colorScheme: const ColorScheme.light().copyWith(secondary: secondaryColor),
     );
@@ -1013,7 +1013,7 @@ void main() {
   });
 
   testWidgets('MaterialApp can customize initial routes', (WidgetTester tester) async {
-    final GlobalKey<NavigatorState> navigatorKey = GlobalKey<NavigatorState>();
+    final navigatorKey = GlobalKey<NavigatorState>();
     await tester.pumpWidget(
       MaterialApp(
         navigatorKey: navigatorKey,
@@ -1070,13 +1070,13 @@ void main() {
   });
 
   testWidgets('MaterialApp.navigatorKey can be updated', (WidgetTester tester) async {
-    final GlobalKey<NavigatorState> key1 = GlobalKey<NavigatorState>();
+    final key1 = GlobalKey<NavigatorState>();
     await tester.pumpWidget(MaterialApp(
       navigatorKey: key1,
       home: const Placeholder(),
     ));
     expect(key1.currentState, isA<NavigatorState>());
-    final GlobalKey<NavigatorState> key2 = GlobalKey<NavigatorState>();
+    final key2 = GlobalKey<NavigatorState>();
     await tester.pumpWidget(MaterialApp(
       navigatorKey: key2,
       home: const Placeholder(),
@@ -1086,13 +1086,13 @@ void main() {
   });
 
   testWidgets('MaterialApp.router works', (WidgetTester tester) async {
-    final PlatformRouteInformationProvider provider = PlatformRouteInformationProvider(
+    final provider = PlatformRouteInformationProvider(
       initialRouteInformation: RouteInformation(
         uri: Uri.parse('initial'),
       ),
     );
     addTearDown(provider.dispose);
-    final SimpleNavigatorRouterDelegate delegate = SimpleNavigatorRouterDelegate(
+    final delegate = SimpleNavigatorRouterDelegate(
       builder: (BuildContext context, RouteInformation information) {
         return Text(information.uri.toString());
       },
@@ -1120,13 +1120,13 @@ void main() {
 
   testWidgets('MaterialApp.router works with onNavigationNotification', (WidgetTester tester) async {
     // This is a regression test for https://github.com/flutter/flutter/issues/139903.
-    final PlatformRouteInformationProvider provider = PlatformRouteInformationProvider(
+    final provider = PlatformRouteInformationProvider(
       initialRouteInformation: RouteInformation(
         uri: Uri.parse('initial'),
       ),
     );
     addTearDown(provider.dispose);
-    final SimpleNavigatorRouterDelegate delegate = SimpleNavigatorRouterDelegate(
+    final delegate = SimpleNavigatorRouterDelegate(
       builder: (BuildContext context, RouteInformation information) {
         return Text(information.uri.toString());
       },
@@ -1139,7 +1139,7 @@ void main() {
     );
     addTearDown(delegate.dispose);
 
-    int navigationCount = 0;
+    var navigationCount = 0;
 
     await tester.pumpWidget(MaterialApp.router(
       routeInformationProvider: provider,
@@ -1153,7 +1153,7 @@ void main() {
     expect(find.text('initial'), findsOneWidget);
 
     expect(navigationCount, greaterThan(0));
-    final int navigationCountAfterBuild = navigationCount;
+    final navigationCountAfterBuild = navigationCount;
 
     // Simulate android back button intent.
     final ByteData message = const JSONMethodCodec().encodeMethodCall(const MethodCall('popRoute'));
@@ -1165,7 +1165,7 @@ void main() {
   });
 
   testWidgets('MaterialApp.router route information parser is optional', (WidgetTester tester) async {
-    final SimpleNavigatorRouterDelegate delegate = SimpleNavigatorRouterDelegate(
+    final delegate = SimpleNavigatorRouterDelegate(
       builder: (BuildContext context, RouteInformation information) {
         return Text(information.uri.toString());
       },
@@ -1191,7 +1191,7 @@ void main() {
   });
 
   testWidgets('MaterialApp.router throw if route information provider is provided but no route information parser', (WidgetTester tester) async {
-    final SimpleNavigatorRouterDelegate delegate = SimpleNavigatorRouterDelegate(
+    final delegate = SimpleNavigatorRouterDelegate(
       builder: (BuildContext context, RouteInformation information) {
         return Text(information.uri.toString());
       },
@@ -1204,7 +1204,7 @@ void main() {
     );
     addTearDown(delegate.dispose);
     delegate.routeInformation = RouteInformation(uri: Uri.parse('initial'));
-    final PlatformRouteInformationProvider provider = PlatformRouteInformationProvider(
+    final provider = PlatformRouteInformationProvider(
       initialRouteInformation: RouteInformation(
         uri: Uri.parse('initial'),
       ),
@@ -1218,7 +1218,7 @@ void main() {
   });
 
   testWidgets('MaterialApp.router throw if route configuration is provided along with other delegate', (WidgetTester tester) async {
-    final SimpleNavigatorRouterDelegate delegate = SimpleNavigatorRouterDelegate(
+    final delegate = SimpleNavigatorRouterDelegate(
       builder: (BuildContext context, RouteInformation information) {
         return Text(information.uri.toString());
       },
@@ -1231,7 +1231,7 @@ void main() {
     );
     addTearDown(delegate.dispose);
     delegate.routeInformation = RouteInformation(uri: Uri.parse('initial'));
-    final RouterConfig<RouteInformation> routerConfig = RouterConfig<RouteInformation>(routerDelegate: delegate);
+    final routerConfig = RouterConfig<RouteInformation>(routerDelegate: delegate);
     await tester.pumpWidget(MaterialApp.router(
       routerDelegate: delegate,
       routerConfig: routerConfig,
@@ -1244,7 +1244,7 @@ void main() {
     addTearDown(() => routerDelegate.dispose());
     late PlatformRouteInformationProvider provider;
     addTearDown(() => provider.dispose());
-    final RouterConfig<RouteInformation> routerConfig = RouterConfig<RouteInformation>(
+    final routerConfig = RouterConfig<RouteInformation>(
         routeInformationProvider: provider = PlatformRouteInformationProvider(
           initialRouteInformation: RouteInformation(
             uri: Uri.parse('initial'),
@@ -1472,7 +1472,7 @@ void main() {
 
   testWidgets('When `useInheritedMediaQuery` is true an existing MediaQuery is used if one is available', (WidgetTester tester) async {
     late BuildContext capturedContext;
-    final UniqueKey uniqueKey = UniqueKey();
+    final uniqueKey = UniqueKey();
     await tester.pumpWidget(
       MediaQuery(
         key: uniqueKey,
@@ -1509,7 +1509,7 @@ void main() {
       ),
     ));
 
-    const ScrollableDetails details = ScrollableDetails(
+    const details = ScrollableDetails(
       direction: AxisDirection.down,
     );
     final Widget child = Container();
@@ -1555,7 +1555,7 @@ void main() {
       ),
     ));
 
-    const ScrollableDetails details = ScrollableDetails(
+    const details = ScrollableDetails(
       direction: AxisDirection.left,
     );
     final Widget child = Container();
@@ -1574,8 +1574,8 @@ void main() {
   }, variant: TargetPlatformVariant.all());
 
   testWidgets('Override theme animation using AnimationStyle', (WidgetTester tester) async {
-    final ThemeData lightTheme = ThemeData.light();
-    final ThemeData darkTheme = ThemeData.dark();
+    final lightTheme = ThemeData.light();
+    final darkTheme = ThemeData.dark();
 
     Widget buildWidget({ ThemeMode themeMode = ThemeMode.light, AnimationStyle? animationStyle }) {
       return MaterialApp(

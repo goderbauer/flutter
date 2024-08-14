@@ -155,7 +155,7 @@ Future<void> _runTest(WidgetTester tester, String positionName, double distanceF
 
   final Offset target = topLeft + (bottomRight - topLeft) * distanceFromTopLeft;
   await tester.tapAt(target);
-  for (int i = 0; i <= 5; i++) {
+  for (var i = 0; i <= 5; i++) {
     await tester.pump(const Duration(milliseconds: 50));
     await expectLater(
       repaintFinder,
@@ -194,7 +194,7 @@ Future<void> _runM3Test(WidgetTester tester, String positionName, double distanc
 
   final Offset target = topLeft + (bottomRight - topLeft) * distanceFromTopLeft;
   await tester.tapAt(target);
-  for (int i = 0; i <= 5; i++) {
+  for (var i = 0; i <= 5; i++) {
     await tester.pump(const Duration(milliseconds: 50));
     await expectLater(
       repaintFinder,

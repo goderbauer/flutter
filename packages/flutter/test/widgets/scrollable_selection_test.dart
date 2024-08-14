@@ -14,7 +14,7 @@ import 'clipboard_utils.dart';
 import 'keyboard_utils.dart';
 
 Offset textOffsetToPosition(RenderParagraph paragraph, int offset) {
-  const Rect caret = Rect.fromLTWH(0.0, 0.0, 2.0, 20.0);
+  const caret = Rect.fromLTWH(0.0, 0.0, 2.0, 20.0);
   final Offset localOffset = paragraph.getOffsetForCaret(TextPosition(offset: offset), caret);
   return paragraph.localToGlobal(localOffset);
 }
@@ -25,7 +25,7 @@ Offset globalize(Offset point, RenderBox box) {
 
 void main() {
   TestWidgetsFlutterBinding.ensureInitialized();
-  final MockClipboard mockClipboard = MockClipboard();
+  final mockClipboard = MockClipboard();
 
   setUp(() async {
     TestDefaultBinaryMessengerBinding.instance.defaultBinaryMessenger.setMockMethodCallHandler(SystemChannels.platform, mockClipboard.handleMethodCall);
@@ -297,7 +297,7 @@ void main() {
   }, skip: kIsWeb); // https://github.com/flutter/flutter/issues/125582.
 
   testWidgets('select to scroll forward', (WidgetTester tester) async {
-    final ScrollController controller = ScrollController();
+    final controller = ScrollController();
     addTearDown(controller.dispose);
     await tester.pumpWidget(MaterialApp(
       home: SelectionArea(
@@ -347,7 +347,7 @@ void main() {
   });
 
   testWidgets('select to scroll works for small scrollable', (WidgetTester tester) async {
-    final ScrollController controller = ScrollController();
+    final controller = ScrollController();
     addTearDown(controller.dispose);
     await tester.pumpWidget(MaterialApp(
       theme: ThemeData(useMaterial3: false),
@@ -394,7 +394,7 @@ void main() {
   });
 
   testWidgets('select to scroll backward', (WidgetTester tester) async {
-    final ScrollController controller = ScrollController();
+    final controller = ScrollController();
     addTearDown(controller.dispose);
     await tester.pumpWidget(MaterialApp(
       home: SelectionArea(
@@ -443,7 +443,7 @@ void main() {
   });
 
   testWidgets('select to scroll forward - horizontal', (WidgetTester tester) async {
-    final ScrollController controller = ScrollController();
+    final controller = ScrollController();
     addTearDown(controller.dispose);
     await tester.pumpWidget(MaterialApp(
       home: SelectionArea(
@@ -492,7 +492,7 @@ void main() {
   });
 
   testWidgets('select to scroll backward - horizontal', (WidgetTester tester) async {
-    final ScrollController controller = ScrollController();
+    final controller = ScrollController();
     addTearDown(controller.dispose);
     await tester.pumpWidget(MaterialApp(
       home: SelectionArea(
@@ -542,7 +542,7 @@ void main() {
   });
 
   testWidgets('preserve selection when out of view.', (WidgetTester tester) async {
-    final ScrollController controller = ScrollController();
+    final controller = ScrollController();
     addTearDown(controller.dispose);
     await tester.pumpWidget(MaterialApp(
       home: SelectionArea(
@@ -590,7 +590,7 @@ void main() {
   });
 
   testWidgets('can select all non-Apple', (WidgetTester tester) async {
-    final FocusNode node = FocusNode();
+    final node = FocusNode();
     addTearDown(node.dispose);
     await tester.pumpWidget(MaterialApp(
       home: SelectionArea(
@@ -609,7 +609,7 @@ void main() {
     await sendKeyCombination(tester, const SingleActivator(LogicalKeyboardKey.keyA, control: true));
     await tester.pump();
 
-    for (int i = 0; i < 13; i += 1) {
+    for (var i = 0; i < 13; i += 1) {
       final RenderParagraph paragraph = tester.renderObject<RenderParagraph>(find.descendant(of: find.text('Item $i'), matching: find.byType(RichText)));
       expect(paragraph.selections[0], TextSelection(baseOffset: 0, extentOffset: 'Item $i'.length));
     }
@@ -617,7 +617,7 @@ void main() {
   }, variant: const TargetPlatformVariant(<TargetPlatform>{ TargetPlatform.android, TargetPlatform.windows, TargetPlatform.linux, TargetPlatform.fuchsia }));
 
   testWidgets('can select all - Apple', (WidgetTester tester) async {
-    final FocusNode node = FocusNode();
+    final node = FocusNode();
     addTearDown(node.dispose);
     await tester.pumpWidget(MaterialApp(
       home: SelectionArea(
@@ -636,7 +636,7 @@ void main() {
     await sendKeyCombination(tester, const SingleActivator(LogicalKeyboardKey.keyA, meta: true));
     await tester.pump();
 
-    for (int i = 0; i < 13; i += 1) {
+    for (var i = 0; i < 13; i += 1) {
       final RenderParagraph paragraph = tester.renderObject<RenderParagraph>(find.descendant(of: find.text('Item $i'), matching: find.byType(RichText)));
       expect(paragraph.selections[0], TextSelection(baseOffset: 0, extentOffset: 'Item $i'.length));
     }
@@ -644,7 +644,7 @@ void main() {
   }, variant: const TargetPlatformVariant(<TargetPlatform>{ TargetPlatform.iOS, TargetPlatform.macOS }));
 
   testWidgets('select to scroll by dragging selection handles forward', (WidgetTester tester) async {
-    final ScrollController controller = ScrollController();
+    final controller = ScrollController();
     addTearDown(controller.dispose);
     await tester.pumpWidget(MaterialApp(
       home: SelectionArea(
@@ -703,7 +703,7 @@ void main() {
   });
 
   testWidgets('select to scroll by dragging start selection handle stops scroll when released', (WidgetTester tester) async {
-    final ScrollController controller = ScrollController();
+    final controller = ScrollController();
     addTearDown(controller.dispose);
     await tester.pumpWidget(MaterialApp(
       home: SelectionArea(
@@ -759,7 +759,7 @@ void main() {
   });
 
   testWidgets('select to scroll by dragging end selection handle stops scroll when released', (WidgetTester tester) async {
-    final ScrollController controller = ScrollController();
+    final controller = ScrollController();
     addTearDown(controller.dispose);
     await tester.pumpWidget(MaterialApp(
       home: SelectionArea(
@@ -814,9 +814,9 @@ void main() {
   });
 
   testWidgets('keyboard selection should auto scroll - vertical', (WidgetTester tester) async {
-    final FocusNode node = FocusNode();
+    final node = FocusNode();
     addTearDown(node.dispose);
-    final ScrollController controller = ScrollController();
+    final controller = ScrollController();
     addTearDown(controller.dispose);
     await tester.pumpWidget(MaterialApp(
       home: SelectionArea(
@@ -879,9 +879,9 @@ void main() {
   }, variant: TargetPlatformVariant.all());
 
   testWidgets('keyboard selection should auto scroll - vertical reversed', (WidgetTester tester) async {
-    final FocusNode node = FocusNode();
+    final node = FocusNode();
     addTearDown(node.dispose);
-    final ScrollController controller = ScrollController();
+    final controller = ScrollController();
     addTearDown(controller.dispose);
     await tester.pumpWidget(MaterialApp(
       home: SelectionArea(
@@ -945,9 +945,9 @@ void main() {
   }, variant: TargetPlatformVariant.all());
 
   testWidgets('keyboard selection should auto scroll - horizontal', (WidgetTester tester) async {
-    final FocusNode node = FocusNode();
+    final node = FocusNode();
     addTearDown(node.dispose);
-    final ScrollController controller = ScrollController();
+    final controller = ScrollController();
     addTearDown(controller.dispose);
     await tester.pumpWidget(MaterialApp(
       home: SelectionArea(
@@ -993,9 +993,9 @@ void main() {
   }, variant: TargetPlatformVariant.all());
 
   testWidgets('keyboard selection should auto scroll - horizontal reversed', (WidgetTester tester) async {
-    final FocusNode node = FocusNode();
+    final node = FocusNode();
     addTearDown(node.dispose);
-    final ScrollController controller = ScrollController();
+    final controller = ScrollController();
     addTearDown(controller.dispose);
     await tester.pumpWidget(MaterialApp(
       home: SelectionArea(
@@ -1051,7 +1051,7 @@ void main() {
 
   group('Complex cases', () {
     testWidgets('selection starts outside of the scrollable', (WidgetTester tester) async {
-      final ScrollController controller = ScrollController();
+      final controller = ScrollController();
       addTearDown(controller.dispose);
       await tester.pumpWidget(MaterialApp(
         home: SelectionArea(
@@ -1096,9 +1096,9 @@ void main() {
     });
 
     testWidgets('nested scrollables keep selection alive', (WidgetTester tester) async {
-      final ScrollController outerController = ScrollController();
+      final outerController = ScrollController();
       addTearDown(outerController.dispose);
-      final ScrollController innerController = ScrollController();
+      final innerController = ScrollController();
       addTearDown(innerController.dispose);
       await tester.pumpWidget(MaterialApp(
         home: SelectionArea(
@@ -1162,9 +1162,9 @@ void main() {
     });
 
     testWidgets('can copy off screen selection - Apple', (WidgetTester tester) async {
-      final ScrollController controller = ScrollController();
+      final controller = ScrollController();
       addTearDown(controller.dispose);
-      final FocusNode focusNode = FocusNode();
+      final focusNode = FocusNode();
       addTearDown(focusNode.dispose);
       await tester.pumpWidget(MaterialApp(
         home: SelectionArea(
@@ -1200,14 +1200,14 @@ void main() {
       // Start copying.
       await sendKeyCombination(tester, const SingleActivator(LogicalKeyboardKey.keyC, meta: true));
 
-      final Map<String, dynamic> clipboardData = mockClipboard.clipboardData as Map<String, dynamic>;
+      final clipboardData = mockClipboard.clipboardData as Map<String, dynamic>;
       expect(clipboardData['text'], 'em 0It');
     }, variant: const TargetPlatformVariant(<TargetPlatform>{ TargetPlatform.iOS, TargetPlatform.macOS }));
 
     testWidgets('can copy off screen selection - non-Apple', (WidgetTester tester) async {
-      final ScrollController controller = ScrollController();
+      final controller = ScrollController();
       addTearDown(controller.dispose);
-      final FocusNode focusNode = FocusNode();
+      final focusNode = FocusNode();
       addTearDown(focusNode.dispose);
       await tester.pumpWidget(MaterialApp(
         home: SelectionArea(
@@ -1243,7 +1243,7 @@ void main() {
       // Start copying.
       await sendKeyCombination(tester, const SingleActivator(LogicalKeyboardKey.keyC, control: true));
 
-      final Map<String, dynamic> clipboardData = mockClipboard.clipboardData as Map<String, dynamic>;
+      final clipboardData = mockClipboard.clipboardData as Map<String, dynamic>;
       expect(clipboardData['text'], 'em 0It');
     }, variant: const TargetPlatformVariant(<TargetPlatform>{ TargetPlatform.android, TargetPlatform.windows, TargetPlatform.linux, TargetPlatform.fuchsia }));
   });

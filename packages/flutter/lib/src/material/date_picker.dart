@@ -896,9 +896,9 @@ class _DatePickerHeader extends StatelessWidget {
     final double maxHeaderTextScaleFactor = math.min(currentScale, entryModeButton != null ? _kMaxHeaderWithEntryTextScaleFactor : _kMaxHeaderTextScaleFactor);
     final double textScaleFactor = MediaQuery.textScalerOf(context).clamp(maxScaleFactor: maxHeaderTextScaleFactor).scale(_fontSizeToScale) / _fontSizeToScale;
     final double scaledFontSize = MediaQuery.textScalerOf(context).scale(titleStyle?.fontSize ?? 32);
-    final double headerScaleFactor = textScaleFactor > 1 ? textScaleFactor  : 1.0;
+    final headerScaleFactor = textScaleFactor > 1 ? textScaleFactor  : 1.0;
 
-    final Text help = Text(
+    final help = Text(
       helpText,
       style: helpStyle,
       maxLines: 1,
@@ -910,7 +910,7 @@ class _DatePickerHeader extends StatelessWidget {
         )
       ),
     );
-    final Text title = Text(
+    final title = Text(
       titleText,
       semanticsLabel: titleSemanticsLabel ?? titleText,
       style: titleStyle,
@@ -1724,7 +1724,7 @@ class _CalendarRangePickerDialog extends StatelessWidget {
       foregroundColor: headerForeground,
       disabledForegroundColor: headerDisabledForeground
     );
-    final IconThemeData iconTheme = IconThemeData(color: headerForeground);
+    final iconTheme = IconThemeData(color: headerForeground);
 
     return SafeArea(
       top: false,
@@ -1986,7 +1986,7 @@ class _CalendarDateRangePickerState extends State<_CalendarDateRangePicker> {
 
   @override
   Widget build(BuildContext context) {
-    const Key sliverAfterKey = Key('sliverAfterKey');
+    const sliverAfterKey = Key('sliverAfterKey');
 
     return Column(
       children: <Widget>[
@@ -2203,7 +2203,7 @@ class _DayHeaders extends StatelessWidget {
   ///     4 5 6 7 8 9 10
   ///
   List<Widget> _getDayHeaders(TextStyle headerStyle, MaterialLocalizations localizations) {
-    final List<Widget> result = <Widget>[];
+    final result = <Widget>[];
     for (int i = localizations.firstDayOfWeekIndex; result.length < DateTime.daysPerWeek; i = (i + 1) % DateTime.daysPerWeek) {
       final String weekday = localizations.narrowWeekdays[i];
       result.add(ExcludeSemantics(
@@ -2508,7 +2508,7 @@ class _MonthItemState extends State<_MonthItem> {
     final int dayOffset = DateUtils.firstDayOffset(year, month, localizations);
     final int weeks = ((daysInMonth + dayOffset) / DateTime.daysPerWeek).ceil();
     final double gridHeight = weeks * _monthItemRowHeight + (weeks - 1) * _monthItemSpaceBetweenRows;
-    final List<Widget> dayItems = <Widget>[];
+    final dayItems = <Widget>[];
 
     // 1-based day of month, e.g. 1-31 for January, and 1-29 for February on
     // a leap year.
@@ -2516,7 +2516,7 @@ class _MonthItemState extends State<_MonthItem> {
       if (day < 1) {
         dayItems.add(const LimitedBox(maxWidth: 0.0, maxHeight: 0.0, child: SizedBox.expand()));
       } else {
-        final DateTime dayToBuild = DateTime(year, month, day);
+        final dayToBuild = DateTime(year, month, day);
         final Widget dayItem = _buildDayItem(
           context,
           dayToBuild,
@@ -2529,8 +2529,8 @@ class _MonthItemState extends State<_MonthItem> {
 
     // Add the leading/trailing edge containers to each week in order to
     // correctly extend the range highlight.
-    final List<Widget> paddedDayItems = <Widget>[];
-    for (int i = 0; i < weeks; i++) {
+    final paddedDayItems = <Widget>[];
+    for (var i = 0; i < weeks; i++) {
       final int start = i * DateTime.daysPerWeek;
       final int end = math.min(
         start + DateTime.daysPerWeek,
@@ -2538,7 +2538,7 @@ class _MonthItemState extends State<_MonthItem> {
       );
       final List<Widget> weekList = dayItems.sublist(start, end);
 
-      final DateTime dateAfterLeadingPadding = DateTime(year, month, start - dayOffset + 1);
+      final dateAfterLeadingPadding = DateTime(year, month, start - dayOffset + 1);
       // Only color the edge container if it is after the start date and
       // on/before the end date.
       final bool isLeadingInRange =
@@ -2552,7 +2552,7 @@ class _MonthItemState extends State<_MonthItem> {
       // Only add a trailing edge container if it is for a full week and not a
       // partial week.
       if (end < dayItems.length || (end == dayItems.length && dayItems.length % DateTime.daysPerWeek == 0)) {
-        final DateTime dateBeforeTrailingPadding =
+        final dateBeforeTrailingPadding =
         DateTime(year, month, end - dayOffset);
         // Only color the edge container if it is on/after the start date and
         // before the end date.
@@ -2686,7 +2686,7 @@ class _DayItemState extends State<_DayItem> {
       );
     }
 
-    final Set<MaterialState> states = <MaterialState>{
+    final states = <MaterialState>{
       if (widget.isDisabled) MaterialState.disabled,
       if (widget.isSelectedDayStart || widget.isSelectedDayEnd) MaterialState.selected,
     };
@@ -2751,8 +2751,8 @@ class _DayItemState extends State<_DayItem> {
     // day of month before the rest of the date, as they are looking
     // for the day of month. To do that we prepend day of month to the
     // formatted full date.
-    final String semanticLabelSuffix = widget.isToday ? ', ${localizations.currentDateLabel}' : '';
-    String semanticLabel = '$dayText, ${localizations.formatFullDate(widget.day)}$semanticLabelSuffix';
+    final semanticLabelSuffix = widget.isToday ? ', ${localizations.currentDateLabel}' : '';
+    var semanticLabel = '$dayText, ${localizations.formatFullDate(widget.day)}$semanticLabelSuffix';
     if (widget.isSelectedDayStart) {
       semanticLabel = localizations.dateRangeStartDateSemanticLabel(semanticLabel);
     } else if (widget.isSelectedDayEnd) {
@@ -2832,7 +2832,7 @@ class _HighlightPainter extends CustomPainter {
       return;
     }
 
-    final Paint paint = Paint()
+    final paint = Paint()
       ..color = color
       ..style = PaintingStyle.fill;
 
@@ -2917,7 +2917,7 @@ class _InputDateRangePickerDialog extends StatelessWidget {
     headlineStyle = headlineStyle?.copyWith(color: headerForegroundColor);
 
     final String dateText = _formatDateRange(context, selectedStartDate, selectedEndDate, currentDate!);
-    final String semanticDateText = selectedStartDate != null && selectedEndDate != null
+    final semanticDateText = selectedStartDate != null && selectedEndDate != null
         ? '${localizations.formatMediumDate(selectedStartDate!)} – ${localizations.formatMediumDate(selectedEndDate!)}'
         : '';
 

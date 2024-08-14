@@ -284,7 +284,7 @@ class Icon extends StatelessWidget {
       iconColor = iconColor.withOpacity(iconColor.opacity * iconOpacity);
     }
 
-    final TextStyle fontStyle = TextStyle(
+    final fontStyle = TextStyle(
       fontVariations: <FontVariation>[
         if (iconFill != null) FontVariation('FILL', iconFill),
         if (iconWeight != null) FontVariation('wght', iconWeight),

@@ -45,7 +45,7 @@ class TestHttpRequest {
         setRequestHeader: setRequestHeader.toJS,
         addEventListener: addEventListener.toJS,
     );
-    final JSAny mock = _mock as JSAny;
+    final mock = _mock as JSAny;
     createGetter(mock, 'headers', () => headers.jsify());
     createGetter(mock,
         'responseHeaders', () => responseHeaders.jsify());
@@ -68,7 +68,7 @@ class TestHttpRequest {
 
   JSVoid addEventListener(String type, web.EventListener listener) {
     if (type == mockEvent?.type) {
-      final _DartDomEventListener dartListener =
+      final dartListener =
           (listener as JSExportedDartFunction).toDart as _DartDomEventListener;
       dartListener(mockEvent!.event);
     }

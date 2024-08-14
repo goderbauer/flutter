@@ -42,11 +42,11 @@ void main() {
     });
 
     test('send semantics update if id is changed', () {
-      final RenderConstrainedBox tree = RenderConstrainedBox(
+      final tree = RenderConstrainedBox(
         additionalConstraints: const BoxConstraints.tightFor(height: 20.0, width: 20.0),
         child: platformViewRenderBox,
       );
-      int semanticsUpdateCount = 0;
+      var semanticsUpdateCount = 0;
       final SemanticsHandle semanticsHandle = TestRenderingFlutterBinding.instance.ensureSemantics();
       TestRenderingFlutterBinding.instance.pipelineOwner.semanticsOwner!.addListener(() {
         ++semanticsUpdateCount;
@@ -64,7 +64,7 @@ void main() {
 
       semanticsUpdateCount = 0;
 
-      final FakePlatformViewController updatedFakePlatformViewController = FakePlatformViewController(10);
+      final updatedFakePlatformViewController = FakePlatformViewController(10);
       platformViewRenderBox.controller = updatedFakePlatformViewController;
       pumpFrame(phase: EnginePhase.flushSemantics);
       // Update id should update the semantics.
@@ -103,11 +103,11 @@ void main() {
 
   // Regression test for https://github.com/flutter/flutter/issues/69431
   test('multi-finger touch test', () {
-    final FakeAndroidPlatformViewsController viewsController = FakeAndroidPlatformViewsController();
+    final viewsController = FakeAndroidPlatformViewsController();
     viewsController.registerViewType('webview');
     final AndroidViewController viewController =
       PlatformViewsService.initAndroidView(id: 0, viewType: 'webview', layoutDirection: TextDirection.rtl);
-    final PlatformViewRenderBox platformViewRenderBox = PlatformViewRenderBox(
+    final platformViewRenderBox = PlatformViewRenderBox(
       controller: viewController,
       hitTestBehavior: PlatformViewHitTestBehavior.opaque,
       gestureRecognizers: <Factory<OneSequenceGestureRecognizer>>{
@@ -151,14 +151,14 @@ void main() {
   });
 
   test('created callback is reset when controller is changed', () {
-    final FakeAndroidPlatformViewsController viewsController = FakeAndroidPlatformViewsController();
+    final viewsController = FakeAndroidPlatformViewsController();
     viewsController.registerViewType('webview');
     final AndroidViewController firstController = PlatformViewsService.initAndroidView(
       id: 0,
       viewType: 'webview',
       layoutDirection: TextDirection.rtl,
     );
-    final RenderAndroidView renderBox = RenderAndroidView(
+    final renderBox = RenderAndroidView(
       viewController: firstController,
       hitTestBehavior: PlatformViewHitTestBehavior.opaque,
       gestureRecognizers: <Factory<OneSequenceGestureRecognizer>>{},
@@ -186,14 +186,14 @@ void main() {
     FakeAsync().run((FakeAsync async) {
       final AndroidViewController viewController =
         PlatformViewsService.initAndroidView(id: 0, viewType: 'webview', layoutDirection: TextDirection.rtl);
-      final RenderAndroidView renderBox = RenderAndroidView(
+      final renderBox = RenderAndroidView(
         viewController: viewController,
         hitTestBehavior: PlatformViewHitTestBehavior.opaque,
         gestureRecognizers: <Factory<OneSequenceGestureRecognizer>>{},
       );
 
-      final Completer<void> viewCreation = Completer<void>();
-      const MethodChannel channel = MethodChannel('flutter/platform_views');
+      final viewCreation = Completer<void>();
+      const channel = MethodChannel('flutter/platform_views');
       binding.defaultBinaryMessenger.setMockMethodCallHandler(channel, (MethodCall methodCall) async {
         assert(methodCall.method == 'create', 'Unexpected method call');
         await viewCreation.future;
@@ -225,14 +225,14 @@ void main() {
     FakeAsync().run((FakeAsync async) {
       final AndroidViewController viewController =
         PlatformViewsService.initAndroidView(id: 0, viewType: 'webview', layoutDirection: TextDirection.rtl);
-      final RenderAndroidView renderBox = RenderAndroidView(
+      final renderBox = RenderAndroidView(
         viewController: viewController,
         hitTestBehavior: PlatformViewHitTestBehavior.opaque,
         gestureRecognizers: <Factory<OneSequenceGestureRecognizer>>{},
       );
 
-      final Completer<void> viewCreation = Completer<void>();
-      const MethodChannel channel = MethodChannel('flutter/platform_views');
+      final viewCreation = Completer<void>();
+      const channel = MethodChannel('flutter/platform_views');
       binding.defaultBinaryMessenger.setMockMethodCallHandler(channel, (MethodCall methodCall) async {
         assert(methodCall.method == 'create', 'Unexpected method call');
         await viewCreation.future;
@@ -262,18 +262,18 @@ void main() {
 
   test('markNeedsPaint does not get called when setting the same viewController', () {
     FakeAsync().run((FakeAsync async) {
-      final Completer<void> viewCreation = Completer<void>();
-      const MethodChannel channel = MethodChannel('flutter/platform_views');
+      final viewCreation = Completer<void>();
+      const channel = MethodChannel('flutter/platform_views');
       binding.defaultBinaryMessenger.setMockMethodCallHandler(channel, (MethodCall methodCall) async {
         assert(methodCall.method == 'create', 'Unexpected method call');
         await viewCreation.future;
         return /*textureId=*/ 0;
       });
 
-      bool futureCallbackRan = false;
+      var futureCallbackRan = false;
 
       PlatformViewsService.initUiKitView(id: 0, viewType: 'webview', layoutDirection: TextDirection.ltr).then((UiKitViewController viewController) {
-        final RenderUiKitView renderBox = RenderUiKitView(
+        final renderBox = RenderUiKitView(
           viewController: viewController,
           hitTestBehavior: PlatformViewHitTestBehavior.opaque,
           gestureRecognizers: <Factory<OneSequenceGestureRecognizer>>{},

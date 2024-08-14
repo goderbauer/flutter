@@ -27,7 +27,7 @@ void main() {
       // ...but we ignore it for the purposes of this test.
     });
 
-    final TestPaintingBinding binding = TestPaintingBinding();
+    final binding = TestPaintingBinding();
     expect(binding._handled, isFalse);
     expect(binding.imageCache, isNotNull);
     expect(binding.imageCache.currentSize, 0);

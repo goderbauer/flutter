@@ -121,13 +121,13 @@ class SpellCheckConfiguration {
 /// [newText] is lagging in order to avoid display of incorrect results.
 List<SuggestionSpan> _correctSpellCheckResults(
     String newText, String resultsText, List<SuggestionSpan> results) {
-  final List<SuggestionSpan> correctedSpellCheckResults = <SuggestionSpan>[];
-  int spanPointer = 0;
-  int offset = 0;
+  final correctedSpellCheckResults = <SuggestionSpan>[];
+  var spanPointer = 0;
+  var offset = 0;
 
   // Assumes that the order of spans has not been jumbled for optimization
   // purposes, and will only search since the previously found span.
-  int searchStart = 0;
+  var searchStart = 0;
 
   while (spanPointer < results.length) {
     final SuggestionSpan currentSpan = results[spanPointer];
@@ -137,7 +137,7 @@ List<SuggestionSpan> _correctSpellCheckResults(
 
     // Try finding SuggestionSpan from resultsText in new text.
     final String escapedText = RegExp.escape(currentSpanText);
-    final RegExp currentSpanTextRegexp = RegExp('\\b$escapedText\\b');
+    final currentSpanTextRegexp = RegExp('\\b$escapedText\\b');
     final int foundIndex = newText.substring(searchStart).indexOf(currentSpanTextRegexp);
 
     // Check whether word was found exactly where expected or elsewhere in the newText.
@@ -150,7 +150,7 @@ List<SuggestionSpan> _correctSpellCheckResults(
       // or at the same index with the previously calculated adjustment by
       // the offset value, so apply it to new text by adding it to the list of
       // corrected results.
-      final SuggestionSpan adjustedSpan = SuggestionSpan(
+      final adjustedSpan = SuggestionSpan(
         TextRange(
           start: currentSpan.range.start + offset,
           end: currentSpan.range.end + offset,
@@ -165,7 +165,7 @@ List<SuggestionSpan> _correctSpellCheckResults(
       // Word was pushed forward but not modified.
       final int adjustedSpanStart = searchStart + foundIndex;
       final int adjustedSpanEnd = adjustedSpanStart + spanLength;
-      final SuggestionSpan adjustedSpan = SuggestionSpan(
+      final adjustedSpan = SuggestionSpan(
         TextRange(start: adjustedSpanStart, end: adjustedSpanEnd),
         currentSpan.suggestions,
       );
@@ -250,15 +250,15 @@ List<TextSpan> _buildSubtreesWithoutComposingRegion(
     TextStyle misspelledStyle,
     int cursorIndex,
 ) {
-  final List<TextSpan> textSpanTreeChildren = <TextSpan>[];
+  final textSpanTreeChildren = <TextSpan>[];
 
-  int textPointer = 0;
-  int currentSpanPointer = 0;
+  var textPointer = 0;
+  var currentSpanPointer = 0;
   int endIndex;
   final String text = value.text;
   final TextStyle misspelledJointStyle =
       style?.merge(misspelledStyle) ?? misspelledStyle;
-  bool cursorInCurrentSpan = false;
+  var cursorInCurrentSpan = false;
 
   // Add text interwoven with any misspelled words to the tree.
   if (spellCheckSuggestions != null) {
@@ -317,10 +317,10 @@ List<TextSpan> _buildSubtreesWithComposingRegion(
     TextStyle? style,
     TextStyle misspelledStyle,
     bool composingWithinCurrentTextRange) {
-  final List<TextSpan> textSpanTreeChildren = <TextSpan>[];
+  final textSpanTreeChildren = <TextSpan>[];
 
-  int textPointer = 0;
-  int currentSpanPointer = 0;
+  var textPointer = 0;
+  var currentSpanPointer = 0;
   int endIndex;
   SuggestionSpan currentSpan;
   final String text = value.text;
@@ -330,8 +330,8 @@ List<TextSpan> _buildSubtreesWithComposingRegion(
           const TextStyle(decoration: TextDecoration.underline);
   final TextStyle misspelledJointStyle =
       style?.merge(misspelledStyle) ?? misspelledStyle;
-  bool textPointerWithinComposingRegion = false;
-  bool currentSpanIsComposingRegion = false;
+  var textPointerWithinComposingRegion = false;
+  var currentSpanIsComposingRegion = false;
 
   // Add text interwoven with any misspelled words to the tree.
   if (spellCheckSuggestions != null) {

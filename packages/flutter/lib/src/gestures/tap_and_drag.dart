@@ -1163,7 +1163,7 @@ sealed class BaseTapAndDragGestureRecognizer extends OneSequenceGestureRecognize
         untransformedDelta: event.localDelta,
         transform: localToGlobal,
       );
-      final OffsetPair updateDelta = OffsetPair(local: event.localDelta, global: globalUpdateDelta);
+      final updateDelta = OffsetPair(local: event.localDelta, global: globalUpdateDelta);
       _correctedPosition = _initialPosition + updateDelta; // Only adds delta for down behaviour
       _checkDragUpdate(event);
       _correctedPosition = null;
@@ -1200,7 +1200,7 @@ sealed class BaseTapAndDragGestureRecognizer extends OneSequenceGestureRecognize
       return;
     }
 
-    final TapDragDownDetails details = TapDragDownDetails(
+    final details = TapDragDownDetails(
       globalPosition: event.position,
       localPosition: event.localPosition,
       kind: getKindForPointer(event.pointer),
@@ -1219,7 +1219,7 @@ sealed class BaseTapAndDragGestureRecognizer extends OneSequenceGestureRecognize
       return;
     }
 
-    final TapDragUpDetails upDetails = TapDragUpDetails(
+    final upDetails = TapDragUpDetails(
       kind: event.kind,
       globalPosition: event.position,
       localPosition: event.localPosition,
@@ -1238,7 +1238,7 @@ sealed class BaseTapAndDragGestureRecognizer extends OneSequenceGestureRecognize
 
   void _checkDragStart(PointerEvent event) {
     if (onDragStart != null) {
-      final TapDragStartDetails details = TapDragStartDetails(
+      final details = TapDragStartDetails(
         sourceTimeStamp: event.timeStamp,
         globalPosition: _initialPosition.global,
         localPosition: _initialPosition.local,
@@ -1256,7 +1256,7 @@ sealed class BaseTapAndDragGestureRecognizer extends OneSequenceGestureRecognize
     final Offset globalPosition = _correctedPosition != null ? _correctedPosition!.global : event.position;
     final Offset localPosition = _correctedPosition != null ? _correctedPosition!.local : event.localPosition;
 
-    final TapDragUpdateDetails details =  TapDragUpdateDetails(
+    final details =  TapDragUpdateDetails(
       sourceTimeStamp: event.timeStamp,
       delta: event.localDelta,
       globalPosition: globalPosition,
@@ -1286,7 +1286,7 @@ sealed class BaseTapAndDragGestureRecognizer extends OneSequenceGestureRecognize
       _handleDragUpdateThrottled();
     }
 
-    final TapDragEndDetails endDetails =
+    final endDetails =
       TapDragEndDetails(
         primaryVelocity: 0.0,
         consecutiveTapCount: consecutiveTapCount,

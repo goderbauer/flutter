@@ -14,7 +14,7 @@ void main() {
     required FocusNode editableFocusNode,
     required FocusNode spyFocusNode,
   }) {
-    final TextEditingController controller = TextEditingController(text: 'dummy text');
+    final controller = TextEditingController(text: 'dummy text');
     addTearDown(controller.dispose);
 
     return MaterialApp(
@@ -49,9 +49,9 @@ void main() {
   }
 
   group('iOS: do not handle delete/backspace events', () {
-    final TargetPlatformVariant iOS = TargetPlatformVariant.only(TargetPlatform.iOS);
-    final FocusNode editable = FocusNode();
-    final FocusNode spy = FocusNode();
+    final iOS = TargetPlatformVariant.only(TargetPlatform.iOS);
+    final editable = FocusNode();
+    final spy = FocusNode();
 
     testWidgets('backspace with and without word modifier', (WidgetTester tester) async {
       tester.binding.testTextInput.unregister();
@@ -67,7 +67,7 @@ void main() {
       await tester.pump();
       final ActionSpyState state = tester.state<ActionSpyState>(find.byType(ActionSpy));
 
-      for (int altShiftState = 0; altShiftState < 1 << 2; altShiftState += 1) {
+      for (var altShiftState = 0; altShiftState < 1 << 2; altShiftState += 1) {
         final bool alt = altShiftState & 0x1 != 0;
         final bool shift = altShiftState & 0x2 != 0;
         await sendKeyCombination(tester, SingleActivator(LogicalKeyboardKey.backspace, alt: alt, shift: shift));
@@ -91,7 +91,7 @@ void main() {
       await tester.pump();
       final ActionSpyState state = tester.state<ActionSpyState>(find.byType(ActionSpy));
 
-      for (int altShiftState = 0; altShiftState < 1 << 2; altShiftState += 1) {
+      for (var altShiftState = 0; altShiftState < 1 << 2; altShiftState += 1) {
         final bool alt = altShiftState & 0x1 != 0;
         final bool shift = altShiftState & 0x2 != 0;
         await sendKeyCombination(tester, SingleActivator(LogicalKeyboardKey.delete, alt: alt, shift: shift));
@@ -115,12 +115,12 @@ void main() {
       await tester.pump();
       final ActionSpyState state = tester.state<ActionSpyState>(find.byType(ActionSpy));
 
-      for (int keyState = 0; keyState < 1 << 2; keyState += 1) {
+      for (var keyState = 0; keyState < 1 << 2; keyState += 1) {
         final bool shift = keyState & 0x1 != 0;
         final LogicalKeyboardKey key = keyState & 0x2 != 0 ? LogicalKeyboardKey.delete : LogicalKeyboardKey.backspace;
 
         state.lastIntent = null;
-        final SingleActivator activator = SingleActivator(key, meta: true, shift: shift);
+        final activator = SingleActivator(key, meta: true, shift: shift);
         await sendKeyCombination(tester, activator);
         await tester.pump();
         expect(state.lastIntent, isA<DeleteToLineBreakIntent>(), reason: '$activator');
@@ -129,16 +129,16 @@ void main() {
   }, skip: kIsWeb); // [intended] specific tests target non-web.
 
   group('macOS does not accept shortcuts if focus under EditableText', () {
-    final TargetPlatformVariant macOSOnly = TargetPlatformVariant.only(TargetPlatform.macOS);
+    final macOSOnly = TargetPlatformVariant.only(TargetPlatform.macOS);
 
     testWidgets('word modifier + arrowLeft', (WidgetTester tester) async {
       tester.binding.testTextInput.unregister();
       addTearDown((){
         tester.binding.testTextInput.register();
       });
-      final FocusNode editable = FocusNode();
+      final editable = FocusNode();
       addTearDown(editable.dispose);
-      final FocusNode spy = FocusNode();
+      final spy = FocusNode();
       addTearDown(spy.dispose);
       await tester.pumpWidget(
         buildSpyAboveEditableText(
@@ -161,9 +161,9 @@ void main() {
       addTearDown((){
         tester.binding.testTextInput.register();
       });
-      final FocusNode editable = FocusNode();
+      final editable = FocusNode();
       addTearDown(editable.dispose);
-      final FocusNode spy = FocusNode();
+      final spy = FocusNode();
       addTearDown(spy.dispose);
       await tester.pumpWidget(
         buildSpyAboveEditableText(
@@ -186,9 +186,9 @@ void main() {
       addTearDown((){
         tester.binding.testTextInput.register();
       });
-      final FocusNode editable = FocusNode();
+      final editable = FocusNode();
       addTearDown(editable.dispose);
-      final FocusNode spy = FocusNode();
+      final spy = FocusNode();
       addTearDown(spy.dispose);
       await tester.pumpWidget(
         buildSpyAboveEditableText(
@@ -211,9 +211,9 @@ void main() {
       addTearDown((){
         tester.binding.testTextInput.register();
       });
-      final FocusNode editable = FocusNode();
+      final editable = FocusNode();
       addTearDown(editable.dispose);
-      final FocusNode spy = FocusNode();
+      final spy = FocusNode();
       addTearDown(spy.dispose);
       await tester.pumpWidget(
         buildSpyAboveEditableText(
@@ -236,9 +236,9 @@ void main() {
       addTearDown((){
         tester.binding.testTextInput.register();
       });
-      final FocusNode editable = FocusNode();
+      final editable = FocusNode();
       addTearDown(editable.dispose);
-      final FocusNode spy = FocusNode();
+      final spy = FocusNode();
       addTearDown(spy.dispose);
       await tester.pumpWidget(
         buildSpyAboveEditableText(
@@ -273,9 +273,9 @@ void main() {
       addTearDown((){
         tester.binding.testTextInput.register();
       });
-      final FocusNode editable = FocusNode();
+      final editable = FocusNode();
       addTearDown(editable.dispose);
-      final FocusNode spy = FocusNode();
+      final spy = FocusNode();
       addTearDown(spy.dispose);
       await tester.pumpWidget(
         buildSpyAboveEditableText(
@@ -306,16 +306,16 @@ void main() {
   });
 
   group('macOS does accept shortcuts if focus above EditableText', () {
-    final TargetPlatformVariant macOSOnly = TargetPlatformVariant.only(TargetPlatform.macOS);
+    final macOSOnly = TargetPlatformVariant.only(TargetPlatform.macOS);
 
     testWidgets('word modifier + arrowLeft', (WidgetTester tester) async {
       tester.binding.testTextInput.unregister();
       addTearDown((){
         tester.binding.testTextInput.register();
       });
-      final FocusNode editable = FocusNode();
+      final editable = FocusNode();
       addTearDown(editable.dispose);
-      final FocusNode spy = FocusNode();
+      final spy = FocusNode();
       addTearDown(spy.dispose);
       await tester.pumpWidget(
         buildSpyAboveEditableText(
@@ -338,9 +338,9 @@ void main() {
       addTearDown((){
         tester.binding.testTextInput.register();
       });
-      final FocusNode editable = FocusNode();
+      final editable = FocusNode();
       addTearDown(editable.dispose);
-      final FocusNode spy = FocusNode();
+      final spy = FocusNode();
       addTearDown(spy.dispose);
       await tester.pumpWidget(
         buildSpyAboveEditableText(
@@ -363,9 +363,9 @@ void main() {
       addTearDown((){
         tester.binding.testTextInput.register();
       });
-      final FocusNode editable = FocusNode();
+      final editable = FocusNode();
       addTearDown(editable.dispose);
-      final FocusNode spy = FocusNode();
+      final spy = FocusNode();
       addTearDown(spy.dispose);
       await tester.pumpWidget(
         buildSpyAboveEditableText(
@@ -388,9 +388,9 @@ void main() {
       addTearDown((){
         tester.binding.testTextInput.register();
       });
-      final FocusNode editable = FocusNode();
+      final editable = FocusNode();
       addTearDown(editable.dispose);
-      final FocusNode spy = FocusNode();
+      final spy = FocusNode();
       addTearDown(spy.dispose);
       await tester.pumpWidget(
         buildSpyAboveEditableText(
@@ -413,9 +413,9 @@ void main() {
       addTearDown((){
         tester.binding.testTextInput.register();
       });
-      final FocusNode editable = FocusNode();
+      final editable = FocusNode();
       addTearDown(editable.dispose);
-      final FocusNode spy = FocusNode();
+      final spy = FocusNode();
       addTearDown(spy.dispose);
       await tester.pumpWidget(
         buildSpyAboveEditableText(
@@ -452,9 +452,9 @@ void main() {
       addTearDown((){
         tester.binding.testTextInput.register();
       });
-      final FocusNode editable = FocusNode();
+      final editable = FocusNode();
       addTearDown(editable.dispose);
-      final FocusNode spy = FocusNode();
+      final spy = FocusNode();
       addTearDown(spy.dispose);
       await tester.pumpWidget(
         buildSpyAboveEditableText(
@@ -489,9 +489,9 @@ void main() {
 
   group('Linux numpad shortcuts', () {
     testWidgets('are triggered when numlock is locked', (WidgetTester tester) async {
-      final FocusNode editable = FocusNode();
+      final editable = FocusNode();
       addTearDown(editable.dispose);
-      final FocusNode spy = FocusNode();
+      final spy = FocusNode();
       addTearDown(spy.dispose);
 
       await tester.pumpWidget(
@@ -578,9 +578,9 @@ void main() {
     }, variant: TargetPlatformVariant.only(TargetPlatform.linux));
 
     testWidgets('are triggered when numlock is unlocked', (WidgetTester tester) async {
-      final FocusNode editable = FocusNode();
+      final editable = FocusNode();
       addTearDown(editable.dispose);
-      final FocusNode spy = FocusNode();
+      final spy = FocusNode();
       addTearDown(spy.dispose);
 
       await tester.pumpWidget(
@@ -666,9 +666,9 @@ void main() {
     }, variant: TargetPlatformVariant.only(TargetPlatform.linux));
 
     testWidgets('update the editable text content when triggered on non-web', (WidgetTester tester) async {
-      final FocusNode focusNode = FocusNode();
+      final focusNode = FocusNode();
       addTearDown(focusNode.dispose);
-      final TextEditingController controller = TextEditingController(text: 'Flutter');
+      final controller = TextEditingController(text: 'Flutter');
       addTearDown(controller.dispose);
 
       await tester.pumpWidget(MaterialApp(
@@ -700,9 +700,9 @@ void main() {
     );
 
     testWidgets('do not update the editable text content when triggered on web', (WidgetTester tester) async {
-      final FocusNode focusNode = FocusNode();
+      final focusNode = FocusNode();
       addTearDown(focusNode.dispose);
-      final TextEditingController controller = TextEditingController(text: 'Flutter');
+      final controller = TextEditingController(text: 'Flutter');
       addTearDown(controller.dispose);
 
       await tester.pumpWidget(MaterialApp(

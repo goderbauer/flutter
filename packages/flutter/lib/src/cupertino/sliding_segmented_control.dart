@@ -429,7 +429,7 @@ class _SegmentedControlState<T extends Object> extends State<CupertinoSlidingSeg
     // If the long press or horizontal drag recognizer gets accepted, we know for
     // sure the gesture is meant for the segmented control. Hand everything to
     // the drag gesture recognizer.
-    final GestureArenaTeam team = GestureArenaTeam();
+    final team = GestureArenaTeam();
     longPress.team = team;
     drag.team = team;
     team.captain = drag;
@@ -488,7 +488,7 @@ class _SegmentedControlState<T extends Object> extends State<CupertinoSlidingSeg
   // Converts local coordinate to segments. This method assumes each segment has
   // the same width.
   T segmentForXPosition(double dx) {
-    final RenderBox renderBox = context.findRenderObject()! as RenderBox;
+    final renderBox = context.findRenderObject()! as RenderBox;
     final int numOfChildren = widget.children.length;
     assert(renderBox.hasSize);
     assert(numOfChildren >= 2);
@@ -505,11 +505,11 @@ class _SegmentedControlState<T extends Object> extends State<CupertinoSlidingSeg
   }
 
   bool _hasDraggedTooFar(DragUpdateDetails details) {
-    final RenderBox renderBox = context.findRenderObject()! as RenderBox;
+    final renderBox = context.findRenderObject()! as RenderBox;
     assert(renderBox.hasSize);
     final Size size = renderBox.size;
     final Offset offCenter = details.localPosition - Offset(size.width/2, size.height/2);
-    final double l2 = math.pow(math.max(0.0, offCenter.dx.abs() - size.width/2), 2)
+    final l2 = math.pow(math.max(0.0, offCenter.dx.abs() - size.width/2), 2)
                     + math.pow(math.max(0.0, offCenter.dy.abs() - size.height/2), 2) as double;
     return l2 > _kTouchYDistanceThreshold;
   }
@@ -627,10 +627,10 @@ class _SegmentedControlState<T extends Object> extends State<CupertinoSlidingSeg
   @override
   Widget build(BuildContext context) {
     assert(widget.children.length >= 2);
-    List<Widget> children = <Widget>[];
-    bool isPreviousSegmentHighlighted = false;
+    var children = <Widget>[];
+    var isPreviousSegmentHighlighted = false;
 
-    int index = 0;
+    var index = 0;
     int? highlightedIndex;
     for (final MapEntry<T, Widget> entry in widget.children.entries) {
       final bool isHighlighted = highlighted == entry.key;
@@ -953,7 +953,7 @@ class _RenderSegmentedControl<T extends Object> extends RenderBox
   @override
   double? computeDryBaseline(covariant BoxConstraints constraints, TextBaseline baseline) {
     final Size childSize = _calculateChildSize(constraints);
-    final BoxConstraints childConstraints = BoxConstraints.tight(childSize);
+    final childConstraints = BoxConstraints.tight(childSize);
 
     BaselineOffset baselineOffset = BaselineOffset.noBaseline;
     for (RenderBox? child = firstChild; child != null; child = childAfter(child)) {
@@ -972,16 +972,16 @@ class _RenderSegmentedControl<T extends Object> extends RenderBox
   void performLayout() {
     final BoxConstraints constraints = this.constraints;
     final Size childSize = _calculateChildSize(constraints);
-    final BoxConstraints childConstraints = BoxConstraints.tight(childSize);
+    final childConstraints = BoxConstraints.tight(childSize);
     final BoxConstraints separatorConstraints = childConstraints.heightConstraints();
 
     RenderBox? child = firstChild;
-    int index = 0;
+    var index = 0;
     double start = 0;
     while (child != null) {
       child.layout(index.isEven ? childConstraints : separatorConstraints, parentUsesSize: true);
-      final _SegmentedControlContainerBoxParentData childParentData = child.parentData! as _SegmentedControlContainerBoxParentData;
-      final Offset childOffset = Offset(start, 0);
+      final childParentData = child.parentData! as _SegmentedControlContainerBoxParentData;
+      final childOffset = Offset(start, 0);
       childParentData.offset = childOffset;
       start += child.size.width;
       assert(
@@ -1028,7 +1028,7 @@ class _RenderSegmentedControl<T extends Object> extends RenderBox
   void paint(PaintingContext context, Offset offset) {
     final List<RenderBox> children = getChildrenAsList();
 
-    for (int index = 1; index < childCount; index += 2) {
+    for (var index = 1; index < childCount; index += 2) {
       _paintSeparator(context, offset, children[index]);
     }
 
@@ -1037,7 +1037,7 @@ class _RenderSegmentedControl<T extends Object> extends RenderBox
     if (highlightedChildIndex != null) {
       final RenderBox selectedChild = children[highlightedChildIndex * 2];
 
-      final _SegmentedControlContainerBoxParentData childParentData = selectedChild.parentData! as _SegmentedControlContainerBoxParentData;
+      final childParentData = selectedChild.parentData! as _SegmentedControlContainerBoxParentData;
       final Rect newThumbRect = _kThumbInsets.inflateRect(childParentData.offset & selectedChild.size);
 
       // Update thumb animation's tween, in case the end rect changed (e.g., a
@@ -1061,7 +1061,7 @@ class _RenderSegmentedControl<T extends Object> extends RenderBox
 
       final Rect unscaledThumbRect = state.thumbAnimatable?.evaluate(state.thumbController) ?? newThumbRect;
       currentThumbRect = unscaledThumbRect;
-      final Rect thumbRect = Rect.fromCenter(
+      final thumbRect = Rect.fromCenter(
         center: unscaledThumbRect.center,
         width: unscaledThumbRect.width * thumbScale,
         height: unscaledThumbRect.height * thumbScale,
@@ -1072,7 +1072,7 @@ class _RenderSegmentedControl<T extends Object> extends RenderBox
       currentThumbRect = null;
     }
 
-    for (int index = 0; index < children.length; index += 2) {
+    for (var index = 0; index < children.length; index += 2) {
       _paintChild(context, offset, children[index]);
     }
   }
@@ -1080,18 +1080,18 @@ class _RenderSegmentedControl<T extends Object> extends RenderBox
   // Paint the separator to the right of the given child.
   final Paint separatorPaint = Paint();
   void _paintSeparator(PaintingContext context, Offset offset, RenderBox child) {
-    final _SegmentedControlContainerBoxParentData childParentData = child.parentData! as _SegmentedControlContainerBoxParentData;
+    final childParentData = child.parentData! as _SegmentedControlContainerBoxParentData;
     context.paintChild(child, offset + childParentData.offset);
   }
 
   void _paintChild(PaintingContext context, Offset offset, RenderBox child) {
-    final _SegmentedControlContainerBoxParentData childParentData = child.parentData! as _SegmentedControlContainerBoxParentData;
+    final childParentData = child.parentData! as _SegmentedControlContainerBoxParentData;
     context.paintChild(child, childParentData.offset + offset);
   }
 
   void _paintThumb(PaintingContext context, Offset offset, Rect thumbRect) {
     // Colors extracted from https://developer.apple.com/design/resources/.
-    const List<BoxShadow> thumbShadow = <BoxShadow> [
+    const thumbShadow = <BoxShadow> [
       BoxShadow(
         color: Color(0x1F000000),
         offset: Offset(0, 3),
@@ -1104,9 +1104,9 @@ class _RenderSegmentedControl<T extends Object> extends RenderBox
       ),
     ];
 
-    final RRect thumbRRect = RRect.fromRectAndRadius(thumbRect.shift(offset), _kThumbRadius);
+    final thumbRRect = RRect.fromRectAndRadius(thumbRect.shift(offset), _kThumbRadius);
 
-    for (final BoxShadow shadow in thumbShadow) {
+    for (final shadow in thumbShadow) {
       context.canvas.drawRRect(thumbRRect.shift(shadow.offset), shadow.toPaint());
     }
 
@@ -1125,7 +1125,7 @@ class _RenderSegmentedControl<T extends Object> extends RenderBox
   bool hitTestChildren(BoxHitTestResult result, { required Offset position }) {
     RenderBox? child = lastChild;
     while (child != null) {
-      final _SegmentedControlContainerBoxParentData childParentData =
+      final childParentData =
         child.parentData! as _SegmentedControlContainerBoxParentData;
       if ((childParentData.offset & child.size).contains(position)) {
         return result.addWithPaintOffset(

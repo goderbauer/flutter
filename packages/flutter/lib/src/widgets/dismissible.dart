@@ -444,7 +444,7 @@ class _DismissibleState extends State<Dismissible> with TickerProviderStateMixin
     if (widget.onUpdate != null) {
       final bool oldDismissThresholdReached = _dismissThresholdReached;
       _dismissThresholdReached = _moveController.value > _dismissThreshold;
-      final DismissUpdateDetails details = DismissUpdateDetails(
+      final details = DismissUpdateDetails(
           direction: _dismissDirection,
           reached: _dismissThresholdReached,
           previousReached: oldDismissThresholdReached,

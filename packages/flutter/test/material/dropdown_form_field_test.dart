@@ -119,10 +119,10 @@ class TestApp extends StatefulWidget {
 }
 
 void verifyPaintedShadow(Finder customPaint, int elevation) {
-  const Rect originalRectangle = Rect.fromLTRB(0.0, 0.0, 800, 208.0);
+  const originalRectangle = Rect.fromLTRB(0.0, 0.0, 800, 208.0);
 
-  final List<BoxShadow> boxShadows = List<BoxShadow>.generate(3, (int index) => kElevationToShadow[elevation]![index]);
-  final List<RRect> rrects = List<RRect>.generate(3, (int index) {
+  final boxShadows = List<BoxShadow>.generate(3, (int index) => kElevationToShadow[elevation]![index]);
+  final rrects = List<RRect>.generate(3, (int index) {
     return RRect.fromRectAndRadius(
       originalRectangle.shift(
         boxShadows[index].offset,
@@ -346,7 +346,7 @@ void main() {
   });
 
   testWidgets('label position test - show selected item: disabled + hint + disabledHint', (WidgetTester tester) async {
-    const int value = 1;
+    const value = 1;
 
     await tester.pumpWidget(
       TestApp(
@@ -439,7 +439,7 @@ void main() {
 
   testWidgets('DropdownButtonFormField with autovalidation test', (WidgetTester tester) async {
     String? value = 'one';
-    int validateCalled = 0;
+    var validateCalled = 0;
 
     await tester.pumpWidget(
       StatefulBuilder(
@@ -490,7 +490,7 @@ void main() {
     final Key buttonKey = UniqueKey();
 
     // There shouldn't be overflow when expanded although list contains longer items.
-    final List<String> items = <String>[
+    final items = <String>[
       '1234567890',
       'abcdefghijklmnopqrstuvwxyz1234567890abcdefghijklmnopqrstuvwxyz1234567890',
     ];
@@ -553,7 +553,7 @@ void main() {
     final double menuItemHeight = itemBoxesHeight.reduce(math.max);
     expect(menuItemHeight, greaterThanOrEqualTo(buttonBox.size.height));
 
-    for (final RenderBox itemBox in itemBoxes) {
+    for (final itemBox in itemBoxes) {
       expect(itemBox.attached, isTrue);
       final Offset buttonBoxCenter = buttonBox.size.center(buttonBox.localToGlobal(Offset.zero));
       final Offset itemBoxCenter = itemBox.size.center(itemBox.localToGlobal(Offset.zero));
@@ -563,7 +563,7 @@ void main() {
 
   testWidgets('DropdownButtonFormField with isDense:true does not clip large scale text', (WidgetTester tester) async {
     final Key buttonKey = UniqueKey();
-    const String value = 'two';
+    const value = 'two';
 
     await tester.pumpWidget(
       TestApp(
@@ -604,7 +604,7 @@ void main() {
   testWidgets('DropdownButtonFormField.isDense is true by default', (WidgetTester tester) async {
     // Regression test for https://github.com/flutter/flutter/issues/46844
     final Key buttonKey = UniqueKey();
-    const String value = 'two';
+    const value = 'two';
 
     await tester.pumpWidget(
       TestApp(
@@ -633,8 +633,8 @@ void main() {
   });
 
   testWidgets('DropdownButtonFormField - custom text style', (WidgetTester tester) async {
-    const String value = 'foo';
-    final UniqueKey itemKey = UniqueKey();
+    const value = 'foo';
+    final itemKey = UniqueKey();
 
     await tester.pumpWidget(
       TestApp(
@@ -802,7 +802,7 @@ void main() {
 
   testWidgets('DropdownButtonFormField - Custom icon size and colors', (WidgetTester tester) async {
     final Key iconKey = UniqueKey();
-    final Icon customIcon = Icon(Icons.assessment, key: iconKey);
+    final customIcon = Icon(Icons.assessment, key: iconKey);
 
     await tester.pumpWidget(buildFormFrame(
       icon: customIcon,
@@ -949,7 +949,7 @@ void main() {
   });
 
   testWidgets('DropdownButtonFormField - selectedItemBuilder builds custom buttons', (WidgetTester tester) async {
-    const List<String> items = <String>[
+    const items = <String>[
       'One',
       'Two',
       'Three',
@@ -965,7 +965,7 @@ void main() {
                 value: selectedItem,
                 onChanged: (String? string) => setState(() => selectedItem = string),
                 selectedItemBuilder: (BuildContext context) {
-                  int index = 0;
+                  var index = 0;
                   return items.map((String string) {
                     index += 1;
                     return Text('$string as an Arabic numeral: $index');
@@ -993,7 +993,7 @@ void main() {
   });
 
   testWidgets('DropdownButton onTap callback is called when defined', (WidgetTester tester) async {
-    int dropdownButtonTapCounter = 0;
+    var dropdownButtonTapCounter = 0;
     String? value = 'one';
     void onChanged(String? newValue) {
       value = newValue;
@@ -1039,7 +1039,7 @@ void main() {
   });
 
   testWidgets('DropdownButtonFormField should re-render if value param changes', (WidgetTester tester) async {
-    String currentValue = 'two';
+    var currentValue = 'two';
 
     await tester.pumpWidget(
       StatefulBuilder(
@@ -1085,7 +1085,7 @@ void main() {
   });
 
   testWidgets('autovalidateMode is passed to super', (WidgetTester tester) async {
-    int validateCalled = 0;
+    var validateCalled = 0;
 
     await tester.pumpWidget(
       MaterialApp(
@@ -1131,16 +1131,16 @@ void main() {
   });
 
   testWidgets('InputDecoration borders are used for clipping', (WidgetTester tester) async {
-    const BorderRadius errorBorderRadius = BorderRadius.all(Radius.circular(5.0));
-    const BorderRadius focusedErrorBorderRadius = BorderRadius.all(Radius.circular(6.0));
-    const BorderRadius focusedBorder = BorderRadius.all(Radius.circular(7.0));
-    const BorderRadius enabledBorder = BorderRadius.all(Radius.circular(9.0));
+    const errorBorderRadius = BorderRadius.all(Radius.circular(5.0));
+    const focusedErrorBorderRadius = BorderRadius.all(Radius.circular(6.0));
+    const focusedBorder = BorderRadius.all(Radius.circular(7.0));
+    const enabledBorder = BorderRadius.all(Radius.circular(9.0));
 
-    final FocusNode focusNode = FocusNode();
+    final focusNode = FocusNode();
     addTearDown(focusNode.dispose);
 
-    const String errorText = 'This is an error';
-    bool showError = false;
+    const errorText = 'This is an error';
+    var showError = false;
 
     await tester.pumpWidget(
       MaterialApp(
@@ -1229,8 +1229,8 @@ void main() {
 
   testWidgets('DropdownButtonFormField onChanged is called when the form is reset', (WidgetTester tester) async {
     // Regression test for https://github.com/flutter/flutter/issues/123009.
-    final GlobalKey<FormFieldState<String>> stateKey = GlobalKey<FormFieldState<String>>();
-    final GlobalKey<FormState> formKey = GlobalKey<FormState>();
+    final stateKey = GlobalKey<FormFieldState<String>>();
+    final formKey = GlobalKey<FormState>();
     String? value;
 
     await tester.pumpWidget(
@@ -1277,8 +1277,8 @@ void main() {
 
   testWidgets('DropdownButtonFormField with onChanged set to null does not throw on form reset', (WidgetTester tester) async {
     // Regression test for https://github.com/flutter/flutter/issues/146335.
-    final GlobalKey<FormFieldState<String>> stateKey = GlobalKey<FormFieldState<String>>();
-    final GlobalKey<FormState> formKey = GlobalKey<FormState>();
+    final stateKey = GlobalKey<FormFieldState<String>>();
+    final formKey = GlobalKey<FormState>();
 
     await tester.pumpWidget(
       MaterialApp(

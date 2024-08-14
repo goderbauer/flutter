@@ -28,7 +28,7 @@ void main() {
   });
 
   testWidgets('Passes scrollPhysics to underlying TextField', (WidgetTester tester) async {
-    const ScrollPhysics scrollPhysics = ScrollPhysics();
+    const scrollPhysics = ScrollPhysics();
 
     await tester.pumpWidget(
       CupertinoApp(
@@ -106,9 +106,9 @@ void main() {
   });
 
   testWidgets('Passes cursor attributes to underlying CupertinoTextField', (WidgetTester tester) async {
-    const double cursorWidth = 3.14;
-    const double cursorHeight = 6.28;
-    const Radius cursorRadius = Radius.circular(2);
+    const cursorWidth = 3.14;
+    const cursorHeight = 6.28;
+    const cursorRadius = Radius.circular(2);
     const Color cursorColor = CupertinoColors.systemPurple;
 
     await tester.pumpWidget(
@@ -134,7 +134,7 @@ void main() {
   });
 
   testWidgets('onFieldSubmit callbacks are called', (WidgetTester tester) async {
-    bool called = false;
+    var called = false;
 
     await tester.pumpWidget(
       CupertinoApp(
@@ -175,7 +175,7 @@ void main() {
   });
 
   testWidgets('autovalidateMode is passed to super', (WidgetTester tester) async {
-    int validateCalled = 0;
+    var validateCalled = 0;
 
     await tester.pumpWidget(
       CupertinoApp(
@@ -198,7 +198,7 @@ void main() {
   });
 
   testWidgets('validate is called if widget is enabled', (WidgetTester tester) async {
-    int validateCalled = 0;
+    var validateCalled = 0;
 
     await tester.pumpWidget(
       CupertinoApp(
@@ -263,7 +263,7 @@ void main() {
   }, skip: isBrowser); // [intended] We do not use Flutter-rendered context menu on the Web.
 
   testWidgets('onTap is called upon tap', (WidgetTester tester) async {
-    int tapCount = 0;
+    var tapCount = 0;
     await tester.pumpWidget(
       CupertinoApp(
         home: Center(
@@ -327,7 +327,7 @@ void main() {
   });
 
   testWidgets('onChanged callbacks value and FormFieldState.value are sync', (WidgetTester tester) async {
-    bool called = false;
+    var called = false;
 
     late FormFieldState<String> state;
 
@@ -369,7 +369,7 @@ void main() {
   });
 
   testWidgets('autovalidateMode is passed to super', (WidgetTester tester) async {
-    int validateCalled = 0;
+    var validateCalled = 0;
 
     await tester.pumpWidget(
       CupertinoApp(
@@ -412,7 +412,7 @@ void main() {
   });
 
   testWidgets('Shows error text upon invalid input', (WidgetTester tester) async {
-    final TextEditingController controller = TextEditingController(text: '');
+    final controller = TextEditingController(text: '');
     addTearDown(controller.dispose);
     await tester.pumpWidget(
       CupertinoApp(
@@ -494,9 +494,9 @@ void main() {
   testWidgets(
       'CupertinoTextFormFieldRow onChanged is called when the form is reset', (WidgetTester tester) async {
     // Regression test for https://github.com/flutter/flutter/issues/123009.
-    final GlobalKey<FormFieldState<String>> stateKey = GlobalKey<FormFieldState<String>>();
-    final GlobalKey<FormState> formKey = GlobalKey<FormState>();
-    String value = 'initialValue';
+    final stateKey = GlobalKey<FormFieldState<String>>();
+    final formKey = GlobalKey<FormState>();
+    var value = 'initialValue';
 
     await tester.pumpWidget(
       CupertinoApp(

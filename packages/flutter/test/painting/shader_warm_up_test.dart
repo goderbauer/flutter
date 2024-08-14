@@ -10,7 +10,7 @@ import 'package:flutter_test/flutter_test.dart';
 
 Future<void> main() async {
   test('ShaderWarmUp', () {
-    final FakeShaderWarmUp shaderWarmUp = FakeShaderWarmUp();
+    final shaderWarmUp = FakeShaderWarmUp();
     PaintingBinding.shaderWarmUp = shaderWarmUp;
     debugCaptureShaderWarmUpImage = expectAsync1((ui.Image image) => true);
     WidgetsFlutterBinding.ensureInitialized();

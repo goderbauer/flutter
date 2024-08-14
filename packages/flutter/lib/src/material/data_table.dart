@@ -739,7 +739,7 @@ class DataTable extends StatelessWidget {
   final int? _onlyTextColumn;
   static int? _initOnlyTextColumn(List<DataColumn> columns) {
     int? result;
-    for (int index = 0; index < columns.length; index += 1) {
+    for (var index = 0; index < columns.length; index += 1) {
       final DataColumn column = columns[index];
       if (!column.numeric) {
         if (result != null) {
@@ -1033,13 +1033,13 @@ class DataTable extends StatelessWidget {
       ?? theme.dataTableTheme.columnSpacing
       ?? _columnSpacing;
 
-    final List<TableColumnWidth> tableColumns = List<TableColumnWidth>.filled(columns.length + (displayCheckboxColumn ? 1 : 0), const _NullTableColumnWidth());
-    final List<TableRow> tableRows = List<TableRow>.generate(
+    final tableColumns = List<TableColumnWidth>.filled(columns.length + (displayCheckboxColumn ? 1 : 0), const _NullTableColumnWidth());
+    final tableRows = List<TableRow>.generate(
       rows.length + 1, // the +1 is for the header row
       (int index) {
         final bool isSelected = index > 0 && rows[index - 1].selected;
         final bool isDisabled = index > 0 && anyRowSelectable && rows[index - 1].onSelectChanged == null;
-        final Set<MaterialState> states = <MaterialState>{
+        final states = <MaterialState>{
           if (isSelected)
             MaterialState.selected,
           if (isDisabled)
@@ -1047,7 +1047,7 @@ class DataTable extends StatelessWidget {
         };
         final Color? resolvedDataRowColor = index > 0 ? (rows[index - 1].color ?? effectiveDataRowColor)?.resolve(states) : null;
         final Color? resolvedHeadingRowColor = effectiveHeadingRowColor?.resolve(<MaterialState>{});
-        final Color? rowColor = index > 0 ? resolvedDataRowColor : resolvedHeadingRowColor;
+        final rowColor = index > 0 ? resolvedDataRowColor : resolvedHeadingRowColor;
         final BorderSide borderSide = Divider.createBorderSide(
           context,
           width: dividerThickness
@@ -1071,7 +1071,7 @@ class DataTable extends StatelessWidget {
 
     int rowIndex;
 
-    int displayColumnIndex = 0;
+    var displayColumnIndex = 0;
     if (displayCheckboxColumn) {
       tableColumns[0] = FixedColumnWidth(effectiveCheckboxHorizontalMarginStart + Checkbox.width + effectiveCheckboxHorizontalMarginEnd);
       tableRows[0].children[0] = _buildCheckbox(
@@ -1084,7 +1084,7 @@ class DataTable extends StatelessWidget {
       );
       rowIndex = 1;
       for (final DataRow row in rows) {
-        final Set<MaterialState> states = <MaterialState>{
+        final states = <MaterialState>{
           if (row.selected)
             MaterialState.selected,
         };
@@ -1102,7 +1102,7 @@ class DataTable extends StatelessWidget {
       displayColumnIndex += 1;
     }
 
-    for (int dataColumnIndex = 0; dataColumnIndex < columns.length; dataColumnIndex += 1) {
+    for (var dataColumnIndex = 0; dataColumnIndex < columns.length; dataColumnIndex += 1) {
       final DataColumn column = columns[dataColumnIndex];
 
       final double paddingStart = switch (dataColumnIndex) {
@@ -1118,7 +1118,7 @@ class DataTable extends StatelessWidget {
         paddingEnd = effectiveColumnSpacing / 2.0;
       }
 
-      final EdgeInsetsDirectional padding = EdgeInsetsDirectional.only(
+      final padding = EdgeInsetsDirectional.only(
         start: paddingStart,
         end: paddingEnd,
       );
@@ -1127,7 +1127,7 @@ class DataTable extends StatelessWidget {
       } else {
         tableColumns[displayColumnIndex] = const IntrinsicColumnWidth();
       }
-      final Set<MaterialState> headerStates = <MaterialState>{
+      final headerStates = <MaterialState>{
         if (column.onSort == null)
           MaterialState.disabled,
       };
@@ -1146,7 +1146,7 @@ class DataTable extends StatelessWidget {
       );
       rowIndex = 1;
       for (final DataRow row in rows) {
-        final Set<MaterialState> states = <MaterialState>{
+        final states = <MaterialState>{
           if (row.selected)
             MaterialState.selected,
         };
@@ -1232,7 +1232,7 @@ class TableRowInkWell extends InkResponse {
     return () {
       RenderObject cell = referenceBox;
       RenderObject? table = cell.parent;
-      final Matrix4 transform = Matrix4.identity();
+      final transform = Matrix4.identity();
       while (table is RenderObject && table is! RenderTable) {
         table.applyPaintTransform(cell, transform);
         assert(table == cell.parent);
@@ -1240,7 +1240,7 @@ class TableRowInkWell extends InkResponse {
         table = table.parent;
       }
       if (table is RenderTable) {
-        final TableCellParentData cellParentData = cell.parentData! as TableCellParentData;
+        final cellParentData = cell.parentData! as TableCellParentData;
         assert(cellParentData.y != null);
         final Rect rect = table.getRowBox(cellParentData.y!);
         // The rect is in the table's coordinate space. We need to change it to the
@@ -1334,7 +1334,7 @@ class _SortArrowState extends State<_SortArrow> with TickerProviderStateMixin {
   @override
   void didUpdateWidget(_SortArrow oldWidget) {
     super.didUpdateWidget(oldWidget);
-    bool skipArrow = false;
+    var skipArrow = false;
     final bool? newUp = widget.up ?? _up;
     if (oldWidget.visible != widget.visible) {
       if (widget.visible && _opacityController.isDismissed) {

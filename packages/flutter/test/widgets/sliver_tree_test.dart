@@ -52,10 +52,10 @@ void main() {
     });
 
     test('getters, toString', () {
-      final List<TreeSliverNode<String>> children = <TreeSliverNode<String>>[
+      final children = <TreeSliverNode<String>>[
         TreeSliverNode<String>('child'),
       ];
-      final TreeSliverNode<String> node = TreeSliverNode<String>(
+      final node = TreeSliverNode<String>(
         'parent',
         children: children,
         expanded: true,
@@ -83,10 +83,10 @@ void main() {
     });
 
     testWidgets('TreeSliverNode sets ups parent and depth properties', (WidgetTester tester) async {
-      final List<TreeSliverNode<String>> children = <TreeSliverNode<String>>[
+      final children = <TreeSliverNode<String>>[
         TreeSliverNode<String>('child'),
       ];
-      final TreeSliverNode<String> node = TreeSliverNode<String>(
+      final node = TreeSliverNode<String>(
         'parent',
         children: children,
         expanded: true,
@@ -148,7 +148,7 @@ void main() {
     });
 
     testWidgets('Can set controller on TreeSliver', (WidgetTester tester) async {
-      final TreeSliverController controller = TreeSliverController();
+      final controller = TreeSliverController();
       TreeSliverController? returnedController;
       await tester.pumpWidget(MaterialApp(
         home: CustomScrollView(
@@ -202,7 +202,7 @@ void main() {
     });
 
     testWidgets('Can get node for TreeSliverNode.content', (WidgetTester tester) async {
-      final TreeSliverController controller = TreeSliverController();
+      final controller = TreeSliverController();
       await tester.pumpWidget(MaterialApp(
         home: CustomScrollView(
           slivers: <Widget>[
@@ -218,7 +218,7 @@ void main() {
     });
 
     testWidgets('Can get isExpanded for a node', (WidgetTester tester) async {
-      final TreeSliverController controller = TreeSliverController();
+      final controller = TreeSliverController();
       await tester.pumpWidget(MaterialApp(
         home: CustomScrollView(
           slivers: <Widget>[
@@ -240,7 +240,7 @@ void main() {
     });
 
     testWidgets('Can get isActive for a node', (WidgetTester tester) async {
-      final TreeSliverController controller = TreeSliverController();
+      final controller = TreeSliverController();
       await tester.pumpWidget(MaterialApp(
         home: CustomScrollView(
           slivers: <Widget>[
@@ -271,7 +271,7 @@ void main() {
     });
 
     testWidgets('Can toggleNode, to collapse or expand', (WidgetTester tester) async {
-      final TreeSliverController controller = TreeSliverController();
+      final controller = TreeSliverController();
       await tester.pumpWidget(MaterialApp(
         home: CustomScrollView(
           slivers: <Widget>[
@@ -337,7 +337,7 @@ void main() {
 
     testWidgets('Can expandNode, then collapseAll',
         (WidgetTester tester) async {
-      final TreeSliverController controller = TreeSliverController();
+      final controller = TreeSliverController();
       await tester.pumpWidget(MaterialApp(
         home: CustomScrollView(
           slivers: <Widget>[
@@ -385,7 +385,7 @@ void main() {
     });
 
     testWidgets('Can collapseNode, then expandAll', (WidgetTester tester) async {
-      final TreeSliverController controller = TreeSliverController();
+      final controller = TreeSliverController();
       await tester.pumpWidget(MaterialApp(
         home: CustomScrollView(
           slivers: <Widget>[
@@ -471,9 +471,9 @@ void main() {
       TreeSliverNode<String>('Root 3'),
     ];
 
-    final TreeSliverController controller = TreeSliverController();
+    final controller = TreeSliverController();
     // The default node builder wraps the leading icon with toggleNodeWith.
-    bool toggled = false;
+    var toggled = false;
     TreeSliverNode<String>? toggledNode;
     await tester.pumpWidget(MaterialApp(
       home: CustomScrollView(
@@ -670,7 +670,7 @@ void main() {
       ),
       TreeSliverNode<String>('Root 3'),
     ];
-    final TreeSliverController controller = TreeSliverController();
+    final controller = TreeSliverController();
     await tester.pumpWidget(MaterialApp(
       home: StatefulBuilder(
         builder: (BuildContext context, StateSetter setState) {
@@ -741,7 +741,7 @@ void main() {
       ),
       TreeSliverNode<String>('Root 3'),
     ];
-    final TreeSliverController controller = TreeSliverController();
+    final controller = TreeSliverController();
     await tester.pumpWidget(MaterialApp(
       home: StatefulBuilder(
         builder: (BuildContext context, StateSetter setState) {

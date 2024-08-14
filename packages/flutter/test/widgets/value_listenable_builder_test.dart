@@ -43,7 +43,7 @@ void main() {
   });
 
   testWidgets('Widget builds with initial value', (WidgetTester tester) async {
-    final SpyStringValueNotifier valueListenable = SpyStringValueNotifier('Bachman');
+    final valueListenable = SpyStringValueNotifier('Bachman');
     addTearDown(valueListenable.dispose);
 
     await tester.pumpWidget(builderForValueListenable(valueListenable));
@@ -71,7 +71,7 @@ void main() {
     await tester.pump();
     expect(find.text('Gilfoyle'), findsOneWidget);
 
-    final SpyStringValueNotifier differentListenable = SpyStringValueNotifier('Hendricks');
+    final differentListenable = SpyStringValueNotifier('Hendricks');
     addTearDown(differentListenable.dispose);
 
     await tester.pumpWidget(builderForValueListenable(differentListenable));
@@ -87,7 +87,7 @@ void main() {
     await tester.pump();
     expect(find.text('Gilfoyle'), findsOneWidget);
 
-    final SpyStringValueNotifier differentListenable = SpyStringValueNotifier('Hendricks');
+    final differentListenable = SpyStringValueNotifier('Hendricks');
     addTearDown(differentListenable.dispose);
 
     await tester.pumpWidget(builderForValueListenable(differentListenable));

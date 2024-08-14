@@ -20,10 +20,10 @@ void main() {
 
   testWidgets('scrollable in hidden overlay does not crash when unhidden', (WidgetTester tester) async {
     // Regression test for https://github.com/flutter/flutter/issues/44269.
-    final TabController controller = TabController(vsync: const TestVSync(), length: 1);
+    final controller = TabController(vsync: const TestVSync(), length: 1);
     addTearDown(controller.dispose);
 
-    final OverlayEntry entry1 = OverlayEntry(
+    final entry1 = OverlayEntry(
       maintainState: true,
       opaque: true,
       builder: (BuildContext context) {
@@ -38,7 +38,7 @@ void main() {
     );
     addTearDown(() {entry1.remove(); entry1.dispose();});
 
-    final OverlayEntry entry2 = OverlayEntry(
+    final entry2 = OverlayEntry(
       maintainState: true,
       opaque: true,
       builder: (BuildContext context) {

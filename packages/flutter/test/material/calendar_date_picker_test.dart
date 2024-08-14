@@ -265,7 +265,7 @@ void main() {
     });
 
     testWidgets('Cannot select a day outside bounds', (WidgetTester tester) async {
-      final DateTime validDate = DateTime(2017, DateTime.january, 15);
+      final validDate = DateTime(2017, DateTime.january, 15);
       DateTime? selectedDate;
       await tester.pumpWidget(calendarDatePicker(
         initialDate: validDate,
@@ -432,7 +432,7 @@ void main() {
         initialDate: DateTime(2016, DateTime.january, 15),
         currentDate: DateTime(2016, 1, 2),
       ));
-      const Color todayColor = Color(0xff2196f3); // default primary color
+      const todayColor = Color(0xff2196f3); // default primary color
       expect(
         Material.of(tester.element(find.text('2'))),
         // The current day should be painted with a circle outline.
@@ -450,7 +450,7 @@ void main() {
         initialDate: DateTime(2016, DateTime.january, 15),
         currentDate: DateTime(2016, 1, 2),
       ));
-      const Color todayColor = Color(0xff6750a4); // default primary color
+      const todayColor = Color(0xff6750a4); // default primary color
       expect(
         Material.of(tester.element(find.text('2'))),
         // The current day should be painted with a circle outline.
@@ -470,7 +470,7 @@ void main() {
         currentDate: DateTime(2016, 1, 2), // not between first and last
         initialDate: DateTime(2016, 1, 5),
       ));
-      const Color disabledColor = Color(0x61000000); // default disabled color
+      const disabledColor = Color(0x61000000); // default disabled color
       expect(
         Material.of(tester.element(find.text('2'))),
         // The current day should be painted with a circle outline.
@@ -491,7 +491,7 @@ void main() {
         currentDate: DateTime(2016, 1, 2), // not between first and last
         initialDate: DateTime(2016, 1, 5),
       ));
-      const Color disabledColor = Color(0x616750a4); // default disabled color
+      const disabledColor = Color(0x616750a4); // default disabled color
       expect(
         Material.of(tester.element(find.text('2'))),
         // The current day should be painted with a circle outline.
@@ -542,14 +542,14 @@ void main() {
       expect(selection, day(3));
     });
 
-    for (final bool useMaterial3 in <bool>[false, true]) {
+    for (final useMaterial3 in <bool>[false, true]) {
       testWidgets('Updates to initialDate parameter are not reflected in the state (useMaterial3=$useMaterial3)', (WidgetTester tester) async {
         final Key pickerKey = UniqueKey();
-        final DateTime initialDate = DateTime(2020, 1, 21);
-        final DateTime updatedDate = DateTime(1976, 2, 23);
-        final DateTime firstDate = DateTime(1970);
-        final DateTime lastDate = DateTime(2099, 31, 12);
-        final Color selectedColor = useMaterial3 ? const Color(0xff6750a4) : const Color(0xff2196f3); // default primary color
+        final initialDate = DateTime(2020, 1, 21);
+        final updatedDate = DateTime(1976, 2, 23);
+        final firstDate = DateTime(1970);
+        final lastDate = DateTime(2099, 31, 12);
+        final selectedColor = useMaterial3 ? const Color(0xff6750a4) : const Color(0xff2196f3); // default primary color
 
         await tester.pumpWidget(calendarDatePicker(
           key: pickerKey,
@@ -790,7 +790,7 @@ void main() {
     });
 
     group('Haptic feedback', () {
-      const Duration hapticFeedbackInterval = Duration(milliseconds: 10);
+      const hapticFeedbackInterval = Duration(milliseconds: 10);
       late FeedbackTester feedback;
 
       setUp(() {
@@ -1109,7 +1109,7 @@ void main() {
         ));
 
         // Year grid only shows 2010 - 2024.
-        for (int year = 2010; year <= 2024; year++) {
+        for (var year = 2010; year <= 2024; year++) {
           expect(tester.getSemantics(find.text('$year')), matchesSemantics(
             label: '$year',
             hasTapAction: true,
@@ -1125,8 +1125,8 @@ void main() {
       // This is a regression test for https://github.com/flutter/flutter/issues/143439.
       testWidgets('Selected date Semantics announcement on onDateChanged', (WidgetTester tester) async {
         final SemanticsHandle semantics = tester.ensureSemantics();
-        const DefaultMaterialLocalizations localizations = DefaultMaterialLocalizations();
-        final DateTime initialDate = DateTime(2016, DateTime.january, 15);
+        const localizations = DefaultMaterialLocalizations();
+        final initialDate = DateTime(2016, DateTime.january, 15);
         DateTime? selectedDate;
 
         await tester.pumpWidget(calendarDatePicker(
@@ -1137,7 +1137,7 @@ void main() {
         ));
 
         final bool isToday = DateUtils.isSameDay(initialDate, selectedDate);
-        final String semanticLabelSuffix = isToday ? ', ${localizations.currentDateLabel}' : '';
+        final semanticLabelSuffix = isToday ? ', ${localizations.currentDateLabel}' : '';
 
         // The initial date should be announced.
         expect(
@@ -1170,7 +1170,7 @@ void main() {
 
     // This is a regression test for https://github.com/flutter/flutter/issues/141350.
     testWidgets('Default day selection overlay', (WidgetTester tester) async {
-      final ThemeData theme = ThemeData();
+      final theme = ThemeData();
       await tester.pumpWidget(calendarDatePicker(
         firstDate: DateTime(2016, DateTime.december, 15),
         initialDate: DateTime(2017, DateTime.january, 15),
@@ -1193,8 +1193,8 @@ void main() {
       expect(inkFeatures, paints..circle(radius: 35.0, color: theme.colorScheme.onSurfaceVariant.withOpacity(0.08)));
       expect(inkFeatures, paintsExactlyCountTimes(#clipPath, 1));
 
-      final Rect expectedClipRect = Rect.fromCircle(center: const Offset(400.0, 241.0), radius: 35.0);
-      final Path expectedClipPath = Path()..addRect(expectedClipRect);
+      final expectedClipRect = Rect.fromCircle(center: const Offset(400.0, 241.0), radius: 35.0);
+      final expectedClipPath = Path()..addRect(expectedClipRect);
       expect(
         inkFeatures,
         paints..clipPath(pathMatcher: coversSameAreaAs(

@@ -31,10 +31,10 @@ void main() {
     Future<void> sendRedo(WidgetTester tester) => sendUndoRedo(tester, true);
 
     testWidgets('UndoHistory widget registers as global undo/redo client', (WidgetTester tester) async {
-      final FocusNode focusNode = FocusNode(debugLabel: 'UndoHistory Node');
+      final focusNode = FocusNode(debugLabel: 'UndoHistory Node');
       addTearDown(focusNode.dispose);
       final GlobalKey undoHistoryGlobalKey = GlobalKey();
-      final ValueNotifier<int> value = ValueNotifier<int>(0);
+      final value = ValueNotifier<int>(0);
       addTearDown(value.dispose);
 
       await tester.pumpWidget(
@@ -68,10 +68,10 @@ void main() {
 
     testWidgets('UndoHistory widget deregisters as global undo/redo client when it loses focus',
             (WidgetTester tester) async {
-          final FocusNode focusNode = FocusNode(debugLabel: 'UndoHistory Node');
+          final focusNode = FocusNode(debugLabel: 'UndoHistory Node');
           addTearDown(focusNode.dispose);
           final GlobalKey undoHistoryGlobalKey = GlobalKey();
-          final ValueNotifier<int> value = ValueNotifier<int>(0);
+          final value = ValueNotifier<int>(0);
           addTearDown(value.dispose);
 
           await tester.pumpWidget(
@@ -106,10 +106,10 @@ void main() {
         });
 
     testWidgets('UndoHistory widget deregisters as global undo/redo client when disposed', (WidgetTester tester) async {
-      final FocusNode focusNode = FocusNode(debugLabel: 'UndoHistory Node');
+      final focusNode = FocusNode(debugLabel: 'UndoHistory Node');
       addTearDown(focusNode.dispose);
       final GlobalKey undoHistoryGlobalKey = GlobalKey();
-      final ValueNotifier<int> value = ValueNotifier<int>(0);
+      final value = ValueNotifier<int>(0);
       addTearDown(value.dispose);
 
       await tester.pumpWidget(
@@ -148,9 +148,9 @@ void main() {
     });
 
     testWidgets('allows undo and redo to be called programmatically from the UndoHistoryController', (WidgetTester tester) async {
-      final ValueNotifier<int> value = ValueNotifier<int>(0);
+      final value = ValueNotifier<int>(0);
       addTearDown(value.dispose);
-      final UndoHistoryController controller = UndoHistoryController();
+      final controller = UndoHistoryController();
       addTearDown(controller.dispose);
 
       await tester.pumpWidget(
@@ -240,9 +240,9 @@ void main() {
     }, variant: TargetPlatformVariant.all());
 
     testWidgets('allows undo and redo to be called using the keyboard', (WidgetTester tester) async {
-      final ValueNotifier<int> value = ValueNotifier<int>(0);
+      final value = ValueNotifier<int>(0);
       addTearDown(value.dispose);
-      final UndoHistoryController controller = UndoHistoryController();
+      final controller = UndoHistoryController();
       addTearDown(controller.dispose);
 
       await tester.pumpWidget(
@@ -335,9 +335,9 @@ void main() {
     }, variant: TargetPlatformVariant.all(), skip: kIsWeb); // [intended]
 
     testWidgets('duplicate changes do not affect the undo history', (WidgetTester tester) async {
-      final ValueNotifier<int> value = ValueNotifier<int>(0);
+      final value = ValueNotifier<int>(0);
       addTearDown(value.dispose);
-      final UndoHistoryController controller = UndoHistoryController();
+      final controller = UndoHistoryController();
       addTearDown(controller.dispose);
 
       await tester.pumpWidget(
@@ -388,12 +388,12 @@ void main() {
     }, variant: TargetPlatformVariant.all());
 
     testWidgets('ignores value changes pushed during onTriggered', (WidgetTester tester) async {
-      final ValueNotifier<int> value = ValueNotifier<int>(0);
+      final value = ValueNotifier<int>(0);
       addTearDown(value.dispose);
-      final UndoHistoryController controller = UndoHistoryController();
+      final controller = UndoHistoryController();
       addTearDown(controller.dispose);
       int Function(int newValue) valueToUse = (int value) => value;
-      final GlobalKey<UndoHistoryState<int>> key = GlobalKey<UndoHistoryState<int>>();
+      final key = GlobalKey<UndoHistoryState<int>>();
 
       await tester.pumpWidget(
         MaterialApp(
@@ -439,17 +439,17 @@ void main() {
     }, variant: TargetPlatformVariant.all());
 
     testWidgets('changes should send setUndoState to the UndoManagerConnection on iOS', (WidgetTester tester) async {
-      final List<MethodCall> log = <MethodCall>[];
+      final log = <MethodCall>[];
       tester.binding.defaultBinaryMessenger.setMockMethodCallHandler(SystemChannels.undoManager, (MethodCall methodCall) async {
         log.add(methodCall);
         return null;
       });
-      final FocusNode focusNode = FocusNode();
+      final focusNode = FocusNode();
       addTearDown(focusNode.dispose);
 
-      final ValueNotifier<int> value = ValueNotifier<int>(0);
+      final value = ValueNotifier<int>(0);
       addTearDown(value.dispose);
-      final UndoHistoryController controller = UndoHistoryController();
+      final controller = UndoHistoryController();
       addTearDown(controller.dispose);
 
       await tester.pumpWidget(
@@ -512,9 +512,9 @@ void main() {
     }, variant: const TargetPlatformVariant(<TargetPlatform>{TargetPlatform.iOS}), skip: kIsWeb); // [intended]
 
     testWidgets('handlePlatformUndo should undo or redo appropriately on iOS', (WidgetTester tester) async {
-      final ValueNotifier<int> value = ValueNotifier<int>(0);
+      final value = ValueNotifier<int>(0);
       addTearDown(value.dispose);
-      final UndoHistoryController controller = UndoHistoryController();
+      final controller = UndoHistoryController();
       addTearDown(controller.dispose);
 
       await tester.pumpWidget(
@@ -602,8 +602,8 @@ void main() {
 
   group('UndoHistoryController', () {
     testWidgets('UndoHistoryController notifies onUndo listeners onUndo', (WidgetTester tester) async {
-      int calls = 0;
-      final UndoHistoryController controller = UndoHistoryController();
+      var calls = 0;
+      final controller = UndoHistoryController();
       addTearDown(controller.dispose);
       controller.onUndo.addListener(() {
         calls++;
@@ -620,8 +620,8 @@ void main() {
     });
 
     testWidgets('UndoHistoryController notifies onRedo listeners onRedo', (WidgetTester tester) async {
-      int calls = 0;
-      final UndoHistoryController controller = UndoHistoryController();
+      var calls = 0;
+      final controller = UndoHistoryController();
       addTearDown(controller.dispose);
       controller.onRedo.addListener(() {
         calls++;
@@ -638,8 +638,8 @@ void main() {
     });
 
     testWidgets('UndoHistoryController notifies listeners on value change', (WidgetTester tester) async {
-      int calls = 0;
-      final UndoHistoryController controller = UndoHistoryController(value: const UndoHistoryValue(canUndo: true));
+      var calls = 0;
+      final controller = UndoHistoryController(value: const UndoHistoryValue(canUndo: true));
       addTearDown(controller.dispose);
       controller.addListener(() {
         calls++;

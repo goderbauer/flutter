@@ -693,7 +693,7 @@ class _TileIcon extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final Color? iconColor = colorTween.evaluate(animation);
-    final IconThemeData defaultIconTheme = IconThemeData(
+    final defaultIconTheme = IconThemeData(
       color: iconColor,
       size: iconSize,
     );
@@ -1085,9 +1085,9 @@ class _BottomNavigationBarState extends State<BottomNavigationBar> with TickerPr
         );
     }
 
-    final List<Widget> tiles = <Widget>[];
-    for (int i = 0; i < widget.items.length; i++) {
-      final Set<MaterialState> states = <MaterialState>{
+    final tiles = <Widget>[];
+    for (var i = 0; i < widget.items.length; i++) {
+      final states = <MaterialState>{
         if (i == widget.currentIndex) MaterialState.selected,
       };
 
@@ -1291,7 +1291,7 @@ class _RadialPainter extends CustomPainter {
     if (circles.length != oldPainter.circles.length) {
       return true;
     }
-    for (int i = 0; i < circles.length; i += 1) {
+    for (var i = 0; i < circles.length; i += 1) {
       if (circles[i] != oldPainter.circles[i]) {
         return true;
       }
@@ -1302,15 +1302,15 @@ class _RadialPainter extends CustomPainter {
   @override
   void paint(Canvas canvas, Size size) {
     for (final _Circle circle in circles) {
-      final Paint paint = Paint()..color = circle.color;
-      final Rect rect = Rect.fromLTWH(0.0, 0.0, size.width, size.height);
+      final paint = Paint()..color = circle.color;
+      final rect = Rect.fromLTWH(0.0, 0.0, size.width, size.height);
       canvas.clipRect(rect);
       final double leftFraction = switch (textDirection) {
         TextDirection.rtl => 1.0 - circle.horizontalLeadingOffset,
         TextDirection.ltr => circle.horizontalLeadingOffset,
       };
-      final Offset center = Offset(leftFraction * size.width, size.height / 2.0);
-      final Tween<double> radiusTween = Tween<double>(
+      final center = Offset(leftFraction * size.width, size.height / 2.0);
+      final radiusTween = Tween<double>(
         begin: 0.0,
         end: _maxRadius(center, size),
       );

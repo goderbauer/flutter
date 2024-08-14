@@ -74,7 +74,7 @@ class FailingTestImageProvider extends TestImageProvider {
 }
 
 Future<ImageInfo> extractOneFrame(ImageStream stream) {
-  final Completer<ImageInfo> completer = Completer<ImageInfo>();
+  final completer = Completer<ImageInfo>();
   late ImageStreamListener listener;
   listener = ImageStreamListener((ImageInfo image, bool synchronousCall) {
     completer.complete(image);
@@ -138,7 +138,7 @@ class LoadErrorImageProvider extends ImageProvider<LoadErrorImageProvider> {
 class LoadErrorCompleterImageProvider extends ImageProvider<LoadErrorCompleterImageProvider> {
   @override
   ImageStreamCompleter loadImage(LoadErrorCompleterImageProvider key, ImageDecoderCallback decode) {
-    final Completer<ImageInfo> completer = Completer<ImageInfo>.sync();
+    final completer = Completer<ImageInfo>.sync();
     completer.completeError(Error());
     return OneFrameImageStreamCompleter(completer.future);
   }

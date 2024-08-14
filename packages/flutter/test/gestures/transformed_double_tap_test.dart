@@ -8,7 +8,7 @@ import 'package:flutter_test/flutter_test.dart';
 
 void main() {
   testWidgets('kTouchSlop is evaluated in the global coordinate space when scaled up', (WidgetTester tester) async {
-    int doubleTapCount = 0;
+    var doubleTapCount = 0;
 
     final Key redContainer = UniqueKey();
     await tester.pumpWidget(
@@ -52,7 +52,7 @@ void main() {
   });
 
   testWidgets('kTouchSlop is evaluated in the global coordinate space when scaled down', (WidgetTester tester) async {
-    int doubleTapCount = 0;
+    var doubleTapCount = 0;
 
     final Key redContainer = UniqueKey();
     await tester.pumpWidget(

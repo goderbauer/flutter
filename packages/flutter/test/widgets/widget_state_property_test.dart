@@ -22,7 +22,7 @@ void main() {
 
   test('WidgetStateProperty.map()', () {
     final WidgetStatesConstraint active = WidgetState.hovered | WidgetState.focused | WidgetState.pressed;
-    final WidgetStateProperty<String?> value = WidgetStateProperty<String?>.fromMap(
+    final value = WidgetStateProperty<String?>.fromMap(
       <WidgetStatesConstraint, String?>{
         active & WidgetState.error: 'active error',
         WidgetState.disabled | WidgetState.error: 'kinda sus',
@@ -49,7 +49,7 @@ void main() {
   });
 
   test('WidgetStatePropertyAll', () {
-    const WidgetStatePropertyAll<int> value = WidgetStatePropertyAll<int>(123);
+    const value = WidgetStatePropertyAll<int>(123);
     expect(value.resolve(<WidgetState>{}), 123);
     expect(value.resolve(<WidgetState>{WidgetState.hovered}), 123);
     expect(value.resolve(<WidgetState>{WidgetState.focused}), 123);

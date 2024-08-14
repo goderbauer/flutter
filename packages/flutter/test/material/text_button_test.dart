@@ -11,8 +11,8 @@ import '../widgets/semantics_tester.dart';
 
 void main() {
   testWidgets('TextButton, TextButton.icon defaults', (WidgetTester tester) async {
-    const ColorScheme colorScheme = ColorScheme.light();
-    final ThemeData theme = ThemeData.from(colorScheme: colorScheme);
+    const colorScheme = ColorScheme.light();
+    final theme = ThemeData.from(colorScheme: colorScheme);
     final bool material3 = theme.useMaterial3;
 
     // Enabled TextButton
@@ -155,10 +155,10 @@ void main() {
   });
 
   testWidgets('TextButton.defaultStyle produces a ButtonStyle with appropriate non-null values', (WidgetTester tester) async {
-    const ColorScheme colorScheme = ColorScheme.light();
-    final ThemeData theme = ThemeData.from(colorScheme: colorScheme);
+    const colorScheme = ColorScheme.light();
+    final theme = ThemeData.from(colorScheme: colorScheme);
 
-    final TextButton button = TextButton(
+    final button = TextButton(
       onPressed: () { },
       child: const Text('button'),
     );
@@ -209,10 +209,10 @@ void main() {
   });
 
     testWidgets('TextButton.defaultStyle with an icon produces a ButtonStyle with appropriate non-null values', (WidgetTester tester) async {
-    const ColorScheme colorScheme = ColorScheme.light();
-    final ThemeData theme = ThemeData.from(colorScheme: colorScheme);
+    const colorScheme = ColorScheme.light();
+    final theme = ThemeData.from(colorScheme: colorScheme);
 
-    final TextButton button = TextButton.icon(
+    final button = TextButton.icon(
       onPressed: () { },
       icon: const SizedBox(),
       label: const Text('button'),
@@ -263,8 +263,8 @@ void main() {
   });
 
   testWidgets('TextButton.icon produces the correct widgets when icon is null', (WidgetTester tester) async {
-    const ColorScheme colorScheme = ColorScheme.light();
-    final ThemeData theme = ThemeData.from(colorScheme: colorScheme);
+    const colorScheme = ColorScheme.light();
+    final theme = ThemeData.from(colorScheme: colorScheme);
     final Key iconButtonKey = UniqueKey();
     await tester.pumpWidget(
       MaterialApp(
@@ -302,7 +302,7 @@ void main() {
   });
 
   testWidgets('Default TextButton meets a11y contrast guidelines', (WidgetTester tester) async {
-    final FocusNode focusNode = FocusNode();
+    final focusNode = FocusNode();
 
     await tester.pumpWidget(
       MaterialApp(
@@ -350,10 +350,10 @@ void main() {
   );
 
   testWidgets('TextButton with colored theme meets a11y contrast guidelines', (WidgetTester tester) async {
-    final FocusNode focusNode = FocusNode();
+    final focusNode = FocusNode();
 
     Color getTextColor(Set<MaterialState> states) {
-      final Set<MaterialState> interactiveStates = <MaterialState>{
+      final interactiveStates = <MaterialState>{
         MaterialState.pressed,
         MaterialState.hovered,
         MaterialState.focused,
@@ -419,8 +419,8 @@ void main() {
   );
 
   testWidgets('TextButton default overlayColor resolves pressed state', (WidgetTester tester) async {
-    final FocusNode focusNode = FocusNode();
-    final ThemeData theme = ThemeData(useMaterial3: true);
+    final focusNode = FocusNode();
+    final theme = ThemeData(useMaterial3: true);
 
     await tester.pumpWidget(
       MaterialApp(
@@ -474,12 +474,12 @@ void main() {
   });
 
   testWidgets('TextButton uses stateful color for text color in different states', (WidgetTester tester) async {
-    final FocusNode focusNode = FocusNode();
+    final focusNode = FocusNode();
 
-    const Color pressedColor = Color(0x00000001);
-    const Color hoverColor = Color(0x00000002);
-    const Color focusedColor = Color(0x00000003);
-    const Color defaultColor = Color(0x00000004);
+    const pressedColor = Color(0x00000001);
+    const hoverColor = Color(0x00000002);
+    const focusedColor = Color(0x00000003);
+    const defaultColor = Color(0x00000004);
 
     Color getTextColor(Set<MaterialState> states) {
       if (states.contains(MaterialState.pressed)) {
@@ -543,13 +543,13 @@ void main() {
   });
 
   testWidgets('TextButton uses stateful color for icon color in different states', (WidgetTester tester) async {
-    final FocusNode focusNode = FocusNode();
+    final focusNode = FocusNode();
     final Key buttonKey = UniqueKey();
 
-    const Color pressedColor = Color(0x00000001);
-    const Color hoverColor = Color(0x00000002);
-    const Color focusedColor = Color(0x00000003);
-    const Color defaultColor = Color(0x00000004);
+    const pressedColor = Color(0x00000001);
+    const hoverColor = Color(0x00000002);
+    const focusedColor = Color(0x00000003);
+    const defaultColor = Color(0x00000004);
 
     Color getTextColor(Set<MaterialState> states) {
       if (states.contains(MaterialState.pressed)) {
@@ -630,7 +630,7 @@ void main() {
   });
 
   testWidgets('Does TextButton work with hover', (WidgetTester tester) async {
-    const Color hoverColor = Color(0xff001122);
+    const hoverColor = Color(0xff001122);
 
     Color? getOverlayColor(Set<MaterialState> states) {
       return states.contains(MaterialState.hovered) ? hoverColor : null;
@@ -659,13 +659,13 @@ void main() {
   });
 
   testWidgets('Does TextButton work with focus', (WidgetTester tester) async {
-    const Color focusColor = Color(0xff001122);
+    const focusColor = Color(0xff001122);
 
     Color? getOverlayColor(Set<MaterialState> states) {
       return states.contains(MaterialState.focused) ? focusColor : null;
     }
 
-    final FocusNode focusNode = FocusNode(debugLabel: 'TextButton Node');
+    final focusNode = FocusNode(debugLabel: 'TextButton Node');
     await tester.pumpWidget(
       Directionality(
         textDirection: TextDirection.ltr,
@@ -691,7 +691,7 @@ void main() {
   });
 
   testWidgets('Does TextButton contribute semantics', (WidgetTester tester) async {
-    final SemanticsTester semantics = SemanticsTester(tester);
+    final semantics = SemanticsTester(tester);
     await tester.pumpWidget(
       Directionality(
         textDirection: TextDirection.ltr,
@@ -778,8 +778,8 @@ void main() {
       ),
     );
 
-    const Size textButtonSize = Size(68.5, 48.0);
-    const Size textSize = Size(52.5, 18.0);
+    const textButtonSize = Size(68.5, 48.0);
+    const textSize = Size(52.5, 18.0);
     expect(tester.getSize(find.byType(TextButton)), textButtonSize);
     expect(tester.getSize(find.byType(Text)), textSize);
 
@@ -878,8 +878,8 @@ void main() {
   });
 
   testWidgets('TextButton onPressed and onLongPress callbacks are distinctly recognized', (WidgetTester tester) async {
-    bool didPressButton = false;
-    bool didLongPressButton = false;
+    var didPressButton = false;
+    var didLongPressButton = false;
 
     await tester.pumpWidget(
       Directionality(
@@ -910,9 +910,9 @@ void main() {
 
   testWidgets("TextButton response doesn't hover when disabled", (WidgetTester tester) async {
     FocusManager.instance.highlightStrategy = FocusHighlightStrategy.alwaysTouch;
-    final FocusNode focusNode = FocusNode(debugLabel: 'TextButton Focus');
+    final focusNode = FocusNode(debugLabel: 'TextButton Focus');
     final GlobalKey childKey = GlobalKey();
-    bool hovering = false;
+    var hovering = false;
     await tester.pumpWidget(
       Directionality(
         textDirection: TextDirection.ltr,
@@ -961,7 +961,7 @@ void main() {
   });
 
   testWidgets('disabled and hovered TextButton responds to mouse-exit', (WidgetTester tester) async {
-    int onHoverCount = 0;
+    var onHoverCount = 0;
     late bool hover;
 
     Widget buildFrame({ required bool enabled }) {
@@ -1023,8 +1023,8 @@ void main() {
   });
 
   testWidgets('Can set TextButton focus and Can set unFocus.', (WidgetTester tester) async {
-    final FocusNode node = FocusNode(debugLabel: 'TextButton Focus');
-    bool gotFocus = false;
+    final node = FocusNode(debugLabel: 'TextButton Focus');
+    var gotFocus = false;
     await tester.pumpWidget(
       Directionality(
         textDirection: TextDirection.ltr,
@@ -1054,8 +1054,8 @@ void main() {
   });
 
   testWidgets('When TextButton disable, Can not set TextButton focus.', (WidgetTester tester) async {
-    final FocusNode node = FocusNode(debugLabel: 'TextButton Focus');
-    bool gotFocus = false;
+    final node = FocusNode(debugLabel: 'TextButton Focus');
+    var gotFocus = false;
     await tester.pumpWidget(
       Directionality(
         textDirection: TextDirection.ltr,
@@ -1079,8 +1079,8 @@ void main() {
   });
 
   testWidgets('TextButton responds to density changes.', (WidgetTester tester) async {
-    const Key key = Key('test');
-    const Key childKey = Key('test child');
+    const key = Key('test');
+    const childKey = Key('test child');
 
     Future<void> buildTest(VisualDensity visualDensity, { bool useText = false }) async {
       return tester.pumpWidget(
@@ -1144,16 +1144,16 @@ void main() {
   });
 
   group('Default TextButton padding for textScaleFactor, textDirection', () {
-    const ValueKey<String> buttonKey = ValueKey<String>('button');
-    const ValueKey<String> labelKey = ValueKey<String>('label');
-    const ValueKey<String> iconKey = ValueKey<String>('icon');
+    const buttonKey = ValueKey<String>('button');
+    const labelKey = ValueKey<String>('label');
+    const iconKey = ValueKey<String>('icon');
 
-    const List<double> textScaleFactorOptions = <double>[0.5, 1.0, 1.25, 1.5, 2.0, 2.5, 3.0, 4.0];
-    const List<TextDirection> textDirectionOptions = <TextDirection>[TextDirection.ltr, TextDirection.rtl];
-    const List<Widget?> iconOptions = <Widget?>[null, Icon(Icons.add, size: 18, key: iconKey)];
+    const textScaleFactorOptions = <double>[0.5, 1.0, 1.25, 1.5, 2.0, 2.5, 3.0, 4.0];
+    const textDirectionOptions = <TextDirection>[TextDirection.ltr, TextDirection.rtl];
+    const iconOptions = <Widget?>[null, Icon(Icons.add, size: 18, key: iconKey)];
 
     // Expected values for each textScaleFactor.
-    final Map<double, double> paddingVertical = <double, double>{
+    final paddingVertical = <double, double>{
       0.5: 8,
       1: 8,
       1.25: 6,
@@ -1163,7 +1163,7 @@ void main() {
       3: 0,
       4: 0,
     };
-    final Map<double, double> paddingWithIconGap = <double, double>{
+    final paddingWithIconGap = <double, double>{
       0.5: 8,
       1: 8,
       1.25: 7,
@@ -1173,7 +1173,7 @@ void main() {
       3: 4,
       4: 4,
     };
-    final Map<double, double> textPaddingWithoutIconHorizontal = <double, double>{
+    final textPaddingWithoutIconHorizontal = <double, double>{
       0.5: 8,
       1: 8,
       1.25: 8,
@@ -1183,7 +1183,7 @@ void main() {
       3: 4,
       4: 4,
     };
-    final Map<double, double> textPaddingWithIconHorizontal = <double, double>{
+    final textPaddingWithIconHorizontal = <double, double>{
       0.5: 8,
       1: 8,
       1.25: 7,
@@ -1210,9 +1210,9 @@ void main() {
       );
     }
 
-    for (final double textScaleFactor in textScaleFactorOptions) {
-      for (final TextDirection textDirection in textDirectionOptions) {
-        for (final Widget? icon in iconOptions) {
+    for (final textScaleFactor in textScaleFactorOptions) {
+      for (final textDirection in textDirectionOptions) {
+        for (final icon in iconOptions) {
           final String testName = <String>[
             'TextButton, text scale $textScaleFactor',
             if (icon != null)
@@ -1268,7 +1268,7 @@ void main() {
               ),
             );
             expect(Directionality.of(paddingElement), textDirection);
-            final Padding paddingWidget = paddingElement.widget as Padding;
+            final paddingWidget = paddingElement.widget as Padding;
 
             // Compute expected padding, and check.
 
@@ -1278,7 +1278,7 @@ void main() {
             final double expectedPaddingStart = icon != null
               ? textPaddingWithIconHorizontal[textScaleFactor]!
               : textPaddingWithoutIconHorizontal[textScaleFactor]!;
-            final double expectedPaddingEnd = expectedPaddingStart;
+            final expectedPaddingEnd = expectedPaddingStart;
 
             final EdgeInsets expectedPadding = EdgeInsetsDirectional.fromSTEB(
               expectedPaddingStart,
@@ -1559,7 +1559,7 @@ void main() {
   });
 
   testWidgets('TextButton uses InkSparkle only for Android non-web when useMaterial3 is true', (WidgetTester tester) async {
-    final ThemeData theme = ThemeData(useMaterial3: true);
+    final theme = ThemeData(useMaterial3: true);
 
     await tester.pumpWidget(
       MaterialApp(
@@ -1586,7 +1586,7 @@ void main() {
   }, variant: TargetPlatformVariant.all());
 
   testWidgets('TextButton uses InkRipple when useMaterial3 is false', (WidgetTester tester) async {
-    final ThemeData theme = ThemeData(useMaterial3: false);
+    final theme = ThemeData(useMaterial3: false);
 
     await tester.pumpWidget(
       MaterialApp(
@@ -1863,11 +1863,11 @@ void main() {
   });
 
   Future<void> testStatesController(Widget? icon, WidgetTester tester) async {
-    int count = 0;
+    var count = 0;
     void valueChanged() {
       count += 1;
     }
-    final MaterialStatesController controller = MaterialStatesController();
+    final controller = MaterialStatesController();
     addTearDown(controller.dispose);
     controller.addListener(valueChanged);
 
@@ -1978,11 +1978,11 @@ void main() {
   });
 
   testWidgets('Disabled TextButton statesController', (WidgetTester tester) async {
-    int count = 0;
+    var count = 0;
     void valueChanged() {
       count += 1;
     }
-    final MaterialStatesController controller = MaterialStatesController();
+    final controller = MaterialStatesController();
     addTearDown(controller.dispose);
     controller.addListener(valueChanged);
 
@@ -2003,8 +2003,8 @@ void main() {
 
   testWidgets('icon color can be different from the text color', (WidgetTester tester) async {
     final Key iconButtonKey = UniqueKey();
-    const ColorScheme colorScheme = ColorScheme.light();
-    final ThemeData theme = ThemeData.from(colorScheme: colorScheme);
+    const colorScheme = ColorScheme.light();
+    final theme = ThemeData.from(colorScheme: colorScheme);
     await tester.pumpWidget(
       MaterialApp(
         theme: theme,
@@ -2076,8 +2076,8 @@ void main() {
   });
 
   testWidgets('TextButton backgroundBuilder and foregroundBuilder', (WidgetTester tester) async {
-    const Color backgroundColor = Color(0xFF000011);
-    const Color foregroundColor = Color(0xFF000022);
+    const backgroundColor = Color(0xFF000011);
+    const foregroundColor = Color(0xFF000022);
 
     await tester.pumpWidget(
       Directionality(
@@ -2133,8 +2133,8 @@ void main() {
   });
 
   testWidgets('TextButton backgroundBuilder drops button child and foregroundBuilder return value', (WidgetTester tester) async {
-    const Color backgroundColor = Color(0xFF000011);
-    const Color foregroundColor = Color(0xFF000022);
+    const backgroundColor = Color(0xFF000011);
+    const foregroundColor = Color(0xFF000022);
 
     await tester.pumpWidget(
       Directionality(
@@ -2172,7 +2172,7 @@ void main() {
   });
 
   testWidgets('TextButton foregroundBuilder drops button child', (WidgetTester tester) async {
-    const Color foregroundColor = Color(0xFF000022);
+    const foregroundColor = Color(0xFF000022);
 
     await tester.pumpWidget(
       Directionality(
@@ -2203,9 +2203,9 @@ void main() {
   });
 
   testWidgets('TextButton foreground and background builders are applied to the correct states', (WidgetTester tester) async {
-    Set<MaterialState> foregroundStates = <MaterialState>{};
-    Set<MaterialState> backgroundStates = <MaterialState>{};
-    final FocusNode focusNode = FocusNode();
+    var foregroundStates = <MaterialState>{};
+    var backgroundStates = <MaterialState>{};
+    final focusNode = FocusNode();
 
     await tester.pumpWidget(
       MaterialApp(
@@ -2235,9 +2235,9 @@ void main() {
     expect(backgroundStates.isEmpty, isTrue);
     expect(foregroundStates.isEmpty, isTrue);
 
-    const Set<MaterialState> focusedStates = <MaterialState>{MaterialState.focused};
-    const Set<MaterialState> focusedHoveredStates = <MaterialState>{MaterialState.focused, MaterialState.hovered};
-    const Set<MaterialState> focusedHoveredPressedStates = <MaterialState>{MaterialState.focused, MaterialState.hovered, MaterialState.pressed};
+    const focusedStates = <MaterialState>{MaterialState.focused};
+    const focusedHoveredStates = <MaterialState>{MaterialState.focused, MaterialState.hovered};
+    const focusedHoveredPressedStates = <MaterialState>{MaterialState.focused, MaterialState.hovered, MaterialState.pressed};
 
     bool sameStates(Set<MaterialState> expectedValue, Set<MaterialState> actualValue) {
       return expectedValue.difference(actualValue).isEmpty && actualValue.difference(expectedValue).isEmpty;
@@ -2273,7 +2273,7 @@ void main() {
   testWidgets('TextButton styleFrom backgroundColor special case', (WidgetTester tester) async {
     // Regression test for an internal Google issue: b/323399158
 
-    const Color backgroundColor = Color(0xFF000022);
+    const backgroundColor = Color(0xFF000022);
 
     Widget buildFrame({ VoidCallback? onPressed }) {
       return Directionality(
@@ -2412,10 +2412,10 @@ void main() {
   });
 
   testWidgets('treats a hovering stylus like a mouse', (WidgetTester tester) async {
-    final FocusNode focusNode = FocusNode();
+    final focusNode = FocusNode();
     addTearDown(focusNode.dispose);
-    final ThemeData theme = ThemeData(useMaterial3: true);
-    bool hasBeenHovered = false;
+    final theme = ThemeData(useMaterial3: true);
+    var hasBeenHovered = false;
 
     await tester.pumpWidget(
       MaterialApp(

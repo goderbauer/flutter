@@ -922,7 +922,7 @@ void _drawImageScaledAndCentered(PaintingContext context, ui.Image image, double
   if (scale <= 0.0 || opacity <= 0.0) {
     return;
   }
-  final Paint paint = Paint()
+  final paint = Paint()
     ..filterQuality = ui.FilterQuality.medium
     ..color = Color.fromRGBO(0, 0, 0, opacity);
   final double logicalWidth = image.width / pixelRatio;
@@ -931,7 +931,7 @@ void _drawImageScaledAndCentered(PaintingContext context, ui.Image image, double
   final double scaledLogicalHeight = logicalHeight * scale;
   final double left = (logicalWidth - scaledLogicalWidth) / 2;
   final double top = (logicalHeight - scaledLogicalHeight) / 2;
-  final Rect dst = Rect.fromLTWH(left, top, scaledLogicalWidth, scaledLogicalHeight);
+  final dst = Rect.fromLTWH(left, top, scaledLogicalWidth, scaledLogicalHeight);
   context.canvas.drawImageRect(image, Rect.fromLTWH(0, 0, image.width.toDouble(), image.height.toDouble()), dst, paint);
 }
 
@@ -1007,7 +1007,7 @@ class _ZoomEnterTransitionPainter extends SnapshotPainter {
   final LayerHandle<TransformLayer> _transformHandler = LayerHandle<TransformLayer>();
 
   void _drawScrim(PaintingContext context, Offset offset, Size size) {
-    double scrimOpacity = 0.0;
+    var scrimOpacity = 0.0;
     // The transition's scrim opacity only increases on the forward transition.
     // In the reverse transition, the opacity should always be 0.0.
     //

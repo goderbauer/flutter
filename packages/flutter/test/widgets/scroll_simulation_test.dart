@@ -10,7 +10,7 @@ import 'package:flutter_test/flutter_test.dart';
 void main() {
   test('ClampingScrollSimulation has a stable initial conditions', () {
     void checkInitialConditions(double position, double velocity) {
-      final ClampingScrollSimulation simulation = ClampingScrollSimulation(position: position, velocity: velocity);
+      final simulation = ClampingScrollSimulation(position: position, velocity: velocity);
       expect(simulation.x(0.0), moreOrLessEquals(position));
       expect(simulation.dx(0.0), moreOrLessEquals(velocity));
     }
@@ -28,9 +28,9 @@ void main() {
 
   test('ClampingScrollSimulation only decelerates, never speeds up', () {
     // Regression test for https://github.com/flutter/flutter/issues/113424
-    final ClampingScrollSimulation simulation =
+    final simulation =
         ClampingScrollSimulation(position: 0, velocity: 8000.0);
-    double time = 0.0;
+    var time = 0.0;
     double velocity = simulation.dx(time);
     while (!simulation.isDone(time)) {
       expect(time, lessThan(3.0));
@@ -43,12 +43,12 @@ void main() {
 
   test('ClampingScrollSimulation reaches a smooth stop: velocity is continuous and goes to zero', () {
     // Regression test for https://github.com/flutter/flutter/issues/113424
-    const double initialVelocity = 8000.0;
-    const double maxDeceleration = 5130.0; // -acceleration(initialVelocity), from formula below
-    final ClampingScrollSimulation simulation =
+    const initialVelocity = 8000.0;
+    const maxDeceleration = 5130.0; // -acceleration(initialVelocity), from formula below
+    final simulation =
         ClampingScrollSimulation(position: 0, velocity: initialVelocity);
 
-    double time = 0.0;
+    var time = 0.0;
     double velocity = simulation.dx(time);
     const double delta = 1 / 60;
     do {
@@ -64,15 +64,15 @@ void main() {
   test('ClampingScrollSimulation is ballistic', () {
     // Regression test for https://github.com/flutter/flutter/issues/120338
     const double delta = 1 / 90;
-    final ClampingScrollSimulation undisturbed =
+    final undisturbed =
         ClampingScrollSimulation(position: 0, velocity: 8000.0);
 
-    double time = 0.0;
-    ClampingScrollSimulation restarted = undisturbed;
-    final List<double> xsRestarted = <double>[];
-    final List<double> xsUndisturbed = <double>[];
-    final List<double> dxsRestarted = <double>[];
-    final List<double> dxsUndisturbed = <double>[];
+    var time = 0.0;
+    var restarted = undisturbed;
+    final xsRestarted = <double>[];
+    final xsUndisturbed = <double>[];
+    final dxsRestarted = <double>[];
+    final dxsUndisturbed = <double>[];
     do {
       expect(time, lessThan(4.0));
       time += delta;
@@ -90,7 +90,7 @@ void main() {
     expect(xsRestarted.last, moreOrLessEquals(xsUndisturbed.last));
 
     // The whole trajectories along the way should match too.
-    for (int i = 0; i < xsRestarted.length; i++) {
+    for (var i = 0; i < xsRestarted.length; i++) {
       expect(xsRestarted[i],  moreOrLessEquals(xsUndisturbed[i]));
       expect(dxsRestarted[i], moreOrLessEquals(dxsUndisturbed[i]));
     }
@@ -132,9 +132,9 @@ void main() {
     }
 
     void checkAcceleration(double position, double velocity) {
-      final ClampingScrollSimulation simulation =
+      final simulation =
           ClampingScrollSimulation(position: position, velocity: velocity);
-      double time = 0.0;
+      var time = 0.0;
       const double delta = 1/60;
       for (; time < 2.0; time += delta) {
         final double difference = simulation.dx(time + delta) - simulation.dx(time);

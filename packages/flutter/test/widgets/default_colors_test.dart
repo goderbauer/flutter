@@ -69,9 +69,9 @@ void main() {
 
   testWidgets('Default text selection color', (WidgetTester tester) async {
     final GlobalKey key = GlobalKey();
-    final FocusNode focusNode = FocusNode();
+    final focusNode = FocusNode();
     addTearDown(focusNode.dispose);
-    final OverlayEntry overlayEntry = OverlayEntry(
+    final overlayEntry = OverlayEntry(
       builder: (BuildContext context) => SelectableRegion(
         focusNode: focusNode,
         selectionControls: emptyTextSelectionControls,
@@ -138,8 +138,8 @@ Future<void> _expectColors(WidgetTester tester, Finder finder, Set<Color> allowe
   final ui.Image image = (await binding.runAsync<ui.Image>(() => captureImage(finder.evaluate().single)))!;
   addTearDown(image.dispose);
   final ByteData bytes = (await binding.runAsync<ByteData?>(() => image.toByteData(format: ui.ImageByteFormat.rawStraightRgba)))!;
-  final Set<int> actualColorValues = <int>{};
-  for (int offset = 0; offset < bytes.lengthInBytes; offset += 4) {
+  final actualColorValues = <int>{};
+  for (var offset = 0; offset < bytes.lengthInBytes; offset += 4) {
     actualColorValues.add((bytes.getUint8(offset + 3) << 24) +
                           (bytes.getUint8(offset + 0) << 16) +
                           (bytes.getUint8(offset + 1) << 8) +

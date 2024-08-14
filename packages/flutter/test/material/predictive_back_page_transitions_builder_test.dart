@@ -24,7 +24,7 @@ void main() {
   }
 
   testWidgets('PredictiveBackPageTransitionsBuilder supports predictive back on Android', (WidgetTester tester) async {
-    final Map<String, WidgetBuilder> routes = <String, WidgetBuilder>{
+    final routes = <String, WidgetBuilder>{
       '/': (BuildContext context) => Material(
         child: TextButton(
           child: const Text('push'),
@@ -136,7 +136,7 @@ void main() {
   }, variant: TargetPlatformVariant.all());
 
   testWidgets('PredictiveBackPageTransitionsBuilder supports canceling a predictive back gesture', (WidgetTester tester) async {
-    final Map<String, WidgetBuilder> routes = <String, WidgetBuilder>{
+    final routes = <String, WidgetBuilder>{
       '/': (BuildContext context) => Material(
         child: TextButton(
           child: const Text('push'),
@@ -247,9 +247,9 @@ void main() {
   }, variant: TargetPlatformVariant.all());
 
   testWidgets('if multiple PredictiveBackPageTransitionBuilder observers, only one gets called for a given back gesture', (WidgetTester tester) async {
-    bool includingNestedNavigator = false;
+    var includingNestedNavigator = false;
     late StateSetter setState;
-    final Map<String, WidgetBuilder> routes = <String, WidgetBuilder>{
+    final routes = <String, WidgetBuilder>{
       '/': (BuildContext context) => Material(
         child: TextButton(
           child: const Text('push'),

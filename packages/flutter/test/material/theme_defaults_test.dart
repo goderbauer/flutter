@@ -9,13 +9,13 @@ const Duration defaultButtonDuration = Duration(milliseconds: 200);
 
 void main() {
   group('FloatingActionButton', () {
-    const BoxConstraints defaultFABConstraints = BoxConstraints.tightFor(width: 56.0, height: 56.0);
+    const defaultFABConstraints = BoxConstraints.tightFor(width: 56.0, height: 56.0);
     const ShapeBorder defaultFABShape = CircleBorder();
     const ShapeBorder defaultFABShapeM3 = RoundedRectangleBorder(borderRadius: BorderRadius.all(Radius.circular(16.0)));
     const EdgeInsets defaultFABPadding = EdgeInsets.zero;
 
     testWidgets('Material2 - theme: ThemeData.light(), enabled: true', (WidgetTester tester) async {
-      final ThemeData theme = ThemeData.light(useMaterial3: false);
+      final theme = ThemeData.light(useMaterial3: false);
       await tester.pumpWidget(
         MaterialApp(
           theme: theme,
@@ -43,7 +43,7 @@ void main() {
     });
 
     testWidgets('Material3 - theme: ThemeData.light(), enabled: true', (WidgetTester tester) async {
-      final ThemeData theme = ThemeData.light(useMaterial3: true);
+      final theme = ThemeData.light(useMaterial3: true);
       await tester.pumpWidget(
         MaterialApp(
           theme: theme,
@@ -71,7 +71,7 @@ void main() {
     });
 
     testWidgets('Material2 - theme: ThemeData.light(), enabled: false', (WidgetTester tester) async {
-      final ThemeData theme = ThemeData.light(useMaterial3: false);
+      final theme = ThemeData.light(useMaterial3: false);
       await tester.pumpWidget(
         MaterialApp(
           theme: theme,
@@ -101,7 +101,7 @@ void main() {
     });
 
     testWidgets('Material3 - theme: ThemeData.light(), enabled: false', (WidgetTester tester) async {
-      final ThemeData theme = ThemeData.light(useMaterial3: true);
+      final theme = ThemeData.light(useMaterial3: true);
       await tester.pumpWidget(
         MaterialApp(
           theme: theme,

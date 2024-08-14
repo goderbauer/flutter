@@ -404,7 +404,7 @@ class ImageCache {
     // A multi-frame provider may call the listener more than once. We need do make
     // sure that some cleanup works won't run multiple times, such as finishing the
     // tracing task or removing the listeners
-    bool listenedOnce = false;
+    var listenedOnce = false;
 
     // We shouldn't use the _pendingImages map if the cache is disabled, but we
     // will have to listen to the image at least once so we don't leak it in
@@ -417,7 +417,7 @@ class ImageCache {
         sizeBytes = info.sizeBytes;
         info.dispose();
       }
-      final _CachedImage image = _CachedImage(
+      final image = _CachedImage(
         result!,
         sizeBytes: sizeBytes,
       );
@@ -449,7 +449,7 @@ class ImageCache {
       listenedOnce = true;
     }
 
-    final ImageStreamListener streamListener = ImageStreamListener(listener);
+    final streamListener = ImageStreamListener(listener);
     pendingImage = _PendingImage(result, streamListener);
     if (trackPendingImage) {
       _pendingImages[key] = pendingImage;
@@ -505,7 +505,7 @@ class ImageCache {
   // Remove images from the cache until both the length and bytes are below
   // maximum, or the cache is empty.
   void _checkCacheSize(TimelineTask? timelineTask) {
-    final Map<String, dynamic> finishArgs = <String, dynamic>{};
+    final finishArgs = <String, dynamic>{};
     if (!kReleaseMode) {
       timelineTask!.start('checkCacheSize');
       finishArgs['evictedKeys'] = <String>[];

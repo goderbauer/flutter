@@ -47,7 +47,7 @@ void main() {
   testWidgets('Chip caches baseline', (WidgetTester tester) async {
     final bool checkIntrinsicSizes = debugCheckIntrinsicSizes;
     debugCheckIntrinsicSizes = false;
-    int calls = 0;
+    var calls = 0;
     await tester.pumpWidget(
       MaterialApp(
         home: Material(
@@ -76,7 +76,7 @@ void main() {
   testWidgets('ListTile caches baseline', (WidgetTester tester) async {
     final bool checkIntrinsicSizes = debugCheckIntrinsicSizes;
     debugCheckIntrinsicSizes = false;
-    int calls = 0;
+    var calls = 0;
     await tester.pumpWidget(
       MaterialApp(
         home: Material(

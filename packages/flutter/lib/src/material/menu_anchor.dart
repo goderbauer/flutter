@@ -475,7 +475,7 @@ class _MenuAnchorState extends State<MenuAnchor> {
   }
 
   _MenuAnchorState get _root {
-    _MenuAnchorState anchor = this;
+    var anchor = this;
     while (anchor._parent != null) {
       anchor = anchor._parent!;
     }
@@ -583,7 +583,7 @@ class _MenuAnchorState extends State<MenuAnchor> {
 
   void _closeChildren({bool inDispose = false}) {
     assert(_debugMenuInfo('Closing children of $this${inDispose ? ' (dispose)' : ''}'));
-    for (final _MenuAnchorState child in List<_MenuAnchorState>.from(_anchorChildren)) {
+    for (final child in List<_MenuAnchorState>.from(_anchorChildren)) {
       child._close(inDispose: inDispose);
     }
   }
@@ -2301,7 +2301,7 @@ class _LocalizedShortcutLabeler {
     }
     if (serialized.trigger != null) {
       final LogicalKeyboardKey trigger = serialized.trigger!;
-      final List<String> modifiers = <String>[
+      final modifiers = <String>[
         if (_usesSymbolicModifiers) ...<String>[
           // macOS/iOS platform convention uses this ordering, with ⌘ always last.
           if (serialized.control!) _getModifierLabel(LogicalKeyboardKey.control, localizations),
@@ -2337,7 +2337,7 @@ class _LocalizedShortcutLabeler {
         if (shortcutTrigger != null && shortcutTrigger.isNotEmpty) shortcutTrigger,
       ].join(keySeparator);
     } else if (serialized.character != null) {
-      final List<String> modifiers = <String>[
+      final modifiers = <String>[
         // Character based shortcuts cannot check shifted keys.
         if (_usesSymbolicModifiers) ...<String>[
           // macOS/iOS platform convention uses this ordering, with ⌘ always last.
@@ -2817,15 +2817,15 @@ class MenuAcceleratorLabel extends StatefulWidget {
   ///
   /// {@macro flutter.material.menu_anchor.menu_accelerator_label.label}
   static String stripAcceleratorMarkers(String label, {void Function(int index)? setIndex}) {
-    int quotedAmpersands = 0;
-    final StringBuffer displayLabel = StringBuffer();
+    var quotedAmpersands = 0;
+    final displayLabel = StringBuffer();
     int acceleratorIndex = -1;
     // Use characters so that we don't split up surrogate pairs and interpret
     // them incorrectly.
     final Characters labelChars = label.characters;
     final Characters ampersand = '&'.characters;
-    bool lastWasAmpersand = false;
-    for (int i = 0; i < labelChars.length; i += 1) {
+    var lastWasAmpersand = false;
+    for (var i = 0; i < labelChars.length; i += 1) {
       // Stop looking one before the end, since a single ampersand at the end is
       // just treated as a quoted ampersand.
       final Characters character = labelChars.characterAt(i);
@@ -3552,11 +3552,11 @@ class _Submenu extends StatelessWidget {
         .add(EdgeInsets.fromLTRB(dx, dy, dx, dy))
         .clamp(EdgeInsets.zero, EdgeInsetsGeometry.infinity);
     final BuildContext anchorContext = anchor._anchorKey.currentContext!;
-    final RenderBox overlay = Overlay.of(anchorContext).context.findRenderObject()! as RenderBox;
-    final RenderBox anchorBox = anchorContext.findRenderObject()! as RenderBox;
+    final overlay = Overlay.of(anchorContext).context.findRenderObject()! as RenderBox;
+    final anchorBox = anchorContext.findRenderObject()! as RenderBox;
     final Offset upperLeft = anchorBox.localToGlobal(Offset(dx, -dy), ancestor: overlay);
     final Offset bottomRight = anchorBox.localToGlobal(anchorBox.paintBounds.bottomRight, ancestor: overlay);
-    final Rect anchorRect = Rect.fromPoints(upperLeft, bottomRight);
+    final anchorRect = Rect.fromPoints(upperLeft, bottomRight);
 
     return Theme(
       data: Theme.of(context).copyWith(

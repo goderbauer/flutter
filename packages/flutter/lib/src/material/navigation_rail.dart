@@ -626,7 +626,7 @@ class _RailDestinationState extends State<_RailDestination> {
     final bool material3 = theme.useMaterial3;
     final EdgeInsets destinationPadding = (widget.padding ?? EdgeInsets.zero).resolve(textDirection);
     Offset indicatorOffset;
-    bool applyXOffset = false;
+    var applyXOffset = false;
 
     final Widget themedIcon = IconTheme(
       data: widget.disabled
@@ -729,7 +729,7 @@ class _RailDestinationState extends State<_RailDestination> {
       case NavigationRailLabelType.selected:
         final double appearingAnimationValue = 1 - _positionAnimation.value;
         final double verticalPadding = lerpDouble(_verticalDestinationPaddingNoLabel, _verticalDestinationPaddingWithLabel, appearingAnimationValue)!;
-        final Interval interval = widget.selected ? const Interval(0.25, 0.75) : const Interval(0.75, 1.0);
+        final interval = widget.selected ? const Interval(0.25, 0.75) : const Interval(0.75, 1.0);
         final Animation<double> labelFadeAnimation = widget.destinationAnimation.drive(CurveTween(curve: interval));
         final double minHeight = material3 ? 0 : widget.minWidth;
         final Widget topSpacing = SizedBox(height: material3 ? 0 : verticalPadding);

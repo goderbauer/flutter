@@ -213,7 +213,7 @@ class ClampingScrollSimulation extends Simulation {
     final double referenceVelocity = friction * _physicalCoeff / _kInflexion;
 
     // This is the value getSplineFlingDuration() would return, but in seconds.
-    final double androidDuration =
+    final androidDuration =
         math.pow(velocity.abs() / referenceVelocity,
                  1 / (_kDecelerationRate - 1.0)) as double;
 

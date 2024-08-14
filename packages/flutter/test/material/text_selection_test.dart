@@ -17,7 +17,7 @@ import '../widgets/editable_text_utils.dart' show findRenderEditable, globalize,
 
 void main() {
   TestWidgetsFlutterBinding.ensureInitialized();
-  final MockClipboard mockClipboard = MockClipboard();
+  final mockClipboard = MockClipboard();
 
   setUp(() async {
     TestDefaultBinaryMessengerBinding.instance.defaultBinaryMessenger
@@ -43,10 +43,10 @@ void main() {
       String? text,
       TextSelection? selection,
     }) {
-      final TextEditingController controller = TextEditingController(text: text)
+      final controller = TextEditingController(text: text)
         ..selection = selection ?? const TextSelection.collapsed(offset: -1);
       addTearDown(controller.dispose);
-      final FocusNode focusNode = FocusNode();
+      final focusNode = FocusNode();
       addTearDown(focusNode.dispose);
 
       return MaterialApp(
@@ -99,7 +99,7 @@ void main() {
 
   group('Text selection menu overflow (Android)', () {
     testWidgets('All menu items show when they fit.', (WidgetTester tester) async {
-      final TextEditingController controller = TextEditingController(text: 'abc def ghi');
+      final controller = TextEditingController(text: 'abc def ghi');
       addTearDown(controller.dispose);
       await tester.pumpWidget(MaterialApp(
         theme: ThemeData(platform: TargetPlatform.android),
@@ -166,7 +166,7 @@ void main() {
       tester.view.physicalSize = const Size(1000, 800);
       addTearDown(tester.view.reset);
 
-      final TextEditingController controller = TextEditingController(text: 'abc def ghi');
+      final controller = TextEditingController(text: 'abc def ghi');
       addTearDown(controller.dispose);
       await tester.pumpWidget(MaterialApp(
         theme: ThemeData(platform: TargetPlatform.android),
@@ -241,7 +241,7 @@ void main() {
       tester.view.physicalSize = const Size(800, 800);
       addTearDown(tester.view.reset);
 
-      final TextEditingController controller = TextEditingController(text: 'abc def ghi');
+      final controller = TextEditingController(text: 'abc def ghi');
       addTearDown(controller.dispose);
       await tester.pumpWidget(MaterialApp(
         theme: ThemeData(platform: TargetPlatform.android),
@@ -307,7 +307,7 @@ void main() {
       tester.view.physicalSize = const Size(1000, 800);
       addTearDown(tester.view.reset);
 
-      final TextEditingController controller = TextEditingController(text: 'abc def ghi');
+      final controller = TextEditingController(text: 'abc def ghi');
       addTearDown(controller.dispose);
       await tester.pumpWidget(MaterialApp(
         theme: ThemeData(platform: TargetPlatform.android),
@@ -382,7 +382,7 @@ void main() {
       tester.view.physicalSize = const Size(1000, 800);
       addTearDown(tester.view.reset);
 
-      final TextEditingController controller = TextEditingController(text: 'abc def ghi');
+      final controller = TextEditingController(text: 'abc def ghi');
       addTearDown(controller.dispose);
       await tester.pumpWidget(MaterialApp(
         theme: ThemeData(platform: TargetPlatform.android, useMaterial3: false),
@@ -492,7 +492,7 @@ void main() {
 
   group('menu position', () {
     testWidgets('When renders below a block of text, menu appears below bottom endpoint', (WidgetTester tester) async {
-      final TextEditingController controller = TextEditingController(text: 'abc\ndef\nghi\njkl\nmno\npqr');
+      final controller = TextEditingController(text: 'abc\ndef\nghi\njkl\nmno\npqr');
       addTearDown(controller.dispose);
       await tester.pumpWidget(MaterialApp(
         theme: ThemeData(platform: TargetPlatform.android),
@@ -567,7 +567,7 @@ void main() {
     testWidgets(
       'When selecting multiple lines over max lines',
       (WidgetTester tester) async {
-        final TextEditingController controller =
+        final controller =
             TextEditingController(text: 'abc\ndef\nghi\njkl\nmno\npqr');
         addTearDown(controller.dispose);
         await tester.pumpWidget(MaterialApp(
@@ -711,7 +711,7 @@ void main() {
   });
 
   testWidgets('Paste only appears when clipboard has contents', (WidgetTester tester) async {
-    final TextEditingController controller = TextEditingController(
+    final controller = TextEditingController(
       text: 'Atwater Peel Sherbrooke Bonaventure',
     );
     addTearDown(controller.dispose);
@@ -733,7 +733,7 @@ void main() {
     await Clipboard.setData(const ClipboardData(text: ''));
 
     // Double tap to select the first word.
-    const int index = 4;
+    const index = 4;
     await tester.tapAt(textOffsetToPosition(tester, index));
     await tester.pump(const Duration(milliseconds: 50));
     await tester.tapAt(textOffsetToPosition(tester, index));

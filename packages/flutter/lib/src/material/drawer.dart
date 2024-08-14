@@ -565,7 +565,7 @@ class DrawerControllerState extends State<DrawerController> with SingleTickerPro
   final GlobalKey _drawerKey = GlobalKey();
 
   double get _width {
-    final RenderBox? box = _drawerKey.currentContext?.findRenderObject() as RenderBox?;
+    final box = _drawerKey.currentContext?.findRenderObject() as RenderBox?;
     // return _kWidth if drawer not being shown currently
     return box?.size.width ?? _kWidth;
   }

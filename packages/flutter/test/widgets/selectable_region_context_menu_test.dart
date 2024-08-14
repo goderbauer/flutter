@@ -40,7 +40,7 @@ void main() {
     final String className = element!.className;
 
     expect(web.document.head!.children.iterable, isNotEmpty);
-    bool foundStyle = false;
+    var foundStyle = false;
     for (final web.Element? element in web.document.head!.children.iterable) {
       expect(element, isNotNull);
       if (element!.tagName != 'STYLE') {
@@ -58,9 +58,9 @@ void main() {
   });
 
   testWidgets('right click can trigger select word', (WidgetTester tester) async {
-    final FocusNode focusNode = FocusNode();
+    final focusNode = FocusNode();
     addTearDown(focusNode.dispose);
-    final UniqueKey spy = UniqueKey();
+    final spy = UniqueKey();
     await tester.pumpWidget(
         MaterialApp(
           home: SelectableRegion(

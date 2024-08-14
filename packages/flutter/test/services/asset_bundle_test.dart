@@ -56,7 +56,7 @@ void main() {
   TestWidgetsFlutterBinding.ensureInitialized();
 
   test('Caching asset bundle test', () async {
-    final TestAssetBundle bundle = TestAssetBundle();
+    final bundle = TestAssetBundle();
 
     final ByteData assetData = await bundle.load('one');
     expect(assetData.getInt8(0), equals(49));
@@ -79,7 +79,7 @@ void main() {
 
   group('CachingAssetBundle caching behavior', () {
     test('caches results for loadString, loadStructuredData, and loadBinaryStructuredData', () async {
-      final TestAssetBundle bundle = TestAssetBundle();
+      final bundle = TestAssetBundle();
 
       final String firstLoadStringResult = await bundle.loadString('counter');
       final String secondLoadStringResult = await bundle.loadString('counter');
@@ -98,7 +98,7 @@ void main() {
     });
 
     test("clear clears all cached values'", () async {
-      final TestAssetBundle bundle = TestAssetBundle();
+      final bundle = TestAssetBundle();
 
       await bundle.loadString('counter');
       bundle.clear();
@@ -117,7 +117,7 @@ void main() {
     });
 
     test('evict evicts a particular key from the cache', () async {
-      final TestAssetBundle bundle = TestAssetBundle();
+      final bundle = TestAssetBundle();
 
       await bundle.loadString('counter');
       bundle.evict('counter');
@@ -136,7 +136,7 @@ void main() {
     });
 
     test('for a given key, subsequent loadStructuredData calls are synchronous after the first call resolves', () async {
-      final TestAssetBundle bundle = TestAssetBundle();
+      final bundle = TestAssetBundle();
       await bundle.loadStructuredData('one', (String data) => SynchronousFuture<int>(1));
       final Future<int> data = bundle.loadStructuredData('one', (String data) => SynchronousFuture<int>(2));
       expect(data, isA<SynchronousFuture<int>>());
@@ -144,7 +144,7 @@ void main() {
     });
 
     test('for a given key, subsequent loadStructuredBinaryData calls are synchronous after the first call resolves', () async {
-      final TestAssetBundle bundle = TestAssetBundle();
+      final bundle = TestAssetBundle();
       await bundle.loadStructuredBinaryData('one', (ByteData data) => 1);
       final Future<int> data = bundle.loadStructuredBinaryData('one', (ByteData data) => 2);
       expect(data, isA<SynchronousFuture<int>>());
@@ -152,7 +152,7 @@ void main() {
     });
 
     testWidgets('loadStructuredData handles exceptions correctly', (WidgetTester tester) async {
-      final TestAssetBundle bundle = TestAssetBundle();
+      final bundle = TestAssetBundle();
       try {
         await bundle.loadStructuredData('AssetManifest.json', (String value) => Future<String>.error('what do they say?'));
         fail('expected exception did not happen');
@@ -162,7 +162,7 @@ void main() {
     });
 
     testWidgets('loadStructuredBinaryData handles exceptions correctly', (WidgetTester tester) async {
-      final TestAssetBundle bundle = TestAssetBundle();
+      final bundle = TestAssetBundle();
       try {
         await bundle.loadStructuredBinaryData('AssetManifest.bin', (ByteData value) => Future<String>.error('buy more crystals'));
         fail('expected exception did not happen');
@@ -174,15 +174,15 @@ void main() {
 
   test('AssetImage.obtainKey succeeds with ImageConfiguration.empty', () async {
     // This is a regression test for https://github.com/flutter/flutter/issues/12392
-    final AssetImage assetImage = AssetImage('one', bundle: TestAssetBundle());
+    final assetImage = AssetImage('one', bundle: TestAssetBundle());
     final AssetBundleImageKey key = await assetImage.obtainKey(ImageConfiguration.empty);
     expect(key.name, 'one');
     expect(key.scale, 1.0);
   });
 
   test('NetworkAssetBundle control test', () async {
-    final Uri uri = Uri.http('example.org', '/path');
-    final NetworkAssetBundle bundle = NetworkAssetBundle(uri);
+    final uri = Uri.http('example.org', '/path');
+    final bundle = NetworkAssetBundle(uri);
     late FlutterError error;
     try {
       await bundle.load('key');
@@ -201,8 +201,8 @@ void main() {
   }, skip: isBrowser); // https://github.com/flutter/flutter/issues/39998
 
   test('toString works as intended', () {
-    final Uri uri = Uri.http('example.org', '/path');
-    final NetworkAssetBundle bundle = NetworkAssetBundle(uri);
+    final uri = Uri.http('example.org', '/path');
+    final bundle = NetworkAssetBundle(uri);
 
     expect(bundle.toString(), 'NetworkAssetBundle#${shortHash(bundle)}($uri)');
   }, skip: isBrowser); // https://github.com/flutter/flutter/issues/39998
@@ -224,7 +224,7 @@ void main() {
   }, skip: isBrowser); // https://github.com/flutter/flutter/issues/56314
 
   test('loadStructuredBinaryData correctly loads ByteData', () async {
-    final TestAssetBundle bundle = TestAssetBundle();
+    final bundle = TestAssetBundle();
     final Map<Object?, Object?> assetManifest =
       await bundle.loadStructuredBinaryData('AssetManifest.bin', (ByteData data) => const StandardMessageCodec().decodeMessage(data) as Map<Object?, Object?>);
     expect(assetManifest.keys.toList(), equals(<String>['one']));

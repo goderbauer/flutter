@@ -827,7 +827,7 @@ class DefaultMaterialLocalizations implements MaterialLocalizations {
       }
       return 28;
     }
-    const List<int> daysInMonth = <int>[31, -1, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31];
+    const daysInMonth = <int>[31, -1, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31];
     return daysInMonth[month - 1];
   }
 
@@ -1038,9 +1038,9 @@ class DefaultMaterialLocalizations implements MaterialLocalizations {
     }
 
     final String digits = number.abs().toString();
-    final StringBuffer result = StringBuffer(number < 0 ? '-' : '');
+    final result = StringBuffer(number < 0 ? '-' : '');
     final int maxDigitIndex = digits.length - 1;
-    for (int i = 0; i <= maxDigitIndex; i += 1) {
+    for (var i = 0; i <= maxDigitIndex; i += 1) {
       result.write(digits[i]);
       if (i < maxDigitIndex && (maxDigitIndex - i) % 3 == 0) {
         result.write(',');
@@ -1059,7 +1059,7 @@ class DefaultMaterialLocalizations implements MaterialLocalizations {
     // - DateFormat operates on DateTime, which is sensitive to time eras and
     //   time zones, while here we want to format hour and minute within one day
     //   no matter what date the day falls on.
-    final StringBuffer buffer = StringBuffer();
+    final buffer = StringBuffer();
 
     // Add hour:minute.
     buffer

@@ -517,7 +517,7 @@ class _DiscreteKeyFrameSimulation extends Simulation {
     : assert(_keyFrames.isNotEmpty),
       assert(_keyFrames.last.time <= maxDuration),
       assert(() {
-        for (int i = 0; i < _keyFrames.length -1; i += 1) {
+        for (var i = 0; i < _keyFrames.length -1; i += 1) {
           if (_keyFrames[i].time > _keyFrames[i + 1].time) {
             return false;
           }
@@ -1983,7 +1983,7 @@ class EditableText extends StatefulWidget {
     required final VoidCallback? onShare,
     required final VoidCallback? onLiveTextInput,
   }) {
-    final List<ContextMenuButtonItem> resultButtonItem = <ContextMenuButtonItem>[];
+    final resultButtonItem = <ContextMenuButtonItem>[];
 
     // Configure button items with clipboard.
     if (onPaste == null || clipboardStatus != ClipboardStatus.unknown) {
@@ -2072,7 +2072,7 @@ class EditableText extends StatefulWidget {
       switch (defaultTargetPlatform) {
         case TargetPlatform.iOS:
         case TargetPlatform.macOS:
-          const Map<String, TextInputType> iOSKeyboardType = <String, TextInputType> {
+          const iOSKeyboardType = <String, TextInputType> {
             AutofillHints.addressCity : TextInputType.name,
             AutofillHints.addressCityAndState : TextInputType.name, // Autofill not working.
             AutofillHints.addressState : TextInputType.name,
@@ -2119,7 +2119,7 @@ class EditableText extends StatefulWidget {
       return TextInputType.multiline;
     }
 
-    const Map<String, TextInputType> inferKeyboardType = <String, TextInputType> {
+    const inferKeyboardType = <String, TextInputType> {
       AutofillHints.addressCity : TextInputType.streetAddress,
       AutofillHints.addressCityAndState : TextInputType.streetAddress,
       AutofillHints.addressState : TextInputType.streetAddress,
@@ -2707,9 +2707,9 @@ class EditableTextState extends State<EditableText> with AutomaticKeepAliveClien
     }
 
     final List<SuggestionSpan> suggestionSpans = spellCheckResults!.suggestionSpans;
-    int leftIndex = 0;
+    var leftIndex = 0;
     int rightIndex = suggestionSpans.length - 1;
-    int midIndex = 0;
+    var midIndex = 0;
 
     while (leftIndex <= rightIndex) {
       midIndex = ((leftIndex + rightIndex) / 2).floor();
@@ -2925,7 +2925,7 @@ class EditableTextState extends State<EditableText> with AutomaticKeepAliveClien
   }
 
   List<ContextMenuButtonItem> get _textProcessingActionButtonItems {
-    final List<ContextMenuButtonItem> buttonItems = <ContextMenuButtonItem>[];
+    final buttonItems = <ContextMenuButtonItem>[];
     final TextSelection selection = textEditingValue.selection;
     if (widget.obscureText || !selection.isValid || selection.isCollapsed) {
       return buttonItems;
@@ -3578,7 +3578,7 @@ class EditableTextState extends State<EditableText> with AutomaticKeepAliveClien
       // The caret is vertically centered within the line. Expand the caret's
       // height so that it spans the line because we're going to ensure that the
       // entire expanded caret is scrolled into view.
-      final Rect expandedRect = Rect.fromCenter(
+      final expandedRect = Rect.fromCenter(
         center: rect.center,
         width: rect.width,
         height: math.max(rect.height, renderEditable.preferredLineHeight),
@@ -3831,7 +3831,7 @@ class EditableTextState extends State<EditableText> with AutomaticKeepAliveClien
     final ui.FlutterView view = View.of(context);
     final double obscuredVertical = (view.padding.top + view.padding.bottom + view.viewInsets.bottom) / view.devicePixelRatio;
     final double obscuredHorizontal = (view.padding.left + view.padding.right) / view.devicePixelRatio;
-    final Size visibleScreenSize = Size(screenSize.width - obscuredHorizontal, screenSize.height - obscuredVertical);
+    final visibleScreenSize = Size(screenSize.width - obscuredHorizontal, screenSize.height - obscuredVertical);
     return Rect.fromLTWH(view.padding.left / view.devicePixelRatio, view.padding.top / view.devicePixelRatio, visibleScreenSize.width, visibleScreenSize.height);
   }
 
@@ -3920,7 +3920,7 @@ class EditableTextState extends State<EditableText> with AutomaticKeepAliveClien
 
   TextSelectionOverlay _createSelectionOverlay() {
     final EditableTextContextMenuBuilder? contextMenuBuilder = widget.contextMenuBuilder;
-    final TextSelectionOverlay selectionOverlay = TextSelectionOverlay(
+    final selectionOverlay = TextSelectionOverlay(
       clipboardStatus: clipboardStatus,
       context: context,
       value: _value,
@@ -4027,7 +4027,7 @@ class EditableTextState extends State<EditableText> with AutomaticKeepAliveClien
       _showCaretOnScreenScheduled = false;
       // Since we are in a post frame callback, check currentContext in case
       // RenderEditable has been disposed (in which case it will be null).
-      final RenderEditable? renderEditable =
+      final renderEditable =
           _editableKey.currentContext?.findRenderObject() as RenderEditable?;
       if (renderEditable == null
           || !(renderEditable.selection?.isValid ?? false)
@@ -4442,7 +4442,7 @@ class EditableTextState extends State<EditableText> with AutomaticKeepAliveClien
       (null, null)                         => MediaQuery.textScalerOf(context),
     };
 
-    final _ScribbleCacheKey newCacheKey = _ScribbleCacheKey(
+    final newCacheKey = _ScribbleCacheKey(
       inlineSpan: inlineSpan,
       textAlign: widget.textAlign,
       textDirection: _textDirection,
@@ -4462,12 +4462,12 @@ class EditableTextState extends State<EditableText> with AutomaticKeepAliveClien
     }
     _scribbleCacheKey = newCacheKey;
 
-    final List<SelectionRect> rects = <SelectionRect>[];
-    int graphemeStart = 0;
+    final rects = <SelectionRect>[];
+    var graphemeStart = 0;
     // Can't use _value.text here: the controller value could change between
     // frames.
     final String plainText = inlineSpan.toPlainText(includeSemanticsLabels: false);
-    final CharacterRange characterRange = CharacterRange(plainText);
+    final characterRange = CharacterRange(plainText);
     while (characterRange.moveNext()) {
       final int graphemeEnd = graphemeStart + characterRange.current.length;
       final List<TextBox> boxes = renderEditable.getBoxesForSelection(
@@ -4531,7 +4531,7 @@ class EditableTextState extends State<EditableText> with AutomaticKeepAliveClien
     if (selection == null || !selection.isValid) {
       return;
     }
-    final TextPosition currentTextPosition = TextPosition(offset: selection.start);
+    final currentTextPosition = TextPosition(offset: selection.start);
     final Rect caretRect = renderEditable.getLocalRectForCaret(currentTextPosition);
     _textInputConnection!.setCaretRect(caretRect);
   }
@@ -4927,7 +4927,7 @@ class EditableTextState extends State<EditableText> with AutomaticKeepAliveClien
     final String text = _value.text;
     final TextSelection selection = _value.selection;
     final bool atEnd = selection.baseOffset == text.length;
-    final CharacterRange transposing = CharacterRange.at(text, selection.baseOffset);
+    final transposing = CharacterRange.at(text, selection.baseOffset);
     if (atEnd) {
       transposing.moveBack(2);
     } else {
@@ -4997,7 +4997,7 @@ class EditableTextState extends State<EditableText> with AutomaticKeepAliveClien
       return;
     }
 
-    final ScrollableState? state = _scrollableKey.currentState as ScrollableState?;
+    final state = _scrollableKey.currentState as ScrollableState?;
     final double increment = ScrollAction.getDirectionalIncrement(state!, intent);
     final double destination = clampDouble(
       position.pixels + increment,
@@ -5021,7 +5021,7 @@ class EditableTextState extends State<EditableText> with AutomaticKeepAliveClien
     final Rect extentRect = renderEditable.getLocalRectForCaret(
       _value.selection.extent,
     );
-    final ScrollableState? state = _scrollableKey.currentState as ScrollableState?;
+    final state = _scrollableKey.currentState as ScrollableState?;
     final double increment = ScrollAction.getDirectionalIncrement(
       state!,
       ScrollIntent(
@@ -5034,7 +5034,7 @@ class EditableTextState extends State<EditableText> with AutomaticKeepAliveClien
       if (_value.selection.extentOffset >= _value.text.length) {
         return;
       }
-      final Offset nextExtentOffset =
+      final nextExtentOffset =
           Offset(extentRect.left, extentRect.top + increment);
       final double height = position.maxScrollExtent + renderEditable.size.height;
       final TextPosition nextExtent = nextExtentOffset.dy + position.pixels >= height
@@ -5049,7 +5049,7 @@ class EditableTextState extends State<EditableText> with AutomaticKeepAliveClien
       if (_value.selection.extentOffset <= 0) {
         return;
       }
-      final Offset nextExtentOffset =
+      final nextExtentOffset =
           Offset(extentRect.left, extentRect.top + increment);
       final TextPosition nextExtent = nextExtentOffset.dy + position.pixels <= 0
           ? const TextPosition(offset: 0)
@@ -5344,7 +5344,7 @@ class EditableTextState extends State<EditableText> with AutomaticKeepAliveClien
       // Reveal the latest character in an obscured field only on mobile.
       // Newer versions of iOS (iOS 15+) no longer reveal the most recently
       // entered character.
-      const Set<TargetPlatform> mobilePlatforms = <TargetPlatform> {
+      const mobilePlatforms = <TargetPlatform> {
         TargetPlatform.android, TargetPlatform.fuchsia,
       };
       final bool brieflyShowPassword = WidgetsBinding.instance.platformDispatcher.brieflyShowPassword
@@ -5358,7 +5358,7 @@ class EditableTextState extends State<EditableText> with AutomaticKeepAliveClien
       return TextSpan(style: _style, text: text);
     }
     if (_placeholderLocation >= 0 && _placeholderLocation <= _value.text.length) {
-      final List<_ScribblePlaceholder> placeholders = <_ScribblePlaceholder>[];
+      final placeholders = <_ScribblePlaceholder>[];
       final int placeholderLocation = _value.text.length - _placeholderLocation;
       if (_isMultiline) {
         // The zero size placeholder here allows the line to break and keep the caret on the first line.
@@ -5687,14 +5687,14 @@ class _ScribbleFocusableState extends State<_ScribbleFocusable> implements Scrib
       return false;
     }
     final Rect intersection = calculatedBounds.intersect(rect);
-    final HitTestResult result = HitTestResult();
+    final result = HitTestResult();
     WidgetsBinding.instance.hitTestInView(result, intersection.center, View.of(context).viewId);
     return result.path.any((HitTestEntry entry) => entry.target == renderEditable);
   }
 
   @override
   Rect get bounds {
-    final RenderBox? box = context.findRenderObject() as RenderBox?;
+    final box = context.findRenderObject() as RenderBox?;
     if (box == null || !mounted || !box.attached) {
       return Rect.zero;
     }
@@ -5825,7 +5825,7 @@ class _DeleteTextAction<T extends DirectionalTextEditingIntent> extends ContextA
     final TextBoundary atomicBoundary = state._characterBoundary();
     if (!selection.isCollapsed) {
       // Expands the selection to ensure the range covers full graphemes.
-      final TextRange range = TextRange(
+      final range = TextRange(
         start: atomicBoundary.getLeadingTextBoundaryAt(selection.start) ?? state._value.text.length,
         end: atomicBoundary.getTrailingTextBoundaryAt(selection.end - 1) ?? 0,
       );
@@ -5875,7 +5875,7 @@ class _UpdateTextSelectionAction<T extends DirectionalCaretMovementIntent> exten
   // Returns true iff the given position is at a wordwrap boundary in the
   // upstream position.
   bool _isAtWordwrapUpstream(TextPosition position) {
-    final TextPosition end = TextPosition(
+    final end = TextPosition(
       offset: state.renderEditable.getLineAtOffset(position).end,
       affinity: TextAffinity.upstream,
     );
@@ -5886,7 +5886,7 @@ class _UpdateTextSelectionAction<T extends DirectionalCaretMovementIntent> exten
   // Returns true if the given position at a wordwrap boundary in the
   // downstream position.
   bool _isAtWordwrapDownstream(TextPosition position) {
-    final TextPosition start = TextPosition(
+    final start = TextPosition(
       offset: state.renderEditable.getLineAtOffset(position).start,
     );
     return start == position && start.offset != 0
@@ -5931,7 +5931,7 @@ class _UpdateTextSelectionAction<T extends DirectionalCaretMovementIntent> exten
 
     final bool shouldCollapseToBase = intent.collapseAtReversal
       && (selection.baseOffset - selection.extentOffset) * (selection.baseOffset - newSelection.extentOffset) < 0;
-    final TextSelection newRange = shouldCollapseToBase ? TextSelection.fromPosition(selection.base) : newSelection;
+    final newRange = shouldCollapseToBase ? TextSelection.fromPosition(selection.base) : newSelection;
     return Actions.invoke(context!, UpdateSelectionIntent(state._value, newRange, SelectionChangedCause.keyboard));
   }
 

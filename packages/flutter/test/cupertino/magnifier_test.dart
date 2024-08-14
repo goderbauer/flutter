@@ -10,10 +10,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 
 void main() {
-  final Offset basicOffset = Offset(CupertinoMagnifier.kDefaultSize.width / 2,
+  final basicOffset = Offset(CupertinoMagnifier.kDefaultSize.width / 2,
        CupertinoMagnifier.kDefaultSize.height - CupertinoMagnifier.kMagnifierAboveFocalPoint);
-  const Rect reasonableTextField = Rect.fromLTRB(0, 100, 200, 200);
-  final MagnifierController magnifierController = MagnifierController();
+  const reasonableTextField = Rect.fromLTRB(0, 100, 200, 200);
+  final magnifierController = MagnifierController();
 
   // Make sure that your gesture in magnifierInfo is within the line in magnifierInfo,
   // or else the magnifier status will stay hidden and this will not complete.
@@ -71,12 +71,12 @@ void main() {
         final BuildContext context = tester.element(find.byType(Placeholder));
 
         // Magnifier should be positioned directly over the red square.
-        final RenderBox tapPointRenderBox =
+        final tapPointRenderBox =
             tester.firstRenderObject(find.byKey(fakeTextFieldKey)) as RenderBox;
         final Rect fakeTextFieldRect =
             tapPointRenderBox.localToGlobal(Offset.zero) & tapPointRenderBox.size;
 
-        final ValueNotifier<MagnifierInfo> magnifier =
+        final magnifier =
             ValueNotifier<MagnifierInfo>(
           MagnifierInfo(
             currentLineBoundaries: fakeTextFieldRect,
@@ -108,7 +108,7 @@ void main() {
 
         final BuildContext context = tester.firstElement(find.byType(Placeholder));
 
-        final ValueNotifier<MagnifierInfo> magnifierInfo = ValueNotifier<MagnifierInfo>(
+        final magnifierInfo = ValueNotifier<MagnifierInfo>(
           MagnifierInfo(
             currentLineBoundaries: reasonableTextField,
             fieldBounds: reasonableTextField,
@@ -143,7 +143,7 @@ void main() {
         final BuildContext context =
             tester.firstElement(find.byType(Placeholder));
 
-        final ValueNotifier<MagnifierInfo> magnifierInfo =
+        final magnifierInfo =
             ValueNotifier<MagnifierInfo>(
           MagnifierInfo(
             currentLineBoundaries: reasonableTextField,
@@ -182,7 +182,7 @@ void main() {
         final BuildContext context =
             tester.firstElement(find.byType(Placeholder));
 
-        final ValueNotifier<MagnifierInfo> magnifierInfo =
+        final magnifierInfo =
             ValueNotifier<MagnifierInfo>(
           MagnifierInfo(
             currentLineBoundaries: reasonableTextField,
@@ -223,7 +223,7 @@ void main() {
         final BuildContext context =
             tester.firstElement(find.byType(Placeholder));
 
-        final ValueNotifier<MagnifierInfo> magnifierInfo =
+        final magnifierInfo =
             ValueNotifier<MagnifierInfo>(
           MagnifierInfo(
             currentLineBoundaries: reasonableTextField,

@@ -11,7 +11,7 @@ void main() {
     await tester.pumpWidget(const Center(child: Chip(label: Text('label'))));
     final dynamic exception = tester.takeException();
     expect(exception, isFlutterError);
-    final FlutterError error = exception as FlutterError;
+    final error = exception as FlutterError;
     expect(error.diagnostics.length, 5);
     expect(error.diagnostics[2].level, DiagnosticLevel.hint);
     expect(
@@ -51,7 +51,7 @@ void main() {
     await tester.pumpWidget(const Center(child: BackButton()));
     final dynamic exception = tester.takeException();
     expect(exception, isFlutterError);
-    final FlutterError error = exception as FlutterError;
+    final error = exception as FlutterError;
     expect(error.diagnostics.length, 6);
     expect(error.diagnostics[3].level, DiagnosticLevel.hint);
     expect(
@@ -107,7 +107,7 @@ void main() {
     );
     final dynamic exception = tester.takeException();
     expect(exception, isFlutterError);
-    final FlutterError error = exception as FlutterError;
+    final error = exception as FlutterError;
     expect(error.diagnostics.length, 5);
     expect(error.diagnostics[2], isA<DiagnosticsProperty<Element>>());
     expect(error.diagnostics[3], isA<DiagnosticsBlock>());
@@ -137,9 +137,9 @@ void main() {
   });
 
   testWidgets('debugCheckHasScaffoldMessenger control test', (WidgetTester tester) async {
-    final GlobalKey<ScaffoldState> scaffoldKey = GlobalKey<ScaffoldState>();
-    final GlobalKey<ScaffoldMessengerState> scaffoldMessengerKey = GlobalKey<ScaffoldMessengerState>();
-    final SnackBar snackBar = SnackBar(
+    final scaffoldKey = GlobalKey<ScaffoldState>();
+    final scaffoldMessengerKey = GlobalKey<ScaffoldMessengerState>();
+    final snackBar = SnackBar(
       content: const Text('Snack'),
       action: SnackBarAction(label: 'Test', onPressed: () {}),
     );
@@ -157,7 +157,7 @@ void main() {
         ),
       ),
     ));
-    final List<dynamic> exceptions = <dynamic>[];
+    final exceptions = <dynamic>[];
     final FlutterExceptionHandler? oldHandler = FlutterError.onError;
     FlutterError.onError = (FlutterErrorDetails details) {
       exceptions.add(details.exception);
@@ -184,7 +184,7 @@ void main() {
     expect(exceptions.length, 1);
     // ignore: avoid_dynamic_calls
     expect(exceptions.single.runtimeType, FlutterError);
-    final FlutterError error = exceptions.first as FlutterError;
+    final error = exceptions.first as FlutterError;
     expect(error.diagnostics.length, 5);
     expect(error.diagnostics[2], isA<DiagnosticsProperty<Element>>());
     expect(error.diagnostics[3], isA<DiagnosticsBlock>());

@@ -22,7 +22,7 @@ class User {
 }
 
 void main() {
-  const List<String> kOptions = <String>[
+  const kOptions = <String>[
     'aardvark',
     'bobcat',
     'chameleon',
@@ -39,7 +39,7 @@ void main() {
     'northern white rhinoceros',
   ];
 
-  const List<User> kOptionsUsers = <User>[
+  const kOptionsUsers = <User>[
     User(name: 'Alice', email: 'alice@example.com'),
     User(name: 'Bob', email: 'bob@example.com'),
     User(name: 'Charlie', email: 'charlie123@gmail.com'),
@@ -496,9 +496,9 @@ void main() {
     group('fieldViewBuilder not passed', () {
       testWidgets('down', (WidgetTester tester) async {
         final GlobalKey autocompleteKey = GlobalKey();
-        final TextEditingController controller = TextEditingController();
+        final controller = TextEditingController();
         addTearDown(controller.dispose);
-        final FocusNode focusNode = FocusNode();
+        final focusNode = FocusNode();
         addTearDown(focusNode.dispose);
         await tester.pumpWidget(
           MaterialApp(
@@ -529,9 +529,9 @@ void main() {
 
       testWidgets('up', (WidgetTester tester) async {
         final GlobalKey autocompleteKey = GlobalKey();
-        final TextEditingController controller = TextEditingController();
+        final controller = TextEditingController();
         addTearDown(controller.dispose);
-        final FocusNode focusNode = FocusNode();
+        final focusNode = FocusNode();
         addTearDown(focusNode.dispose);
         await tester.pumpWidget(
           MaterialApp(
@@ -705,9 +705,9 @@ void main() {
     final GlobalKey optionsKey = GlobalKey();
     final GlobalKey autocompleteKey = GlobalKey();
     late Iterable<String> lastOptions;
-    final FocusNode focusNode = FocusNode();
+    final focusNode = FocusNode();
     addTearDown(focusNode.dispose);
-    final TextEditingController textEditingController = TextEditingController();
+    final textEditingController = TextEditingController();
     addTearDown(textEditingController.dispose);
 
     await tester.pumpWidget(
@@ -829,9 +829,9 @@ void main() {
   });
 
   testWidgets('initialValue cannot be defined if TextEditingController is defined', (WidgetTester tester) async {
-    final FocusNode focusNode = FocusNode();
+    final focusNode = FocusNode();
     addTearDown(focusNode.dispose);
-    final TextEditingController textEditingController = TextEditingController();
+    final textEditingController = TextEditingController();
     addTearDown(textEditingController.dispose);
 
     expect(
@@ -1103,7 +1103,7 @@ void main() {
     final GlobalKey fieldKey = GlobalKey();
     final GlobalKey optionsKey = GlobalKey();
     late FocusNode focusNode;
-    bool wrappingActionInvoked = false;
+    var wrappingActionInvoked = false;
     await tester.pumpWidget(
       MaterialApp(
         home: Scaffold(

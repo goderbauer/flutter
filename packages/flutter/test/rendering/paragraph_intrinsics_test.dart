@@ -8,14 +8,14 @@ import 'package:flutter_test/flutter_test.dart';
 
 void main() {
   test('list body and paragraph intrinsics', () {
-    final RenderParagraph paragraph = RenderParagraph(
+    final paragraph = RenderParagraph(
       const TextSpan(
         style: TextStyle(height: 1.0),
         text: 'Hello World',
       ),
       textDirection: TextDirection.ltr,
     );
-    final RenderListBody testBlock = RenderListBody(
+    final testBlock = RenderListBody(
       children: <RenderBox>[
         paragraph,
       ],
@@ -69,7 +69,7 @@ void main() {
   });
 
   test('textScaler affects intrinsics', () {
-    final RenderParagraph paragraph = RenderParagraph(
+    final paragraph = RenderParagraph(
       const TextSpan(
         style: TextStyle(fontSize: 10),
         text: 'Hello World',
@@ -84,7 +84,7 @@ void main() {
   });
 
   test('maxLines affects intrinsics', () {
-    final RenderParagraph paragraph = RenderParagraph(
+    final paragraph = RenderParagraph(
       TextSpan(
         style: const TextStyle(fontSize: 10),
         text: List<String>.filled(5, 'A').join('\n'),
@@ -99,7 +99,7 @@ void main() {
   });
 
   test('strutStyle affects intrinsics', () {
-    final RenderParagraph paragraph = RenderParagraph(
+    final paragraph = RenderParagraph(
       const TextSpan(
         style: TextStyle(fontSize: 10),
         text: 'Hello World',

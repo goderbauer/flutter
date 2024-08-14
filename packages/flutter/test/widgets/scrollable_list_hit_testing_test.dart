@@ -10,7 +10,7 @@ const List<int> items = <int>[0, 1, 2, 3, 4, 5];
 
 void main() {
   testWidgets('Tap item after scroll - horizontal', (WidgetTester tester) async {
-    final List<int> tapped = <int>[];
+    final tapped = <int>[];
     await tester.pumpWidget(
       Directionality(
         textDirection: TextDirection.ltr,
@@ -52,7 +52,7 @@ void main() {
   });
 
   testWidgets('Tap item after scroll - vertical', (WidgetTester tester) async {
-    final List<int> tapped = <int>[];
+    final tapped = <int>[];
     await tester.pumpWidget(
       Directionality(
         textDirection: TextDirection.ltr,
@@ -95,7 +95,7 @@ void main() {
   });
 
   testWidgets('Padding scroll anchor start', (WidgetTester tester) async {
-    final List<int> tapped = <int>[];
+    final tapped = <int>[];
 
     await tester.pumpWidget(
       Directionality(
@@ -127,7 +127,7 @@ void main() {
   });
 
   testWidgets('Padding scroll anchor end', (WidgetTester tester) async {
-    final List<int> tapped = <int>[];
+    final tapped = <int>[];
 
     await tester.pumpWidget(
       Directionality(
@@ -161,7 +161,7 @@ void main() {
 
   testWidgets('Tap immediately following clamped overscroll', (WidgetTester tester) async {
     // Regression test for https://github.com/flutter/flutter/issues/5709
-    final List<int> tapped = <int>[];
+    final tapped = <int>[];
 
     await tester.pumpWidget(
       Directionality(

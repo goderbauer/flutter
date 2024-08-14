@@ -10,7 +10,7 @@ import 'test_widgets.dart';
 
 void main() {
   testWidgets('ListView mount/dismount smoke test', (WidgetTester tester) async {
-    final List<int> callbackTracker = <int>[];
+    final callbackTracker = <int>[];
 
     // the root view is 800x600 in the test environment
     // so if our widget is 100 pixels tall, it should fit exactly 6 times.
@@ -60,7 +60,7 @@ void main() {
   });
 
   testWidgets('ListView vertical', (WidgetTester tester) async {
-    final List<int> callbackTracker = <int>[];
+    final callbackTracker = <int>[];
 
     // the root view is 800x600 in the test environment
     // so if our widget is 200 pixels tall, it should fit exactly 3 times.
@@ -77,7 +77,7 @@ void main() {
     }
 
     Widget builder() {
-      final ScrollController controller = ScrollController(initialScrollOffset: 300.0);
+      final controller = ScrollController(initialScrollOffset: 300.0);
       addTearDown(controller.dispose);
 
       return Directionality(
@@ -126,7 +126,7 @@ void main() {
   });
 
   testWidgets('ListView horizontal', (WidgetTester tester) async {
-    final List<int> callbackTracker = <int>[];
+    final callbackTracker = <int>[];
 
     // the root view is 800x600 in the test environment
     // so if our widget is 200 pixels wide, it should fit exactly 4 times.
@@ -143,7 +143,7 @@ void main() {
     }
 
     Widget builder() {
-      final ScrollController controller = ScrollController(initialScrollOffset: 500.0);
+      final controller = ScrollController(initialScrollOffset: 500.0);
       addTearDown(controller.dispose);
 
       return Directionality(
@@ -183,8 +183,8 @@ void main() {
   });
 
   testWidgets('ListView reinvoke builders', (WidgetTester tester) async {
-    final List<int> callbackTracker = <int>[];
-    final List<String?> text = <String?>[];
+    final callbackTracker = <int>[];
+    final text = <String?>[];
 
     Widget itemBuilder(BuildContext context, int index) {
       callbackTracker.add(index);
@@ -236,7 +236,7 @@ void main() {
 
   testWidgets('ListView reinvoke builders', (WidgetTester tester) async {
     late StateSetter setState;
-    ThemeData themeData = ThemeData.light(useMaterial3: false);
+    var themeData = ThemeData.light(useMaterial3: false);
 
     Widget itemBuilder(BuildContext context, int index) {
       return Container(
@@ -440,8 +440,8 @@ void main() {
   });
 
   testWidgets('ListView should not paint hidden children', (WidgetTester tester) async {
-    const Text text = Text('test');
-    final ScrollController controller = ScrollController(initialScrollOffset: 300.0);
+    const text = Text('test');
+    final controller = ScrollController(initialScrollOffset: 300.0);
     addTearDown(controller.dispose);
 
     await tester.pumpWidget(
@@ -472,7 +472,7 @@ void main() {
   });
 
   testWidgets('ListView should paint with offset', (WidgetTester tester) async {
-    final ScrollController controller = ScrollController(initialScrollOffset: 120.0);
+    final controller = ScrollController(initialScrollOffset: 120.0);
     addTearDown(controller.dispose);
 
     await tester.pumpWidget(

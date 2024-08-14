@@ -10,7 +10,7 @@ import 'package:flutter_test/flutter_test.dart';
 
 void main() {
   testWidgets('TapRegionSurface detects outside taps', (WidgetTester tester) async {
-    final Set<String> tappedOutside = <String>{};
+    final tappedOutside = <String>{};
     await tester.pumpWidget(
       Directionality(
         textDirection: TextDirection.ltr,
@@ -102,8 +102,8 @@ void main() {
   });
 
   testWidgets('TapRegionSurface consumes outside taps when asked', (WidgetTester tester) async {
-    final Set<String> tappedOutside = <String>{};
-    int propagatedTaps = 0;
+    final tappedOutside = <String>{};
+    var propagatedTaps = 0;
     await tester.pumpWidget(
       Directionality(
         textDirection: TextDirection.ltr,
@@ -207,7 +207,7 @@ void main() {
   });
 
   testWidgets('TapRegionSurface detects inside taps', (WidgetTester tester) async {
-    final Set<String> tappedInside = <String>{};
+    final tappedInside = <String>{};
     await tester.pumpWidget(
       Directionality(
         textDirection: TextDirection.ltr,
@@ -294,10 +294,10 @@ void main() {
   });
 
   testWidgets('TapRegionSurface detects inside taps correctly with behavior', (WidgetTester tester) async {
-    final Set<String> tappedInside = <String>{};
-    const ValueKey<String> noGroupKey = ValueKey<String>('No Group');
-    const ValueKey<String> group1AKey = ValueKey<String>('Group 1 A');
-    const ValueKey<String> group1BKey = ValueKey<String>('Group 1 B');
+    final tappedInside = <String>{};
+    const noGroupKey = ValueKey<String>('No Group');
+    const group1AKey = ValueKey<String>('Group 1 A');
+    const group1BKey = ValueKey<String>('Group 1 B');
     await tester.pumpWidget(
       Directionality(
         textDirection: TextDirection.ltr,
@@ -380,7 +380,7 @@ void main() {
   });
 
   testWidgets('Setting the group updates the registration', (WidgetTester tester) async {
-    final Set<String> tappedOutside = <String>{};
+    final tappedOutside = <String>{};
     await tester.pumpWidget(
       Directionality(
         textDirection: TextDirection.ltr,
@@ -481,7 +481,7 @@ void main() {
   });
 
   testWidgets('TapRegionSurface detects outside right click', (WidgetTester tester) async {
-    final Set<String> tappedOutside = <String>{};
+    final tappedOutside = <String>{};
     await tester.pumpWidget(
       Directionality(
         textDirection: TextDirection.ltr,
@@ -574,7 +574,7 @@ void main() {
   });
 
   testWidgets('TapRegionSurface detects outside middle click', (WidgetTester tester) async {
-    final Set<String> tappedOutside = <String>{};
+    final tappedOutside = <String>{};
     await tester.pumpWidget(
       Directionality(
         textDirection: TextDirection.ltr,
@@ -667,8 +667,8 @@ void main() {
   });
 
   testWidgets('TapRegionSurface consumes outside right click when asked', (WidgetTester tester) async {
-    final Set<String> tappedOutside = <String>{};
-    int propagatedTaps = 0;
+    final tappedOutside = <String>{};
+    var propagatedTaps = 0;
     await tester.pumpWidget(
       Directionality(
         textDirection: TextDirection.ltr,
@@ -773,8 +773,8 @@ void main() {
   });
 
   testWidgets('TapRegionSurface consumes outside middle click when asked', (WidgetTester tester) async {
-    final Set<String> tappedOutside = <String>{};
-    int propagatedTaps = 0;
+    final tappedOutside = <String>{};
+    var propagatedTaps = 0;
     await tester.pumpWidget(
       Directionality(
         textDirection: TextDirection.ltr,
@@ -879,7 +879,7 @@ void main() {
   });
 
   testWidgets('TapRegionSurface detects inside right click', (WidgetTester tester) async {
-    final Set<String> tappedInside = <String>{};
+    final tappedInside = <String>{};
     await tester.pumpWidget(
       Directionality(
         textDirection: TextDirection.ltr,
@@ -967,7 +967,7 @@ void main() {
   });
 
   testWidgets('TapRegionSurface detects inside middle click', (WidgetTester tester) async {
-    final Set<String> tappedInside = <String>{};
+    final tappedInside = <String>{};
     await tester.pumpWidget(
       Directionality(
         textDirection: TextDirection.ltr,

@@ -299,7 +299,7 @@ abstract class SelectionContainerDelegate implements SelectionHandler, Selection
       _selectionContainerContext?.findRenderObject() != null,
       'getTransformTo cannot be called before SelectionContainer is laid out.',
     );
-    final RenderBox box = _selectionContainerContext!.findRenderObject()! as RenderBox;
+    final box = _selectionContainerContext!.findRenderObject()! as RenderBox;
     return box.getTransformTo(ancestor);
   }
 
@@ -313,7 +313,7 @@ abstract class SelectionContainerDelegate implements SelectionHandler, Selection
     _selectionContainerContext?.findRenderObject() != null,
     'The _selectionContainerContext must have a renderObject, such as after the first build has completed.',
     );
-    final RenderBox box = _selectionContainerContext!.findRenderObject()! as RenderBox;
+    final box = _selectionContainerContext!.findRenderObject()! as RenderBox;
     return box.hasSize;
   }
 
@@ -325,7 +325,7 @@ abstract class SelectionContainerDelegate implements SelectionHandler, Selection
       hasSize,
       'containerSize cannot be called before SelectionContainer is laid out.',
     );
-    final RenderBox box = _selectionContainerContext!.findRenderObject()! as RenderBox;
+    final box = _selectionContainerContext!.findRenderObject()! as RenderBox;
     return box.size;
   }
 }

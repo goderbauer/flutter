@@ -313,14 +313,14 @@ class RenderFlow extends RenderBox
   void performLayout() {
     final BoxConstraints constraints = this.constraints;
     size = _getSize(constraints);
-    int i = 0;
+    var i = 0;
     _randomAccessChildren.clear();
     RenderBox? child = firstChild;
     while (child != null) {
       _randomAccessChildren.add(child);
       final BoxConstraints innerConstraints = _delegate.getConstraintsForChild(i, constraints);
       child.layout(innerConstraints, parentUsesSize: true);
-      final FlowParentData childParentData = child.parentData! as FlowParentData;
+      final childParentData = child.parentData! as FlowParentData;
       childParentData.offset = Offset.zero;
       child = childParentData.nextSibling;
       i += 1;
@@ -349,7 +349,7 @@ class RenderFlow extends RenderBox
   void paintChild(int i, { Matrix4? transform, double opacity = 1.0 }) {
     transform ??= Matrix4.identity();
     final RenderBox child = _randomAccessChildren[i];
-    final FlowParentData childParentData = child.parentData! as FlowParentData;
+    final childParentData = child.parentData! as FlowParentData;
     assert(() {
       if (childParentData._transform != null) {
         throw FlutterError(
@@ -386,7 +386,7 @@ class RenderFlow extends RenderBox
     _paintingContext = context;
     _paintingOffset = offset;
     for (final RenderBox child in _randomAccessChildren) {
-      final FlowParentData childParentData = child.parentData! as FlowParentData;
+      final childParentData = child.parentData! as FlowParentData;
       childParentData._transform = null;
     }
     try {
@@ -426,7 +426,7 @@ class RenderFlow extends RenderBox
         continue;
       }
       final RenderBox child = children[childIndex];
-      final FlowParentData childParentData = child.parentData! as FlowParentData;
+      final childParentData = child.parentData! as FlowParentData;
       final Matrix4? transform = childParentData._transform;
       if (transform == null) {
         continue;
@@ -447,7 +447,7 @@ class RenderFlow extends RenderBox
 
   @override
   void applyPaintTransform(RenderBox child, Matrix4 transform) {
-    final FlowParentData childParentData = child.parentData! as FlowParentData;
+    final childParentData = child.parentData! as FlowParentData;
     if (childParentData._transform != null) {
       transform.multiply(childParentData._transform!);
     }

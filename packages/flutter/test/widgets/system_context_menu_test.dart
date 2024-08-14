@@ -12,7 +12,7 @@ void main() {
   final TestWidgetsFlutterBinding binding = TestWidgetsFlutterBinding.ensureInitialized();
 
   testWidgets('asserts when built on an unsupported device', (WidgetTester tester) async {
-    final TextEditingController controller = TextEditingController(
+    final controller = TextEditingController(
       text: 'one two three',
     );
     addTearDown(controller.dispose);
@@ -61,7 +61,7 @@ void main() {
       TestDefaultBinaryMessengerBinding.instance.defaultBinaryMessenger.setMockMethodCallHandler(SystemChannels.contextMenu, null);
     });
 
-    final TextEditingController controller = TextEditingController(
+    final controller = TextEditingController(
       text: 'one two three',
     );
     addTearDown(controller.dispose);
@@ -95,7 +95,7 @@ void main() {
   );
 
   testWidgets('can be shown and hidden like a normal context menu', (WidgetTester tester) async {
-    final TextEditingController controller = TextEditingController(
+    final controller = TextEditingController(
       text: 'one two three',
     );
     addTearDown(controller.dispose);
@@ -143,12 +143,12 @@ void main() {
   );
 
   testWidgets('can be updated.', (WidgetTester tester) async {
-    final List<Map<String, double>> targetRects = <Map<String, double>>[];
+    final targetRects = <Map<String, double>>[];
     TestDefaultBinaryMessengerBinding.instance.defaultBinaryMessenger
       .setMockMethodCallHandler(SystemChannels.platform, (MethodCall methodCall) async {
         if (methodCall.method == 'ContextMenu.showSystemContextMenu') {
-          final Map<String, dynamic> arguments = methodCall.arguments as Map<String, dynamic>;
-          final Map<String, dynamic> untypedTargetRect = arguments['targetRect'] as Map<String, dynamic>;
+          final arguments = methodCall.arguments as Map<String, dynamic>;
+          final untypedTargetRect = arguments['targetRect'] as Map<String, dynamic>;
           final Map<String, double> lastTargetRect = untypedTargetRect.map((String key, dynamic value) {
             return MapEntry<String, double>(key, value as double);
           });
@@ -161,7 +161,7 @@ void main() {
           .setMockMethodCallHandler(SystemChannels.platform, null);
     });
 
-    final TextEditingController controller = TextEditingController(
+    final controller = TextEditingController(
       text: 'one two three',
     );
     addTearDown(controller.dispose);
@@ -216,7 +216,7 @@ void main() {
   );
 
   testWidgets('can be rebuilt', (WidgetTester tester) async {
-    final TextEditingController controller = TextEditingController(
+    final controller = TextEditingController(
       text: 'one two three',
     );
     addTearDown(controller.dispose);
@@ -268,11 +268,11 @@ void main() {
   );
 
   testWidgets('can handle multiple instances', (WidgetTester tester) async {
-    final TextEditingController controller1 = TextEditingController(
+    final controller1 = TextEditingController(
       text: 'one two three',
     );
     addTearDown(controller1.dispose);
-    final TextEditingController controller2 = TextEditingController(
+    final controller2 = TextEditingController(
       text: 'four five six',
     );
     addTearDown(controller2.dispose);

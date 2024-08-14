@@ -145,7 +145,7 @@ class RenderObjectToWidgetElement<T extends RenderObject> extends RenderTreeRoot
     try {
       _child = updateChild(_child, (widget as RenderObjectToWidgetAdapter<T>).child, _rootChildSlot);
     } catch (exception, stack) {
-      final FlutterErrorDetails details = FlutterErrorDetails(
+      final details = FlutterErrorDetails(
         exception: exception,
         stack: stack,
         library: 'widgets library',

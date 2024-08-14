@@ -42,7 +42,7 @@ void main() {
         matching: find.byType(DefaultTextStyle),
       )).style;
     }
-    final ThemeData theme = ThemeData();
+    final theme = ThemeData();
     await tester.pumpWidget(
       boilerplate(
         child: ToggleButtons(
@@ -75,8 +75,8 @@ void main() {
           matching: find.byType(DefaultTextStyle),
         )).style;
       }
-      final List<bool> isSelected = <bool>[false, true];
-      final ThemeData theme = ThemeData();
+      final isSelected = <bool>[false, true];
+      final theme = ThemeData();
       await tester.pumpWidget(
         StatefulBuilder(
           builder: (BuildContext context, StateSetter setState) {
@@ -134,8 +134,8 @@ void main() {
           matching: find.byType(DefaultTextStyle),
         )).style;
       }
-      final List<bool> isSelected = <bool>[false, true];
-      final ThemeData theme = ThemeData();
+      final isSelected = <bool>[false, true];
+      final theme = ThemeData();
 
       await tester.pumpWidget(
         boilerplate(
@@ -205,7 +205,7 @@ void main() {
   );
 
   testWidgets('Default text style is applied', (WidgetTester tester) async {
-    final ThemeData theme = ThemeData();
+    final theme = ThemeData();
     await tester.pumpWidget(
       boilerplate(
         child: ToggleButtons(
@@ -374,7 +374,7 @@ void main() {
           matching: find.byType(IconTheme),
         ));
       }
-      final ThemeData theme = ThemeData();
+      final theme = ThemeData();
       await tester.pumpWidget(
         boilerplate(
           child: ToggleButtons(
@@ -466,7 +466,7 @@ void main() {
           matching: find.byType(IconTheme),
         ));
       }
-      final ThemeData theme = ThemeData();
+      final theme = ThemeData();
       const Color enabledColor = Colors.lime;
       const Color selectedColor = Colors.green;
       const Color disabledColor = Colors.yellow;
@@ -538,7 +538,7 @@ void main() {
   );
 
   testWidgets('Default button fillColor - unselected', (WidgetTester tester) async {
-    final ThemeData theme = ThemeData();
+    final theme = ThemeData();
     await tester.pumpWidget(
       boilerplate(
         child: ToggleButtons(
@@ -565,7 +565,7 @@ void main() {
   });
 
   testWidgets('Default button fillColor - selected', (WidgetTester tester) async {
-    final ThemeData theme = ThemeData();
+    final theme = ThemeData();
     await tester.pumpWidget(
       boilerplate(
         child: ToggleButtons(
@@ -592,7 +592,7 @@ void main() {
   });
 
   testWidgets('Default button fillColor - disabled', (WidgetTester tester) async {
-    final ThemeData theme = ThemeData();
+    final theme = ThemeData();
     await tester.pumpWidget(
       boilerplate(
         child: ToggleButtons(
@@ -652,7 +652,7 @@ void main() {
       );
     }
 
-    final ThemeData theme = ThemeData();
+    final theme = ThemeData();
     const Color selectedFillColor = Colors.yellow;
 
     await tester.pumpWidget(
@@ -753,8 +753,8 @@ void main() {
   });
 
   testWidgets('Default InkWell colors - unselected', (WidgetTester tester) async {
-    final ThemeData theme = ThemeData();
-    final FocusNode focusNode = FocusNode();
+    final theme = ThemeData();
+    final focusNode = FocusNode();
     await tester.pumpWidget(
       boilerplate(
         child: ToggleButtons(
@@ -820,8 +820,8 @@ void main() {
   });
 
   testWidgets('Default InkWell colors - selected', (WidgetTester tester) async {
-    final ThemeData theme = ThemeData();
-    final FocusNode focusNode = FocusNode();
+    final theme = ThemeData();
+    final focusNode = FocusNode();
     await tester.pumpWidget(
       boilerplate(
         child: ToggleButtons(
@@ -887,11 +887,11 @@ void main() {
   });
 
   testWidgets('Custom InkWell colors', (WidgetTester tester) async {
-    const Color splashColor = Color(0xff4caf50);
-    const Color highlightColor = Color(0xffcddc39);
-    const Color hoverColor = Color(0xffffeb3b);
-    const Color focusColor = Color(0xffffff00);
-    final FocusNode focusNode = FocusNode();
+    const splashColor = Color(0xff4caf50);
+    const highlightColor = Color(0xffcddc39);
+    const hoverColor = Color(0xffffeb3b);
+    const focusColor = Color(0xffffff00);
+    final focusNode = FocusNode();
 
     await tester.pumpWidget(
       boilerplate(
@@ -960,8 +960,8 @@ void main() {
   testWidgets(
     'Default border width and border colors for enabled, selected and disabled states',
     (WidgetTester tester) async {
-      final ThemeData theme = ThemeData();
-      const double defaultBorderWidth = 1.0;
+      final theme = ThemeData();
+      const defaultBorderWidth = 1.0;
       await tester.pumpWidget(
         boilerplate(
           child: ToggleButtons(
@@ -1048,10 +1048,10 @@ void main() {
   testWidgets(
     'Custom border width and border colors for enabled, selected and disabled states',
     (WidgetTester tester) async {
-      const Color borderColor = Color(0xff4caf50);
-      const Color selectedBorderColor = Color(0xffcddc39);
-      const Color disabledBorderColor = Color(0xffffeb3b);
-      const double customWidth = 2.0;
+      const borderColor = Color(0xff4caf50);
+      const selectedBorderColor = Color(0xffcddc39);
+      const disabledBorderColor = Color(0xffffeb3b);
+      const customWidth = 2.0;
 
       await tester.pumpWidget(
         boilerplate(
@@ -1143,7 +1143,7 @@ void main() {
   );
 
   testWidgets('Height of segmented control is determined by tallest widget', (WidgetTester tester) async {
-    final List<Widget> children = <Widget>[
+    final children = <Widget>[
       Container(
         constraints: const BoxConstraints.tightFor(height: 100.0),
       ),
@@ -1168,14 +1168,14 @@ void main() {
       return widget.runtimeType.toString() == '_SelectToggleButton';
     }).toList();
 
-    for (int i = 0; i < toggleButtons.length; i++) {
+    for (var i = 0; i < toggleButtons.length; i++) {
       final Rect rect = tester.getRect(find.byWidget(toggleButtons[i]));
       expect(rect.height, 400.0 + 2 * _defaultBorderWidth);
     }
   });
 
   testWidgets('Sizes of toggle buttons rebuilds with the correct dimensions', (WidgetTester tester) async {
-    final List<Widget> children = <Widget>[
+    final children = <Widget>[
       Container(
         constraints: const BoxConstraints.tightFor(
           width: 100.0,
@@ -1210,7 +1210,7 @@ void main() {
       return widget.runtimeType.toString() == '_SelectToggleButton';
     }).toList();
 
-    for (int i = 0; i < toggleButtons.length; i++) {
+    for (var i = 0; i < toggleButtons.length; i++) {
       final Rect rect = tester.getRect(find.byWidget(toggleButtons[i]));
       expect(rect.height, 100.0 + 2 * _defaultBorderWidth);
 
@@ -1223,7 +1223,7 @@ void main() {
       }
     }
 
-    final List<Widget> childrenRebuilt = <Widget>[
+    final childrenRebuilt = <Widget>[
       Container(
         constraints: const BoxConstraints.tightFor(
           width: 200.0,
@@ -1245,7 +1245,7 @@ void main() {
     ];
 
     // Update border width and widget sized to verify layout updates correctly
-    const double customBorderWidth = 5.0;
+    const customBorderWidth = 5.0;
     await tester.pumpWidget(
       boilerplate(
         child: ToggleButtons(
@@ -1262,7 +1262,7 @@ void main() {
 
     // Only the last button paints both leading and trailing borders.
     // Other buttons only paint the leading border.
-    for (int i = 0; i < toggleButtons.length; i++) {
+    for (var i = 0; i < toggleButtons.length; i++) {
       final Rect rect = tester.getRect(find.byWidget(toggleButtons[i]));
       expect(rect.height, 200.0 + 2 * customBorderWidth);
       if (i == toggleButtons.length - 1) {
@@ -1423,7 +1423,7 @@ void main() {
   testWidgets(
     'Properly draws borders based on state',
     (WidgetTester tester) async {
-      final ThemeData theme = ThemeData();
+      final theme = ThemeData();
       await tester.pumpWidget(
         boilerplate(
           child: ToggleButtons(
@@ -1503,7 +1503,7 @@ void main() {
   testWidgets(
     'Properly draws borders based on state when direction is vertical and verticalDirection is down.',
         (WidgetTester tester) async {
-      final ThemeData theme = ThemeData();
+      final theme = ThemeData();
       await tester.pumpWidget(
         boilerplate(
           child: ToggleButtons(
@@ -1753,7 +1753,7 @@ void main() {
 
   // Regression test for https://github.com/flutter/flutter/issues/73725
   testWidgets('Material2 - Border radius paint test when there is only one button', (WidgetTester tester) async {
-    final ThemeData theme = ThemeData(useMaterial3: false);
+    final theme = ThemeData(useMaterial3: false);
     await tester.pumpWidget(
       boilerplate(
         theme: theme,
@@ -1798,7 +1798,7 @@ void main() {
   });
 
   testWidgets('Material3 - Border radius paint test when there is only one button', (WidgetTester tester) async {
-    final ThemeData theme = ThemeData();
+    final theme = ThemeData();
     await tester.pumpWidget(
       boilerplate(
         child: RepaintBoundary(
@@ -1897,7 +1897,7 @@ void main() {
   });
 
   testWidgets('ToggleButtons implements debugFillProperties', (WidgetTester tester) async {
-    final DiagnosticPropertiesBuilder builder = DiagnosticPropertiesBuilder();
+    final builder = DiagnosticPropertiesBuilder();
 
     ToggleButtons(
       direction: Axis.vertical,
@@ -1998,7 +1998,7 @@ void main() {
   });
 
   testWidgets('ToggleButtons focus, hover, and highlight elevations are 0', (WidgetTester tester) async {
-    final List<FocusNode> focusNodes = <FocusNode>[FocusNode(), FocusNode()];
+    final focusNodes = <FocusNode>[FocusNode(), FocusNode()];
     await tester.pumpWidget(
       boilerplate(
         child: ToggleButtons(
@@ -2042,7 +2042,7 @@ void main() {
 
     await hoverGesture.removePointer();
 
-    for (final FocusNode n in focusNodes) {
+    for (final n in focusNodes) {
       n.dispose();
     }
   });
@@ -2072,7 +2072,7 @@ void main() {
 
   testWidgets('Toggle buttons constraints size does not affect minimum input padding', (WidgetTester tester) async {
     // Regression test for https://github.com/flutter/flutter/issues/97302
-    final SemanticsTester semantics = SemanticsTester(tester);
+    final semantics = SemanticsTester(tester);
 
     await tester.pumpWidget(
       boilerplate(
@@ -2161,7 +2161,7 @@ void main() {
   });
 
   testWidgets('Toggle buttons have correct semantics', (WidgetTester tester) async {
-    final SemanticsTester semantics = SemanticsTester(tester);
+    final semantics = SemanticsTester(tester);
 
     await tester.pumpWidget(
       boilerplate(

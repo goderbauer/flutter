@@ -7,9 +7,9 @@ import 'package:flutter_test/flutter_test.dart';
 
 void main() {
   testWidgets('AnimatedSwitcher fades in a new child.', (WidgetTester tester) async {
-    final UniqueKey containerOne = UniqueKey();
-    final UniqueKey containerTwo = UniqueKey();
-    final UniqueKey containerThree = UniqueKey();
+    final containerOne = UniqueKey();
+    final containerTwo = UniqueKey();
+    final containerThree = UniqueKey();
     await tester.pumpWidget(
       AnimatedSwitcher(
         duration: const Duration(milliseconds: 100),
@@ -51,9 +51,9 @@ void main() {
   });
 
   testWidgets('AnimatedSwitcher can handle back-to-back changes.', (WidgetTester tester) async {
-    final UniqueKey container1 = UniqueKey();
-    final UniqueKey container2 = UniqueKey();
-    final UniqueKey container3 = UniqueKey();
+    final container1 = UniqueKey();
+    final container2 = UniqueKey();
+    final container3 = UniqueKey();
     await tester.pumpWidget(
       AnimatedSwitcher(
         duration: const Duration(milliseconds: 100),
@@ -229,7 +229,7 @@ void main() {
     );
 
     expect(find.byType(Column), findsOneWidget);
-    for (final Widget child in foundChildren) {
+    for (final child in foundChildren) {
       expect(child, isA<KeyedSubtree>());
     }
 
@@ -245,7 +245,7 @@ void main() {
     );
     await tester.pump(const Duration(milliseconds: 50));
 
-    for (final Widget child in foundChildren) {
+    for (final child in foundChildren) {
       expect(child, isA<KeyedSubtree>());
       expect(
         find.descendant(of: find.byWidget(child), matching: find.byType(SizeTransition)),
@@ -255,9 +255,9 @@ void main() {
   });
 
   testWidgets("AnimatedSwitcher doesn't reset state of the children in transitions.", (WidgetTester tester) async {
-    final UniqueKey statefulOne = UniqueKey();
-    final UniqueKey statefulTwo = UniqueKey();
-    final UniqueKey statefulThree = UniqueKey();
+    final statefulOne = UniqueKey();
+    final statefulTwo = UniqueKey();
+    final statefulThree = UniqueKey();
 
     StatefulTestState.generation = 0;
 
@@ -333,9 +333,9 @@ void main() {
   });
 
   testWidgets('AnimatedSwitcher updates previous child transitions if the transitionBuilder changes.', (WidgetTester tester) async {
-    final UniqueKey containerOne = UniqueKey();
-    final UniqueKey containerTwo = UniqueKey();
-    final UniqueKey containerThree = UniqueKey();
+    final containerOne = UniqueKey();
+    final containerTwo = UniqueKey();
+    final containerThree = UniqueKey();
 
     late List<Widget> foundChildren;
     Widget newLayoutBuilder(Widget? currentChild, List<Widget> previousChildren) {
@@ -378,7 +378,7 @@ void main() {
     await tester.pump(const Duration(milliseconds: 10));
 
     expect(foundChildren.length, equals(3));
-    for (final Widget child in foundChildren) {
+    for (final child in foundChildren) {
       expect(child, isA<KeyedSubtree>());
       expect(
         find.descendant(of: find.byWidget(child), matching: find.byType(FadeTransition)),
@@ -407,7 +407,7 @@ void main() {
     await tester.pump(const Duration(milliseconds: 10));
 
     expect(foundChildren.length, equals(3));
-    for (final Widget child in foundChildren) {
+    for (final child in foundChildren) {
       expect(child, isA<KeyedSubtree>());
       expect(
         find.descendant(of: find.byWidget(child), matching: find.byType(ScaleTransition)),

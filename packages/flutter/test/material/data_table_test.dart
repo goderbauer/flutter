@@ -17,7 +17,7 @@ import 'data_table_test_utils.dart';
 
 void main() {
   testWidgets('DataTable control test', (WidgetTester tester) async {
-    final List<String> log = <String>[];
+    final log = <String>[];
 
     Widget buildTable({ int? sortColumnIndex, bool sortAscending = true }) {
       return DataTable(
@@ -160,8 +160,8 @@ void main() {
   });
 
   testWidgets('DataTable control test - tristate', (WidgetTester tester) async {
-    final List<String> log = <String>[];
-    const int numItems = 3;
+    final log = <String>[];
+    const numItems = 3;
     Widget buildTable(List<bool> selected, {int? disabledIndex}) {
       return DataTable(
         onSelectAll: (bool? value) {
@@ -230,7 +230,7 @@ void main() {
   });
 
   testWidgets('DataTable control test - no checkboxes', (WidgetTester tester) async {
-    final List<String> log = <String>[];
+    final log = <String>[];
 
     Widget buildTable({ bool checkboxes = false }) {
       return DataTable(
@@ -739,7 +739,7 @@ void main() {
   });
 
   testWidgets('DataTable custom row height one row taller than others', (WidgetTester tester) async {
-    const String multilineText = 'Line one.\nLine two.\nLine three.\nLine four.';
+    const multilineText = 'Line one.\nLine two.\nLine three.\nLine four.';
 
     Widget buildCustomTable({
       double? dataRowMinHeight,
@@ -830,10 +830,10 @@ void main() {
   });
 
   testWidgets('DataTable custom horizontal padding - checkbox', (WidgetTester tester) async {
-    const double defaultHorizontalMargin = 24.0;
-    const double defaultColumnSpacing = 56.0;
-    const double customHorizontalMargin = 10.0;
-    const double customColumnSpacing = 15.0;
+    const defaultHorizontalMargin = 24.0;
+    const defaultColumnSpacing = 56.0;
+    const customHorizontalMargin = 10.0;
+    const customColumnSpacing = 15.0;
     Finder cellContent;
     Finder checkbox;
     Finder padding;
@@ -1053,10 +1053,10 @@ void main() {
   });
 
   testWidgets('DataTable custom horizontal padding - no checkbox', (WidgetTester tester) async {
-    const double defaultHorizontalMargin = 24.0;
-    const double defaultColumnSpacing = 56.0;
-    const double customHorizontalMargin = 10.0;
-    const double customColumnSpacing = 15.0;
+    const defaultHorizontalMargin = 24.0;
+    const defaultColumnSpacing = 56.0;
+    const customHorizontalMargin = 10.0;
+    const customColumnSpacing = 15.0;
     Finder cellContent;
     Finder padding;
 
@@ -1247,17 +1247,17 @@ void main() {
   });
 
   testWidgets('DataTable set border width test', (WidgetTester tester) async {
-    const List<DataColumn> columns = <DataColumn>[
+    const columns = <DataColumn>[
       DataColumn(label: Text('column1')),
       DataColumn(label: Text('column2')),
     ];
 
-    const List<DataCell> cells = <DataCell>[
+    const cells = <DataCell>[
       DataCell(Text('cell1')),
       DataCell(Text('cell2')),
     ];
 
-    const List<DataRow> rows = <DataRow>[
+    const rows = <DataRow>[
       DataRow(cells: cells),
       DataRow(cells: cells),
     ];
@@ -1277,10 +1277,10 @@ void main() {
 
     Table table = tester.widget(find.byType(Table));
     TableRow tableRow = table.children.last;
-    BoxDecoration boxDecoration = tableRow.decoration! as BoxDecoration;
+    var boxDecoration = tableRow.decoration! as BoxDecoration;
     expect(boxDecoration.border!.top.width, 1.0);
 
-    const double thickness =  4.2;
+    const thickness =  4.2;
     await tester.pumpWidget(
       MaterialApp(
         home: Material(
@@ -1299,17 +1299,17 @@ void main() {
   });
 
   testWidgets('DataTable set show bottom border', (WidgetTester tester) async {
-    const List<DataColumn> columns = <DataColumn>[
+    const columns = <DataColumn>[
       DataColumn(label: Text('column1')),
       DataColumn(label: Text('column2')),
     ];
 
-    const List<DataCell> cells = <DataCell>[
+    const cells = <DataCell>[
       DataCell(Text('cell1')),
       DataCell(Text('cell2')),
     ];
 
-    const List<DataRow> rows = <DataRow>[
+    const rows = <DataRow>[
       DataRow(cells: cells),
       DataRow(cells: cells),
     ];
@@ -1328,7 +1328,7 @@ void main() {
 
     Table table = tester.widget(find.byType(Table));
     TableRow tableRow = table.children.last;
-    BoxDecoration boxDecoration = tableRow.decoration! as BoxDecoration;
+    var boxDecoration = tableRow.decoration! as BoxDecoration;
     expect(boxDecoration.border!.bottom.width, 1.0);
 
     await tester.pumpWidget(
@@ -1460,7 +1460,7 @@ void main() {
   });
 
   testWidgets('DataRow renders default selected row colors', (WidgetTester tester) async {
-    final ThemeData themeData = ThemeData.light();
+    final themeData = ThemeData.light();
     Widget buildTable({bool selected = false}) {
       return MaterialApp(
         theme: themeData,
@@ -1502,10 +1502,10 @@ void main() {
   });
 
   testWidgets('DataRow renders checkbox with colors from CheckboxTheme', (WidgetTester tester) async {
-    const Color fillColor = Color(0xFF00FF00);
-    const Color checkColor = Color(0xFF0000FF);
+    const fillColor = Color(0xFF00FF00);
+    const checkColor = Color(0xFF0000FF);
 
-    final ThemeData themeData = ThemeData(
+    final themeData = ThemeData(
       checkboxTheme: const CheckboxThemeData(
         fillColor: MaterialStatePropertyAll<Color?>(fillColor),
         checkColor: MaterialStatePropertyAll<Color?>(checkColor),
@@ -1651,7 +1651,7 @@ void main() {
   });
 
   testWidgets('Material2 - DataRow renders custom colors when pressed', (WidgetTester tester) async {
-    const Color pressedColor = Color(0xff4caf50);
+    const pressedColor = Color(0xff4caf50);
     Widget buildTable() {
       return DataTable(
         columns: const <DataColumn>[
@@ -1685,13 +1685,13 @@ void main() {
 
     final TestGesture gesture = await tester.startGesture(tester.getCenter(find.text('Content1')));
     await tester.pump(const Duration(milliseconds: 200)); // splash is well underway
-    final RenderBox box = Material.of(tester.element(find.byType(InkWell)))as RenderBox;
+    final box = Material.of(tester.element(find.byType(InkWell)))as RenderBox;
     expect(box, paints..circle(x: 68.0, y: 24.0, color: pressedColor));
     await gesture.up();
   });
 
   testWidgets('Material3 - DataRow renders custom colors when pressed', (WidgetTester tester) async {
-    const Color pressedColor = Color(0xff4caf50);
+    const pressedColor = Color(0xff4caf50);
     Widget buildTable() {
       return DataTable(
         columns: const <DataColumn>[
@@ -1725,7 +1725,7 @@ void main() {
 
     final TestGesture gesture = await tester.startGesture(tester.getCenter(find.text('Content1')));
     await tester.pump(const Duration(milliseconds: 200)); // splash is well underway
-    final RenderBox box = Material.of(tester.element(find.byType(InkWell)))as RenderBox;
+    final box = Material.of(tester.element(find.byType(InkWell)))as RenderBox;
     // Material 3 uses the InkSparkle which uses a shader, so we can't capture
     // the effect with paint methods.
     expect(
@@ -1762,10 +1762,10 @@ void main() {
   testWidgets('DataTable renders with border and background decoration', (WidgetTester tester) async {
     const double width = 800;
     const double height = 600;
-    const double borderHorizontal = 5.0;
-    const double borderVertical = 10.0;
-    const Color borderColor = Color(0xff2196f3);
-    const Color backgroundColor = Color(0xfff5f5f5);
+    const borderHorizontal = 5.0;
+    const borderVertical = 10.0;
+    const borderColor = Color(0xff2196f3);
+    const backgroundColor = Color(0xfff5f5f5);
 
     await tester.pumpWidget(
       MaterialApp(
@@ -1809,8 +1809,8 @@ void main() {
   });
 
   testWidgets('checkboxHorizontalMargin properly applied', (WidgetTester tester) async {
-    const double customCheckboxHorizontalMargin = 15.0;
-    const double customHorizontalMargin = 10.0;
+    const customCheckboxHorizontalMargin = 15.0;
+    const customHorizontalMargin = 10.0;
     Finder cellContent;
     Finder checkbox;
     Finder padding;
@@ -1933,17 +1933,17 @@ void main() {
   });
 
   testWidgets('DataTable set interior border test', (WidgetTester tester) async {
-    const List<DataColumn> columns = <DataColumn>[
+    const columns = <DataColumn>[
       DataColumn(label: Text('column1')),
       DataColumn(label: Text('column2')),
     ];
 
-    const List<DataCell> cells = <DataCell>[
+    const cells = <DataCell>[
       DataCell(Text('cell1')),
       DataCell(Text('cell2')),
     ];
 
-    const List<DataRow> rows = <DataRow>[
+    const rows = <DataRow>[
       DataRow(cells: cells),
       DataRow(cells: cells),
     ];
@@ -1999,17 +1999,17 @@ void main() {
 
   // Regression test for https://github.com/flutter/flutter/issues/100952
   testWidgets('Do not crashes when paint borders in a narrow space', (WidgetTester tester) async {
-    const List<DataColumn> columns = <DataColumn>[
+    const columns = <DataColumn>[
       DataColumn(label: Text('column1')),
       DataColumn(label: Text('column2')),
     ];
 
-    const List<DataCell> cells = <DataCell>[
+    const cells = <DataCell>[
       DataCell(Text('cell1')),
       DataCell(Text('cell2')),
     ];
 
-    const List<DataRow> rows = <DataRow>[
+    const rows = <DataRow>[
       DataRow(cells: cells),
       DataRow(cells: cells),
     ];
@@ -2038,7 +2038,7 @@ void main() {
   testWidgets('DataTable clip behavior', (WidgetTester tester) async {
     const Color selectedColor = Colors.green;
     const Color defaultColor = Colors.red;
-    const BorderRadius borderRadius = BorderRadius.all(Radius.circular(30));
+    const borderRadius = BorderRadius.all(Radius.circular(30));
 
     Widget buildTable({bool selected = false, required Clip clipBehavior}) {
       return Material(
@@ -2119,8 +2119,8 @@ void main() {
 
   group('TableRowInkWell', () {
     testWidgets('can handle secondary taps', (WidgetTester tester) async {
-      bool secondaryTapped = false;
-      bool secondaryTappedDown = false;
+      var secondaryTapped = false;
+      var secondaryTappedDown = false;
 
       await tester.pumpWidget(MaterialApp(
         home: Material(
@@ -2366,7 +2366,7 @@ void main() {
 
   // This is a regression test for https://github.com/flutter/flutter/issues/143340.
   testWidgets('DataColumn label can be centered', (WidgetTester tester) async {
-    const double horizontalMargin = 24.0;
+    const horizontalMargin = 24.0;
 
     Widget buildTable({ MainAxisAlignment? headingRowAlignment, bool sortEnabled = false }) {
       return MaterialApp(

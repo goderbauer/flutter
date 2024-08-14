@@ -544,7 +544,7 @@ class _RenderInputPadding extends RenderShiftedBox {
       layoutChild: ChildLayoutHelper.layoutChild,
     );
     if (child != null) {
-      final BoxParentData childParentData = child!.parentData! as BoxParentData;
+      final childParentData = child!.parentData! as BoxParentData;
       childParentData.offset = Alignment.center.alongOffset(size - child!.size as Offset);
     }
   }

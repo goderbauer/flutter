@@ -24,7 +24,7 @@ Widget buildFrame({
   List<int> pages = defaultPages,
   required TextDirection textDirection,
 }) {
-  final PageView child = PageView(
+  final child = PageView(
     reverse: reverse,
     onPageChanged: (int page) { currentPage = page; },
     children: pages.map<Widget>(buildPage).toList(),

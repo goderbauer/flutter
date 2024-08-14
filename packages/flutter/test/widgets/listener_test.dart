@@ -13,7 +13,7 @@ import 'gesture_utils.dart';
 
 void main() {
   testWidgets('Events bubble up the tree', (WidgetTester tester) async {
-    final List<String> log = <String>[];
+    final log = <String>[];
 
     await tester.pumpWidget(
       Listener(
@@ -47,7 +47,7 @@ void main() {
   });
 
   testWidgets('Detects hover events from touch devices', (WidgetTester tester) async {
-    final List<String> log = <String>[];
+    final log = <String>[];
 
     await tester.pumpWidget(
       Center(
@@ -75,7 +75,7 @@ void main() {
 
   group('transformed events', () {
     testWidgets('simple offset for touch/signal', (WidgetTester tester) async {
-      final List<PointerEvent> events = <PointerEvent>[];
+      final events = <PointerEvent>[];
       final Key key = UniqueKey();
 
       await tester.pumpWidget(
@@ -102,7 +102,7 @@ void main() {
           ),
         ),
       );
-      const Offset moved = Offset(20, 30);
+      const moved = Offset(20, 30);
       final Offset center = tester.getCenter(find.byKey(key));
       final Offset topLeft = tester.getTopLeft(find.byKey(key));
       final TestGesture gesture = await tester.startGesture(center);
@@ -110,11 +110,11 @@ void main() {
       await gesture.up();
 
       expect(events, hasLength(3));
-      final PointerDownEvent down = events[0] as PointerDownEvent;
-      final PointerMoveEvent move = events[1] as PointerMoveEvent;
-      final PointerUpEvent up = events[2] as PointerUpEvent;
+      final down = events[0] as PointerDownEvent;
+      final move = events[1] as PointerMoveEvent;
+      final up = events[2] as PointerUpEvent;
 
-      final Matrix4 expectedTransform = Matrix4.translationValues(-topLeft.dx, -topLeft.dy, 0);
+      final expectedTransform = Matrix4.translationValues(-topLeft.dx, -topLeft.dy, 0);
 
       expect(center, isNot(const Offset(50, 50)));
 
@@ -146,7 +146,7 @@ void main() {
     });
 
     testWidgets('scaled for touch/signal', (WidgetTester tester) async {
-      final List<PointerEvent> events = <PointerEvent>[];
+      final events = <PointerEvent>[];
       final Key key = UniqueKey();
 
       const double scaleFactor = 2;
@@ -179,18 +179,18 @@ void main() {
           ),
         ),
       );
-      const Offset moved = Offset(20, 30);
+      const moved = Offset(20, 30);
       final Offset center = tester.getCenter(find.byKey(key));
       final TestGesture gesture = await tester.startGesture(center);
       await gesture.moveBy(moved);
       await gesture.up();
 
       expect(events, hasLength(3));
-      final PointerDownEvent down = events[0] as PointerDownEvent;
-      final PointerMoveEvent move = events[1] as PointerMoveEvent;
-      final PointerUpEvent up = events[2] as PointerUpEvent;
+      final down = events[0] as PointerDownEvent;
+      final move = events[1] as PointerMoveEvent;
+      final up = events[2] as PointerUpEvent;
 
-      final Matrix4 expectedTransform = Matrix4.identity()
+      final expectedTransform = Matrix4.identity()
         ..scale(1 / scaleFactor, 1 / scaleFactor, 1.0);
 
       expect(center, isNot(const Offset(50, 50)));
@@ -223,7 +223,7 @@ void main() {
     });
 
     testWidgets('scaled and offset for touch/signal', (WidgetTester tester) async {
-      final List<PointerEvent> events = <PointerEvent>[];
+      final events = <PointerEvent>[];
       final Key key = UniqueKey();
 
       const double scaleFactor = 2;
@@ -255,7 +255,7 @@ void main() {
           ),
         ),
       );
-      const Offset moved = Offset(20, 30);
+      const moved = Offset(20, 30);
       final Offset center = tester.getCenter(find.byKey(key));
       final Offset topLeft = tester.getTopLeft(find.byKey(key));
       final TestGesture gesture = await tester.startGesture(center);
@@ -263,11 +263,11 @@ void main() {
       await gesture.up();
 
       expect(events, hasLength(3));
-      final PointerDownEvent down = events[0] as PointerDownEvent;
-      final PointerMoveEvent move = events[1] as PointerMoveEvent;
-      final PointerUpEvent up = events[2] as PointerUpEvent;
+      final down = events[0] as PointerDownEvent;
+      final move = events[1] as PointerMoveEvent;
+      final up = events[2] as PointerUpEvent;
 
-      final Matrix4 expectedTransform = Matrix4.identity()
+      final expectedTransform = Matrix4.identity()
         ..scale(1 / scaleFactor, 1 / scaleFactor, 1.0)
         ..translate(-topLeft.dx, -topLeft.dy);
 
@@ -301,7 +301,7 @@ void main() {
     });
 
     testWidgets('rotated for touch/signal', (WidgetTester tester) async {
-      final List<PointerEvent> events = <PointerEvent>[];
+      final events = <PointerEvent>[];
       final Key key = UniqueKey();
 
       await tester.pumpWidget(
@@ -332,19 +332,19 @@ void main() {
           ),
         ),
       );
-      const Offset moved = Offset(20, 30);
+      const moved = Offset(20, 30);
       final Offset downPosition = tester.getCenter(find.byKey(key)) + const Offset(10, 5);
       final TestGesture gesture = await tester.startGesture(downPosition);
       await gesture.moveBy(moved);
       await gesture.up();
 
       expect(events, hasLength(3));
-      final PointerDownEvent down = events[0] as PointerDownEvent;
-      final PointerMoveEvent move = events[1] as PointerMoveEvent;
-      final PointerUpEvent up = events[2] as PointerUpEvent;
+      final down = events[0] as PointerDownEvent;
+      final move = events[1] as PointerMoveEvent;
+      final up = events[2] as PointerUpEvent;
 
-      const Offset offset = Offset((800 - 100) / 2, (600 - 100) / 2);
-      final Matrix4 expectedTransform = Matrix4.identity()
+      const offset = Offset((800 - 100) / 2, (600 - 100) / 2);
+      final expectedTransform = Matrix4.identity()
         ..rotateZ(-math.pi / 2)
         ..translate(-offset.dx, -offset.dy);
 
@@ -355,7 +355,7 @@ void main() {
       expect(down.localDelta, Offset.zero);
       expect(down.transform, expectedTransform);
 
-      const Offset localDelta = Offset(30, -20);
+      const localDelta = Offset(30, -20);
       expect(move.localPosition, within(distance: 0.001, from: localDownPosition + localDelta));
       expect(move.position, downPosition + moved);
       expect(move.delta, moved);
@@ -379,8 +379,8 @@ void main() {
   });
 
   testWidgets("RenderPointerListener's debugFillProperties when default", (WidgetTester tester) async {
-    final DiagnosticPropertiesBuilder builder = DiagnosticPropertiesBuilder();
-    final RenderPointerListener renderListener = RenderPointerListener();
+    final builder = DiagnosticPropertiesBuilder();
+    final renderListener = RenderPointerListener();
     addTearDown(renderListener.dispose);
 
     renderListener.debugFillProperties(builder);
@@ -400,12 +400,12 @@ void main() {
   });
 
   testWidgets("RenderPointerListener's debugFillProperties when full", (WidgetTester tester) async {
-    final DiagnosticPropertiesBuilder builder = DiagnosticPropertiesBuilder();
+    final builder = DiagnosticPropertiesBuilder();
 
-    final RenderErrorBox renderErrorBox = RenderErrorBox();
+    final renderErrorBox = RenderErrorBox();
     addTearDown(() => renderErrorBox.dispose());
 
-    final RenderPointerListener renderListener = RenderPointerListener(
+    final renderListener = RenderPointerListener(
       onPointerDown: (PointerDownEvent event) {},
       onPointerUp: (PointerUpEvent event) {},
       onPointerMove: (PointerMoveEvent event) {},

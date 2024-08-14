@@ -55,11 +55,11 @@ class RenderSliverCrossAxisGroup extends RenderSliver with ContainerRenderObject
     assert(crossAxisExtent.isFinite);
 
     // First, layout each child with flex == 0 or null.
-    int totalFlex = 0;
-    double remainingExtent = crossAxisExtent;
+    var totalFlex = 0;
+    var remainingExtent = crossAxisExtent;
     RenderSliver? child = firstChild;
     while (child != null) {
-      final SliverPhysicalParentData childParentData = child.parentData! as SliverPhysicalParentData;
+      final childParentData = child.parentData! as SliverPhysicalParentData;
       final int flex = childParentData.crossAxisFlex ?? 0;
       if (flex == 0) {
         // If flex is 0 or null, then the child sliver must provide their own crossAxisExtent.
@@ -81,7 +81,7 @@ class RenderSliverCrossAxisGroup extends RenderSliver with ContainerRenderObject
     // Layout the rest and keep track of the child geometry with greatest scrollExtent.
     geometry = SliverGeometry.zero;
     while (child != null) {
-      final SliverPhysicalParentData childParentData = child.parentData! as SliverPhysicalParentData;
+      final childParentData = child.parentData! as SliverPhysicalParentData;
       final int flex = childParentData.crossAxisFlex ?? 0;
       double childExtent;
       if (flex != 0) {
@@ -103,9 +103,9 @@ class RenderSliverCrossAxisGroup extends RenderSliver with ContainerRenderObject
     // Go back and correct any slivers using a negative paint offset if it tries
     // to paint outside the bounds of the sliver group.
     child = firstChild;
-    double offset = 0.0;
+    var offset = 0.0;
     while (child != null) {
-      final SliverPhysicalParentData childParentData = child.parentData! as SliverPhysicalParentData;
+      final childParentData = child.parentData! as SliverPhysicalParentData;
       final SliverGeometry childLayoutGeometry = child.geometry!;
       final double remainingExtent = geometry!.scrollExtent - constraints.scrollOffset;
       final double paintCorrection = childLayoutGeometry.paintExtent > remainingExtent
@@ -128,7 +128,7 @@ class RenderSliverCrossAxisGroup extends RenderSliver with ContainerRenderObject
 
     while (child != null) {
       if (child.geometry!.visible) {
-        final SliverPhysicalParentData childParentData = child.parentData! as SliverPhysicalParentData;
+        final childParentData = child.parentData! as SliverPhysicalParentData;
         context.paintChild(child, offset + childParentData.paintOffset);
       }
       child = childAfter(child);
@@ -137,7 +137,7 @@ class RenderSliverCrossAxisGroup extends RenderSliver with ContainerRenderObject
 
   @override
   void applyPaintTransform(RenderSliver child, Matrix4 transform) {
-    final SliverPhysicalParentData childParentData = child.parentData! as SliverPhysicalParentData;
+    final childParentData = child.parentData! as SliverPhysicalParentData;
     childParentData.applyPaintTransform(transform);
   }
 
@@ -210,7 +210,7 @@ class RenderSliverMainAxisGroup extends RenderSliver with ContainerRenderObjectM
     final GrowthDirection growthDirection = constraints.growthDirection;
     switch (growthDirection) {
       case GrowthDirection.forward:
-        double childScrollOffset = 0.0;
+        var childScrollOffset = 0.0;
         RenderSliver? current = childBefore(child as RenderSliver);
         while (current != null) {
           childScrollOffset += current.geometry!.scrollExtent;
@@ -218,7 +218,7 @@ class RenderSliverMainAxisGroup extends RenderSliver with ContainerRenderObjectM
         }
         return childScrollOffset;
       case GrowthDirection.reverse:
-        double childScrollOffset = 0.0;
+        var childScrollOffset = 0.0;
         RenderSliver? current = childAfter(child as RenderSliver);
         while (current != null) {
           childScrollOffset -= current.geometry!.scrollExtent;
@@ -266,7 +266,7 @@ class RenderSliverMainAxisGroup extends RenderSliver with ContainerRenderObjectM
         parentUsesSize: true,
       );
       final SliverGeometry childLayoutGeometry = child.geometry!;
-      final SliverPhysicalParentData childParentData = child.parentData! as SliverPhysicalParentData;
+      final childParentData = child.parentData! as SliverPhysicalParentData;
       childParentData.paintOffset = switch (constraints.axis) {
         Axis.vertical   => Offset(0.0, beforeOffsetPaintExtent),
         Axis.horizontal => Offset(beforeOffsetPaintExtent, 0.0),
@@ -285,7 +285,7 @@ class RenderSliverMainAxisGroup extends RenderSliver with ContainerRenderObjectM
       }());
     }
 
-    final double totalScrollExtent = offset;
+    final totalScrollExtent = offset;
     offset = 0.0;
     child = firstChild;
     // Second pass to correct out of bound paintOffsets.
@@ -296,7 +296,7 @@ class RenderSliverMainAxisGroup extends RenderSliver with ContainerRenderObjectM
         to: offset,
       );
       final SliverGeometry childLayoutGeometry = child.geometry!;
-      final SliverPhysicalParentData childParentData = child.parentData! as SliverPhysicalParentData;
+      final childParentData = child.parentData! as SliverPhysicalParentData;
       final double remainingExtent = totalScrollExtent - constraints.scrollOffset;
       if (childLayoutGeometry.paintExtent > remainingExtent) {
         final double paintCorrection = childLayoutGeometry.paintExtent - remainingExtent;
@@ -364,7 +364,7 @@ class RenderSliverMainAxisGroup extends RenderSliver with ContainerRenderObjectM
     while (child != null) {
       final double mainAxisDelta = childMainAxisPosition(child);
       final double crossAxisDelta = childCrossAxisPosition(child);
-      Offset childOffset = Offset(
+      var childOffset = Offset(
         originOffset.dx + mainAxisUnit.dx * mainAxisDelta + crossAxisUnit.dx * crossAxisDelta,
         originOffset.dy + mainAxisUnit.dy * mainAxisDelta + crossAxisUnit.dy * crossAxisDelta,
       );
@@ -381,7 +381,7 @@ class RenderSliverMainAxisGroup extends RenderSliver with ContainerRenderObjectM
 
   @override
   void applyPaintTransform(RenderSliver child, Matrix4 transform) {
-    final SliverPhysicalParentData childParentData = child.parentData! as SliverPhysicalParentData;
+    final childParentData = child.parentData! as SliverPhysicalParentData;
     childParentData.applyPaintTransform(transform);
   }
 

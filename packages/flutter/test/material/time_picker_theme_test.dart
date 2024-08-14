@@ -13,12 +13,12 @@ void main() {
   });
 
   test('TimePickerThemeData lerp special cases', () {
-    const TimePickerThemeData data = TimePickerThemeData();
+    const data = TimePickerThemeData();
     expect(identical(TimePickerThemeData.lerp(data, data, 0.5), data), true);
   });
 
   test('TimePickerThemeData has null fields by default', () {
-    const TimePickerThemeData timePickerTheme = TimePickerThemeData();
+    const timePickerTheme = TimePickerThemeData();
     expect(timePickerTheme.backgroundColor, null);
     expect(timePickerTheme.cancelButtonStyle, null);
     expect(timePickerTheme.confirmButtonStyle, null);
@@ -47,7 +47,7 @@ void main() {
   });
 
   testWidgets('Default TimePickerThemeData debugFillProperties', (WidgetTester tester) async {
-    final DiagnosticPropertiesBuilder builder = DiagnosticPropertiesBuilder();
+    final builder = DiagnosticPropertiesBuilder();
     const TimePickerThemeData().debugFillProperties(builder);
 
     final List<String> description = builder.properties
@@ -59,7 +59,7 @@ void main() {
   });
 
   testWidgets('TimePickerThemeData implements debugFillProperties', (WidgetTester tester) async {
-    final DiagnosticPropertiesBuilder builder = DiagnosticPropertiesBuilder();
+    final builder = DiagnosticPropertiesBuilder();
     const TimePickerThemeData(
       backgroundColor: Color(0xfffffff0),
       cancelButtonStyle: ButtonStyle(foregroundColor: MaterialStatePropertyAll<Color>(Color(0xfffffff1))),
@@ -129,7 +129,7 @@ void main() {
   });
 
   testWidgets('Material2 - Passing no TimePickerThemeData uses defaults', (WidgetTester tester) async {
-    final ThemeData defaultTheme = ThemeData(useMaterial3: false);
+    final defaultTheme = ThemeData(useMaterial3: false);
     await tester.pumpWidget(_TimePickerLauncher(themeData: defaultTheme));
     await tester.tap(find.text('X'));
     await tester.pumpAndSettle(const Duration(seconds: 1));
@@ -191,7 +191,7 @@ void main() {
     final CustomPaint dialPaint = tester.widget(findDialPaint);
     final dynamic dialPainter = dialPaint.painter;
     // ignore: avoid_dynamic_calls
-    final List<dynamic> primaryLabels = dialPainter.primaryLabels as List<dynamic>;
+    final primaryLabels = dialPainter.primaryLabels as List<dynamic>;
     expect(
       // ignore: avoid_dynamic_calls
       primaryLabels.first.painter.text.style,
@@ -200,7 +200,7 @@ void main() {
         .copyWith(color: defaultTheme.colorScheme.onSurface),
     );
     // ignore: avoid_dynamic_calls
-    final List<dynamic> selectedLabels = dialPainter.selectedLabels as List<dynamic>;
+    final selectedLabels = dialPainter.selectedLabels as List<dynamic>;
     expect(
       // ignore: avoid_dynamic_calls
       selectedLabels.first.painter.text.style,
@@ -262,7 +262,7 @@ void main() {
   });
 
   testWidgets('Material3 - Passing no TimePickerThemeData uses defaults', (WidgetTester tester) async {
-    final ThemeData defaultTheme = ThemeData(useMaterial3: true);
+    final defaultTheme = ThemeData(useMaterial3: true);
     await tester.pumpWidget(_TimePickerLauncher(themeData: defaultTheme));
     await tester.tap(find.text('X'));
     await tester.pumpAndSettle(const Duration(seconds: 1));
@@ -340,7 +340,7 @@ void main() {
     final CustomPaint dialPaint = tester.widget(findDialPaint);
     final dynamic dialPainter = dialPaint.painter;
     // ignore: avoid_dynamic_calls
-    final List<dynamic> primaryLabels = dialPainter.primaryLabels as List<dynamic>;
+    final primaryLabels = dialPainter.primaryLabels as List<dynamic>;
     expect(
       // ignore: avoid_dynamic_calls
       primaryLabels.first.painter.text.style,
@@ -352,7 +352,7 @@ void main() {
         ),
     );
     // ignore: avoid_dynamic_calls
-    final List<dynamic> selectedLabels = dialPainter.selectedLabels as List<dynamic>;
+    final selectedLabels = dialPainter.selectedLabels as List<dynamic>;
     expect(
       // ignore: avoid_dynamic_calls
       selectedLabels.first.painter.text.style,
@@ -410,7 +410,7 @@ void main() {
   });
 
   testWidgets('Material2 - Passing no TimePickerThemeData uses defaults - input mode', (WidgetTester tester) async {
-    final ThemeData defaultTheme = ThemeData(useMaterial3: false);
+    final defaultTheme = ThemeData(useMaterial3: false);
     await tester.pumpWidget(_TimePickerLauncher(themeData: defaultTheme, entryMode: TimePickerEntryMode.input));
     await tester.tap(find.text('X'));
     await tester.pumpAndSettle(const Duration(seconds: 1));
@@ -452,7 +452,7 @@ void main() {
   });
 
   testWidgets('Material3 - Passing no TimePickerThemeData uses defaults - input mode', (WidgetTester tester) async {
-    final ThemeData defaultTheme = ThemeData(useMaterial3: true);
+    final defaultTheme = ThemeData(useMaterial3: true);
     await tester.pumpWidget(_TimePickerLauncher(themeData: defaultTheme, entryMode: TimePickerEntryMode.input));
     await tester.tap(find.text('X'));
     await tester.pumpAndSettle(const Duration(seconds: 1));
@@ -520,7 +520,7 @@ void main() {
 
   testWidgets('Material2 - Time picker uses values from TimePickerThemeData', (WidgetTester tester) async {
     final TimePickerThemeData timePickerTheme = _timePickerTheme();
-    final ThemeData theme = ThemeData(timePickerTheme: timePickerTheme, useMaterial3: false);
+    final theme = ThemeData(timePickerTheme: timePickerTheme, useMaterial3: false);
     await tester.pumpWidget(_TimePickerLauncher(themeData: theme));
     await tester.tap(find.text('X'));
     await tester.pumpAndSettle(const Duration(seconds: 1));
@@ -584,7 +584,7 @@ void main() {
     final CustomPaint dialPaint = tester.widget(findDialPaint);
     final dynamic dialPainter = dialPaint.painter;
     // ignore: avoid_dynamic_calls
-    final List<dynamic> primaryLabels = dialPainter.primaryLabels as List<dynamic>;
+    final primaryLabels = dialPainter.primaryLabels as List<dynamic>;
     expect(
       // ignore: avoid_dynamic_calls
       primaryLabels.first.painter.text.style,
@@ -593,7 +593,7 @@ void main() {
         .copyWith(color: _unselectedColor),
     );
     // ignore: avoid_dynamic_calls
-    final List<dynamic> selectedLabels = dialPainter.selectedLabels as List<dynamic>;
+    final selectedLabels = dialPainter.selectedLabels as List<dynamic>;
     expect(
       // ignore: avoid_dynamic_calls
       selectedLabels.first.painter.text.style,
@@ -643,7 +643,7 @@ void main() {
 
   testWidgets('Material3 - Time picker uses values from TimePickerThemeData', (WidgetTester tester) async {
     final TimePickerThemeData timePickerTheme = _timePickerTheme();
-    final ThemeData theme = ThemeData(timePickerTheme: timePickerTheme, useMaterial3: true);
+    final theme = ThemeData(timePickerTheme: timePickerTheme, useMaterial3: true);
     await tester.pumpWidget(_TimePickerLauncher(themeData: theme));
     await tester.tap(find.text('X'));
     await tester.pumpAndSettle(const Duration(seconds: 1));
@@ -710,7 +710,7 @@ void main() {
     final CustomPaint dialPaint = tester.widget(findDialPaint);
     final dynamic dialPainter = dialPaint.painter;
     // ignore: avoid_dynamic_calls
-    final List<dynamic> primaryLabels = dialPainter.primaryLabels as List<dynamic>;
+    final primaryLabels = dialPainter.primaryLabels as List<dynamic>;
     expect(
       // ignore: avoid_dynamic_calls
       primaryLabels.first.painter.text.style,
@@ -719,7 +719,7 @@ void main() {
         .copyWith(color: _unselectedColor, decorationColor: theme.colorScheme.onSurface),
     );
     // ignore: avoid_dynamic_calls
-    final List<dynamic> selectedLabels = dialPainter.selectedLabels as List<dynamic>;
+    final selectedLabels = dialPainter.selectedLabels as List<dynamic>;
     expect(
       // ignore: avoid_dynamic_calls
       selectedLabels.first.painter.text.style,
@@ -766,7 +766,7 @@ void main() {
 
   testWidgets('Time picker uses values from TimePickerThemeData with InputDecorationTheme - input mode', (WidgetTester tester) async {
     final TimePickerThemeData timePickerTheme = _timePickerTheme(includeInputDecoration: true);
-    final ThemeData theme = ThemeData(timePickerTheme: timePickerTheme);
+    final theme = ThemeData(timePickerTheme: timePickerTheme);
     await tester.pumpWidget(_TimePickerLauncher(themeData: theme, entryMode: TimePickerEntryMode.input));
     await tester.tap(find.text('X'));
     await tester.pumpAndSettle(const Duration(seconds: 1));
@@ -783,7 +783,7 @@ void main() {
 
   testWidgets('Time picker uses values from TimePickerThemeData without InputDecorationTheme - input mode', (WidgetTester tester) async {
     final TimePickerThemeData timePickerTheme = _timePickerTheme();
-    final ThemeData theme = ThemeData(timePickerTheme: timePickerTheme);
+    final theme = ThemeData(timePickerTheme: timePickerTheme);
     await tester.pumpWidget(_TimePickerLauncher(themeData: theme, entryMode: TimePickerEntryMode.input));
     await tester.tap(find.text('X'));
     await tester.pumpAndSettle(const Duration(seconds: 1));
@@ -794,7 +794,7 @@ void main() {
 
   testWidgets('Time picker dayPeriodColor does the right thing with non-MaterialStateColor', (WidgetTester tester) async {
     final TimePickerThemeData timePickerTheme = _timePickerTheme().copyWith(dayPeriodColor: Colors.red);
-    final ThemeData theme = ThemeData(timePickerTheme: timePickerTheme);
+    final theme = ThemeData(timePickerTheme: timePickerTheme);
     await tester.pumpWidget(_TimePickerLauncher(themeData: theme, entryMode: TimePickerEntryMode.input));
     await tester.tap(find.text('X'));
     await tester.pumpAndSettle(const Duration(seconds: 1));
@@ -807,7 +807,7 @@ void main() {
   });
 
   testWidgets('Time picker dayPeriodColor does the right thing with MaterialStateColor', (WidgetTester tester) async {
-    final MaterialStateColor testColor = MaterialStateColor.resolveWith((Set<MaterialState> states) {
+    final testColor = MaterialStateColor.resolveWith((Set<MaterialState> states) {
       if (states.contains(MaterialState.selected)) {
         return Colors.green;
       }
@@ -815,7 +815,7 @@ void main() {
     });
 
     final TimePickerThemeData timePickerTheme = _timePickerTheme().copyWith(dayPeriodColor: testColor);
-    final ThemeData theme = ThemeData(timePickerTheme: timePickerTheme);
+    final theme = ThemeData(timePickerTheme: timePickerTheme);
     await tester.pumpWidget(_TimePickerLauncher(themeData: theme, entryMode: TimePickerEntryMode.input));
     await tester.tap(find.text('X'));
     await tester.pumpAndSettle(const Duration(seconds: 1));
@@ -831,7 +831,7 @@ void main() {
     final TimePickerThemeData timePickerTheme = _timePickerTheme().copyWith(
       timeSelectorSeparatorColor: const MaterialStatePropertyAll<Color>(Color(0xff00ff00))
     );
-    final ThemeData theme = ThemeData(timePickerTheme: timePickerTheme);
+    final theme = ThemeData(timePickerTheme: timePickerTheme);
     await tester.pumpWidget(_TimePickerLauncher(themeData: theme, entryMode: TimePickerEntryMode.input));
     await tester.tap(find.text('X'));
     await tester.pumpAndSettle(const Duration(seconds: 1));
@@ -849,7 +849,7 @@ void main() {
         ),
       ),
     );
-    final ThemeData theme = ThemeData(timePickerTheme: timePickerTheme);
+    final theme = ThemeData(timePickerTheme: timePickerTheme);
     await tester.pumpWidget(_TimePickerLauncher(themeData: theme, entryMode: TimePickerEntryMode.input));
     await tester.tap(find.text('X'));
     await tester.pumpAndSettle(const Duration(seconds: 1));
@@ -867,7 +867,7 @@ TimePickerThemeData _timePickerTheme({bool includeInputDecoration = false}) {
   Color getColor(Set<MaterialState> states) {
     return states.contains(MaterialState.selected) ? _selectedColor : _unselectedColor;
   }
-  final MaterialStateColor materialStateColor = MaterialStateColor.resolveWith(getColor);
+  final materialStateColor = MaterialStateColor.resolveWith(getColor);
   return TimePickerThemeData(
     backgroundColor: Colors.orange,
     cancelButtonStyle: TextButton.styleFrom(foregroundColor: Colors.red),

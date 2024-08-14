@@ -10,7 +10,7 @@ import 'clipboard_utils.dart';
 import 'editable_text_utils.dart';
 
 void main() {
-  final MockClipboard mockClipboard = MockClipboard();
+  final mockClipboard = MockClipboard();
   TestWidgetsFlutterBinding.ensureInitialized()
     .defaultBinaryMessenger.setMockMethodCallHandler(SystemChannels.platform, mockClipboard.handleMethodCall);
 
@@ -41,7 +41,7 @@ void main() {
     expect(find.byKey(key1), findsNothing);
     expect(find.byKey(key2), findsNothing);
 
-    final ContextMenuController controller1 = ContextMenuController();
+    final controller1 = ContextMenuController();
     await tester.pump();
     expect(find.byKey(key1), findsNothing);
     expect(find.byKey(key2), findsNothing);
@@ -71,7 +71,7 @@ void main() {
     expect(find.byKey(key2), findsNothing);
 
     // Showing a new menu hides the first.
-    final ContextMenuController controller2 = ContextMenuController();
+    final controller2 = ContextMenuController();
     controller2.show(
       context: context,
       contextMenuBuilder: (BuildContext context) {
@@ -109,7 +109,7 @@ void main() {
 
     expect(find.byKey(key1), findsNothing);
 
-    final ContextMenuController controller = ContextMenuController();
+    final controller = ContextMenuController();
     addTearDown(controller.remove);
 
     // Instantiating the controller does not shown it.
@@ -143,7 +143,7 @@ void main() {
   });
 
   testWidgets('markNeedsBuild causes the builder to update', (WidgetTester tester) async {
-    int buildCount = 0;
+    var buildCount = 0;
     late final BuildContext context;
 
     await tester.pumpWidget(
@@ -159,7 +159,7 @@ void main() {
       ),
     );
 
-    final ContextMenuController controller = ContextMenuController();
+    final controller = ContextMenuController();
     controller.show(
       context: context,
       contextMenuBuilder: (BuildContext context) {
@@ -184,10 +184,10 @@ void main() {
     final GlobalKey directKey = GlobalKey();
     late final BuildContext context;
 
-    final TextEditingController textEditingController = TextEditingController();
+    final textEditingController = TextEditingController();
     addTearDown(textEditingController.dispose);
 
-    final FocusNode focusNode = FocusNode();
+    final focusNode = FocusNode();
     addTearDown(focusNode.dispose);
 
     await tester.pumpWidget(
@@ -229,7 +229,7 @@ void main() {
     expect(find.byKey(builtInKey), findsOneWidget);
     expect(find.byKey(directKey), findsNothing);
 
-    final ContextMenuController controller = ContextMenuController();
+    final controller = ContextMenuController();
     controller.show(
       context: context,
       contextMenuBuilder: (BuildContext context) {

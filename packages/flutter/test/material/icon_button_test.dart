@@ -22,8 +22,8 @@ class MockOnPressedFunction {
 
 void main() {
   late MockOnPressedFunction mockOnPressedFunction;
-  const ColorScheme colorScheme = ColorScheme.light();
-  final ThemeData theme = ThemeData.from(colorScheme: colorScheme);
+  const colorScheme = ColorScheme.light();
+  final theme = ThemeData.from(colorScheme: colorScheme);
   setUp(() {
     mockOnPressedFunction = MockOnPressedFunction();
   });
@@ -33,7 +33,7 @@ void main() {
   }
 
   testWidgets('test icon is findable by key', (WidgetTester tester) async {
-    const ValueKey<String> key = ValueKey<String>('icon-button');
+    const key = ValueKey<String>('icon-button');
     await tester.pumpWidget(
       wrap(
         useMaterial3: true,
@@ -104,7 +104,7 @@ void main() {
 
   testWidgets('when both iconSize and IconTheme.of(context).size are null, size falls back to 24.0', (WidgetTester tester) async {
     final bool material3 = theme.useMaterial3;
-    final FocusNode focusNode = FocusNode(debugLabel: 'Ink Focus');
+    final focusNode = FocusNode(debugLabel: 'Ink Focus');
     await tester.pumpWidget(
       wrap(
         useMaterial3: material3,
@@ -282,11 +282,11 @@ void main() {
 
   testWidgets('Small icons comply with VisualDensity requirements', (WidgetTester tester) async {
     final bool material3 = theme.useMaterial3;
-    final ThemeData themeDataM2 = ThemeData(
+    final themeDataM2 = ThemeData(
       useMaterial3: material3,
       visualDensity: const VisualDensity(horizontal: 1, vertical: -1),
     );
-    final ThemeData themeDataM3 = ThemeData(
+    final themeDataM3 = ThemeData(
       useMaterial3: material3,
       iconButtonTheme: IconButtonThemeData(
           style: IconButton.styleFrom(
@@ -481,8 +481,8 @@ void main() {
   // This test is very similar to the '...explicit splashColor and highlightColor' test
   // in buttons_test.dart. If you change this one, you may want to also change that one.
   testWidgets('IconButton with explicit splashColor and highlightColor - M2', (WidgetTester tester) async {
-    const Color directSplashColor = Color(0xFF00000F);
-    const Color directHighlightColor = Color(0xFF0000F0);
+    const directSplashColor = Color(0xFF00000F);
+    const directHighlightColor = Color(0xFF0000F0);
 
     Widget buttonWidget = wrap(
       useMaterial3: false,
@@ -513,8 +513,8 @@ void main() {
         ..circle(color: directHighlightColor),
     );
 
-    const Color themeSplashColor1 = Color(0xFF000F00);
-    const Color themeHighlightColor1 = Color(0xFF00FF00);
+    const themeSplashColor1 = Color(0xFF000F00);
+    const themeHighlightColor1 = Color(0xFF00FF00);
 
     buttonWidget = wrap(
       useMaterial3: false,
@@ -542,8 +542,8 @@ void main() {
         ..circle(color: themeHighlightColor1),
     );
 
-    const Color themeSplashColor2 = Color(0xFF002200);
-    const Color themeHighlightColor2 = Color(0xFF001100);
+    const themeSplashColor2 = Color(0xFF002200);
+    const themeHighlightColor2 = Color(0xFF001100);
 
     await tester.pumpWidget(
       Theme(
@@ -567,7 +567,7 @@ void main() {
   });
 
   testWidgets('IconButton with explicit splash radius - M2', (WidgetTester tester) async {
-    const double splashRadius = 30.0;
+    const splashRadius = 30.0;
     await tester.pumpWidget(
       MaterialApp(
         theme: ThemeData(useMaterial3: false),
@@ -598,7 +598,7 @@ void main() {
   });
 
   testWidgets('IconButton Semantics (enabled) - M2', (WidgetTester tester) async {
-    final SemanticsTester semantics = SemanticsTester(tester);
+    final semantics = SemanticsTester(tester);
 
     await tester.pumpWidget(
       wrap(
@@ -633,7 +633,7 @@ void main() {
   });
 
   testWidgets('IconButton Semantics (disabled) - M2', (WidgetTester tester) async {
-    final SemanticsTester semantics = SemanticsTester(tester);
+    final semantics = SemanticsTester(tester);
 
     await tester.pumpWidget(
       wrap(
@@ -662,7 +662,7 @@ void main() {
   });
 
     testWidgets('IconButton Semantics (selected) - M3', (WidgetTester tester) async {
-    final SemanticsTester semantics = SemanticsTester(tester);
+    final semantics = SemanticsTester(tester);
 
     await tester.pumpWidget(
       wrap(
@@ -719,7 +719,7 @@ void main() {
   });
 
   testWidgets('IconButton loses focus when disabled.', (WidgetTester tester) async {
-    final FocusNode focusNode = FocusNode(debugLabel: 'IconButton');
+    final focusNode = FocusNode(debugLabel: 'IconButton');
     await tester.pumpWidget(
       wrap(
         useMaterial3: theme.useMaterial3,
@@ -753,7 +753,7 @@ void main() {
   });
 
   testWidgets('IconButton keeps focus when disabled in directional navigation mode.', (WidgetTester tester) async {
-    final FocusNode focusNode = FocusNode(debugLabel: 'IconButton');
+    final focusNode = FocusNode(debugLabel: 'IconButton');
     await tester.pumpWidget(
       wrap(
         useMaterial3: theme.useMaterial3,
@@ -797,8 +797,8 @@ void main() {
   });
 
   testWidgets("Disabled IconButton can't be traversed to when disabled.", (WidgetTester tester) async {
-    final FocusNode focusNode1 = FocusNode(debugLabel: 'IconButton 1');
-    final FocusNode focusNode2 = FocusNode(debugLabel: 'IconButton 2');
+    final focusNode1 = FocusNode(debugLabel: 'IconButton 1');
+    final focusNode2 = FocusNode(debugLabel: 'IconButton 2');
     addTearDown(() {
       focusNode1.dispose();
       focusNode2.dispose();
@@ -916,7 +916,7 @@ void main() {
   });
 
   testWidgets('IconButton responds to density changes.', (WidgetTester tester) async {
-    const Key key = Key('test');
+    const key = Key('test');
     final bool material3 = theme.useMaterial3;
     Future<void> buildTest(VisualDensity visualDensity) async {
       return tester.pumpWidget(
@@ -1081,7 +1081,7 @@ void main() {
   });
 
   testWidgets('IconTheme opacity test', (WidgetTester tester) async {
-    final ThemeData theme = ThemeData.from(colorScheme: colorScheme, useMaterial3: false);
+    final theme = ThemeData.from(colorScheme: colorScheme, useMaterial3: false);
 
     await tester.pumpWidget(
       MaterialApp(
@@ -1124,7 +1124,7 @@ void main() {
   });
 
   testWidgets('IconButton defaults - M3', (WidgetTester tester) async {
-    final ThemeData themeM3 = ThemeData.from(colorScheme: colorScheme, useMaterial3: true);
+    final themeM3 = ThemeData.from(colorScheme: colorScheme, useMaterial3: true);
 
     // Enabled IconButton
     await tester.pumpWidget(
@@ -1207,8 +1207,8 @@ void main() {
   });
 
   testWidgets('IconButton default overlayColor resolves pressed state', (WidgetTester tester) async {
-    final FocusNode focusNode = FocusNode();
-    final ThemeData theme = ThemeData(useMaterial3: true);
+    final focusNode = FocusNode();
+    final theme = ThemeData(useMaterial3: true);
 
     await tester.pumpWidget(
       MaterialApp(
@@ -1258,7 +1258,7 @@ void main() {
   });
 
   testWidgets('IconButton.fill defaults - M3', (WidgetTester tester) async {
-    final ThemeData themeM3 = ThemeData.from(colorScheme: colorScheme, useMaterial3: true);
+    final themeM3 = ThemeData.from(colorScheme: colorScheme, useMaterial3: true);
 
     // Enabled IconButton
     await tester.pumpWidget(
@@ -1344,8 +1344,8 @@ void main() {
   });
 
   testWidgets('IconButton.fill default overlayColor resolves pressed state', (WidgetTester tester) async {
-    final FocusNode focusNode = FocusNode();
-    final ThemeData theme = ThemeData(useMaterial3: true);
+    final focusNode = FocusNode();
+    final theme = ThemeData(useMaterial3: true);
 
     await tester.pumpWidget(
       MaterialApp(
@@ -1395,7 +1395,7 @@ void main() {
   });
 
   testWidgets('Toggleable IconButton.fill defaults - M3', (WidgetTester tester) async {
-    final ThemeData themeM3 = ThemeData.from(colorScheme: colorScheme, useMaterial3: true);
+    final themeM3 = ThemeData.from(colorScheme: colorScheme, useMaterial3: true);
 
     // Enabled selected IconButton
     await tester.pumpWidget(
@@ -1510,7 +1510,7 @@ void main() {
   });
 
   testWidgets('IconButton.filledTonal defaults - M3', (WidgetTester tester) async {
-    final ThemeData themeM3 = ThemeData.from(colorScheme: colorScheme, useMaterial3: true);
+    final themeM3 = ThemeData.from(colorScheme: colorScheme, useMaterial3: true);
 
     // Enabled IconButton.tonal
     await tester.pumpWidget(
@@ -1596,8 +1596,8 @@ void main() {
   });
 
   testWidgets('IconButton.filledTonal default overlayColor resolves pressed state', (WidgetTester tester) async {
-    final FocusNode focusNode = FocusNode();
-    final ThemeData theme = ThemeData(useMaterial3: true);
+    final focusNode = FocusNode();
+    final theme = ThemeData(useMaterial3: true);
 
     await tester.pumpWidget(
       MaterialApp(
@@ -1647,7 +1647,7 @@ void main() {
   });
 
   testWidgets('Toggleable IconButton.filledTonal defaults - M3', (WidgetTester tester) async {
-    final ThemeData themeM3 = ThemeData.from(colorScheme: colorScheme, useMaterial3: true);
+    final themeM3 = ThemeData.from(colorScheme: colorScheme, useMaterial3: true);
 
     // Enabled selected IconButton
     await tester.pumpWidget(
@@ -1762,7 +1762,7 @@ void main() {
   });
 
   testWidgets('IconButton.outlined defaults - M3', (WidgetTester tester) async {
-    final ThemeData themeM3 = ThemeData.from(colorScheme: colorScheme, useMaterial3: true);
+    final themeM3 = ThemeData.from(colorScheme: colorScheme, useMaterial3: true);
 
     // Enabled IconButton.tonal
     await tester.pumpWidget(
@@ -1848,8 +1848,8 @@ void main() {
   });
 
   testWidgets('IconButton.outlined default overlayColor resolves pressed state', (WidgetTester tester) async {
-    final FocusNode focusNode = FocusNode();
-    final ThemeData theme = ThemeData(useMaterial3: true);
+    final focusNode = FocusNode();
+    final theme = ThemeData(useMaterial3: true);
 
     await tester.pumpWidget(
       MaterialApp(
@@ -1899,7 +1899,7 @@ void main() {
   });
 
   testWidgets('Toggleable IconButton.outlined defaults - M3', (WidgetTester tester) async {
-    final ThemeData themeM3 = ThemeData.from(colorScheme: colorScheme, useMaterial3: true);
+    final themeM3 = ThemeData.from(colorScheme: colorScheme, useMaterial3: true);
 
     // Enabled selected IconButton
     await tester.pumpWidget(
@@ -2014,7 +2014,7 @@ void main() {
   });
 
   testWidgets('Default IconButton meets a11y contrast guidelines - M3', (WidgetTester tester) async {
-    final FocusNode focusNode = FocusNode();
+    final focusNode = FocusNode();
 
     await tester.pumpWidget(
       MaterialApp(
@@ -2063,14 +2063,14 @@ void main() {
   );
 
   testWidgets('IconButton uses stateful color for icon color in different states - M3', (WidgetTester tester) async {
-    bool isSelected = false;
-    final FocusNode focusNode = FocusNode();
+    var isSelected = false;
+    final focusNode = FocusNode();
 
-    const Color pressedColor = Color(0x00000001);
-    const Color hoverColor = Color(0x00000002);
-    const Color focusedColor = Color(0x00000003);
-    const Color defaultColor = Color(0x00000004);
-    const Color selectedColor = Color(0x00000005);
+    const pressedColor = Color(0x00000001);
+    const hoverColor = Color(0x00000002);
+    const focusedColor = Color(0x00000003);
+    const defaultColor = Color(0x00000004);
+    const selectedColor = Color(0x00000005);
 
     Color getIconColor(Set<MaterialState> states) {
       if (states.contains(MaterialState.pressed)) {
@@ -2151,7 +2151,7 @@ void main() {
   });
 
   testWidgets('Does IconButton contribute semantics - M3', (WidgetTester tester) async {
-    final SemanticsTester semantics = SemanticsTester(tester);
+    final semantics = SemanticsTester(tester);
     await tester.pumpWidget(
       Directionality(
         textDirection: TextDirection.ltr,
@@ -2333,7 +2333,7 @@ void main() {
   });
 
   testWidgets('Icon button is selectable when isSelected is not null - M3', (WidgetTester tester) async {
-    bool isSelected = false;
+    var isSelected = false;
     await tester.pumpWidget(
       MaterialApp(
         theme: ThemeData.from(colorScheme: const ColorScheme.light(), useMaterial3: true),
@@ -2386,7 +2386,7 @@ void main() {
   });
 
   testWidgets('The IconButton is in selected status if isSelected is true by default - M3', (WidgetTester tester) async {
-    bool isSelected = true;
+    var isSelected = true;
     await tester.pumpWidget(
       MaterialApp(
         theme: ThemeData.from(colorScheme: const ColorScheme.light(), useMaterial3: true),
@@ -2432,7 +2432,7 @@ void main() {
   });
 
   testWidgets("The selectedIcon is used if it's not null and the button is clicked" , (WidgetTester tester) async {
-    bool isSelected = false;
+    var isSelected = false;
     await tester.pumpWidget(
       MaterialApp(
         theme: ThemeData.from(colorScheme: const ColorScheme.light(), useMaterial3: true),
@@ -2472,7 +2472,7 @@ void main() {
   });
 
   testWidgets('The original icon is used for selected and unselected status when selectedIcon is null' , (WidgetTester tester) async {
-    bool isSelected = false;
+    var isSelected = false;
     await tester.pumpWidget(
       MaterialApp(
         theme: ThemeData.from(colorScheme: const ColorScheme.light(), useMaterial3: true),
@@ -2579,7 +2579,7 @@ void main() {
   });
 
   testWidgets('IconButton.styleFrom overlayColor overrides default overlay color', (WidgetTester tester) async {
-    const Color overlayColor = Color(0xffff0000);
+    const overlayColor = Color(0xffff0000);
     await tester.pumpWidget(
       MaterialApp(
         home: Scaffold(
@@ -2626,10 +2626,10 @@ void main() {
   });
 
   testWidgets('IconButton.styleFrom highlight, hover, focus colors overrides overlayColor', (WidgetTester tester) async {
-    const Color hoverColor = Color(0xff0000f2);
-    const Color highlightColor = Color(0xff0000f1);
-    const Color focusColor = Color(0xff0000f3);
-    const Color overlayColor = Color(0xffff0000);
+    const hoverColor = Color(0xff0000f2);
+    const highlightColor = Color(0xff0000f1);
+    const focusColor = Color(0xff0000f3);
+    const overlayColor = Color(0xffff0000);
 
     await tester.pumpWidget(
       MaterialApp(

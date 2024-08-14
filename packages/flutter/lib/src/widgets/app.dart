@@ -166,7 +166,7 @@ Locale basicLocaleListResolution(List<Locale>? preferredLocales, Iterable<Locale
   Locale? matchesLanguageCode;
   Locale? matchesCountryCode;
   // Loop over user's preferred locales
-  for (int localeIndex = 0; localeIndex < preferredLocales.length; localeIndex += 1) {
+  for (var localeIndex = 0; localeIndex < preferredLocales.length; localeIndex += 1) {
     final Locale userLocale = preferredLocales[localeIndex];
     // Look for perfect match.
     if (allSupportedLocales.containsKey('${userLocale.languageCode}_${userLocale.scriptCode}_${userLocale.countryCode}')) {

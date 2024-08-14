@@ -85,12 +85,12 @@ void main() {
 
       // The maximum amounts we expect the fab width and height to change
       // during one step of a transition.
-      const double maxDeltaWidth = 12.5;
-      const double maxDeltaHeight = 12.5;
+      const maxDeltaWidth = 12.5;
+      const maxDeltaHeight = 12.5;
 
       // The maximum amounts we expect the fab icon to rotate during one step
       // of a transition.
-      const double maxDeltaRotation = 0.09;
+      const maxDeltaRotation = 0.09;
 
       // We'll listen to the Scaffold's geometry for any 'jumps' to detect
       // changes in the size and rotation of the fab.
@@ -134,8 +134,8 @@ void main() {
 
           if ((previousRotations?.isNotEmpty ?? false) && currentRotations.isNotEmpty
               && previousRect != null && currentRect != null) {
-            final List<double> deltas = <double>[];
-            for (final double currentRotation in currentRotations) {
+            final deltas = <double>[];
+            for (final currentRotation in currentRotations) {
               late double minDelta;
               for (final double previousRotation in previousRotations!) {
                 final double delta = (previousRotation - currentRotation).abs();
@@ -588,8 +588,8 @@ void main() {
 
     testWidgets('Moves between new locations and old locations with custom animator', (WidgetTester tester) async {
       final FloatingActionButtonAnimator animator = _LinearMovementFabAnimator();
-      const Offset begin = Offset(_centerOffsetX, _topOffsetY);
-      const Offset end = Offset(_rightOffsetX - 50, _floatOffsetY);
+      const begin = Offset(_centerOffsetX, _topOffsetY);
+      const end = Offset(_rightOffsetX - 50, _floatOffsetY);
 
       final Duration animationDuration = kFloatingActionButtonSegue * 2;
 
@@ -754,10 +754,10 @@ void main() {
       required Rect snackBarRect,
       bool mini = false,
     }) async  {
-      const double keyboardHeight = 200.0;
-      const double viewPadding = 50.0;
+      const keyboardHeight = 200.0;
+      const viewPadding = 50.0;
       final Key floatingActionButton = UniqueKey();
-      const double bottomNavHeight = 106.0;
+      const bottomNavHeight = 106.0;
       // Default
       await tester.pumpWidget(buildTest(
         location,
@@ -1000,13 +1000,13 @@ void main() {
     }
 
     testWidgets('startFloat', (WidgetTester tester) async {
-      const Rect defaultRect = Rect.fromLTRB(16.0, 478.0, 72.0, 534.0);
+      const defaultRect = Rect.fromLTRB(16.0, 478.0, 72.0, 534.0);
       // Positioned relative to BottomNavigationBar
-      const Rect bottomNavigationBarRect = Rect.fromLTRB(16.0, 422.0, 72.0, 478.0);
+      const bottomNavigationBarRect = Rect.fromLTRB(16.0, 422.0, 72.0, 478.0);
       // Position relative to BottomSheet
-      const Rect bottomSheetRect = Rect.fromLTRB(16.0, 472.0, 72.0, 528.0);
+      const bottomSheetRect = Rect.fromLTRB(16.0, 472.0, 72.0, 528.0);
       // Positioned relative to SnackBar
-      const Rect snackBarRect = Rect.fromLTRB(16.0, 478.0, 72.0, 534.0);
+      const snackBarRect = Rect.fromLTRB(16.0, 478.0, 72.0, 534.0);
       await runFloatTests(
         tester,
         FloatingActionButtonLocation.startFloat,
@@ -1018,13 +1018,13 @@ void main() {
     });
 
     testWidgets('miniStartFloat', (WidgetTester tester) async {
-      const Rect defaultRect = Rect.fromLTRB(12.0, 490.0, 60.0, 538.0);
+      const defaultRect = Rect.fromLTRB(12.0, 490.0, 60.0, 538.0);
       // Positioned relative to BottomNavigationBar
-      const Rect bottomNavigationBarRect = Rect.fromLTRB(12.0, 434.0, 60.0, 482.0);
+      const bottomNavigationBarRect = Rect.fromLTRB(12.0, 434.0, 60.0, 482.0);
       // Positioned relative to BottomSheet
-      const Rect bottomSheetRect = Rect.fromLTRB(12.0, 480.0, 60.0, 528.0);
+      const bottomSheetRect = Rect.fromLTRB(12.0, 480.0, 60.0, 528.0);
       // Positioned relative to SnackBar
-      const Rect snackBarRect = Rect.fromLTRB(12.0, 490.0, 60.0, 538.0);
+      const snackBarRect = Rect.fromLTRB(12.0, 490.0, 60.0, 538.0);
       await runFloatTests(
         tester,
         FloatingActionButtonLocation.miniStartFloat,
@@ -1037,13 +1037,13 @@ void main() {
     });
 
     testWidgets('centerFloat', (WidgetTester tester) async {
-      const Rect defaultRect = Rect.fromLTRB(372.0, 478.0, 428.0, 534.0);
+      const defaultRect = Rect.fromLTRB(372.0, 478.0, 428.0, 534.0);
       // Positioned relative to BottomNavigationBar
-      const Rect bottomNavigationBarRect = Rect.fromLTRB(372.0, 422.0, 428.0, 478.0);
+      const bottomNavigationBarRect = Rect.fromLTRB(372.0, 422.0, 428.0, 478.0);
       // Positioned relative to BottomSheet
-      const Rect bottomSheetRect = Rect.fromLTRB(372.0, 472.0, 428.0, 528.0);
+      const bottomSheetRect = Rect.fromLTRB(372.0, 472.0, 428.0, 528.0);
       // Positioned relative to SnackBar
-      const Rect snackBarRect = Rect.fromLTRB(372.0, 478.0, 428.0, 534.0);
+      const snackBarRect = Rect.fromLTRB(372.0, 478.0, 428.0, 534.0);
       await runFloatTests(
         tester,
         FloatingActionButtonLocation.centerFloat,
@@ -1055,13 +1055,13 @@ void main() {
     });
 
     testWidgets('miniCenterFloat', (WidgetTester tester) async {
-      const Rect defaultRect = Rect.fromLTRB(376.0, 490.0, 424.0, 538.0);
+      const defaultRect = Rect.fromLTRB(376.0, 490.0, 424.0, 538.0);
       // Positioned relative to BottomNavigationBar
-      const Rect bottomNavigationBarRect = Rect.fromLTRB(376.0, 434.0, 424.0, 482.0);
+      const bottomNavigationBarRect = Rect.fromLTRB(376.0, 434.0, 424.0, 482.0);
       // Positioned relative to BottomSheet
-      const Rect bottomSheetRect = Rect.fromLTRB(376.0, 480.0, 424.0, 528.0);
+      const bottomSheetRect = Rect.fromLTRB(376.0, 480.0, 424.0, 528.0);
       // Positioned relative to SnackBar
-      const Rect snackBarRect = Rect.fromLTRB(376.0, 490.0, 424.0, 538.0);
+      const snackBarRect = Rect.fromLTRB(376.0, 490.0, 424.0, 538.0);
       await runFloatTests(
         tester,
         FloatingActionButtonLocation.miniCenterFloat,
@@ -1074,13 +1074,13 @@ void main() {
     });
 
     testWidgets('endFloat', (WidgetTester tester) async {
-      const Rect defaultRect = Rect.fromLTRB(728.0, 478.0, 784.0, 534.0);
+      const defaultRect = Rect.fromLTRB(728.0, 478.0, 784.0, 534.0);
       // Positioned relative to BottomNavigationBar
-      const Rect bottomNavigationBarRect = Rect.fromLTRB(728.0, 422.0, 784.0, 478.0);
+      const bottomNavigationBarRect = Rect.fromLTRB(728.0, 422.0, 784.0, 478.0);
       // Positioned relative to BottomSheet
-      const Rect bottomSheetRect = Rect.fromLTRB(728.0, 472.0, 784.0, 528.0);
+      const bottomSheetRect = Rect.fromLTRB(728.0, 472.0, 784.0, 528.0);
       // Positioned relative to SnackBar
-      const Rect snackBarRect = Rect.fromLTRB(728.0, 478.0, 784.0, 534.0);
+      const snackBarRect = Rect.fromLTRB(728.0, 478.0, 784.0, 534.0);
       await runFloatTests(
         tester,
         FloatingActionButtonLocation.endFloat,
@@ -1092,13 +1092,13 @@ void main() {
     });
 
     testWidgets('miniEndFloat', (WidgetTester tester) async {
-      const Rect defaultRect = Rect.fromLTRB(740.0, 490.0, 788.0, 538.0);
+      const defaultRect = Rect.fromLTRB(740.0, 490.0, 788.0, 538.0);
       // Positioned relative to BottomNavigationBar
-      const Rect bottomNavigationBarRect = Rect.fromLTRB(740.0, 434.0, 788.0, 482.0);
+      const bottomNavigationBarRect = Rect.fromLTRB(740.0, 434.0, 788.0, 482.0);
       // Positioned relative to BottomSheet
-      const Rect bottomSheetRect = Rect.fromLTRB(740.0, 480.0, 788.0, 528.0);
+      const bottomSheetRect = Rect.fromLTRB(740.0, 480.0, 788.0, 528.0);
       // Positioned relative to SnackBar
-      const Rect snackBarRect = Rect.fromLTRB(740.0, 490.0, 788.0, 538.0);
+      const snackBarRect = Rect.fromLTRB(740.0, 490.0, 788.0, 538.0);
       await runFloatTests(
         tester,
         FloatingActionButtonLocation.miniEndFloat,
@@ -1129,12 +1129,12 @@ void main() {
       required Rect snackBarRect,
       bool mini = false,
     }) async  {
-      const double keyboardHeight = 200.0;
-      const double viewPadding = 50.0;
-      const double bottomNavHeight = 106.0;
-      const double scaffoldHeight = 600.0;
+      const keyboardHeight = 200.0;
+      const viewPadding = 50.0;
+      const bottomNavHeight = 106.0;
+      const scaffoldHeight = 600.0;
       final Key floatingActionButton = UniqueKey();
-      final double fabHeight = mini ? 48.0 : 56.0;
+      final fabHeight = mini ? 48.0 : 56.0;
       // Default
       await tester.pumpWidget(buildTest(
         location,
@@ -1363,13 +1363,13 @@ void main() {
     }
 
     testWidgets('startDocked', (WidgetTester tester) async {
-      const Rect defaultRect = Rect.fromLTRB(16.0, 494.0, 72.0, 550.0);
+      const defaultRect = Rect.fromLTRB(16.0, 494.0, 72.0, 550.0);
       // Positioned relative to BottomNavigationBar
-      const Rect bottomNavigationBarRect = Rect.fromLTRB(16.0, 466.0, 72.0, 522.0);
+      const bottomNavigationBarRect = Rect.fromLTRB(16.0, 466.0, 72.0, 522.0);
       // Positioned relative to BottomNavigationBar & BottomSheet
-      const Rect bottomSheetRect = Rect.fromLTRB(16.0, 366.0, 72.0, 422.0);
+      const bottomSheetRect = Rect.fromLTRB(16.0, 366.0, 72.0, 422.0);
       // Positioned relative to SnackBar
-      const Rect snackBarRect = Rect.fromLTRB(16.0, 486.0, 72.0, 542.0);
+      const snackBarRect = Rect.fromLTRB(16.0, 486.0, 72.0, 542.0);
       await runDockedTests(
         tester,
         FloatingActionButtonLocation.startDocked,
@@ -1381,13 +1381,13 @@ void main() {
     });
 
     testWidgets('miniStartDocked', (WidgetTester tester) async {
-      const Rect defaultRect = Rect.fromLTRB(12.0, 502.0, 60.0, 550.0);
+      const defaultRect = Rect.fromLTRB(12.0, 502.0, 60.0, 550.0);
       // Positioned relative to BottomNavigationBar
-      const Rect bottomNavigationBarRect = Rect.fromLTRB(12.0, 470.0, 60.0, 518.0);
+      const bottomNavigationBarRect = Rect.fromLTRB(12.0, 470.0, 60.0, 518.0);
       // Positioned relative to BottomNavigationBar & BottomSheet
-      const Rect bottomSheetRect = Rect.fromLTRB(12.0, 370.0, 60.0, 418.0);
+      const bottomSheetRect = Rect.fromLTRB(12.0, 370.0, 60.0, 418.0);
       // Positioned relative to SnackBar
-      const Rect snackBarRect = Rect.fromLTRB(12.0, 494.0, 60.0, 542.0);
+      const snackBarRect = Rect.fromLTRB(12.0, 494.0, 60.0, 542.0);
       await runDockedTests(
         tester,
         FloatingActionButtonLocation.miniStartDocked,
@@ -1400,13 +1400,13 @@ void main() {
     });
 
     testWidgets('centerDocked', (WidgetTester tester) async {
-      const Rect defaultRect = Rect.fromLTRB(372.0, 494.0, 428.0, 550.0);
+      const defaultRect = Rect.fromLTRB(372.0, 494.0, 428.0, 550.0);
       // Positioned relative to BottomNavigationBar
-      const Rect bottomNavigationBarRect = Rect.fromLTRB(372.0, 466.0, 428.0, 522.0);
+      const bottomNavigationBarRect = Rect.fromLTRB(372.0, 466.0, 428.0, 522.0);
       // Positioned relative to BottomNavigationBar & BottomSheet
-      const Rect bottomSheetRect = Rect.fromLTRB(372.0, 366.0, 428.0, 422.0);
+      const bottomSheetRect = Rect.fromLTRB(372.0, 366.0, 428.0, 422.0);
       // Positioned relative to SnackBar
-      const Rect snackBarRect = Rect.fromLTRB(372.0, 486.0, 428.0, 542.0);
+      const snackBarRect = Rect.fromLTRB(372.0, 486.0, 428.0, 542.0);
       await runDockedTests(
         tester,
         FloatingActionButtonLocation.centerDocked,
@@ -1418,13 +1418,13 @@ void main() {
     });
 
     testWidgets('miniCenterDocked', (WidgetTester tester) async {
-      const Rect defaultRect = Rect.fromLTRB(376.0, 502.0, 424.0, 550.0);
+      const defaultRect = Rect.fromLTRB(376.0, 502.0, 424.0, 550.0);
       // Positioned relative to BottomNavigationBar
-      const Rect bottomNavigationBarRect = Rect.fromLTRB(376.0, 470.0, 424.0, 518.0);
+      const bottomNavigationBarRect = Rect.fromLTRB(376.0, 470.0, 424.0, 518.0);
       // Positioned relative to BottomNavigationBar & BottomSheet
-      const Rect bottomSheetRect = Rect.fromLTRB(376.0, 370.0, 424.0, 418.0);
+      const bottomSheetRect = Rect.fromLTRB(376.0, 370.0, 424.0, 418.0);
       // Positioned relative to SnackBar
-      const Rect snackBarRect = Rect.fromLTRB(376.0, 494.0, 424.0, 542.0);
+      const snackBarRect = Rect.fromLTRB(376.0, 494.0, 424.0, 542.0);
       await runDockedTests(
         tester,
         FloatingActionButtonLocation.miniCenterDocked,
@@ -1437,13 +1437,13 @@ void main() {
     });
 
     testWidgets('endDocked', (WidgetTester tester) async {
-      const Rect defaultRect = Rect.fromLTRB(728.0, 494.0, 784.0, 550.0);
+      const defaultRect = Rect.fromLTRB(728.0, 494.0, 784.0, 550.0);
       // Positioned relative to BottomNavigationBar
-      const Rect bottomNavigationBarRect = Rect.fromLTRB(728.0, 466.0, 784.0, 522.0);
+      const bottomNavigationBarRect = Rect.fromLTRB(728.0, 466.0, 784.0, 522.0);
       // Positioned relative to BottomNavigationBar & BottomSheet
-      const Rect bottomSheetRect = Rect.fromLTRB(728.0, 366.0, 784.0, 422.0);
+      const bottomSheetRect = Rect.fromLTRB(728.0, 366.0, 784.0, 422.0);
       // Positioned relative to SnackBar
-      const Rect snackBarRect = Rect.fromLTRB(728.0, 486.0, 784.0, 542.0);
+      const snackBarRect = Rect.fromLTRB(728.0, 486.0, 784.0, 542.0);
       await runDockedTests(
         tester,
         FloatingActionButtonLocation.endDocked,
@@ -1455,13 +1455,13 @@ void main() {
     });
 
     testWidgets('miniEndDocked', (WidgetTester tester) async {
-      const Rect defaultRect = Rect.fromLTRB(740.0, 502.0, 788.0, 550.0);
+      const defaultRect = Rect.fromLTRB(740.0, 502.0, 788.0, 550.0);
       // Positioned relative to BottomNavigationBar
-      const Rect bottomNavigationBarRect = Rect.fromLTRB(740.0, 470.0, 788.0, 518.0);
+      const bottomNavigationBarRect = Rect.fromLTRB(740.0, 470.0, 788.0, 518.0);
       // Positioned relative to BottomNavigationBar & BottomSheet
-      const Rect bottomSheetRect = Rect.fromLTRB(740.0, 370.0, 788.0, 418.0);
+      const bottomSheetRect = Rect.fromLTRB(740.0, 370.0, 788.0, 418.0);
       // Positioned relative to SnackBar
-      const Rect snackBarRect = Rect.fromLTRB(740.0, 494.0, 788.0, 542.0);
+      const snackBarRect = Rect.fromLTRB(740.0, 494.0, 788.0, 542.0);
       await runDockedTests(
         tester,
         FloatingActionButtonLocation.miniEndDocked,
@@ -1483,7 +1483,7 @@ void main() {
       required Rect appBarRect,
       bool mini = false,
     }) async  {
-      const double viewPadding = 50.0;
+      const viewPadding = 50.0;
       final Key floatingActionButton = UniqueKey();
       // Default
       await tester.pumpWidget(buildTest(
@@ -1512,9 +1512,9 @@ void main() {
     }
 
     testWidgets('startTop', (WidgetTester tester) async {
-      const Rect defaultRect = Rect.fromLTRB(16.0, 50.0, 72.0, 106.0);
+      const defaultRect = Rect.fromLTRB(16.0, 50.0, 72.0, 106.0);
       // Positioned relative to AppBar
-      const Rect appBarRect = Rect.fromLTRB(16.0, 28.0, 72.0, 84.0);
+      const appBarRect = Rect.fromLTRB(16.0, 28.0, 72.0, 84.0);
       await runTopTests(
         tester,
         FloatingActionButtonLocation.startTop,
@@ -1524,9 +1524,9 @@ void main() {
     });
 
     testWidgets('miniStartTop', (WidgetTester tester) async {
-      const Rect defaultRect = Rect.fromLTRB(12.0, 50.0, 60.0, 98.0);
+      const defaultRect = Rect.fromLTRB(12.0, 50.0, 60.0, 98.0);
       // Positioned relative to AppBar
-      const Rect appBarRect = Rect.fromLTRB(12.0, 32.0, 60.0, 80.0);
+      const appBarRect = Rect.fromLTRB(12.0, 32.0, 60.0, 80.0);
       await runTopTests(
         tester,
         FloatingActionButtonLocation.miniStartTop,
@@ -1537,9 +1537,9 @@ void main() {
     });
 
     testWidgets('centerTop', (WidgetTester tester) async {
-      const Rect defaultRect = Rect.fromLTRB(372.0, 50.0, 428.0, 106.0);
+      const defaultRect = Rect.fromLTRB(372.0, 50.0, 428.0, 106.0);
       // Positioned relative to AppBar
-      const Rect appBarRect = Rect.fromLTRB(372.0, 28.0, 428.0, 84.0);
+      const appBarRect = Rect.fromLTRB(372.0, 28.0, 428.0, 84.0);
       await runTopTests(
         tester,
         FloatingActionButtonLocation.centerTop,
@@ -1549,9 +1549,9 @@ void main() {
     });
 
     testWidgets('miniCenterTop', (WidgetTester tester) async {
-      const Rect defaultRect = Rect.fromLTRB(376.0, 50.0, 424.0, 98.0);
+      const defaultRect = Rect.fromLTRB(376.0, 50.0, 424.0, 98.0);
       // Positioned relative to AppBar
-      const Rect appBarRect = Rect.fromLTRB(376.0, 32.0, 424.0, 80.0);
+      const appBarRect = Rect.fromLTRB(376.0, 32.0, 424.0, 80.0);
       await runTopTests(
         tester,
         FloatingActionButtonLocation.miniCenterTop,
@@ -1562,9 +1562,9 @@ void main() {
     });
 
     testWidgets('endTop', (WidgetTester tester) async {
-      const Rect defaultRect = Rect.fromLTRB(728.0, 50.0, 784.0, 106.0);
+      const defaultRect = Rect.fromLTRB(728.0, 50.0, 784.0, 106.0);
       // Positioned relative to AppBar
-      const Rect appBarRect = Rect.fromLTRB(728.0, 28.0, 784.0, 84.0);
+      const appBarRect = Rect.fromLTRB(728.0, 28.0, 784.0, 84.0);
       await runTopTests(
         tester,
         FloatingActionButtonLocation.endTop,
@@ -1574,9 +1574,9 @@ void main() {
     });
 
     testWidgets('miniEndTop', (WidgetTester tester) async {
-      const Rect defaultRect = Rect.fromLTRB(740.0, 50.0, 788.0, 98.0);
+      const defaultRect = Rect.fromLTRB(740.0, 50.0, 788.0, 98.0);
       // Positioned relative to AppBar
-      const Rect appBarRect = Rect.fromLTRB(740.0, 32.0, 788.0, 80.0);
+      const appBarRect = Rect.fromLTRB(740.0, 32.0, 788.0, 80.0);
       await runTopTests(
         tester,
         FloatingActionButtonLocation.miniEndTop,

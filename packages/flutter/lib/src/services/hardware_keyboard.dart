@@ -50,7 +50,7 @@ bool _keyboardDebug(
   debugPrint('KEYBOARD: ${messageFunc()}');
   final Iterable<Object> details = detailsFunc?.call() ?? const <Object>[];
   if (details.isNotEmpty) {
-    for (final Object detail in details) {
+    for (final detail in details) {
       debugPrint('    $detail');
     }
   }
@@ -502,7 +502,7 @@ class HardwareKeyboard {
 
   void _assertEventIsRegular(KeyEvent event) {
     assert(() {
-      const String common = 'If this occurs in real application, please report this '
+      const common = 'If this occurs in real application, please report this '
         'bug to Flutter. If this occurs in unit tests, please ensure that '
         "simulated events follow Flutter's event model as documented in "
         '`HardwareKeyboard`. This was the event: ';
@@ -585,8 +585,8 @@ class HardwareKeyboard {
     );
     if (keyboardState != null) {
       for (final int key in keyboardState.keys) {
-        final PhysicalKeyboardKey physicalKey = PhysicalKeyboardKey(key);
-        final LogicalKeyboardKey logicalKey = LogicalKeyboardKey(keyboardState[key]!);
+        final physicalKey = PhysicalKeyboardKey(key);
+        final logicalKey = LogicalKeyboardKey(keyboardState[key]!);
         _pressedKeys[physicalKey] = logicalKey;
       }
     }
@@ -599,7 +599,7 @@ class HardwareKeyboard {
     // only 1, this function just uses a simpler algorithm.
     assert(!_duringDispatch, 'Nested keyboard dispatching is not supported');
     _duringDispatch = true;
-    bool handled = false;
+    var handled = false;
     for (final KeyEventCallback handler in _handlers) {
       try {
         final bool thisResult = handler(event);
@@ -1099,7 +1099,7 @@ class KeyEventManager {
 
   bool _dispatchKeyMessage(List<KeyEvent> keyEvents, RawKeyEvent? rawEvent) {
     if (keyMessageHandler != null) {
-      final KeyMessage message = KeyMessage(keyEvents, rawEvent);
+      final message = KeyMessage(keyEvents, rawEvent);
       try {
         return keyMessageHandler!(message);
       } catch (exception, stack) {
@@ -1141,9 +1141,9 @@ class KeyEventManager {
       // the raw event should be dispatched.
       _rawKeyboard.addListener(_convertRawEventAndStore);
     }
-    final RawKeyEvent rawEvent = RawKeyEvent.fromMessage(message as Map<String, dynamic>);
+    final rawEvent = RawKeyEvent.fromMessage(message as Map<String, dynamic>);
 
-    bool shouldDispatch = true;
+    var shouldDispatch = true;
     if (rawEvent is RawKeyDownEvent) {
       if (!rawEvent.data.shouldDispatchEvent()) {
         shouldDispatch = false;
@@ -1158,7 +1158,7 @@ class KeyEventManager {
       }
     }
 
-    bool handled = true;
+    var handled = true;
     if (shouldDispatch) {
       // The following `handleRawKeyEvent` will call `_convertRawEventAndStore`
       // unless the event is not dispatched.
@@ -1216,7 +1216,7 @@ class KeyEventManager {
     final PhysicalKeyboardKey physicalKey = rawEvent.physicalKey;
     final LogicalKeyboardKey logicalKey = rawEvent.logicalKey;
     final Set<PhysicalKeyboardKey> physicalKeysPressed = _hardwareKeyboard.physicalKeysPressed;
-    final List<KeyEvent> eventAfterwards = <KeyEvent>[];
+    final eventAfterwards = <KeyEvent>[];
     final KeyEvent? mainEvent;
     final LogicalKeyboardKey? recordedLogicalMain = _hardwareKeyboard.lookUpLayout(physicalKey);
     final Duration timeStamp = ServicesBinding.instance.currentSystemFrameTimeStamp;

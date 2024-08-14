@@ -19,7 +19,7 @@ import 'package:flutter/rendering.dart';
 import 'package:flutter_test/flutter_test.dart';
 
 void main() {
-  final ThemeData theme = ThemeData();
+  final theme = ThemeData();
 
   // The "can be constructed" tests that follow are primarily to ensure that any
   // animations started by the progress indicators are stopped at dispose() time.
@@ -307,7 +307,7 @@ void main() {
     );
 
     // With no color provided
-    const Color primaryColor = Color(0xff008800);
+    const primaryColor = Color(0xff008800);
     await tester.pumpWidget(
       Theme(
         data: theme.copyWith(colorScheme: ColorScheme.fromSwatch().copyWith(primary: primaryColor)),
@@ -335,7 +335,7 @@ void main() {
     );
 
     // With ProgressIndicatorTheme colors
-    const Color indicatorColor = Color(0xff0000ff);
+    const indicatorColor = Color(0xff0000ff);
     await tester.pumpWidget(
       Theme(
         data: theme.copyWith(
@@ -561,9 +561,9 @@ void main() {
   });
 
   testWidgets('CircularProgressIndicator paint colors', (WidgetTester tester) async {
-    const Color green = Color(0xFF00FF00);
-    const Color blue = Color(0xFF0000FF);
-    const Color red = Color(0xFFFF0000);
+    const green = Color(0xFF00FF00);
+    const blue = Color(0xFF0000FF);
+    const red = Color(0xFFFF0000);
 
     // With valueColor & color provided
     await tester.pumpWidget(Theme(
@@ -618,9 +618,9 @@ void main() {
   });
 
   testWidgets('RefreshProgressIndicator paint colors', (WidgetTester tester) async {
-    const Color green = Color(0xFF00FF00);
-    const Color blue = Color(0xFF0000FF);
-    const Color red = Color(0xFFFF0000);
+    const green = Color(0xFF00FF00);
+    const blue = Color(0xFF0000FF);
+    const red = Color(0xFFFF0000);
 
     // With valueColor & color provided
     await tester.pumpWidget(Theme(
@@ -739,7 +739,7 @@ void main() {
   });
 
   testWidgets('Material2 - RefreshProgressIndicator uses expected animation', (WidgetTester tester) async {
-    final AnimationSheetBuilder animationSheet = AnimationSheetBuilder(frameSize: const Size(50, 50));
+    final animationSheet = AnimationSheetBuilder(frameSize: const Size(50, 50));
     addTearDown(animationSheet.dispose);
 
     await tester.pumpFrames(animationSheet.record(
@@ -756,7 +756,7 @@ void main() {
   }, skip: isBrowser); // https://github.com/flutter/flutter/issues/56001
 
   testWidgets('Material3 - RefreshProgressIndicator uses expected animation', (WidgetTester tester) async {
-    final AnimationSheetBuilder animationSheet = AnimationSheetBuilder(frameSize: const Size(50, 50));
+    final animationSheet = AnimationSheetBuilder(frameSize: const Size(50, 50));
     addTearDown(animationSheet.dispose);
 
     await tester.pumpFrames(animationSheet.record(
@@ -880,8 +880,8 @@ void main() {
   testWidgets('LinearProgressIndicator can be made accessible', (WidgetTester tester) async {
     final SemanticsHandle handle = tester.ensureSemantics();
     final GlobalKey key = GlobalKey();
-    const String label = 'Label';
-    const String value = '25%';
+    const label = 'Label';
+    const value = '25%';
     await tester.pumpWidget(
       Theme(
         data: theme,
@@ -909,7 +909,7 @@ void main() {
   testWidgets('LinearProgressIndicator that is determinate gets default a11y value', (WidgetTester tester) async {
     final SemanticsHandle handle = tester.ensureSemantics();
     final GlobalKey key = GlobalKey();
-    const String label = 'Label';
+    const label = 'Label';
     await tester.pumpWidget(
       Theme(
         data: theme,
@@ -957,7 +957,7 @@ void main() {
   testWidgets('LinearProgressIndicator that is indeterminate does not default a11y value', (WidgetTester tester) async {
     final SemanticsHandle handle = tester.ensureSemantics();
     final GlobalKey key = GlobalKey();
-    const String label = 'Progress';
+    const label = 'Progress';
     await tester.pumpWidget(
       Theme(
         data: theme,
@@ -983,8 +983,8 @@ void main() {
   testWidgets('CircularProgressIndicator can be made accessible', (WidgetTester tester) async {
     final SemanticsHandle handle = tester.ensureSemantics();
     final GlobalKey key = GlobalKey();
-    const String label = 'Label';
-    const String value = '25%';
+    const label = 'Label';
+    const value = '25%';
     await tester.pumpWidget(
       Theme(
         data: theme,
@@ -1012,8 +1012,8 @@ void main() {
   testWidgets('RefreshProgressIndicator can be made accessible', (WidgetTester tester) async {
     final SemanticsHandle handle = tester.ensureSemantics();
     final GlobalKey key = GlobalKey();
-    const String label = 'Label';
-    const String value = '25%';
+    const label = 'Label';
+    const value = '25%';
     await tester.pumpWidget(
       Theme(
         data: theme,
@@ -1038,7 +1038,7 @@ void main() {
   });
 
   testWidgets('Material2 - Indeterminate CircularProgressIndicator uses expected animation', (WidgetTester tester) async {
-    final AnimationSheetBuilder animationSheet = AnimationSheetBuilder(frameSize: const Size(40, 40));
+    final animationSheet = AnimationSheetBuilder(frameSize: const Size(40, 40));
     addTearDown(animationSheet.dispose);
 
     await tester.pumpFrames(animationSheet.record(
@@ -1061,7 +1061,7 @@ void main() {
   }, skip: isBrowser); // https://github.com/flutter/flutter/issues/56001
 
   testWidgets('Material3 - Indeterminate CircularProgressIndicator uses expected animation', (WidgetTester tester) async {
-    final AnimationSheetBuilder animationSheet = AnimationSheetBuilder(frameSize: const Size(40, 40));
+    final animationSheet = AnimationSheetBuilder(frameSize: const Size(40, 40));
     addTearDown(animationSheet.dispose);
 
     await tester.pumpFrames(animationSheet.record(
@@ -1190,12 +1190,12 @@ void main() {
 
     late BuildContext builderContext;
 
-    const ProgressIndicatorThemeData themeData = ProgressIndicatorThemeData(
+    const themeData = ProgressIndicatorThemeData(
       color: Color(0xFFFF0000),
       linearTrackColor: Color(0xFF00FF00),
     );
 
-    final ProgressIndicatorTheme progressTheme = ProgressIndicatorTheme(
+    final progressTheme = ProgressIndicatorTheme(
       data: themeData,
       child: Builder(
         builder: (BuildContext context) {
@@ -1265,7 +1265,7 @@ void main() {
     expect(padding.padding, const EdgeInsets.all(12.0));
 
     // With values provided.
-    const double testElevation = 1.0;
+    const testElevation = 1.0;
     const EdgeInsetsGeometry testIndicatorMargin = EdgeInsets.all(6.0);
     const EdgeInsetsGeometry testIndicatorPadding = EdgeInsets.all(10.0);
     await pumpIndicator(

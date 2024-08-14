@@ -975,7 +975,7 @@ class SliverReorderableListState extends State<SliverReorderableList> with Ticke
     }
 
     // First, determine which semantics actions apply.
-    final Map<CustomSemanticsAction, VoidCallback> semanticsActions = <CustomSemanticsAction, VoidCallback>{};
+    final semanticsActions = <CustomSemanticsAction, VoidCallback>{};
 
     // Create the appropriate semantics actions.
     void moveToStart() => reorder(index, 0);
@@ -1027,7 +1027,7 @@ class SliverReorderableListState extends State<SliverReorderableList> with Ticke
   @override
   Widget build(BuildContext context) {
     assert(debugCheckHasOverlay(context));
-    final SliverChildBuilderDelegate childrenDelegate = SliverChildBuilderDelegate(
+    final childrenDelegate = SliverChildBuilderDelegate(
       _itemBuilder,
       childCount: widget.itemCount,
       findChildIndexCallback: widget.findChildIndexCallback,
@@ -1198,7 +1198,7 @@ class _ReorderableItemState extends State<_ReorderableItem> {
   }
 
   Rect targetGeometry() {
-    final RenderBox itemRenderBox = context.findRenderObject()! as RenderBox;
+    final itemRenderBox = context.findRenderObject()! as RenderBox;
     final Offset itemPosition = itemRenderBox.localToGlobal(Offset.zero) + _targetOffset;
     return itemPosition & itemRenderBox.size;
   }
@@ -1337,7 +1337,7 @@ class _DragInfo extends Drag {
         object: this,
       );
     }
-    final RenderBox itemRenderBox = item.context.findRenderObject()! as RenderBox;
+    final itemRenderBox = item.context.findRenderObject()! as RenderBox;
     listState = item._listState;
     index = item.index;
     child = item.widget.child;
@@ -1434,7 +1434,7 @@ class _DragInfo extends Drag {
 
 Offset _overlayOrigin(BuildContext context) {
   final OverlayState overlay = Overlay.of(context, debugRequiredFor: context.widget);
-  final RenderBox overlayBox = overlay.context.findRenderObject()! as RenderBox;
+  final overlayBox = overlay.context.findRenderObject()! as RenderBox;
   return overlayBox.localToGlobal(Offset.zero);
 }
 

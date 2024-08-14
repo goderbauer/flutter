@@ -17,7 +17,7 @@ double _caretMarginOf(RenderEditable renderEditable) {
 }
 
 void _applyParentData(List<RenderBox> inlineRenderBoxes, InlineSpan span) {
-  int index = 0;
+  var index = 0;
   RenderBox? previousBox;
   span.visitChildren((InlineSpan span) {
     if (span is! WidgetSpan) {
@@ -71,11 +71,11 @@ void main() {
   TestRenderingFlutterBinding.ensureInitialized();
 
   test('RenderEditable respects clipBehavior', () {
-    const BoxConstraints viewport = BoxConstraints(maxHeight: 100.0, maxWidth: 1.0);
+    const viewport = BoxConstraints(maxHeight: 100.0, maxWidth: 1.0);
     final String longString = 'a' * 10000;
 
-    for (final Clip? clip in <Clip?>[null, ...Clip.values]) {
-      final TestClipPaintingContext context = TestClipPaintingContext();
+    for (final clip in <Clip?>[null, ...Clip.values]) {
+      final context = TestClipPaintingContext();
       final RenderEditable editable;
       switch (clip) {
         case Clip.none:
@@ -115,8 +115,8 @@ void main() {
       style: TextStyle(fontSize: 10),
       children: <InlineSpan>[TextSpan(text: 'TALL', style: TextStyle(fontSize: 100))],
     );
-    final BoxConstraints constraints = BoxConstraints.loose(const Size(600, 600));
-    final RenderEditable editable = RenderEditable(
+    final constraints = BoxConstraints.loose(const Size(600, 600));
+    final editable = RenderEditable(
       textDirection: TextDirection.ltr,
       startHandleLayerLink: LayerLink(),
       endHandleLayerLink: LayerLink(),
@@ -134,8 +134,8 @@ void main() {
       text: 'liiiiines\n' * 10,
       style: const TextStyle(fontSize: 10),
     );
-    final BoxConstraints constraints = BoxConstraints.loose(const Size(600, 600));
-    final RenderEditable editable = RenderEditable(
+    final constraints = BoxConstraints.loose(const Size(600, 600));
+    final editable = RenderEditable(
       textDirection: TextDirection.ltr,
       startHandleLayerLink: LayerLink(),
       endHandleLayerLink: LayerLink(),
@@ -150,7 +150,7 @@ void main() {
 
   test('Editable respect clipBehavior in describeApproximatePaintClip', () {
     final String longString = 'a' * 10000;
-    final RenderEditable editable = RenderEditable(
+    final editable = RenderEditable(
       text: TextSpan(text: longString),
       textDirection: TextDirection.ltr,
       startHandleLayerLink: LayerLink(),
@@ -162,7 +162,7 @@ void main() {
     );
     layout(editable);
 
-    bool visited = false;
+    var visited = false;
     editable.visitChildren((RenderObject child) {
       visited = true;
       expect(editable.describeApproximatePaintClip(child), null);
@@ -171,14 +171,14 @@ void main() {
   });
 
   test('RenderEditable.paint respects offset argument', () {
-    const BoxConstraints viewport = BoxConstraints(maxHeight: 1000.0, maxWidth: 1000.0);
-    final TestPushLayerPaintingContext context = TestPushLayerPaintingContext();
+    const viewport = BoxConstraints(maxHeight: 1000.0, maxWidth: 1000.0);
+    final context = TestPushLayerPaintingContext();
 
-    const Offset paintOffset = Offset(100, 200);
-    const double fontSize = 20.0;
-    const Offset endpoint = Offset(0.0, fontSize);
+    const paintOffset = Offset(100, 200);
+    const fontSize = 20.0;
+    const endpoint = Offset(0.0, fontSize);
 
-    final RenderEditable editable = RenderEditable(
+    final editable = RenderEditable(
       text: const TextSpan(
         text: 'text',
         style: TextStyle(
@@ -206,7 +206,7 @@ void main() {
   // animation).
   test('correct clipping', () {
     final TextSelectionDelegate delegate = _FakeEditableTextState();
-    final RenderEditable editable = RenderEditable(
+    final editable = RenderEditable(
       text: const TextSpan(
         style: TextStyle(height: 1.0, fontSize: 10.0),
         text: 'A',
@@ -232,10 +232,10 @@ void main() {
 
   test('Can change cursor color, radius, visibility', () {
     final TextSelectionDelegate delegate = _FakeEditableTextState();
-    final ValueNotifier<bool> showCursor = ValueNotifier<bool>(true);
+    final showCursor = ValueNotifier<bool>(true);
     EditableText.debugDeterministicCursor = true;
 
-    final RenderEditable editable = RenderEditable(
+    final editable = RenderEditable(
       backgroundCursorColor: Colors.grey,
       textDirection: TextDirection.ltr,
       cursorColor: const Color.fromARGB(0xFF, 0xFF, 0x00, 0x00),
@@ -309,7 +309,7 @@ void main() {
   test('Can change textAlign', () {
     final TextSelectionDelegate delegate = _FakeEditableTextState();
 
-    final RenderEditable editable = RenderEditable(
+    final editable = RenderEditable(
       textDirection: TextDirection.ltr,
       offset: ViewportOffset.zero(),
       textSelectionDelegate: delegate,
@@ -331,7 +331,7 @@ void main() {
 
   test('Can read plain text', () {
     final TextSelectionDelegate delegate = _FakeEditableTextState();
-    final RenderEditable editable = RenderEditable(
+    final editable = RenderEditable(
       maxLines: null,
       textDirection: TextDirection.ltr,
       offset: ViewportOffset.zero(),
@@ -359,10 +359,10 @@ void main() {
 
   test('Cursor with ideographic script', () {
     final TextSelectionDelegate delegate = _FakeEditableTextState();
-    final ValueNotifier<bool> showCursor = ValueNotifier<bool>(true);
+    final showCursor = ValueNotifier<bool>(true);
     EditableText.debugDeterministicCursor = true;
 
-    final RenderEditable editable = RenderEditable(
+    final editable = RenderEditable(
       backgroundCursorColor: Colors.grey,
       textDirection: TextDirection.ltr,
       cursorColor: const Color.fromARGB(0xFF, 0xFF, 0x00, 0x00),
@@ -434,7 +434,7 @@ void main() {
 
   test('text is painted above selection', () {
     final TextSelectionDelegate delegate = _FakeEditableTextState();
-    final RenderEditable editable = RenderEditable(
+    final editable = RenderEditable(
       backgroundCursorColor: Colors.grey,
       selectionColor: Colors.black,
       textDirection: TextDirection.ltr,
@@ -472,8 +472,8 @@ void main() {
 
   test('cursor can paint above or below the text', () {
     final TextSelectionDelegate delegate = _FakeEditableTextState();
-    final ValueNotifier<bool> showCursor = ValueNotifier<bool>(true);
-    final RenderEditable editable = RenderEditable(
+    final showCursor = ValueNotifier<bool>(true);
+    final editable = RenderEditable(
       backgroundCursorColor: Colors.grey,
       selectionColor: Colors.black,
       paintCursorAboveText: true,
@@ -522,8 +522,8 @@ void main() {
 
   test('does not paint the caret when selection is null or invalid', () async {
     final TextSelectionDelegate delegate = _FakeEditableTextState();
-    final ValueNotifier<bool> showCursor = ValueNotifier<bool>(true);
-    final RenderEditable editable = RenderEditable(
+    final showCursor = ValueNotifier<bool>(true);
+    final editable = RenderEditable(
       backgroundCursorColor: Colors.grey,
       selectionColor: Colors.black,
       paintCursorAboveText: true,
@@ -576,11 +576,11 @@ void main() {
   });
 
   test('selects correct place with offsets', () {
-    const String text = 'test\ntest';
-    final _FakeEditableTextState delegate = _FakeEditableTextState()
+    const text = 'test\ntest';
+    final delegate = _FakeEditableTextState()
       ..textEditingValue = const TextEditingValue(text: text);
-    final ViewportOffset viewportOffset = ViewportOffset.zero();
-    final RenderEditable editable = RenderEditable(
+    final viewportOffset = ViewportOffset.zero();
+    final editable = RenderEditable(
       backgroundCursorColor: Colors.grey,
       selectionColor: Colors.black,
       textDirection: TextDirection.ltr,
@@ -659,11 +659,11 @@ void main() {
     // Regression test for https://github.com/flutter/flutter/issues/79166.
     final TargetPlatform? previousPlatform = debugDefaultTargetPlatformOverride;
     debugDefaultTargetPlatformOverride = TargetPlatform.android;
-    const String text = '  test';
-    final _FakeEditableTextState delegate = _FakeEditableTextState()
+    const text = '  test';
+    final delegate = _FakeEditableTextState()
       ..textEditingValue = const TextEditingValue(text: text);
-    final ViewportOffset viewportOffset = ViewportOffset.zero();
-    final RenderEditable editable = RenderEditable(
+    final viewportOffset = ViewportOffset.zero();
+    final editable = RenderEditable(
       backgroundCursorColor: Colors.grey,
       selectionColor: Colors.black,
       textDirection: TextDirection.ltr,
@@ -697,11 +697,11 @@ void main() {
     // Regression test for https://github.com/flutter/flutter/issues/79166.
     final TargetPlatform? previousPlatform = debugDefaultTargetPlatformOverride;
     debugDefaultTargetPlatformOverride = TargetPlatform.iOS;
-    const String text = '  test';
-    final _FakeEditableTextState delegate = _FakeEditableTextState()
+    const text = '  test';
+    final delegate = _FakeEditableTextState()
       ..textEditingValue = const TextEditingValue(text: text);
-    final ViewportOffset viewportOffset = ViewportOffset.zero();
-    final RenderEditable editable = RenderEditable(
+    final viewportOffset = ViewportOffset.zero();
+    final editable = RenderEditable(
       backgroundCursorColor: Colors.grey,
       selectionColor: Colors.black,
       textDirection: TextDirection.ltr,
@@ -734,11 +734,11 @@ void main() {
     // Regression test for https://github.com/flutter/flutter/issues/79166.
     final TargetPlatform? previousPlatform = debugDefaultTargetPlatformOverride;
     debugDefaultTargetPlatformOverride = TargetPlatform.iOS;
-    const String text = '   ';
-    final _FakeEditableTextState delegate = _FakeEditableTextState()
+    const text = '   ';
+    final delegate = _FakeEditableTextState()
       ..textEditingValue = const TextEditingValue(text: text);
-    final ViewportOffset viewportOffset = ViewportOffset.zero();
-    final RenderEditable editable = RenderEditable(
+    final viewportOffset = ViewportOffset.zero();
+    final editable = RenderEditable(
       backgroundCursorColor: Colors.grey,
       selectionColor: Colors.black,
       textDirection: TextDirection.ltr,
@@ -768,11 +768,11 @@ void main() {
   });
 
   test('selects correct place when offsets are flipped', () {
-    const String text = 'abc def ghi';
-    final _FakeEditableTextState delegate = _FakeEditableTextState()
+    const text = 'abc def ghi';
+    final delegate = _FakeEditableTextState()
       ..textEditingValue = const TextEditingValue(text: text);
-    final ViewportOffset viewportOffset = ViewportOffset.zero();
-    final RenderEditable editable = RenderEditable(
+    final viewportOffset = ViewportOffset.zero();
+    final editable = RenderEditable(
       backgroundCursorColor: Colors.grey,
       selectionColor: Colors.black,
       textDirection: TextDirection.ltr,
@@ -797,9 +797,9 @@ void main() {
   });
 
   test('promptRect disappears when promptRectColor is set to null', () {
-    const Color promptRectColor = Color(0x12345678);
+    const promptRectColor = Color(0x12345678);
     final TextSelectionDelegate delegate = _FakeEditableTextState();
-    final RenderEditable editable = RenderEditable(
+    final editable = RenderEditable(
       text: const TextSpan(
         style: TextStyle(height: 1.0, fontSize: 10.0),
         text: 'ABCDEFG',
@@ -838,7 +838,7 @@ void main() {
   test('editable hasFocus correctly initialized', () {
     // Regression test for https://github.com/flutter/flutter/issues/21640
     final TextSelectionDelegate delegate = _FakeEditableTextState();
-    final RenderEditable editable = RenderEditable(
+    final editable = RenderEditable(
       text: const TextSpan(
         style: TextStyle(height: 1.0, fontSize: 10.0),
         text: '12345',
@@ -861,7 +861,7 @@ void main() {
     final TextSelectionDelegate delegate = _FakeEditableTextState();
     EditableText.debugDeterministicCursor = true;
 
-    final RenderEditable editable = RenderEditable(
+    final editable = RenderEditable(
       maxLines: 2,
       backgroundCursorColor: Colors.grey,
       textDirection: TextDirection.ltr,
@@ -904,7 +904,7 @@ void main() {
 
   test('getEndpointsForSelection handles empty characters', () {
     final TextSelectionDelegate delegate = _FakeEditableTextState();
-    final RenderEditable editable = RenderEditable(
+    final editable = RenderEditable(
       // This is a Unicode left-to-right mark character that will not render
       // any glyphs.
       text: const TextSpan(text: '\u200e'),
@@ -923,22 +923,22 @@ void main() {
 
   test('TextSelectionPoint can compare', () {
     // ignore: prefer_const_constructors
-    final TextSelectionPoint first = TextSelectionPoint(Offset(1, 2), TextDirection.ltr);
+    final first = TextSelectionPoint(Offset(1, 2), TextDirection.ltr);
     // ignore: prefer_const_constructors
-    final TextSelectionPoint second = TextSelectionPoint(Offset(1, 2), TextDirection.ltr);
+    final second = TextSelectionPoint(Offset(1, 2), TextDirection.ltr);
     expect(first == second, isTrue);
     expect(first.hashCode == second.hashCode, isTrue);
 
     // ignore: prefer_const_constructors
-    final TextSelectionPoint different = TextSelectionPoint(Offset(2, 2), TextDirection.ltr);
+    final different = TextSelectionPoint(Offset(2, 2), TextDirection.ltr);
     expect(first == different, isFalse);
     expect(first.hashCode == different.hashCode, isFalse);
   });
 
   group('getRectForComposingRange', () {
-    const TextSpan emptyTextSpan = TextSpan(text: '\u200e');
+    const emptyTextSpan = TextSpan(text: '\u200e');
     final TextSelectionDelegate delegate = _FakeEditableTextState();
-    final RenderEditable editable = RenderEditable(
+    final editable = RenderEditable(
       maxLines: null,
       textDirection: TextDirection.ltr,
       offset: ViewportOffset.zero(),
@@ -968,8 +968,8 @@ void main() {
     });
 
     test('more than 1 run on the same line', () {
-      const TextStyle tinyText = TextStyle(fontSize: 1);
-      const TextStyle normalText = TextStyle(fontSize: 10);
+      const tinyText = TextStyle(fontSize: 1);
+      const normalText = TextStyle(fontSize: 10);
       editable.text = TextSpan(
         children: <TextSpan>[
           const TextSpan(text: 'A', style: tinyText),
@@ -991,7 +991,7 @@ void main() {
   group('custom painters', () {
     final TextSelectionDelegate delegate = _FakeEditableTextState();
 
-    final _TestRenderEditable editable = _TestRenderEditable(
+    final editable = _TestRenderEditable(
       textDirection: TextDirection.ltr,
       offset: ViewportOffset.zero(),
       textSelectionDelegate: delegate,
@@ -1065,7 +1065,7 @@ void main() {
       layout(editable, constraints: BoxConstraints.loose(const Size(100, 100)));
       // Prepare for painting after layout.
 
-      _TestRenderEditablePainter currentPainter = _TestRenderEditablePainter();
+      var currentPainter = _TestRenderEditablePainter();
       // Foreground painter.
       editable.foregroundPainter = currentPainter;
       pumpFrame(phase: EnginePhase.paint);
@@ -1084,7 +1084,7 @@ void main() {
       layout(editable, constraints: BoxConstraints.loose(const Size(100, 100)));
       // Prepare for painting after layout.
 
-      _TestRenderEditablePainter currentPainter = _TestRenderEditablePainter();
+      var currentPainter = _TestRenderEditablePainter();
       // Foreground painter.
       editable.painter = currentPainter;
       pumpFrame(phase: EnginePhase.paint);
@@ -1102,8 +1102,8 @@ void main() {
     test('swapping painters', () {
       layout(editable, constraints: BoxConstraints.loose(const Size(100, 100)));
 
-      final _TestRenderEditablePainter painter1 = _TestRenderEditablePainter(color: const Color(0x01234567));
-      final _TestRenderEditablePainter painter2 = _TestRenderEditablePainter(color: const Color(0x76543210));
+      final painter1 = _TestRenderEditablePainter(color: const Color(0x01234567));
+      final painter2 = _TestRenderEditablePainter(color: const Color(0x76543210));
 
       editable.painter = painter1;
       editable.foregroundPainter = painter2;
@@ -1129,7 +1129,7 @@ void main() {
     test('reusing the same painter', () {
       layout(editable, constraints: BoxConstraints.loose(const Size(100, 100)));
 
-      final _TestRenderEditablePainter painter = _TestRenderEditablePainter();
+      final painter = _TestRenderEditablePainter();
       FlutterErrorDetails? errorDetails;
       editable.painter = painter;
       editable.foregroundPainter = painter;
@@ -1151,7 +1151,7 @@ void main() {
     test('does not repaint the render editable when custom painters need repaint', () {
       layout(editable, constraints: BoxConstraints.loose(const Size(100, 100)));
 
-      final _TestRenderEditablePainter painter = _TestRenderEditablePainter();
+      final painter = _TestRenderEditablePainter();
       editable.painter = painter;
       pumpFrame(phase: EnginePhase.paint);
       editable.paintCount = 0;
@@ -1167,7 +1167,7 @@ void main() {
     test('repaints when its RenderEditable repaints', () {
       layout(editable, constraints: BoxConstraints.loose(const Size(100, 100)));
 
-      final _TestRenderEditablePainter painter = _TestRenderEditablePainter();
+      final painter = _TestRenderEditablePainter();
       editable.painter = painter;
       pumpFrame(phase: EnginePhase.paint);
       editable.paintCount = 0;
@@ -1183,7 +1183,7 @@ void main() {
     test('correct coordinate space', () {
       layout(editable, constraints: BoxConstraints.loose(const Size(100, 100)));
 
-      final _TestRenderEditablePainter painter = _TestRenderEditablePainter();
+      final painter = _TestRenderEditablePainter();
       editable.painter = painter;
       editable.offset = ViewportOffset.fixed(1000);
 
@@ -1200,16 +1200,16 @@ void main() {
       final TextSelectionDelegate delegate = _FakeEditableTextState();
 
       test('Basic TextSpan Hit testing', () {
-        final TextSpan textSpanA = TextSpan(text: 'A' * 10);
-        const TextSpan textSpanBC = TextSpan(text: 'BC', style: TextStyle(letterSpacing: 26.0));
+        final textSpanA = TextSpan(text: 'A' * 10);
+        const textSpanBC = TextSpan(text: 'BC', style: TextStyle(letterSpacing: 26.0));
 
-        final TextSpan text = TextSpan(
+        final text = TextSpan(
           text: '',
           style: const TextStyle(fontSize: 10.0),
           children: <InlineSpan>[textSpanA, textSpanBC],
         );
 
-        final RenderEditable renderEditable = RenderEditable(
+        final renderEditable = RenderEditable(
           text: text,
           maxLines: null,
           startHandleLayerLink: LayerLink(),
@@ -1257,19 +1257,19 @@ void main() {
       });
 
       test('TextSpan Hit testing with text justification', () {
-        const TextSpan textSpanA = TextSpan(text: 'A ');      // The space is a word break.
-        const TextSpan textSpanB = TextSpan(text: 'B\u200B'); // The zero-width space is used as a line break.
-        final TextSpan textSpanC = TextSpan(text: 'C' * 10);  // The third span starts a new line since it's too long for the first line.
+        const textSpanA = TextSpan(text: 'A ');      // The space is a word break.
+        const textSpanB = TextSpan(text: 'B\u200B'); // The zero-width space is used as a line break.
+        final textSpanC = TextSpan(text: 'C' * 10);  // The third span starts a new line since it's too long for the first line.
 
         // The text should look like:
         // A        B
         // CCCCCCCCCC
-        final TextSpan text = TextSpan(
+        final text = TextSpan(
           text: '',
           style: const TextStyle(fontSize: 10.0),
           children: <InlineSpan>[textSpanA, textSpanB, textSpanC],
         );
-        final RenderEditable renderEditable = RenderEditable(
+        final renderEditable = RenderEditable(
           text: text,
           maxLines: null,
           startHandleLayerLink: LayerLink(),
@@ -1298,7 +1298,7 @@ void main() {
       });
 
       test('hits correct TextSpan when not scrolled', () {
-        final RenderEditable editable = RenderEditable(
+        final editable = RenderEditable(
           text: const TextSpan(
             style: TextStyle(height: 1.0, fontSize: 10.0),
             children: <InlineSpan>[
@@ -1319,7 +1319,7 @@ void main() {
         // Prepare for painting after layout.
         pumpFrame(phase: EnginePhase.compositingBits);
 
-        BoxHitTestResult result = BoxHitTestResult();
+        var result = BoxHitTestResult();
         editable.hitTest(result, position: Offset.zero);
         // We expect two hit test entries in the path because the RenderEditable
         // will add itself as well.
@@ -1340,7 +1340,7 @@ void main() {
 
       test('hits correct TextSpan when scrolled vertically', () {
         final TextSelectionDelegate delegate = _FakeEditableTextState();
-        final RenderEditable editable = RenderEditable(
+        final editable = RenderEditable(
           text: const TextSpan(
             style: TextStyle(height: 1.0, fontSize: 10.0),
             children: <InlineSpan>[
@@ -1365,7 +1365,7 @@ void main() {
         // Prepare for painting after layout.
         pumpFrame(phase: EnginePhase.compositingBits);
 
-        BoxHitTestResult result = BoxHitTestResult();
+        var result = BoxHitTestResult();
         editable.hitTest(result, position: Offset.zero);
         expect(result.path, hasLength(2));
         HitTestTarget target = result.path.first.target;
@@ -1391,7 +1391,7 @@ void main() {
 
       test('hits correct TextSpan when scrolled horizontally', () {
         final TextSelectionDelegate delegate = _FakeEditableTextState();
-        final RenderEditable editable = RenderEditable(
+        final editable = RenderEditable(
           text: const TextSpan(
             style: TextStyle(height: 1.0, fontSize: 10.0),
             children: <InlineSpan>[
@@ -1414,7 +1414,7 @@ void main() {
         // Prepare for painting after layout.
         pumpFrame(phase: EnginePhase.compositingBits);
 
-        final BoxHitTestResult result = BoxHitTestResult();
+        final result = BoxHitTestResult();
         // At x=6, we should hit "B" as we are scrolled to the left by 6
         // pixels.
         editable.hitTest(result, position: const Offset(6.0, 0));
@@ -1433,11 +1433,11 @@ void main() {
             text: 'test',
             selection: TextSelection.collapsed(offset: 3),
           );
-      final List<RenderBox> renderBoxes = <RenderBox>[
+      final renderBoxes = <RenderBox>[
         RenderParagraph(const TextSpan(text: 'b'), textDirection: TextDirection.ltr),
       ];
-      final ViewportOffset viewportOffset = ViewportOffset.zero();
-      final RenderEditable editable = RenderEditable(
+      final viewportOffset = ViewportOffset.zero();
+      final editable = RenderEditable(
         backgroundCursorColor: Colors.grey,
         selectionColor: Colors.black,
         textDirection: TextDirection.ltr,
@@ -1471,13 +1471,13 @@ void main() {
             text: 'test',
             selection: TextSelection.collapsed(offset: 3),
           );
-      final List<RenderBox> renderBoxes = <RenderBox>[
+      final renderBoxes = <RenderBox>[
         RenderParagraph(const TextSpan(text: 'b'), textDirection: TextDirection.ltr),
         RenderParagraph(const TextSpan(text: 'c'), textDirection: TextDirection.ltr),
         RenderParagraph(const TextSpan(text: 'd'), textDirection: TextDirection.ltr),
       ];
-      final ViewportOffset viewportOffset = ViewportOffset.zero();
-      final RenderEditable editable = RenderEditable(
+      final viewportOffset = ViewportOffset.zero();
+      final editable = RenderEditable(
         backgroundCursorColor: Colors.grey,
         selectionColor: Colors.black,
         textDirection: TextDirection.ltr,
@@ -1514,13 +1514,13 @@ void main() {
             text: 'test',
             selection: TextSelection.collapsed(offset: 3),
           );
-      final List<RenderBox> renderBoxes = <RenderBox>[
+      final renderBoxes = <RenderBox>[
         RenderParagraph(const TextSpan(text: 'b'), textDirection: TextDirection.ltr),
         RenderParagraph(const TextSpan(text: 'c'), textDirection: TextDirection.ltr),
         RenderParagraph(const TextSpan(text: 'd'), textDirection: TextDirection.ltr),
       ];
-      final ViewportOffset viewportOffset = ViewportOffset.zero();
-      final RenderEditable editable = RenderEditable(
+      final viewportOffset = ViewportOffset.zero();
+      final editable = RenderEditable(
         backgroundCursorColor: Colors.grey,
         selectionColor: Colors.black,
         textDirection: TextDirection.ltr,
@@ -1562,14 +1562,14 @@ void main() {
             text: 'test',
             selection: TextSelection.collapsed(offset: 3),
           );
-      final List<RenderBox> renderBoxes = <RenderBox>[
+      final renderBoxes = <RenderBox>[
         RenderParagraph(const TextSpan(text: 'b'), textDirection: TextDirection.ltr),
         RenderParagraph(const TextSpan(text: 'c'), textDirection: TextDirection.ltr),
         RenderParagraph(const TextSpan(text: 'd'), textDirection: TextDirection.ltr),
         RenderParagraph(const TextSpan(text: 'e'), textDirection: TextDirection.ltr),
       ];
-      final ViewportOffset viewportOffset = ViewportOffset.zero();
-      final RenderEditable editable = RenderEditable(
+      final viewportOffset = ViewportOffset.zero();
+      final editable = RenderEditable(
         backgroundCursorColor: Colors.grey,
         selectionColor: Colors.black,
         textDirection: TextDirection.ltr,
@@ -1619,13 +1619,13 @@ void main() {
             text: 'test',
             selection: TextSelection.collapsed(offset: 3),
           );
-      final List<RenderBox> renderBoxes = <RenderBox>[
+      final renderBoxes = <RenderBox>[
         RenderParagraph(const TextSpan(text: 'a'), textDirection: TextDirection.ltr),
         RenderParagraph(const TextSpan(text: 'b'), textDirection: TextDirection.ltr),
         RenderParagraph(const TextSpan(text: 'c'), textDirection: TextDirection.ltr),
       ];
-      final ViewportOffset viewportOffset = ViewportOffset.zero();
-      final RenderEditable editable = RenderEditable(
+      final viewportOffset = ViewportOffset.zero();
+      final editable = RenderEditable(
         backgroundCursorColor: Colors.grey,
         selectionColor: Colors.black,
         textDirection: TextDirection.ltr,
@@ -1674,11 +1674,11 @@ void main() {
             text: 'test',
             selection: TextSelection.collapsed(offset: 3),
           );
-      final List<RenderBox> renderBoxes = <RenderBox>[
+      final renderBoxes = <RenderBox>[
         RenderParagraph(const TextSpan(text: 'b'), textDirection: TextDirection.ltr),
       ];
-      final ViewportOffset viewportOffset = ViewportOffset.fixed(100.0);
-      final RenderEditable editable = RenderEditable(
+      final viewportOffset = ViewportOffset.fixed(100.0);
+      final editable = RenderEditable(
         backgroundCursorColor: Colors.grey,
         selectionColor: Colors.black,
         textDirection: TextDirection.ltr,
@@ -1709,19 +1709,19 @@ void main() {
 
     test('can compute IntrinsicWidth for WidgetSpans', () {
       // Regression test for https://github.com/flutter/flutter/issues/59316
-      const double screenWidth = 1000.0;
-      const double fixedHeight = 1000.0;
-      const String sentence = 'one two';
+      const screenWidth = 1000.0;
+      const fixedHeight = 1000.0;
+      const sentence = 'one two';
       final TextSelectionDelegate delegate = _FakeEditableTextState()
         ..textEditingValue = const TextEditingValue(
             text: 'test',
             selection: TextSelection.collapsed(offset: 3),
           );
-      final List<RenderBox> renderBoxes = <RenderBox>[
+      final renderBoxes = <RenderBox>[
         RenderParagraph(const TextSpan(text: sentence), textDirection: TextDirection.ltr),
       ];
-      final ViewportOffset viewportOffset = ViewportOffset.zero();
-      final RenderEditable editable = RenderEditable(
+      final viewportOffset = ViewportOffset.zero();
+      final editable = RenderEditable(
         backgroundCursorColor: Colors.grey,
         selectionColor: Colors.black,
         textDirection: TextDirection.ltr,
@@ -1771,12 +1771,12 @@ void main() {
             text: 'test',
             selection: TextSelection.collapsed(offset: 3),
           );
-      final List<RenderBox> renderBoxes = <RenderBox>[
+      final renderBoxes = <RenderBox>[
         RenderParagraph(const TextSpan(text: 'a'), textDirection: TextDirection.ltr),
         RenderParagraph(const TextSpan(text: 'b'), textDirection: TextDirection.ltr),
         RenderParagraph(const TextSpan(text: 'c'), textDirection: TextDirection.ltr),
       ];
-      final RenderEditable editable = RenderEditable(
+      final editable = RenderEditable(
         text: const TextSpan(
           style: TextStyle(height: 1.0, fontSize: 10.0),
           children: <InlineSpan>[
@@ -1803,7 +1803,7 @@ void main() {
       layout(editable, constraints: BoxConstraints.loose(const Size(500.0, 500.0)));
       // Prepare for painting after layout.
       pumpFrame(phase: EnginePhase.compositingBits);
-      BoxHitTestResult result = BoxHitTestResult();
+      var result = BoxHitTestResult();
       // The WidgetSpans have a height of 14.0, so "test" has a y offset of 4.0.
       editable.hitTest(result, position: const Offset(1.0, 5.0));
       // We expect two hit test entries in the path because the RenderEditable
@@ -1848,18 +1848,18 @@ void main() {
     }, skip: isBrowser); // https://github.com/flutter/flutter/issues/61020
 
     test('hits correct WidgetSpan when scrolled', () {
-      final String text = '${"\n" * 10}test';
+      final text = '${"\n" * 10}test';
       final TextSelectionDelegate delegate = _FakeEditableTextState()
         ..textEditingValue = TextEditingValue(
             text: text,
             selection: const TextSelection.collapsed(offset: 13),
           );
-      final List<RenderBox> renderBoxes = <RenderBox>[
+      final renderBoxes = <RenderBox>[
         RenderParagraph(const TextSpan(text: 'a'), textDirection: TextDirection.ltr),
         RenderParagraph(const TextSpan(text: 'b'), textDirection: TextDirection.ltr),
         RenderParagraph(const TextSpan(text: 'c'), textDirection: TextDirection.ltr),
       ];
-      final RenderEditable editable = RenderEditable(
+      final editable = RenderEditable(
         maxLines: null,
         text: TextSpan(
           style: const TextStyle(height: 1.0, fontSize: 10.0),
@@ -1887,7 +1887,7 @@ void main() {
       layout(editable, constraints: BoxConstraints.loose(const Size(500.0, 500.0)));
       // Prepare for painting after layout.
       pumpFrame(phase: EnginePhase.compositingBits);
-      BoxHitTestResult result = BoxHitTestResult();
+      var result = BoxHitTestResult();
       // The WidgetSpans have a height of 14.0, so "test" has a y offset of 4.0.
       editable.hitTest(result, position: const Offset(0.0, 4.0));
       // We expect two hit test entries in the path because the RenderEditable
@@ -1936,8 +1936,8 @@ void main() {
   test('does not skip TextPainter.layout because of invalid cache', () {
     // Regression test for https://github.com/flutter/flutter/issues/84896.
     final TextSelectionDelegate delegate = _FakeEditableTextState();
-    const BoxConstraints constraints = BoxConstraints(minWidth: 100, maxWidth: 500);
-    final RenderEditable editable = RenderEditable(
+    const constraints = BoxConstraints(minWidth: 100, maxWidth: 500);
+    final editable = RenderEditable(
       text: const TextSpan(
         style: TextStyle(height: 1.0, fontSize: 10.0),
         text: 'A',
@@ -1966,12 +1966,12 @@ void main() {
 
   test('Floating cursor position is independent of viewport offset', () {
     final TextSelectionDelegate delegate = _FakeEditableTextState();
-    final ValueNotifier<bool> showCursor = ValueNotifier<bool>(true);
+    final showCursor = ValueNotifier<bool>(true);
     EditableText.debugDeterministicCursor = true;
 
-    const Color cursorColor = Color.fromARGB(0xFF, 0xFF, 0x00, 0x00);
+    const cursorColor = Color.fromARGB(0xFF, 0xFF, 0x00, 0x00);
 
-    final RenderEditable editable = RenderEditable(
+    final editable = RenderEditable(
       backgroundCursorColor: Colors.grey,
       textDirection: TextDirection.ltr,
       cursorColor: cursorColor,
@@ -2009,7 +2009,7 @@ void main() {
     ));
     pumpFrame(phase: EnginePhase.compositingBits);
 
-    final RRect expectedRRect = RRect.fromRectAndRadius(
+    final expectedRRect = RRect.fromRectAndRadius(
       const Rect.fromLTWH(49.5, 51, 2, 8),
       const Radius.circular(1)
     );
@@ -2036,11 +2036,11 @@ void main() {
   });
 
   test('getWordAtOffset with a negative position', () {
-    const String text = 'abc';
-    final _FakeEditableTextState delegate = _FakeEditableTextState()
+    const text = 'abc';
+    final delegate = _FakeEditableTextState()
       ..textEditingValue = const TextEditingValue(text: text);
-    final ViewportOffset viewportOffset = ViewportOffset.zero();
-    final RenderEditable editable = RenderEditable(
+    final viewportOffset = ViewportOffset.zero();
+    final editable = RenderEditable(
       backgroundCursorColor: Colors.grey,
       selectionColor: Colors.black,
       textDirection: TextDirection.ltr,

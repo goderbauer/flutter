@@ -16,8 +16,8 @@ class TestCanvas implements Canvas {
 
 void main() {
   test('Border.fromBorderSide constructor', () {
-    const BorderSide side = BorderSide();
-    const Border border = Border.fromBorderSide(side);
+    const side = BorderSide();
+    const border = Border.fromBorderSide(side);
     expect(border.left, same(side));
     expect(border.top, same(side));
     expect(border.right, same(side));
@@ -25,9 +25,9 @@ void main() {
   });
 
   test('Border.symmetric constructor', () {
-    const BorderSide side1 = BorderSide(color: Color(0xFFFFFFFF));
-    const BorderSide side2 = BorderSide();
-    const Border border = Border.symmetric(vertical: side1, horizontal: side2);
+    const side1 = BorderSide(color: Color(0xFFFFFFFF));
+    const side2 = BorderSide();
+    const border = Border.symmetric(vertical: side1, horizontal: side2);
     expect(border.left, same(side1));
     expect(border.top, same(side2));
     expect(border.right, same(side1));
@@ -35,10 +35,10 @@ void main() {
   });
 
   test('Border.merge', () {
-    const BorderSide magenta3 = BorderSide(color: Color(0xFFFF00FF), width: 3.0);
-    const BorderSide magenta6 = BorderSide(color: Color(0xFFFF00FF), width: 6.0);
-    const BorderSide yellow2 = BorderSide(color: Color(0xFFFFFF00), width: 2.0);
-    const BorderSide yellowNone0 = BorderSide(color: Color(0xFFFFFF00), width: 0.0, style: BorderStyle.none);
+    const magenta3 = BorderSide(color: Color(0xFFFF00FF), width: 3.0);
+    const magenta6 = BorderSide(color: Color(0xFFFF00FF), width: 6.0);
+    const yellow2 = BorderSide(color: Color(0xFFFFFF00), width: 2.0);
+    const yellowNone0 = BorderSide(color: Color(0xFFFFFF00), width: 0.0, style: BorderStyle.none);
     expect(
       Border.merge(
         const Border(top: yellow2),
@@ -74,10 +74,10 @@ void main() {
   });
 
   test('Border.add', () {
-    const BorderSide magenta3 = BorderSide(color: Color(0xFFFF00FF), width: 3.0);
-    const BorderSide magenta6 = BorderSide(color: Color(0xFFFF00FF), width: 6.0);
-    const BorderSide yellow2 = BorderSide(color: Color(0xFFFFFF00), width: 2.0);
-    const BorderSide yellowNone0 = BorderSide(color: Color(0xFFFFFF00), width: 0.0, style: BorderStyle.none);
+    const magenta3 = BorderSide(color: Color(0xFFFF00FF), width: 3.0);
+    const magenta6 = BorderSide(color: Color(0xFFFF00FF), width: 6.0);
+    const yellow2 = BorderSide(color: Color(0xFFFFFF00), width: 2.0);
+    const yellowNone0 = BorderSide(color: Color(0xFFFFFF00), width: 0.0, style: BorderStyle.none);
     expect(
       const Border(top: yellow2) + const Border(right: magenta3),
       const Border(top: yellow2, right: magenta3),
@@ -98,11 +98,11 @@ void main() {
       const Border(left: magenta3) + const Border(left: yellow2),
       isNot(isA<Border>()), // see shape_border_test.dart for better tests of this case
     );
-    const Border b3 = Border(top: magenta3);
-    const Border b6 = Border(top: magenta6);
+    const b3 = Border(top: magenta3);
+    const b6 = Border(top: magenta6);
     expect(b3 + b3, b6);
-    const Border b0 = Border(top: yellowNone0);
-    const Border bZ = Border();
+    const b0 = Border(top: yellowNone0);
+    const bZ = Border();
     expect(b0 + b0, bZ);
     expect(bZ + bZ, bZ);
     expect(b0 + bZ, bZ);
@@ -110,16 +110,16 @@ void main() {
   });
 
   test('Border.scale', () {
-    const BorderSide magenta3 = BorderSide(color: Color(0xFFFF00FF), width: 3.0);
-    const BorderSide magenta6 = BorderSide(color: Color(0xFFFF00FF), width: 6.0);
-    const BorderSide yellow2 = BorderSide(color: Color(0xFFFFFF00), width: 2.0);
-    const BorderSide yellowNone0 = BorderSide(color: Color(0xFFFFFF00), width: 0.0, style: BorderStyle.none);
-    const Border b3 = Border(left: magenta3);
-    const Border b6 = Border(left: magenta6);
+    const magenta3 = BorderSide(color: Color(0xFFFF00FF), width: 3.0);
+    const magenta6 = BorderSide(color: Color(0xFFFF00FF), width: 6.0);
+    const yellow2 = BorderSide(color: Color(0xFFFFFF00), width: 2.0);
+    const yellowNone0 = BorderSide(color: Color(0xFFFFFF00), width: 0.0, style: BorderStyle.none);
+    const b3 = Border(left: magenta3);
+    const b6 = Border(left: magenta6);
     expect(b3.scale(2.0), b6);
-    const Border bY0 = Border(top: yellowNone0);
+    const bY0 = Border(top: yellowNone0);
     expect(bY0.scale(3.0), bY0);
-    const Border bY2 = Border(top: yellow2);
+    const bY2 = Border(top: yellow2);
     expect(bY2.scale(0.0), bY0);
   });
 
@@ -217,13 +217,13 @@ void main() {
   });
 
   test('Border.lerp', () {
-    const Border visualWithTop10 = Border(top: BorderSide(width: 10.0));
-    const Border atMinus100 = Border(left: BorderSide(width: 0.0), right: BorderSide(width: 300.0));
-    const Border at0 = Border(left: BorderSide(width: 100.0), right: BorderSide(width: 200.0));
-    const Border at25 = Border(left: BorderSide(width: 125.0), right: BorderSide(width: 175.0));
-    const Border at75 = Border(left: BorderSide(width: 175.0), right: BorderSide(width: 125.0));
-    const Border at100 = Border(left: BorderSide(width: 200.0), right: BorderSide(width: 100.0));
-    const Border at200 = Border(left: BorderSide(width: 300.0), right: BorderSide(width: 0.0));
+    const visualWithTop10 = Border(top: BorderSide(width: 10.0));
+    const atMinus100 = Border(left: BorderSide(width: 0.0), right: BorderSide(width: 300.0));
+    const at0 = Border(left: BorderSide(width: 100.0), right: BorderSide(width: 200.0));
+    const at25 = Border(left: BorderSide(width: 125.0), right: BorderSide(width: 175.0));
+    const at75 = Border(left: BorderSide(width: 175.0), right: BorderSide(width: 125.0));
+    const at100 = Border(left: BorderSide(width: 200.0), right: BorderSide(width: 100.0));
+    const at200 = Border(left: BorderSide(width: 300.0), right: BorderSide(width: 0.0));
 
     expect(Border.lerp(null, null, -1.0), null);
     expect(Border.lerp(visualWithTop10, null, -1.0), const Border(top: BorderSide(width: 20.0)));
@@ -259,7 +259,7 @@ void main() {
   test('Border - throws correct exception with strokeAlign', () {
     late FlutterError error;
     try {
-      final TestCanvas canvas = TestCanvas();
+      final canvas = TestCanvas();
       // Border.all supports all StrokeAlign values.
       // Border() supports [BorderSide.strokeAlignInside] only.
       const Border(
@@ -278,28 +278,28 @@ void main() {
   });
 
   test('Border.dimension', () {
-    final Border insideBorder = Border.all(width: 10);
+    final insideBorder = Border.all(width: 10);
     expect(insideBorder.dimensions, const EdgeInsets.all(10));
 
-    final Border centerBorder = Border.all(width: 10, strokeAlign: BorderSide.strokeAlignCenter);
+    final centerBorder = Border.all(width: 10, strokeAlign: BorderSide.strokeAlignCenter);
     expect(centerBorder.dimensions, const EdgeInsets.all(5));
 
-    final Border outsideBorder = Border.all(width: 10, strokeAlign: BorderSide.strokeAlignOutside);
+    final outsideBorder = Border.all(width: 10, strokeAlign: BorderSide.strokeAlignOutside);
     expect(outsideBorder.dimensions, EdgeInsets.zero);
 
-    const BorderSide insideSide = BorderSide(width: 10);
-    const BorderDirectional insideBorderDirectional = BorderDirectional(top: insideSide, bottom: insideSide, start: insideSide, end: insideSide);
+    const insideSide = BorderSide(width: 10);
+    const insideBorderDirectional = BorderDirectional(top: insideSide, bottom: insideSide, start: insideSide, end: insideSide);
     expect(insideBorderDirectional.dimensions, const EdgeInsetsDirectional.all(10));
 
-    const BorderSide centerSide = BorderSide(width: 10, strokeAlign: BorderSide.strokeAlignCenter);
-    const BorderDirectional centerBorderDirectional = BorderDirectional(top: centerSide, bottom: centerSide, start: centerSide, end: centerSide);
+    const centerSide = BorderSide(width: 10, strokeAlign: BorderSide.strokeAlignCenter);
+    const centerBorderDirectional = BorderDirectional(top: centerSide, bottom: centerSide, start: centerSide, end: centerSide);
     expect(centerBorderDirectional.dimensions, const EdgeInsetsDirectional.all(5));
 
-    const BorderSide outsideSide = BorderSide(width: 10, strokeAlign: BorderSide.strokeAlignOutside);
-    const BorderDirectional outsideBorderDirectional = BorderDirectional(top: outsideSide, bottom: outsideSide, start: outsideSide, end: outsideSide);
+    const outsideSide = BorderSide(width: 10, strokeAlign: BorderSide.strokeAlignOutside);
+    const outsideBorderDirectional = BorderDirectional(top: outsideSide, bottom: outsideSide, start: outsideSide, end: outsideSide);
     expect(outsideBorderDirectional.dimensions, EdgeInsetsDirectional.zero);
 
-    const Border nonUniformBorder = Border(
+    const nonUniformBorder = Border(
       left: BorderSide(width: 5),
       top: BorderSide(width: 10, strokeAlign: BorderSide.strokeAlignCenter),
       right: BorderSide(width: 15, strokeAlign: BorderSide.strokeAlignOutside),
@@ -307,7 +307,7 @@ void main() {
     );
     expect(nonUniformBorder.dimensions, const EdgeInsets.fromLTRB(5, 5, 0, 20));
 
-    const BorderDirectional nonUniformBorderDirectional = BorderDirectional(
+    const nonUniformBorderDirectional = BorderDirectional(
       start: BorderSide(width: 5),
       top: BorderSide(width: 10, strokeAlign: BorderSide.strokeAlignCenter),
       end: BorderSide(width: 15, strokeAlign: BorderSide.strokeAlignOutside),
@@ -332,7 +332,7 @@ void main() {
     }
 
     // This is used to test every allowed non-uniform border combination.
-    const Border allowedBorderVariations = Border(
+    const allowedBorderVariations = Border(
       left: BorderSide(width: 5),
       top: BorderSide(width: 10, strokeAlign: BorderSide.strokeAlignCenter),
       right: BorderSide(width: 15, strokeAlign: BorderSide.strokeAlignOutside),
@@ -400,7 +400,7 @@ void main() {
         reason: 'Border with width == 0 and borderRadius should fail (hairline border).');
 
     // Tests for BorderDirectional.
-    const BorderDirectional allowedBorderDirectionalVariations = BorderDirectional(
+    const allowedBorderDirectionalVariations = BorderDirectional(
       start: BorderSide(width: 5),
       top: BorderSide(width: 10, strokeAlign: BorderSide.strokeAlignCenter),
       end: BorderSide(width: 15, strokeAlign: BorderSide.strokeAlignOutside),

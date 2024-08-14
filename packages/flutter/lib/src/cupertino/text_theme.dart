@@ -283,7 +283,7 @@ class CupertinoTextThemeData with Diagnosticable {
   @override
   void debugFillProperties(DiagnosticPropertiesBuilder properties) {
     super.debugFillProperties(properties);
-    const CupertinoTextThemeData defaultData = CupertinoTextThemeData();
+    const defaultData = CupertinoTextThemeData();
     properties.add(DiagnosticsProperty<TextStyle>('textStyle', textStyle, defaultValue: defaultData.textStyle));
     properties.add(DiagnosticsProperty<TextStyle>('actionTextStyle', actionTextStyle, defaultValue: defaultData.actionTextStyle));
     properties.add(DiagnosticsProperty<TextStyle>('actionSmallTextStyle', actionSmallTextStyle, defaultValue: defaultData.actionSmallTextStyle));

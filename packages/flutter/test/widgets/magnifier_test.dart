@@ -32,7 +32,7 @@ class _MockAnimationController extends AnimationController {
 void main() {
   Future<T> runFakeAsync<T>(Future<T> Function(FakeAsync time) f) async {
     return FakeAsync().run((FakeAsync time) async {
-      bool pump = true;
+      var pump = true;
       final Future<T> future = f(time).whenComplete(() => pump = false);
       while (pump) {
         time.flushMicrotasks();
@@ -45,9 +45,9 @@ void main() {
     testWidgets('should render with correct focal point and decoration',
         (WidgetTester tester) async {
       final Key appKey = UniqueKey();
-      const Size magnifierSize = Size(100, 100);
-      const Offset magnifierFocalPoint = Offset(50, 50);
-      const Offset magnifierPosition = Offset(200, 200);
+      const magnifierSize = Size(100, 100);
+      const magnifierFocalPoint = Offset(50, 50);
+      const magnifierPosition = Offset(200, 200);
       const double magnificationScale = 2;
 
       await tester.pumpWidget(MaterialApp(
@@ -106,9 +106,9 @@ void main() {
     }, skip: kIsWeb);  // [intended] Bdf does not display on web.
 
     group('transition states', () {
-      final AnimationController animationController = AnimationController(
+      final animationController = AnimationController(
           vsync: const TestVSync(), duration: const Duration(minutes: 2));
-      final MagnifierController magnifierController = MagnifierController();
+      final magnifierController = MagnifierController();
 
       tearDown(() {
         animationController.value = 0;
@@ -121,7 +121,7 @@ void main() {
           'should immediately remove from overlay on no animation controller',
           (WidgetTester tester) async {
         await runFakeAsync((FakeAsync async) async {
-          const RawMagnifier testMagnifier = RawMagnifier(
+          const testMagnifier = RawMagnifier(
             size: Size(100, 100),
           );
 
@@ -153,10 +153,10 @@ void main() {
       testWidgets('should update shown based on animation status',
           (WidgetTester tester) async {
         await runFakeAsync((FakeAsync async) async {
-          final MagnifierController magnifierController =
+          final magnifierController =
               MagnifierController(animationController: animationController);
 
-          const RawMagnifier testMagnifier = RawMagnifier(
+          const testMagnifier = RawMagnifier(
             size: Size(100, 100),
           );
 
@@ -208,7 +208,7 @@ void main() {
   });
 
   group('magnifier controller', () {
-    final MagnifierController magnifierController = MagnifierController();
+    final magnifierController = MagnifierController();
 
     tearDown(() {
       magnifierController.removeFromOverlay();
@@ -225,7 +225,7 @@ void main() {
         final Widget fakeMagnifier = Placeholder(key: UniqueKey());
         final Widget fakeBefore = Placeholder(key: UniqueKey());
 
-        final OverlayEntry fakeBeforeOverlayEntry =
+        final fakeBeforeOverlayEntry =
             OverlayEntry(builder: (_) => fakeBefore);
         addTearDown(() => fakeBeforeOverlayEntry..remove()..dispose());
 
@@ -252,14 +252,14 @@ void main() {
       testWidgets('should insert newly built widget without animating out if overlay != null',
           (WidgetTester tester) async {
         await runFakeAsync((FakeAsync async) async {
-          final _MockAnimationController animationController =
+          final animationController =
               _MockAnimationController();
           addTearDown(animationController.dispose);
 
-          const RawMagnifier testMagnifier = RawMagnifier(
+          const testMagnifier = RawMagnifier(
             size: Size(100, 100),
           );
-          const RawMagnifier testMagnifier2 = RawMagnifier(
+          const testMagnifier2 = RawMagnifier(
             size: Size(100, 100),
           );
 
@@ -296,26 +296,26 @@ void main() {
     });
 
     group('shift within bounds', () {
-      final List<Rect> boundsRects = <Rect>[
+      final boundsRects = <Rect>[
         const Rect.fromLTRB(0, 0, 100, 100),
         const Rect.fromLTRB(0, 0, 100, 100),
         const Rect.fromLTRB(0, 0, 100, 100),
         const Rect.fromLTRB(0, 0, 100, 100),
       ];
-      final List<Rect> inputRects = <Rect>[
+      final inputRects = <Rect>[
         const Rect.fromLTRB(-100, -100, -80, -80),
         const Rect.fromLTRB(0, 0, 20, 20),
         const Rect.fromLTRB(110, 0, 120, 10),
         const Rect.fromLTRB(110, 110, 120, 120)
       ];
-      final List<Rect> outputRects = <Rect>[
+      final outputRects = <Rect>[
         const Rect.fromLTRB(0, 0, 20, 20),
         const Rect.fromLTRB(0, 0, 20, 20),
         const Rect.fromLTRB(90, 0, 100, 10),
         const Rect.fromLTRB(90, 90, 100, 100)
       ];
 
-      for (int i = 0; i < boundsRects.length; i++) {
+      for (var i = 0; i < boundsRects.length; i++) {
         test(
             'should shift ${inputRects[i]} to ${outputRects[i]} for bounds ${boundsRects[i]}',
             () {

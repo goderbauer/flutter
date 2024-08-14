@@ -873,7 +873,7 @@ class MediaQueryData {
 
   @override
   String toString() {
-    final List<String> properties = <String>[
+    final properties = <String>[
       'size: $size',
       'devicePixelRatio: ${devicePixelRatio.toStringAsFixed(1)}',
       'textScaler: $textScaler',
@@ -1802,7 +1802,7 @@ class _MediaQueryFromViewState extends State<_MediaQueryFromView> with WidgetsBi
   }
 
   void _updateData() {
-    final MediaQueryData newData = MediaQueryData.fromView(widget.view, platformData: _parentData);
+    final newData = MediaQueryData.fromView(widget.view, platformData: _parentData);
     if (newData != _data) {
       setState(() {
         _data = newData;

@@ -1066,8 +1066,8 @@ class _TextFieldState extends State<TextField> with RestorationMixin implements 
       return effectiveDecoration;
     } // No counter widget
 
-    String counterText = '$currentLength';
-    String semanticCounterText = '';
+    var counterText = '$currentLength';
+    var semanticCounterText = '';
 
     // Handle a real maxLength (positive number)
     if (widget.maxLength! > 0) {
@@ -1356,7 +1356,7 @@ class _TextFieldState extends State<TextField> with RestorationMixin implements 
     final Brightness keyboardAppearance = widget.keyboardAppearance ?? theme.brightness;
     final TextEditingController controller = _effectiveController;
     final FocusNode focusNode = _effectiveFocusNode;
-    final List<TextInputFormatter> formatters = <TextInputFormatter>[
+    final formatters = <TextInputFormatter>[
       ...?widget.inputFormatters,
       if (widget.maxLength != null)
         LengthLimitingTextInputFormatter(

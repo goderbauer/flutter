@@ -670,9 +670,9 @@ class RenderFlex extends RenderBox with ContainerRenderObjectMixin<RenderBox, Fl
       // INTRINSIC MAIN SIZE
       // Intrinsic main size is the smallest size the flex container can take
       // while maintaining the min/max-content contributions of its flex items.
-      double totalFlex = 0.0;
+      var totalFlex = 0.0;
       double inflexibleSpace = spacing * (childCount - 1);
-      double maxFlexFractionSoFar = 0.0;
+      var maxFlexFractionSoFar = 0.0;
       for (RenderBox? child = firstChild; child != null; child = childAfter(child)) {
         final int flex = _getFlex(child);
         totalFlex += flex;
@@ -758,12 +758,12 @@ class RenderFlex extends RenderBox with ContainerRenderObjectMixin<RenderBox, Fl
   }
 
   static int _getFlex(RenderBox child) {
-    final FlexParentData childParentData = child.parentData! as FlexParentData;
+    final childParentData = child.parentData! as FlexParentData;
     return childParentData.flex ?? 0;
   }
 
   static FlexFit _getFit(RenderBox child) {
-    final FlexParentData childParentData = child.parentData! as FlexParentData;
+    final childParentData = child.parentData! as FlexParentData;
     return childParentData.fit ?? FlexFit.tight;
   }
 
@@ -908,7 +908,7 @@ class RenderFlex extends RenderBox with ContainerRenderObjectMixin<RenderBox, Fl
         final bool flipCrossAxis = _flipCrossAxis;
         for (RenderBox? child = firstChild; child != null; child = childAfter(child)) {
           final BoxConstraints childConstraints = constraintsForChild(child);
-          final BaselineOffset distance = BaselineOffset(child.getDryBaseline(childConstraints, baseline));
+          final distance = BaselineOffset(child.getDryBaseline(childConstraints, baseline));
           final double freeCrossAxisSpace = sizes.axisSize.crossAxisExtent - child.getDryLayout(childConstraints).height;
           final BaselineOffset childBaseline = distance + crossAxisAlignment._getChildCrossAxisOffset(freeCrossAxisSpace, flipCrossAxis);
           baselineOffset = baselineOffset.minOf(childBaseline);
@@ -949,11 +949,11 @@ class RenderFlex extends RenderBox with ContainerRenderObjectMixin<RenderBox, Fl
       while (child != null) {
         final int flex = _getFlex(child);
         if (flex > 0) {
-          final String identity = _direction == Axis.horizontal ? 'row' : 'column';
-          final String axis = _direction == Axis.horizontal ? 'horizontal' : 'vertical';
-          final String dimension = _direction == Axis.horizontal ? 'width' : 'height';
+          final identity = _direction == Axis.horizontal ? 'row' : 'column';
+          final axis = _direction == Axis.horizontal ? 'horizontal' : 'vertical';
+          final dimension = _direction == Axis.horizontal ? 'width' : 'height';
           DiagnosticsNode error, message;
-          final List<DiagnosticsNode> addendum = <DiagnosticsNode>[];
+          final addendum = <DiagnosticsNode>[];
           if (!canFlex && (mainAxisSize == MainAxisSize.max || _getFit(child) == FlexFit.tight)) {
             error = ErrorSummary('RenderFlex children have non-zero flex but incoming $dimension constraints are unbounded.');
             message = ErrorDescription(
@@ -1041,18 +1041,18 @@ class RenderFlex extends RenderBox with ContainerRenderObjectMixin<RenderBox, Fl
       : null;
 
     // The first pass lays out non-flex children and computes total flex.
-    int totalFlex = 0;
+    var totalFlex = 0;
     RenderBox? firstFlexChild;
     _AscentDescent accumulatedAscentDescent = _AscentDescent.none;
     // Initially, accumulatedSize is the sum of the spaces between children in the main axis.
-    _AxisSize accumulatedSize = _AxisSize._(Size(spacing * (childCount - 1), 0.0));
+    var accumulatedSize = _AxisSize._(Size(spacing * (childCount - 1), 0.0));
     for (RenderBox? child = firstChild; child != null; child = childAfter(child)) {
       final int flex;
       if (canFlex && (flex = _getFlex(child)) > 0) {
         totalFlex += flex;
         firstFlexChild ??= child;
       } else {
-        final _AxisSize childSize = _AxisSize.fromSize(size: layoutChild(child, nonFlexChildConstraints), direction: direction);
+        final childSize = _AxisSize.fromSize(size: layoutChild(child, nonFlexChildConstraints), direction: direction);
         accumulatedSize += childSize;
         // Baseline-aligned children contributes to the cross axis extent separately.
         final double? baselineOffset = textBaseline == null ? null : getBaseline(child, nonFlexChildConstraints, textBaseline);
@@ -1066,7 +1066,7 @@ class RenderFlex extends RenderBox with ContainerRenderObjectMixin<RenderBox, Fl
     // The second pass distributes free space to flexible children.
     final double flexSpace = math.max(0.0, maxMainSize - accumulatedSize.mainAxisExtent);
     final double spacePerFlex = flexSpace / totalFlex;
-    for (RenderBox? child = firstFlexChild; child != null && totalFlex > 0; child = childAfter(child)) {
+    for (var child = firstFlexChild; child != null && totalFlex > 0; child = childAfter(child)) {
       final int flex = _getFlex(child);
       if (flex == 0) {
         continue;
@@ -1076,7 +1076,7 @@ class RenderFlex extends RenderBox with ContainerRenderObjectMixin<RenderBox, Fl
       final double maxChildExtent = spacePerFlex * flex;
       assert(_getFit(child) == FlexFit.loose || maxChildExtent < double.infinity);
       final BoxConstraints childConstraints = _constraintsForFlexChild(child, constraints, maxChildExtent);
-      final _AxisSize childSize = _AxisSize.fromSize(size: layoutChild(child, childConstraints), direction: direction);
+      final childSize = _AxisSize.fromSize(size: layoutChild(child, childConstraints), direction: direction);
       accumulatedSize += childSize;
       final double? baselineOffset = textBaseline == null ? null : getBaseline(child, childConstraints, textBaseline);
       accumulatedAscentDescent += _AscentDescent(baselineOffset: baselineOffset, crossSize: childSize.crossAxisExtent);
@@ -1138,15 +1138,15 @@ class RenderFlex extends RenderBox with ContainerRenderObjectMixin<RenderBox, Fl
 
     // Position all children in visual order: starting from the top-left child and
     // work towards the child that's farthest away from the origin.
-    double childMainPosition = leadingSpace;
-    for (RenderBox? child = topLeftChild; child != null; child = nextChild(child)) {
+    var childMainPosition = leadingSpace;
+    for (var child = topLeftChild; child != null; child = nextChild(child)) {
       final double? childBaselineOffset;
       final bool baselineAlign = baselineOffset != null
         && (childBaselineOffset = child.getDistanceToBaseline(textBaseline!, onlyReal: true)) != null;
       final double childCrossPosition = baselineAlign
         ? baselineOffset - childBaselineOffset!
         : crossAxisAlignment._getChildCrossAxisOffset(crossAxisExtent - _getCrossSize(child.size), flipCrossAxis);
-      final FlexParentData childParentData = child.parentData! as FlexParentData;
+      final childParentData = child.parentData! as FlexParentData;
       childParentData.offset = switch (direction) {
         Axis.horizontal => Offset(childMainPosition, childCrossPosition),
         Axis.vertical => Offset(childCrossPosition, childMainPosition),
@@ -1182,7 +1182,7 @@ class RenderFlex extends RenderBox with ContainerRenderObjectMixin<RenderBox, Fl
     );
 
     assert(() {
-      final List<DiagnosticsNode> debugOverflowHints = <DiagnosticsNode>[
+      final debugOverflowHints = <DiagnosticsNode>[
         ErrorDescription(
           'The overflowing $runtimeType has an orientation of $_direction.',
         ),

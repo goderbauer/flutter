@@ -135,10 +135,10 @@ Finder findTooltipContainer(String tooltipText) {
 
 void main() {
   testWidgets('InputChip.color resolves material states', (WidgetTester tester) async {
-    const Color disabledSelectedColor = Color(0xffffff00);
-    const Color disabledColor = Color(0xff00ff00);
-    const Color backgroundColor = Color(0xff0000ff);
-    const Color selectedColor = Color(0xffff0000);
+    const disabledSelectedColor = Color(0xffffff00);
+    const disabledColor = Color(0xff00ff00);
+    const backgroundColor = Color(0xff0000ff);
+    const selectedColor = Color(0xffff0000);
     Widget buildApp({ required bool enabled, required bool selected }) {
       return wrapForChip(
         child: InputChip(
@@ -190,9 +190,9 @@ void main() {
   });
 
   testWidgets('InputChip uses provided state color properties', (WidgetTester tester) async {
-    const Color disabledColor = Color(0xff00ff00);
-    const Color backgroundColor = Color(0xff0000ff);
-    const Color selectedColor = Color(0xffff0000);
+    const disabledColor = Color(0xff00ff00);
+    const backgroundColor = Color(0xff0000ff);
+    const selectedColor = Color(0xffff0000);
     Widget buildApp({ required bool enabled, required bool selected }) {
       return wrapForChip(
         child: InputChip(
@@ -243,7 +243,7 @@ void main() {
   });
 
   testWidgets('loses focus when disabled', (WidgetTester tester) async {
-    final FocusNode focusNode = FocusNode(debugLabel: 'InputChip');
+    final focusNode = FocusNode(debugLabel: 'InputChip');
     await tester.pumpWidget(
       wrapForChip(
         child: InputChip(
@@ -277,8 +277,8 @@ void main() {
   });
 
   testWidgets('cannot be traversed to when disabled', (WidgetTester tester) async {
-    final FocusNode focusNode1 = FocusNode(debugLabel: 'InputChip 1');
-    final FocusNode focusNode2 = FocusNode(debugLabel: 'InputChip 2');
+    final focusNode1 = FocusNode(debugLabel: 'InputChip 1');
+    final focusNode2 = FocusNode(debugLabel: 'InputChip 2');
     await tester.pumpWidget(
       wrapForChip(
         child: FocusScope(
@@ -325,7 +325,7 @@ void main() {
   });
 
   testWidgets('Material3 - Input chip disabled check mark color is determined by platform brightness when light', (WidgetTester tester) async {
-    final ThemeData theme = ThemeData();
+    final theme = ThemeData();
     await pumpCheckmarkChip(tester, chip: selectedInputChip(), theme: theme);
 
     expectCheckmarkColor(find.byType(InputChip), theme.colorScheme.onSurface);
@@ -342,7 +342,7 @@ void main() {
   });
 
   testWidgets('Material3 - Input chip disabled check mark color is determined by platform brightness when dark', (WidgetTester tester) async {
-    final ThemeData theme = ThemeData.dark();
+    final theme = ThemeData.dark();
     await pumpCheckmarkChip(
       tester,
       chip: selectedInputChip(),
@@ -382,7 +382,7 @@ void main() {
   });
 
   testWidgets('InputChip clipBehavior properly passes through to the Material', (WidgetTester tester) async {
-    const Text label = Text('label');
+    const label = Text('label');
     await tester.pumpWidget(wrapForChip(child: const InputChip(label: label)));
     checkChipMaterialClipBehavior(tester, Clip.none);
 
@@ -391,7 +391,7 @@ void main() {
   });
 
   testWidgets('Material3 - Input chip has correct selected color when enabled', (WidgetTester tester) async {
-    final ThemeData theme = ThemeData();
+    final theme = ThemeData();
     await pumpCheckmarkChip(
       tester,
       chip: selectedInputChip(enabled: true),
@@ -403,7 +403,7 @@ void main() {
   });
 
   testWidgets('Material3 - Input chip has correct selected color when disabled', (WidgetTester tester) async {
-    final ThemeData theme = ThemeData();
+    final theme = ThemeData();
     await pumpCheckmarkChip(
       tester,
       chip: selectedInputChip(),
@@ -415,7 +415,7 @@ void main() {
   });
 
   testWidgets('InputChip uses provided iconTheme', (WidgetTester tester) async {
-    final ThemeData theme = ThemeData();
+    final theme = ThemeData();
 
     Widget buildChip({ IconThemeData? iconTheme }) {
       return MaterialApp(
@@ -487,11 +487,11 @@ void main() {
   });
 
   testWidgets('InputChip avatar layout constraints can be customized', (WidgetTester tester) async {
-    const double border = 1.0;
-    const double iconSize = 18.0;
-    const double labelPadding = 8.0;
-    const double padding = 8.0;
-    const Size labelSize = Size(100, 100);
+    const border = 1.0;
+    const iconSize = 18.0;
+    const labelPadding = 8.0;
+    const padding = 8.0;
+    const labelSize = Size(100, 100);
 
     Widget buildChip({BoxConstraints? avatarBoxConstraints}) {
       return wrapForChip(
@@ -543,11 +543,11 @@ void main() {
   });
 
   testWidgets('InputChip delete icon layout constraints can be customized', (WidgetTester tester) async {
-    const double border = 1.0;
-    const double iconSize = 18.0;
-    const double labelPadding = 8.0;
-    const double padding = 8.0;
-    const Size labelSize = Size(100, 100);
+    const border = 1.0;
+    const iconSize = 18.0;
+    const labelPadding = 8.0;
+    const padding = 8.0;
+    const labelSize = Size(100, 100);
 
     Widget buildChip({BoxConstraints? deleteIconBoxConstraints}) {
       return wrapForChip(
@@ -601,7 +601,7 @@ void main() {
   });
 
   testWidgets('InputChip.chipAnimationStyle is passed to RawChip', (WidgetTester tester) async {
-    final ChipAnimationStyle chipAnimationStyle = ChipAnimationStyle(
+    final chipAnimationStyle = ChipAnimationStyle(
       enableAnimation: AnimationStyle(duration: Durations.short2),
       selectAnimation: AnimationStyle.noAnimation,
     );

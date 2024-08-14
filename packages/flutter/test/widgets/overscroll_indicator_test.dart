@@ -11,7 +11,7 @@ final Matcher doesNotOverscroll = isNot(paints..circle());
 
 Future<void> slowDrag(WidgetTester tester, Offset start, Offset offset) async {
   final TestGesture gesture = await tester.startGesture(start);
-  for (int index = 0; index < 10; index += 1) {
+  for (var index = 0; index < 10; index += 1) {
     await gesture.moveBy(offset);
     await tester.pump(const Duration(milliseconds: 20));
   }
@@ -106,7 +106,7 @@ void main() {
       if (method != #drawCircle) {
         return false;
       }
-      final Offset center = arguments[0] as Offset;
+      final center = arguments[0] as Offset;
       if (center.dx < 400.0) {
         return true;
       }
@@ -117,7 +117,7 @@ void main() {
       if (method != #drawCircle) {
         return false;
       }
-      final Offset center = arguments[0] as Offset;
+      final center = arguments[0] as Offset;
       if (center.dx > 400.0) {
         return true;
       }
@@ -143,15 +143,15 @@ void main() {
     final TestGesture gesture = await tester.startGesture(const Offset(300.0, 200.0));
     await gesture.moveBy(const Offset(0.0, 10.0));
     await tester.pump(const Duration(milliseconds: 20));
-    double oldX = 0.0;
-    for (int index = 0; index < 10; index += 1) {
+    var oldX = 0.0;
+    for (var index = 0; index < 10; index += 1) {
       await gesture.moveBy(const Offset(50.0, 50.0));
       await tester.pump(const Duration(milliseconds: 20));
       expect(painter, paints..something((Symbol method, List<dynamic> arguments) {
         if (method != #drawCircle) {
           return false;
         }
-        final Offset center = arguments[0] as Offset;
+        final center = arguments[0] as Offset;
         if (center.dx <= oldX) {
           throw 'Sliding to the right did not make the center of the radius slide to the right.';
         }

@@ -60,10 +60,10 @@ void main() {
   });
 
   test('Tasks are executed in the right order', () {
-    final TestStrategy strategy = TestStrategy();
+    final strategy = TestStrategy();
     scheduler.schedulingStrategy = strategy.shouldRunTaskWithPriority;
-    final List<int> input = <int>[2, 23, 23, 11, 0, 80, 3];
-    final List<int> executedTasks = <int>[];
+    final input = <int>[2, 23, 23, 11, 0, 80, 3];
+    final executedTasks = <int>[];
 
     void scheduleAddingTask(int x) {
       scheduler.scheduleTask(() { executedTasks.add(x); }, Priority.idle + x);
@@ -72,13 +72,13 @@ void main() {
     input.forEach(scheduleAddingTask);
 
     strategy.allowedPriority = 100;
-    for (int i = 0; i < 3; i += 1) {
+    for (var i = 0; i < 3; i += 1) {
       expect(scheduler.handleEventLoopCallback(), isTrue);
     }
     expect(executedTasks.isEmpty, isTrue);
 
     strategy.allowedPriority = 50;
-    for (int i = 0; i < 3; i += 1) {
+    for (var i = 0; i < 3; i += 1) {
       expect(scheduler.handleEventLoopCallback(), isTrue);
     }
     expect(executedTasks, hasLength(1));
@@ -86,7 +86,7 @@ void main() {
     executedTasks.clear();
 
     strategy.allowedPriority = 20;
-    for (int i = 0; i < 3; i += 1) {
+    for (var i = 0; i < 3; i += 1) {
       expect(scheduler.handleEventLoopCallback(), isTrue);
     }
     expect(executedTasks, hasLength(2));
@@ -98,7 +98,7 @@ void main() {
     scheduleAddingTask(19);
     scheduleAddingTask(5);
     scheduleAddingTask(97);
-    for (int i = 0; i < 3; i += 1) {
+    for (var i = 0; i < 3; i += 1) {
       expect(scheduler.handleEventLoopCallback(), isTrue);
     }
     expect(executedTasks, hasLength(2));
@@ -107,7 +107,7 @@ void main() {
     executedTasks.clear();
 
     strategy.allowedPriority = 10;
-    for (int i = 0; i < 3; i += 1) {
+    for (var i = 0; i < 3; i += 1) {
       expect(scheduler.handleEventLoopCallback(), isTrue);
     }
     expect(executedTasks, hasLength(2));
@@ -116,7 +116,7 @@ void main() {
     executedTasks.clear();
 
     strategy.allowedPriority = 1;
-    for (int i = 0; i < 4; i += 1) {
+    for (var i = 0; i < 4; i += 1) {
       expect(scheduler.handleEventLoopCallback(), isTrue);
     }
     expect(executedTasks, hasLength(3));
@@ -134,8 +134,8 @@ void main() {
   test('scheduleWarmUpFrame should flush microtasks between callbacks', () async {
     addTearDown(() => scheduler.handleEventLoopCallback());
 
-    bool microtaskDone = false;
-    final Completer<void> drawFrameDone = Completer<void>();
+    var microtaskDone = false;
+    final drawFrameDone = Completer<void>();
     scheduler.additionalHandleBeginFrame = () {
       expect(microtaskDone, false);
       scheduleMicrotask(() {
@@ -151,8 +151,8 @@ void main() {
   });
 
   test('2 calls to scheduleWarmUpFrame just schedules it once', () {
-    final List<VoidCallback> timerQueueTasks = <VoidCallback>[];
-    bool taskExecuted = false;
+    final timerQueueTasks = <VoidCallback>[];
+    var taskExecuted = false;
     runZoned<void>(
       () {
         // Run it twice without processing the queued tasks.
@@ -175,7 +175,7 @@ void main() {
     expect(taskExecuted, false);
 
     // Run the timers so that the scheduler is no longer in warm-up state.
-    for (final VoidCallback timer in timerQueueTasks) {
+    for (final timer in timerQueueTasks) {
       timer();
     }
 
@@ -260,8 +260,8 @@ void main() {
 
   test('Animation frame scheduled in the middle of the warm-up frame', () {
     expect(scheduler.schedulerPhase, SchedulerPhase.idle);
-    final List<VoidCallback> timers = <VoidCallback>[];
-    final ZoneSpecification timerInterceptor = ZoneSpecification(
+    final timers = <VoidCallback>[];
+    final timerInterceptor = ZoneSpecification(
       createTimer: (Zone self, ZoneDelegate parent, Zone zone, Duration duration, void Function() callback) {
         timers.add(callback);
         return DummyTimer();
@@ -293,12 +293,12 @@ void main() {
   });
 
   test('Can schedule futures to completion', () async {
-    bool isCompleted = false;
+    var isCompleted = false;
 
     // `Future` is disallowed in this file due to the import of
     // scheduler_tester.dart so annotations cannot be specified.
     // ignore: always_specify_types
-    final result = scheduler.scheduleTask(
+    final Future<int> result = scheduler.scheduleTask(
       () async {
         // Yield, so if awaiting `result` did not wait for completion of this
         // task, the assertion on `isCompleted` will fail.
@@ -312,7 +312,7 @@ void main() {
     );
 
     scheduler.handleEventLoopCallback();
-    await result;
+    result;
 
     expect(isCompleted, true);
   });

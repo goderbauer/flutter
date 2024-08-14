@@ -40,7 +40,7 @@ void main() {
   });
 
   test('WidgetBinding build rendering tree and warm up frame back to back', () {
-    final FakeAsync fakeAsync = FakeAsync();
+    final fakeAsync = FakeAsync();
     fakeAsync.run((FakeAsync async) {
       runApp(
         const MaterialApp(

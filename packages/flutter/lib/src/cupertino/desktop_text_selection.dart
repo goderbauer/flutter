@@ -160,7 +160,7 @@ class _CupertinoDesktopTextSelectionControlsToolbarState extends State<_Cupertin
     assert(debugCheckHasMediaQuery(context));
     final EdgeInsets mediaQueryPadding = MediaQuery.paddingOf(context);
 
-    final Offset midpointAnchor = Offset(
+    final midpointAnchor = Offset(
       clampDouble(widget.selectionMidpoint.dx - widget.globalEditableRegion.left,
         mediaQueryPadding.left,
         MediaQuery.sizeOf(context).width - mediaQueryPadding.right,
@@ -168,7 +168,7 @@ class _CupertinoDesktopTextSelectionControlsToolbarState extends State<_Cupertin
       widget.selectionMidpoint.dy - widget.globalEditableRegion.top,
     );
 
-    final List<Widget> items = <Widget>[];
+    final items = <Widget>[];
     final CupertinoLocalizations localizations = CupertinoLocalizations.of(context);
     final Widget onePhysicalPixelVerticalDivider =
         SizedBox(width: 1.0 / MediaQuery.devicePixelRatioOf(context));

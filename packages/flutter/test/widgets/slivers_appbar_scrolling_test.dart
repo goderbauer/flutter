@@ -9,7 +9,7 @@ import 'package:flutter_test/flutter_test.dart';
 void verifyPaintPosition(GlobalKey key, Offset ideal) {
   final RenderObject target = key.currentContext!.findRenderObject()!;
   expect(target.parent, isA<RenderViewport>());
-  final SliverPhysicalParentData parentData = target.parentData! as SliverPhysicalParentData;
+  final parentData = target.parentData! as SliverPhysicalParentData;
   final Offset actual = parentData.paintOffset;
   expect(actual, ideal);
 }
@@ -52,7 +52,7 @@ void main() {
 
   testWidgets('Sliver appbars - scrolling off screen', (WidgetTester tester) async {
     final GlobalKey key = GlobalKey();
-    final TestDelegate delegate = TestDelegate();
+    final delegate = TestDelegate();
     await tester.pumpWidget(
       Directionality(
         textDirection: TextDirection.ltr,
@@ -70,7 +70,7 @@ void main() {
     position.animateTo(RenderBigSliver.height + delegate.maxExtent - 5.0, curve: Curves.linear, duration: const Duration(minutes: 1));
     await tester.pumpAndSettle(const Duration(milliseconds: 1000));
     final RenderBox box = tester.renderObject<RenderBox>(find.text('Sliver App Bar'));
-    final Rect rect = Rect.fromPoints(box.localToGlobal(Offset.zero), box.localToGlobal(box.size.bottomRight(Offset.zero)));
+    final rect = Rect.fromPoints(box.localToGlobal(Offset.zero), box.localToGlobal(box.size.bottomRight(Offset.zero)));
     expect(rect, equals(const Rect.fromLTWH(0.0, -195.0, 800.0, 200.0)));
   });
 
@@ -175,7 +175,7 @@ void main() {
 
         testWidgets('partially scrolling off screen', (WidgetTester tester) async {
           final GlobalKey key = GlobalKey();
-          final TestDelegate delegate = TestDelegate();
+          final delegate = TestDelegate();
           final SemanticsHandle handle = tester.ensureSemantics();
           const double cacheExtent = 250;
           await tester.pumpWidget(
@@ -195,7 +195,7 @@ void main() {
           position.animateTo(delegate.maxExtent - 20.0, curve: Curves.linear, duration: const Duration(minutes: 1));
           await tester.pumpAndSettle(const Duration(milliseconds: 1000));
           final RenderBox box = tester.renderObject<RenderBox>(find.text('Sliver App Bar'));
-          final Rect rect = Rect.fromPoints(box.localToGlobal(Offset.zero), box.localToGlobal(box.size.bottomRight(Offset.zero)));
+          final rect = Rect.fromPoints(box.localToGlobal(Offset.zero), box.localToGlobal(box.size.bottomRight(Offset.zero)));
           expect(rect, equals(const Rect.fromLTWH(0.0, -180.0, 800.0, 200.0)));
 
           final SemanticsFinder sliverAppBar = find.semantics.byLabel(
@@ -210,7 +210,7 @@ void main() {
 
         testWidgets('completely scrolling off screen but within cache extent', (WidgetTester tester) async {
           final GlobalKey key = GlobalKey();
-          final TestDelegate delegate = TestDelegate();
+          final delegate = TestDelegate();
           final SemanticsHandle handle = tester.ensureSemantics();
           const double cacheExtent = 250;
           await tester.pumpWidget(
@@ -241,7 +241,7 @@ void main() {
 
         testWidgets('completely scrolling off screen and not within cache extent', (WidgetTester tester) async {
           final GlobalKey key = GlobalKey();
-          final TestDelegate delegate = TestDelegate();
+          final delegate = TestDelegate();
           final SemanticsHandle handle = tester.ensureSemantics();
           const double cacheExtent = 250;
           await tester.pumpWidget(

@@ -11,10 +11,10 @@ void main() {
     PointerEvent event;
     debugPrintGestureArenaDiagnostics = true;
     final DebugPrintCallback oldCallback = debugPrint;
-    final List<String> log = <String>[];
+    final log = <String>[];
     debugPrint = (String? s, { int? wrapWidth }) { log.add(s ?? ''); };
 
-    final TapGestureRecognizer tap = TapGestureRecognizer()
+    final tap = TapGestureRecognizer()
       ..onTapDown = (TapDownDetails details) { }
       ..onTapUp = (TapUpDetails details) { }
       ..onTap = () { }
@@ -57,10 +57,10 @@ void main() {
     PointerEvent event;
     debugPrintRecognizerCallbacksTrace = true;
     final DebugPrintCallback oldCallback = debugPrint;
-    final List<String> log = <String>[];
+    final log = <String>[];
     debugPrint = (String? s, { int? wrapWidth }) { log.add(s ?? ''); };
 
-    final TapGestureRecognizer tap = TapGestureRecognizer()
+    final tap = TapGestureRecognizer()
       ..onTapDown = (TapDownDetails details) { }
       ..onTapUp = (TapUpDetails details) { }
       ..onTap = () { }
@@ -100,10 +100,10 @@ void main() {
     debugPrintGestureArenaDiagnostics = true;
     debugPrintRecognizerCallbacksTrace = true;
     final DebugPrintCallback oldCallback = debugPrint;
-    final List<String> log = <String>[];
+    final log = <String>[];
     debugPrint = (String? s, { int? wrapWidth }) { log.add(s ?? ''); };
 
-    final TapGestureRecognizer tap = TapGestureRecognizer()
+    final tap = TapGestureRecognizer()
       ..onTapDown = (TapDownDetails details) { }
       ..onTapUp = (TapUpDetails details) { }
       ..onTap = () { }
@@ -147,10 +147,10 @@ void main() {
   });
 
   test('TapGestureRecognizer _sentTapDown toString', () {
-    final TapGestureRecognizer tap = TapGestureRecognizer()
+    final tap = TapGestureRecognizer()
       ..onTap = () {}; // Add a callback so that event can be added
     expect(tap.toString(), equalsIgnoringHashCodes('TapGestureRecognizer#00000(state: ready)'));
-    const PointerDownEvent event = PointerDownEvent(pointer: 1, position: Offset(10.0, 10.0));
+    const event = PointerDownEvent(pointer: 1, position: Offset(10.0, 10.0));
     tap.addPointer(event);
     tap.didExceedDeadline();
     expect(tap.toString(), equalsIgnoringHashCodes('TapGestureRecognizer#00000(state: possible, button: 1, sent tap down)'));

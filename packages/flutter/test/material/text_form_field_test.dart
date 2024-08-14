@@ -16,7 +16,7 @@ import '../widgets/editable_text_utils.dart';
 
 void main() {
   TestWidgetsFlutterBinding.ensureInitialized();
-  final MockClipboard mockClipboard = MockClipboard();
+  final mockClipboard = MockClipboard();
   TestDefaultBinaryMessengerBinding.instance.defaultBinaryMessenger.setMockMethodCallHandler(SystemChannels.platform, mockClipboard.handleMethodCall);
 
   setUp(() async {
@@ -26,7 +26,7 @@ void main() {
   });
 
   testWidgets('can use the desktop cut/copy/paste buttons on Mac', (WidgetTester tester) async {
-    final TextEditingController controller = TextEditingController(
+    final controller = TextEditingController(
       text: 'blah1 blah2',
     );
     addTearDown(controller.dispose);
@@ -103,7 +103,7 @@ void main() {
   );
 
   testWidgets('can use the desktop cut/copy/paste buttons on Windows and Linux', (WidgetTester tester) async {
-    final TextEditingController controller = TextEditingController(
+    final controller = TextEditingController(
       text: 'blah1 blah2',
     );
     addTearDown(controller.dispose);
@@ -252,7 +252,7 @@ void main() {
   testWidgets(
     '$SelectionOverlay is not leaking',
     (WidgetTester tester) async {
-    final TextEditingController controller = TextEditingController(
+    final controller = TextEditingController(
       text: 'blah1 blah2',
     );
     addTearDown(controller.dispose);
@@ -279,7 +279,7 @@ void main() {
   );
 
   testWidgets('the desktop cut/copy/paste buttons are disabled for read-only obscured form fields', (WidgetTester tester) async {
-    final TextEditingController controller = TextEditingController(
+    final controller = TextEditingController(
       text: 'blah1 blah2',
     );
     addTearDown(controller.dispose);
@@ -299,7 +299,7 @@ void main() {
 
     // Initially, the menu is not shown and there is no selection.
     expect(find.byType(CupertinoButton), findsNothing);
-    const TextSelection invalidSelection = TextSelection(baseOffset: -1, extentOffset: -1);
+    const invalidSelection = TextSelection(baseOffset: -1, extentOffset: -1);
     expect(controller.selection, invalidSelection);
 
     final Offset midBlah1 = textOffsetToPosition(tester, 2);
@@ -324,7 +324,7 @@ void main() {
   );
 
   testWidgets('the desktop cut/copy buttons are disabled for obscured form fields', (WidgetTester tester) async {
-    final TextEditingController controller = TextEditingController(
+    final controller = TextEditingController(
       text: 'blah1 blah2',
     );
     addTearDown(controller.dispose);
@@ -343,7 +343,7 @@ void main() {
 
     // Initially, the menu is not shown and there is no selection.
     expect(find.byType(CupertinoButton), findsNothing);
-    const TextSelection invalidSelection = TextSelection(baseOffset: -1, extentOffset: -1);
+    const invalidSelection = TextSelection(baseOffset: -1, extentOffset: -1);
     expect(controller.selection, invalidSelection);
 
     final Offset midBlah1 = textOffsetToPosition(tester, 2);
@@ -411,7 +411,7 @@ void main() {
   });
 
   testWidgets('Passes scrollPhysics to underlying TextField', (WidgetTester tester) async {
-    const ScrollPhysics scrollPhysics = ScrollPhysics();
+    const scrollPhysics = ScrollPhysics();
 
     await tester.pumpWidget(
       MaterialApp(
@@ -497,9 +497,9 @@ void main() {
   });
 
   testWidgets('Passes cursor attributes to underlying TextField', (WidgetTester tester) async {
-    const double cursorWidth = 3.14;
-    const double cursorHeight = 6.28;
-    const Radius cursorRadius = Radius.circular(4);
+    const cursorWidth = 3.14;
+    const cursorHeight = 6.28;
+    const cursorRadius = Radius.circular(4);
     const Color cursorColor = Colors.purple;
 
     await tester.pumpWidget(
@@ -528,7 +528,7 @@ void main() {
   });
 
   testWidgets('onFieldSubmit callbacks are called', (WidgetTester tester) async {
-    bool called = false;
+    var called = false;
 
     await tester.pumpWidget(
       MaterialApp(
@@ -571,7 +571,7 @@ void main() {
   });
 
   testWidgets('autovalidateMode is passed to super', (WidgetTester tester) async {
-    int validateCalled = 0;
+    var validateCalled = 0;
 
     await tester.pumpWidget(
       MaterialApp(
@@ -596,7 +596,7 @@ void main() {
   });
 
   testWidgets('validate is called if widget is enabled', (WidgetTester tester) async {
-    int validateCalled = 0;
+    var validateCalled = 0;
 
     await tester.pumpWidget(
       MaterialApp(
@@ -623,9 +623,9 @@ void main() {
 
 
   testWidgets('Disabled field hides helper and counter in M2', (WidgetTester tester) async {
-    const String helperText = 'helper text';
-    const String counterText = 'counter text';
-    const String errorText = 'error text';
+    const helperText = 'helper text';
+    const counterText = 'counter text';
+    const errorText = 'error text';
     Widget buildFrame(bool enabled, bool hasError) {
       return MaterialApp(
         theme: ThemeData(useMaterial3: false),
@@ -736,7 +736,7 @@ void main() {
   }, skip: isBrowser); // [intended] We do not use Flutter-rendered context menu on the Web.
 
   testWidgets('onTap is called upon tap', (WidgetTester tester) async {
-    int tapCount = 0;
+    var tapCount = 0;
     await tester.pumpWidget(
       MaterialApp(
         home: Material(
@@ -763,7 +763,7 @@ void main() {
   });
 
   testWidgets('onTapOutside is called upon tap outside', (WidgetTester tester) async {
-    int tapOutsideCount = 0;
+    var tapOutsideCount = 0;
     await tester.pumpWidget(
       MaterialApp(
         home: Material(
@@ -795,7 +795,7 @@ void main() {
 
   // Regression test for https://github.com/flutter/flutter/issues/134341.
   testWidgets('onTapOutside is not called upon tap outside when field is not focused', (WidgetTester tester) async {
-    int tapOutsideCount = 0;
+    var tapOutsideCount = 0;
     await tester.pumpWidget(
       MaterialApp(
         home: Material(
@@ -831,9 +831,9 @@ void main() {
       final GlobalKey keyA = GlobalKey();
       final GlobalKey keyB = GlobalKey();
       final GlobalKey keyC = GlobalKey();
-      bool outsideClickA = false;
-      bool outsideClickB = false;
-      bool outsideClickC = false;
+      var outsideClickA = false;
+      var outsideClickB = false;
+      var outsideClickC = false;
       await tester.pumpWidget(
         MaterialApp(
           home: Align(
@@ -934,7 +934,7 @@ void main() {
   });
 
   testWidgets('reset resets the text fields value to the controller initial value', (WidgetTester tester) async {
-    final TextEditingController controller = TextEditingController(text: 'initialValue');
+    final controller = TextEditingController(text: 'initialValue');
     addTearDown(controller.dispose);
 
     await tester.pumpWidget(
@@ -1028,7 +1028,7 @@ void main() {
   });
 
   testWidgets('onChanged callbacks value and FormFieldState.value are sync', (WidgetTester tester) async {
-    bool called = false;
+    var called = false;
 
     late FormFieldState<String> state;
 
@@ -1072,7 +1072,7 @@ void main() {
   });
 
   testWidgets('autovalidateMode is passed to super', (WidgetTester tester) async {
-    int validateCalled = 0;
+    var validateCalled = 0;
 
     await tester.pumpWidget(
       MaterialApp(
@@ -1156,7 +1156,7 @@ void main() {
   });
 
   testWidgets('Passes scrollController to underlying TextField', (WidgetTester tester) async {
-    final ScrollController scrollController = ScrollController();
+    final scrollController = ScrollController();
     addTearDown(scrollController.dispose);
 
     await tester.pumpWidget(
@@ -1243,7 +1243,7 @@ void main() {
 
   // Regression test for https://github.com/flutter/flutter/issues/101587.
   testWidgets('Right clicking menu behavior', (WidgetTester tester) async {
-    final TextEditingController controller = TextEditingController(
+    final controller = TextEditingController(
       text: 'blah1 blah2',
     );
     addTearDown(controller.dispose);
@@ -1325,7 +1325,7 @@ void main() {
   );
 
   testWidgets('spellCheckConfiguration passes through to EditableText', (WidgetTester tester) async {
-    final SpellCheckConfiguration mySpellCheckConfiguration = SpellCheckConfiguration(
+    final mySpellCheckConfiguration = SpellCheckConfiguration(
         spellCheckService: DefaultSpellCheckService(),
         misspelledTextStyle: TextField.materialMisspelledTextStyle,
       );
@@ -1355,7 +1355,7 @@ void main() {
   });
 
   testWidgets('magnifierConfiguration passes through to EditableText', (WidgetTester tester) async {
-    final TextMagnifierConfiguration myTextMagnifierConfiguration = TextMagnifierConfiguration(
+    final myTextMagnifierConfiguration = TextMagnifierConfiguration(
       magnifierBuilder: (BuildContext context, MagnifierController controller, ValueNotifier<MagnifierInfo> notifier) {
         return const Placeholder();
       },
@@ -1376,7 +1376,7 @@ void main() {
   });
 
   testWidgets('Passes undoController to undoController TextField', (WidgetTester tester) async {
-    final UndoHistoryController undoController = UndoHistoryController(value: UndoHistoryValue.empty);
+    final undoController = UndoHistoryController(value: UndoHistoryValue.empty);
     addTearDown(undoController.dispose);
 
     await tester.pumpWidget(
@@ -1399,7 +1399,7 @@ void main() {
   });
 
   testWidgets('Passes cursorOpacityAnimates to cursorOpacityAnimates TextField', (WidgetTester tester) async {
-    const bool cursorOpacityAnimates = true;
+    const cursorOpacityAnimates = true;
 
     await tester.pumpWidget(
       MaterialApp(
@@ -1421,7 +1421,7 @@ void main() {
   });
 
   testWidgets('Passes contentInsertionConfiguration to contentInsertionConfiguration TextField', (WidgetTester tester) async {
-    final ContentInsertionConfiguration contentInsertionConfiguration =
+    final contentInsertionConfiguration =
         ContentInsertionConfiguration(onContentInserted: (KeyboardInsertedContent value) {});
 
     await tester.pumpWidget(
@@ -1466,7 +1466,7 @@ void main() {
   });
 
   testWidgets('Passes scribbleEnabled to scribbleEnabled TextField', (WidgetTester tester) async {
-    const bool scribbleEnabled = false;
+    const scribbleEnabled = false;
 
     await tester.pumpWidget(
       MaterialApp(
@@ -1488,7 +1488,7 @@ void main() {
   });
 
   testWidgets('Passes canRequestFocus to canRequestFocus TextField', (WidgetTester tester) async {
-    const bool canRequestFocus = false;
+    const canRequestFocus = false;
 
     await tester.pumpWidget(
       MaterialApp(
@@ -1618,9 +1618,9 @@ void main() {
   });
 
   testWidgets('Error color for cursor while validating', (WidgetTester tester) async {
-    const Color themeErrorColor = Color(0xff111111);
-    const Color errorStyleColor = Color(0xff777777);
-    const Color cursorErrorColor = Color(0xffbbbbbb);
+    const themeErrorColor = Color(0xff111111);
+    const errorStyleColor = Color(0xff777777);
+    const cursorErrorColor = Color(0xffbbbbbb);
 
     Widget buildWidget({Color? errorStyleColor, Color? cursorErrorColor}) {
       return MaterialApp(
@@ -1680,9 +1680,9 @@ void main() {
 
   testWidgets('TextFormField onChanged is called when the form is reset', (WidgetTester tester) async {
     // Regression test for https://github.com/flutter/flutter/issues/123009.
-    final GlobalKey<FormFieldState<String>> stateKey = GlobalKey<FormFieldState<String>>();
-    final GlobalKey<FormState> formKey = GlobalKey<FormState>();
-    String value = 'initialValue';
+    final stateKey = GlobalKey<FormFieldState<String>>();
+    final formKey = GlobalKey<FormState>();
+    var value = 'initialValue';
 
     await tester.pumpWidget(MaterialApp(
       home: Scaffold(
@@ -1718,10 +1718,10 @@ void main() {
   testWidgets(
     'isValid returns false when forceErrorText is set and will change error display',
     (WidgetTester tester) async {
-      final GlobalKey<FormFieldState<String>> fieldKey1 = GlobalKey<FormFieldState<String>>();
-      final GlobalKey<FormFieldState<String>> fieldKey2 = GlobalKey<FormFieldState<String>>();
-      const String forceErrorText = 'Forcing error.';
-      const String validString = 'Valid string';
+      final fieldKey1 = GlobalKey<FormFieldState<String>>();
+      final fieldKey2 = GlobalKey<FormFieldState<String>>();
+      const forceErrorText = 'Forcing error.';
+      const validString = 'Valid string';
       String? validator(String? s) => s == validString ? null : 'Error text';
 
       await tester.pumpWidget(
@@ -1765,8 +1765,8 @@ void main() {
   });
 
   testWidgets('forceErrorText will override InputDecoration.error when both are provided', (WidgetTester tester) async {
-    const String forceErrorText = 'Forcing error';
-    const String decorationErrorText = 'Decoration';
+    const forceErrorText = 'Forcing error';
+    const decorationErrorText = 'Decoration';
 
     await tester.pumpWidget(
       MaterialApp(

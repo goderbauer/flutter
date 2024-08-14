@@ -81,7 +81,7 @@ void main() {
     });
 
     testWidgets('selected item is in the middle', (WidgetTester tester) async {
-      final FixedExtentScrollController controller = FixedExtentScrollController(initialItem: 1);
+      final controller = FixedExtentScrollController(initialItem: 1);
       addTearDown(controller.dispose);
       await tester.pumpWidget(
         Directionality(
@@ -229,8 +229,8 @@ void main() {
     testWidgets(
       'scrolling calls onSelectedItemChanged and triggers haptic feedback',
       (WidgetTester tester) async {
-        final List<int> selectedItems = <int>[];
-        final List<MethodCall> systemCalls = <MethodCall>[];
+        final selectedItems = <int>[];
+        final systemCalls = <MethodCall>[];
 
         tester.binding.defaultBinaryMessenger.setMockMethodCallHandler(SystemChannels.platform, (MethodCall methodCall) async {
           systemCalls.add(methodCall);
@@ -283,8 +283,8 @@ void main() {
     testWidgets(
       'do not trigger haptic effects on non-iOS devices',
       (WidgetTester tester) async {
-        final List<int> selectedItems = <int>[];
-        final List<MethodCall> systemCalls = <MethodCall>[];
+        final selectedItems = <int>[];
+        final systemCalls = <MethodCall>[];
 
         tester.binding.defaultBinaryMessenger.setMockMethodCallHandler(SystemChannels.platform, (MethodCall methodCall) async {
           systemCalls.add(methodCall);
@@ -318,9 +318,9 @@ void main() {
     );
 
     testWidgets('a drag in between items settles back', (WidgetTester tester) async {
-      final FixedExtentScrollController controller = FixedExtentScrollController(initialItem: 10);
+      final controller = FixedExtentScrollController(initialItem: 10);
       addTearDown(controller.dispose);
-      final List<int> selectedItems = <int>[];
+      final selectedItems = <int>[];
 
       await tester.pumpWidget(
         Directionality(
@@ -373,10 +373,10 @@ void main() {
     }, variant: const TargetPlatformVariant(<TargetPlatform>{ TargetPlatform.iOS,  TargetPlatform.macOS }));
 
     testWidgets('a big fling that overscrolls springs back', (WidgetTester tester) async {
-      final FixedExtentScrollController controller =
+      final controller =
           FixedExtentScrollController(initialItem: 10);
       addTearDown(controller.dispose);
-      final List<int> selectedItems = <int>[];
+      final selectedItems = <int>[];
 
       await tester.pumpWidget(
         Directionality(
@@ -500,7 +500,7 @@ void main() {
   });
 
   testWidgets('Scroll controller is detached upon dispose', (WidgetTester tester) async {
-    final SpyFixedExtentScrollController controller = SpyFixedExtentScrollController();
+    final controller = SpyFixedExtentScrollController();
     addTearDown(controller.dispose);
     expect(controller.hasListeners, false);
     expect(controller.positions.length, 0);
@@ -535,9 +535,9 @@ void main() {
       'Registers taps and does not crash with certain diameterRatio', (WidgetTester tester) async {
     // Regression test for https://github.com/flutter/flutter/issues/126491
 
-    final List<int> children = List<int>.generate(100, (int index) => index);
-    final List<int> paintedChildren = <int>[];
-    final Set<int> tappedChildren = <int>{};
+    final children = List<int>.generate(100, (int index) => index);
+    final paintedChildren = <int>[];
+    final tappedChildren = <int>{};
 
     await tester.pumpWidget(CupertinoApp(
       home: Align(

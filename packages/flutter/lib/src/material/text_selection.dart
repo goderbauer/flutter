@@ -218,11 +218,11 @@ class _TextSelectionControlsToolbarState extends State<_TextSelectionControlsToo
     final double topAmountInEditableRegion = startTextSelectionPoint.point.dy - widget.textLineHeight;
     final double anchorTop = math.max(topAmountInEditableRegion, 0) + widget.globalEditableRegion.top - _kToolbarContentDistance;
 
-    final Offset anchorAbove = Offset(
+    final anchorAbove = Offset(
       widget.globalEditableRegion.left + widget.selectionMidpoint.dx,
       anchorTop,
     );
-    final Offset anchorBelow = Offset(
+    final anchorBelow = Offset(
       widget.globalEditableRegion.left + widget.selectionMidpoint.dx,
       widget.globalEditableRegion.top + endTextSelectionPoint.point.dy + _kToolbarContentDistanceBelow,
     );
@@ -232,7 +232,7 @@ class _TextSelectionControlsToolbarState extends State<_TextSelectionControlsToo
     // appearance.
     assert(debugCheckHasMaterialLocalizations(context));
     final MaterialLocalizations localizations = MaterialLocalizations.of(context);
-    final List<_TextSelectionToolbarItemData> itemDatas = <_TextSelectionToolbarItemData>[
+    final itemDatas = <_TextSelectionToolbarItemData>[
       if (widget.handleCut != null)
         _TextSelectionToolbarItemData(
           label: localizations.cutButtonLabel,
@@ -284,11 +284,11 @@ class _TextSelectionHandlePainter extends CustomPainter {
 
   @override
   void paint(Canvas canvas, Size size) {
-    final Paint paint = Paint()..color = color;
+    final paint = Paint()..color = color;
     final double radius = size.width/2.0;
-    final Rect circle = Rect.fromCircle(center: Offset(radius, radius), radius: radius);
-    final Rect point = Rect.fromLTWH(0.0, 0.0, radius, radius);
-    final Path path = Path()..addOval(circle)..addRect(point);
+    final circle = Rect.fromCircle(center: Offset(radius, radius), radius: radius);
+    final point = Rect.fromLTWH(0.0, 0.0, radius, radius);
+    final path = Path()..addOval(circle)..addRect(point);
     canvas.drawPath(path, paint);
   }
 

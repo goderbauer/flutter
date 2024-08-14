@@ -520,7 +520,7 @@ class RadioListTile<T> extends StatelessWidget {
 
     final ThemeData theme = Theme.of(context);
     final RadioThemeData radioThemeData = RadioTheme.of(context);
-    final Set<MaterialState> states = <MaterialState>{
+    final states = <MaterialState>{
       if (selected) MaterialState.selected,
     };
     final Color effectiveActiveColor = activeColor

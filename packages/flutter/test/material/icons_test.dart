@@ -164,7 +164,7 @@ Future<void> _loadIconFont() async {
     ),
   );
 
-  final Future<ByteData> bytes = Future<ByteData>.value(
+  final bytes = Future<ByteData>.value(
       iconFont.readAsBytesSync().buffer.asByteData(),
   );
 

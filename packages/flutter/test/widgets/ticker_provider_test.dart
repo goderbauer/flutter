@@ -75,7 +75,7 @@ void main() {
       final dynamic exception = tester.takeException();
       expect(exception, isNotNull);
       expect(exception, isFlutterError);
-      final FlutterError error = exception as FlutterError;
+      final error = exception as FlutterError;
       expect(error.diagnostics.length, 3);
       expect(error.diagnostics[2].level, DiagnosticLevel.hint);
       expect(error.diagnostics[2].toStringDeep(), equalsIgnoringHashCodes(
@@ -100,7 +100,7 @@ void main() {
     });
 
     testWidgets('SingleTickerProviderStateMixin dispose while active', (WidgetTester tester) async {
-      final GlobalKey<_SingleTickerTestState> key = GlobalKey<_SingleTickerTestState>();
+      final key = GlobalKey<_SingleTickerTestState>();
       final Widget widget = _SingleTickerTest(key: key);
       await tester.pumpWidget(widget);
       FlutterError? error;
@@ -140,7 +140,7 @@ void main() {
     });
 
     testWidgets('SingleTickerProviderStateMixin dispose while active', (WidgetTester tester) async {
-      final GlobalKey<_SingleTickerTestState> key = GlobalKey<_SingleTickerTestState>();
+      final key = GlobalKey<_SingleTickerTestState>();
       final Widget widget = _SingleTickerTest(key: key);
       await tester.pumpWidget(widget);
       FlutterError? error;
@@ -180,7 +180,7 @@ void main() {
     });
 
     testWidgets('TickerProviderStateMixin dispose while any ticker is active', (WidgetTester tester) async {
-      final GlobalKey<_MultipleTickerTestState> key = GlobalKey<_MultipleTickerTestState>();
+      final key = GlobalKey<_MultipleTickerTestState>();
       final Widget widget = _MultipleTickerTest(key: key);
       await tester.pumpWidget(widget);
       FlutterError? error;
@@ -287,7 +287,7 @@ class _MultipleTickerTestState extends State<_MultipleTickerTest> with TickerPro
   @override
   void initState() {
     super.initState();
-    const Duration duration = Duration(seconds: 100);
+    const duration = Duration(seconds: 100);
     controllers.add(AnimationController(vsync: this, duration: duration));
     controllers.add(AnimationController(vsync: this, duration: duration));
   }

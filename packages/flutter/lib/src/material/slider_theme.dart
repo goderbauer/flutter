@@ -316,20 +316,20 @@ class SliderThemeData with Diagnosticable {
 
     // These are Material Design defaults, and are used to derive
     // component Colors (with opacity) from base colors.
-    const int activeTrackAlpha = 0xff;
-    const int inactiveTrackAlpha = 0x3d; // 24% opacity
-    const int secondaryActiveTrackAlpha = 0x8a; // 54% opacity
-    const int disabledActiveTrackAlpha = 0x52; // 32% opacity
-    const int disabledInactiveTrackAlpha = 0x1f; // 12% opacity
-    const int disabledSecondaryActiveTrackAlpha = 0x1f; // 12% opacity
-    const int activeTickMarkAlpha = 0x8a; // 54% opacity
-    const int inactiveTickMarkAlpha = 0x8a; // 54% opacity
-    const int disabledActiveTickMarkAlpha = 0x1f; // 12% opacity
-    const int disabledInactiveTickMarkAlpha = 0x1f; // 12% opacity
-    const int thumbAlpha = 0xff;
-    const int disabledThumbAlpha = 0x52; // 32% opacity
-    const int overlayAlpha = 0x1f; // 12% opacity
-    const int valueIndicatorAlpha = 0xff;
+    const activeTrackAlpha = 0xff;
+    const inactiveTrackAlpha = 0x3d; // 24% opacity
+    const secondaryActiveTrackAlpha = 0x8a; // 54% opacity
+    const disabledActiveTrackAlpha = 0x52; // 32% opacity
+    const disabledInactiveTrackAlpha = 0x1f; // 12% opacity
+    const disabledSecondaryActiveTrackAlpha = 0x1f; // 12% opacity
+    const activeTickMarkAlpha = 0x8a; // 54% opacity
+    const inactiveTickMarkAlpha = 0x8a; // 54% opacity
+    const disabledActiveTickMarkAlpha = 0x1f; // 12% opacity
+    const disabledInactiveTickMarkAlpha = 0x1f; // 12% opacity
+    const thumbAlpha = 0xff;
+    const disabledThumbAlpha = 0x52; // 32% opacity
+    const overlayAlpha = 0x1f; // 12% opacity
+    const valueIndicatorAlpha = 0xff;
 
     return SliderThemeData(
       trackHeight: 2.0,
@@ -786,7 +786,7 @@ class SliderThemeData with Diagnosticable {
   @override
   void debugFillProperties(DiagnosticPropertiesBuilder properties) {
     super.debugFillProperties(properties);
-    const SliderThemeData defaultData = SliderThemeData();
+    const defaultData = SliderThemeData();
     properties.add(DoubleProperty('trackHeight', trackHeight, defaultValue: defaultData.trackHeight));
     properties.add(ColorProperty('activeTrackColor', activeTrackColor, defaultValue: defaultData.activeTrackColor));
     properties.add(ColorProperty('inactiveTrackColor', inactiveTrackColor, defaultValue: defaultData.inactiveTrackColor));
@@ -1604,10 +1604,10 @@ class RectangularSliderTrackShape extends SliderTrackShape with BaseSliderTrackS
 
     // Assign the track segment paints, which are left: active, right: inactive,
     // but reversed for right to left text.
-    final ColorTween activeTrackColorTween = ColorTween(begin: sliderTheme.disabledActiveTrackColor, end: sliderTheme.activeTrackColor);
-    final ColorTween inactiveTrackColorTween = ColorTween(begin: sliderTheme.disabledInactiveTrackColor, end: sliderTheme.inactiveTrackColor);
-    final Paint activePaint = Paint()..color = activeTrackColorTween.evaluate(enableAnimation)!;
-    final Paint inactivePaint = Paint()..color = inactiveTrackColorTween.evaluate(enableAnimation)!;
+    final activeTrackColorTween = ColorTween(begin: sliderTheme.disabledActiveTrackColor, end: sliderTheme.activeTrackColor);
+    final inactiveTrackColorTween = ColorTween(begin: sliderTheme.disabledInactiveTrackColor, end: sliderTheme.inactiveTrackColor);
+    final activePaint = Paint()..color = activeTrackColorTween.evaluate(enableAnimation)!;
+    final inactivePaint = Paint()..color = inactiveTrackColorTween.evaluate(enableAnimation)!;
     final (Paint leftTrackPaint, Paint rightTrackPaint) = switch (textDirection) {
       TextDirection.ltr => (activePaint, inactivePaint),
       TextDirection.rtl => (inactivePaint, activePaint),
@@ -1621,11 +1621,11 @@ class RectangularSliderTrackShape extends SliderTrackShape with BaseSliderTrackS
       isDiscrete: isDiscrete,
     );
 
-    final Rect leftTrackSegment = Rect.fromLTRB(trackRect.left, trackRect.top, thumbCenter.dx, trackRect.bottom);
+    final leftTrackSegment = Rect.fromLTRB(trackRect.left, trackRect.top, thumbCenter.dx, trackRect.bottom);
     if (!leftTrackSegment.isEmpty) {
       context.canvas.drawRect(leftTrackSegment, leftTrackPaint);
     }
-    final Rect rightTrackSegment = Rect.fromLTRB(thumbCenter.dx, trackRect.top, trackRect.right, trackRect.bottom);
+    final rightTrackSegment = Rect.fromLTRB(thumbCenter.dx, trackRect.top, trackRect.right, trackRect.bottom);
     if (!rightTrackSegment.isEmpty) {
       context.canvas.drawRect(rightTrackSegment, rightTrackPaint);
     }
@@ -1636,8 +1636,8 @@ class RectangularSliderTrackShape extends SliderTrackShape with BaseSliderTrackS
     };
 
     if (showSecondaryTrack) {
-      final ColorTween secondaryTrackColorTween = ColorTween(begin: sliderTheme.disabledSecondaryActiveTrackColor, end: sliderTheme.secondaryActiveTrackColor);
-      final Paint secondaryTrackPaint = Paint()..color = secondaryTrackColorTween.evaluate(enableAnimation)!;
+      final secondaryTrackColorTween = ColorTween(begin: sliderTheme.disabledSecondaryActiveTrackColor, end: sliderTheme.secondaryActiveTrackColor);
+      final secondaryTrackPaint = Paint()..color = secondaryTrackColorTween.evaluate(enableAnimation)!;
       final Rect secondaryTrackSegment = switch (textDirection) {
         TextDirection.rtl => Rect.fromLTRB(secondaryOffset.dx, trackRect.top, thumbCenter.dx, trackRect.bottom),
         TextDirection.ltr => Rect.fromLTRB(thumbCenter.dx, trackRect.top, secondaryOffset.dx, trackRect.bottom),
@@ -1706,10 +1706,10 @@ class RoundedRectSliderTrackShape extends SliderTrackShape with BaseSliderTrackS
 
     // Assign the track segment paints, which are leading: active and
     // trailing: inactive.
-    final ColorTween activeTrackColorTween = ColorTween(begin: sliderTheme.disabledActiveTrackColor, end: sliderTheme.activeTrackColor);
-    final ColorTween inactiveTrackColorTween = ColorTween(begin: sliderTheme.disabledInactiveTrackColor, end: sliderTheme.inactiveTrackColor);
-    final Paint activePaint = Paint()..color = activeTrackColorTween.evaluate(enableAnimation)!;
-    final Paint inactivePaint = Paint()..color = inactiveTrackColorTween.evaluate(enableAnimation)!;
+    final activeTrackColorTween = ColorTween(begin: sliderTheme.disabledActiveTrackColor, end: sliderTheme.activeTrackColor);
+    final inactiveTrackColorTween = ColorTween(begin: sliderTheme.disabledInactiveTrackColor, end: sliderTheme.inactiveTrackColor);
+    final activePaint = Paint()..color = activeTrackColorTween.evaluate(enableAnimation)!;
+    final inactivePaint = Paint()..color = inactiveTrackColorTween.evaluate(enableAnimation)!;
     final (Paint leftTrackPaint, Paint rightTrackPaint) = switch (textDirection) {
       TextDirection.ltr => (activePaint, inactivePaint),
       TextDirection.rtl => (inactivePaint, activePaint),
@@ -1722,8 +1722,8 @@ class RoundedRectSliderTrackShape extends SliderTrackShape with BaseSliderTrackS
       isEnabled: isEnabled,
       isDiscrete: isDiscrete,
     );
-    final Radius trackRadius = Radius.circular(trackRect.height / 2);
-    final Radius activeTrackRadius = Radius.circular((trackRect.height + additionalActiveTrackHeight) / 2);
+    final trackRadius = Radius.circular(trackRect.height / 2);
+    final activeTrackRadius = Radius.circular((trackRect.height + additionalActiveTrackHeight) / 2);
     final bool isLTR = textDirection == TextDirection.ltr;
     final bool isRTL = textDirection == TextDirection.rtl;
 
@@ -1760,8 +1760,8 @@ class RoundedRectSliderTrackShape extends SliderTrackShape with BaseSliderTrackS
         (isLTR ? (secondaryOffset.dx > thumbCenter.dx) : (secondaryOffset.dx < thumbCenter.dx));
 
     if (showSecondaryTrack) {
-      final ColorTween secondaryTrackColorTween = ColorTween(begin: sliderTheme.disabledSecondaryActiveTrackColor, end: sliderTheme.secondaryActiveTrackColor);
-      final Paint secondaryTrackPaint = Paint()..color = secondaryTrackColorTween.evaluate(enableAnimation)!;
+      final secondaryTrackColorTween = ColorTween(begin: sliderTheme.disabledSecondaryActiveTrackColor, end: sliderTheme.secondaryActiveTrackColor);
+      final secondaryTrackPaint = Paint()..color = secondaryTrackColorTween.evaluate(enableAnimation)!;
       if (isLTR) {
         context.canvas.drawRRect(
           RRect.fromLTRBAndCorners(
@@ -1894,10 +1894,10 @@ class RectangularRangeSliderTrackShape extends RangeSliderTrackShape with BaseRa
     assert(enableAnimation != null);
     // Assign the track segment paints, which are left: active, right: inactive,
     // but reversed for right to left text.
-    final ColorTween activeTrackColorTween = ColorTween(begin: sliderTheme.disabledActiveTrackColor, end: sliderTheme.activeTrackColor);
-    final ColorTween inactiveTrackColorTween = ColorTween(begin: sliderTheme.disabledInactiveTrackColor, end: sliderTheme.inactiveTrackColor);
-    final Paint activePaint = Paint()..color = activeTrackColorTween.evaluate(enableAnimation!)!;
-    final Paint inactivePaint = Paint()..color = inactiveTrackColorTween.evaluate(enableAnimation)!;
+    final activeTrackColorTween = ColorTween(begin: sliderTheme.disabledActiveTrackColor, end: sliderTheme.activeTrackColor);
+    final inactiveTrackColorTween = ColorTween(begin: sliderTheme.disabledInactiveTrackColor, end: sliderTheme.inactiveTrackColor);
+    final activePaint = Paint()..color = activeTrackColorTween.evaluate(enableAnimation!)!;
+    final inactivePaint = Paint()..color = inactiveTrackColorTween.evaluate(enableAnimation)!;
 
     final (Offset leftThumbOffset, Offset rightThumbOffset) = switch (textDirection) {
       TextDirection.ltr => (startThumbCenter, endThumbCenter),
@@ -1911,15 +1911,15 @@ class RectangularRangeSliderTrackShape extends RangeSliderTrackShape with BaseRa
       isEnabled: isEnabled,
       isDiscrete: isDiscrete,
     );
-    final Rect leftTrackSegment = Rect.fromLTRB(trackRect.left, trackRect.top, leftThumbOffset.dx, trackRect.bottom);
+    final leftTrackSegment = Rect.fromLTRB(trackRect.left, trackRect.top, leftThumbOffset.dx, trackRect.bottom);
     if (!leftTrackSegment.isEmpty) {
       context.canvas.drawRect(leftTrackSegment, inactivePaint);
     }
-    final Rect middleTrackSegment = Rect.fromLTRB(leftThumbOffset.dx, trackRect.top, rightThumbOffset.dx, trackRect.bottom);
+    final middleTrackSegment = Rect.fromLTRB(leftThumbOffset.dx, trackRect.top, rightThumbOffset.dx, trackRect.bottom);
     if (!middleTrackSegment.isEmpty) {
       context.canvas.drawRect(middleTrackSegment, activePaint);
     }
-    final Rect rightTrackSegment = Rect.fromLTRB(rightThumbOffset.dx, trackRect.top, trackRect.right, trackRect.bottom);
+    final rightTrackSegment = Rect.fromLTRB(rightThumbOffset.dx, trackRect.top, trackRect.right, trackRect.bottom);
     if (!rightTrackSegment.isEmpty) {
       context.canvas.drawRect(rightTrackSegment, inactivePaint);
     }
@@ -1985,17 +1985,17 @@ class RoundedRectRangeSliderTrackShape extends RangeSliderTrackShape with BaseRa
 
     // Assign the track segment paints, which are left: active, right: inactive,
     // but reversed for right to left text.
-    final ColorTween activeTrackColorTween = ColorTween(
+    final activeTrackColorTween = ColorTween(
       begin: sliderTheme.disabledActiveTrackColor,
       end: sliderTheme.activeTrackColor,
     );
-    final ColorTween inactiveTrackColorTween = ColorTween(
+    final inactiveTrackColorTween = ColorTween(
       begin: sliderTheme.disabledInactiveTrackColor,
       end: sliderTheme.inactiveTrackColor,
     );
-    final Paint activePaint = Paint()
+    final activePaint = Paint()
       ..color = activeTrackColorTween.evaluate(enableAnimation)!;
-    final Paint inactivePaint = Paint()
+    final inactivePaint = Paint()
       ..color = inactiveTrackColorTween.evaluate(enableAnimation)!;
 
     final (Offset leftThumbOffset, Offset rightThumbOffset) = switch (textDirection) {
@@ -2014,7 +2014,7 @@ class RoundedRectRangeSliderTrackShape extends RangeSliderTrackShape with BaseRa
       isDiscrete: isDiscrete,
     );
 
-    final Radius trackRadius = Radius.circular(trackRect.height / 2);
+    final trackRadius = Radius.circular(trackRect.height / 2);
 
     context.canvas.drawRRect(
       RRect.fromLTRBAndCorners(
@@ -2116,7 +2116,7 @@ class RoundSliderTickMarkShape extends SliderTickMarkShape {
       TextDirection.rtl when xOffset < 0 => (sliderTheme.disabledInactiveTickMarkColor, sliderTheme.inactiveTickMarkColor),
       TextDirection.ltr || TextDirection.rtl => (sliderTheme.disabledActiveTickMarkColor, sliderTheme.activeTickMarkColor),
     };
-    final Paint paint = Paint()..color = ColorTween(begin: begin, end: end).evaluate(enableAnimation)!;
+    final paint = Paint()..color = ColorTween(begin: begin, end: end).evaluate(enableAnimation)!;
 
     // The tick marks are tiny circles that are the same height as the track.
     final double tickMarkRadius = getPreferredSize(
@@ -2192,7 +2192,7 @@ class RoundRangeSliderTickMarkShape extends RangeSliderTickMarkShape {
     };
     final Color? begin = isBetweenThumbs ? sliderTheme.disabledActiveTickMarkColor : sliderTheme.disabledInactiveTickMarkColor;
     final Color? end = isBetweenThumbs ? sliderTheme.activeTickMarkColor : sliderTheme.inactiveTickMarkColor;
-    final Paint paint = Paint()..color = ColorTween(begin: begin, end: end).evaluate(enableAnimation)!;
+    final paint = Paint()..color = ColorTween(begin: begin, end: end).evaluate(enableAnimation)!;
 
     // The tick marks are tiny circles that are the same height as the track.
     final double tickMarkRadius = getPreferredSize(
@@ -2341,11 +2341,11 @@ class RoundSliderThumbShape extends SliderComponentShape {
     assert(sliderTheme.thumbColor != null);
 
     final Canvas canvas = context.canvas;
-    final Tween<double> radiusTween = Tween<double>(
+    final radiusTween = Tween<double>(
       begin: _disabledThumbRadius,
       end: enabledThumbRadius,
     );
-    final ColorTween colorTween = ColorTween(
+    final colorTween = ColorTween(
       begin: sliderTheme.disabledThumbColor,
       end: sliderTheme.thumbColor,
     );
@@ -2353,16 +2353,16 @@ class RoundSliderThumbShape extends SliderComponentShape {
     final Color color = colorTween.evaluate(enableAnimation)!;
     final double radius = radiusTween.evaluate(enableAnimation);
 
-    final Tween<double> elevationTween = Tween<double>(
+    final elevationTween = Tween<double>(
       begin: elevation,
       end: pressedElevation,
     );
 
     final double evaluatedElevation = elevationTween.evaluate(activationAnimation);
-    final Path path = Path()
+    final path = Path()
       ..addArc(Rect.fromCenter(center: center, width: 2 * radius, height: 2 * radius), 0, math.pi * 2);
 
-    bool paintShadows = true;
+    var paintShadows = true;
     assert(() {
       if (debugDisableShadows) {
         _debugDrawShadow(canvas, path, evaluatedElevation);
@@ -2447,16 +2447,16 @@ class RoundRangeSliderThumbShape extends RangeSliderThumbShape {
     assert(sliderTheme.showValueIndicator != null);
     assert(sliderTheme.overlappingShapeStrokeColor != null);
     final Canvas canvas = context.canvas;
-    final Tween<double> radiusTween = Tween<double>(
+    final radiusTween = Tween<double>(
       begin: _disabledThumbRadius,
       end: enabledThumbRadius,
     );
-    final ColorTween colorTween = ColorTween(
+    final colorTween = ColorTween(
       begin: sliderTheme.disabledThumbColor,
       end: sliderTheme.thumbColor,
     );
     final double radius = radiusTween.evaluate(enableAnimation);
-    final Tween<double> elevationTween = Tween<double>(
+    final elevationTween = Tween<double>(
       begin: elevation,
       end: pressedElevation,
     );
@@ -2464,7 +2464,7 @@ class RoundRangeSliderThumbShape extends RangeSliderThumbShape {
     // Add a stroke of 1dp around the circle if this thumb would overlap
     // the other thumb.
     if (isOnTop ?? false) {
-      final Paint strokePaint = Paint()
+      final strokePaint = Paint()
         ..color = sliderTheme.overlappingShapeStrokeColor!
         ..strokeWidth = 1.0
         ..style = PaintingStyle.stroke;
@@ -2474,10 +2474,10 @@ class RoundRangeSliderThumbShape extends RangeSliderThumbShape {
     final Color color = colorTween.evaluate(enableAnimation)!;
 
     final double evaluatedElevation = isPressed! ? elevationTween.evaluate(activationAnimation) : elevation;
-    final Path shadowPath = Path()
+    final shadowPath = Path()
       ..addArc(Rect.fromCenter(center: center, width: 2 * radius, height: 2 * radius), 0, math.pi * 2);
 
-    bool paintShadows = true;
+    var paintShadows = true;
     assert(() {
       if (debugDisableShadows) {
         _debugDrawShadow(canvas, shadowPath, evaluatedElevation);
@@ -2545,7 +2545,7 @@ class RoundSliderOverlayShape extends SliderComponentShape {
   }) {
 
     final Canvas canvas = context.canvas;
-    final Tween<double> radiusTween = Tween<double>(
+    final radiusTween = Tween<double>(
       begin: 0.0,
       end: overlayRadius,
     );
@@ -2726,7 +2726,7 @@ class _RectangularSliderValueIndicatorPathPainter {
   }) {
     assert(!sizeWithOverflow.isEmpty);
 
-    const double edgePadding = 8.0;
+    const edgePadding = 8.0;
     final double rectangleWidth = _upperRectangleWidth(labelPainter, scale, textScaleFactor);
     /// Value indicator draws on the Overlay and by using the global Offset
     /// we are making sure we use the bounds of the Overlay instead of the Slider.
@@ -2781,19 +2781,19 @@ class _RectangularSliderValueIndicatorPathPainter {
     );
 
     final double rectHeight = labelPainter.height + _labelPadding;
-    final Rect upperRect = Rect.fromLTWH(
+    final upperRect = Rect.fromLTWH(
       -rectangleWidth / 2 + horizontalShift,
       -_triangleHeight - rectHeight,
       rectangleWidth,
       rectHeight,
     );
 
-    final Path trianglePath = Path()
+    final trianglePath = Path()
       ..lineTo(-_triangleHeight, -_triangleHeight)
       ..lineTo(_triangleHeight, -_triangleHeight)
       ..close();
-    final Paint fillPaint = Paint()..color = backgroundPaintColor;
-    final RRect upperRRect = RRect.fromRectAndRadius(upperRect, const Radius.circular(_upperRectRadius));
+    final fillPaint = Paint()..color = backgroundPaintColor;
+    final upperRRect = RRect.fromRectAndRadius(upperRect, const Radius.circular(_upperRectRadius));
     trianglePath.addRRect(upperRRect);
 
     canvas.save();
@@ -2802,7 +2802,7 @@ class _RectangularSliderValueIndicatorPathPainter {
     canvas.translate(center.dx, center.dy - _bottomTipYOffset);
     canvas.scale(scale, scale);
     if (strokePaintColor != null) {
-      final Paint strokePaint = Paint()
+      final strokePaint = Paint()
         ..color = strokePaintColor
         ..strokeWidth = 1.0
         ..style = PaintingStyle.stroke;
@@ -2813,8 +2813,8 @@ class _RectangularSliderValueIndicatorPathPainter {
     // The label text is centered within the value indicator.
     final double bottomTipToUpperRectTranslateY = -_preferredHalfHeight / 2 - upperRect.height;
     canvas.translate(0, bottomTipToUpperRectTranslateY);
-    final Offset boxCenter = Offset(horizontalShift, upperRect.height / 2);
-    final Offset halfLabelPainterOffset = Offset(labelPainter.width / 2, labelPainter.height / 2);
+    final boxCenter = Offset(horizontalShift, upperRect.height / 2);
+    final halfLabelPainterOffset = Offset(labelPainter.width / 2, labelPainter.height / 2);
     final Offset labelOffset = boxCenter - halfLabelPainterOffset;
     labelPainter.paint(canvas, labelOffset);
     canvas.restore();
@@ -2865,7 +2865,7 @@ class PaddleSliderValueIndicatorShape extends SliderComponentShape {
     required Size sizeWithOverflow,
   }) {
     assert(!sizeWithOverflow.isEmpty);
-    final ColorTween enableColor = ColorTween(
+    final enableColor = ColorTween(
       begin: sliderTheme.disabledThumbColor,
       end: sliderTheme.valueIndicatorColor,
     );
@@ -2945,7 +2945,7 @@ class PaddleRangeSliderValueIndicatorShape extends RangeSliderValueIndicatorShap
     Size? sizeWithOverflow,
   }) {
     assert(!sizeWithOverflow!.isEmpty);
-    final ColorTween enableColor = ColorTween(
+    final enableColor = ColorTween(
       begin: sliderTheme.disabledThumbColor,
       end: sliderTheme.valueIndicatorColor,
     );
@@ -3016,7 +3016,7 @@ class _PaddleSliderValueIndicatorPathPainter {
   // a convenience to make adding arcs have less boilerplate.
   static void _addArc(Path path, Offset center, double radius, double startAngle, double endAngle) {
     assert(center.isFinite);
-    final Rect arcRect = Rect.fromCircle(center: center, radius: radius);
+    final arcRect = Rect.fromCircle(center: center, radius: radius);
     path.arcTo(arcRect, startAngle, endAngle - startAngle, false);
   }
 
@@ -3046,8 +3046,8 @@ class _PaddleSliderValueIndicatorPathPainter {
     Offset center,
     double widthWithOverflow,
   ) {
-    const double edgeMargin = 8.0;
-    final Rect topLobeRect = Rect.fromLTWH(
+    const edgeMargin = 8.0;
+    final topLobeRect = Rect.fromLTWH(
       -_topLobeRadius - halfWidthNeeded,
       -_topLobeRadius - _distanceBetweenTopBottomCenters,
       2.0 * (_topLobeRadius + halfWidthNeeded),
@@ -3057,7 +3057,7 @@ class _PaddleSliderValueIndicatorPathPainter {
     // around (0, 0).
     final Offset topLeft = (topLobeRect.topLeft * scale) + center;
     final Offset bottomRight = (topLobeRect.bottomRight * scale) + center;
-    double shift = 0.0;
+    var shift = 0.0;
 
     if (topLeft.dx < edgeMargin) {
       shift = edgeMargin - topLeft.dx;
@@ -3109,7 +3109,7 @@ class _PaddleSliderValueIndicatorPathPainter {
     final double bottomNeckTriangleHypotenuse = _bottomNeckRadius + _bottomLobeRadius / overallScale;
     final double rightBottomNeckCenterY = -math.sqrt(math.pow(bottomNeckTriangleHypotenuse, 2) - math.pow(_rightBottomNeckCenterX, 2));
     final double rightBottomNeckAngleEnd = math.pi + math.atan(rightBottomNeckCenterY / _rightBottomNeckCenterX);
-    final Path path = Path()..moveTo(_middleNeckWidth / 2, rightBottomNeckCenterY);
+    final path = Path()..moveTo(_middleNeckWidth / 2, rightBottomNeckCenterY);
     _addArc(
       path,
       Offset(_rightBottomNeckCenterX, rightBottomNeckCenterY),
@@ -3153,11 +3153,11 @@ class _PaddleSliderValueIndicatorPathPainter {
     final double leftTheta = (1.0 - leftAmount) * _thirtyDegrees;
     final double rightTheta = (1.0 - rightAmount) * _thirtyDegrees;
     // The center of the top left neck arc.
-    final Offset leftTopNeckCenter = Offset(
+    final leftTopNeckCenter = Offset(
       -_neckTriangleBase,
       _topLobeCenter.dy + math.cos(leftTheta) * _neckTriangleHypotenuse,
     );
-    final Offset neckRightCenter = Offset(
+    final neckRightCenter = Offset(
       _neckTriangleBase,
       _topLobeCenter.dy + math.cos(rightTheta) * _neckTriangleHypotenuse,
     );
@@ -3167,20 +3167,20 @@ class _PaddleSliderValueIndicatorPathPainter {
     // the top neck arc. We use this to shrink/expand it based on the scale
     // factor of the value indicator.
     final double neckStretchBaseline = math.max(0.0, rightBottomNeckCenterY - math.max(leftTopNeckCenter.dy, neckRightCenter.dy));
-    final double t = math.pow(inverseTextScale, 3.0) as double;
+    final t = math.pow(inverseTextScale, 3.0) as double;
     final double stretch = clampDouble(neckStretchBaseline * t, 0.0, 10.0 * neckStretchBaseline);
-    final Offset neckStretch = Offset(0.0, neckStretchBaseline - stretch);
+    final neckStretch = Offset(0.0, neckStretchBaseline - stretch);
 
     assert(!_debuggingLabelLocation || () {
       final Offset leftCenter = _topLobeCenter - Offset(leftWidthNeeded, 0.0) + neckStretch;
       final Offset rightCenter = _topLobeCenter + Offset(rightWidthNeeded, 0.0) + neckStretch;
-      final Rect valueRect = Rect.fromLTRB(
+      final valueRect = Rect.fromLTRB(
         leftCenter.dx - _topLobeRadius,
         leftCenter.dy - _topLobeRadius,
         rightCenter.dx + _topLobeRadius,
         rightCenter.dy + _topLobeRadius,
       );
-      final Paint outlinePaint = Paint()
+      final outlinePaint = Paint()
         ..color = const Color(0xffff0000)
         ..style = PaintingStyle.stroke
         ..strokeWidth = 1.0;
@@ -3218,7 +3218,7 @@ class _PaddleSliderValueIndicatorPathPainter {
     );
 
     if (strokePaintColor != null) {
-      final Paint strokePaint = Paint()
+      final strokePaint = Paint()
         ..color = strokePaintColor
         ..strokeWidth = 1.0
         ..style = PaintingStyle.stroke;
@@ -3442,7 +3442,7 @@ class _DropSliderValueIndicatorPathPainter {
   }) {
     assert(!sizeWithOverflow.isEmpty);
 
-    const double edgePadding = 8.0;
+    const edgePadding = 8.0;
     final double rectangleWidth = _upperRectangleWidth(labelPainter, scale);
     /// Value indicator draws on the Overlay and by using the global Offset
     /// we are making sure we use the bounds of the Overlay instead of the Slider.
@@ -3470,7 +3470,7 @@ class _DropSliderValueIndicatorPathPainter {
   }
 
   BorderRadius _adjustBorderRadius(Rect rect) {
-    const double rectness = 0.0;
+    const rectness = 0.0;
     return BorderRadius.lerp(
       BorderRadius.circular(_upperRectRadius),
       BorderRadius.all(Radius.circular(rect.shortestSide / 2.0)),
@@ -3503,14 +3503,14 @@ class _DropSliderValueIndicatorPathPainter {
       sizeWithOverflow: sizeWithOverflow,
       scale: scale,
     );
-    final Rect upperRect = Rect.fromLTWH(
+    final upperRect = Rect.fromLTWH(
       -rectangleWidth / 2 + horizontalShift,
       -_rectYOffset - _minRectHeight,
       rectangleWidth,
       _minRectHeight,
     );
 
-    final Paint fillPaint = Paint()..color = backgroundPaintColor;
+    final fillPaint = Paint()..color = backgroundPaintColor;
 
     canvas.save();
     canvas.translate(center.dx, center.dy - _bottomTipYOffset);
@@ -3518,14 +3518,14 @@ class _DropSliderValueIndicatorPathPainter {
 
     final BorderRadius adjustedBorderRadius = _adjustBorderRadius(upperRect);
     final RRect borderRect = adjustedBorderRadius.resolve(labelPainter.textDirection).toRRect(upperRect);
-    final Path trianglePath = Path()
+    final trianglePath = Path()
       ..lineTo(-_triangleHeight, -_triangleHeight)
       ..lineTo(_triangleHeight, -_triangleHeight)
       ..close();
     trianglePath.addRRect(borderRect);
 
     if (strokePaintColor != null) {
-      final Paint strokePaint = Paint()
+      final strokePaint = Paint()
         ..color = strokePaintColor
         ..strokeWidth = 1.0
         ..style = PaintingStyle.stroke;
@@ -3537,8 +3537,8 @@ class _DropSliderValueIndicatorPathPainter {
     // The label text is centered within the value indicator.
     final double bottomTipToUpperRectTranslateY = -_preferredHalfHeight / 2 - upperRect.height;
     canvas.translate(0, bottomTipToUpperRectTranslateY);
-    final Offset boxCenter = Offset(horizontalShift, upperRect.height / 1.75);
-    final Offset halfLabelPainterOffset = Offset(labelPainter.width / 2, labelPainter.height / 2);
+    final boxCenter = Offset(horizontalShift, upperRect.height / 1.75);
+    final halfLabelPainterOffset = Offset(labelPainter.width / 2, labelPainter.height / 2);
     final Offset labelOffset = boxCenter - halfLabelPainterOffset;
     labelPainter.paint(canvas, labelOffset);
     canvas.restore();

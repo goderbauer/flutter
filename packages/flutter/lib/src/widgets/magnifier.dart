@@ -651,12 +651,12 @@ class _RenderMagnification extends RenderProxyBox {
   @override
   void paint(PaintingContext context, Offset offset) {
     final Offset thisCenter = Alignment.center.alongSize(size) + offset;
-    final Matrix4 matrix = Matrix4.identity()
+    final matrix = Matrix4.identity()
       ..translate(
           magnificationScale * ((focalPointOffset.dx * -1) - thisCenter.dx) + thisCenter.dx,
           magnificationScale * ((focalPointOffset.dy * -1) - thisCenter.dy) + thisCenter.dy)
       ..scale(magnificationScale);
-    final ImageFilter filter = ImageFilter.matrix(matrix.storage, filterQuality: FilterQuality.high);
+    final filter = ImageFilter.matrix(matrix.storage, filterQuality: FilterQuality.high);
 
     if (layer == null) {
       layer = BackdropFilterLayer(

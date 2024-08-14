@@ -65,7 +65,7 @@ List<Color> indicatorColors(WidgetTester tester) {
 
 void main() {
   testWidgets('PageSelector responds correctly to setting the TabController index', (WidgetTester tester) async {
-    final TabController tabController = TabController(
+    final tabController = TabController(
       vsync: const TestVSync(),
       length: 3,
     );
@@ -87,7 +87,7 @@ void main() {
   });
 
   testWidgets('PageSelector responds correctly to TabController.animateTo()', (WidgetTester tester) async {
-    final TabController tabController = TabController(
+    final tabController = TabController(
       vsync: const TestVSync(),
       length: 3,
     );
@@ -131,7 +131,7 @@ void main() {
   });
 
   testWidgets('PageSelector responds correctly to TabBarView drags', (WidgetTester tester) async {
-    final TabController tabController = TabController(
+    final tabController = TabController(
       vsync: const TestVSync(),
       initialIndex: 1,
       length: 3,
@@ -190,10 +190,10 @@ void main() {
   });
 
   testWidgets('PageSelector indicatorColors', (WidgetTester tester) async {
-    const Color kRed = Color(0xFFFF0000);
-    const Color kBlue = Color(0xFF0000FF);
+    const kRed = Color(0xFFFF0000);
+    const kBlue = Color(0xFF0000FF);
 
-    final TabController tabController = TabController(
+    final tabController = TabController(
       vsync: const TestVSync(),
       initialIndex: 1,
       length: 3,
@@ -210,7 +210,7 @@ void main() {
   });
 
   testWidgets('PageSelector indicatorSize', (WidgetTester tester) async {
-    final TabController tabController = TabController(
+    final tabController = TabController(
       vsync: const TestVSync(),
       initialIndex: 1,
       length: 3,
@@ -224,7 +224,7 @@ void main() {
     ).evaluate();
 
     // Indicators get an 8 pixel margin, 16 + 8 = 24.
-    for (final Element indicatorElement in indicatorElements) {
+    for (final indicatorElement in indicatorElements) {
       expect(indicatorElement.size, const Size(24.0, 24.0));
     }
 
@@ -232,7 +232,7 @@ void main() {
   });
 
   testWidgets('PageSelector circle border', (WidgetTester tester) async {
-    final TabController tabController = TabController(
+    final tabController = TabController(
       vsync: const TestVSync(),
       initialIndex: 1,
       length: 3,
@@ -249,7 +249,7 @@ void main() {
         matching: find.byType(TabPageSelectorIndicator),
       ),
     );
-    for (final TabPageSelectorIndicator indicator in indicators) {
+    for (final indicator in indicators) {
       expect(indicator.borderStyle, BorderStyle.solid);
     }
 
@@ -261,7 +261,7 @@ void main() {
         matching: find.byType(TabPageSelectorIndicator),
       ),
     );
-    for (final TabPageSelectorIndicator indicator in indicators) {
+    for (final indicator in indicators) {
       expect(indicator.borderStyle, BorderStyle.none);
     }
 
@@ -273,7 +273,7 @@ void main() {
         matching: find.byType(TabPageSelectorIndicator),
       ),
     );
-    for (final TabPageSelectorIndicator indicator in indicators) {
+    for (final indicator in indicators) {
       expect(indicator.borderStyle, BorderStyle.solid);
     }
   });

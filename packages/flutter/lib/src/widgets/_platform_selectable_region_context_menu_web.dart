@@ -85,7 +85,7 @@ class PlatformSelectableRegionContextMenu extends StatelessWidget {
       final SelectionContainerDelegate? client = _activeClient;
       if (client != null) {
         // Converts the html right click event to flutter coordinate.
-        final Offset localOffset = Offset(event.offsetX.toDouble(), event.offsetY.toDouble());
+        final localOffset = Offset(event.offsetX.toDouble(), event.offsetY.toDouble());
         final Matrix4 transform = client.getTransformTo(null);
         final Offset globalOffset = MatrixUtils.transformPoint(transform, localOffset);
         client.dispatchSelectionEvent(SelectWordSelectionEvent(globalPosition: globalOffset));
@@ -105,21 +105,21 @@ class PlatformSelectableRegionContextMenu extends StatelessWidget {
 
   static String _registerWebSelectionCallback(_WebSelectionCallBack callback) {
     _registerViewFactory(_viewType, (int viewId) {
-      final web.HTMLElement htmlElement = web.document.createElement('div') as web.HTMLElement;
+      final htmlElement = web.document.createElement('div') as web.HTMLElement;
       htmlElement
         ..style.width = '100%'
         ..style.height = '100%'
         ..classList.add(_kClassName);
 
       // Create css style for _kClassName.
-      final web.HTMLStyleElement styleElement = web.document.createElement('style') as web.HTMLStyleElement;
+      final styleElement = web.document.createElement('style') as web.HTMLStyleElement;
       web.document.head!.append(styleElement as JSAny);
       final web.CSSStyleSheet sheet = styleElement.sheet!;
       sheet.insertRule(_kClassRule, 0);
       sheet.insertRule(_kClassSelectionRule, 1);
 
       htmlElement.addEventListener('mousedown', (web.Event event) {
-        final web.MouseEvent mouseEvent = event as web.MouseEvent;
+        final mouseEvent = event as web.MouseEvent;
         if (mouseEvent.button != _kRightClickButton) {
           return;
         }

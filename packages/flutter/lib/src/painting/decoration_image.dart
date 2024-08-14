@@ -224,7 +224,7 @@ class DecorationImage {
 
   @override
   String toString() {
-    final List<String> properties = <String>[
+    final properties = <String>[
       '$image',
       if (colorFilter != null)
         '$colorFilter',
@@ -337,7 +337,7 @@ class _DecorationImagePainter implements DecorationImagePainter {
 
   @override
   void paint(Canvas canvas, Rect rect, Path? clipPath, ImageConfiguration configuration, { double blend = 1.0, BlendMode blendMode = BlendMode.srcOver }) {
-    bool flipHorizontally = false;
+    var flipHorizontally = false;
     if (_details.matchTextDirection) {
       assert(() {
         // We check this first so that the assert will fire immediately, not just
@@ -362,7 +362,7 @@ class _DecorationImagePainter implements DecorationImagePainter {
 
     final ImageStream newImageStream = _details.image.resolve(configuration);
     if (newImageStream.key != _imageStream?.key) {
-      final ImageStreamListener listener = ImageStreamListener(
+      final listener = ImageStreamListener(
         _handleImage,
         onError: _details.onError,
       );
@@ -549,7 +549,7 @@ void paintImage({
     return;
   }
   Size outputSize = rect.size;
-  Size inputSize = Size(image.width.toDouble(), image.height.toDouble());
+  var inputSize = Size(image.width.toDouble(), image.height.toDouble());
   Offset? sliceBorder;
   if (centerSlice != null) {
     sliceBorder = inputSize / scale - centerSlice.size as Offset;
@@ -574,7 +574,7 @@ void paintImage({
     // output rect with the image.
     repeat = ImageRepeat.noRepeat;
   }
-  final Paint paint = Paint()..isAntiAlias = isAntiAlias;
+  final paint = Paint()..isAntiAlias = isAntiAlias;
   if (colorFilter != null) {
     paint.colorFilter = colorFilter;
   }
@@ -590,7 +590,7 @@ void paintImage({
   final Rect destinationRect = destinationPosition & destinationSize;
 
   // Set to true if we added a saveLayer to the canvas to invert/flip the image.
-  bool invertedCanvas = false;
+  var invertedCanvas = false;
   // Output size and destination rect are fully calculated.
 
   // Implement debug-mode and profile-mode features:
@@ -609,7 +609,7 @@ void paintImage({
       0.0,
       (double previousValue, ui.FlutterView view) => math.max(previousValue, view.devicePixelRatio),
     );
-    final ImageSizeInfo sizeInfo = ImageSizeInfo(
+    final sizeInfo = ImageSizeInfo(
       // Some ImageProvider implementations may not have given this.
       source: debugImageLabel ?? '<Unknown Image(${image.width}×${image.height})>',
       imageSize: Size(image.width.toDouble(), image.height.toDouble()),
@@ -720,10 +720,10 @@ void paintImage({
 }
 
 Iterable<Rect> _generateImageTileRects(Rect outputRect, Rect fundamentalRect, ImageRepeat repeat) {
-  int startX = 0;
-  int startY = 0;
-  int stopX = 0;
-  int stopY = 0;
+  var startX = 0;
+  var startY = 0;
+  var stopX = 0;
+  var stopY = 0;
   final double strideX = fundamentalRect.width;
   final double strideY = fundamentalRect.height;
 

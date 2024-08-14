@@ -651,7 +651,7 @@ class LongPressGestureRecognizer extends PrimaryPointerGestureRecognizer {
 
   void _checkLongPressDown(PointerDownEvent event) {
     assert(_longPressOrigin != null);
-    final LongPressDownDetails details = LongPressDownDetails(
+    final details = LongPressDownDetails(
       globalPosition: _longPressOrigin!.global,
       localPosition: _longPressOrigin!.local,
       kind: getKindForPointer(event.pointer),
@@ -699,7 +699,7 @@ class LongPressGestureRecognizer extends PrimaryPointerGestureRecognizer {
     switch (_initialButtons) {
       case kPrimaryButton:
         if (onLongPressStart != null) {
-          final LongPressStartDetails details = LongPressStartDetails(
+          final details = LongPressStartDetails(
             globalPosition: _longPressOrigin!.global,
             localPosition: _longPressOrigin!.local,
           );
@@ -710,7 +710,7 @@ class LongPressGestureRecognizer extends PrimaryPointerGestureRecognizer {
         }
       case kSecondaryButton:
         if (onSecondaryLongPressStart != null) {
-          final LongPressStartDetails details = LongPressStartDetails(
+          final details = LongPressStartDetails(
             globalPosition: _longPressOrigin!.global,
             localPosition: _longPressOrigin!.local,
           );
@@ -721,7 +721,7 @@ class LongPressGestureRecognizer extends PrimaryPointerGestureRecognizer {
         }
       case kTertiaryButton:
         if (onTertiaryLongPressStart != null) {
-          final LongPressStartDetails details = LongPressStartDetails(
+          final details = LongPressStartDetails(
             globalPosition: _longPressOrigin!.global,
             localPosition: _longPressOrigin!.local,
           );
@@ -736,7 +736,7 @@ class LongPressGestureRecognizer extends PrimaryPointerGestureRecognizer {
   }
 
   void _checkLongPressMoveUpdate(PointerEvent event) {
-    final LongPressMoveUpdateDetails details = LongPressMoveUpdateDetails(
+    final details = LongPressMoveUpdateDetails(
       globalPosition: event.position,
       localPosition: event.localPosition,
       offsetFromOrigin: event.position - _longPressOrigin!.global,
@@ -765,7 +765,7 @@ class LongPressGestureRecognizer extends PrimaryPointerGestureRecognizer {
     final Velocity velocity = estimate == null
         ? Velocity.zero
         : Velocity(pixelsPerSecond: estimate.pixelsPerSecond);
-    final LongPressEndDetails details = LongPressEndDetails(
+    final details = LongPressEndDetails(
       globalPosition: event.position,
       localPosition: event.localPosition,
       velocity: velocity,

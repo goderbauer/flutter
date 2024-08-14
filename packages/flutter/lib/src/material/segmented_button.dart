@@ -425,7 +425,7 @@ class SegmentedButtonState<T> extends State<SegmentedButton<T>> {
     final bool validChange = widget.emptySelectionAllowed || !onlySelectedSegment;
     if (validChange) {
       final bool toggle = widget.multiSelectionEnabled || (widget.emptySelectionAllowed && onlySelectedSegment);
-      final Set<T> pressedSegment = <T>{segmentValue};
+      final pressedSegment = <T>{segmentValue};
       late final Set<T> updatedSelection;
       if (toggle) {
         updatedSelection = widget.selected.contains(segmentValue)
@@ -446,9 +446,9 @@ class SegmentedButtonState<T> extends State<SegmentedButton<T>> {
     final SegmentedButtonThemeData defaults = _SegmentedButtonDefaultsM3(context);
     final TextDirection direction = Directionality.of(context);
 
-    const Set<MaterialState> enabledState = <MaterialState>{};
-    const Set<MaterialState> disabledState = <MaterialState>{ MaterialState.disabled };
-    final Set<MaterialState> currentState = _enabled ? enabledState : disabledState;
+    const enabledState = <MaterialState>{};
+    const disabledState = <MaterialState>{ MaterialState.disabled };
+    final currentState = _enabled ? enabledState : disabledState;
 
     P? effectiveValue<P>(P? Function(ButtonStyle? style) getProperty) {
       late final P? widgetValue  = getProperty(widget.style);
@@ -547,7 +547,7 @@ class SegmentedButtonState<T> extends State<SegmentedButton<T>> {
     final List<Widget> buttons = widget.segments.map(buttonFor).toList();
 
     final Offset densityAdjustment = resolvedVisualDensity.baseSizeAdjustment;
-    const double textButtonMinHeight = 40.0;
+    const textButtonMinHeight = 40.0;
 
     final double adjustButtonMinHeight = textButtonMinHeight + densityAdjustment.dy;
     final double effectiveVerticalPadding = resolvedPadding.vertical + densityAdjustment.dy * 2;
@@ -736,9 +736,9 @@ class _RenderSegmentedButton<T> extends RenderBox with
   @override
   double computeMinIntrinsicWidth(double height) {
     RenderBox? child = firstChild;
-    double minWidth = 0.0;
+    var minWidth = 0.0;
     while (child != null) {
-      final _SegmentedButtonContainerBoxParentData childParentData = child.parentData! as _SegmentedButtonContainerBoxParentData;
+      final childParentData = child.parentData! as _SegmentedButtonContainerBoxParentData;
       final double childWidth = child.getMinIntrinsicWidth(height);
       minWidth = math.max(minWidth, childWidth);
       child = childParentData.nextSibling;
@@ -749,9 +749,9 @@ class _RenderSegmentedButton<T> extends RenderBox with
   @override
   double computeMaxIntrinsicWidth(double height) {
     RenderBox? child = firstChild;
-    double maxWidth = 0.0;
+    var maxWidth = 0.0;
     while (child != null) {
-      final _SegmentedButtonContainerBoxParentData childParentData = child.parentData! as _SegmentedButtonContainerBoxParentData;
+      final childParentData = child.parentData! as _SegmentedButtonContainerBoxParentData;
       final double childWidth = child.getMaxIntrinsicWidth(height);
       maxWidth = math.max(maxWidth, childWidth);
       child = childParentData.nextSibling;
@@ -762,9 +762,9 @@ class _RenderSegmentedButton<T> extends RenderBox with
   @override
   double computeMinIntrinsicHeight(double width) {
     RenderBox? child = firstChild;
-    double minHeight = 0.0;
+    var minHeight = 0.0;
     while (child != null) {
-      final _SegmentedButtonContainerBoxParentData childParentData = child.parentData! as _SegmentedButtonContainerBoxParentData;
+      final childParentData = child.parentData! as _SegmentedButtonContainerBoxParentData;
       final double childHeight = child.getMinIntrinsicHeight(width);
       minHeight = math.max(minHeight, childHeight);
       child = childParentData.nextSibling;
@@ -775,9 +775,9 @@ class _RenderSegmentedButton<T> extends RenderBox with
   @override
   double computeMaxIntrinsicHeight(double width) {
     RenderBox? child = firstChild;
-    double maxHeight = 0.0;
+    var maxHeight = 0.0;
     while (child != null) {
-      final _SegmentedButtonContainerBoxParentData childParentData = child.parentData! as _SegmentedButtonContainerBoxParentData;
+      final childParentData = child.parentData! as _SegmentedButtonContainerBoxParentData;
       final double childHeight = child.getMaxIntrinsicHeight(width);
       maxHeight = math.max(maxHeight, childHeight);
       child = childParentData.nextSibling;
@@ -799,13 +799,13 @@ class _RenderSegmentedButton<T> extends RenderBox with
 
   void _layoutRects(_NextChild nextChild, RenderBox? leftChild, RenderBox? rightChild) {
     RenderBox? child = leftChild;
-    double start = 0.0;
+    var start = 0.0;
     while (child != null) {
-      final _SegmentedButtonContainerBoxParentData childParentData = child.parentData! as _SegmentedButtonContainerBoxParentData;
-      final Offset childOffset = Offset(start, 0.0);
+      final childParentData = child.parentData! as _SegmentedButtonContainerBoxParentData;
+      final childOffset = Offset(start, 0.0);
       childParentData.offset = childOffset;
-      final Rect childRect = Rect.fromLTWH(start, 0.0, child.size.width, child.size.height);
-      final RRect rChildRect = RRect.fromRectAndCorners(childRect);
+      final childRect = Rect.fromLTWH(start, 0.0, child.size.width, child.size.height);
+      final rChildRect = RRect.fromRectAndCorners(childRect);
       childParentData.surroundingRect = rChildRect;
       start += child.size.width;
       child = nextChild(child);
@@ -848,7 +848,7 @@ class _RenderSegmentedButton<T> extends RenderBox with
   @override
   double? computeDryBaseline(covariant BoxConstraints constraints, TextBaseline baseline) {
     final Size childSize = _calculateChildSize(constraints);
-    final BoxConstraints childConstraints = BoxConstraints.tight(childSize);
+    final childConstraints = BoxConstraints.tight(childSize);
 
     BaselineOffset baselineOffset = BaselineOffset.noBaseline;
     for (RenderBox? child = firstChild; child != null; child = childAfter(child)) {
@@ -862,7 +862,7 @@ class _RenderSegmentedButton<T> extends RenderBox with
     final BoxConstraints constraints = this.constraints;
     final Size childSize = _calculateChildSize(constraints);
 
-    final BoxConstraints childConstraints = BoxConstraints.tightFor(
+    final childConstraints = BoxConstraints.tightFor(
       width: childSize.width,
       height: childSize.height,
     );
@@ -898,12 +898,12 @@ class _RenderSegmentedButton<T> extends RenderBox with
     final Path borderClipPath = enabledBorder.getInnerPath(borderRect, textDirection: textDirection);
     RenderBox? child = firstChild;
     RenderBox? previousChild;
-    int index = 0;
+    var index = 0;
     Path? enabledClipPath;
     Path? disabledClipPath;
 
     while (child != null) {
-      final _SegmentedButtonContainerBoxParentData childParentData = child.parentData! as _SegmentedButtonContainerBoxParentData;
+      final childParentData = child.parentData! as _SegmentedButtonContainerBoxParentData;
       final Rect childRect = childParentData.surroundingRect!.outerRect.shift(offset);
 
       context.canvas..save()..clipPath(borderClipPath);
@@ -925,7 +925,7 @@ class _RenderSegmentedButton<T> extends RenderBox with
           segmentRight = child == lastChild ? borderRect.right + borderOutset : childRect.right;
           dividerPos = segmentLeft;
       }
-      final Rect segmentClipRect = Rect.fromLTRB(
+      final segmentClipRect = Rect.fromLTRB(
         segmentLeft, borderRect.top - borderOutset,
         segmentRight, borderRect.bottom + borderOutset);
 
@@ -941,8 +941,8 @@ class _RenderSegmentedButton<T> extends RenderBox with
         final BorderSide divider = segments[index - 1].enabled || segments[index].enabled
           ? enabledBorder.side.copyWith(strokeAlign: 0.0)
           : disabledBorder.side.copyWith(strokeAlign: 0.0);
-        final Offset top = Offset(dividerPos, borderRect.top);
-        final Offset bottom = Offset(dividerPos, borderRect.bottom);
+        final top = Offset(dividerPos, borderRect.top);
+        final bottom = Offset(dividerPos, borderRect.bottom);
         context.canvas.drawLine(top, bottom, divider.toPaint());
       }
 
@@ -972,7 +972,7 @@ class _RenderSegmentedButton<T> extends RenderBox with
   bool hitTestChildren(BoxHitTestResult result, { required Offset position }) {
     RenderBox? child = lastChild;
     while (child != null) {
-      final _SegmentedButtonContainerBoxParentData childParentData = child.parentData! as _SegmentedButtonContainerBoxParentData;
+      final childParentData = child.parentData! as _SegmentedButtonContainerBoxParentData;
       if (childParentData.surroundingRect!.contains(position)) {
         return result.addWithPaintOffset(
           offset: childParentData.offset,

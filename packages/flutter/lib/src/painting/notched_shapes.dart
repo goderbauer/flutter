@@ -83,10 +83,10 @@ class CircularNotchedRectangle extends NotchedShape {
     // A detailed explanation and the derivation of the formulas below is
     // available at: https://goo.gl/Ufzrqn
 
-    const double s1 = 15.0;
-    const double s2 = 1.0;
+    const s1 = 15.0;
+    const s2 = 1.0;
 
-    final double r = notchRadius;
+    final r = notchRadius;
     final double a = -1.0 * r - s2;
     final double b = (inverted ? host.bottom : host.top) - guest.center.dy;
 
@@ -96,7 +96,7 @@ class CircularNotchedRectangle extends NotchedShape {
     final double p2yA = math.sqrt(r * r - p2xA * p2xA) * invertMultiplier;
     final double p2yB = math.sqrt(r * r - p2xB * p2xB) * invertMultiplier;
 
-    final List<Offset?> p = List<Offset?>.filled(6, null);
+    final p = List<Offset?>.filled(6, null);
 
     // p0, p1, and p2 are the control points for segment A.
     p[0] = Offset(a - s1, b);
@@ -111,12 +111,12 @@ class CircularNotchedRectangle extends NotchedShape {
     p[5] = Offset(-1.0 * p[0]!.dx, p[0]!.dy);
 
     // translate all points back to the absolute coordinate system.
-    for (int i = 0; i < p.length; i += 1) {
+    for (var i = 0; i < p.length; i += 1) {
       p[i] = p[i]! + guest.center;
     }
 
     // Use the calculated points to draw out a path object.
-    final Path path = Path();
+    final path = Path();
     path.moveTo(host.left, host.top);
     if (!inverted) {
       path

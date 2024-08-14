@@ -121,7 +121,7 @@ void main() {
   testWidgets(
     'copyWith works',
     (WidgetTester tester) async {
-      const CupertinoThemeData originalTheme = CupertinoThemeData(
+      const originalTheme = CupertinoThemeData(
         brightness: Brightness.dark,
         applyThemeToAll: true,
       );
@@ -143,7 +143,7 @@ void main() {
 
   testWidgets("Theme has default IconThemeData, which is derived from the theme's primary color", (WidgetTester tester) async {
     const CupertinoDynamicColor primaryColor = CupertinoColors.systemRed;
-    const CupertinoThemeData themeData = CupertinoThemeData(primaryColor: primaryColor);
+    const themeData = CupertinoThemeData(primaryColor: primaryColor);
 
     final IconThemeData resultingIconTheme = await testIconTheme(tester, themeData);
 
@@ -170,7 +170,7 @@ void main() {
   });
 
   testWidgets('CupertinoTheme diagnostics', (WidgetTester tester) async {
-    final DiagnosticPropertiesBuilder builder = DiagnosticPropertiesBuilder();
+    final builder = DiagnosticPropertiesBuilder();
     const CupertinoThemeData().debugFillProperties(builder);
 
     final Set<String> description = builder.properties
@@ -214,7 +214,7 @@ void main() {
   });
 
   testWidgets('CupertinoThemeData equality', (WidgetTester tester) async {
-    const CupertinoThemeData a = CupertinoThemeData(brightness: Brightness.dark);
+    const a = CupertinoThemeData(brightness: Brightness.dark);
     final CupertinoThemeData b = a.copyWith();
     final CupertinoThemeData c = a.copyWith(brightness: Brightness.light);
     expect(a, equals(b));
@@ -241,7 +241,7 @@ void main() {
 
   void dynamicColorsTestGroup() {
     testWidgets('CupertinoTheme.of resolves colors', (WidgetTester tester) async {
-      final CupertinoThemeData data = CupertinoThemeData(brightness: currentBrightness, primaryColor: CupertinoColors.systemRed);
+      final data = CupertinoThemeData(brightness: currentBrightness, primaryColor: CupertinoColors.systemRed);
       final CupertinoThemeData theme = await testTheme(tester, data);
 
       expect(data.primaryColor, isSameColorAs(CupertinoColors.systemRed));
@@ -250,9 +250,9 @@ void main() {
 
     testWidgets('CupertinoTheme.of resolves default values', (WidgetTester tester) async {
       const CupertinoDynamicColor primaryColor = CupertinoColors.systemRed;
-      final CupertinoThemeData data = CupertinoThemeData(brightness: currentBrightness, primaryColor: primaryColor);
+      final data = CupertinoThemeData(brightness: currentBrightness, primaryColor: primaryColor);
 
-      const CupertinoDynamicColor barBackgroundColor = CupertinoDynamicColor.withBrightness(
+      const barBackgroundColor = CupertinoDynamicColor.withBrightness(
         color: Color(0xF0F9F9F9),
         darkColor: Color(0xF01D1D1D),
       );

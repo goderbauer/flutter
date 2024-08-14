@@ -24,7 +24,7 @@ Widget wrap({Widget? child}) {
 
 void main() {
   testWidgets('RadioListTile should initialize according to groupValue', (WidgetTester tester) async {
-    final List<int> values = <int>[0, 1, 2];
+    final values = <int>[0, 1, 2];
     int? selectedValue;
     // Constructor parameters are required for [RadioListTile], but they are
     // irrelevant when searching with [find.byType].
@@ -86,7 +86,7 @@ void main() {
   testWidgets('RadioListTile simple control test', (WidgetTester tester) async {
     final Key key = UniqueKey();
     final Key titleKey = UniqueKey();
-    final List<int?> log = <int?>[];
+    final log = <int?>[];
 
     await tester.pumpWidget(
       wrap(
@@ -156,7 +156,7 @@ void main() {
   });
 
   testWidgets('RadioListTile control tests', (WidgetTester tester) async {
-    final List<int> values = <int>[0, 1, 2];
+    final values = <int>[0, 1, 2];
     int? selectedValue;
     // Constructor parameters are required for [Radio], but they are irrelevant
     // when searching with [find.byType].
@@ -165,7 +165,7 @@ void main() {
       groupValue: 0,
       onChanged: null,
     ).runtimeType;
-    final List<dynamic> log = <dynamic>[];
+    final log = <dynamic>[];
 
     Widget buildFrame() {
       return wrap(
@@ -224,7 +224,7 @@ void main() {
 
   testWidgets('Selected RadioListTile should not trigger onChanged', (WidgetTester tester) async {
     // Regression test for https://github.com/flutter/flutter/issues/30311
-    final List<int> values = <int>[0, 1, 2];
+    final values = <int>[0, 1, 2];
     int? selectedValue;
     // Constructor parameters are required for [Radio], but they are irrelevant
     // when searching with [find.byType].
@@ -233,7 +233,7 @@ void main() {
       groupValue: 0,
       onChanged: null,
     ).runtimeType;
-    final List<dynamic> log = <dynamic>[];
+    final log = <dynamic>[];
 
     Widget buildFrame() {
       return wrap(
@@ -275,7 +275,7 @@ void main() {
   });
 
   testWidgets('Selected RadioListTile should trigger onChanged when toggleable', (WidgetTester tester) async {
-    final List<int> values = <int>[0, 1, 2];
+    final values = <int>[0, 1, 2];
     int? selectedValue;
     // Constructor parameters are required for [Radio], but they are irrelevant
     // when searching with [find.byType].
@@ -284,7 +284,7 @@ void main() {
       groupValue: 0,
       onChanged: null,
     ).runtimeType;
-    final List<dynamic> log = <dynamic>[];
+    final log = <dynamic>[];
 
     Widget buildFrame() {
       return wrap(
@@ -330,7 +330,7 @@ void main() {
 
   testWidgets('RadioListTile can be toggled when toggleable is set', (WidgetTester tester) async {
     final Key key = UniqueKey();
-    final List<int?> log = <int?>[];
+    final log = <int?>[];
 
     await tester.pumpWidget(Material(
       child: Center(
@@ -384,7 +384,7 @@ void main() {
   });
 
   testWidgets('RadioListTile semantics', (WidgetTester tester) async {
-    final SemanticsTester semantics = SemanticsTester(tester);
+    final semantics = SemanticsTester(tester);
 
     await tester.pumpWidget(
       wrap(
@@ -540,7 +540,7 @@ void main() {
   });
 
   testWidgets('RadioListTile has semantic events', (WidgetTester tester) async {
-    final SemanticsTester semantics = SemanticsTester(tester);
+    final semantics = SemanticsTester(tester);
     final Key key = UniqueKey();
     dynamic semanticEvent;
     int? radioValue = 2;
@@ -638,7 +638,7 @@ void main() {
     final Rect titleRect = tester.getRect(find.text('Title'));
 
     // Get the taller Rect of the Radio and Text widgets
-    final Rect tallerRect = radioRect.height > titleRect.height ? radioRect : titleRect;
+    final tallerRect = radioRect.height > titleRect.height ? radioRect : titleRect;
 
     // Get the extra height between the tallerRect and ListTile height
     final double extraHeight = 56 - tallerRect.height;
@@ -716,7 +716,7 @@ void main() {
   testWidgets('RadioListTile selected item text Color', (WidgetTester tester) async {
     // Regression test for https://github.com/flutter/flutter/pull/76906
 
-    const Color activeColor = Color(0xff00ff00);
+    const activeColor = Color(0xff00ff00);
 
     Widget buildFrame({ Color? activeColor, Color? fillColor }) {
       return MaterialApp(
@@ -754,7 +754,7 @@ void main() {
   });
 
   testWidgets('RadioListTile respects visualDensity', (WidgetTester tester) async {
-    const Key key = Key('test');
+    const key = Key('test');
     Future<void> buildTest(VisualDensity visualDensity) async {
       return tester.pumpWidget(
         wrap(
@@ -802,10 +802,10 @@ void main() {
   });
 
   testWidgets('RadioListTile onFocusChange callback', (WidgetTester tester) async {
-    final FocusNode node = FocusNode(debugLabel: 'RadioListTile onFocusChange');
+    final node = FocusNode(debugLabel: 'RadioListTile onFocusChange');
     addTearDown(node.dispose);
 
-    bool gotFocus = false;
+    var gotFocus = false;
     await tester.pumpWidget(
       MaterialApp(
         home: Material(
@@ -885,10 +885,10 @@ void main() {
   });
 
   testWidgets('RadioListTile respects fillColor in enabled/disabled states', (WidgetTester tester) async {
-    const Color activeEnabledFillColor = Color(0xFF000001);
-    const Color activeDisabledFillColor = Color(0xFF000002);
-    const Color inactiveEnabledFillColor = Color(0xFF000003);
-    const Color inactiveDisabledFillColor = Color(0xFF000004);
+    const activeEnabledFillColor = Color(0xFF000001);
+    const activeDisabledFillColor = Color(0xFF000002);
+    const inactiveEnabledFillColor = Color(0xFF000003);
+    const inactiveDisabledFillColor = Color(0xFF000004);
 
     Color getFillColor(Set<MaterialState> states) {
       if (states.contains(MaterialState.disabled)) {
@@ -973,7 +973,7 @@ void main() {
 
   testWidgets('RadioListTile respects fillColor in hovered state', (WidgetTester tester) async {
     tester.binding.focusManager.highlightStrategy = FocusHighlightStrategy.alwaysTraditional;
-    const Color hoveredFillColor = Color(0xFF000001);
+    const hoveredFillColor = Color(0xFF000001);
 
     Color getFillColor(Set<MaterialState> states) {
       if (states.contains(MaterialState.hovered)) {
@@ -1024,7 +1024,7 @@ void main() {
     tester.binding.focusManager.highlightStrategy = FocusHighlightStrategy.alwaysTraditional;
     int? groupValue = 0;
     final Color? hoverColor = Colors.orange[500];
-    final ThemeData theme = ThemeData(useMaterial3: true);
+    final theme = ThemeData(useMaterial3: true);
     Widget buildApp({bool enabled = true}) {
       return wrap(
         child: MaterialApp(
@@ -1089,11 +1089,11 @@ void main() {
   testWidgets('Material3 - RadioListTile respects overlayColor in active/pressed/hovered states', (WidgetTester tester) async {
     tester.binding.focusManager.highlightStrategy = FocusHighlightStrategy.alwaysTraditional;
 
-    const Color fillColor = Color(0xFF000000);
-    const Color activePressedOverlayColor = Color(0xFF000001);
-    const Color inactivePressedOverlayColor = Color(0xFF000002);
-    const Color hoverOverlayColor = Color(0xFF000003);
-    const Color hoverColor = Color(0xFF000005);
+    const fillColor = Color(0xFF000000);
+    const activePressedOverlayColor = Color(0xFF000001);
+    const inactivePressedOverlayColor = Color(0xFF000002);
+    const hoverOverlayColor = Color(0xFF000003);
+    const hoverColor = Color(0xFF000005);
 
     Color? getOverlayColor(Set<MaterialState> states) {
       if (states.contains(MaterialState.pressed)) {
@@ -1320,14 +1320,14 @@ void main() {
       );
     }
 
-    for (final TargetPlatform platform in <TargetPlatform>[ TargetPlatform.iOS, TargetPlatform.macOS ]) {
+    for (final platform in <TargetPlatform>[ TargetPlatform.iOS, TargetPlatform.macOS ]) {
       await tester.pumpWidget(buildApp(platform));
       await tester.pumpAndSettle();
 
       expect(find.byType(CupertinoRadio<int>), findsOneWidget);
     }
 
-    for (final TargetPlatform platform in <TargetPlatform>[ TargetPlatform.android, TargetPlatform.fuchsia, TargetPlatform.linux, TargetPlatform.windows ]) {
+    for (final platform in <TargetPlatform>[ TargetPlatform.android, TargetPlatform.fuchsia, TargetPlatform.linux, TargetPlatform.windows ]) {
       await tester.pumpWidget(buildApp(platform));
       await tester.pumpAndSettle();
 
@@ -1347,7 +1347,7 @@ void main() {
     });
 
     testWidgets('RadioListTile respects enableFeedback', (WidgetTester tester) async {
-      const Key key = Key('test');
+      const key = Key('test');
       Future<void> buildTest(bool enableFeedback) async {
         return tester.pumpWidget(
           wrap(
@@ -1387,11 +1387,11 @@ void main() {
     testWidgets('Material2 - RadioListTile respects overlayColor in active/pressed/hovered states', (WidgetTester tester) async {
       tester.binding.focusManager.highlightStrategy = FocusHighlightStrategy.alwaysTraditional;
 
-      const Color fillColor = Color(0xFF000000);
-      const Color activePressedOverlayColor = Color(0xFF000001);
-      const Color inactivePressedOverlayColor = Color(0xFF000002);
-      const Color hoverOverlayColor = Color(0xFF000003);
-      const Color hoverColor = Color(0xFF000005);
+      const fillColor = Color(0xFF000000);
+      const activePressedOverlayColor = Color(0xFF000001);
+      const inactivePressedOverlayColor = Color(0xFF000002);
+      const hoverOverlayColor = Color(0xFF000003);
+      const hoverColor = Color(0xFF000005);
 
       Color? getOverlayColor(Set<MaterialState> states) {
         if (states.contains(MaterialState.pressed)) {

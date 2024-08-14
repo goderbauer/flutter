@@ -12,7 +12,7 @@ import 'package:leak_tracker_flutter_testing/leak_tracker_flutter_testing.dart';
 import '../image_data.dart';
 
 void main() {
-  final MockHttpClient client = MockHttpClient();
+  final client = MockHttpClient();
 
   testWidgets('Headers',
   // TODO(polina-c): dispose ImageStreamCompleterHandle, https://github.com/flutter/flutter/issues/145599 [leaks-to-clean]

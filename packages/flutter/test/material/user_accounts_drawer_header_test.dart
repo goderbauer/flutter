@@ -82,12 +82,12 @@ void main() {
   );
 
   testWidgets('UserAccountsDrawerHeader inherits ColorScheme.primary', (WidgetTester tester) async {
-    const Color primaryColor = Color(0xff00ff00);
-    const Color colorSchemePrimary = Color(0xff0000ff);
+    const primaryColor = Color(0xff00ff00);
+    const colorSchemePrimary = Color(0xff0000ff);
 
     await pumpTestWidget(tester, primaryColor: primaryColor, colorSchemePrimary: colorSchemePrimary);
 
-    final BoxDecoration? boxDecoration = tester.widget<DrawerHeader>(
+    final boxDecoration = tester.widget<DrawerHeader>(
       find.byType(DrawerHeader),
     ).decoration as BoxDecoration?;
     expect(boxDecoration?.color == primaryColor, false);
@@ -133,8 +133,8 @@ void main() {
   });
 
   testWidgets('UserAccountsDrawerHeader change default size test', (WidgetTester tester) async {
-    const Size currentAccountPictureSize = Size.square(60.0);
-    const Size otherAccountsPictureSize = Size.square(30.0);
+    const currentAccountPictureSize = Size.square(60.0);
+    const otherAccountsPictureSize = Size.square(30.0);
 
     await pumpTestWidget(
       tester,
@@ -385,7 +385,7 @@ void main() {
     ));
     expect(find.text('A'), findsOneWidget);
 
-    const Key avatarA = Key('A');
+    const avatarA = Key('A');
     await tester.pumpWidget(buildFrame(
       currentAccountPicture: const CircleAvatar(key: avatarA, child: Text('A')),
       accountName: const Text('accountName'),
@@ -496,7 +496,7 @@ void main() {
     ));
     expect(find.text('A'), findsOneWidget);
 
-    const Key avatarA = Key('A');
+    const avatarA = Key('A');
     await tester.pumpWidget(buildFrame(
       currentAccountPicture: const CircleAvatar(key: avatarA, child: Text('A')),
       accountName: const Text('accountName'),
@@ -512,7 +512,7 @@ void main() {
   });
 
   testWidgets('UserAccountsDrawerHeader provides semantics', (WidgetTester tester) async {
-    final SemanticsTester semantics = SemanticsTester(tester);
+    final semantics = SemanticsTester(tester);
     await pumpTestWidget(tester);
 
     expect(
@@ -590,7 +590,7 @@ void main() {
   });
 
   testWidgets('UserAccountsDrawerHeader provides semantics with missing properties', (WidgetTester tester) async {
-    final SemanticsTester semantics = SemanticsTester(tester);
+    final semantics = SemanticsTester(tester);
     await pumpTestWidget(
       tester,
       withEmail: false,

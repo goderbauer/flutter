@@ -10,7 +10,7 @@ void main() {
   testWidgets('Listeners are called when semantics are turned on with ensureSemantics', (WidgetTester tester) async {
     expect(SemanticsBinding.instance.semanticsEnabled, isFalse);
 
-    final List<bool> status = <bool>[];
+    final status = <bool>[];
     void listener() {
       status.add(SemanticsBinding.instance.semanticsEnabled);
     }
@@ -47,7 +47,7 @@ void main() {
   testWidgets('Listeners are called when semantics are turned on by platform', (WidgetTester tester) async {
     expect(SemanticsBinding.instance.semanticsEnabled, isFalse);
 
-    final List<bool> status = <bool>[];
+    final status = <bool>[];
     void listener() {
       status.add(SemanticsBinding.instance.semanticsEnabled);
     }

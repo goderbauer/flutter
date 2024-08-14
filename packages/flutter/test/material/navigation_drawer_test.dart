@@ -9,8 +9,8 @@ void main() {
   testWidgets('Navigation drawer updates destinations when tapped',
       (WidgetTester tester) async {
     int mutatedIndex = -1;
-    final GlobalKey<ScaffoldState> scaffoldKey = GlobalKey<ScaffoldState>();
-    final ThemeData theme = ThemeData();
+    final scaffoldKey = GlobalKey<ScaffoldState>();
+    final theme = ThemeData();
     widgetSetup(tester, 3000, viewHeight: 3000);
     final Widget widget = _buildWidget(
       scaffoldKey,
@@ -52,8 +52,8 @@ void main() {
   testWidgets('NavigationDrawer can update background color',
       (WidgetTester tester) async {
     const Color color = Colors.yellow;
-    final GlobalKey<ScaffoldState> scaffoldKey = GlobalKey<ScaffoldState>();
-    final ThemeData theme = ThemeData();
+    final scaffoldKey = GlobalKey<ScaffoldState>();
+    final theme = ThemeData();
 
     await tester.pumpWidget(
       _buildWidget(
@@ -85,8 +85,8 @@ void main() {
   testWidgets('NavigationDrawer can update destination background color',
       (WidgetTester tester) async {
     const Color color = Colors.yellow;
-    final GlobalKey<ScaffoldState> scaffoldKey = GlobalKey<ScaffoldState>();
-    final ThemeData theme = ThemeData();
+    final scaffoldKey = GlobalKey<ScaffoldState>();
+    final theme = ThemeData();
 
     await tester.pumpWidget(
       _buildWidget(
@@ -122,10 +122,10 @@ void main() {
 
   testWidgets('NavigationDrawer can update elevation',
       (WidgetTester tester) async {
-    const double elevation = 42.0;
-    final GlobalKey<ScaffoldState> scaffoldKey = GlobalKey<ScaffoldState>();
-    final ThemeData theme = ThemeData();
-    final NavigationDrawer drawer = NavigationDrawer(
+    const elevation = 42.0;
+    final scaffoldKey = GlobalKey<ScaffoldState>();
+    final theme = ThemeData();
+    final drawer = NavigationDrawer(
       elevation: elevation,
       children: <Widget>[
         Text('Headline', style: theme.textTheme.bodyLarge),
@@ -155,8 +155,8 @@ void main() {
   testWidgets(
     'NavigationDrawer uses proper defaults when no parameters are given',
       (WidgetTester tester) async {
-    final GlobalKey<ScaffoldState> scaffoldKey = GlobalKey<ScaffoldState>();
-    final ThemeData theme = ThemeData(useMaterial3: true);
+    final scaffoldKey = GlobalKey<ScaffoldState>();
+    final theme = ThemeData(useMaterial3: true);
     await tester.pumpWidget(
       _buildWidget(
         scaffoldKey,
@@ -202,7 +202,7 @@ void main() {
   });
 
   testWidgets('Navigation drawer is scrollable', (WidgetTester tester) async {
-    final GlobalKey<ScaffoldState> scaffoldKey = GlobalKey<ScaffoldState>();
+    final scaffoldKey = GlobalKey<ScaffoldState>();
     widgetSetup(tester, 500, viewHeight: 300);
     await tester.pumpWidget(
       _buildWidget(
@@ -249,7 +249,7 @@ void main() {
    });
 
   testWidgets('Safe Area test', (WidgetTester tester) async {
-    final GlobalKey<ScaffoldState> scaffoldKey = GlobalKey<ScaffoldState>();
+    final scaffoldKey = GlobalKey<ScaffoldState>();
     const double viewHeight = 300;
     widgetSetup(tester, 500, viewHeight: viewHeight);
     await tester.pumpWidget(
@@ -290,8 +290,8 @@ void main() {
    });
 
   testWidgets('Navigation drawer semantics', (WidgetTester tester) async {
-    final GlobalKey<ScaffoldState> scaffoldKey = GlobalKey<ScaffoldState>();
-    final ThemeData theme = ThemeData();
+    final scaffoldKey = GlobalKey<ScaffoldState>();
+    final theme = ThemeData();
     Widget widget({int selectedIndex = 0}) {
       return _buildWidget(
         scaffoldKey,
@@ -364,9 +364,9 @@ void main() {
   });
 
   testWidgets('Navigation destination updates indicator color and shape', (WidgetTester tester) async {
-    final GlobalKey<ScaffoldState> scaffoldKey = GlobalKey<ScaffoldState>();
-    final ThemeData theme = ThemeData(useMaterial3: true);
-    const Color color = Color(0xff0000ff);
+    final scaffoldKey = GlobalKey<ScaffoldState>();
+    final theme = ThemeData(useMaterial3: true);
+    const color = Color(0xff0000ff);
     const ShapeBorder shape = RoundedRectangleBorder();
 
     Widget buildNavigationDrawer({Color? indicatorColor, ShapeBorder? indicatorShape}) {
@@ -415,7 +415,7 @@ void main() {
   });
 
   testWidgets('NavigationDrawer.tilePadding defaults to EdgeInsets.symmetric(horizontal: 12.0)', (WidgetTester tester) async {
-    final GlobalKey<ScaffoldState> scaffoldKey = GlobalKey<ScaffoldState>();
+    final scaffoldKey = GlobalKey<ScaffoldState>();
     widgetSetup(tester, 3000, viewHeight: 3000);
     final Widget widget = _buildWidget(
       scaffoldKey,
@@ -438,8 +438,8 @@ void main() {
   });
 
   testWidgets('Destinations respect their disabled state', (WidgetTester tester) async {
-    final GlobalKey<ScaffoldState> scaffoldKey = GlobalKey<ScaffoldState>();
-    int selectedIndex = 0;
+    final scaffoldKey = GlobalKey<ScaffoldState>();
+    var selectedIndex = 0;
 
     widgetSetup(tester, 800);
 

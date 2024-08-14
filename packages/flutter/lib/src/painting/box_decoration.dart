@@ -220,7 +220,7 @@ class BoxDecoration extends Decoration {
       case BoxShape.circle:
         final Offset center = rect.center;
         final double radius = rect.shortestSide / 2.0;
-        final Rect square = Rect.fromCircle(center: center, radius: radius);
+        final square = Rect.fromCircle(center: center, radius: radius);
         return Path()..addOval(square);
       case BoxShape.rectangle:
         if (borderRadius != null) {
@@ -403,7 +403,7 @@ class _BoxDecorationPainter extends BoxPainter {
 
     if (_cachedBackgroundPaint == null ||
         (_decoration.gradient != null && _rectForCachedBackgroundPaint != rect)) {
-      final Paint paint = Paint();
+      final paint = Paint();
       if (_decoration.backgroundBlendMode != null) {
         paint.blendMode = _decoration.backgroundBlendMode!;
       }
@@ -478,7 +478,7 @@ class _BoxDecorationPainter extends BoxPainter {
         assert(_decoration.borderRadius == null);
         final Offset center = rect.center;
         final double radius = rect.shortestSide / 2.0;
-        final Rect square = Rect.fromCircle(center: center, radius: radius);
+        final square = Rect.fromCircle(center: center, radius: radius);
         clipPath = Path()..addOval(square);
       case BoxShape.rectangle:
         if (_decoration.borderRadius != null) {

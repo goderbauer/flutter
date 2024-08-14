@@ -571,8 +571,8 @@ class RangeMaintainingScrollPhysics extends ScrollPhysics {
     required bool isScrolling,
     required double velocity,
   }) {
-    bool maintainOverscroll = true;
-    bool enforceBoundary = true;
+    var maintainOverscroll = true;
+    var enforceBoundary = true;
     if (velocity != 0.0) {
       // Don't try to adjust an animating position, the jumping around
       // would be distracting.
@@ -721,7 +721,7 @@ class BouncingScrollPhysics extends ScrollPhysics {
 
   static double _applyFriction(double extentOutside, double absDelta, double gamma) {
     assert(absDelta > 0);
-    double total = 0.0;
+    var total = 0.0;
     if (extentOutside > 0) {
       final double deltaToLimit = extentOutside / gamma;
       if (absDelta < deltaToLimit) {

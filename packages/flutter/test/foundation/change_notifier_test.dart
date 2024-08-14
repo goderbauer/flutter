@@ -62,8 +62,8 @@ class Counter with ChangeNotifier {
 
 void main() {
   testWidgets('ChangeNotifier can not dispose in callback', (WidgetTester tester) async {
-    final TestNotifier test = TestNotifier();
-    bool callbackDidFinish = false;
+    final test = TestNotifier();
+    var callbackDidFinish = false;
     void foo() {
       test.dispose();
       callbackDidFinish = true;
@@ -72,7 +72,7 @@ void main() {
 
     test.notify();
 
-    final AssertionError error = tester.takeException() as AssertionError;
+    final error = tester.takeException() as AssertionError;
     expect(error.toString().contains('dispose()'), isTrue);
     // Make sure it crashes during dispose call.
     expect(callbackDidFinish, isFalse);
@@ -80,7 +80,7 @@ void main() {
   });
 
   testWidgets('ChangeNotifier', (WidgetTester tester) async {
-    final List<String> log = <String>[];
+    final log = <String>[];
     void listener() {
       log.add('listener');
     }
@@ -98,7 +98,7 @@ void main() {
       throw ArgumentError();
     }
 
-    final TestNotifier test = TestNotifier();
+    final test = TestNotifier();
 
     test.addListener(listener);
     test.addListener(listener);
@@ -165,8 +165,8 @@ void main() {
   });
 
   test('ChangeNotifier with mutating listener', () {
-    final TestNotifier test = TestNotifier();
-    final List<String> log = <String>[];
+    final test = TestNotifier();
+    final log = <String>[];
 
     void listener1() {
       log.add('listener1');
@@ -204,8 +204,8 @@ void main() {
   });
 
   test('During notifyListeners, a listener was added and removed immediately', () {
-    final TestNotifier source = TestNotifier();
-    final List<String> log = <String>[];
+    final source = TestNotifier();
+    final log = <String>[];
 
     void listener3() {
       log.add('listener3');
@@ -233,8 +233,8 @@ void main() {
     'If a listener in the middle of the list of listeners removes itself, '
     'notifyListeners still notifies all listeners',
     () {
-      final TestNotifier source = TestNotifier();
-      final List<String> log = <String>[];
+      final source = TestNotifier();
+      final log = <String>[];
 
       void selfRemovingListener() {
         log.add('selfRemovingListener');
@@ -256,8 +256,8 @@ void main() {
   );
 
   test('If the first listener removes itself, notifyListeners still notify all listeners', () {
-    final TestNotifier source = TestNotifier();
-    final List<String> log = <String>[];
+    final source = TestNotifier();
+    final log = <String>[];
 
     void selfRemovingListener() {
       log.add('selfRemovingListener');
@@ -277,12 +277,12 @@ void main() {
   });
 
   test('Merging change notifiers', () {
-    final TestNotifier source1 = TestNotifier();
-    final TestNotifier source2 = TestNotifier();
-    final TestNotifier source3 = TestNotifier();
-    final List<String> log = <String>[];
+    final source1 = TestNotifier();
+    final source2 = TestNotifier();
+    final source3 = TestNotifier();
+    final log = <String>[];
 
-    final Listenable merged = Listenable.merge(<Listenable>[source1, source2]);
+    final merged = Listenable.merge(<Listenable>[source1, source2]);
     void listener1() {
       log.add('listener1');
     }
@@ -315,11 +315,11 @@ void main() {
   });
 
   test('Merging change notifiers supports any iterable', () {
-    final TestNotifier source1 = TestNotifier();
-    final TestNotifier source2 = TestNotifier();
-    final List<String> log = <String>[];
+    final source1 = TestNotifier();
+    final source2 = TestNotifier();
+    final log = <String>[];
 
-    final Listenable merged = Listenable.merge(<Listenable?>{source1, source2});
+    final merged = Listenable.merge(<Listenable?>{source1, source2});
     void listener() => log.add('listener');
 
     merged.addListener(listener);
@@ -330,11 +330,11 @@ void main() {
   });
 
   test('Merging change notifiers ignores null', () {
-    final TestNotifier source1 = TestNotifier();
-    final TestNotifier source2 = TestNotifier();
-    final List<String> log = <String>[];
+    final source1 = TestNotifier();
+    final source2 = TestNotifier();
+    final log = <String>[];
 
-    final Listenable merged =
+    final merged =
         Listenable.merge(<Listenable?>[null, source1, null, source2, null]);
     void listener() {
       log.add('listener');
@@ -348,11 +348,11 @@ void main() {
   });
 
   test('Can remove from merged notifier', () {
-    final TestNotifier source1 = TestNotifier();
-    final TestNotifier source2 = TestNotifier();
-    final List<String> log = <String>[];
+    final source1 = TestNotifier();
+    final source2 = TestNotifier();
+    final log = <String>[];
 
-    final Listenable merged = Listenable.merge(<Listenable>[source1, source2]);
+    final merged = Listenable.merge(<Listenable>[source1, source2]);
     void listener() {
       log.add('listener');
     }
@@ -370,7 +370,7 @@ void main() {
   });
 
   test('Cannot use a disposed ChangeNotifier except for remove listener', () {
-    final TestNotifier source = TestNotifier();
+    final source = TestNotifier();
     source.dispose();
     expect(() {
       source.addListener(() {});
@@ -384,7 +384,7 @@ void main() {
   });
 
   test('Can remove listener on a disposed ChangeNotifier', () {
-    final TestNotifier source = TestNotifier();
+    final source = TestNotifier();
     FlutterError? error;
     try {
       source.dispose();
@@ -396,7 +396,7 @@ void main() {
   });
 
   test('Can check hasListener on a disposed ChangeNotifier', () {
-    final HasListenersTester<int> source = HasListenersTester<int>(0);
+    final source = HasListenersTester<int>(0);
     source.addListener(() { });
     expect(source.testHasListeners, isTrue);
     FlutterError? error;
@@ -410,9 +410,9 @@ void main() {
   });
 
   test('Value notifier', () {
-    final ValueNotifier<double> notifier = ValueNotifier<double>(2.0);
+    final notifier = ValueNotifier<double>(2.0);
 
-    final List<double> log = <double>[];
+    final log = <double>[];
     void listener() {
       log.add(notifier.value);
     }
@@ -428,10 +428,10 @@ void main() {
   });
 
   test('Listenable.merge toString', () {
-    final TestNotifier source1 = TestNotifier();
-    final TestNotifier source2 = TestNotifier();
+    final source1 = TestNotifier();
+    final source2 = TestNotifier();
 
-    Listenable listenableUnderTest = Listenable.merge(<Listenable>[]);
+    var listenableUnderTest = Listenable.merge(<Listenable>[]);
     expect(listenableUnderTest.toString(), 'Listenable.merge([])');
 
     listenableUnderTest = Listenable.merge(<Listenable?>[null]);
@@ -459,11 +459,11 @@ void main() {
   test('Listenable.merge does not leak', () {
     // Regression test for https://github.com/flutter/flutter/issues/25163.
 
-    final TestNotifier source1 = TestNotifier();
-    final TestNotifier source2 = TestNotifier();
+    final source1 = TestNotifier();
+    final source2 = TestNotifier();
     void fakeListener() {}
 
-    final Listenable listenableUnderTest =
+    final listenableUnderTest =
         Listenable.merge(<Listenable>[source1, source2]);
     expect(source1.isListenedTo, isFalse);
     expect(source2.isListenedTo, isFalse);
@@ -477,7 +477,7 @@ void main() {
   });
 
   test('hasListeners', () {
-    final HasListenersTester<bool> notifier = HasListenersTester<bool>(true);
+    final notifier = HasListenersTester<bool>(true);
     expect(notifier.testHasListeners, isFalse);
     void test1() {}
     void test2() {}
@@ -501,8 +501,8 @@ void main() {
 
   test('ChangeNotifier as a mixin', () {
     // We document that this is a valid way to use this class.
-    final B b = B();
-    int notifications = 0;
+    final b = B();
+    var notifications = 0;
     b.addListener(() {
       notifications += 1;
     });
@@ -514,7 +514,7 @@ void main() {
   });
 
   test('Throws FlutterError when disposed and called', () {
-    final TestNotifier testNotifier = TestNotifier();
+    final testNotifier = TestNotifier();
     testNotifier.dispose();
     FlutterError? error;
     try {
@@ -536,7 +536,7 @@ void main() {
   });
 
   test('Calling debugAssertNotDisposed works as intended', () {
-    final TestNotifier testNotifier = TestNotifier();
+    final testNotifier = TestNotifier();
     expect(ChangeNotifier.debugAssertNotDisposed(testNotifier), isTrue);
     testNotifier.dispose();
     FlutterError? error;
@@ -559,8 +559,8 @@ void main() {
   });
 
   test('notifyListener can be called recursively', () {
-    final Counter counter = Counter();
-    final List<String> log = <String>[];
+    final counter = Counter();
+    final log = <String>[];
 
     void listener1() {
       log.add('listener1');
@@ -584,9 +584,9 @@ void main() {
   });
 
   test('Remove Listeners while notifying on a list which will not resize', () {
-    final TestNotifier test = TestNotifier();
-    final List<String> log = <String>[];
-    final List<VoidCallback> listeners = <VoidCallback>[];
+    final test = TestNotifier();
+    final log = <String>[];
+    final listeners = <VoidCallback>[];
 
     void autoRemove() {
       // We remove 4 listeners.
@@ -600,7 +600,7 @@ void main() {
     test.addListener(autoRemove);
 
     // We add 12 more listeners.
-    for (int i = 0; i < 12; i++) {
+    for (var i = 0; i < 12; i++) {
       void listener() {
         log.add('listener$i');
       }
@@ -609,7 +609,7 @@ void main() {
       test.addListener(listener);
     }
 
-    final List<int> remainingListenerIndexes = <int>[
+    final remainingListenerIndexes = <int>[
       0,
       2,
       5,
@@ -632,7 +632,7 @@ void main() {
     expect(log, expectedLog);
 
     // We remove all other listeners.
-    for (int i = 0; i < remainingListenerIndexes.length; i++) {
+    for (var i = 0; i < remainingListenerIndexes.length; i++) {
       test.removeListener(listeners[remainingListenerIndexes[i]]);
     }
 

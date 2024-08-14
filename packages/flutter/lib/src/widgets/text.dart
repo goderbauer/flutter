@@ -899,7 +899,7 @@ class _SelectableTextContainerDelegate extends MultiSelectableSelectionContainer
 
   SelectionResult _handleSelectParagraph(SelectParagraphSelectionEvent event) {
     if (event.absorb) {
-      for (int index = 0; index < selectables.length; index += 1) {
+      for (var index = 0; index < selectables.length; index += 1) {
         dispatchSelectionEventToChild(selectables[index], event);
       }
       currentSelectionStartIndex = 0;
@@ -909,7 +909,7 @@ class _SelectableTextContainerDelegate extends MultiSelectableSelectionContainer
 
     // First pass, if the position is on a placeholder then dispatch the selection
     // event to the [Selectable] at the location and terminate.
-    for (int index = 0; index < selectables.length; index += 1) {
+    for (var index = 0; index < selectables.length; index += 1) {
       final bool selectableIsPlaceholder = !paragraph.selectableBelongsToParagraph(selectables[index]);
       if (selectableIsPlaceholder && selectables[index].boundingBoxes.isNotEmpty) {
         for (final Rect rect in selectables[index].boundingBoxes) {
@@ -923,9 +923,9 @@ class _SelectableTextContainerDelegate extends MultiSelectableSelectionContainer
     }
 
     SelectionResult? lastSelectionResult;
-    bool foundStart = false;
+    var foundStart = false;
     int? lastNextIndex;
-    for (int index = 0; index < selectables.length; index += 1) {
+    for (var index = 0; index < selectables.length; index += 1) {
       if (!paragraph.selectableBelongsToParagraph(selectables[index])) {
         if (foundStart) {
           final SelectionEvent synthesizedEvent = SelectParagraphSelectionEvent(globalPosition: event.globalPosition, absorb: true);
@@ -956,13 +956,13 @@ class _SelectableTextContainerDelegate extends MultiSelectableSelectionContainer
           assert(selectables[index].boundingBoxes.isNotEmpty);
           assert(selectables[index].value.selectionRects.isNotEmpty);
           final bool selectionAtStartOfSelectable = selectables[index].boundingBoxes[0].overlaps(selectables[index].value.selectionRects[0]);
-          int startIndex = 0;
+          var startIndex = 0;
           if (lastNextIndex != null && selectionAtStartOfSelectable) {
             startIndex = lastNextIndex + 1;
           } else {
             startIndex = lastNextIndex == null && selectionAtStartOfSelectable ? 0 : index;
           }
-          for (int i = startIndex; i < index; i += 1) {
+          for (var i = startIndex; i < index; i += 1) {
             final SelectionEvent synthesizedEvent = SelectParagraphSelectionEvent(globalPosition: event.globalPosition, absorb: true);
             dispatchSelectionEventToChild(selectables[i], synthesizedEvent);
           }
@@ -977,7 +977,7 @@ class _SelectableTextContainerDelegate extends MultiSelectableSelectionContainer
       if (selectables[index].value != existingGeometry) {
         if (!foundStart && lastNextIndex == null) {
           currentSelectionStartIndex = 0;
-          for (int i = 0; i < index; i += 1) {
+          for (var i = 0; i < index; i += 1) {
             final SelectionEvent synthesizedEvent = SelectParagraphSelectionEvent(globalPosition: event.globalPosition, absorb: true);
             dispatchSelectionEventToChild(selectables[i], synthesizedEvent);
           }
@@ -1244,7 +1244,7 @@ class _SelectableTextContainerDelegate extends MultiSelectableSelectionContainer
     }
     final int skipStart = min(currentSelectionStartIndex, currentSelectionEndIndex);
     final int skipEnd = max(currentSelectionStartIndex, currentSelectionEndIndex);
-    for (int index = 0; index < selectables.length; index += 1) {
+    for (var index = 0; index < selectables.length; index += 1) {
       if (index >= skipStart && index <= skipEnd) {
         continue;
       }
@@ -1370,7 +1370,7 @@ class _SelectableTextContainerDelegate extends MultiSelectableSelectionContainer
   @override
   void ensureChildUpdated(Selectable selectable) {
     if (_lastEndEdgeUpdateGlobalPosition != null && _hasReceivedEndEvent.add(selectable)) {
-      final SelectionEdgeUpdateEvent synthesizedEvent = SelectionEdgeUpdateEvent.forEnd(
+      final synthesizedEvent = SelectionEdgeUpdateEvent.forEnd(
         globalPosition: _lastEndEdgeUpdateGlobalPosition!,
       );
       if (currentSelectionEndIndex == -1) {
@@ -1379,7 +1379,7 @@ class _SelectableTextContainerDelegate extends MultiSelectableSelectionContainer
       selectable.dispatchSelectionEvent(synthesizedEvent);
     }
     if (_lastStartEdgeUpdateGlobalPosition != null && _hasReceivedStartEvent.add(selectable)) {
-      final SelectionEdgeUpdateEvent synthesizedEvent = SelectionEdgeUpdateEvent.forStart(
+      final synthesizedEvent = SelectionEdgeUpdateEvent.forStart(
           globalPosition: _lastStartEdgeUpdateGlobalPosition!,
       );
       if (currentSelectionStartIndex == -1) {

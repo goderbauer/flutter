@@ -119,7 +119,7 @@ class _SelectableTextSelectionGestureDetectorBuilder extends TextSelectionGestur
       return;
     }
     // Adjust the drag start offset for possible viewport offset changes.
-    final Offset editableOffset = renderEditable.maxLines == 1
+    final editableOffset = renderEditable.maxLines == 1
         ? Offset(renderEditable.offset.pixels - _dragStartViewportOffset, 0.0)
         : Offset(0.0, renderEditable.offset.pixels - _dragStartViewportOffset);
     final Offset scrollableOffset = switch (axisDirectionToAxis(_scrollDirection ?? AxisDirection.left)) {

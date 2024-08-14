@@ -40,7 +40,7 @@ void main() {
   group('SliverFillRemaining', () {
     group('hasScrollBody: true, default', () {
       testWidgets('no siblings', (WidgetTester tester) async {
-        final ScrollController controller = ScrollController();
+        final controller = ScrollController();
         addTearDown(controller.dispose);
         await tester.pumpWidget(
           Directionality(
@@ -81,7 +81,7 @@ void main() {
       });
 
       testWidgets('one sibling', (WidgetTester tester) async {
-        final ScrollController controller = ScrollController();
+        final controller = ScrollController();
         addTearDown(controller.dispose);
         await tester.pumpWidget(
           Directionality(
@@ -123,9 +123,9 @@ void main() {
       });
 
       testWidgets('scrolls beyond viewportMainAxisExtent', (WidgetTester tester) async {
-        final ScrollController controller = ScrollController();
+        final controller = ScrollController();
         addTearDown(controller.dispose);
-        final List<Widget> slivers = <Widget>[
+        final slivers = <Widget>[
           sliverBox,
           SliverFillRemaining(
             child: Container(color: Colors.white),
@@ -269,9 +269,9 @@ void main() {
 
     group('hasScrollBody: false', () {
       testWidgets('does not extend past viewportMainAxisExtent', (WidgetTester tester) async {
-        final ScrollController controller = ScrollController();
+        final controller = ScrollController();
         addTearDown(controller.dispose);
-        final List<Widget> slivers = <Widget>[
+        final slivers = <Widget>[
           sliverBox,
           SliverFillRemaining(
             hasScrollBody: false,
@@ -289,7 +289,7 @@ void main() {
       });
 
       testWidgets('child without size is sized by extent', (WidgetTester tester) async {
-        final List<Widget> slivers = <Widget>[
+        final slivers = <Widget>[
           sliverBox,
           SliverFillRemaining(
             hasScrollBody: false,
@@ -311,7 +311,7 @@ void main() {
 
       testWidgets('child with smaller size is sized by extent', (WidgetTester tester) async {
         final GlobalKey key = GlobalKey();
-        final List<Widget> slivers = <Widget>[
+        final slivers = <Widget>[
           sliverBox,
           SliverFillRemaining(
             hasScrollBody: false,
@@ -351,7 +351,7 @@ void main() {
       });
 
       testWidgets('extent is overridden by child with larger size', (WidgetTester tester) async {
-        final List<Widget> slivers = <Widget>[
+        final slivers = <Widget>[
           sliverBox,
           SliverFillRemaining(
             hasScrollBody: false,
@@ -376,7 +376,7 @@ void main() {
 
       testWidgets('extent is overridden by child size if precedingScrollExtent > viewportMainAxisExtent', (WidgetTester tester) async {
         final GlobalKey key = GlobalKey();
-        final List<Widget> slivers = <Widget>[
+        final slivers = <Widget>[
           SliverFixedExtentList(
             itemExtent: 150,
             delegate: SliverChildBuilderDelegate(
@@ -417,7 +417,7 @@ void main() {
 
       testWidgets('alignment with a flexible works', (WidgetTester tester) async {
         final GlobalKey key = GlobalKey();
-        final List<Widget> slivers = <Widget>[
+        final slivers = <Widget>[
           sliverBox,
           SliverFillRemaining(
             hasScrollBody: false,
@@ -614,7 +614,7 @@ void main() {
 
       group('fillOverscroll: true, relevant platforms', () {
         testWidgets('child without size is sized by extent and overscroll', (WidgetTester tester) async {
-          final List<Widget> slivers = <Widget>[
+          final slivers = <Widget>[
             sliverBox,
             SliverFillRemaining(
               hasScrollBody: false,
@@ -642,7 +642,7 @@ void main() {
 
         testWidgets('child with smaller size is overridden and sized by extent and overscroll', (WidgetTester tester) async {
           final GlobalKey key = GlobalKey();
-          final List<Widget> slivers = <Widget>[
+          final slivers = <Widget>[
             sliverBox,
             SliverFillRemaining(
               hasScrollBody: false,
@@ -689,9 +689,9 @@ void main() {
 
         testWidgets('extent is overridden by child size and overscroll if precedingScrollExtent > viewportMainAxisExtent', (WidgetTester tester) async {
           final GlobalKey key = GlobalKey();
-          final ScrollController controller = ScrollController();
+          final controller = ScrollController();
           addTearDown(controller.dispose);
-          final List<Widget> slivers = <Widget>[
+          final slivers = <Widget>[
             SliverFixedExtentList(
               itemExtent: 150,
               delegate: SliverChildBuilderDelegate(
@@ -754,9 +754,9 @@ void main() {
 
         testWidgets('fillOverscroll works when child has no size and precedingScrollExtent > viewportMainAxisExtent', (WidgetTester tester) async {
           final GlobalKey key = GlobalKey();
-          final ScrollController controller = ScrollController();
+          final controller = ScrollController();
           addTearDown(controller.dispose);
-          final List<Widget> slivers = <Widget>[
+          final slivers = <Widget>[
             SliverFixedExtentList(
               itemExtent: 150,
               delegate: SliverChildBuilderDelegate(
@@ -817,7 +817,7 @@ void main() {
 
         testWidgets('alignment with a flexible works with fillOverscroll', (WidgetTester tester) async {
           final GlobalKey key = GlobalKey();
-          final List<Widget> slivers = <Widget>[
+          final slivers = <Widget>[
             sliverBox,
             SliverFillRemaining(
               hasScrollBody: false,
@@ -1041,7 +1041,7 @@ void main() {
       group('fillOverscroll: true, is ignored on irrelevant platforms', () {
         // Android/Other scroll physics when hasScrollBody: false, ignores fillOverscroll: true
         testWidgets('child without size is sized by extent', (WidgetTester tester) async {
-          final List<Widget> slivers = <Widget>[
+          final slivers = <Widget>[
             sliverBox,
             SliverFillRemaining(
               hasScrollBody: false,
@@ -1061,7 +1061,7 @@ void main() {
 
         testWidgets('child with size is overridden and sized by extent', (WidgetTester tester) async {
           final GlobalKey key = GlobalKey();
-          final List<Widget> slivers = <Widget>[
+          final slivers = <Widget>[
             sliverBox,
             SliverFillRemaining(
               hasScrollBody: false,
@@ -1100,9 +1100,9 @@ void main() {
 
         testWidgets('extent is overridden by child size if precedingScrollExtent > viewportMainAxisExtent', (WidgetTester tester) async {
           final GlobalKey key = GlobalKey();
-          final ScrollController controller = ScrollController();
+          final controller = ScrollController();
           addTearDown(controller.dispose);
-          final List<Widget> slivers = <Widget>[
+          final slivers = <Widget>[
             SliverFixedExtentList(
               itemExtent: 150,
               delegate: SliverChildBuilderDelegate(
@@ -1158,9 +1158,9 @@ void main() {
 
         testWidgets('child has no size and precedingScrollExtent > viewportMainAxisExtent', (WidgetTester tester) async {
           final GlobalKey key = GlobalKey();
-          final ScrollController controller = ScrollController();
+          final controller = ScrollController();
           addTearDown(controller.dispose);
-          final List<Widget> slivers = <Widget>[
+          final slivers = <Widget>[
             SliverFixedExtentList(
               itemExtent: 150,
               delegate: SliverChildBuilderDelegate(

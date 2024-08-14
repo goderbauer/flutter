@@ -24,7 +24,7 @@ Finder _findTooltipContainer(String tooltipText) {
 
 void main() {
   testWidgets('Does tooltip end up in the right place - center', (WidgetTester tester) async {
-    final GlobalKey<TooltipState> tooltipKey = GlobalKey<TooltipState>();
+    final tooltipKey = GlobalKey<TooltipState>();
     late final OverlayEntry entry;
     addTearDown(() => entry..remove()..dispose());
 
@@ -80,7 +80,7 @@ void main() {
   });
 
   testWidgets('Does tooltip end up in the right place - center with padding outside overlay', (WidgetTester tester) async {
-    final GlobalKey<TooltipState> tooltipKey = GlobalKey<TooltipState>();
+    final tooltipKey = GlobalKey<TooltipState>();
     late final OverlayEntry entry;
     addTearDown(() => entry..remove()..dispose());
 
@@ -141,7 +141,7 @@ void main() {
   });
 
   testWidgets('Material2 - Does tooltip end up in the right place - top left', (WidgetTester tester) async {
-    final GlobalKey<TooltipState> tooltipKey = GlobalKey<TooltipState>();
+    final tooltipKey = GlobalKey<TooltipState>();
     late final OverlayEntry entry;
     addTearDown(() => entry..remove()..dispose());
 
@@ -195,7 +195,7 @@ void main() {
   }, skip: kIsWeb && !isSkiaWeb); // https://github.com/flutter/flutter/issues/99933
 
   testWidgets('Material3 - Does tooltip end up in the right place - top left', (WidgetTester tester) async {
-    final GlobalKey<TooltipState> tooltipKey = GlobalKey<TooltipState>();
+    final tooltipKey = GlobalKey<TooltipState>();
     late final OverlayEntry entry;
     addTearDown(() => entry..remove()..dispose());
 
@@ -248,7 +248,7 @@ void main() {
   }, skip: kIsWeb && !isSkiaWeb); // https://github.com/flutter/flutter/issues/99933
 
   testWidgets('Does tooltip end up in the right place - center prefer above fits', (WidgetTester tester) async {
-    final GlobalKey<TooltipState> tooltipKey = GlobalKey<TooltipState>();
+    final tooltipKey = GlobalKey<TooltipState>();
     late final OverlayEntry entry;
     addTearDown(() => entry..remove()..dispose());
 
@@ -303,7 +303,7 @@ void main() {
   });
 
   testWidgets('Does tooltip end up in the right place - center prefer above does not fit', (WidgetTester tester) async {
-    final GlobalKey<TooltipState> tooltipKey = GlobalKey<TooltipState>();
+    final tooltipKey = GlobalKey<TooltipState>();
     late final OverlayEntry entry;
     addTearDown(() => entry..remove()..dispose());
 
@@ -369,7 +369,7 @@ void main() {
   });
 
   testWidgets('Does tooltip end up in the right place - center prefer below fits', (WidgetTester tester) async {
-    final GlobalKey<TooltipState> tooltipKey = GlobalKey<TooltipState>();
+    final tooltipKey = GlobalKey<TooltipState>();
     late final OverlayEntry entry;
     addTearDown(() => entry..remove()..dispose());
 
@@ -423,7 +423,7 @@ void main() {
   });
 
   testWidgets('Material2 - Does tooltip end up in the right place - way off to the right', (WidgetTester tester) async {
-    final GlobalKey<TooltipState> tooltipKey = GlobalKey<TooltipState>();
+    final tooltipKey = GlobalKey<TooltipState>();
     late final OverlayEntry entry;
     addTearDown(() => entry..remove()..dispose());
 
@@ -480,7 +480,7 @@ void main() {
   });
 
   testWidgets('Material3 - Does tooltip end up in the right place - way off to the right', (WidgetTester tester) async {
-    final GlobalKey<TooltipState> tooltipKey = GlobalKey<TooltipState>();
+    final tooltipKey = GlobalKey<TooltipState>();
     late final OverlayEntry entry;
     addTearDown(() => entry..remove()..dispose());
 
@@ -536,7 +536,7 @@ void main() {
   }, skip: kIsWeb && !isSkiaWeb); // https://github.com/flutter/flutter/issues/99933
 
   testWidgets('Material2 - Does tooltip end up in the right place - near the edge', (WidgetTester tester) async {
-    final GlobalKey<TooltipState> tooltipKey = GlobalKey<TooltipState>();
+    final tooltipKey = GlobalKey<TooltipState>();
     late final OverlayEntry entry;
     addTearDown(() => entry..remove()..dispose());
 
@@ -593,7 +593,7 @@ void main() {
   });
 
   testWidgets('Material3 - Does tooltip end up in the right place - near the edge', (WidgetTester tester) async {
-    final GlobalKey<TooltipState> tooltipKey = GlobalKey<TooltipState>();
+    final tooltipKey = GlobalKey<TooltipState>();
     late final OverlayEntry entry;
     addTearDown(() => entry..remove()..dispose());
 
@@ -704,8 +704,8 @@ void main() {
   });
 
   testWidgets('Custom tooltip margin', (WidgetTester tester) async {
-    const double customMarginValue = 10.0;
-    final GlobalKey<TooltipState> tooltipKey = GlobalKey<TooltipState>();
+    const customMarginValue = 10.0;
+    final tooltipKey = GlobalKey<TooltipState>();
     late final OverlayEntry entry;
     addTearDown(() => entry..remove()..dispose());
 
@@ -761,7 +761,7 @@ void main() {
   });
 
   testWidgets('Material2 - Default tooltip message textStyle - light', (WidgetTester tester) async {
-    final GlobalKey<TooltipState> tooltipKey = GlobalKey<TooltipState>();
+    final tooltipKey = GlobalKey<TooltipState>();
     await tester.pumpWidget(MaterialApp(
       theme: ThemeData(useMaterial3: false),
       home: Tooltip(
@@ -785,7 +785,7 @@ void main() {
   });
 
   testWidgets('Material3 - Default tooltip message textStyle - light', (WidgetTester tester) async {
-    final GlobalKey<TooltipState> tooltipKey = GlobalKey<TooltipState>();
+    final tooltipKey = GlobalKey<TooltipState>();
     await tester.pumpWidget(MaterialApp(
       home: Tooltip(
         key: tooltipKey,
@@ -811,7 +811,7 @@ void main() {
   });
 
   testWidgets('Material2 - Default tooltip message textStyle - dark', (WidgetTester tester) async {
-    final GlobalKey<TooltipState> tooltipKey = GlobalKey<TooltipState>();
+    final tooltipKey = GlobalKey<TooltipState>();
     await tester.pumpWidget(MaterialApp(
       theme: ThemeData(
         useMaterial3: false,
@@ -838,7 +838,7 @@ void main() {
   });
 
   testWidgets('Material3 - Default tooltip message textStyle - dark', (WidgetTester tester) async {
-    final GlobalKey<TooltipState> tooltipKey = GlobalKey<TooltipState>();
+    final tooltipKey = GlobalKey<TooltipState>();
     await tester.pumpWidget(MaterialApp(
       theme: ThemeData(brightness: Brightness.dark),
       home: Tooltip(
@@ -862,7 +862,7 @@ void main() {
   });
 
   testWidgets('Custom tooltip message textStyle', (WidgetTester tester) async {
-    final GlobalKey<TooltipState> tooltipKey = GlobalKey<TooltipState>();
+    final tooltipKey = GlobalKey<TooltipState>();
     await tester.pumpWidget(MaterialApp(
       home: Tooltip(
         key: tooltipKey,
@@ -889,7 +889,7 @@ void main() {
 
   testWidgets('Custom tooltip message textAlign', (WidgetTester tester) async {
     Future<void> pumpTooltipWithTextAlign({TextAlign? textAlign}) async {
-      final GlobalKey<TooltipState> tooltipKey = GlobalKey<TooltipState>();
+      final tooltipKey = GlobalKey<TooltipState>();
       await tester.pumpWidget(
         MaterialApp(
           home: Tooltip(
@@ -963,7 +963,7 @@ void main() {
     // A Material widget is needed as an ancestor of the Text widget.
     // It is invalid to have text in a Material application that
     // does not have a Material ancestor.
-    final GlobalKey<TooltipState> tooltipKey = GlobalKey<TooltipState>();
+    final tooltipKey = GlobalKey<TooltipState>();
     await tester.pumpWidget(MaterialApp(
       home: Tooltip(
         key: tooltipKey,
@@ -993,7 +993,7 @@ void main() {
   });
 
   testWidgets('Material2 - Does tooltip end up with the right default size, shape, and color', (WidgetTester tester) async {
-    final GlobalKey<TooltipState> tooltipKey = GlobalKey<TooltipState>();
+    final tooltipKey = GlobalKey<TooltipState>();
     late final OverlayEntry entry;
     addTearDown(() => entry..remove()..dispose());
 
@@ -1031,7 +1031,7 @@ void main() {
   });
 
   testWidgets('Material3 - Does tooltip end up with the right default size, shape, and color', (WidgetTester tester) async {
-    final GlobalKey<TooltipState> tooltipKey = GlobalKey<TooltipState>();
+    final tooltipKey = GlobalKey<TooltipState>();
     late final OverlayEntry entry;
     addTearDown(() => entry..remove()..dispose());
 
@@ -1069,7 +1069,7 @@ void main() {
 
   testWidgets('Material2 - Tooltip default size, shape, and color test for Desktop', (WidgetTester tester) async {
     // Regressing test for https://github.com/flutter/flutter/issues/68601
-    final GlobalKey<TooltipState> tooltipKey = GlobalKey<TooltipState>();
+    final tooltipKey = GlobalKey<TooltipState>();
     await tester.pumpWidget(
       MaterialApp(
         theme: ThemeData(useMaterial3: false),
@@ -1099,7 +1099,7 @@ void main() {
 
   testWidgets('Material3 - Tooltip default size, shape, and color test for Desktop', (WidgetTester tester) async {
     // Regressing test for https://github.com/flutter/flutter/issues/68601
-    final GlobalKey<TooltipState> tooltipKey = GlobalKey<TooltipState>();
+    final tooltipKey = GlobalKey<TooltipState>();
     await tester.pumpWidget(
       MaterialApp(
         home: Tooltip(
@@ -1129,7 +1129,7 @@ void main() {
   );
 
   testWidgets('Material2 - Can tooltip decoration be customized', (WidgetTester tester) async {
-    final GlobalKey<TooltipState> tooltipKey = GlobalKey<TooltipState>();
+    final tooltipKey = GlobalKey<TooltipState>();
     const Decoration customDecoration = ShapeDecoration(
       shape: StadiumBorder(),
       color: Color(0x80800000),
@@ -1168,7 +1168,7 @@ void main() {
   });
 
   testWidgets('Material3 - Can tooltip decoration be customized', (WidgetTester tester) async {
-    final GlobalKey<TooltipState> tooltipKey = GlobalKey<TooltipState>();
+    final tooltipKey = GlobalKey<TooltipState>();
     const Decoration customDecoration = ShapeDecoration(
       shape: StadiumBorder(),
       color: Color(0x80800000),
@@ -1256,8 +1256,8 @@ void main() {
 
   testWidgets('Tooltip dismiss countdown begins on long press release', (WidgetTester tester) async {
     // Specs: https://github.com/flutter/flutter/issues/4182
-    const Duration showDuration = Duration(seconds: 1);
-    const Duration eternity = Duration(days: 9999);
+    const showDuration = Duration(seconds: 1);
+    const eternity = Duration(days: 9999);
     await setWidgetForTooltipMode(tester, TooltipTriggerMode.longPress, showDuration: showDuration);
 
     final Finder tooltip = find.byType(Tooltip);
@@ -1281,7 +1281,7 @@ void main() {
   });
 
   testWidgets('Tooltip is dismissed after a long press and showDuration expired', (WidgetTester tester) async {
-    const Duration showDuration = Duration(seconds: 3);
+    const showDuration = Duration(seconds: 3);
     await setWidgetForTooltipMode(tester, TooltipTriggerMode.longPress, showDuration: showDuration);
 
     final Finder tooltip = find.byType(Tooltip);
@@ -1300,7 +1300,7 @@ void main() {
   });
 
   testWidgets('Tooltip is dismissed after a tap and showDuration expired', (WidgetTester tester) async {
-    const Duration showDuration = Duration(seconds: 3);
+    const showDuration = Duration(seconds: 3);
     await setWidgetForTooltipMode(tester, TooltipTriggerMode.tap, showDuration: showDuration);
 
     final Finder tooltip = find.byType(Tooltip);
@@ -1350,7 +1350,7 @@ void main() {
 
   testWidgets('Tooltip is dismissed after a tap and showDuration expired when competing with a GestureDetector', (WidgetTester tester) async {
     // Regression test for https://github.com/flutter/flutter/issues/98854
-    const Duration showDuration = Duration(seconds: 3);
+    const showDuration = Duration(seconds: 3);
     await tester.pumpWidget(
       MaterialApp(
         home: GestureDetector(
@@ -1699,9 +1699,9 @@ void main() {
   });
 
   testWidgets('Tooltip should not show more than one tooltip when hovered', (WidgetTester tester) async {
-    const Duration waitDuration = Duration(milliseconds: 500);
-    final UniqueKey innerKey = UniqueKey();
-    final UniqueKey outerKey = UniqueKey();
+    const waitDuration = Duration(milliseconds: 500);
+    final innerKey = UniqueKey();
+    final outerKey = UniqueKey();
     await tester.pumpWidget(
       MaterialApp(
         home: Center(
@@ -1850,7 +1850,7 @@ void main() {
 
   testWidgets('Tooltip does not attempt to show after unmount', (WidgetTester tester) async {
     // Regression test for https://github.com/flutter/flutter/issues/54096.
-    const Duration waitDuration = Duration(seconds: 1);
+    const waitDuration = Duration(seconds: 1);
     final TestGesture gesture = await tester.createGesture(kind: PointerDeviceKind.mouse);
     addTearDown(() async {
       return gesture.removePointer();
@@ -1895,8 +1895,8 @@ void main() {
   });
 
   testWidgets('Does tooltip contribute semantics', (WidgetTester tester) async {
-    final SemanticsTester semantics = SemanticsTester(tester);
-    final GlobalKey<TooltipState> tooltipKey = GlobalKey<TooltipState>();
+    final semantics = SemanticsTester(tester);
+    final tooltipKey = GlobalKey<TooltipState>();
     late final OverlayEntry entry;
     addTearDown(() => entry..remove()..dispose());
 
@@ -1927,7 +1927,7 @@ void main() {
       ),
     );
 
-    final TestSemantics expected = TestSemantics.root(
+    final expected = TestSemantics.root(
       children: <TestSemantics>[
         TestSemantics.rootChild(
           id: 1,
@@ -1950,8 +1950,8 @@ void main() {
   });
 
   testWidgets('Tooltip semantics does not merge into child', (WidgetTester tester) async {
-    final SemanticsTester semantics = SemanticsTester(tester);
-    final GlobalKey<TooltipState> tooltipKey = GlobalKey<TooltipState>();
+    final semantics = SemanticsTester(tester);
+    final tooltipKey = GlobalKey<TooltipState>();
     late final OverlayEntry entry;
     addTearDown(() => entry..remove()..dispose());
 
@@ -2112,9 +2112,9 @@ void main() {
   }, skip: kIsWeb && !isSkiaWeb); // https://github.com/flutter/flutter/issues/99933
 
   testWidgets('Tooltip text displays with richMessage', (WidgetTester tester) async {
-    final GlobalKey<TooltipState> tooltipKey = GlobalKey<TooltipState>();
-    const String textSpan1Text = 'I am a rich tooltip message. ';
-    const String textSpan2Text = 'I am another span of a rich tooltip message';
+    final tooltipKey = GlobalKey<TooltipState>();
+    const textSpan1Text = 'I am a rich tooltip message. ';
+    const textSpan2Text = 'I am another span of a rich tooltip message';
     await tester.pumpWidget(
       MaterialApp(
         home: Tooltip(
@@ -2169,7 +2169,7 @@ void main() {
   });
 
   testWidgets('Haptic feedback', (WidgetTester tester) async {
-    final FeedbackTester feedback = FeedbackTester();
+    final feedback = FeedbackTester();
     await tester.pumpWidget(
       MaterialApp(
         home: Center(
@@ -2193,7 +2193,7 @@ void main() {
   });
 
   testWidgets('Semantics included', (WidgetTester tester) async {
-    final SemanticsTester semantics = SemanticsTester(tester);
+    final semantics = SemanticsTester(tester);
 
     await tester.pumpWidget(
       const MaterialApp(
@@ -2233,7 +2233,7 @@ void main() {
   });
 
   testWidgets('Semantics excluded', (WidgetTester tester) async {
-    final SemanticsTester semantics = SemanticsTester(tester);
+    final semantics = SemanticsTester(tester);
 
     await tester.pumpWidget(
       const MaterialApp(
@@ -2273,11 +2273,11 @@ void main() {
   });
 
   testWidgets('has semantic events', (WidgetTester tester) async {
-    final List<dynamic> semanticEvents = <dynamic>[];
+    final semanticEvents = <dynamic>[];
     tester.binding.defaultBinaryMessenger.setMockDecodedMessageHandler<dynamic>(SystemChannels.accessibility, (dynamic message) async {
       semanticEvents.add(message);
     });
-    final SemanticsTester semantics = SemanticsTester(tester);
+    final semantics = SemanticsTester(tester);
 
     await tester.pumpWidget(
       MaterialApp(
@@ -2314,7 +2314,7 @@ void main() {
     tester.binding.defaultBinaryMessenger.setMockDecodedMessageHandler<dynamic>(SystemChannels.accessibility, null);
   });
   testWidgets('default Tooltip debugFillProperties', (WidgetTester tester) async {
-    final DiagnosticPropertiesBuilder builder = DiagnosticPropertiesBuilder();
+    final builder = DiagnosticPropertiesBuilder();
 
     const Tooltip(message: 'message').debugFillProperties(builder);
 
@@ -2327,7 +2327,7 @@ void main() {
     ]);
   });
   testWidgets('default Tooltip debugFillProperties with richMessage', (WidgetTester tester) async {
-    final DiagnosticPropertiesBuilder builder = DiagnosticPropertiesBuilder();
+    final builder = DiagnosticPropertiesBuilder();
 
     const Tooltip(
       richMessage: TextSpan(
@@ -2349,7 +2349,7 @@ void main() {
     ]);
   });
   testWidgets('Tooltip implements debugFillProperties', (WidgetTester tester) async {
-    final DiagnosticPropertiesBuilder builder = DiagnosticPropertiesBuilder();
+    final builder = DiagnosticPropertiesBuilder();
 
     // Not checking controller, inputFormatters, focusNode
     const Tooltip(
@@ -2434,7 +2434,7 @@ void main() {
   });
 
   testWidgets('Tooltip onTriggered is called when Tooltip triggers', (WidgetTester tester) async {
-    bool onTriggeredCalled = false;
+    var onTriggeredCalled = false;
     void onTriggered() => onTriggeredCalled = true;
 
     await setWidgetForTooltipMode(tester, TooltipTriggerMode.longPress, onTriggered: onTriggered);
@@ -2450,7 +2450,7 @@ void main() {
   });
 
   testWidgets('Tooltip onTriggered is not called when Tooltip is hovered', (WidgetTester tester) async {
-    bool onTriggeredCalled = false;
+    var onTriggeredCalled = false;
     void onTriggered() => onTriggeredCalled = true;
 
     const Duration waitDuration = Duration.zero;
@@ -2569,7 +2569,7 @@ void main() {
 
   testWidgets('Hovered tooltips with showDuration set do dismiss when hovering elsewhere', (WidgetTester tester) async {
     const Duration waitDuration = Duration.zero;
-    const Duration showDuration = Duration(seconds: 1);
+    const showDuration = Duration(seconds: 1);
 
     await tester.pumpWidget(
       const MaterialApp(
@@ -2631,7 +2631,7 @@ void main() {
   });
 
   testWidgets('Hovered tooltips hide after stopping the hover and exitDuration expires', (WidgetTester tester) async {
-    const Duration exitDuration = Duration(seconds: 1);
+    const exitDuration = Duration(seconds: 1);
     await tester.pumpWidget(
       const MaterialApp(
         home: Center(
@@ -2720,7 +2720,7 @@ void main() {
   });
 
   testWidgets('Tooltip does not block other mouse regions', (WidgetTester tester) async {
-    bool entered = false;
+    var entered = false;
 
     await tester.pumpWidget(
       MaterialApp(
@@ -2746,7 +2746,7 @@ void main() {
 
   testWidgets('Does not rebuild on mouse connect/disconnect', (WidgetTester tester) async {
     // Regression test for https://github.com/flutter/flutter/issues/117627
-    int buildCount = 0;
+    var buildCount = 0;
     await tester.pumpWidget(
       MaterialApp(
         home: Tooltip(
@@ -2770,8 +2770,8 @@ void main() {
   });
 
   testWidgets('Tooltip should not ignore users tap on richMessage', (WidgetTester tester) async {
-    bool isTapped = false;
-    final TapGestureRecognizer recognizer = TapGestureRecognizer();
+    var isTapped = false;
+    final recognizer = TapGestureRecognizer();
     addTearDown(recognizer.dispose);
 
     await tester.pumpWidget(
@@ -2977,7 +2977,7 @@ void main() {
       ),
     );
     final TooltipState tooltipState = tester.state(find.byType(Tooltip));
-    final Element element = tooltipState.context as Element;
+    final element = tooltipState.context as Element;
     // The Tooltip widget itself is almost stateless thus doesn't need
     // rebuilding.
     expect(element.dirty, isFalse);
@@ -3044,7 +3044,7 @@ void main() {
   });
 
   testWidgets('Tooltip is not selectable', (WidgetTester tester) async {
-    const String tooltipText = 'AAAAAAAAAAAAAAAAAAAAAAA';
+    const tooltipText = 'AAAAAAAAAAAAAAAAAAAAAAA';
     String? selectedText;
     await tester.pumpWidget(
       MaterialApp(

@@ -303,7 +303,7 @@ class DefaultPlatformMenuDelegate extends PlatformMenuDelegate {
   @override
   void setMenus(List<PlatformMenuItem> topLevelMenus) {
     _idMap.clear();
-    final List<Map<String, Object?>> representation = <Map<String, Object?>>[];
+    final representation = <Map<String, Object?>>[];
     if (topLevelMenus.isNotEmpty) {
       for (final PlatformMenuItem childItem in topLevelMenus) {
         representation.addAll(childItem.toChannelRepresentation(this, getId: _getId));
@@ -311,7 +311,7 @@ class DefaultPlatformMenuDelegate extends PlatformMenuDelegate {
     }
     // Currently there's only ever one window, but the channel's format allows
     // more than one window's menu hierarchy to be defined.
-    final Map<String, Object?> windowMenu = <String, Object?>{
+    final windowMenu = <String, Object?>{
       '0': representation,
     };
     channel.invokeMethod<void>(_kMenuSetMethod, windowMenu);
@@ -364,7 +364,7 @@ class DefaultPlatformMenuDelegate extends PlatformMenuDelegate {
   // Handles the method calls from the plugin to forward to selection and
   // open/close callbacks.
   Future<void> _methodCallHandler(MethodCall call) async {
-    final int id = call.arguments as int;
+    final id = call.arguments as int;
     assert(
       _idMap.containsKey(id),
       'Received a menu ${call.method} for a menu item with an ID that was not recognized: $id',
@@ -493,7 +493,7 @@ class _PlatformMenuBarState extends State<PlatformMenuBar> {
   @override
   void didUpdateWidget(PlatformMenuBar oldWidget) {
     super.didUpdateWidget(oldWidget);
-    final List<PlatformMenuItem> newDescendants = <PlatformMenuItem>[
+    final newDescendants = <PlatformMenuItem>[
       for (final PlatformMenuItem item in widget.menus) ...<PlatformMenuItem>[
         item,
         ...item.descendants,
@@ -582,7 +582,7 @@ class PlatformMenu extends PlatformMenuItem with DiagnosticableTreeMixin {
     PlatformMenuDelegate delegate,
     MenuItemSerializableIdGenerator getId,
   ) {
-    final List<Map<String, Object?>> result = <Map<String, Object?>>[];
+    final result = <Map<String, Object?>>[];
     for (final PlatformMenuItem childItem in item.menus) {
       result.addAll(childItem.toChannelRepresentation(
         delegate,

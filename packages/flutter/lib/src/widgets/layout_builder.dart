@@ -145,7 +145,7 @@ class _LayoutBuilderElement<ConstraintType extends Constraints> extends RenderOb
   @override
   void update(ConstrainedLayoutBuilder<ConstraintType> newWidget) {
     assert(widget != newWidget);
-    final ConstrainedLayoutBuilder<ConstraintType> oldWidget = widget as ConstrainedLayoutBuilder<ConstraintType>;
+    final oldWidget = widget as ConstrainedLayoutBuilder<ConstraintType>;
     super.update(newWidget);
     assert(widget == newWidget);
 
@@ -420,7 +420,7 @@ FlutterErrorDetails _reportException(
   StackTrace stack, {
   InformationCollector? informationCollector,
 }) {
-  final FlutterErrorDetails details = FlutterErrorDetails(
+  final details = FlutterErrorDetails(
     exception: exception,
     stack: stack,
     library: 'widgets library',

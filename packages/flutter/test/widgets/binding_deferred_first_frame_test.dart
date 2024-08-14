@@ -16,7 +16,7 @@ void main() {
   testWidgets('deferFirstFrame/allowFirstFrame stops sending frames to engine', (WidgetTester tester) async {
     expect(RendererBinding.instance.sendFramesToEngine, isTrue);
 
-    final Completer<void> completer = Completer<void>();
+    final completer = Completer<void>();
     await tester.pumpWidget(
       Directionality(
         textDirection: TextDirection.ltr,
@@ -53,8 +53,8 @@ void main() {
   testWidgets('Two widgets can defer frames', (WidgetTester tester) async {
     expect(RendererBinding.instance.sendFramesToEngine, isTrue);
 
-    final Completer<void> completer1 = Completer<void>();
-    final Completer<void> completer2 = Completer<void>();
+    final completer1 = Completer<void>();
+    final completer2 = Completer<void>();
     await tester.pumpWidget(
       Directionality(
         textDirection: TextDirection.ltr,

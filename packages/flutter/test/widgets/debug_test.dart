@@ -10,8 +10,8 @@ import 'package:flutter_test/flutter_test.dart';
 
 void main() {
   test('debugChildrenHaveDuplicateKeys control test', () {
-    const Key key = Key('key');
-    final List<Widget> children = <Widget>[
+    const key = Key('key');
+    final children = <Widget>[
       Container(key: key),
       Container(key: key),
     ];
@@ -42,8 +42,8 @@ void main() {
   });
 
   test('debugItemsHaveDuplicateKeys control test', () {
-    const Key key = Key('key');
-    final List<Widget> items = <Widget>[
+    const key = Key('key');
+    final items = <Widget>[
       Container(key: key),
       Container(key: key),
     ];

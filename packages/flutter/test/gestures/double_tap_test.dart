@@ -27,9 +27,9 @@ void main() {
   TestWidgetsFlutterBinding.ensureInitialized();
 
   late DoubleTapGestureRecognizer tap;
-  bool doubleTapRecognized = false;
+  var doubleTapRecognized = false;
   TapDownDetails? doubleTapDownDetails;
-  bool doubleTapCanceled = false;
+  var doubleTapCanceled = false;
 
   setUp(() {
     tap = DoubleTapGestureRecognizer();
@@ -59,73 +59,73 @@ void main() {
   });
 
   // Down/up pair 1: normal tap sequence
-  const PointerDownEvent down1 = PointerDownEvent(
+  const down1 = PointerDownEvent(
     pointer: 1,
     position: Offset(10.0, 10.0),
   );
 
-  const PointerUpEvent up1 = PointerUpEvent(
+  const up1 = PointerUpEvent(
     pointer: 1,
     position: Offset(11.0, 9.0),
   );
 
   // Down/up pair 2: normal tap sequence close to pair 1
-  const PointerDownEvent down2 = PointerDownEvent(
+  const down2 = PointerDownEvent(
     pointer: 2,
     position: Offset(12.0, 12.0),
   );
 
-  const PointerUpEvent up2 = PointerUpEvent(
+  const up2 = PointerUpEvent(
     pointer: 2,
     position: Offset(13.0, 11.0),
   );
 
   // Down/up pair 3: normal tap sequence far away from pair 1
-  const PointerDownEvent down3 = PointerDownEvent(
+  const down3 = PointerDownEvent(
     pointer: 3,
     position: Offset(130.0, 130.0),
   );
 
-  const PointerUpEvent up3 = PointerUpEvent(
+  const up3 = PointerUpEvent(
     pointer: 3,
     position: Offset(131.0, 129.0),
   );
 
   // Down/move/up sequence 4: intervening motion
-  const PointerDownEvent down4 = PointerDownEvent(
+  const down4 = PointerDownEvent(
     pointer: 4,
     position: Offset(10.0, 10.0),
   );
 
-  const PointerMoveEvent move4 = PointerMoveEvent(
+  const move4 = PointerMoveEvent(
     pointer: 4,
     position: Offset(25.0, 25.0),
   );
 
-  const PointerUpEvent up4 = PointerUpEvent(
+  const up4 = PointerUpEvent(
     pointer: 4,
     position: Offset(25.0, 25.0),
   );
 
   // Down/up pair 5: normal tap sequence identical to pair 1
-  const PointerDownEvent down5 = PointerDownEvent(
+  const down5 = PointerDownEvent(
     pointer: 5,
     position: Offset(10.0, 10.0),
   );
 
-  const PointerUpEvent up5 = PointerUpEvent(
+  const up5 = PointerUpEvent(
     pointer: 5,
     position: Offset(11.0, 9.0),
   );
 
   // Down/up pair 6: normal tap sequence close to pair 1 but on secondary button
-  const PointerDownEvent down6 = PointerDownEvent(
+  const down6 = PointerDownEvent(
     pointer: 6,
     position: Offset(10.0, 10.0),
     buttons: kSecondaryMouseButton,
   );
 
-  const PointerUpEvent up6 = PointerUpEvent(
+  const up6 = PointerUpEvent(
     pointer: 6,
     position: Offset(11.0, 9.0),
   );
@@ -154,7 +154,7 @@ void main() {
   });
 
   testGesture('Should recognize double tap with secondaryButton', (GestureTester tester) {
-    final DoubleTapGestureRecognizer tapSecondary = DoubleTapGestureRecognizer(
+    final tapSecondary = DoubleTapGestureRecognizer(
       allowedButtonsFilter: (int buttons) => buttons == kSecondaryButton,
     );
     addTearDown(tapSecondary.dispose);
@@ -169,13 +169,13 @@ void main() {
     };
 
     // Down/up pair 7: normal tap sequence close to pair 6
-    const PointerDownEvent down7 = PointerDownEvent(
+    const down7 = PointerDownEvent(
       pointer: 7,
       position: Offset(10.0, 10.0),
       buttons: kSecondaryMouseButton,
     );
 
-    const PointerUpEvent up7 = PointerUpEvent(
+    const up7 = PointerUpEvent(
       pointer: 7,
       position: Offset(11.0, 9.0),
     );
@@ -365,7 +365,7 @@ void main() {
 
   testGesture('Should cancel on arena reject during first tap', (GestureTester tester) {
     tap.addPointer(down1);
-    final TestGestureArenaMember member = TestGestureArenaMember();
+    final member = TestGestureArenaMember();
     final GestureArenaEntry entry = GestureBinding.instance.gestureArena.add(1, member);
     tester.closeArena(1);
     tester.route(down1);
@@ -388,7 +388,7 @@ void main() {
 
   testGesture('Should cancel on arena reject between taps', (GestureTester tester) {
     tap.addPointer(down1);
-    final TestGestureArenaMember member = TestGestureArenaMember();
+    final member = TestGestureArenaMember();
     final GestureArenaEntry entry = GestureBinding.instance.gestureArena.add(1, member);
     tester.closeArena(1);
     tester.route(down1);
@@ -411,7 +411,7 @@ void main() {
 
   testGesture('Should cancel on arena reject during last tap', (GestureTester tester) {
     tap.addPointer(down1);
-    final TestGestureArenaMember member = TestGestureArenaMember();
+    final member = TestGestureArenaMember();
     final GestureArenaEntry entry = GestureBinding.instance.gestureArena.add(1, member);
     tester.closeArena(1);
     tester.route(down1);
@@ -440,7 +440,7 @@ void main() {
   testGesture('Passive gesture should trigger on double tap cancel', (GestureTester tester) {
     FakeAsync().run((FakeAsync async) {
       tap.addPointer(down1);
-      final TestGestureArenaMember member = TestGestureArenaMember();
+      final member = TestGestureArenaMember();
       GestureBinding.instance.gestureArena.add(1, member);
       tester.closeArena(1);
       tester.route(down1);
@@ -511,7 +511,7 @@ void main() {
       // Down1 -> down6 (different button from 1) -> down2 (same button as 1)
       // Down1 and down2 could've been a double tap, but is interrupted by down 6.
 
-      const Duration interval = Duration(milliseconds: 100);
+      const interval = Duration(milliseconds: 100);
       assert(interval * 2 < kDoubleTapTimeout);
       assert(interval > kDoubleTapMinTime);
 
@@ -544,7 +544,7 @@ void main() {
     });
 
     testGesture('Button change with allowedButtonsFilter should interrupt existing sequence', (GestureTester tester) {
-      final DoubleTapGestureRecognizer tapPrimary = DoubleTapGestureRecognizer(
+      final tapPrimary = DoubleTapGestureRecognizer(
         allowedButtonsFilter: (int buttons) => buttons == kPrimaryButton,
       );
       addTearDown(tapPrimary.dispose);
@@ -562,7 +562,7 @@ void main() {
       // Down1 and down2 could've been a double tap, but is interrupted by down 6.
       // Down6 gets ignored because it's not a primary button. Regardless, the state
       // is reset.
-      const Duration interval = Duration(milliseconds: 100);
+      const interval = Duration(milliseconds: 100);
       assert(interval * 2 < kDoubleTapTimeout);
       assert(interval > kDoubleTapMinTime);
 
@@ -597,7 +597,7 @@ void main() {
     testGesture('Button change should start a valid sequence', (GestureTester tester) {
       // Down6 -> down1 (different button from 6) -> down2 (same button as 1)
 
-      const Duration interval = Duration(milliseconds: 100);
+      const interval = Duration(milliseconds: 100);
       assert(interval * 2 < kDoubleTapTimeout);
       assert(interval > kDoubleTapMinTime);
 
@@ -641,7 +641,7 @@ void main() {
     // The following tests make sure that double tap recognizers do not form
     // competition with a tap gesture recognizer listening on a different button.
 
-    final List<String> recognized = <String>[];
+    final recognized = <String>[];
     late TapGestureRecognizer tapPrimary;
     late TapGestureRecognizer tapSecondary;
     late DoubleTapGestureRecognizer doubleTap;
@@ -693,21 +693,21 @@ void main() {
   });
 
   testGesture('A secondary double tap should not trigger primary', (GestureTester tester) {
-    final List<String> recognized = <String>[];
-    final DoubleTapGestureRecognizer doubleTap = DoubleTapGestureRecognizer()
+    final recognized = <String>[];
+    final doubleTap = DoubleTapGestureRecognizer()
       ..onDoubleTap = () {
         recognized.add('primary');
       };
     addTearDown(doubleTap.dispose);
 
     // Down/up pair 7: normal tap sequence close to pair 6
-    const PointerDownEvent down7 = PointerDownEvent(
+    const down7 = PointerDownEvent(
       pointer: 7,
       position: Offset(10.0, 10.0),
       buttons: kSecondaryMouseButton,
     );
 
-    const PointerUpEvent up7 = PointerUpEvent(
+    const up7 = PointerUpEvent(
       pointer: 7,
       position: Offset(11.0, 9.0),
     );
@@ -730,8 +730,8 @@ void main() {
   });
 
   testGesture('Buttons filter should cancel invalid taps', (GestureTester tester) {
-    final List<String> recognized = <String>[];
-    final DoubleTapGestureRecognizer doubleTap = DoubleTapGestureRecognizer(
+    final recognized = <String>[];
+    final doubleTap = DoubleTapGestureRecognizer(
       allowedButtonsFilter: (int buttons) => false,
     )
       ..onDoubleTap = () {
@@ -740,12 +740,12 @@ void main() {
     addTearDown(doubleTap.dispose);
 
     // Down/up pair 7: normal tap sequence close to pair 6
-    const PointerDownEvent down7 = PointerDownEvent(
+    const down7 = PointerDownEvent(
       pointer: 7,
       position: Offset(10.0, 10.0),
     );
 
-    const PointerUpEvent up7 = PointerUpEvent(
+    const up7 = PointerUpEvent(
       pointer: 7,
       position: Offset(11.0, 9.0),
     );
@@ -770,11 +770,11 @@ void main() {
 
   // Regression test for https://github.com/flutter/flutter/issues/73667
   testGesture('Unfinished DoubleTap does not prevent competing Tap', (GestureTester tester) {
-    int tapCount = 0;
-    final DoubleTapGestureRecognizer doubleTap = DoubleTapGestureRecognizer()
+    var tapCount = 0;
+    final doubleTap = DoubleTapGestureRecognizer()
       ..onDoubleTap = () {};
     addTearDown(doubleTap.dispose);
-    final TapGestureRecognizer tap = TapGestureRecognizer()
+    final tap = TapGestureRecognizer()
       ..onTap = () => tapCount++;
     addTearDown(tap.dispose);
 
@@ -791,7 +791,7 @@ void main() {
     tap.addPointer(down2);
     tester.closeArena(2);
     tester.route(down2);
-    final PointerMoveEvent move2 = PointerMoveEvent(pointer: 2, position: down2.position);
+    final move2 = PointerMoveEvent(pointer: 2, position: down2.position);
     tester.route(move2);
     tester.route(up2);
     expect(tapCount, 1); // The second tap will win immediately.

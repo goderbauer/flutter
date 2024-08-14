@@ -291,7 +291,7 @@ void main() {
 
   group('Date picker', () {
     testWidgets('initial date is set to default value', (WidgetTester tester) async {
-      final CupertinoDatePicker picker = CupertinoDatePicker(
+      final picker = CupertinoDatePicker(
         onDateTimeChanged: (_) { },
       );
       expect(picker.initialDateTime, isNotNull);
@@ -690,8 +690,8 @@ void main() {
         initialDateTime: DateTime(2018, 1, 1, 10, 30),
       );
 
-      const String centerMonth = 'January';
-      const List<String> visibleMonthsExceptTheCenter = <String>[
+      const centerMonth = 'January';
+      const visibleMonthsExceptTheCenter = <String>[
         'September',
         'October',
         'November',
@@ -717,7 +717,7 @@ void main() {
       );
 
       // The wheel does not bend outwards.
-      for (final String month in visibleMonthsExceptTheCenter) {
+      for (final month in visibleMonthsExceptTheCenter) {
         expect(
           tester.getBottomLeft(find.text(centerMonth)).dx,
           lessThan(tester.getBottomLeft(find.text(month)).dx),
@@ -739,7 +739,7 @@ void main() {
       );
 
       // The wheel does not bend outwards at large widths.
-      for (final String month in visibleMonthsExceptTheCenter) {
+      for (final month in visibleMonthsExceptTheCenter) {
         expect(
           tester.getBottomLeft(find.text(centerMonth)).dx,
           lessThan(tester.getBottomLeft(find.text(month)).dx),
@@ -751,7 +751,7 @@ void main() {
       'non-selectable dates are greyed out, '
       'when minimum date is unconstrained',
       (WidgetTester tester) async {
-        final DateTime maximum = DateTime(2018, 6, 15);
+        final maximum = DateTime(2018, 6, 15);
         await tester.pumpWidget(
           CupertinoApp(
             home: Center(
@@ -793,7 +793,7 @@ void main() {
       'non-selectable dates are greyed out, '
       'when maximum date is unconstrained',
       (WidgetTester tester) async {
-        final DateTime minimum = DateTime(2018, 6, 15);
+        final minimum = DateTime(2018, 6, 15);
         await tester.pumpWidget(
           CupertinoApp(
             home: Center(
@@ -835,8 +835,8 @@ void main() {
       'non-selectable dates are greyed out, '
       'months should be taken into account when greying out days',
       (WidgetTester tester) async {
-        final DateTime minimum = DateTime(2018, 5, 15);
-        final DateTime maximum = DateTime(2018, 7, 15);
+        final minimum = DateTime(2018, 5, 15);
+        final maximum = DateTime(2018, 7, 15);
         await tester.pumpWidget(
           CupertinoApp(
             home: Center(
@@ -871,8 +871,8 @@ void main() {
       'non-selectable dates are greyed out, '
       'years should be taken into account when greying out days',
       (WidgetTester tester) async {
-        final DateTime minimum = DateTime(2017, 6, 15);
-        final DateTime maximum = DateTime(2019, 6, 15);
+        final minimum = DateTime(2017, 6, 15);
+        final maximum = DateTime(2019, 6, 15);
         await tester.pumpWidget(
           CupertinoApp(
             home: Center(
@@ -950,8 +950,8 @@ void main() {
       (WidgetTester tester) async {
         late DateTime date;
         // 2016 is a leap year.
-        final DateTime minimum = DateTime(2016, 2, 29);
-        final DateTime maximum = DateTime(2018, 12, 31);
+        final minimum = DateTime(2016, 2, 29);
+        final maximum = DateTime(2018, 12, 31);
         await tester.pumpWidget(
           CupertinoApp(
             home: Center(
@@ -1017,8 +1017,8 @@ void main() {
       "and onDateTimeChanged doesn't report these dates",
       (WidgetTester tester) async {
         late DateTime date;
-        final DateTime minimum = DateTime(2019, 11, 11, 3, 30);
-        final DateTime maximum = DateTime(2019, 11, 11, 14, 59, 59);
+        final minimum = DateTime(2019, 11, 11, 3, 30);
+        final maximum = DateTime(2019, 11, 11, 14, 59, 59);
         await tester.pumpWidget(
           CupertinoApp(
             home: Center(
@@ -1094,8 +1094,8 @@ void main() {
       "and onDateTimeChanged doesn't report these dates",
       (WidgetTester tester) async {
         late DateTime date;
-        final DateTime minimum = DateTime(2019, 11, 11, 3, 30);
-        final DateTime maximum = DateTime(2019, 11, 11, 14, 59, 59);
+        final minimum = DateTime(2019, 11, 11, 3, 30);
+        final maximum = DateTime(2019, 11, 11, 14, 59, 59);
         await tester.pumpWidget(
           CupertinoApp(
             home: Center(
@@ -1172,8 +1172,8 @@ void main() {
       "and onDateTimeChanged doesn't report these dates",
       (WidgetTester tester) async {
         late DateTime date;
-        final DateTime minimum = DateTime(2016, 2);
-        final DateTime maximum = DateTime(2018, 12);
+        final minimum = DateTime(2016, 2);
+        final maximum = DateTime(2018, 12);
         await tester.pumpWidget(
           CupertinoApp(
             home: Center(
@@ -1285,7 +1285,7 @@ void main() {
       (WidgetTester tester) async {
         // Regression test for https://github.com/flutter/flutter/issues/49606.
         late DateTime date;
-        final DateTime minDate = DateTime(2020, 1, 1, 12);
+        final minDate = DateTime(2020, 1, 1, 12);
         await tester.pumpWidget(
           CupertinoApp(
             home: Center(
@@ -1315,7 +1315,7 @@ void main() {
 
     testWidgets('date picker does not display previous day of minimumDate if it is set at midnight', (WidgetTester tester) async {
       // Regression test for https://github.com/flutter/flutter/issues/72932
-      final DateTime minDate = DateTime(2019, 12, 31);
+      final minDate = DateTime(2019, 12, 31);
       await tester.pumpWidget(
         CupertinoApp(
           home: Center(
@@ -1492,7 +1492,7 @@ void main() {
         ),
       );
 
-      const Offset deltaOffset = Offset(0.0, -18.0);
+      const deltaOffset = Offset(0.0, -18.0);
 
       // 11:59 -> 12:59
       await tester.drag(find.text('11'), _kRowOffset, warnIfMissed: false); // see top of file
@@ -1792,7 +1792,7 @@ void main() {
   });
 
   testWidgets('TimerPicker has intrinsic width and height', (WidgetTester tester) async {
-    const Key key = Key('key');
+    const key = Key('key');
 
     await tester.pumpWidget(
       CupertinoApp(
@@ -1843,7 +1843,7 @@ void main() {
     void onSelectedItemChanged(int index) {
       lastSelectedItem = index;
     }
-    final FixedExtentScrollController scrollController1 = FixedExtentScrollController();
+    final scrollController1 = FixedExtentScrollController();
     addTearDown(scrollController1.dispose);
     await tester.pumpWidget(_buildPicker(
       controller: scrollController1,
@@ -1862,7 +1862,7 @@ void main() {
     await tester.pumpAndSettle();
     expect(lastSelectedItem, 2);
 
-    final FixedExtentScrollController scrollController2 = FixedExtentScrollController();
+    final scrollController2 = FixedExtentScrollController();
     addTearDown(scrollController2.dispose);
     await tester.pumpWidget(_buildPicker(
       controller: scrollController2,
@@ -1963,7 +1963,7 @@ void main() {
   testWidgets('picker semantics action test', (WidgetTester tester) async {
     final SemanticsHandle handle = tester.ensureSemantics();
     debugResetSemanticsIdCounter();
-    final DateTime initialDate = DateTime(2018, 6, 8);
+    final initialDate = DateTime(2018, 6, 8);
     late DateTime? date;
     await tester.pumpWidget(
       CupertinoApp(
@@ -2046,9 +2046,9 @@ void main() {
 
   testWidgets('TimerPicker minDate - maxDate with minuteInterval', (WidgetTester tester) async {
     late DateTime date;
-    final DateTime minimum = DateTime(2022, 6, 14, 3, 31);
-    final DateTime initial = DateTime(2022, 6, 14, 3, 40);
-    final DateTime maximum = DateTime(2022, 6, 14, 3, 49);
+    final minimum = DateTime(2022, 6, 14, 3, 31);
+    final initial = DateTime(2022, 6, 14, 3, 40);
+    final maximum = DateTime(2022, 6, 14, 3, 49);
     await tester.pumpWidget(
       CupertinoApp(
         home: Center(

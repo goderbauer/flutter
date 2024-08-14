@@ -23,7 +23,7 @@ void main() {
     }
 
     // Create a ActionIconThemeData with all properties set.
-    final ActionIconThemeData original = ActionIconThemeData(
+    final original = ActionIconThemeData(
       backButtonIconBuilder: originalButtonBuilder,
       closeButtonIconBuilder: originalButtonBuilder,
       drawerButtonIconBuilder: originalButtonBuilder,
@@ -50,7 +50,7 @@ void main() {
   });
 
   test('ActionIconThemeData defaults', () {
-    const ActionIconThemeData themeData = ActionIconThemeData();
+    const themeData = ActionIconThemeData();
     expect(themeData.backButtonIconBuilder, null);
     expect(themeData.closeButtonIconBuilder, null);
     expect(themeData.drawerButtonIconBuilder, null);
@@ -59,7 +59,7 @@ void main() {
 
   testWidgets('Default ActionIconThemeData debugFillProperties',
       (WidgetTester tester) async {
-    final DiagnosticPropertiesBuilder builder = DiagnosticPropertiesBuilder();
+    final builder = DiagnosticPropertiesBuilder();
     const ActionIconThemeData().debugFillProperties(builder);
 
     final List<String> description = builder.properties
@@ -76,7 +76,7 @@ void main() {
       return const Icon(IconData(0));
     }
 
-    final DiagnosticPropertiesBuilder builder = DiagnosticPropertiesBuilder();
+    final builder = DiagnosticPropertiesBuilder();
     ActionIconThemeData(
       backButtonIconBuilder: actionButtonIconBuilder,
       closeButtonIconBuilder: actionButtonIconBuilder,
@@ -99,8 +99,8 @@ void main() {
   });
 
   testWidgets('Action buttons use ThemeData action icon theme', (WidgetTester tester) async {
-    const Color green = Color(0xff00ff00);
-    const IconData icon = IconData(0);
+    const green = Color(0xff00ff00);
+    const icon = IconData(0);
 
     Widget buildSampleIcon(BuildContext context) {
       return const Icon(
@@ -110,7 +110,7 @@ void main() {
       );
     }
 
-    final ActionIconThemeData actionIconTheme = ActionIconThemeData(
+    final actionIconTheme = ActionIconThemeData(
       backButtonIconBuilder: buildSampleIcon,
       closeButtonIconBuilder: buildSampleIcon,
       drawerButtonIconBuilder: buildSampleIcon,
@@ -160,8 +160,8 @@ void main() {
   // this case the theme is introduced with the ActionIconTheme widget instead of
   // ThemeData.actionIconTheme.
   testWidgets('Action buttons use ActionIconTheme', (WidgetTester tester) async {
-    const Color green = Color(0xff00ff00);
-    const IconData icon = IconData(0);
+    const green = Color(0xff00ff00);
+    const icon = IconData(0);
 
     Widget buildSampleIcon(BuildContext context) {
       return const Icon(
@@ -171,7 +171,7 @@ void main() {
       );
     }
 
-    final ActionIconThemeData actionIconTheme = ActionIconThemeData(
+    final actionIconTheme = ActionIconThemeData(
       backButtonIconBuilder: buildSampleIcon,
       closeButtonIconBuilder: buildSampleIcon,
       drawerButtonIconBuilder: buildSampleIcon,

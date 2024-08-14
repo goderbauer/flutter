@@ -95,8 +95,8 @@ abstract class InheritedTheme extends InheritedWidget {
       return CapturedThemes._(const <InheritedTheme>[]);
     }
 
-    final List<InheritedTheme> themes = <InheritedTheme>[];
-    final Set<Type> themeTypes = <Type>{};
+    final themes = <InheritedTheme>[];
+    final themeTypes = <Type>{};
     late bool debugDidFindAncestor;
     assert(() {
       debugDidFindAncestor = to == null;
@@ -111,7 +111,7 @@ abstract class InheritedTheme extends InheritedWidget {
         return false;
       }
       if (ancestor is InheritedElement && ancestor.widget is InheritedTheme) {
-        final InheritedTheme theme = ancestor.widget as InheritedTheme;
+        final theme = ancestor.widget as InheritedTheme;
         final Type themeType = theme.runtimeType;
         // Only remember the first theme of any type. This assumes
         // that inherited themes completely shadow ancestors of the

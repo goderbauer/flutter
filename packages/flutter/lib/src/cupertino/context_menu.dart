@@ -75,7 +75,7 @@ typedef CupertinoContextMenuBuilder = Widget Function(
 // paintBounds in global coordinates.
 Rect _getRect(GlobalKey globalKey) {
   assert(globalKey.currentContext != null);
-  final RenderBox renderBoxContainer = globalKey.currentContext!.findRenderObject()! as RenderBox;
+  final renderBoxContainer = globalKey.currentContext!.findRenderObject()! as RenderBox;
   return Rect.fromPoints(renderBoxContainer.localToGlobal(
     renderBoxContainer.paintBounds.topLeft,
   ), renderBoxContainer.localToGlobal(
@@ -658,8 +658,8 @@ class _DecoyChildState extends State<_DecoyChild> with TickerProviderStateMixin 
   void initState() {
     super.initState();
 
-    const double beginPause = 1.0;
-    const double openAnimationLength = 5.0;
+    const beginPause = 1.0;
+    const openAnimationLength = 5.0;
     const double totalOpenAnimationLength = beginPause + openAnimationLength;
     final double endPause =
       ((totalOpenAnimationLength * _animationDuration) / _previewLongPressTimeout.inMilliseconds) - totalOpenAnimationLength;
@@ -838,7 +838,7 @@ class _ContextMenuRoute<T> extends PopupRoute<T> {
   static Rect _getScaledRect(GlobalKey globalKey, double scale) {
     final Rect childRect = _getRect(globalKey);
     final Size sizeScaled = childRect.size * scale;
-    final Offset offsetScaled = Offset(
+    final offsetScaled = Offset(
       childRect.left + (childRect.size.width - sizeScaled.width) / 2,
       childRect.top + (childRect.size.height - sizeScaled.height) / 2,
     );
@@ -900,7 +900,7 @@ class _ContextMenuRoute<T> extends PopupRoute<T> {
     // When opening, the transition happens from the end of the child's bounce
     // animation to the final state. When closing, it goes from the final state
     // to the original position before the bounce.
-    final Rect childRectOriginal = Rect.fromCenter(
+    final childRectOriginal = Rect.fromCenter(
       center: _previousChildRect.center,
       width: _previousChildRect.width / _scaleFactor,
       height: _previousChildRect.height / _scaleFactor,
@@ -1221,7 +1221,7 @@ class _ContextMenuRouteStaticState extends State<_ContextMenuRouteStatic> with T
   // both the orientation of the screen as well as the position on the screen of
   // the original child.
   List<Widget> _getChildren(Orientation orientation, _ContextMenuLocation contextMenuLocation) {
-    final Expanded child = Expanded(
+    final child = Expanded(
       child: Align(
         alignment: _getChildAlignment(
           widget.orientation,
@@ -1234,11 +1234,11 @@ class _ContextMenuRouteStaticState extends State<_ContextMenuRouteStatic> with T
         ),
       ),
     );
-    const SizedBox spacer = SizedBox(
+    const spacer = SizedBox(
       width: _kPadding,
       height: _kPadding,
     );
-    final Expanded sheet = Expanded(
+    final sheet = Expanded(
       child: AnimatedBuilder(
         animation: _sheetController,
         builder: _buildSheetAnimation,

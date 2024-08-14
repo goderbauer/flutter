@@ -155,7 +155,7 @@ void main() {
     });
 
     testGesture('Should recognize both tap down and long press', (GestureTester tester) {
-      final TapGestureRecognizer tap = TapGestureRecognizer();
+      final tap = TapGestureRecognizer();
       tap.onTapDown = (_) {
         recognized.add('tap_down');
       };
@@ -176,8 +176,8 @@ void main() {
     });
 
     testGesture('Drag start delayed by microtask', (GestureTester tester) {
-      final HorizontalDragGestureRecognizer drag = HorizontalDragGestureRecognizer();
-      bool isDangerousStack = false;
+      final drag = HorizontalDragGestureRecognizer();
+      var isDangerousStack = false;
       drag.onStart = (DragStartDetails details) {
         expect(isDangerousStack, isFalse);
         recognized.add('drag_start');
@@ -389,14 +389,14 @@ void main() {
 
   group('Enforce consistent-button restriction:', () {
     // In sequence between `down` and `up` but with buttons changed
-    const PointerMoveEvent moveR = PointerMoveEvent(
+    const moveR = PointerMoveEvent(
       pointer: 5,
       buttons: kSecondaryButton,
       position: Offset(10, 10),
     );
 
     late LongPressGestureRecognizer gesture;
-    final List<String> recognized = <String>[];
+    final recognized = <String>[];
 
     setUp(() {
       gesture = LongPressGestureRecognizer()
@@ -497,21 +497,21 @@ void main() {
   });
 
   testGesture('Can filter long press based on device kind', (GestureTester tester) {
-    final LongPressGestureRecognizer mouseLongPress = LongPressGestureRecognizer(
+    final mouseLongPress = LongPressGestureRecognizer(
       supportedDevices: <PointerDeviceKind>{ PointerDeviceKind.mouse },
     );
 
-    bool mouseLongPressDown = false;
+    var mouseLongPressDown = false;
     mouseLongPress.onLongPress = () {
       mouseLongPressDown = true;
     };
 
-    const PointerDownEvent mouseDown = PointerDownEvent(
+    const mouseDown = PointerDownEvent(
       pointer: 5,
       position: Offset(10, 10),
       kind: PointerDeviceKind.mouse,
     );
-    const PointerDownEvent touchDown = PointerDownEvent(
+    const touchDown = PointerDownEvent(
       pointer: 5,
       position: Offset(10, 10),
     );
@@ -545,7 +545,7 @@ void main() {
     // The following tests make sure that long press recognizers do not form
     // competition with a tap gesture recognizer listening on a different button.
 
-    final List<String> recognized = <String>[];
+    final recognized = <String>[];
     late TapGestureRecognizer tapPrimary;
     late TapGestureRecognizer tapSecondary;
     late LongPressGestureRecognizer longPress;
@@ -594,8 +594,8 @@ void main() {
   });
 
   testGesture('A secondary long press should not trigger primary', (GestureTester tester) {
-    final List<String> recognized = <String>[];
-    final LongPressGestureRecognizer longPress = LongPressGestureRecognizer()
+    final recognized = <String>[];
+    final longPress = LongPressGestureRecognizer()
       ..onLongPressStart = (LongPressStartDetails details) {
         recognized.add('primaryStart');
       }
@@ -612,19 +612,19 @@ void main() {
         recognized.add('primaryUp');
       };
 
-    const PointerDownEvent down2 = PointerDownEvent(
+    const down2 = PointerDownEvent(
       pointer: 2,
       buttons: kSecondaryButton,
       position: Offset(30.0, 30.0),
     );
 
-    const PointerMoveEvent move2 = PointerMoveEvent(
+    const move2 = PointerMoveEvent(
       pointer: 2,
       buttons: kSecondaryButton,
       position: Offset(100, 200),
     );
 
-    const PointerUpEvent up2 = PointerUpEvent(
+    const up2 = PointerUpEvent(
       pointer: 2,
       position: Offset(100, 201),
     );
@@ -641,8 +641,8 @@ void main() {
   });
 
   testGesture('A tertiary long press should not trigger primary or secondary', (GestureTester tester) {
-    final List<String> recognized = <String>[];
-    final LongPressGestureRecognizer longPress = LongPressGestureRecognizer()
+    final recognized = <String>[];
+    final longPress = LongPressGestureRecognizer()
       ..onLongPressStart = (LongPressStartDetails details) {
         recognized.add('primaryStart');
       }
@@ -674,19 +674,19 @@ void main() {
         recognized.add('secondaryUp');
       };
 
-    const PointerDownEvent down2 = PointerDownEvent(
+    const down2 = PointerDownEvent(
       pointer: 2,
       buttons: kTertiaryButton,
       position: Offset(30.0, 30.0),
     );
 
-    const PointerMoveEvent move2 = PointerMoveEvent(
+    const move2 = PointerMoveEvent(
       pointer: 2,
       buttons: kTertiaryButton,
       position: Offset(100, 200),
     );
 
-    const PointerUpEvent up2 = PointerUpEvent(
+    const up2 = PointerUpEvent(
       pointer: 2,
       position: Offset(100, 201),
     );
@@ -703,8 +703,8 @@ void main() {
   });
 
   testGesture('Switching buttons mid-stream does not fail to send "end" event', (GestureTester tester) {
-    final List<String> recognized = <String>[];
-    final LongPressGestureRecognizer longPress = LongPressGestureRecognizer()
+    final recognized = <String>[];
+    final longPress = LongPressGestureRecognizer()
       ..onLongPressStart = (LongPressStartDetails details) {
         recognized.add('primaryStart');
       }
@@ -712,18 +712,18 @@ void main() {
         recognized.add('primaryEnd');
       };
 
-    const PointerDownEvent down4 = PointerDownEvent(
+    const down4 = PointerDownEvent(
       pointer: 8,
       position: Offset(10, 10),
     );
 
-    const PointerMoveEvent move4 = PointerMoveEvent(
+    const move4 = PointerMoveEvent(
       pointer: 8,
       position: Offset(100, 200),
       buttons: kPrimaryButton | kSecondaryButton,
     );
 
-    const PointerUpEvent up4 = PointerUpEvent(
+    const up4 = PointerUpEvent(
       pointer: 8,
       position: Offset(100, 200),
       buttons: kSecondaryButton,
@@ -745,8 +745,8 @@ void main() {
 
   testGesture('Switching buttons mid-stream does not fail to send "end" event (alternative sequence)', (GestureTester tester) {
     // This reproduces sequences seen on macOS.
-    final List<String> recognized = <String>[];
-    final LongPressGestureRecognizer longPress = LongPressGestureRecognizer()
+    final recognized = <String>[];
+    final longPress = LongPressGestureRecognizer()
       ..onLongPressStart = (LongPressStartDetails details) {
         recognized.add('primaryStart');
       }
@@ -754,24 +754,24 @@ void main() {
         recognized.add('primaryEnd');
       };
 
-    const PointerDownEvent down5 = PointerDownEvent(
+    const down5 = PointerDownEvent(
       pointer: 9,
       position: Offset(10, 10),
     );
 
-    const PointerMoveEvent move5a = PointerMoveEvent(
+    const move5a = PointerMoveEvent(
       pointer: 9,
       position: Offset(100, 200),
       buttons: 3, // add 2
     );
 
-    const PointerMoveEvent move5b = PointerMoveEvent(
+    const move5b = PointerMoveEvent(
       pointer: 9,
       position: Offset(100, 200),
       buttons: 2, // remove 1
     );
 
-    const PointerUpEvent up5 = PointerUpEvent(
+    const up5 = PointerUpEvent(
       pointer: 9,
       position: Offset(100, 200),
     );

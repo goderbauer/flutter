@@ -324,14 +324,14 @@ class _RenderOverflowBar extends RenderBox
     if (child == null) {
       return 0;
     }
-    double barWidth = 0.0;
+    var barWidth = 0.0;
     while (child != null) {
       barWidth += child.getMinIntrinsicWidth(double.infinity);
       child = childAfter(child);
     }
     barWidth += spacing * (childCount - 1);
 
-    double height = 0.0;
+    var height = 0.0;
     if (barWidth > width) {
       child = firstChild;
       while (child != null) {
@@ -355,14 +355,14 @@ class _RenderOverflowBar extends RenderBox
     if (child == null) {
       return 0;
     }
-    double barWidth = 0.0;
+    var barWidth = 0.0;
     while (child != null) {
       barWidth += child.getMinIntrinsicWidth(double.infinity);
       child = childAfter(child);
     }
     barWidth += spacing * (childCount - 1);
 
-    double height = 0.0;
+    var height = 0.0;
     if (barWidth > width) {
       child = firstChild;
       while (child != null) {
@@ -386,7 +386,7 @@ class _RenderOverflowBar extends RenderBox
     if (child == null) {
       return 0;
     }
-    double width = 0.0;
+    var width = 0.0;
     while (child != null) {
       width += child.getMinIntrinsicWidth(double.infinity);
       child = childAfter(child);
@@ -400,7 +400,7 @@ class _RenderOverflowBar extends RenderBox
     if (child == null) {
       return 0;
     }
-    double width = 0.0;
+    var width = 0.0;
     while (child != null) {
       width += child.getMaxIntrinsicWidth(double.infinity);
       child = childAfter(child);
@@ -422,13 +422,13 @@ class _RenderOverflowBar extends RenderBox
       VerticalDirection.up => (childBefore, lastChild),
     };
 
-    double maxChildHeight = 0.0;
-    double y = 0.0;
-    double childrenWidth = 0.0;
+    var maxChildHeight = 0.0;
+    var y = 0.0;
+    var childrenWidth = 0.0;
     BaselineOffset minHorizontalBaseline = BaselineOffset.noBaseline;
     BaselineOffset verticalBaseline = BaselineOffset.noBaseline;
 
-    for (RenderBox? child = startChild; child != null; child = next(child)) {
+    for (var child = startChild; child != null; child = next(child)) {
       final Size childSize = child.getDryLayout(childConstraints);
       final double heightDiff = childSize.height - maxChildHeight;
       if (heightDiff > 0) {
@@ -436,7 +436,7 @@ class _RenderOverflowBar extends RenderBox
         maxChildHeight = childSize.height;
       }
 
-      final BaselineOffset baselineOffset = BaselineOffset(child.getDryBaseline(childConstraints, baseline));
+      final baselineOffset = BaselineOffset(child.getDryBaseline(childConstraints, baseline));
       if (baselineOffset != null) {
         verticalBaseline ??= baselineOffset + y;
         minHorizontalBaseline = minHorizontalBaseline.minOf(baselineOffset + (maxChildHeight - childSize.height));
@@ -458,9 +458,9 @@ class _RenderOverflowBar extends RenderBox
       return constraints.smallest;
     }
     final BoxConstraints childConstraints = constraints.loosen();
-    double childrenWidth = 0.0;
-    double maxChildHeight = 0.0;
-    double y = 0.0;
+    var childrenWidth = 0.0;
+    var maxChildHeight = 0.0;
+    var y = 0.0;
     while (child != null) {
       final Size childSize = child.getDryLayout(childConstraints);
       childrenWidth += childSize.width;
@@ -507,7 +507,7 @@ class _RenderOverflowBar extends RenderBox
       RenderBox? nextChild() => overflowDirection == VerticalDirection.down ? childAfter(child!) : childBefore(child!);
       double y = 0;
       while (child != null) {
-        final _OverflowBarParentData childParentData = child.parentData! as _OverflowBarParentData;
+        final childParentData = child.parentData! as _OverflowBarParentData;
         final double x = switch (overflowAlignment) {
           OverflowBarAlignment.center => (constraints.maxWidth - child.size.width) / 2,
           OverflowBarAlignment.start  => rtl ? constraints.maxWidth - child.size.width : 0,
@@ -549,7 +549,7 @@ class _RenderOverflowBar extends RenderBox
       }
 
       while (child != null) {
-        final _OverflowBarParentData childParentData = child.parentData! as _OverflowBarParentData;
+        final childParentData = child.parentData! as _OverflowBarParentData;
         childParentData.offset = Offset(x, (maxChildHeight - child.size.height) / 2);
         // x is the horizontal origin of child. To advance x to the next child's
         // origin for LTR: add the width of the current child. To advance x to

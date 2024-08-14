@@ -180,7 +180,7 @@ class Typography with Diagnosticable {
     TextTheme? tall,
   }) {
     assert(platform != null || (black != null && white != null));
-    final Typography base = Typography._withPlatform(
+    final base = Typography._withPlatform(
       platform,
       black, white,
       englishLike ?? englishLike2021,
@@ -366,7 +366,7 @@ class Typography with Diagnosticable {
   @override
   void debugFillProperties(DiagnosticPropertiesBuilder properties) {
     super.debugFillProperties(properties);
-    final Typography defaultTypography = Typography.material2014();
+    final defaultTypography = Typography.material2014();
     properties.add(DiagnosticsProperty<TextTheme>('black', black, defaultValue: defaultTypography.black));
     properties.add(DiagnosticsProperty<TextTheme>('white', white, defaultValue: defaultTypography.white));
     properties.add(DiagnosticsProperty<TextTheme>('englishLike', englishLike, defaultValue: defaultTypography.englishLike));

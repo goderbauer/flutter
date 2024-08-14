@@ -10,7 +10,7 @@ import '../widgets/semantics_tester.dart';
 
 void main() {
   testWidgets('Material2 - Drawer control test', (WidgetTester tester) async {
-    const Key containerKey = Key('container');
+    const containerKey = Key('container');
 
     await tester.pumpWidget(
       MaterialApp(
@@ -58,7 +58,7 @@ void main() {
   });
 
   testWidgets('Material3 - Drawer control test', (WidgetTester tester) async {
-    const Key containerKey = Key('container');
+    const containerKey = Key('container');
 
     await tester.pumpWidget(
       MaterialApp(
@@ -106,7 +106,7 @@ void main() {
   });
 
   testWidgets('Drawer dismiss barrier has label', (WidgetTester tester) async {
-    final SemanticsTester semantics = SemanticsTester(tester);
+    final semantics = SemanticsTester(tester);
     await tester.pumpWidget(
       const MaterialApp(
         home: Scaffold(
@@ -130,7 +130,7 @@ void main() {
   }, variant: const TargetPlatformVariant(<TargetPlatform>{ TargetPlatform.iOS,  TargetPlatform.macOS }));
 
   testWidgets('Drawer dismiss barrier has no label', (WidgetTester tester) async {
-    final SemanticsTester semantics = SemanticsTester(tester);
+    final semantics = SemanticsTester(tester);
     await tester.pumpWidget(
       const MaterialApp(
         home: Scaffold(
@@ -168,7 +168,7 @@ void main() {
       ).child!;
     }
 
-    final GlobalKey<ScaffoldState> scaffoldKey = GlobalKey<ScaffoldState>();
+    final scaffoldKey = GlobalKey<ScaffoldState>();
     Widget buildFrame({ Color? drawerScrimColor }) {
       return MaterialApp(
         home: Scaffold(
@@ -193,7 +193,7 @@ void main() {
     scaffoldKey.currentState!.openDrawer();
     await tester.pumpAndSettle();
 
-    ColoredBox scrim = getScrim() as ColoredBox;
+    var scrim = getScrim() as ColoredBox;
     expect(scrim.color, Colors.black54);
 
     await tester.tap(find.byType(Drawer));
@@ -260,7 +260,7 @@ void main() {
   });
 
   testWidgets('Scaffold.drawer - null restorationId ', (WidgetTester tester) async {
-    final GlobalKey<ScaffoldState> scaffoldKey = GlobalKey<ScaffoldState>();
+    final scaffoldKey = GlobalKey<ScaffoldState>();
     await tester.pumpWidget(
       MaterialApp(
         restorationScopeId: 'app',
@@ -283,7 +283,7 @@ void main() {
   });
 
   testWidgets('Scaffold.endDrawer - null restorationId ', (WidgetTester tester) async {
-    final GlobalKey<ScaffoldState> scaffoldKey = GlobalKey<ScaffoldState>();
+    final scaffoldKey = GlobalKey<ScaffoldState>();
     await tester.pumpWidget(
       MaterialApp(
         restorationScopeId: 'app',
@@ -306,7 +306,7 @@ void main() {
   });
 
   testWidgets('Scaffold.drawer state restoration test', (WidgetTester tester) async {
-    final GlobalKey<ScaffoldState> scaffoldKey = GlobalKey<ScaffoldState>();
+    final scaffoldKey = GlobalKey<ScaffoldState>();
     await tester.pumpWidget(
       MaterialApp(
         restorationScopeId: 'app',
@@ -337,7 +337,7 @@ void main() {
   });
 
   testWidgets('Scaffold.endDrawer state restoration test', (WidgetTester tester) async {
-    final GlobalKey<ScaffoldState> scaffoldKey = GlobalKey<ScaffoldState>();
+    final scaffoldKey = GlobalKey<ScaffoldState>();
     await tester.pumpWidget(
       MaterialApp(
         restorationScopeId: 'app',
@@ -368,7 +368,7 @@ void main() {
   });
 
   testWidgets('Both drawer and endDrawer state restoration test', (WidgetTester tester) async {
-    final GlobalKey<ScaffoldState> scaffoldKey = GlobalKey<ScaffoldState>();
+    final scaffoldKey = GlobalKey<ScaffoldState>();
     await tester.pumpWidget(
       MaterialApp(
         restorationScopeId: 'app',
@@ -429,7 +429,7 @@ void main() {
   });
 
   testWidgets('ScaffoldState close drawer', (WidgetTester tester) async {
-    final GlobalKey<ScaffoldState> scaffoldKey = GlobalKey<ScaffoldState>();
+    final scaffoldKey = GlobalKey<ScaffoldState>();
     await tester.pumpWidget(
       MaterialApp(
         home: Scaffold(
@@ -452,7 +452,7 @@ void main() {
   });
 
   testWidgets('ScaffoldState close drawer do not crash if drawer is already closed', (WidgetTester tester) async {
-    final GlobalKey<ScaffoldState> scaffoldKey = GlobalKey<ScaffoldState>();
+    final scaffoldKey = GlobalKey<ScaffoldState>();
     await tester.pumpWidget(
       MaterialApp(
         home: Scaffold(
@@ -553,7 +553,7 @@ void main() {
   });
 
   testWidgets('ScaffoldState close end drawer', (WidgetTester tester) async {
-    final GlobalKey<ScaffoldState> scaffoldKey = GlobalKey<ScaffoldState>();
+    final scaffoldKey = GlobalKey<ScaffoldState>();
     await tester.pumpWidget(
       MaterialApp(
         home: Scaffold(

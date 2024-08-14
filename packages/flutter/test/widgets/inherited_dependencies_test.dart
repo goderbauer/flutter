@@ -17,7 +17,7 @@ void main() {
         return const SizedBox();
       }),
     ));
-    final InheritedElement element = key.currentContext! as InheritedElement;
+    final element = key.currentContext! as InheritedElement;
     expect(
       element.toStringDeep(minLevel: DiagnosticLevel.info),
       equalsIgnoringHashCodes(

@@ -7,8 +7,8 @@ import 'package:flutter_test/flutter_test.dart';
 
 void main() {
   testWidgets('onTap detection with canceled pointer and a drag listener', (WidgetTester tester) async {
-    int detector1TapCount = 0;
-    int detector2TapCount = 0;
+    var detector1TapCount = 0;
+    var detector2TapCount = 0;
 
     final Widget widget = GestureDetector(
       child: Column(

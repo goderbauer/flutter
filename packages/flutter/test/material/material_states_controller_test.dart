@@ -21,11 +21,11 @@ void main() {
   });
 
   test('MaterialStatesController update, listener', () {
-    int count = 0;
+    var count = 0;
     void valueChanged() {
       count += 1;
     }
-    final MaterialStatesController controller = MaterialStatesController();
+    final controller = MaterialStatesController();
     controller.addListener(valueChanged);
 
     controller.update(MaterialState.selected, true);
@@ -75,11 +75,11 @@ void main() {
 
 
   test('MaterialStatesController const initial value', () {
-    int count = 0;
+    var count = 0;
     void valueChanged() {
       count += 1;
     }
-    final MaterialStatesController controller = MaterialStatesController(const <MaterialState>{MaterialState.selected});
+    final controller = MaterialStatesController(const <MaterialState>{MaterialState.selected});
     controller.addListener(valueChanged);
 
     controller.update(MaterialState.selected, true);

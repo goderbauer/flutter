@@ -13,7 +13,7 @@ void main() {
 
   test('ProgressIndicatorThemeData lerp special cases', () {
     expect(ProgressIndicatorThemeData.lerp(null, null, 0), null);
-    const ProgressIndicatorThemeData data = ProgressIndicatorThemeData();
+    const data = ProgressIndicatorThemeData();
     expect(identical(ProgressIndicatorThemeData.lerp(data, data, 0.5), data), true);
   });
 }

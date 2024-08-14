@@ -68,7 +68,7 @@ void main() {
       final int currentViewId = platformViewsRegistry.getNextPlatformViewId();
       fakePlatformViewRegistry.registerViewFactory('webview', _mockViewFactory);
 
-      bool hasPlatformViewCreated = false;
+      var hasPlatformViewCreated = false;
       void onPlatformViewCreatedCallBack(int id) {
         hasPlatformViewCreated = true;
       }
@@ -145,7 +145,7 @@ void main() {
         ),
       );
 
-      final Completer<void> resizeCompleter = Completer<void>();
+      final resizeCompleter = Completer<void>();
 
       await tester.pumpWidget(
         const Center(
@@ -327,7 +327,7 @@ void main() {
       expect(fakePlatformView.params, <dynamic, dynamic>{'tagName': 'div'});
 
       // The HTML element should be a div.
-      final web.HTMLElement htmlElement = fakePlatformView.htmlElement as web.HTMLElement;
+      final htmlElement = fakePlatformView.htmlElement as web.HTMLElement;
       expect(htmlElement.tagName, equalsIgnoringCase('div'));
     });
 
@@ -353,12 +353,12 @@ void main() {
       expect(fakePlatformView.params, <dynamic, dynamic>{'tagName': 'script'});
 
       // The HTML element should be a script.
-      final web.HTMLElement htmlElement = fakePlatformView.htmlElement as web.HTMLElement;
+      final htmlElement = fakePlatformView.htmlElement as web.HTMLElement;
       expect(htmlElement.tagName, equalsIgnoringCase('script'));
     });
 
     testWidgets('onElementCreated', (WidgetTester tester) async {
-      final List<Object> createdElements = <Object>[];
+      final createdElements = <Object>[];
       void onElementCreated(Object element) {
         createdElements.add(element);
       }
@@ -450,9 +450,9 @@ class FakePlatformViewRegistry implements ui_web.PlatformViewRegistry {
   }
 
   Future<dynamic> _create(MethodCall call) async {
-    final Map<dynamic, dynamic> args = call.arguments as Map<dynamic, dynamic>;
-    final int id = args['id'] as int;
-    final String viewType = args['viewType'] as String;
+    final args = call.arguments as Map<dynamic, dynamic>;
+    final id = args['id'] as int;
+    final viewType = args['viewType'] as String;
     final Object? params = args['params'];
 
     if (_findViewById(id) != null) {
@@ -470,7 +470,7 @@ class FakePlatformViewRegistry implements ui_web.PlatformViewRegistry {
       );
     }
 
-    final ui_web.ParameterizedPlatformViewFactory viewFactory =
+    final viewFactory =
         registered.viewFactory as ui_web.ParameterizedPlatformViewFactory;
 
     _views.add((
@@ -483,7 +483,7 @@ class FakePlatformViewRegistry implements ui_web.PlatformViewRegistry {
   }
 
   Future<dynamic> _dispose(MethodCall call) async {
-    final int id = call.arguments as int;
+    final id = call.arguments as int;
 
     final FakePlatformView? view = _findViewById(id);
     if (view == null) {

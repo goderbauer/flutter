@@ -783,7 +783,7 @@ class AnimationController extends Animation<double>
       AnimationBehavior.normal when SemanticsBinding.instance.disableAnimations => 200.0,
       AnimationBehavior.normal || AnimationBehavior.preserve => 1.0,
     };
-    final SpringSimulation simulation = SpringSimulation(springDescription, value, target, velocity * scale)
+    final simulation = SpringSimulation(springDescription, value, target, velocity * scale)
       ..tolerance = _kFlingTolerance;
     assert(
       simulation.type != SpringType.underDamped,
@@ -920,16 +920,16 @@ class AnimationController extends Animation<double>
 
   @override
   String toStringDetails() {
-    final String paused = isAnimating ? '' : '; paused';
-    final String ticker = _ticker == null ? '; DISPOSED' : (_ticker!.muted ? '; silenced' : '');
-    String label = '';
+    final paused = isAnimating ? '' : '; paused';
+    final ticker = _ticker == null ? '; DISPOSED' : (_ticker!.muted ? '; silenced' : '');
+    var label = '';
     assert(() {
       if (debugLabel != null) {
         label = '; for $debugLabel';
       }
       return true;
     }());
-    final String more = '${super.toStringDetails()} ${value.toStringAsFixed(3)}';
+    final more = '${super.toStringDetails()} ${value.toStringAsFixed(3)}';
     return '$more$paused$ticker$label';
   }
 }

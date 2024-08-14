@@ -221,7 +221,7 @@ class RenderTapRegionSurface extends RenderProxyBoxWithHitTestBehavior implement
     final bool hitTarget = hitTestChildren(result, position: position) || hitTestSelf(position);
 
     if (hitTarget) {
-      final BoxHitTestEntry entry = BoxHitTestEntry(this, position);
+      final entry = BoxHitTestEntry(this, position);
       _cachedResults[entry] = result;
       result.add(entry);
     }
@@ -263,7 +263,7 @@ class RenderTapRegionSurface extends RenderProxyBoxWithHitTestBehavior implement
         _getRegionsHit(_registeredRegions, result.path).cast<RenderTapRegion>().toSet();
     assert(_tapRegionDebug('Tap event hit ${hitRegions.length} descendants.'));
 
-    final Set<RenderTapRegion> insideRegions = <RenderTapRegion>{
+    final insideRegions = <RenderTapRegion>{
       for (final RenderTapRegion region in hitRegions)
         if (region.groupId == null) region
         // Adding all grouped regions, so they act as a single region.
@@ -272,8 +272,8 @@ class RenderTapRegionSurface extends RenderProxyBoxWithHitTestBehavior implement
     // If they're not inside, then they're outside.
     final Set<RenderTapRegion> outsideRegions = _registeredRegions.difference(insideRegions);
 
-    bool consumeOutsideTaps = false;
-    for (final RenderTapRegion region in outsideRegions) {
+    var consumeOutsideTaps = false;
+    for (final region in outsideRegions) {
       assert(_tapRegionDebug('Calling onTapOutside for $region'));
       if (region.consumeOutsideTaps) {
         assert(_tapRegionDebug('Stopping tap propagation for $region (and all of ${region.groupId})'));
@@ -281,7 +281,7 @@ class RenderTapRegionSurface extends RenderProxyBoxWithHitTestBehavior implement
       }
       region.onTapOutside?.call(event);
     }
-    for (final RenderTapRegion region in insideRegions) {
+    for (final region in insideRegions) {
       assert(_tapRegionDebug('Calling onTapInside for $region'));
       region.onTapInside?.call(event);
     }

@@ -16,9 +16,9 @@ void main() {
   late FakeMenuChannel fakeMenuChannel;
   late PlatformMenuDelegate originalDelegate;
   late DefaultPlatformMenuDelegate delegate;
-  final List<String> selected = <String>[];
-  final List<String> opened = <String>[];
-  final List<String> closed = <String>[];
+  final selected = <String>[];
+  final opened = <String>[];
+  final closed = <String>[];
 
   void onSelected(String item) {
     selected.add(item);
@@ -130,11 +130,11 @@ void main() {
       expect(tester.takeException(), isA<AssertionError>());
     });
     testWidgets('diagnostics', (WidgetTester tester) async {
-      const PlatformMenuItem item = PlatformMenuItem(
+      const item = PlatformMenuItem(
         label: 'label2',
         shortcut: SingleActivator(LogicalKeyboardKey.keyA),
       );
-      const PlatformMenuBar menuBar = PlatformMenuBar(
+      const menuBar = PlatformMenuBar(
         menus: <PlatformMenuItem>[item],
         child: SizedBox(),
       );
@@ -162,15 +162,15 @@ void main() {
   });
   group('MenuBarItem', () {
     testWidgets('diagnostics', (WidgetTester tester) async {
-      const PlatformMenuItem childItem = PlatformMenuItem(
+      const childItem = PlatformMenuItem(
         label: 'label',
       );
-      const PlatformMenu item = PlatformMenu(
+      const item = PlatformMenu(
         label: 'label',
         menus: <PlatformMenuItem>[childItem],
       );
 
-      final DiagnosticPropertiesBuilder builder = DiagnosticPropertiesBuilder();
+      final builder = DiagnosticPropertiesBuilder();
       item.debugFillProperties(builder);
 
       final List<String> description = builder.properties
@@ -186,12 +186,12 @@ void main() {
 
   group('ShortcutSerialization', () {
     testWidgets('character constructor', (WidgetTester tester) async {
-      final ShortcutSerialization serialization = ShortcutSerialization.character('?');
+      final serialization = ShortcutSerialization.character('?');
       expect(serialization.toChannelRepresentation(), equals(<String, Object?>{
         'shortcutCharacter': '?',
         'shortcutModifiers': 0,
       }));
-      final ShortcutSerialization serializationWithModifiers = ShortcutSerialization.character('?', alt: true, control: true, meta: true);
+      final serializationWithModifiers = ShortcutSerialization.character('?', alt: true, control: true, meta: true);
       expect(serializationWithModifiers.toChannelRepresentation(), equals(<String, Object?>{
         'shortcutCharacter': '?',
         'shortcutModifiers': 13,
@@ -199,12 +199,12 @@ void main() {
     });
 
     testWidgets('modifier constructor', (WidgetTester tester) async {
-      final ShortcutSerialization serialization = ShortcutSerialization.modifier(LogicalKeyboardKey.home);
+      final serialization = ShortcutSerialization.modifier(LogicalKeyboardKey.home);
       expect(serialization.toChannelRepresentation(), equals(<String, Object?>{
         'shortcutTrigger': LogicalKeyboardKey.home.keyId,
         'shortcutModifiers': 0,
       }));
-      final ShortcutSerialization serializationWithModifiers = ShortcutSerialization.modifier(LogicalKeyboardKey.home, alt: true, control: true, meta: true, shift: true);
+      final serializationWithModifiers = ShortcutSerialization.modifier(LogicalKeyboardKey.home, alt: true, control: true, meta: true, shift: true);
       expect(serializationWithModifiers.toChannelRepresentation(), equals(<String, Object?>{
         'shortcutTrigger': LogicalKeyboardKey.home.keyId,
         'shortcutModifiers': 15,
@@ -249,7 +249,7 @@ List<PlatformMenuItem> createTestMenus({
   Map<String, MenuSerializableShortcut> shortcuts = const <String, MenuSerializableShortcut>{},
   bool includeStandard = false,
 }) {
-  final List<PlatformMenuItem> result = <PlatformMenuItem>[
+  final result = <PlatformMenuItem>[
     PlatformMenu(
       label: mainMenu[0],
       onOpen: onOpen != null ? () => onOpen(mainMenu[0]) : null,
@@ -460,7 +460,7 @@ class FakeMenuChannel implements MethodChannel {
 
   @override
   Future<T> invokeMethod<T>(String method, [dynamic arguments]) async {
-    final MethodCall call = MethodCall(method, arguments);
+    final call = MethodCall(method, arguments);
     outgoingCalls.add(call);
     return await outgoing(call) as T;
   }

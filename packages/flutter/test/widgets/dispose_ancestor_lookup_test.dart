@@ -32,7 +32,7 @@ void main() {
   testWidgets('dependOnInheritedWidgetOfExactType() called from dispose() throws error',
   experimentalLeakTesting: LeakTesting.settings.withIgnoredAll(), // leaking by design because of exception
   (WidgetTester tester) async {
-    bool disposeCalled = false;
+    var disposeCalled = false;
     await tester.pumpWidget(
       TestWidget((BuildContext context) {
         disposeCalled = true;
@@ -47,7 +47,7 @@ void main() {
   testWidgets('getElementForInheritedWidgetOfExactType() called from dispose() throws error',
   experimentalLeakTesting: LeakTesting.settings.withIgnoredAll(), // leaking by design because of exception
   (WidgetTester tester) async {
-    bool disposeCalled = false;
+    var disposeCalled = false;
     await tester.pumpWidget(
       TestWidget((BuildContext context) {
         disposeCalled = true;
@@ -62,7 +62,7 @@ void main() {
   testWidgets('findAncestorWidgetOfExactType() called from dispose() throws error',
   experimentalLeakTesting: LeakTesting.settings.withIgnoredAll(), // leaking by design because of exception
   (WidgetTester tester) async {
-    bool disposeCalled = false;
+    var disposeCalled = false;
     await tester.pumpWidget(
       TestWidget((BuildContext context) {
         disposeCalled = true;
@@ -77,7 +77,7 @@ void main() {
   testWidgets('findAncestorStateOfType() called from dispose() throws error',
   experimentalLeakTesting: LeakTesting.settings.withIgnoredAll(), // leaking by design because of exception
   (WidgetTester tester) async {
-    bool disposeCalled = false;
+    var disposeCalled = false;
     await tester.pumpWidget(
       TestWidget((BuildContext context) {
         disposeCalled = true;
@@ -92,7 +92,7 @@ void main() {
   testWidgets('findAncestorRenderObjectOfType() called from dispose() throws error',
   experimentalLeakTesting: LeakTesting.settings.withIgnoredAll(), // leaking by design because of exception
   (WidgetTester tester) async {
-    bool disposeCalled = false;
+    var disposeCalled = false;
     await tester.pumpWidget(
       TestWidget((BuildContext context) {
         disposeCalled = true;
@@ -107,7 +107,7 @@ void main() {
   testWidgets('visitAncestorElements() called from dispose() throws error',
   experimentalLeakTesting: LeakTesting.settings.withIgnoredAll(), // leaking by design because of exception
   (WidgetTester tester) async {
-    bool disposeCalled = false;
+    var disposeCalled = false;
     await tester.pumpWidget(
       TestWidget((BuildContext context) {
         disposeCalled = true;
@@ -120,7 +120,7 @@ void main() {
   });
 
   testWidgets('dispose() method does not unconditionally throw an error', (WidgetTester tester) async {
-    bool disposeCalled = false;
+    var disposeCalled = false;
     await tester.pumpWidget(
       TestWidget((BuildContext context) {
         disposeCalled = true;

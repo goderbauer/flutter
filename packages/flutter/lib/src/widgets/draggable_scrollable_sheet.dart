@@ -134,7 +134,7 @@ class DraggableScrollableController extends ChangeNotifier {
     _assertAttached();
     assert(size >= 0 && size <= 1);
     assert(duration != Duration.zero);
-    final AnimationController animationController = AnimationController.unbounded(
+    final animationController = AnimationController.unbounded(
       vsync: _attachedController!.position.context.vsync,
       value: _attachedController!.extent.currentSize,
     );
@@ -666,7 +666,7 @@ class _DraggableScrollableSheetState extends State<DraggableScrollableSheet> {
   }
 
   List<double> _impliedSnapSizes() {
-    for (int index = 0; index < (widget.snapSizes?.length ?? 0); index += 1) {
+    for (var index = 0; index < (widget.snapSizes?.length ?? 0); index += 1) {
       final double snapSize = widget.snapSizes![index];
       assert(snapSize >= widget.minChildSize && snapSize <= widget.maxChildSize,
         '${_snapSizeErrorMessage(index)}\nSnap sizes must be between `minChildSize` and `maxChildSize`. ');
@@ -762,8 +762,8 @@ class _DraggableScrollableSheetState extends State<DraggableScrollableSheet> {
       // this runs-we can't use the previous extent's available pixels as it may
       // have changed when the widget was updated.
       WidgetsBinding.instance.addPostFrameCallback((Duration timeStamp) {
-        for (int index = 0; index < _scrollController.positions.length; index++) {
-          final _DraggableScrollableSheetScrollPosition position =
+        for (var index = 0; index < _scrollController.positions.length; index++) {
+          final position =
             _scrollController.positions.elementAt(index) as _DraggableScrollableSheetScrollPosition;
           position.goBallistic(0);
         }
@@ -970,7 +970,7 @@ class _DraggableScrollableSheetScrollPosition extends ScrollPositionWithSingleCo
       );
     }
 
-    final AnimationController ballisticController = AnimationController.unbounded(
+    final ballisticController = AnimationController.unbounded(
       debugLabel: objectRuntimeType(this, '_DraggableScrollableSheetPosition'),
       vsync: context.vsync,
     );
@@ -1118,7 +1118,7 @@ class _InheritedResetNotifier extends InheritedNotifier<_ResetNotifier> {
       return false;
     }
     assert(widget is _InheritedResetNotifier);
-    final _InheritedResetNotifier inheritedNotifier = widget as _InheritedResetNotifier;
+    final inheritedNotifier = widget as _InheritedResetNotifier;
     final bool wasCalled = inheritedNotifier.notifier!._wasCalled;
     inheritedNotifier.notifier!._wasCalled = false;
     return wasCalled;

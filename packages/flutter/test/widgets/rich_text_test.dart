@@ -9,11 +9,11 @@ import 'package:flutter_test/flutter_test.dart';
 
 void main() {
   testWidgets('RichText with recognizers without handlers does not throw', (WidgetTester tester) async {
-    final TapGestureRecognizer recognizer1 = TapGestureRecognizer();
+    final recognizer1 = TapGestureRecognizer();
     addTearDown(recognizer1.dispose);
-    final LongPressGestureRecognizer recognizer2 = LongPressGestureRecognizer();
+    final recognizer2 = LongPressGestureRecognizer();
     addTearDown(recognizer2.dispose);
-    final DoubleTapGestureRecognizer recognizer3 = DoubleTapGestureRecognizer();
+    final recognizer3 = DoubleTapGestureRecognizer();
     addTearDown(recognizer3.dispose);
 
     await tester.pumpWidget(
@@ -48,9 +48,9 @@ void main() {
   });
 
   testWidgets('TextSpan Locale works', (WidgetTester tester) async {
-    final TapGestureRecognizer recognizer1 = TapGestureRecognizer();
+    final recognizer1 = TapGestureRecognizer();
     addTearDown(recognizer1.dispose);
-    final DoubleTapGestureRecognizer recognizer2 = DoubleTapGestureRecognizer();
+    final recognizer2 = DoubleTapGestureRecognizer();
     addTearDown(recognizer2.dispose);
 
     await tester.pumpWidget(
@@ -102,9 +102,9 @@ void main() {
   });
 
   testWidgets('TextSpan spellOut works', (WidgetTester tester) async {
-    final TapGestureRecognizer recognizer1 = TapGestureRecognizer();
+    final recognizer1 = TapGestureRecognizer();
     addTearDown(recognizer1.dispose);
-    final DoubleTapGestureRecognizer recognizer2 = DoubleTapGestureRecognizer();
+    final recognizer2 = DoubleTapGestureRecognizer();
     addTearDown(recognizer2.dispose);
 
     await tester.pumpWidget(
@@ -188,7 +188,7 @@ void main() {
   });
 
   testWidgets('RichText implements debugFillProperties', (WidgetTester tester) async {
-    final DiagnosticPropertiesBuilder builder = DiagnosticPropertiesBuilder();
+    final builder = DiagnosticPropertiesBuilder();
     RichText(
       text: const TextSpan(text: 'rich text'),
       textAlign: TextAlign.center,

@@ -52,21 +52,21 @@ void main() {
 
       final ui.Image image2 = (await tester.runAsync<ui.Image>(() => createTestImage(width: 2, height: 2)))!;
       addTearDown(image2.dispose);
-      const String debugImageLabel = 'debugImageLabel';
+      const debugImageLabel = 'debugImageLabel';
       const double width = 1;
       const double height = 1;
-      const double scale = 2.0;
+      const scale = 2.0;
       const Color color = Colors.black;
       const Animation<double> opacity = AlwaysStoppedAnimation<double>(0.0);
       const BlendMode colorBlendMode = BlendMode.difference;
       const BoxFit fit = BoxFit.contain;
       const AlignmentGeometry alignment = Alignment.topCenter;
       const ImageRepeat repeat = ImageRepeat.repeat;
-      const Rect centerSlice = Rect.fromLTWH(0, 0, width, height);
-      const bool matchTextDirection = true;
-      const bool invertColors = true;
+      const centerSlice = Rect.fromLTWH(0, 0, width, height);
+      const matchTextDirection = true;
+      const invertColors = true;
       const FilterQuality filterQuality = FilterQuality.high;
-      const bool isAntiAlias = true;
+      const isAntiAlias = true;
 
       await tester.pumpWidget(
         Directionality(
@@ -160,7 +160,7 @@ void main() {
   group('FractionalTranslation', () {
     testWidgets('hit test - entirely inside the bounding box', (WidgetTester tester) async {
       final GlobalKey key1 = GlobalKey();
-      bool pointerDown = false;
+      var pointerDown = false;
 
       await tester.pumpWidget(
         Center(
@@ -189,7 +189,7 @@ void main() {
 
     testWidgets('hit test - partially inside the bounding box', (WidgetTester tester) async {
       final GlobalKey key1 = GlobalKey();
-      bool pointerDown = false;
+      var pointerDown = false;
 
       await tester.pumpWidget(
         Center(
@@ -218,7 +218,7 @@ void main() {
 
     testWidgets('hit test - completely outside the bounding box', (WidgetTester tester) async {
       final GlobalKey key1 = GlobalKey();
-      bool pointerDown = false;
+      var pointerDown = false;
 
       await tester.pumpWidget(
         Center(
@@ -248,7 +248,7 @@ void main() {
     testWidgets('semantics bounds are updated', (WidgetTester tester) async {
       final GlobalKey fractionalTranslationKey = GlobalKey();
       final GlobalKey textKey = GlobalKey();
-      Offset offset = const Offset(0.4, 0.4);
+      var offset = const Offset(0.4, 0.4);
 
       await tester.pumpWidget(
         StatefulBuilder(
@@ -310,7 +310,7 @@ void main() {
 
   group('Semantics', () {
     testWidgets('Semantics can set attributed Text', (WidgetTester tester) async {
-      final UniqueKey key = UniqueKey();
+      final key = UniqueKey();
       await tester.pumpWidget(
         MaterialApp(
           home: Scaffold(
@@ -349,7 +349,7 @@ void main() {
       expect(attributedValue.string, 'value');
       expect(attributedValue.attributes.length, 1);
       expect(attributedValue.attributes[0] is LocaleStringAttribute, isTrue);
-      final LocaleStringAttribute valueLocale =  attributedValue.attributes[0] as LocaleStringAttribute;
+      final valueLocale =  attributedValue.attributes[0] as LocaleStringAttribute;
       expect(valueLocale.range, const TextRange(start:0, end: 5));
       expect(valueLocale.locale, const Locale('en', 'MX'));
 
@@ -361,7 +361,7 @@ void main() {
     });
 
     testWidgets('Semantics can merge attributed strings', (WidgetTester tester) async {
-      final UniqueKey key = UniqueKey();
+      final key = UniqueKey();
       await tester.pumpWidget(
           MaterialApp(
             home: Scaffold(
@@ -416,7 +416,7 @@ void main() {
     });
 
     testWidgets('Semantics can merge attributed strings with non attributed string', (WidgetTester tester) async {
-      final UniqueKey key = UniqueKey();
+      final key = UniqueKey();
       await tester.pumpWidget(
           MaterialApp(
             home: Scaffold(
@@ -456,8 +456,8 @@ void main() {
 
   group('Row', () {
     testWidgets('multiple baseline aligned children', (WidgetTester tester) async {
-      final UniqueKey key1 = UniqueKey();
-      final UniqueKey key2 = UniqueKey();
+      final key1 = UniqueKey();
+      final key2 = UniqueKey();
       // The point size of the font must be a multiple of 4 until
       // https://github.com/flutter/flutter/issues/122066 is resolved.
       const double fontSize1 = 52;
@@ -495,7 +495,7 @@ void main() {
       // lines, but being aligned by the first line's baseline, they hang far
       // below the baseline. The size of the parent row is just enough to
       // contain both of them.
-      const double ascentRatio = 0.75;
+      const ascentRatio = 0.75;
       const double aboveBaseline1 = fontSize1 * ascentRatio;
       const double belowBaseline1 = fontSize1 * (1 - ascentRatio);
       const double aboveBaseline2 = fontSize2 * ascentRatio;
@@ -511,8 +511,8 @@ void main() {
 
     testWidgets('baseline aligned children account for a larger, no-baseline child size', (WidgetTester tester) async {
       // Regression test for https://github.com/flutter/flutter/issues/58898
-      final UniqueKey key1 = UniqueKey();
-      final UniqueKey key2 = UniqueKey();
+      final key1 = UniqueKey();
+      final key2 = UniqueKey();
       // The point size of the font must be a multiple of 4 until
       // https://github.com/flutter/flutter/issues/122066 is resolved.
       const double fontSize1 = 52;
@@ -551,7 +551,7 @@ void main() {
       // lines, but being aligned by the first line's baseline, they hang far
       // below the baseline. The FlutterLogo extends further than both Texts,
       // so the size of the parent row should contain the FlutterLogo as well.
-      const double ascentRatio = 0.75;
+      const ascentRatio = 0.75;
       const double aboveBaseline1 = fontSize1 * ascentRatio;
       const double aboveBaseline2 = fontSize2 * ascentRatio;
       expect(rowBox.size.height, greaterThan(textBox1.size.height));
@@ -587,7 +587,7 @@ void main() {
   });
 
   testWidgets('UnconstrainedBox warns only when clipBehavior is Clip.none', (WidgetTester tester) async {
-    for (final Clip? clip in <Clip?>[null, ...Clip.values]) {
+    for (final clip in <Clip?>[null, ...Clip.values]) {
       // Clear any render objects that were there before so that we can see more
       // than one error. Otherwise, it just throws the first one and skips the
       // rest, since the render objects haven't changed.
@@ -655,7 +655,7 @@ void main() {
   group('ColoredBox', () {
     late _MockCanvas mockCanvas;
     late _MockPaintingContext mockContext;
-    const Color colorToPaint = Color(0xFFABCDEF);
+    const colorToPaint = Color(0xFFABCDEF);
 
     setUp(() {
       mockContext = _MockPaintingContext();
@@ -684,7 +684,7 @@ void main() {
     });
 
     testWidgets('ColoredBox - no size, child', (WidgetTester tester) async {
-      const ValueKey<int> key = ValueKey<int>(0);
+      const key = ValueKey<int>(0);
       const Widget child = SizedBox.expand(key: key);
       await tester.pumpWidget(const Flex(
         direction: Axis.horizontal,
@@ -721,7 +721,7 @@ void main() {
     });
 
     testWidgets('ColoredBox - size, child', (WidgetTester tester) async {
-      const ValueKey<int> key = ValueKey<int>(0);
+      const key = ValueKey<int>(0);
       const Widget child = SizedBox.expand(key: key);
       await tester.pumpWidget(const ColoredBox(color: colorToPaint, child: child));
       expect(find.byType(ColoredBox), findsOneWidget);
@@ -737,8 +737,8 @@ void main() {
     });
 
     testWidgets('ColoredBox - debugFillProperties', (WidgetTester tester) async {
-      const ColoredBox box = ColoredBox(color: colorToPaint);
-      final DiagnosticPropertiesBuilder properties = DiagnosticPropertiesBuilder();
+      const box = ColoredBox(color: colorToPaint);
+      final properties = DiagnosticPropertiesBuilder();
       box.debugFillProperties(properties);
 
       expect(properties.properties.first.value, colorToPaint);
@@ -762,7 +762,7 @@ void main() {
   });
 
   testWidgets('IgnorePointer ignores pointers', (WidgetTester tester) async {
-    final List<String> logs = <String>[];
+    final logs = <String>[];
     Widget target({required bool ignoring}) => Align(
       alignment: Alignment.topLeft,
       child: Directionality(
@@ -840,7 +840,7 @@ void main() {
 
   group('IgnorePointer semantics', () {
     testWidgets('does not change semantics when not ignoring', (WidgetTester tester) async {
-      final UniqueKey key = UniqueKey();
+      final key = UniqueKey();
       await tester.pumpWidget(
         MaterialApp(
           home: IgnorePointer(
@@ -868,9 +868,9 @@ void main() {
     });
 
     testWidgets('can toggle the ignoring.', (WidgetTester tester) async {
-      final UniqueKey key1 = UniqueKey();
-      final UniqueKey key2 = UniqueKey();
-      final UniqueKey key3 = UniqueKey();
+      final key1 = UniqueKey();
+      final key2 = UniqueKey();
+      final key3 = UniqueKey();
       await tester.pumpWidget(
         MaterialApp(
           home: TestIgnorePointer(
@@ -987,8 +987,8 @@ void main() {
     });
 
     testWidgets('drops semantics when its ignoringSemantics is true', (WidgetTester tester) async {
-      final SemanticsTester semantics = SemanticsTester(tester);
-      final UniqueKey key = UniqueKey();
+      final semantics = SemanticsTester(tester);
+      final key = UniqueKey();
       await tester.pumpWidget(
         MaterialApp(
           home: IgnorePointer(
@@ -1006,7 +1006,7 @@ void main() {
     });
 
     testWidgets('ignores user interactions', (WidgetTester tester) async {
-      final UniqueKey key = UniqueKey();
+      final key = UniqueKey();
       await tester.pumpWidget(
         MaterialApp(
           home: IgnorePointer(
@@ -1033,7 +1033,7 @@ void main() {
   });
 
   testWidgets('AbsorbPointer absorbs pointers', (WidgetTester tester) async {
-    final List<String> logs = <String>[];
+    final logs = <String>[];
     Widget target({required bool absorbing}) => Align(
       alignment: Alignment.topLeft,
       child: Directionality(
@@ -1110,7 +1110,7 @@ void main() {
   });
 
   testWidgets('Wrap implements debugFillProperties', (WidgetTester tester) async {
-    final DiagnosticPropertiesBuilder builder = DiagnosticPropertiesBuilder();
+    final builder = DiagnosticPropertiesBuilder();
     const Wrap(
       spacing: 8.0, // gap between adjacent Text widget
       runSpacing: 4.0, // gap between lines
@@ -1210,7 +1210,7 @@ class HitsRenderBox extends Matcher {
 
   @override
   bool matches(dynamic item, Map<dynamic, dynamic> matchState) {
-    final HitTestResult hitTestResult = item as HitTestResult;
+    final hitTestResult = item as HitTestResult;
     return hitTestResult.path.where(
       (HitTestEntry entry) => entry.target == renderBox,
     ).isNotEmpty;
@@ -1230,7 +1230,7 @@ class DoesNotHitRenderBox extends Matcher {
 
   @override
   bool matches(dynamic item, Map<dynamic, dynamic> matchState) {
-    final HitTestResult hitTestResult = item as HitTestResult;
+    final hitTestResult = item as HitTestResult;
     return hitTestResult.path.where(
       (HitTestEntry entry) => entry.target == renderBox,
     ).isEmpty;

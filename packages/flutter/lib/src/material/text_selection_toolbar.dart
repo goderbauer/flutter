@@ -115,7 +115,7 @@ class TextSelectionToolbar extends StatelessWidget {
     final double availableHeight = anchorAbovePadded.dy - _kToolbarContentDistance - paddingAbove;
     final bool fitsAbove = _kToolbarHeight <= availableHeight;
     // Makes up for the Padding above the Stack.
-    final Offset localAdjustment = Offset(screenPadding, paddingAbove);
+    final localAdjustment = Offset(screenPadding, paddingAbove);
 
     return Padding(
       padding: EdgeInsets.fromLTRB(
@@ -326,7 +326,7 @@ class _TextSelectionToolbarTrailingEdgeAlignRenderBox extends RenderProxyBox {
 
     // Set the offset in the parent data such that the child will be aligned to
     // the trailing edge, depending on the text direction.
-    final ToolbarItemsParentData childParentData = child!.parentData! as ToolbarItemsParentData;
+    final childParentData = child!.parentData! as ToolbarItemsParentData;
     childParentData.offset = Offset(
       textDirection == TextDirection.rtl ? 0.0 : size.width - child!.size.width,
       0.0,
@@ -336,7 +336,7 @@ class _TextSelectionToolbarTrailingEdgeAlignRenderBox extends RenderProxyBox {
   // Paint at the offset set in the parent data.
   @override
   void paint(PaintingContext context, Offset offset) {
-    final ToolbarItemsParentData childParentData = child!.parentData! as ToolbarItemsParentData;
+    final childParentData = child!.parentData! as ToolbarItemsParentData;
     context.paintChild(child!, childParentData.offset + offset);
   }
 
@@ -344,7 +344,7 @@ class _TextSelectionToolbarTrailingEdgeAlignRenderBox extends RenderProxyBox {
   @override
   bool hitTestChildren(BoxHitTestResult result, { required Offset position }) {
     // The x, y parameters have the top left of the node's box as the origin.
-    final ToolbarItemsParentData childParentData = child!.parentData! as ToolbarItemsParentData;
+    final childParentData = child!.parentData! as ToolbarItemsParentData;
     return result.addWithPaintOffset(
       offset: childParentData.offset,
       position: position,
@@ -364,7 +364,7 @@ class _TextSelectionToolbarTrailingEdgeAlignRenderBox extends RenderProxyBox {
 
   @override
   void applyPaintTransform(RenderObject child, Matrix4 transform) {
-    final ToolbarItemsParentData childParentData = child.parentData! as ToolbarItemsParentData;
+    final childParentData = child.parentData! as ToolbarItemsParentData;
     transform.translate(childParentData.offset.dx, childParentData.offset.dy);
     super.applyPaintTransform(child, transform);
   }
@@ -459,7 +459,7 @@ class _RenderTextSelectionToolbarItemsLayout extends RenderBox with ContainerRen
         ));
 
     int i = -1;
-    double width = 0.0;
+    var width = 0.0;
     visitChildren((RenderObject renderObjectChild) {
       i++;
 
@@ -471,7 +471,7 @@ class _RenderTextSelectionToolbarItemsLayout extends RenderBox with ContainerRen
         return;
       }
 
-      final RenderBox child = renderObjectChild as RenderBox;
+      final child = renderObjectChild as RenderBox;
       child.layout(sizedConstraints.loosen(), parentUsesSize: true);
       width += child.size.width;
 
@@ -514,14 +514,14 @@ class _RenderTextSelectionToolbarItemsLayout extends RenderBox with ContainerRen
   void _placeChildren() {
     int i = -1;
     Size nextSize = Size.zero;
-    double fitWidth = 0.0;
+    var fitWidth = 0.0;
     final RenderBox navButton = firstChild!;
     double overflowHeight = overflowOpen && !isAbove ? navButton.size.height : 0.0;
     visitChildren((RenderObject renderObjectChild) {
       i++;
 
-      final RenderBox child = renderObjectChild as RenderBox;
-      final ToolbarItemsParentData childParentData = child.parentData! as ToolbarItemsParentData;
+      final child = renderObjectChild as RenderBox;
+      final childParentData = child.parentData! as ToolbarItemsParentData;
 
       // Handle placing the navigation button after iterating all children.
       if (renderObjectChild == navButton) {
@@ -553,7 +553,7 @@ class _RenderTextSelectionToolbarItemsLayout extends RenderBox with ContainerRen
     });
 
     // Place the navigation button if needed.
-    final ToolbarItemsParentData navButtonParentData = navButton.parentData! as ToolbarItemsParentData;
+    final navButtonParentData = navButton.parentData! as ToolbarItemsParentData;
     if (_shouldPaintChild(firstChild!, 0)) {
       navButtonParentData.shouldPaint = true;
       if (overflowOpen) {
@@ -586,8 +586,8 @@ class _RenderTextSelectionToolbarItemsLayout extends RenderBox with ContainerRen
     int i = -1;
 
     visitChildren((RenderObject renderObjectChild) {
-      final RenderBox child = renderObjectChild as RenderBox;
-      final ToolbarItemsParentData childParentData = child.parentData! as ToolbarItemsParentData;
+      final child = renderObjectChild as RenderBox;
+      final childParentData = child.parentData! as ToolbarItemsParentData;
 
       i++;
 
@@ -625,8 +625,8 @@ class _RenderTextSelectionToolbarItemsLayout extends RenderBox with ContainerRen
   @override
   void paint(PaintingContext context, Offset offset) {
     visitChildren((RenderObject renderObjectChild) {
-      final RenderBox child = renderObjectChild as RenderBox;
-      final ToolbarItemsParentData childParentData = child.parentData! as ToolbarItemsParentData;
+      final child = renderObjectChild as RenderBox;
+      final childParentData = child.parentData! as ToolbarItemsParentData;
       if (!childParentData.shouldPaint) {
         return;
       }
@@ -647,7 +647,7 @@ class _RenderTextSelectionToolbarItemsLayout extends RenderBox with ContainerRen
     RenderBox? child = lastChild;
     while (child != null) {
       // The x, y parameters have the top left of the node's box as the origin.
-      final ToolbarItemsParentData childParentData = child.parentData! as ToolbarItemsParentData;
+      final childParentData = child.parentData! as ToolbarItemsParentData;
 
       // Don't hit test children aren't shown.
       if (!childParentData.shouldPaint) {
@@ -675,8 +675,8 @@ class _RenderTextSelectionToolbarItemsLayout extends RenderBox with ContainerRen
   @override
   void visitChildrenForSemantics(RenderObjectVisitor visitor) {
     visitChildren((RenderObject renderObjectChild) {
-      final RenderBox child = renderObjectChild as RenderBox;
-      final ToolbarItemsParentData childParentData = child.parentData! as ToolbarItemsParentData;
+      final child = renderObjectChild as RenderBox;
+      final childParentData = child.parentData! as ToolbarItemsParentData;
       if (childParentData.shouldPaint) {
         visitor(renderObjectChild);
       }

@@ -234,9 +234,9 @@ class RenderTreeSliver extends RenderSliverVariedExtentList {
     if (scrollOffset == 0.0) {
       return 0;
     }
-    double position = 0.0;
-    int index = 0;
-    double totalAnimationOffset = 0.0;
+    var position = 0.0;
+    var index = 0;
+    var totalAnimationOffset = 0.0;
     double? itemExtent;
     final int? childCount = childManager.estimatedChildCount;
     while (position < scrollOffset) {
@@ -270,8 +270,8 @@ class RenderTreeSliver extends RenderSliverVariedExtentList {
     double currentPosition = position;
     final int startingIndex = _activeAnimations[key]!.fromIndex;
     final int lastIndex = _activeAnimations[key]!.toIndex;
-    int currentIndex = startingIndex;
-    double totalAnimatingOffset = 0.0;
+    var currentIndex = startingIndex;
+    var totalAnimatingOffset = 0.0;
     // We animate only a portion of children that would be visible/in the cache
     // extent, unless all children would fit on the screen.
     while (currentIndex <= lastIndex && currentPosition < targetPosition) {
@@ -293,9 +293,9 @@ class RenderTreeSliver extends RenderSliverVariedExtentList {
   double indexToLayoutOffset(double itemExtent, int index) {
     // itemExtent is deprecated in the super class, we ignore it because we use
     // the builder anyways.
-    double position = 0.0;
-    int currentIndex = 0;
-    double totalAnimationOffset = 0.0;
+    var position = 0.0;
+    var currentIndex = 0;
+    var totalAnimationOffset = 0.0;
     double? itemExtent;
     final int? childCount = childManager.estimatedChildCount;
     while (currentIndex < index) {
@@ -337,8 +337,8 @@ class RenderTreeSliver extends RenderSliverVariedExtentList {
       RenderBox? child = startWith;
       while (child != null && indexOf(child) <= index) {
         final double mainAxisDelta = childMainAxisPosition(child);
-        final TreeSliverNodeParentData parentData = child.parentData! as TreeSliverNodeParentData;
-        final Offset childOffset = Offset(
+        final parentData = child.parentData! as TreeSliverNodeParentData;
+        final childOffset = Offset(
           parentData.depth * indentation,
           parentData.layoutOffset!,
         );
@@ -362,7 +362,7 @@ class RenderTreeSliver extends RenderSliverVariedExtentList {
     // Separate animating segments to clip for any overlap.
     int leadingIndex = indexOf(firstChild!);
     final List<int> animationIndices = _animationLeadingIndices.keys.toList()..sort();
-    final List<_PaintSegment> paintSegments = <_PaintSegment>[];
+    final paintSegments = <_PaintSegment>[];
     while (animationIndices.isNotEmpty) {
       final int trailingIndex = animationIndices.removeAt(0);
       paintSegments.add((leadingIndex: leadingIndex, trailingIndex: trailingIndex));
@@ -385,7 +385,7 @@ class RenderTreeSliver extends RenderSliverVariedExtentList {
         + (parentIndex == 0 ? 0.0 : itemExtentBuilder(parentIndex, _currentLayoutDimensions)!);
       final double trailingOffset = indexToLayoutOffset(0.0, segment.trailingIndex)
         + itemExtentBuilder(segment.trailingIndex, _currentLayoutDimensions)!;
-      final Rect rect = Rect.fromPoints(
+      final rect = Rect.fromPoints(
         Offset(0.0, leadingOffset),
         Offset(constraints.crossAxisExtent, trailingOffset),
       );

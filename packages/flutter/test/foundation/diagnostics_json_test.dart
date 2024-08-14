@@ -24,7 +24,7 @@ void main() {
   });
 
   group('Serialization', () {
-    final TestTree testTree = TestTree(
+    final testTree = TestTree(
       properties: <DiagnosticsNode>[
         StringProperty('stringProperty1', 'value1', quoted: false),
         DoubleProperty('doubleProperty1', 42.5),
@@ -75,7 +75,7 @@ void main() {
     test('subtreeDepth 1', () {
       final Map<String, Object?> result = testTree.toDiagnosticsNode().toJsonMap(const DiagnosticsSerializationDelegate(subtreeDepth: 1));
       expect(result.containsKey('properties'), isFalse);
-      final List<Map<String, Object?>> children = result['children']! as List<Map<String, Object?>>;
+      final children = result['children']! as List<Map<String, Object?>>;
       expect(children[0].containsKey('children'), isFalse);
       expect(children[1].containsKey('children'), isFalse);
       expect(children[2].containsKey('children'), isFalse);
@@ -84,7 +84,7 @@ void main() {
     test('subtreeDepth 5', () {
       final Map<String, Object?> result = testTree.toDiagnosticsNode().toJsonMap(const DiagnosticsSerializationDelegate(subtreeDepth: 5));
       expect(result.containsKey('properties'), isFalse);
-      final List<Map<String, Object?>> children = result['children']! as List<Map<String, Object?>>;
+      final children = result['children']! as List<Map<String, Object?>>;
       expect(children[0]['children'], hasLength(0));
       expect(children[1]['children'], hasLength(3));
       expect(children[2]['children'], hasLength(0));
@@ -102,7 +102,7 @@ void main() {
         subtreeDepth: 1,
       ));
       expect(result['properties'], hasLength(7));
-      final List<Map<String, Object?>> children = result['children']! as List<Map<String, Object?>>;
+      final children = result['children']! as List<Map<String, Object?>>;
       expect(children, hasLength(3));
       expect(children[0]['properties'], hasLength(0));
       expect(children[1]['properties'], hasLength(2));
@@ -118,11 +118,11 @@ void main() {
         },
       ));
       expect(result['foo'], isTrue);
-      final List<Map<String, Object?>> properties = result['properties']! as List<Map<String, Object?>>;
+      final properties = result['properties']! as List<Map<String, Object?>>;
       expect(properties, hasLength(7));
       expect(properties.every((Map<String, Object?> property) => property['foo'] == true), isTrue);
 
-      final List<Map<String, Object?>> children = result['children']! as List<Map<String, Object?>>;
+      final children = result['children']! as List<Map<String, Object?>>;
       expect(children, hasLength(3));
       expect(children.every((Map<String, Object?> child) => child['foo'] == true), isTrue);
     });
@@ -134,13 +134,13 @@ void main() {
             return nodes.whereType<StringProperty>().toList();
           },
       ));
-      final List<Map<String, Object?>> properties = result['properties']! as List<Map<String, Object?>>;
+      final properties = result['properties']! as List<Map<String, Object?>>;
       expect(properties, hasLength(3));
       expect(properties.every((Map<String, Object?> property) => property['type'] == 'StringProperty'), isTrue);
     });
 
     test('filterProperties - replace', () {
-      bool replaced = false;
+      var replaced = false;
       final Map<String, Object?> result = testTree.toDiagnosticsNode().toJsonMap(TestDiagnosticsSerializationDelegate(
           includeProperties: true,
           propertyFilter: (List<DiagnosticsNode> nodes, DiagnosticsNode owner) {
@@ -153,7 +153,7 @@ void main() {
             ];
           },
       ));
-      final List<Map<String, Object?>> properties = result['properties']! as List<Map<String, Object?>>;
+      final properties = result['properties']! as List<Map<String, Object?>>;
       expect(properties, hasLength(1));
       expect(properties.single['name'], 'foo');
     });
@@ -165,7 +165,7 @@ void main() {
             return nodes.where((DiagnosticsNode node) => node.getProperties().isEmpty).toList();
           },
       ));
-      final List<Map<String, Object?>> children = result['children']! as List<Map<String, Object?>>;
+      final children = result['children']! as List<Map<String, Object?>>;
       expect(children, hasLength(1));
     });
 
@@ -176,7 +176,7 @@ void main() {
             return nodes.expand((DiagnosticsNode node) => node.getChildren()).toList();
           },
       ));
-      final List<Map<String, Object?>> children = result['children']! as List<Map<String, Object?>>;
+      final children = result['children']! as List<Map<String, Object?>>;
       expect(children, hasLength(3));
       expect(children.first['name'], 'child node B1');
     });
@@ -189,11 +189,11 @@ void main() {
             return nodes.take(2).toList();
           },
       ));
-      final List<Map<String, Object?>> children = result['children']! as List<Map<String, Object?>>;
+      final children = result['children']! as List<Map<String, Object?>>;
       expect(children, hasLength(3));
       expect(children.last['truncated'], isTrue);
 
-      final List<Map<String, Object?>> properties = result['properties']! as List<Map<String, Object?>>;
+      final properties = result['properties']! as List<Map<String, Object?>>;
       expect(properties, hasLength(3));
       expect(properties.last['truncated'], isTrue);
     });
@@ -206,11 +206,11 @@ void main() {
             return delegate.copyWith(includeProperties: false);
           },
       ));
-      final List<Map<String, Object?>> properties = result['properties']! as List<Map<String, Object?>>;
+      final properties = result['properties']! as List<Map<String, Object?>>;
       expect(properties, hasLength(7));
       expect(properties.every((Map<String, Object?> property) => !property.containsKey('properties')), isTrue);
 
-      final List<Map<String, Object?>> children = result['children']! as List<Map<String, Object?>>;
+      final children = result['children']! as List<Map<String, Object?>>;
       expect(children, hasLength(3));
       expect(children.every((Map<String, Object?> child) => !child.containsKey('properties')), isTrue);
     });

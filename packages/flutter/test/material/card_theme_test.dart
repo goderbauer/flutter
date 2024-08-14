@@ -19,12 +19,12 @@ void main() {
 
   test('CardThemeData lerp special cases', () {
     expect(CardThemeData.lerp(null, null, 0), const CardThemeData());
-    const CardThemeData theme = CardThemeData();
+    const theme = CardThemeData();
     expect(identical(CardThemeData.lerp(theme, theme, 0.5), theme), true);
   });
 
   test('CardThemeData defaults', () {
-    const CardThemeData cardThemeData = CardThemeData();
+    const cardThemeData = CardThemeData();
 
     expect(cardThemeData.clipBehavior, null);
     expect(cardThemeData.color, null);
@@ -34,7 +34,7 @@ void main() {
     expect(cardThemeData.shape, null);
     expect(cardThemeData.surfaceTintColor, null);
 
-    const CardTheme cardTheme = CardTheme(data: CardThemeData(), child: SizedBox());
+    const cardTheme = CardTheme(data: CardThemeData(), child: SizedBox());
     expect(cardTheme.clipBehavior, null);
     expect(cardTheme.color, null);
     expect(cardTheme.elevation, null);
@@ -45,7 +45,7 @@ void main() {
   });
 
   testWidgets('Default CardThemeData debugFillProperties', (WidgetTester tester) async {
-    final DiagnosticPropertiesBuilder builder = DiagnosticPropertiesBuilder();
+    final builder = DiagnosticPropertiesBuilder();
     const CardThemeData().debugFillProperties(builder);
 
     final List<String> description = builder.properties
@@ -57,7 +57,7 @@ void main() {
   });
 
   testWidgets('CardThemeData implements debugFillProperties', (WidgetTester tester) async {
-    final DiagnosticPropertiesBuilder builder = DiagnosticPropertiesBuilder();
+    final builder = DiagnosticPropertiesBuilder();
     const CardThemeData(
       clipBehavior: Clip.antiAlias,
       color: Colors.amber,
@@ -83,7 +83,7 @@ void main() {
   });
 
   testWidgets('Material3 - Passing no CardTheme returns defaults', (WidgetTester tester) async {
-    final ThemeData theme = ThemeData(useMaterial3: true);
+    final theme = ThemeData(useMaterial3: true);
     await tester.pumpWidget(MaterialApp(
       theme: theme,
       home: const Scaffold(
@@ -131,8 +131,8 @@ void main() {
     const Clip clip = Clip.hardEdge;
     const Color color = Colors.orange;
     const Color shadowColor = Colors.pink;
-    const double elevation = 7.0;
-    const EdgeInsets margin = EdgeInsets.all(3.0);
+    const elevation = 7.0;
+    const margin = EdgeInsets.all(3.0);
     const ShapeBorder shape = RoundedRectangleBorder(
       borderRadius: BorderRadius.all(Radius.circular(9.0)),
     );
@@ -178,7 +178,7 @@ void main() {
   });
 
   testWidgets('Material3 - ThemeData properties are used when no CardTheme is set', (WidgetTester tester) async {
-    final ThemeData themeData = ThemeData(useMaterial3: true);
+    final themeData = ThemeData(useMaterial3: true);
 
     await tester.pumpWidget(MaterialApp(
       theme: themeData,
@@ -192,7 +192,7 @@ void main() {
   });
 
   testWidgets('Material3 - CardTheme customizes shape', (WidgetTester tester) async {
-    const CardTheme cardTheme = CardTheme(
+    const cardTheme = CardTheme(
       color: Colors.white,
       shape: BeveledRectangleBorder(borderRadius: BorderRadius.all(Radius.circular(7))),
       elevation: 1.0,
@@ -226,7 +226,7 @@ void main() {
     // can be deleted.
 
     testWidgets('Material2 - ThemeData properties are used when no CardTheme is set', (WidgetTester tester) async {
-      final ThemeData themeData = ThemeData(useMaterial3: false);
+      final themeData = ThemeData(useMaterial3: false);
 
       await tester.pumpWidget(MaterialApp(
         theme: themeData,
@@ -262,7 +262,7 @@ void main() {
     });
 
     testWidgets('Material2 - CardTheme customizes shape', (WidgetTester tester) async {
-      const CardTheme cardTheme = CardTheme(
+      const cardTheme = CardTheme(
         color: Colors.white,
         shape: BeveledRectangleBorder(borderRadius: BorderRadius.all(Radius.circular(7))),
         elevation: 1.0,

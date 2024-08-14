@@ -72,8 +72,8 @@ void checkChipMaterialClipBehavior(WidgetTester tester, Clip clipBehavior) {
 
 void main() {
   testWidgets('Material2 - ActionChip defaults', (WidgetTester tester) async {
-    final ThemeData theme = ThemeData(useMaterial3: false);
-    const String label = 'action chip';
+    final theme = ThemeData(useMaterial3: false);
+    const label = 'action chip';
 
     // Test enabled ActionChip defaults.
     await tester.pumpWidget(
@@ -103,7 +103,7 @@ void main() {
     expect(chipMaterial.shadowColor, Colors.black);
     expect(chipMaterial.shape, const StadiumBorder());
 
-    ShapeDecoration decoration = tester.widget<Ink>(find.byType(Ink)).decoration! as ShapeDecoration;
+    var decoration = tester.widget<Ink>(find.byType(Ink)).decoration! as ShapeDecoration;
     expect(decoration.color, Colors.black.withAlpha(0x1f));
 
     // Test disabled ActionChip defaults.
@@ -129,8 +129,8 @@ void main() {
   });
 
   testWidgets('Material3 - ActionChip defaults', (WidgetTester tester) async {
-    final ThemeData theme = ThemeData();
-    const String label = 'action chip';
+    final theme = ThemeData();
+    const label = 'action chip';
 
     // Test enabled ActionChip defaults.
     await tester.pumpWidget(
@@ -170,7 +170,7 @@ void main() {
       ),
     );
 
-    ShapeDecoration decoration = tester.widget<Ink>(find.byType(Ink)).decoration! as ShapeDecoration;
+    var decoration = tester.widget<Ink>(find.byType(Ink)).decoration! as ShapeDecoration;
     expect(decoration.color, null);
 
     // Test disabled ActionChip defaults.
@@ -203,8 +203,8 @@ void main() {
   });
 
   testWidgets('Material3 - ActionChip.elevated defaults', (WidgetTester tester) async {
-    final ThemeData theme = ThemeData();
-    const String label = 'action chip';
+    final theme = ThemeData();
+    const label = 'action chip';
 
     // Test enabled ActionChip defaults.
     await tester.pumpWidget(
@@ -244,7 +244,7 @@ void main() {
       ),
     );
 
-    ShapeDecoration decoration = tester.widget<Ink>(find.byType(Ink)).decoration! as ShapeDecoration;
+    var decoration = tester.widget<Ink>(find.byType(Ink)).decoration! as ShapeDecoration;
     expect(decoration.color, theme.colorScheme.surfaceContainerLow);
 
     // Test disabled ActionChip.elevated defaults.
@@ -277,8 +277,8 @@ void main() {
   });
 
   testWidgets('ActionChip.color resolves material states', (WidgetTester tester) async {
-    const Color disabledColor = Color(0xff00ff00);
-    const Color backgroundColor = Color(0xff0000ff);
+    const disabledColor = Color(0xff00ff00);
+    const backgroundColor = Color(0xff0000ff);
     final MaterialStateProperty<Color?> color = MaterialStateProperty.resolveWith((Set<MaterialState> states) {
       if (states.contains(MaterialState.disabled)) {
         return disabledColor;
@@ -335,8 +335,8 @@ void main() {
   });
 
   testWidgets('ActionChip uses provided state color properties', (WidgetTester tester) async {
-    const Color disabledColor = Color(0xff00ff00);
-    const Color backgroundColor = Color(0xff0000ff);
+    const disabledColor = Color(0xff00ff00);
+    const backgroundColor = Color(0xff0000ff);
     Widget buildApp({ required bool enabled, required bool selected }) {
       return wrapForChip(
         child: Column(
@@ -405,7 +405,7 @@ void main() {
   });
 
   testWidgets('ActionChip clipBehavior properly passes through to the Material', (WidgetTester tester) async {
-    const Text label = Text('label');
+    const label = Text('label');
     await tester.pumpWidget(wrapForChip(child: ActionChip(label: label, onPressed: () { })));
     checkChipMaterialClipBehavior(tester, Clip.none);
 
@@ -439,11 +439,11 @@ void main() {
   });
 
   testWidgets('ActionChip avatar layout constraints can be customized', (WidgetTester tester) async {
-    const double border = 1.0;
-    const double iconSize = 18.0;
-    const double labelPadding = 8.0;
-    const double padding = 8.0;
-    const Size labelSize = Size(100, 100);
+    const border = 1.0;
+    const iconSize = 18.0;
+    const labelPadding = 8.0;
+    const padding = 8.0;
+    const labelSize = Size(100, 100);
 
     Widget buildChip({BoxConstraints? avatarBoxConstraints}) {
       return wrapForChip(
@@ -495,7 +495,7 @@ void main() {
   });
 
   testWidgets('ActionChip.chipAnimationStyle is passed to RawChip', (WidgetTester tester) async {
-    final ChipAnimationStyle chipAnimationStyle = ChipAnimationStyle(
+    final chipAnimationStyle = ChipAnimationStyle(
       enableAnimation: AnimationStyle(duration: Durations.extralong4),
       selectAnimation: AnimationStyle.noAnimation,
     );
@@ -513,7 +513,7 @@ void main() {
   });
 
   testWidgets('Elevated ActionChip.chipAnimationStyle is passed to RawChip', (WidgetTester tester) async {
-    final ChipAnimationStyle chipAnimationStyle = ChipAnimationStyle(
+    final chipAnimationStyle = ChipAnimationStyle(
       enableAnimation: AnimationStyle(duration: Durations.extralong4),
       selectAnimation: AnimationStyle.noAnimation,
     );

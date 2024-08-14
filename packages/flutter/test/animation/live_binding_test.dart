@@ -19,9 +19,9 @@ void main() {
   LiveTestWidgetsFlutterBinding().framePolicy = LiveTestWidgetsFlutterBindingFramePolicy.onlyPumps;
 
   testWidgets('Should show event indicator for pointer events', (WidgetTester tester) async {
-    final AnimationSheetBuilder animationSheet = AnimationSheetBuilder(frameSize: const Size(200, 200), allLayers: true);
+    final animationSheet = AnimationSheetBuilder(frameSize: const Size(200, 200), allLayers: true);
     addTearDown(animationSheet.dispose);
-    final List<Offset> taps = <Offset>[];
+    final taps = <Offset>[];
     Widget target({bool recording = true}) => Container(
       padding: const EdgeInsets.fromLTRB(20, 10, 25, 20),
       child: animationSheet.record(
@@ -79,9 +79,9 @@ void main() {
 
   testWidgets('Should show event indicator for pointer events with setSurfaceSize',
   (WidgetTester tester) async {
-    final AnimationSheetBuilder animationSheet = AnimationSheetBuilder(frameSize: const Size(200, 200), allLayers: true);
+    final animationSheet = AnimationSheetBuilder(frameSize: const Size(200, 200), allLayers: true);
     addTearDown(animationSheet.dispose);
-    final List<Offset> taps = <Offset>[];
+    final taps = <Offset>[];
     Widget target({bool recording = true}) => Container(
       padding: const EdgeInsets.fromLTRB(20, 10, 25, 20),
       child: animationSheet.record(

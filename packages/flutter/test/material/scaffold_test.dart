@@ -20,7 +20,7 @@ const Duration _bottomSheetExitDuration = Duration(milliseconds: 200);
 void main() {
   // Regression test for https://github.com/flutter/flutter/issues/103741
   testWidgets('extendBodyBehindAppBar change should not cause the body widget lose state', (WidgetTester tester) async {
-    final ScrollController controller = ScrollController();
+    final controller = ScrollController();
     addTearDown(controller.dispose);
 
     Widget buildFrame({required bool extendBodyBehindAppBar}) {
@@ -54,8 +54,8 @@ void main() {
   });
 
   testWidgets('Scaffold drawer callback test', (WidgetTester tester) async {
-    bool isDrawerOpen = false;
-    bool isEndDrawerOpen = false;
+    var isDrawerOpen = false;
+    var isEndDrawerOpen = false;
 
     await tester.pumpWidget(MaterialApp(
       home: Scaffold(
@@ -94,8 +94,8 @@ void main() {
 
   testWidgets('Scaffold drawer callback test - only call when changed', (WidgetTester tester) async {
     // Regression test for https://github.com/flutter/flutter/issues/87914
-    bool onDrawerChangedCalled = false;
-    bool onEndDrawerChangedCalled = false;
+    var onDrawerChangedCalled = false;
+    var onEndDrawerChangedCalled = false;
 
     await tester.pumpWidget(MaterialApp(
       home: Scaffold(
@@ -272,9 +272,9 @@ void main() {
   });
 
   testWidgets('Floating action button shrinks when bottom sheet becomes dominant', (WidgetTester tester) async {
-    final DraggableScrollableController draggableController = DraggableScrollableController();
+    final draggableController = DraggableScrollableController();
     addTearDown(draggableController.dispose);
-    const double kBottomSheetDominatesPercentage = 0.3;
+    const kBottomSheetDominatesPercentage = 0.3;
 
     await tester.pumpWidget(MaterialApp(home: Scaffold(
       floatingActionButton: const FloatingActionButton(
@@ -312,11 +312,11 @@ void main() {
   });
 
   testWidgets('Scaffold shows scrim when bottom sheet becomes dominant', (WidgetTester tester) async {
-    final DraggableScrollableController draggableController = DraggableScrollableController();
+    final draggableController = DraggableScrollableController();
     addTearDown(draggableController.dispose);
-    const double kBottomSheetDominatesPercentage = 0.3;
-    const double kMinBottomSheetScrimOpacity = 0.1;
-    const double kMaxBottomSheetScrimOpacity = 0.6;
+    const kBottomSheetDominatesPercentage = 0.3;
+    const kMinBottomSheetScrimOpacity = 0.1;
+    const kMaxBottomSheetScrimOpacity = 0.6;
 
     await tester.pumpWidget(MaterialApp(home: Scaffold(
       bottomSheet: DraggableScrollableSheet(
@@ -449,9 +449,9 @@ void main() {
 
   testWidgets('Drawer scrolling', (WidgetTester tester) async {
     final Key drawerKey = UniqueKey();
-    const double appBarHeight = 256.0;
+    const appBarHeight = 256.0;
 
-    final ScrollController scrollOffset = ScrollController();
+    final scrollOffset = ScrollController();
     addTearDown(scrollOffset.dispose);
 
     await tester.pumpWidget(
@@ -497,7 +497,7 @@ void main() {
 
     expect(scrollOffset.offset, 0.0);
 
-    const double scrollDelta = 80.0;
+    const scrollDelta = 80.0;
     await tester.drag(find.byKey(drawerKey), const Offset(0.0, -scrollDelta));
     await tester.pump();
 
@@ -542,8 +542,8 @@ void main() {
   }, variant: const TargetPlatformVariant(<TargetPlatform>{ TargetPlatform.iOS,  TargetPlatform.macOS }));
 
   testWidgets('Tapping the status bar scrolls to top with ease out curve animation', (WidgetTester tester) async {
-    const int duration = 1000;
-    final List<double> stops = <double>[0.842, 0.959, 0.993, 1.0];
+    const duration = 1000;
+    final stops = <double>[0.842, 0.959, 0.993, 1.0];
     const double scrollOffset = 1000;
 
     await tester.pumpWidget(buildStatusBarTestApp(debugDefaultTargetPlatformOverride));
@@ -554,7 +554,7 @@ void main() {
     await tester.pump(Duration.zero);
     expect(scrollable.position.pixels, equals(scrollOffset));
 
-    for (int i = 0; i < stops.length; i++) {
+    for (var i = 0; i < stops.length; i++) {
       await tester.pump( Duration(milliseconds: duration ~/ stops.length));
       // Scroll pixel position is very long double, compare with floored int
       // pixel position
@@ -656,7 +656,7 @@ void main() {
   });
 
   testWidgets('Persistent bottom buttons are persistent', (WidgetTester tester) async {
-    bool didPressButton = false;
+    var didPressButton = false;
     await tester.pumpWidget(
       MaterialApp(
         home: Scaffold(
@@ -833,7 +833,7 @@ void main() {
   group('back arrow', () {
     Future<void> expectBackIcon(WidgetTester tester, IconData expectedIcon) async {
       final GlobalKey rootKey = GlobalKey();
-      final Map<String, WidgetBuilder> routes = <String, WidgetBuilder>{
+      final routes = <String, WidgetBuilder>{
         '/': (_) => Container(key: rootKey, child: const Text('Home')),
         '/scaffold': (_) => Scaffold(
             appBar: AppBar(),
@@ -1147,13 +1147,13 @@ void main() {
   });
 
   testWidgets('Open drawer hides underlying semantics tree', (WidgetTester tester) async {
-    const String bodyLabel = 'I am the body';
-    const String persistentFooterButtonLabel = 'a button on the bottom';
-    const String bottomNavigationBarLabel = 'a bar in an app';
-    const String floatingActionButtonLabel = 'I float in space';
-    const String drawerLabel = 'I am the reason for this test';
+    const bodyLabel = 'I am the body';
+    const persistentFooterButtonLabel = 'a button on the bottom';
+    const bottomNavigationBarLabel = 'a bar in an app';
+    const floatingActionButtonLabel = 'I float in space';
+    const drawerLabel = 'I am the reason for this test';
 
-    final SemanticsTester semantics = SemanticsTester(tester);
+    final semantics = SemanticsTester(tester);
     await tester.pumpWidget(const MaterialApp(home: Scaffold(
       body: Text(bodyLabel),
       persistentFooterButtons: <Widget>[Text(persistentFooterButtonLabel)],
@@ -1588,7 +1588,7 @@ void main() {
 
     testWidgets('change notifications', (WidgetTester tester) async {
       final GlobalKey key = GlobalKey();
-      int numNotificationsAtLastFrame = 0;
+      var numNotificationsAtLastFrame = 0;
       await tester.pumpWidget(MaterialApp(home: Scaffold(
             body: ConstrainedBox(
               constraints: const BoxConstraints.expand(height: 80.0),
@@ -1625,11 +1625,11 @@ void main() {
     });
 
     testWidgets('Simultaneous drawers on either side', (WidgetTester tester) async {
-      const String bodyLabel = 'I am the body';
-      const String drawerLabel = 'I am the label on start side';
-      const String endDrawerLabel = 'I am the label on end side';
+      const bodyLabel = 'I am the body';
+      const drawerLabel = 'I am the label on start side';
+      const endDrawerLabel = 'I am the label on end side';
 
-      final SemanticsTester semantics = SemanticsTester(tester);
+      final semantics = SemanticsTester(tester);
       await tester.pumpWidget(const MaterialApp(home: Scaffold(
         body: Text(bodyLabel),
         drawer: Drawer(child: Text(drawerLabel)),
@@ -1767,7 +1767,7 @@ void main() {
     });
 
     testWidgets('Drawer opens correctly with padding from MediaQuery (LTR)', (WidgetTester tester) async {
-      const double simulatedNotchSize = 40.0;
+      const simulatedNotchSize = 40.0;
       await tester.pumpWidget(
         MaterialApp(
           home: Scaffold(
@@ -1821,7 +1821,7 @@ void main() {
     });
 
     testWidgets('Drawer opens correctly with padding from MediaQuery (RTL)', (WidgetTester tester) async {
-      const double simulatedNotchSize = 40.0;
+      const simulatedNotchSize = 40.0;
       await tester.pumpWidget(
         MaterialApp(
           home: Scaffold(
@@ -2158,7 +2158,7 @@ void main() {
   group('FlutterError control test', () {
     testWidgets('showBottomSheet() while Scaffold has bottom sheet',
       (WidgetTester tester) async {
-        final GlobalKey<ScaffoldState> key = GlobalKey<ScaffoldState>();
+        final key = GlobalKey<ScaffoldState>();
         await tester.pumpWidget(
           MaterialApp(
             home: Scaffold(
@@ -2209,11 +2209,11 @@ void main() {
       'didUpdate bottomSheet while a previous bottom sheet is still displayed',
       experimentalLeakTesting: LeakTesting.settings.withIgnoredAll(), // leaking by design because of exception
       (WidgetTester tester) async {
-        final GlobalKey<ScaffoldState> key = GlobalKey<ScaffoldState>();
-        const Key buttonKey = Key('button');
-        final List<FlutterErrorDetails> errors = <FlutterErrorDetails>[];
+        final key = GlobalKey<ScaffoldState>();
+        const buttonKey = Key('button');
+        final errors = <FlutterErrorDetails>[];
         FlutterError.onError = (FlutterErrorDetails error) => errors.add(error);
-        int state = 0;
+        var state = 0;
         await tester.pumpWidget(
           MaterialApp(
             home: StatefulBuilder(
@@ -2239,7 +2239,7 @@ void main() {
         await tester.pump();
         expect(errors, isNotEmpty);
         expect(errors.first.exception, isFlutterError);
-        final FlutterError error = errors.first.exception as FlutterError;
+        final error = errors.first.exception as FlutterError;
         expect(error.diagnostics.length, 2);
         expect(error.diagnostics.last.level, DiagnosticLevel.hint);
         expect(
@@ -2276,7 +2276,7 @@ void main() {
       );
       final dynamic exception = tester.takeException();
       expect(exception, isFlutterError);
-      final FlutterError error = exception as FlutterError;
+      final error = exception as FlutterError;
       expect(error.diagnostics.length, 5);
       expect(error.diagnostics[2].level, DiagnosticLevel.hint);
       expect(
@@ -2349,7 +2349,7 @@ void main() {
       final dynamic exception = tester.takeException();
       expect(exception, isFlutterError);
       expect(geometry, isNull);
-      final FlutterError error = exception as FlutterError;
+      final error = exception as FlutterError;
       expect(error.diagnostics.length, 5);
       expect(error.diagnostics[2].level, DiagnosticLevel.hint);
       expect(
@@ -2432,7 +2432,7 @@ void main() {
 
   testWidgets('ScaffoldMessenger.maybeOf can return null if not found', (WidgetTester tester) async {
     ScaffoldMessengerState? scaffoldMessenger;
-    const Key tapTarget = Key('tap-target');
+    const tapTarget = Key('tap-target');
     await tester.pumpWidget(Directionality(
       textDirection: TextDirection.ltr,
       child: MediaQuery(
@@ -2462,9 +2462,9 @@ void main() {
   });
 
   testWidgets('ScaffoldMessenger.of will assert if not found', (WidgetTester tester) async {
-    const Key tapTarget = Key('tap-target');
+    const tapTarget = Key('tap-target');
 
-    final List<dynamic> exceptions = <dynamic>[];
+    final exceptions = <dynamic>[];
     final FlutterExceptionHandler? oldHandler = FlutterError.onError;
     FlutterError.onError = (FlutterErrorDetails details) {
       exceptions.add(details.exception);
@@ -2496,7 +2496,7 @@ void main() {
     expect(exceptions.length, 1);
     // ignore: avoid_dynamic_calls
     expect(exceptions.single.runtimeType, FlutterError);
-    final FlutterError error = exceptions.first as FlutterError;
+    final error = exceptions.first as FlutterError;
     expect(error.diagnostics.length, 5);
     expect(error.diagnostics[2], isA<DiagnosticsProperty<Element>>());
     expect(error.diagnostics[3], isA<DiagnosticsBlock>());
@@ -2526,7 +2526,7 @@ void main() {
 
   testWidgets('ScaffoldMessenger checks for nesting when a new Scaffold is registered', (WidgetTester tester) async {
     // Regression test for https://github.com/flutter/flutter/issues/77251
-    const String snackBarContent = 'SnackBar Content';
+    const snackBarContent = 'SnackBar Content';
     await tester.pumpWidget(MaterialApp(
       home: Builder(
         builder: (BuildContext context) => Scaffold(
@@ -2542,7 +2542,7 @@ void main() {
                           children: <Widget>[
                             TextButton(
                               onPressed: () {
-                                const SnackBar snackBar = SnackBar(
+                                const snackBar = SnackBar(
                                   content: Text(snackBarContent),
                                   behavior: SnackBarBehavior.floating,
                                 );
@@ -2597,8 +2597,8 @@ void main() {
 
   testWidgets('Drawer can be dismissed with escape keyboard shortcut', (WidgetTester tester) async {
     // Regression test for https://github.com/flutter/flutter/issues/106131
-    bool isDrawerOpen = false;
-    bool isEndDrawerOpen = false;
+    var isDrawerOpen = false;
+    var isEndDrawerOpen = false;
 
     await tester.pumpWidget(MaterialApp(
       home: Scaffold(
@@ -2655,8 +2655,8 @@ void main() {
       ),
     ));
 
-    final FlutterError error = tester.takeException() as FlutterError;
-    final ErrorSummary summary = error.diagnostics.first as ErrorSummary;
+    final error = tester.takeException() as FlutterError;
+    final summary = error.diagnostics.first as ErrorSummary;
     expect(summary.toString(), 'The showSnackBar() method cannot be called during build.');
   });
 
@@ -2684,7 +2684,7 @@ void main() {
 
   // Regression test for https://github.com/flutter/flutter/issues/117004
   testWidgets('can rebuild and remove bottomSheet at the same time', (WidgetTester tester) async {
-    bool themeIsLight = true;
+    var themeIsLight = true;
     bool? defaultBottomSheet = true;
     final GlobalKey bottomSheetKey1 = GlobalKey();
     final GlobalKey bottomSheetKey2 = GlobalKey();
@@ -2763,7 +2763,7 @@ void main() {
   });
 
   testWidgets('showBottomSheet removes scrim when draggable sheet is dismissed', (WidgetTester tester) async {
-    final DraggableScrollableController draggableController = DraggableScrollableController();
+    final draggableController = DraggableScrollableController();
     addTearDown(draggableController.dispose);
     final GlobalKey<ScaffoldState> scaffoldKey = GlobalKey();
     PersistentBottomSheetController? sheetController;
@@ -2812,7 +2812,7 @@ void main() {
   testWidgets("Closing bottom sheet & removing FAB at the same time doesn't throw assertion", (WidgetTester tester) async {
       final Key bottomSheetKey = UniqueKey();
       PersistentBottomSheetController? controller;
-      bool show = true;
+      var show = true;
 
       await tester.pumpWidget(StatefulBuilder(
         builder: (_, StateSetter setState) => MaterialApp(
@@ -3259,7 +3259,7 @@ void main() {
 
   // This is a regression test for https://github.com/flutter/flutter/issues/145585.
   testWidgets('FAB default entrance and exit animations', (WidgetTester tester) async {
-    bool showFab = false;
+    var showFab = false;
 
     await tester.pumpWidget(
       MaterialApp(
@@ -3318,7 +3318,7 @@ void main() {
 
   // This is a regression test for https://github.com/flutter/flutter/issues/145585.
   testWidgets('FAB default entrance and exit animations can be disabled', (WidgetTester tester) async {
-    bool showFab = false;
+    var showFab = false;
     FloatingActionButtonLocation fabLocation = FloatingActionButtonLocation.endFloat;
 
     await tester.pumpWidget(
@@ -3397,7 +3397,7 @@ void main() {
   });
 
   testWidgets('Scaffold background color defaults to ColorScheme.surface', (WidgetTester tester) async {
-    final ThemeData theme = ThemeData(
+    final theme = ThemeData(
       colorScheme: ThemeData().colorScheme.copyWith(
         surface: Colors.orange,
         background: Colors.green,

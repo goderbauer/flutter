@@ -12,8 +12,8 @@ import '../widgets/semantics_tester.dart';
 
 void main() {
   testWidgets('RawMaterialButton responds when tapped', (WidgetTester tester) async {
-    bool pressed = false;
-    const Color splashColor = Color(0xff00ff00);
+    var pressed = false;
+    const splashColor = Color(0xff00ff00);
     await tester.pumpWidget(
       Theme(
         data: ThemeData(useMaterial3: false),
@@ -33,7 +33,7 @@ void main() {
     await tester.tap(find.text('BUTTON'));
     await tester.pump(const Duration(milliseconds: 10));
 
-    final RenderBox splash = Material.of(tester.element(find.byType(InkWell))) as RenderBox;
+    final splash = Material.of(tester.element(find.byType(InkWell))) as RenderBox;
     expect(splash, paints..circle(color: splashColor));
 
     await tester.pumpAndSettle();
@@ -42,9 +42,9 @@ void main() {
   });
 
   testWidgets('RawMaterialButton responds to shortcut when activated', (WidgetTester tester) async {
-    bool pressed = false;
-    final FocusNode focusNode = FocusNode(debugLabel: 'Test Button');
-    const Color splashColor = Color(0xff00ff00);
+    var pressed = false;
+    final focusNode = FocusNode(debugLabel: 'Test Button');
+    const splashColor = Color(0xff00ff00);
     await tester.pumpWidget(
       Theme(
         data: ThemeData(useMaterial3: false),
@@ -76,7 +76,7 @@ void main() {
     await tester.pump(const Duration(milliseconds: 10));
 
     if (!kIsWeb) {
-      final RenderBox splash = Material.of(tester.element(find.byType(InkWell))) as RenderBox;
+      final splash = Material.of(tester.element(find.byType(InkWell))) as RenderBox;
       expect(splash, paints..circle(color: splashColor));
     }
 
@@ -94,7 +94,7 @@ void main() {
     await tester.sendKeyEvent(LogicalKeyboardKey.space);
     await tester.pump(const Duration(milliseconds: 10));
 
-    final RenderBox splash = Material.of(tester.element(find.byType(InkWell))) as RenderBox;
+    final splash = Material.of(tester.element(find.byType(InkWell))) as RenderBox;
     expect(splash, paints..circle(color: splashColor));
 
     await tester.pumpAndSettle();
@@ -110,7 +110,7 @@ void main() {
   });
 
   testWidgets('materialTapTargetSize.padded expands hit test area', (WidgetTester tester) async {
-    int pressed = 0;
+    var pressed = 0;
 
     await tester.pumpWidget(
       Directionality(
@@ -132,7 +132,7 @@ void main() {
   });
 
   testWidgets('materialTapTargetSize.padded expands semantics area', (WidgetTester tester) async {
-    final SemanticsTester semantics = SemanticsTester(tester);
+    final semantics = SemanticsTester(tester);
     await tester.pumpWidget(
       Directionality(
         textDirection: TextDirection.ltr,
@@ -176,9 +176,9 @@ void main() {
   });
 
   testWidgets('Ink splash from center tap originates in correct location', (WidgetTester tester) async {
-    const Color highlightColor = Color(0xAAFF0000);
-    const Color splashColor = Color(0xAA0000FF);
-    const Color fillColor = Color(0xFFEF5350);
+    const highlightColor = Color(0xAAFF0000);
+    const splashColor = Color(0xAA0000FF);
+    const fillColor = Color(0xFFEF5350);
 
     await tester.pumpWidget(
       Theme(
@@ -204,16 +204,16 @@ void main() {
     await tester.pump(); // start gesture
     await tester.pump(const Duration(milliseconds: 200)); // wait for splash to be well under way
 
-    final RenderBox box = Material.of(tester.element(find.byType(InkWell))) as RenderBox;
+    final box = Material.of(tester.element(find.byType(InkWell))) as RenderBox;
     // centered in material button.
     expect(box, paints..circle(x: 44.0, y: 18.0, color: splashColor));
     await gesture.up();
   });
 
   testWidgets('Ink splash from tap above material originates in correct location', (WidgetTester tester) async {
-    const Color highlightColor = Color(0xAAFF0000);
-    const Color splashColor = Color(0xAA0000FF);
-    const Color fillColor = Color(0xFFEF5350);
+    const highlightColor = Color(0xAAFF0000);
+    const splashColor = Color(0xAA0000FF);
+    const fillColor = Color(0xFFEF5350);
 
     await tester.pumpWidget(
       Theme(
@@ -238,7 +238,7 @@ void main() {
     final TestGesture gesture = await tester.startGesture(top);
     await tester.pump(); // start gesture
     await tester.pump(const Duration(milliseconds: 200)); // wait for splash to be well under way
-    final RenderBox box = Material.of(tester.element(find.byType(InkWell))) as RenderBox;
+    final box = Material.of(tester.element(find.byType(InkWell))) as RenderBox;
     // paints above material
     expect(box, paints..circle(x: 44.0, y: 0.0, color: splashColor));
     await gesture.up();
@@ -275,7 +275,7 @@ void main() {
   });
 
   testWidgets('smaller child is hit testable', (WidgetTester tester) async {
-    const Key key = Key('test');
+    const key = Key('test');
     await tester.pumpWidget(
       MaterialApp(
         home: Column(
@@ -300,7 +300,7 @@ void main() {
   });
 
   testWidgets('RawMaterialButton can be expanded by parent constraints', (WidgetTester tester) async {
-    const Key key = Key('test');
+    const key = Key('test');
     await tester.pumpWidget(
       MaterialApp(
         home: Column(
@@ -320,9 +320,9 @@ void main() {
   });
 
   testWidgets('RawMaterialButton handles focus', (WidgetTester tester) async {
-    final FocusNode focusNode = FocusNode(debugLabel: 'Button Focus');
-    const Key key = Key('test');
-    const Color focusColor = Color(0xff00ff00);
+    final focusNode = FocusNode(debugLabel: 'Button Focus');
+    const key = Key('test');
+    const focusColor = Color(0xff00ff00);
 
     FocusManager.instance.highlightStrategy = FocusHighlightStrategy.alwaysTraditional;
     await tester.pumpWidget(
@@ -338,7 +338,7 @@ void main() {
         ),
       ),
     );
-    final RenderBox box = Material.of(tester.element(find.byType(InkWell))) as RenderBox;
+    final box = Material.of(tester.element(find.byType(InkWell))) as RenderBox;
     expect(box, isNot(paints..rect(color: focusColor)));
 
     focusNode.requestFocus();
@@ -349,7 +349,7 @@ void main() {
   });
 
   testWidgets('RawMaterialButton loses focus when disabled.', (WidgetTester tester) async {
-    final FocusNode focusNode = FocusNode(debugLabel: 'RawMaterialButton');
+    final focusNode = FocusNode(debugLabel: 'RawMaterialButton');
     await tester.pumpWidget(
       MaterialApp(
         home: Center(
@@ -384,8 +384,8 @@ void main() {
   });
 
   testWidgets("Disabled RawMaterialButton can't be traversed to.", (WidgetTester tester) async {
-    final FocusNode focusNode1 = FocusNode(debugLabel: '$RawMaterialButton 1');
-    final FocusNode focusNode2 = FocusNode(debugLabel: '$RawMaterialButton 2');
+    final focusNode1 = FocusNode(debugLabel: '$RawMaterialButton 1');
+    final focusNode2 = FocusNode(debugLabel: '$RawMaterialButton 2');
 
     await tester.pumpWidget(
       MaterialApp(
@@ -427,8 +427,8 @@ void main() {
   });
 
   testWidgets('RawMaterialButton handles hover', (WidgetTester tester) async {
-    const Key key = Key('test');
-    const Color hoverColor = Color(0xff00ff00);
+    const key = Key('test');
+    const hoverColor = Color(0xff00ff00);
 
     FocusManager.instance.highlightStrategy = FocusHighlightStrategy.alwaysTraditional;
     await tester.pumpWidget(
@@ -444,7 +444,7 @@ void main() {
         ),
       ),
     );
-    final RenderBox box = Material.of(tester.element(find.byType(InkWell))) as RenderBox;
+    final box = Material.of(tester.element(find.byType(InkWell))) as RenderBox;
     final TestGesture gesture = await tester.createGesture(kind: PointerDeviceKind.mouse);
     await gesture.addPointer();
     expect(box, isNot(paints..rect(color: hoverColor)));
@@ -500,8 +500,8 @@ void main() {
   });
 
   testWidgets('RawMaterialButton onPressed and onLongPress callbacks are distinctly recognized', (WidgetTester tester) async {
-    bool didPressButton = false;
-    bool didLongPressButton = false;
+    var didPressButton = false;
+    var didLongPressButton = false;
 
     await tester.pumpWidget(
       Directionality(
@@ -531,8 +531,8 @@ void main() {
   });
 
   testWidgets('RawMaterialButton responds to density changes.', (WidgetTester tester) async {
-    const Key key = Key('test');
-    const Key childKey = Key('test child');
+    const key = Key('test');
+    const childKey = Key('test child');
 
     Future<void> buildTest(VisualDensity visualDensity, {bool useText = false}) async {
       return tester.pumpWidget(

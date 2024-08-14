@@ -9,7 +9,7 @@ void main() {
   TestWidgetsFlutterBinding.ensureInitialized();
 
   testWidgets('can press', (WidgetTester tester) async {
-    bool pressed = false;
+    var pressed = false;
     await tester.pumpWidget(
       CupertinoApp(
         home: Center(
@@ -46,7 +46,7 @@ void main() {
       of: find.byType(CupertinoButton),
       matching: find.byType(DecoratedBox),
     ));
-    BoxDecoration boxDecoration = decoratedBox.decoration as BoxDecoration;
+    var boxDecoration = decoratedBox.decoration as BoxDecoration;
     expect(boxDecoration.color, CupertinoColors.transparent);
 
     // Make a "down" gesture on the button.
