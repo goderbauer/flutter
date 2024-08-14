@@ -37,7 +37,7 @@ class _CheckboxExampleState extends State<CheckboxExample> {
   @override
   Widget build(BuildContext context) {
     Color getColor(Set<WidgetState> states) {
-      const Set<WidgetState> interactiveStates = <WidgetState>{
+      const interactiveStates = <WidgetState>{
         WidgetState.pressed,
         WidgetState.hovered,
         WidgetState.focused,

@@ -31,7 +31,7 @@ void main() {
       const example.SharedAppDataExampleApp(),
     );
 
-    for (int i = 0; i < 10; i++) {
+    for (var i = 0; i < 10; i++) {
       final example.SharedObject sharedObject = getSharedObject(tester);
 
       final Finder buttonFinder = find.ancestor(

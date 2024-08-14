@@ -26,7 +26,7 @@ void main() {
       const example.ActionsExampleApp(),
     );
 
-    int value = 0;
+    var value = 0;
 
     while (value < 10) {
       expect(find.text('Value: $value'), findsOneWidget);
@@ -78,7 +78,7 @@ void main() {
   });
 
   testWidgets('SaveButton tap resets dirty status and adds log', (WidgetTester tester) async {
-    final List<String?> log = <String?>[];
+    final log = <String?>[];
 
     final DebugPrintCallback originalDebugPrint = debugPrint;
     debugPrint = (String? message, {int? wrapWidth}) {

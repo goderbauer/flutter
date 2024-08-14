@@ -30,7 +30,7 @@ class MaterialStatePropertyExample extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     Color getColor(Set<MaterialState> states) {
-      const Set<MaterialState> interactiveStates = <MaterialState>{
+      const interactiveStates = <MaterialState>{
         MaterialState.pressed,
         MaterialState.hovered,
         MaterialState.focused,

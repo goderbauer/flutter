@@ -13,7 +13,7 @@ void main() {
       const example.AnimatedSwitcherExampleApp(),
     );
 
-    int counter = 0;
+    var counter = 0;
 
     expect(find.text('$counter'), findsOneWidget);
 
@@ -40,7 +40,7 @@ void main() {
     );
 
     // The animation duration defined in the example app.
-    const Duration animationDuration = Duration(milliseconds: 500);
+    const animationDuration = Duration(milliseconds: 500);
 
     final Finder zeroTransitionFinder = find.ancestor(
       of: find.text('0'),

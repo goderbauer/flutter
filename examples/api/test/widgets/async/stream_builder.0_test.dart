@@ -30,7 +30,7 @@ void main() {
   });
 
   testWidgets('BidsStatus correctly displays error state', (WidgetTester tester) async {
-    final StreamController<int> controller = StreamController<int>();
+    final controller = StreamController<int>();
     addTearDown(controller.close);
 
     controller.onListen = () {
@@ -61,7 +61,7 @@ void main() {
   });
 
   testWidgets('BidsStatus correctly displays waiting state', (WidgetTester tester) async {
-    final StreamController<int> controller = StreamController<int>();
+    final controller = StreamController<int>();
     addTearDown(controller.close);
 
     await tester.pumpWidget(
@@ -75,7 +75,7 @@ void main() {
   });
 
   testWidgets('BidsStatus correctly displays active state', (WidgetTester tester) async {
-    final StreamController<int> controller = StreamController<int>();
+    final controller = StreamController<int>();
     addTearDown(controller.close);
 
     controller.onListen = () {
@@ -94,7 +94,7 @@ void main() {
   });
 
   testWidgets('BidsStatus correctly displays done state', (WidgetTester tester) async {
-    final StreamController<int> controller = StreamController<int>();
+    final controller = StreamController<int>();
     controller.close();
 
     await tester.pumpWidget(

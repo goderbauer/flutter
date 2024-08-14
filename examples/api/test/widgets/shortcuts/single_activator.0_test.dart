@@ -35,7 +35,7 @@ void main() {
           const example.SingleActivatorExampleApp(),
         );
 
-        for (int counter = 0; counter < 10; counter++) {
+        for (var counter = 0; counter < 10; counter++) {
           expect(find.text('count: $counter'), findsOneWidget);
 
           await pressControlC(tester);

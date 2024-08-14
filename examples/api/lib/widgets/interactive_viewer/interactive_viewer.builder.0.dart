@@ -43,7 +43,7 @@ class _IVBuilderExampleState extends State<_IVBuilderExample> {
     double xMax = quad.point0.x;
     double yMin = quad.point0.y;
     double yMax = quad.point0.y;
-    for (final Vector3 point in <Vector3>[
+    for (final point in <Vector3>[
       quad.point1,
       quad.point2,
       quad.point3,

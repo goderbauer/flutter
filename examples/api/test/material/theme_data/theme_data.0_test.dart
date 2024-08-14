@@ -11,7 +11,7 @@ void main() {
   testWidgets('ThemeData basics', (WidgetTester tester) async {
     await tester.pumpWidget(const example.ThemeDataExampleApp());
 
-    final ColorScheme colorScheme = ColorScheme.fromSeed(
+    final colorScheme = ColorScheme.fromSeed(
       seedColor: Colors.indigo,
     );
 

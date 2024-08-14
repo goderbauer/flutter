@@ -12,7 +12,7 @@ void main() {
       const example.InheritedModelApp(),
     );
 
-    BoxDecoration? decoration = tester.widget<AnimatedContainer>(
+    var decoration = tester.widget<AnimatedContainer>(
       find.byType(AnimatedContainer).first,
     ).decoration as BoxDecoration?;
     expect(decoration!.color, Colors.blue);

@@ -54,7 +54,7 @@ void main() {
   });
 
   testWidgets('MenuBar is wrapped in a SafeArea', (WidgetTester tester) async {
-    const double safeAreaPadding = 100.0;
+    const safeAreaPadding = 100.0;
     await tester.pumpWidget(
       const MediaQuery(
         data: MediaQueryData(

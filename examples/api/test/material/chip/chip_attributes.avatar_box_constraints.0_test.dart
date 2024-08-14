@@ -8,9 +8,9 @@ import 'package:flutter_test/flutter_test.dart';
 
 void main() {
   testWidgets('RawChip.avatarBoxConstraints updates avatar size constraints', (WidgetTester tester) async {
-    const double border = 1.0;
-    const double iconSize = 18.0;
-    const double padding = 8.0;
+    const border = 1.0;
+    const iconSize = 18.0;
+    const padding = 8.0;
 
     await tester.pumpWidget(
       const example.AvatarBoxConstraintsApp(),

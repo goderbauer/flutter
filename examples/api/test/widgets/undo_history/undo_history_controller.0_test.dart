@@ -13,7 +13,7 @@ void main() {
     );
 
     // Equals to UndoHistoryState._kThrottleDuration.
-    const Duration kThrottleDuration = Duration(milliseconds: 500);
+    const kThrottleDuration = Duration(milliseconds: 500);
 
     expect(find.byType(TextField), findsOne);
     expect(find.widgetWithText(TextButton, 'Undo'), findsOne);

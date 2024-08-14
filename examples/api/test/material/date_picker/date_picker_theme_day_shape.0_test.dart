@@ -8,11 +8,11 @@ import 'package:flutter_test/flutter_test.dart';
 
 void main() {
   testWidgets('DatePickerThemeData.dayShape updates day selection shape decoration', (WidgetTester tester) async {
-    final ThemeData theme = ThemeData();
+    final theme = ThemeData();
     final OutlinedBorder dayShape = RoundedRectangleBorder(borderRadius: BorderRadius.circular(8.0));
     const Color todayBackgroundColor = Colors.amber;
     const Color todayForegroundColor = Colors.black;
-    const BorderSide todayBorder = BorderSide(width: 2);
+    const todayBorder = BorderSide(width: 2);
 
     await tester.pumpWidget(
       const example.DatePickerApp(),
@@ -21,7 +21,7 @@ void main() {
     await tester.tap(find.text('Open Date Picker'));
     await tester.pumpAndSettle();
 
-    ShapeDecoration dayShapeDecoration = tester.widget<DecoratedBox>(find.ancestor(
+    var dayShapeDecoration = tester.widget<DecoratedBox>(find.ancestor(
       of: find.text('15'),
       matching: find.byType(DecoratedBox),
     )).decoration as ShapeDecoration;

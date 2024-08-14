@@ -22,11 +22,11 @@ void main() {
       ),
     );
 
-    final ShapeDecoration decoration = ink.decoration! as ShapeDecoration;
+    final decoration = ink.decoration! as ShapeDecoration;
     expect(decoration.color, Colors.lightBlue);
     expect(decoration.shape, const CircleBorder());
 
-    final IconButton iconButton = ink.child! as IconButton;
+    final iconButton = ink.child! as IconButton;
     expect(iconButton.color, Colors.white) ;
   });
 }

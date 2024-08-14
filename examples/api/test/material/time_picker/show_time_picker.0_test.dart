@@ -8,8 +8,8 @@ import 'package:flutter_test/flutter_test.dart';
 
 void main() {
   testWidgets('Can open and modify time picker', (WidgetTester tester) async {
-    const String openPicker = 'Open time picker';
-    final List<String> options = <String>[
+    const openPicker = 'Open time picker';
+    final options = <String>[
       '$TimePickerEntryMode',
       ... TimePickerEntryMode.values.map<String>((TimePickerEntryMode value) => value.name),
       '$ThemeMode',
@@ -33,7 +33,7 @@ void main() {
       const example.ShowTimePickerApp(),
     );
 
-    for (final String option in options) {
+    for (final option in options) {
       expect(find.text(option), findsOneWidget, reason: 'Unable to find $option widget in example.');
     }
 

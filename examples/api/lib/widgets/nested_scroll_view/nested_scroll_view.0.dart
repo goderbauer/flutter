@@ -24,7 +24,7 @@ class NestedScrollViewExample extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final List<String> tabs = <String>['Tab 1', 'Tab 2'];
+    final tabs = <String>['Tab 1', 'Tab 2'];
     return DefaultTabController(
       length: tabs.length, // This is the number of tabs.
       child: Scaffold(

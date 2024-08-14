@@ -8,9 +8,9 @@ import 'package:flutter_test/flutter_test.dart';
 
 void main() {
   testWidgets('Can use Overlay to highlight NavigationBar destination', (WidgetTester tester) async {
-    const String explorePage = 'Explore page';
-    const String commutePage = 'Commute page';
-    const String savedPage = 'Saved page';
+    const explorePage = 'Explore page';
+    const commutePage = 'Commute page';
+    const savedPage = 'Saved page';
 
     await tester.pumpWidget(
       const example.OverlayApp(),

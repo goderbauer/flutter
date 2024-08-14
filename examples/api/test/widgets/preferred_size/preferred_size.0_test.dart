@@ -22,7 +22,7 @@ void main() {
         ),
       );
 
-      final RenderBox appBarContent = tester.renderObject(
+      final appBarContent = tester.renderObject(
         find.byType(example.AppBarContent),
       ) as RenderBox;
 

@@ -76,7 +76,7 @@ class _TreeSliverExampleState extends State<TreeSliverExample> {
     AnimationStyle toggleAnimationStyle,
   ) {
     final bool isParentNode = node.children.isNotEmpty;
-    final BorderSide border = BorderSide(
+    final border = BorderSide(
       width: 2,
       color: Colors.purple[300]!,
     );
@@ -144,7 +144,7 @@ class _TreeSliverExampleState extends State<TreeSliverExample> {
   Widget build(BuildContext context) {
     // This example is assumes the full screen is available.
     final Size screenSize = MediaQuery.sizeOf(context);
-    final List<Widget> selectedChildren = <Widget>[];
+    final selectedChildren = <Widget>[];
     if (_selectedNode != null) {
       selectedChildren.addAll(<Widget>[
         const Spacer(),

@@ -16,10 +16,10 @@ void main() {
     );
 
     // The animation duration defined in the example app.
-    const Duration animationDuration = Duration(seconds: 1);
+    const animationDuration = Duration(seconds: 1);
 
-    const double beginSize = 0.0;
-    const double endSize = 24.0;
+    const beginSize = 0.0;
+    const endSize = 24.0;
 
     final Finder iconButtonFinder = find.byType(IconButton);
 
@@ -49,10 +49,10 @@ void main() {
     await tester.pumpAndSettle();
 
     // The animation duration defined in the example app.
-    const Duration animationDuration = Duration(seconds: 1);
+    const animationDuration = Duration(seconds: 1);
 
-    const double beginSize = 24.0;
-    const double endSize = 48.0;
+    const beginSize = 24.0;
+    const endSize = 48.0;
 
     final Finder iconButtonFinder = find.byType(IconButton);
 
@@ -111,10 +111,10 @@ void main() {
     await tester.pumpAndSettle();
 
     // The animation duration defined in the example app.
-    const Duration animationDuration = Duration(seconds: 1);
+    const animationDuration = Duration(seconds: 1);
 
-    const double beginSize = 24.0;
-    const double endSize = 48.0;
+    const beginSize = 24.0;
+    const endSize = 48.0;
     final double middleSize = lerpDouble(beginSize, endSize, 0.5)!;
 
     final Finder iconButtonFinder = find.byType(IconButton);

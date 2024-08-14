@@ -13,7 +13,7 @@ void main() {
       const example.TextEditingControllerExampleApp(),
     );
 
-    const String input = 'Almost Everything Is a WIDGET! 💙';
+    const input = 'Almost Everything Is a WIDGET! 💙';
 
     await tester.enterText(find.byType(TextFormField), input);
     await tester.pump();
@@ -30,7 +30,7 @@ void main() {
       const example.TextEditingControllerExampleApp(),
     );
 
-    const String input = 'flutter';
+    const input = 'flutter';
 
     await tester.enterText(find.byType(TextFormField), input);
     await tester.pump();

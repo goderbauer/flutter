@@ -152,7 +152,7 @@ class _SnackBarExampleState extends State<SnackBarExample> {
     final double? width = _snackBarBehavior == SnackBarBehavior.floating
         ? 400.0
         : null;
-    final String label = _multiLine
+    final label = _multiLine
         ? 'A Snack Bar with quite a lot of text which spans across multiple '
         'lines. You can look at how the Action Label moves around when trying '
         'to layout this text.'
