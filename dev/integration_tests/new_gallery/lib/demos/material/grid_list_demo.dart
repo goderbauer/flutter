@@ -91,7 +91,7 @@ class GridListDemo extends StatelessWidget {
         crossAxisCount: 2,
         mainAxisSpacing: 8,
         crossAxisSpacing: 8,
-        padding: const EdgeInsets.all(8),
+        padding: EdgeInsets.all(8),
         children: _photos(context).map<Widget>((_Photo photo) {
           return _GridDemoPhotoItem(
             photo: photo,
@@ -162,7 +162,7 @@ class _GridDemoPhotoItem extends StatelessWidget {
         return GridTile(
           header: Material(
             color: Colors.transparent,
-            shape: const RoundedRectangleBorder(
+            shape: RoundedRectangleBorder(
               borderRadius: BorderRadius.vertical(top: Radius.circular(4)),
             ),
             clipBehavior: Clip.antiAlias,
@@ -177,7 +177,7 @@ class _GridDemoPhotoItem extends StatelessWidget {
         return GridTile(
           footer: Material(
             color: Colors.transparent,
-            shape: const RoundedRectangleBorder(
+            shape: RoundedRectangleBorder(
               borderRadius: BorderRadius.vertical(bottom: Radius.circular(4)),
             ),
             clipBehavior: Clip.antiAlias,

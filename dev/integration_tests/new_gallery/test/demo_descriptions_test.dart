@@ -19,7 +19,7 @@ bool _isUnique(List<String> list) {
   return true;
 }
 
-const ListEquality<String> _stringListEquality = ListEquality<String>();
+ListEquality<String> _stringListEquality = ListEquality<String>();
 
 void main() {
   test('_isUnique works correctly', () {

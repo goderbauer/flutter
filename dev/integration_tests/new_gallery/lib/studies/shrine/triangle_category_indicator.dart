@@ -6,7 +6,7 @@ import 'package:flutter/material.dart';
 
 import 'colors.dart';
 
-const List<Offset> _vertices = <Offset>[
+List<Offset> _vertices = <Offset>[
   Offset(0, -14),
   Offset(-17, 14),
   Offset(17, 14),
@@ -18,7 +18,7 @@ const List<Offset> _vertices = <Offset>[
 ];
 
 class TriangleCategoryIndicator extends CustomPainter {
-  const TriangleCategoryIndicator(
+  TriangleCategoryIndicator(
     this.triangleWidth,
     this.triangleHeight,
   );

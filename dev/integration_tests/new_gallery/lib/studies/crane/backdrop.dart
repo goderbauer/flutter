@@ -38,8 +38,8 @@ class _FrontLayer extends StatefulWidget {
 class _FrontLayerState extends State<_FrontLayer> {
   List<Destination>? destinations;
 
-  static const double frontLayerBorderRadius = 16.0;
-  static const EdgeInsets bottomPadding = EdgeInsets.only(bottom: 120);
+  static double frontLayerBorderRadius = 16.0;
+  static EdgeInsets bottomPadding = EdgeInsets.only(bottom: 120);
 
   @override
   void didChangeDependencies() {
@@ -64,7 +64,7 @@ class _FrontLayerState extends State<_FrontLayer> {
     return Align(
       alignment: AlignmentDirectional.centerStart,
       child: Padding(
-        padding: const EdgeInsets.only(
+        padding: EdgeInsets.only(
           top: 20,
           bottom: 22,
         ),
@@ -91,7 +91,7 @@ class _FrontLayerState extends State<_FrontLayer> {
         child: PhysicalShape(
           elevation: 16,
           color: cranePrimaryWhite,
-          clipper: const ShapeBorderClipper(
+          clipper: ShapeBorderClipper(
             shape: RoundedRectangleBorder(
               borderRadius: BorderRadius.only(
                 topLeft: Radius.circular(frontLayerBorderRadius),
@@ -105,7 +105,7 @@ class _FrontLayerState extends State<_FrontLayer> {
                         horizontal:
                             isSmallDesktop ? appPaddingSmall : appPaddingLarge)
                     .add(bottomPadding)
-                : const EdgeInsets.symmetric(horizontal: 20).add(bottomPadding),
+                : EdgeInsets.symmetric(horizontal: 20).add(bottomPadding),
             child: Column(
               children: <Widget>[
                 _header(),
@@ -163,7 +163,7 @@ class _BackdropState extends State<Backdrop>
 
   // How much the 'sleep' front layer is vertically offset relative to other
   // front layers, in pixels, with the mobile layout.
-  static const double _sleepLayerTopOffset = 60.0;
+  static final double _sleepLayerTopOffset = 60.0;
 
   @override
   String get restorationId => 'tab_non_scrollable_demo';
@@ -190,13 +190,13 @@ class _BackdropState extends State<Backdrop>
     final Animation<double> tabControllerAnimation = _tabController.animation!;
 
     _flyLayerHorizontalOffset = tabControllerAnimation.drive(
-        Tween<Offset>(begin: Offset.zero, end: const Offset(-0.05, 0)));
+        Tween<Offset>(begin: Offset.zero, end: Offset(-0.05, 0)));
 
     _sleepLayerHorizontalOffset = tabControllerAnimation.drive(
-        Tween<Offset>(begin: const Offset(0.05, 0), end: Offset.zero));
+        Tween<Offset>(begin: Offset(0.05, 0), end: Offset.zero));
 
     _eatLayerHorizontalOffset = tabControllerAnimation.drive(Tween<Offset>(
-        begin: const Offset(0.10, 0), end: const Offset(0.05, 0)));
+        begin: Offset(0.10, 0), end: Offset(0.05, 0)));
   }
 
   @override
@@ -208,7 +208,7 @@ class _BackdropState extends State<Backdrop>
 
   void _handleTabs(int tabIndex) {
     _tabController.animateTo(tabIndex,
-        duration: const Duration(milliseconds: 300));
+        duration: Duration(milliseconds: 300));
   }
 
   @override
@@ -219,7 +219,7 @@ class _BackdropState extends State<Backdrop>
     return Material(
       color: cranePurple800,
       child: Padding(
-        padding: const EdgeInsets.only(top: 12),
+        padding: EdgeInsets.only(top: 12),
         child: FocusTraversalGroup(
           policy: ReadingOrderTraversalPolicy(),
           child: Scaffold(
@@ -259,7 +259,7 @@ class _BackdropState extends State<Backdrop>
                           constraints.maxHeight + _sleepLayerTopOffset * 2,
                       child: TabBarView(
                         physics: isDesktop
-                            ? const NeverScrollableScrollPhysics()
+                            ? NeverScrollableScrollPhysics()
                             : null, // use default TabBarView physics
                         controller: _tabController,
                         children: <Widget>[
@@ -335,7 +335,7 @@ class _CraneAppBarState extends State<CraneAppBar> {
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           children: <Widget>[
-            const ExcludeSemantics(
+            ExcludeSemantics(
               child: FadeInImagePlaceholder(
                 image: ResizeImage(
                   AssetImage(
@@ -355,7 +355,7 @@ class _CraneAppBarState extends State<CraneAppBar> {
             ),
             Expanded(
               child: Padding(
-                padding: const EdgeInsetsDirectional.only(start: 24),
+                padding: EdgeInsetsDirectional.only(start: 24),
                 child: Theme(
                   data: Theme.of(context).copyWith(
                     splashColor: Colors.transparent,
@@ -366,16 +366,16 @@ class _CraneAppBarState extends State<CraneAppBar> {
                       textScaleFactor: textScaleFactor,
                     ),
                     controller: widget.tabController,
-                    labelPadding: const EdgeInsets.symmetric(horizontal: 32),
+                    labelPadding: EdgeInsets.symmetric(horizontal: 32),
                     isScrollable: true,
                     // left-align tabs on desktop
                     labelStyle: Theme.of(context).textTheme.labelLarge,
                     labelColor: cranePrimaryWhite,
-                    physics: const BouncingScrollPhysics(),
+                    physics: BouncingScrollPhysics(),
                     unselectedLabelColor: cranePrimaryWhite.withOpacity(.6),
                     onTap: (int index) => widget.tabController.animateTo(
                       index,
-                      duration: const Duration(milliseconds: 300),
+                      duration: Duration(milliseconds: 300),
                     ),
                     tabs: <Widget>[
                       Tab(text: localizations.craneFly),

@@ -5,7 +5,7 @@
 import 'package:flutter/material.dart';
 import '../../gallery_localizations.dart';
 
-const String _kGalleryAssetsPackage = 'flutter_gallery_assets';
+String _kGalleryAssetsPackage = 'flutter_gallery_assets';
 
 // BEGIN cardsDemo
 
@@ -16,7 +16,7 @@ enum CardType {
 }
 
 class TravelDestination {
-  const TravelDestination({
+  TravelDestination({
     required this.assetName,
     required this.assetPackage,
     required this.title,
@@ -73,7 +73,7 @@ class TravelDestinationItem extends StatelessWidget {
       {super.key, required this.destination, this.shape});
 
   // This height will allow for all the Card's content to fit comfortably within the card.
-  static const double height = 360.0;
+  static double height = 360.0;
   final TravelDestination destination;
   final ShapeBorder? shape;
 
@@ -83,7 +83,7 @@ class TravelDestinationItem extends StatelessWidget {
       top: false,
       bottom: false,
       child: Padding(
-        padding: const EdgeInsets.all(8),
+        padding: EdgeInsets.all(8),
         child: Column(
           children: <Widget>[
             SectionTitle(
@@ -116,7 +116,7 @@ class TappableTravelDestinationItem extends StatelessWidget {
   });
 
   // This height will allow for all the Card's content to fit comfortably within the card.
-  static const double height = 298.0;
+  static double height = 298.0;
   final TravelDestination destination;
   final ShapeBorder? shape;
 
@@ -126,7 +126,7 @@ class TappableTravelDestinationItem extends StatelessWidget {
       top: false,
       bottom: false,
       child: Padding(
-        padding: const EdgeInsets.all(8),
+        padding: EdgeInsets.all(8),
         child: Column(
           children: <Widget>[
             SectionTitle(
@@ -173,7 +173,7 @@ class SelectableTravelDestinationItem extends StatelessWidget {
   final VoidCallback onSelected;
 
   // This height will allow for all the Card's content to fit comfortably within the card.
-  static const double height = 298.0;
+  static double height = 298.0;
 
   @override
   Widget build(BuildContext context) {
@@ -186,7 +186,7 @@ class SelectableTravelDestinationItem extends StatelessWidget {
       top: false,
       bottom: false,
       child: Padding(
-        padding: const EdgeInsets.all(8),
+        padding: EdgeInsets.all(8),
         child: Column(
           children: <Widget>[
             SectionTitle(title: GalleryLocalizations.of(context)!.selectable),
@@ -224,7 +224,7 @@ class SelectableTravelDestinationItem extends StatelessWidget {
                       Align(
                         alignment: Alignment.topRight,
                         child: Padding(
-                          padding: const EdgeInsets.all(8),
+                          padding: EdgeInsets.all(8),
                           child: Icon(
                             Icons.check_circle,
                             color: isSelected
@@ -257,7 +257,7 @@ class SectionTitle extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.fromLTRB(4, 4, 4, 12),
+      padding: EdgeInsets.fromLTRB(4, 4, 4, 12),
       child: Align(
         alignment: Alignment.centerLeft,
         child: Text(title, style: Theme.of(context).textTheme.titleMedium),
@@ -325,7 +325,7 @@ class TravelDestinationContent extends StatelessWidget {
         Semantics(
           container: true,
           child: Padding(
-            padding: const EdgeInsets.fromLTRB(16, 16, 16, 0),
+            padding: EdgeInsets.fromLTRB(16, 16, 16, 0),
             child: DefaultTextStyle(
               softWrap: false,
               overflow: TextOverflow.ellipsis,
@@ -336,7 +336,7 @@ class TravelDestinationContent extends StatelessWidget {
                   // This array contains the three line description on each card
                   // demo.
                   Padding(
-                    padding: const EdgeInsets.only(bottom: 8),
+                    padding: EdgeInsets.only(bottom: 8),
                     child: Text(
                       destination.description,
                       style: descriptionStyle.copyWith(color: Colors.black54),
@@ -352,7 +352,7 @@ class TravelDestinationContent extends StatelessWidget {
         if (destination.cardType == CardType.standard)
           // share, explore buttons
           Padding(
-            padding: const EdgeInsets.all(8),
+            padding: EdgeInsets.all(8),
             child: OverflowBar(
               alignment: MainAxisAlignment.start,
               spacing: 8,
@@ -411,11 +411,11 @@ class _CardsDemoState extends State<CardsDemo> with RestorationMixin {
       body: Scrollbar(
         child: ListView(
           restorationId: 'cards_demo_list_view',
-          padding: const EdgeInsets.only(top: 8, left: 8, right: 8),
+          padding: EdgeInsets.only(top: 8, left: 8, right: 8),
           children: <Widget>[
             for (final TravelDestination destination in destinations(context))
               Container(
-                margin: const EdgeInsets.only(bottom: 8),
+                margin: EdgeInsets.only(bottom: 8),
                 child: switch (destination.cardType) {
                   CardType.standard => TravelDestinationItem(destination: destination),
                   CardType.tappable => TappableTravelDestinationItem(destination: destination),

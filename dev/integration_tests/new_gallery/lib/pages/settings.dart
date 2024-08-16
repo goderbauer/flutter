@@ -68,7 +68,7 @@ class _SettingsPageState extends State<SettingsPage> {
 
     _staggerSettingsItemsAnimation = CurvedAnimation(
       parent: widget.animationController,
-      curve: const Interval(
+      curve: Interval(
         0.4,
         1.0,
         curve: Curves.ease,
@@ -270,7 +270,7 @@ class _SettingsPageState extends State<SettingsPage> {
       child: Padding(
         padding: isDesktop
             ? EdgeInsets.zero
-            : const EdgeInsets.only(
+            : EdgeInsets.only(
                 bottom: galleryHeaderHeight,
               ),
         // Remove ListView top padding as it is already accounted for.
@@ -280,9 +280,9 @@ class _SettingsPageState extends State<SettingsPage> {
           child: ListView(
             children: <Widget>[
               if (isDesktop)
-                const SizedBox(height: firstHeaderDesktopTopPadding),
+                SizedBox(height: firstHeaderDesktopTopPadding),
               Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 32),
+                padding: EdgeInsets.symmetric(horizontal: 32),
                 child: ExcludeSemantics(
                   child: Header(
                     color: Theme.of(context).colorScheme.onSurface,
@@ -297,14 +297,14 @@ class _SettingsPageState extends State<SettingsPage> {
                   animation: _staggerSettingsItemsAnimation,
                   children: settingsListItems,
                 ),
-                const SizedBox(height: 16),
+                SizedBox(height: 16),
                 Divider(thickness: 2, height: 0, color: colorScheme.outline),
-                const SizedBox(height: 12),
-                const SettingsAbout(),
-                const SettingsFeedback(),
-                const SizedBox(height: 12),
+                SizedBox(height: 12),
+                SettingsAbout(),
+                SettingsFeedback(),
+                SizedBox(height: 12),
                 Divider(thickness: 2, height: 0, color: colorScheme.outline),
-                const SettingsAttribution(),
+                SettingsAttribution(),
               ],
             ],
           ),
@@ -409,7 +409,7 @@ class _SettingsLink extends StatelessWidget {
             ),
             Flexible(
               child: Padding(
-                padding: const EdgeInsetsDirectional.only(
+                padding: EdgeInsetsDirectional.only(
                   start: 16,
                   top: 12,
                   bottom: 12,
@@ -442,14 +442,14 @@ class _AnimateSettingsListItems extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    const double dividingPadding = 4.0;
+    final double dividingPadding = 4.0;
     final Tween<double> dividerTween = Tween<double>(
       begin: 0,
       end: dividingPadding,
     );
 
     return Padding(
-      padding: const EdgeInsets.symmetric(vertical: 16.0),
+      padding: EdgeInsets.symmetric(vertical: 16.0),
       child: Column(
         children: <Widget>[
           for (final Widget child in children)

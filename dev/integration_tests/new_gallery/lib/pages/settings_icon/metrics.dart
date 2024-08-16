@@ -6,40 +6,40 @@ import 'dart:math';
 import 'package:flutter/material.dart';
 
 // Color gradients.
-const Color pinkLeft = Color(0xFFFF5983);
-const Color pinkRight = Color(0xFFFF8383);
+Color pinkLeft = Color(0xFFFF5983);
+Color pinkRight = Color(0xFFFF8383);
 
-const Color tealLeft = Color(0xFF1CDDC8);
-const Color tealRight = Color(0xFF00A5B3);
+Color tealLeft = Color(0xFF1CDDC8);
+Color tealRight = Color(0xFF00A5B3);
 
 // Dimensions.
-const int unitHeight = 1;
-const int unitWidth = 1;
+int unitHeight = 1;
+int unitWidth = 1;
 
-const double stickLength = 5 / 9;
-const double stickWidth = 5 / 36;
-const double stickRadius = stickWidth / 2;
-const double knobDiameter = 5 / 54;
-const double knobRadius = knobDiameter / 2;
-const double stickGap = 5 / 54;
+double stickLength = 5 / 9;
+double stickWidth = 5 / 36;
+double stickRadius = stickWidth / 2;
+double knobDiameter = 5 / 54;
+double knobRadius = knobDiameter / 2;
+double stickGap = 5 / 54;
 
 // Locations.
-const double knobDistanceFromCenter = stickGap / 2 + stickWidth / 2;
-const Offset lowerKnobCenter = Offset(0, knobDistanceFromCenter);
-const Offset upperKnobCenter = Offset(0, -knobDistanceFromCenter);
+double knobDistanceFromCenter = stickGap / 2 + stickWidth / 2;
+Offset lowerKnobCenter = Offset(0, knobDistanceFromCenter);
+Offset upperKnobCenter = Offset(0, -knobDistanceFromCenter);
 
-const double knobDeviation = stickLength / 2 - stickRadius;
+double knobDeviation = stickLength / 2 - stickRadius;
 
 // Key moments in animation.
-const double _colorKnobContractionBegins = 1 / 23;
-const double _monoKnobExpansionEnds = 11 / 23;
-const double _colorKnobContractionEnds = 14 / 23;
+double _colorKnobContractionBegins = 1 / 23;
+double _monoKnobExpansionEnds = 11 / 23;
+double _colorKnobContractionEnds = 14 / 23;
 
 // Stages.
 bool isTransitionPhase(double time) => time < _colorKnobContractionEnds;
 
 // Curve easing.
-const Cubic _curve = Curves.easeInOutCubic;
+Cubic _curve = Curves.easeInOutCubic;
 
 double _progress(
   double time, {

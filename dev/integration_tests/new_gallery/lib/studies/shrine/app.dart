@@ -24,8 +24,8 @@ import 'theme.dart';
 class ShrineApp extends StatefulWidget {
   const ShrineApp({super.key});
 
-  static const String loginRoute = routes.loginRoute;
-  static const String homeRoute = routes.homeRoute;
+  static String loginRoute = routes.loginRoute;
+  static String homeRoute = routes.homeRoute;
 
   @override
   State<ShrineApp> createState() => _ShrineAppState();
@@ -65,7 +65,7 @@ class _ShrineAppState extends State<ShrineApp>
     super.initState();
     _controller = AnimationController(
       vsync: this,
-      duration: const Duration(milliseconds: 450),
+      duration: Duration(milliseconds: 450),
       value: 1,
     );
     // Save state restoration animation values only when the cart page
@@ -76,7 +76,7 @@ class _ShrineAppState extends State<ShrineApp>
       }
     });
     _expandingController = AnimationController(
-      duration: const Duration(milliseconds: 500),
+      duration: Duration(milliseconds: 500),
       vsync: this,
     );
     // Save state restoration animation values only when the menu page
@@ -99,16 +99,16 @@ class _ShrineAppState extends State<ShrineApp>
 
   Widget mobileBackdrop() {
     return Backdrop(
-      frontLayer: const ProductPage(),
+      frontLayer: ProductPage(),
       backLayer: CategoryMenuPage(onCategoryTap: () => _controller.forward()),
-      frontTitle: const Text('SHRINE'),
+      frontTitle: Text('SHRINE'),
       backTitle: Text(GalleryLocalizations.of(context)!.shrineMenuCaption),
       controller: _controller,
     );
   }
 
   Widget desktopBackdrop() {
-    return const DesktopBackdrop(
+    return DesktopBackdrop(
       frontLayer: ProductPage(),
       backLayer: CategoryMenuPage(),
     );
@@ -157,13 +157,13 @@ class _ShrineAppState extends State<ShrineApp>
           // the gallery need to be audited before enabling this feature,
           // see https://github.com/flutter/gallery/issues/541
           scrollBehavior:
-              const MaterialScrollBehavior().copyWith(scrollbars: false),
+              MaterialScrollBehavior().copyWith(scrollbars: false),
           restorationScopeId: 'shrineApp',
           title: 'Shrine',
           debugShowCheckedModeBanner: false,
           initialRoute: ShrineApp.loginRoute,
           routes: <String, WidgetBuilder>{
-            ShrineApp.loginRoute: (BuildContext context) => const LoginPage(),
+            ShrineApp.loginRoute: (BuildContext context) => LoginPage(),
             ShrineApp.homeRoute: (BuildContext context) => home,
           },
           theme: shrineTheme.copyWith(

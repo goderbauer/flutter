@@ -7,12 +7,12 @@ import 'dart:math';
 import 'package:flutter/material.dart';
 import 'animation.dart';
 
-const double contentHeight = 80.0;
-const double contentWidth = 300.0;
-const double contentHorizontalPadding = 40.0;
-const double tapTargetRadius = 44.0;
-const double tapTargetToContentDistance = 20.0;
-const double gutterHeight = 88.0;
+double contentHeight = 80.0;
+double contentWidth = 300.0;
+double contentHorizontalPadding = 40.0;
+double tapTargetRadius = 44.0;
+double tapTargetToContentDistance = 20.0;
+double gutterHeight = 88.0;
 
 /// Background of the overlay.
 class Background extends StatelessWidget {
@@ -44,8 +44,8 @@ class Background extends StatelessWidget {
   /// Directionality of content.
   final TextDirection textDirection;
 
-  static const double horizontalShift = 20.0;
-  static const double padding = 40.0;
+  static double horizontalShift = 20.0;
+  static double padding = 40.0;
 
   /// Compute the center position of the background.
   ///
@@ -128,7 +128,7 @@ class Background extends StatelessWidget {
         left: centerPosition.dx,
         top: centerPosition.dy,
         child: FractionalTranslation(
-          translation: const Offset(-0.5, -0.5),
+          translation: Offset(-0.5, -0.5),
           child: Opacity(
             opacity: opacity,
             child: Container(
@@ -208,7 +208,7 @@ class Content extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: <Widget>[
             _buildTitle(textTheme),
-            const SizedBox(height: 12.0),
+            SizedBox(height: 12.0),
             _buildDescription(textTheme),
           ],
         ),
@@ -262,13 +262,13 @@ class Ripple extends StatelessWidget {
       left: center.dx,
       top: center.dy,
       child: FractionalTranslation(
-        translation: const Offset(-0.5, -0.5),
+        translation: Offset(-0.5, -0.5),
         child: Opacity(
           opacity: opacity,
           child: Container(
             height: radius * 2,
             width: radius * 2,
-            decoration: const BoxDecoration(
+            decoration: BoxDecoration(
               color: Colors.white,
               shape: BoxShape.circle,
             ),
@@ -315,7 +315,7 @@ class TapTarget extends StatelessWidget {
       left: center.dx,
       top: center.dy,
       child: FractionalTranslation(
-        translation: const Offset(-0.5, -0.5),
+        translation: Offset(-0.5, -0.5),
         child: InkWell(
           onTap: onTap,
           child: Opacity(

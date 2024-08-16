@@ -30,28 +30,28 @@ class _OverviewViewState extends State<OverviewView> {
     final List<AlertData> alerts = DummyDataService.getAlerts(context);
 
     if (isDisplayDesktop(context)) {
-      const String sortKeyName = 'Overview';
+      final String sortKeyName = 'Overview';
       return SingleChildScrollView(
         restorationId: 'overview_scroll_view',
         child: Padding(
-          padding: const EdgeInsets.symmetric(vertical: 24),
+          padding: EdgeInsets.symmetric(vertical: 24),
           child: Row(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: <Widget>[
               Flexible(
                 flex: 7,
                 child: Semantics(
-                  sortKey: const OrdinalSortKey(1, name: sortKeyName),
-                  child: const _OverviewGrid(spacing: 24),
+                  sortKey: OrdinalSortKey(1, name: sortKeyName),
+                  child: _OverviewGrid(spacing: 24),
                 ),
               ),
-              const SizedBox(width: 24),
+              SizedBox(width: 24),
               Flexible(
                 flex: 3,
                 child: SizedBox(
                   width: 400,
                   child: Semantics(
-                    sortKey: const OrdinalSortKey(2, name: sortKeyName),
+                    sortKey: OrdinalSortKey(2, name: sortKeyName),
                     child: FocusTraversalGroup(
                       child: _AlertsView(alerts: alerts),
                     ),
@@ -66,12 +66,12 @@ class _OverviewViewState extends State<OverviewView> {
       return SingleChildScrollView(
         restorationId: 'overview_scroll_view',
         child: Padding(
-          padding: const EdgeInsets.symmetric(vertical: 12),
+          padding: EdgeInsets.symmetric(vertical: 12),
           child: Column(
             children: <Widget>[
               _AlertsView(alerts: alerts.sublist(0, 1)),
-              const SizedBox(height: 12),
-              const _OverviewGrid(spacing: 12),
+              SizedBox(height: 12),
+              _OverviewGrid(spacing: 12),
             ],
           ),
         ),
@@ -98,7 +98,7 @@ class _OverviewGrid extends StatelessWidget {
 
       // Only display multiple columns when the constraints allow it and we
       // have a regular text scale factor.
-      const int minWidthForTwoColumns = 600;
+      final int minWidthForTwoColumns = 600;
       final bool hasMultipleColumns = isDisplayDesktop(context) &&
           constraints.maxWidth > minWidthForTwoColumns &&
           textScaleFactor <= 2;
@@ -156,14 +156,14 @@ class _AlertsView extends StatelessWidget {
     final GalleryLocalizations localizations = GalleryLocalizations.of(context)!;
 
     return Container(
-      padding: const EdgeInsetsDirectional.only(start: 16, top: 4, bottom: 4),
+      padding: EdgeInsetsDirectional.only(start: 16, top: 4, bottom: 4),
       color: RallyColors.cardBackground,
       child: Column(
         children: <Widget>[
           Container(
             width: double.infinity,
             padding:
-                isDesktop ? const EdgeInsets.symmetric(vertical: 16) : null,
+                isDesktop ? EdgeInsets.symmetric(vertical: 16) : null,
             child: MergeSemantics(
               child: Wrap(
                 alignment: WrapAlignment.spaceBetween,
@@ -202,7 +202,7 @@ class _Alert extends StatelessWidget {
     return MergeSemantics(
       child: Container(
         padding: isDisplayDesktop(context)
-            ? const EdgeInsets.symmetric(vertical: 8)
+            ? EdgeInsets.symmetric(vertical: 8)
             : null,
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -257,7 +257,7 @@ class _FinancialView extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.stretch,
                 children: <Widget>[
                   Padding(
-                    padding: const EdgeInsets.only(
+                    padding: EdgeInsets.only(
                       top: 16,
                       left: 16,
                       right: 16,
@@ -265,7 +265,7 @@ class _FinancialView extends StatelessWidget {
                     child: SelectableText(title!),
                   ),
                   Padding(
-                    padding: const EdgeInsets.only(left: 16, right: 16),
+                    padding: EdgeInsets.only(left: 16, right: 16),
                     child: SelectableText(
                       usdWithSignFormat(context).format(total),
                       style: theme.textTheme.bodyLarge!.copyWith(

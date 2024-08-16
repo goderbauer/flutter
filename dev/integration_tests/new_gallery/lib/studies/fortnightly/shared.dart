@@ -52,7 +52,7 @@ class HorizontalArticlePreview extends StatelessWidget {
                 data.category,
                 style: textTheme.titleMedium,
               ),
-              const SizedBox(height: 12),
+              SizedBox(height: 12),
               SelectableText(
                 data.title,
                 style: textTheme.headlineSmall!.copyWith(fontSize: 16),
@@ -65,7 +65,7 @@ class HorizontalArticlePreview extends StatelessWidget {
             GalleryLocalizations.of(context)!.craneMinutes(minutes!),
             style: textTheme.bodyLarge,
           ),
-          const SizedBox(width: 8),
+          SizedBox(width: 8),
         ],
         FadeInImagePlaceholder(
           image: AssetImage(data.imageUrl, package: 'flutter_gallery_assets'),
@@ -124,18 +124,18 @@ class VerticalArticlePreview extends StatelessWidget {
               excludeFromSemantics: true,
             ),
           ),
-          const SizedBox(height: 12),
+          SizedBox(height: 12),
           SelectableText(
             data.category,
             style: textTheme.titleMedium,
           ),
-          const SizedBox(height: 12),
+          SizedBox(height: 12),
           SelectableText(
             data.title,
             style: headlineTextStyle ?? textTheme.headlineSmall,
           ),
           if (showSnippet) ...<Widget>[
-            const SizedBox(height: 4),
+            SizedBox(height: 4),
             SelectableText(
               data.snippet!,
               style: textTheme.bodyMedium,
@@ -150,12 +150,12 @@ class VerticalArticlePreview extends StatelessWidget {
 List<Widget> buildArticlePreviewItems(BuildContext context) {
   final GalleryLocalizations localizations = GalleryLocalizations.of(context)!;
   final Widget articleDivider = Container(
-    margin: const EdgeInsets.symmetric(vertical: 16),
+    margin: EdgeInsets.symmetric(vertical: 16),
     color: Colors.black.withOpacity(0.07),
     height: 1,
   );
   final Widget sectionDivider = Container(
-    margin: const EdgeInsets.symmetric(vertical: 16),
+    margin: EdgeInsets.symmetric(vertical: 16),
     color: Colors.black.withOpacity(0.2),
     height: 1,
   );
@@ -234,7 +234,7 @@ class HashtagBar extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final Container verticalDivider = Container(
-      margin: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+      margin: EdgeInsets.symmetric(horizontal: 16, vertical: 8),
       color: Colors.black.withOpacity(0.1),
       width: 1,
     );
@@ -249,7 +249,7 @@ class HashtagBar extends StatelessWidget {
         restorationId: 'hashtag_bar_list_view',
         scrollDirection: Axis.horizontal,
         children: <Widget>[
-          const SizedBox(width: 16),
+          SizedBox(width: 16),
           Center(
             child: SelectableText(
               '#${localizations.fortnightlyTrendingTechDesign}',
@@ -306,7 +306,7 @@ class NavigationMenu extends StatelessWidget {
             children: <Widget>[
               IconButton(
                 key: StandardComponentType.closeButton.key,
-                icon: const Icon(Icons.close),
+                icon: Icon(Icons.close),
                 tooltip: MaterialLocalizations.of(context).closeButtonTooltip,
                 onPressed: () => Navigator.pop(context),
               ),
@@ -317,7 +317,7 @@ class NavigationMenu extends StatelessWidget {
               ),
             ],
           ),
-        const SizedBox(height: 32),
+        SizedBox(height: 32),
         MenuItem(
           localizations.fortnightlyMenuFrontPage,
           header: true,
@@ -345,13 +345,13 @@ class MenuItem extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.symmetric(vertical: 8),
+      padding: EdgeInsets.symmetric(vertical: 8),
       child: Row(
         children: <Widget>[
           Container(
             width: 32,
             alignment: Alignment.centerLeft,
-            child: header ? null : const Icon(Icons.arrow_drop_down),
+            child: header ? null : Icon(Icons.arrow_drop_down),
           ),
           Expanded(
             child: SelectableText(
@@ -392,7 +392,7 @@ class StockItem extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: <Widget>[
         SelectableText(ticker, style: textTheme.titleMedium),
-        const SizedBox(height: 2),
+        SizedBox(height: 2),
         Row(
           children: <Widget>[
             Expanded(
@@ -408,11 +408,11 @@ class StockItem extends StatelessWidget {
               style: textTheme.titleSmall!.copyWith(
                 fontSize: 12,
                 color: percent > 0
-                    ? const Color(0xff20CF63)
-                    : const Color(0xff661FFF),
+                    ? Color(0xff20CF63)
+                    : Color(0xff661FFF),
               ),
             ),
-            const SizedBox(width: 4),
+            SizedBox(width: 4),
             SelectableText(
               percentFormat.format(percent.abs() / 100),
               style: textTheme.bodySmall!.copyWith(
@@ -429,17 +429,17 @@ class StockItem extends StatelessWidget {
 
 List<Widget> buildStockItems(BuildContext context) {
   final Widget articleDivider = Container(
-    margin: const EdgeInsets.symmetric(vertical: 16),
+    margin: EdgeInsets.symmetric(vertical: 16),
     color: Colors.black.withOpacity(0.07),
     height: 1,
   );
-  const double imageAspectRatio = 165 / 55;
+  final double imageAspectRatio = 165 / 55;
 
   return <Widget>[
     SizedBox(
       width: double.infinity,
       child: FadeInImagePlaceholder(
-        image: const AssetImage(
+        image: AssetImage(
           'fortnightly/fortnightly_chart.png',
           package: 'flutter_gallery_assets',
         ),
@@ -456,31 +456,31 @@ List<Widget> buildStockItems(BuildContext context) {
       ),
     ),
     articleDivider,
-    const StockItem(
+    StockItem(
       ticker: 'DIJA',
       price: '7,031.21',
       percent: -0.48,
     ),
     articleDivider,
-    const StockItem(
+    StockItem(
       ticker: 'SP',
       price: '1,967.84',
       percent: -0.23,
     ),
     articleDivider,
-    const StockItem(
+    StockItem(
       ticker: 'Nasdaq',
       price: '6,211.46',
       percent: 0.52,
     ),
     articleDivider,
-    const StockItem(
+    StockItem(
       ticker: 'Nikkei',
       price: '5,891',
       percent: 1.16,
     ),
     articleDivider,
-    const StockItem(
+    StockItem(
       ticker: 'DJ Total',
       price: '89.02',
       percent: 0.80,
@@ -525,7 +525,7 @@ class VideoPreview extends StatelessWidget {
             excludeFromSemantics: true,
           ),
         ),
-        const SizedBox(height: 4),
+        SizedBox(height: 4),
         Row(
           children: <Widget>[
             Expanded(
@@ -537,7 +537,7 @@ class VideoPreview extends StatelessWidget {
             SelectableText(time, style: textTheme.bodyLarge)
           ],
         ),
-        const SizedBox(height: 4),
+        SizedBox(height: 4),
         SelectableText(data.title,
             style: textTheme.headlineSmall!.copyWith(fontSize: 16)),
       ],
@@ -557,7 +557,7 @@ List<Widget> buildVideoPreviewItems(BuildContext context) {
       ),
       time: '2:31',
     ),
-    const SizedBox(height: 32),
+    SizedBox(height: 32),
     VideoPreview(
       data: ArticleData(
         imageUrl: 'fortnightly/fortnightly_bees.jpg',

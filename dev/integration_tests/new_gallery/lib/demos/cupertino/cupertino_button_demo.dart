@@ -28,14 +28,14 @@ class CupertinoButtonDemo extends StatelessWidget {
                 localizations.cupertinoButton,
               ),
             ),
-            const SizedBox(height: 16),
+            SizedBox(height: 16),
             CupertinoButton.filled(
               onPressed: () {},
               child: Text(
                 localizations.cupertinoButtonWithBackground,
               ),
             ),
-            const SizedBox(height: 30),
+            SizedBox(height: 30),
             // Disabled buttons
             CupertinoButton(
               onPressed: null,
@@ -43,7 +43,7 @@ class CupertinoButtonDemo extends StatelessWidget {
                 localizations.cupertinoButton,
               ),
             ),
-            const SizedBox(height: 16),
+            SizedBox(height: 16),
             CupertinoButton.filled(
               onPressed: null,
               child: Text(

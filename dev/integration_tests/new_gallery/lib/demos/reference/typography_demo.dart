@@ -22,7 +22,7 @@ class _TextStyleItem extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 16),
+      padding: EdgeInsets.symmetric(horizontal: 8, vertical: 16),
       child: Row(
         children: <Widget>[
           SizedBox(

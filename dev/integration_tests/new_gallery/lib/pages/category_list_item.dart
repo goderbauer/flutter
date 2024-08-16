@@ -38,7 +38,7 @@ class _CategoryListItemState extends State<CategoryListItem>
     with SingleTickerProviderStateMixin {
   static final Animatable<double> _easeInTween =
       CurveTween(curve: Curves.easeIn);
-  static const Duration _expandDuration = Duration(milliseconds: 200);
+  static final Duration _expandDuration = Duration(milliseconds: 200);
   late AnimationController _controller;
   late Animation<double> _childrenHeightFactor;
   late Animation<double> _headerChevronOpacity;
@@ -64,15 +64,15 @@ class _CategoryListItemState extends State<CategoryListItem>
       end: 96,
     ).animate(_controller);
     _headerMargin = EdgeInsetsGeometryTween(
-      begin: const EdgeInsets.fromLTRB(32, 8, 32, 8),
+      begin: EdgeInsets.fromLTRB(32, 8, 32, 8),
       end: EdgeInsets.zero,
     ).animate(_controller);
     _headerImagePadding = EdgeInsetsGeometryTween(
-      begin: const EdgeInsets.all(8),
-      end: const EdgeInsetsDirectional.fromSTEB(16, 8, 8, 8),
+      begin: EdgeInsets.all(8),
+      end: EdgeInsetsDirectional.fromSTEB(16, 8, 8, 8),
     ).animate(_controller);
     _childrenPadding = EdgeInsetsGeometryTween(
-      begin: const EdgeInsets.symmetric(horizontal: 32),
+      begin: EdgeInsets.symmetric(horizontal: 32),
       end: EdgeInsets.zero,
     ).animate(_controller);
     _headerBorderRadius = BorderRadiusTween(
@@ -204,7 +204,7 @@ class _CategoryHeader extends StatelessWidget {
                         ),
                       ),
                       Padding(
-                        padding: const EdgeInsetsDirectional.only(start: 8),
+                        padding: EdgeInsetsDirectional.only(start: 8),
                         child: Text(
                           category.displayTitle(
                             GalleryLocalizations.of(context)!,
@@ -222,7 +222,7 @@ class _CategoryHeader extends StatelessWidget {
                   opacity: chevronOpacity,
                   child: chevronOpacity != 0
                       ? Padding(
-                          padding: const EdgeInsetsDirectional.only(
+                          padding: EdgeInsetsDirectional.only(
                             start: 8,
                             end: 32,
                           ),
@@ -261,7 +261,7 @@ class _ExpandedCategoryDemos extends StatelessWidget {
           CategoryDemoItem(
             demo: demo,
           ),
-        const SizedBox(height: 12), // Extra space below.
+        SizedBox(height: 12), // Extra space below.
       ],
     );
   }
@@ -300,7 +300,7 @@ class CategoryDemoItem extends StatelessWidget {
                   demo.icon,
                   color: colorScheme.primary,
                 ),
-                const SizedBox(width: 40),
+                SizedBox(width: 40),
                 Flexible(
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
@@ -316,7 +316,7 @@ class CategoryDemoItem extends StatelessWidget {
                           color: colorScheme.onSurface.withOpacity(0.5),
                         ),
                       ),
-                      const SizedBox(height: 20),
+                      SizedBox(height: 20),
                       Divider(
                         thickness: 1,
                         height: 1,

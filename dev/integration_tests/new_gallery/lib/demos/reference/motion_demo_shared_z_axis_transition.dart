@@ -42,14 +42,14 @@ class SharedZAxisTransitionDemo extends StatelessWidget {
             ),
             actions: <Widget>[
               IconButton(
-                icon: const Icon(Icons.settings),
+                icon: Icon(Icons.settings),
                 onPressed: () {
                   Navigator.of(context).push<void>(_createSettingsRoute());
                 },
               ),
             ],
           ),
-          body: const _RecipePage(),
+          body: _RecipePage(),
         );
       },
       transitionsBuilder: (BuildContext context, Animation<double> animation, Animation<double> secondaryAnimation, Widget child) {
@@ -67,7 +67,7 @@ class SharedZAxisTransitionDemo extends StatelessWidget {
   Route<void> _createSettingsRoute() {
     return PageRouteBuilder<void>(
       pageBuilder: (BuildContext context, Animation<double> animation, Animation<double> secondaryAnimation) =>
-          const _SettingsPage(),
+          _SettingsPage(),
       transitionsBuilder: (BuildContext context, Animation<double> animation, Animation<double> secondaryAnimation, Widget child) {
         return SharedAxisTransition(
           fillColor: Colors.transparent,
@@ -134,14 +134,14 @@ class _SettingsTile extends StatelessWidget {
           leading: Icon(settingData.settingIcon),
           title: Text(settingData.settingsLabel),
         ),
-        const Divider(thickness: 2),
+        Divider(thickness: 2),
       ],
     );
   }
 }
 
 class _SettingsInfo {
-  const _SettingsInfo(this.settingIcon, this.settingsLabel);
+  _SettingsInfo(this.settingIcon, this.settingsLabel);
 
   final IconData settingIcon;
   final String settingsLabel;
@@ -190,15 +190,15 @@ class _RecipePage extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: <Widget>[
-        const SizedBox(height: 8),
+        SizedBox(height: 8),
         Padding(
-          padding: const EdgeInsetsDirectional.only(start: 8.0),
+          padding: EdgeInsetsDirectional.only(start: 8.0),
           child: Text(localizations.demoSharedZAxisSavedRecipesListTitle),
         ),
-        const SizedBox(height: 4),
+        SizedBox(height: 4),
         Expanded(
           child: ListView(
-            padding: const EdgeInsets.all(8),
+            padding: EdgeInsets.all(8),
             children: <Widget>[
               for (final _RecipeInfo recipe in savedRecipes)
                 _RecipeTile(recipe, savedRecipes.indexOf(recipe))
@@ -211,7 +211,7 @@ class _RecipePage extends StatelessWidget {
 }
 
 class _RecipeInfo {
-  const _RecipeInfo(this.recipeName, this.recipeDescription, this.recipeImage);
+  _RecipeInfo(this.recipeName, this.recipeDescription, this.recipeImage);
 
   final String recipeName;
   final String recipeDescription;
@@ -231,7 +231,7 @@ class _RecipeTile extends StatelessWidget {
           height: 70,
           width: 100,
           child: ClipRRect(
-            borderRadius: const BorderRadius.all(Radius.circular(4)),
+            borderRadius: BorderRadius.all(Radius.circular(4)),
             child: Image.asset(
               _recipe.recipeImage,
               package: 'flutter_gallery_assets',
@@ -239,7 +239,7 @@ class _RecipeTile extends StatelessWidget {
             ),
           ),
         ),
-        const SizedBox(width: 24),
+        SizedBox(width: 24),
         Expanded(
           child: Column(
             children: <Widget>[
@@ -248,7 +248,7 @@ class _RecipeTile extends StatelessWidget {
                 subtitle: Text(_recipe.recipeDescription),
                 trailing: Text('0${_index + 1}'),
               ),
-              const Divider(thickness: 2),
+              Divider(thickness: 2),
             ],
           ),
         ),

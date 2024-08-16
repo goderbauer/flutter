@@ -25,7 +25,7 @@ import 'package:test/test.dart' hide TypeMatcher, isInstanceOf;
 //
 // These names must match the output of GalleryDemo.describe in
 // lib/data/demos.dart.
-const List<String> _profiledDemos = <String>[
+List<String> _profiledDemos = <String>[
   'reply@study',
   'shrine@study',
   'rally@study',
@@ -45,7 +45,7 @@ const List<String> _profiledDemos = <String>[
 //
 // These names must match the output of GalleryDemo.describe in
 // lib/data/demos.dart.
-const List<String> _unsynchronizedDemos = <String>[
+List<String> _unsynchronizedDemos = <String>[
   'progress-indicator@material',
   'cupertino-activity-indicator@cupertino',
   'colors@other',
@@ -55,7 +55,7 @@ const List<String> _unsynchronizedDemos = <String>[
 //
 // These names must match the output of GalleryDemo.describe in
 // lib/data/demos.dart.
-const List<String> _skippedDemos = <String>[];
+List<String> _skippedDemos = <String>[];
 
 // All of the gallery demos, identified as "title@category".
 //
@@ -80,7 +80,7 @@ final SerializableFinder replyExit = find.byValueKey('ReplyExit');
 
 // Let overscroll animation settle on iOS after driver.scroll.
 void handleOverscrollAnimation() {
-  sleep(const Duration(seconds: 1));
+  sleep(Duration(seconds: 1));
 }
 
 /// Scroll to the top of the app, given the current demo. Works with both mobile
@@ -93,7 +93,7 @@ Future<void> scrollToTop(SerializableFinder demoItem, FlutterDriver driver) asyn
     demoItem,
     0,
     5000,
-    const Duration(milliseconds: 200),
+    Duration(milliseconds: 200),
   );
   handleOverscrollAnimation();
 
@@ -102,7 +102,7 @@ Future<void> scrollToTop(SerializableFinder demoItem, FlutterDriver driver) asyn
     categoriesHeader,
     0,
     500,
-    const Duration(milliseconds: 200),
+    Duration(milliseconds: 200),
   );
   handleOverscrollAnimation();
 }
@@ -161,7 +161,7 @@ Future<void> runDemos(
           homeList,
           demoList,
           dyScroll: -1000,
-          timeout: const Duration(seconds: 10),
+          timeout: Duration(seconds: 10),
         );
       }
     }
@@ -181,9 +181,9 @@ Future<void> runDemos(
     // To resolve this, we scroll 75% of the list width/height dimensions on
     // each increment.
     final DriverOffset topLeft =
-        await driver.getTopLeft(demoList, timeout: const Duration(seconds: 10));
+        await driver.getTopLeft(demoList, timeout: Duration(seconds: 10));
     final DriverOffset bottomRight = await driver.getBottomRight(demoList,
-        timeout: const Duration(seconds: 10));
+        timeout: Duration(seconds: 10));
     final double listWidth = bottomRight.dx - topLeft.dx;
     final double listHeight = bottomRight.dy - topLeft.dy;
     await driver.scrollUntilVisible(
@@ -192,7 +192,7 @@ Future<void> runDemos(
       dxScroll: -listWidth * 0.75,
       dyScroll: -listHeight * 0.75,
       alignment: 0.5,
-      timeout: const Duration(seconds: 10),
+      timeout: Duration(seconds: 10),
     );
 
     // We launch each demo twice to be able to measure and compare first and
@@ -201,7 +201,7 @@ Future<void> runDemos(
       stdout.writeln('tapping demo');
       await driver.tap(demoItem); // Launch the demo
 
-      sleep(const Duration(milliseconds: 500));
+      sleep(Duration(milliseconds: 500));
 
       if (additionalActions != null) {
         await additionalActions();
@@ -279,12 +279,12 @@ void main([List<String> args = const <String>[]]) {
               craneFlyList,
               0,
               -1000,
-              const Duration(seconds: 1),
+              Duration(seconds: 1),
             ),
             scrollToTopWhenDone: false,
           );
         },
-        streams: const <TimelineStream>[
+        streams: <TimelineStream>[
           TimelineStream.dart,
           TimelineStream.embedder,
         ],
@@ -330,7 +330,7 @@ void main([List<String> args = const <String>[]]) {
             scrollToTopWhenDone: false,
           );
         },
-        streams: const <TimelineStream>[
+        streams: <TimelineStream>[
           TimelineStream.dart,
           TimelineStream.embedder,
         ],
@@ -350,7 +350,7 @@ void main([List<String> args = const <String>[]]) {
         () async {
           await runDemos(_profiledDemos, driver);
         },
-        streams: const <TimelineStream>[
+        streams: <TimelineStream>[
           TimelineStream.dart,
           TimelineStream.embedder,
         ],

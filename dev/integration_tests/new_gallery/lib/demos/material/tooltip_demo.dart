@@ -20,7 +20,7 @@ class TooltipDemo extends StatelessWidget {
       ),
       body: Center(
         child: Padding(
-          padding: const EdgeInsets.all(8),
+          padding: EdgeInsets.all(8),
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[
@@ -28,13 +28,13 @@ class TooltipDemo extends StatelessWidget {
                 localizations.demoTooltipInstructions,
                 textAlign: TextAlign.center,
               ),
-              const SizedBox(height: 16),
+              SizedBox(height: 16),
               Tooltip(
                 message: localizations.starterAppTooltipSearch,
                 child: IconButton(
                   color: Theme.of(context).colorScheme.primary,
                   onPressed: () {},
-                  icon: const Icon(Icons.search),
+                  icon: Icon(Icons.search),
                 ),
               ),
             ],

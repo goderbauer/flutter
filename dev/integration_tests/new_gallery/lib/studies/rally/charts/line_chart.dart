@@ -32,7 +32,7 @@ class RallyLineChart extends StatelessWidget {
         textDirection: GalleryOptions.of(context).resolvedTextDirection(),
         textScaleFactor: reducedTextScale(context),
         padding: isDisplayDesktop(context)
-            ? const EdgeInsets.symmetric(vertical: 22)
+            ? EdgeInsets.symmetric(vertical: 22)
             : EdgeInsets.zero,
       ),
     );
@@ -88,7 +88,7 @@ class RallyLineChartPainter extends CustomPainter {
 
   // The number of milliseconds in a day. This is the inherit period fot the
   // points in this line.
-  static const int millisInDay = 24 * 60 * 60 * 1000;
+  static int millisInDay = 24 * 60 * 60 * 1000;
 
   // Amount to shift the tick drawing by so that the Sunday ticks do not start
   // on the edge.
@@ -130,7 +130,7 @@ class RallyLineChartPainter extends CustomPainter {
 
       // We divide the graph and the amounts into [numGroups] groups, with
       // [numItemsPerGroup] amounts per group.
-      const int numGroups = 10;
+      final int numGroups = 10;
       final int numItemsPerGroup = amounts.length ~/ numGroups;
 
       // For each group we calculate the median value.
@@ -194,7 +194,7 @@ class RallyLineChartPainter extends CustomPainter {
       ..strokeWidth = 2;
 
     // Try changing this value between 1, 7, 15, etc.
-    const int smoothing = 1;
+    final int smoothing = 1;
 
     final List<double> amounts = _amountsPerDay(numDays + smoothing);
     final List<Offset> points = <Offset>[];

@@ -9,7 +9,7 @@ import '../../layout/image_placeholder.dart';
 import 'model/destination.dart';
 
 // Width and height for thumbnail images.
-const double mobileThumbnailSize = 60.0;
+double mobileThumbnailSize = 60.0;
 
 class DestinationCard extends StatelessWidget {
   const DestinationCard({
@@ -26,18 +26,18 @@ class DestinationCard extends StatelessWidget {
 
     final Widget card = isDesktop
         ? Padding(
-            padding: const EdgeInsets.only(bottom: 40),
+            padding: EdgeInsets.only(bottom: 40),
             child: Semantics(
               container: true,
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: <Widget>[
                   ClipRRect(
-                    borderRadius: const BorderRadius.all(Radius.circular(4)),
+                    borderRadius: BorderRadius.all(Radius.circular(4)),
                     child: _DestinationImage(destination: destination),
                   ),
                   Padding(
-                    padding: const EdgeInsets.only(top: 20, bottom: 10),
+                    padding: EdgeInsets.only(top: 20, bottom: 10),
                     child: SelectableText(
                       destination.destination,
                       style: textTheme.titleMedium,
@@ -56,9 +56,9 @@ class DestinationCard extends StatelessWidget {
             mainAxisSize: MainAxisSize.min,
             children: <Widget>[
               ListTile(
-                contentPadding: const EdgeInsetsDirectional.only(end: 8),
+                contentPadding: EdgeInsetsDirectional.only(end: 8),
                 leading: ClipRRect(
-                  borderRadius: const BorderRadius.all(Radius.circular(4)),
+                  borderRadius: BorderRadius.all(Radius.circular(4)),
                   child: SizedBox(
                     width: mobileThumbnailSize,
                     height: mobileThumbnailSize,
@@ -73,7 +73,7 @@ class DestinationCard extends StatelessWidget {
                   style: textTheme.titleSmall,
                 ),
               ),
-              const Divider(thickness: 1),
+              Divider(thickness: 1),
             ],
           );
 

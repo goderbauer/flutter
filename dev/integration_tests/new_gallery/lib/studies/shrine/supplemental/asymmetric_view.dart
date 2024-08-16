@@ -16,10 +16,10 @@ import 'desktop_product_columns.dart';
 import 'product_card.dart';
 import 'product_columns.dart';
 
-const double _topPadding = 34.0;
-const double _bottomPadding = 44.0;
+double _topPadding = 34.0;
+double _bottomPadding = 44.0;
 
-const double _cardToScreenWidthRatio = 0.59;
+double _cardToScreenWidthRatio = 0.59;
 
 class MobileAsymmetricView extends StatelessWidget {
   const MobileAsymmetricView({
@@ -34,7 +34,7 @@ class MobileAsymmetricView extends StatelessWidget {
     BoxConstraints constraints,
   ) {
     if (products.isEmpty) {
-      return const <SizedBox>[];
+      return <SizedBox>[];
     }
 
     // Decide whether the page size and text size allow 2-column products.
@@ -91,7 +91,7 @@ class MobileAsymmetricView extends StatelessWidget {
         return SizedBox(
           width: width,
           child: Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 16),
+            padding: EdgeInsets.symmetric(horizontal: 16),
             child: column,
           ),
         );
@@ -104,7 +104,7 @@ class MobileAsymmetricView extends StatelessWidget {
           SizedBox(
             width: _cardToScreenWidthRatio * MediaQuery.of(context).size.width,
             child: Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 16),
+              padding: EdgeInsets.symmetric(horizontal: 16),
               child: OneProductCardColumn(
                 product: product,
                 reverse: false,
@@ -147,13 +147,13 @@ class MobileAsymmetricView extends StatelessWidget {
               return ListView(
                 restorationId: 'product_page_list_view',
                 scrollDirection: Axis.horizontal,
-                padding: const EdgeInsetsDirectional.fromSTEB(
+                padding: EdgeInsetsDirectional.fromSTEB(
                   0,
                   _topPadding,
                   16,
                   _bottomPadding,
                 ),
-                physics: const BouncingScrollPhysics(),
+                physics: BouncingScrollPhysics(),
                 children: _buildColumns(context, constraints),
               );
             },
@@ -270,13 +270,13 @@ class DesktopColumns extends StatelessWidget {
     );
 
     return ListView(
-      physics: const AlwaysScrollableScrollPhysics(),
+      physics: AlwaysScrollableScrollPhysics(),
       children: <Widget>[
         Container(height: 60),
         Row(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: <Widget>[
-            const Spacer(),
+            Spacer(),
             ...List<Widget>.generate(
               2 * columnCount - 1,
               (int generalizedColumnIndex) {
@@ -287,7 +287,7 @@ class DesktopColumns extends StatelessWidget {
                 }
               },
             ),
-            const Spacer(),
+            Spacer(),
           ],
         ),
         Container(height: 60),

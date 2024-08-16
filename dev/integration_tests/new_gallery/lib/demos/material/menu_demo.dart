@@ -57,7 +57,7 @@ class _MenuDemoState extends State<MenuDemo> {
         automaticallyImplyLeading: false,
       ),
       body: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 20),
+        padding: EdgeInsets.symmetric(horizontal: 20),
         child: Center(
           child: demo,
         ),
@@ -136,7 +136,7 @@ class _SectionedMenuDemo extends StatelessWidget {
           PopupMenuItem<String>(
             value: localizations.demoMenuPreview,
             child: ListTile(
-              leading: const Icon(Icons.visibility),
+              leading: Icon(Icons.visibility),
               title: Text(
                 localizations.demoMenuPreview,
               ),
@@ -145,7 +145,7 @@ class _SectionedMenuDemo extends StatelessWidget {
           PopupMenuItem<String>(
             value: localizations.demoMenuShare,
             child: ListTile(
-              leading: const Icon(Icons.person_add),
+              leading: Icon(Icons.person_add),
               title: Text(
                 localizations.demoMenuShare,
               ),
@@ -154,17 +154,17 @@ class _SectionedMenuDemo extends StatelessWidget {
           PopupMenuItem<String>(
             value: localizations.demoMenuGetLink,
             child: ListTile(
-              leading: const Icon(Icons.link),
+              leading: Icon(Icons.link),
               title: Text(
                 localizations.demoMenuGetLink,
               ),
             ),
           ),
-          const PopupMenuDivider(),
+          PopupMenuDivider(),
           PopupMenuItem<String>(
             value: localizations.demoMenuRemove,
             child: ListTile(
-              leading: const Icon(Icons.delete),
+              leading: Icon(Icons.delete),
               title: Text(
                 localizations.demoMenuRemove,
               ),

@@ -63,11 +63,11 @@ class _SharedXAxisTransitionDemoState extends State<SharedXAxisTransitionDemo> {
                     child: child,
                   );
                 },
-                child: _isLoggedIn ? const _CoursePage() : const _SignInPage(),
+                child: _isLoggedIn ? _CoursePage() : _SignInPage(),
               ),
             ),
             Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 20),
+              padding: EdgeInsets.symmetric(horizontal: 15, vertical: 20),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: <Widget>[
@@ -98,18 +98,18 @@ class _CoursePage extends StatelessWidget {
 
     return ListView(
       children: <Widget>[
-        const SizedBox(height: 16),
+        SizedBox(height: 16),
         Text(
           localizations.demoSharedXAxisCoursePageTitle,
           style: Theme.of(context).textTheme.headlineSmall,
           textAlign: TextAlign.center,
         ),
-        const SizedBox(height: 10),
+        SizedBox(height: 10),
         Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 10),
+          padding: EdgeInsets.symmetric(horizontal: 10),
           child: Text(
             localizations.demoSharedXAxisCoursePageSubtitle,
-            style: const TextStyle(
+            style: TextStyle(
               fontSize: 12,
               color: Colors.grey,
             ),
@@ -172,10 +172,10 @@ class _SignInPage extends StatelessWidget {
     return LayoutBuilder(
       builder: (BuildContext context, BoxConstraints constraints) {
         final double maxHeight = constraints.maxHeight;
-        const SizedBox spacing = SizedBox(height: 10);
+        final SizedBox spacing = SizedBox(height: 10);
 
         return Container(
-          constraints: const BoxConstraints(maxWidth: 400),
+          constraints: BoxConstraints(maxWidth: 400),
           child: Column(
             children: <Widget>[
               SizedBox(height: maxHeight / 10),
@@ -193,7 +193,7 @@ class _SignInPage extends StatelessWidget {
               spacing,
               Text(
                 localizations.demoSharedXAxisSignInSubtitleText,
-                style: const TextStyle(
+                style: TextStyle(
                   fontSize: 12,
                   color: Colors.grey,
                 ),
@@ -202,7 +202,7 @@ class _SignInPage extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: <Widget>[
                   Padding(
-                    padding: const EdgeInsetsDirectional.only(
+                    padding: EdgeInsetsDirectional.only(
                       top: 40,
                       start: 10,
                       end: 10,
@@ -210,14 +210,14 @@ class _SignInPage extends StatelessWidget {
                     ),
                     child: TextField(
                       decoration: InputDecoration(
-                        suffixIcon: const Icon(
+                        suffixIcon: Icon(
                           Icons.visibility,
                           size: 20,
                           color: Colors.black54,
                         ),
                         labelText:
                             localizations.demoSharedXAxisSignInTextFieldLabel,
-                        border: const OutlineInputBorder(),
+                        border: OutlineInputBorder(),
                       ),
                     ),
                   ),

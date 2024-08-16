@@ -9,7 +9,7 @@ import '../../../gallery_localizations.dart';
 import 'formatters.dart';
 
 abstract class Destination {
-  const Destination({
+  Destination({
     required this.id,
     required this.destination,
     required this.assetSemanticLabel,
@@ -32,7 +32,7 @@ abstract class Destination {
 }
 
 class FlyDestination extends Destination {
-  const FlyDestination({
+  FlyDestination({
     required super.id,
     required super.destination,
     required super.assetSemanticLabel,
@@ -78,7 +78,7 @@ class FlyDestination extends Destination {
 }
 
 class SleepDestination extends Destination {
-  const SleepDestination({
+  SleepDestination({
     required super.id,
     required super.destination,
     required super.assetSemanticLabel,
@@ -98,7 +98,7 @@ class SleepDestination extends Destination {
 }
 
 class EatDestination extends Destination {
-  const EatDestination({
+  EatDestination({
     required super.id,
     required super.destination,
     required super.assetSemanticLabel,

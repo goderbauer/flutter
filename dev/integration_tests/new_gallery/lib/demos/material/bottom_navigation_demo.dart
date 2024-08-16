@@ -59,23 +59,23 @@ class _BottomNavigationDemoState extends State<BottomNavigationDemo>
 
     List<BottomNavigationBarItem> bottomNavigationBarItems = <BottomNavigationBarItem>[
       BottomNavigationBarItem(
-        icon: const Icon(Icons.add_comment),
+        icon: Icon(Icons.add_comment),
         label: localizations.bottomNavigationCommentsTab,
       ),
       BottomNavigationBarItem(
-        icon: const Icon(Icons.calendar_today),
+        icon: Icon(Icons.calendar_today),
         label: localizations.bottomNavigationCalendarTab,
       ),
       BottomNavigationBarItem(
-        icon: const Icon(Icons.account_circle),
+        icon: Icon(Icons.account_circle),
         label: localizations.bottomNavigationAccountTab,
       ),
       BottomNavigationBarItem(
-        icon: const Icon(Icons.alarm_on),
+        icon: Icon(Icons.alarm_on),
         label: localizations.bottomNavigationAlarmTab,
       ),
       BottomNavigationBarItem(
-        icon: const Icon(Icons.camera_enhance),
+        icon: Icon(Icons.camera_enhance),
         label: localizations.bottomNavigationCameraTab,
       ),
     ];
@@ -145,7 +145,7 @@ class _NavigationDestinationView extends StatelessWidget {
         ExcludeSemantics(
           child: Center(
             child: Padding(
-              padding: const EdgeInsets.all(16),
+              padding: EdgeInsets.all(16),
               child: ClipRRect(
                 borderRadius: BorderRadius.circular(8),
                 child: Image.asset(
@@ -158,7 +158,7 @@ class _NavigationDestinationView extends StatelessWidget {
         ),
         Center(
           child: IconTheme(
-            data: const IconThemeData(
+            data: IconThemeData(
               color: Colors.white,
               size: 80,
             ),

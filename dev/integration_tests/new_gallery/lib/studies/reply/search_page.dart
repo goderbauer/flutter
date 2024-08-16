@@ -19,12 +19,12 @@ class SearchPage extends StatelessWidget {
           child: Column(
             children: <Widget>[
               Padding(
-                padding: const EdgeInsets.all(8),
+                padding: EdgeInsets.all(8),
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: <Widget>[
                     BackButton(
-                      key: const ValueKey<String>('ReplyExit'),
+                      key: ValueKey<String>('ReplyExit'),
                       onPressed: () {
                         Provider.of<EmailStore>(
                           context,
@@ -32,7 +32,7 @@ class SearchPage extends StatelessWidget {
                         ).onSearchPage = false;
                       },
                     ),
-                    const Expanded(
+                    Expanded(
                       child: TextField(
                         decoration: InputDecoration.collapsed(
                           hintText: 'Search email',
@@ -40,14 +40,14 @@ class SearchPage extends StatelessWidget {
                       ),
                     ),
                     IconButton(
-                      icon: const Icon(Icons.mic),
+                      icon: Icon(Icons.mic),
                       onPressed: () {},
                     )
                   ],
                 ),
               ),
-              const Divider(thickness: 1),
-              const Expanded(
+              Divider(thickness: 1),
+              Expanded(
                 child: SingleChildScrollView(
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
@@ -95,7 +95,7 @@ class _SectionHeader extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsetsDirectional.only(
+      padding: EdgeInsetsDirectional.only(
         start: 16,
         top: 16,
         bottom: 16,

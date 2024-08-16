@@ -34,7 +34,7 @@ class DemoPage extends StatefulWidget {
     required this.slug,
   });
 
-  static const String baseRoute = '/demo';
+  static String baseRoute = '/demo';
   final String? slug;
 
   @override
@@ -111,7 +111,7 @@ class _GalleryDemoPageState extends State<GalleryDemoPage>
     super.initState();
     _codeBackgroundColorController = AnimationController(
       vsync: this,
-      duration: const Duration(milliseconds: 300),
+      duration: Duration(milliseconds: 300),
     );
   }
 
@@ -175,7 +175,7 @@ class _GalleryDemoPageState extends State<GalleryDemoPage>
             title: Text(GalleryLocalizations.of(context)!.demoInvalidURL),
             children: <Widget>[
               Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 16),
+                padding: EdgeInsets.symmetric(horizontal: 16),
                 child: Text(url),
               ),
             ],
@@ -224,8 +224,8 @@ class _GalleryDemoPageState extends State<GalleryDemoPage>
       leading: Padding(
         padding: EdgeInsetsDirectional.only(start: appBarPadding),
         child: IconButton(
-          key: const ValueKey<String>('Back'),
-          icon: const BackButtonIcon(),
+          key: ValueKey<String>('Back'),
+          icon: BackButtonIcon(),
           tooltip: MaterialLocalizations.of(context).backButtonTooltip,
           onPressed: () {
             Navigator.maybePop(context);
@@ -252,7 +252,7 @@ class _GalleryDemoPageState extends State<GalleryDemoPage>
             onPressed: () => _handleTap(_DemoState.options),
           ),
         IconButton(
-          icon: const Icon(Icons.info),
+          icon: Icon(Icons.info),
           tooltip: localizations.demoInfoTooltip,
           color: currentDemoState == _DemoState.info
               ? selectedIconColor
@@ -260,7 +260,7 @@ class _GalleryDemoPageState extends State<GalleryDemoPage>
           onPressed: () => _handleTap(_DemoState.info),
         ),
         IconButton(
-          icon: const Icon(Icons.code),
+          icon: Icon(Icons.code),
           tooltip: localizations.demoCodeTooltip,
           color: currentDemoState == _DemoState.code
               ? selectedIconColor
@@ -268,14 +268,14 @@ class _GalleryDemoPageState extends State<GalleryDemoPage>
           onPressed: () => _handleTap(_DemoState.code),
         ),
         IconButton(
-          icon: const Icon(Icons.library_books),
+          icon: Icon(Icons.library_books),
           tooltip: localizations.demoDocumentationTooltip,
           color: iconColor,
           onPressed: () => _showDocumentation(context),
         ),
         if (isDesktop)
           IconButton(
-            icon: const Icon(Icons.fullscreen),
+            icon: Icon(Icons.fullscreen),
             tooltip: localizations.demoFullscreenTooltip,
             color: currentDemoState == _DemoState.fullscreen
                 ? selectedIconColor
@@ -294,7 +294,7 @@ class _GalleryDemoPageState extends State<GalleryDemoPage>
         appBar.preferredSize.height;
     final double maxSectionHeight = isDesktop ? contentHeight : contentHeight - 64;
     final double horizontalPadding = isDesktop ? mediaQuery.size.width * 0.12 : 0.0;
-    const double maxSectionWidth = 420.0;
+    final double maxSectionWidth = 420.0;
 
     Widget section;
     switch (currentDemoState) {
@@ -325,14 +325,14 @@ class _GalleryDemoPageState extends State<GalleryDemoPage>
           fontSize: 12 * options.textScaleFactor(context),
         );
         section = CodeStyle(
-          baseStyle: codeTheme.copyWith(color: const Color(0xFFFAFBFB)),
-          numberStyle: codeTheme.copyWith(color: const Color(0xFFBD93F9)),
-          commentStyle: codeTheme.copyWith(color: const Color(0xFF808080)),
-          keywordStyle: codeTheme.copyWith(color: const Color(0xFF1CDEC9)),
-          stringStyle: codeTheme.copyWith(color: const Color(0xFFFFA65C)),
-          punctuationStyle: codeTheme.copyWith(color: const Color(0xFF8BE9FD)),
-          classStyle: codeTheme.copyWith(color: const Color(0xFFD65BAD)),
-          constantStyle: codeTheme.copyWith(color: const Color(0xFFFF8383)),
+          baseStyle: codeTheme.copyWith(color: Color(0xFFFAFBFB)),
+          numberStyle: codeTheme.copyWith(color: Color(0xFFBD93F9)),
+          commentStyle: codeTheme.copyWith(color: Color(0xFF808080)),
+          keywordStyle: codeTheme.copyWith(color: Color(0xFF1CDEC9)),
+          stringStyle: codeTheme.copyWith(color: Color(0xFFFFA65C)),
+          punctuationStyle: codeTheme.copyWith(color: Color(0xFF8BE9FD)),
+          classStyle: codeTheme.copyWith(color: Color(0xFFD65BAD)),
+          constantStyle: codeTheme.copyWith(color: Color(0xFFFF8383)),
           child: _DemoSectionCode(
             maxHeight: maxSectionHeight,
             codeWidget: CodeDisplayPage(
@@ -365,13 +365,13 @@ class _GalleryDemoPageState extends State<GalleryDemoPage>
 
       body = SafeArea(
         child: Padding(
-          padding: const EdgeInsets.only(top: 56),
+          padding: EdgeInsets.only(top: 56),
           child: sectionAndDemo,
         ),
       );
     } else {
       section = AnimatedSize(
-        duration: const Duration(milliseconds: 200),
+        duration: Duration(milliseconds: 200),
         alignment: Alignment.topCenter,
         curve: Curves.easeIn,
         child: section,
@@ -405,7 +405,7 @@ class _GalleryDemoPageState extends State<GalleryDemoPage>
         child: ListView(
           // Use a non-scrollable ListView to enable animation of shifting the
           // demo offscreen.
-          physics: const NeverScrollableScrollPhysics(),
+          physics: NeverScrollableScrollPhysics(),
           children: <Widget>[
             section,
             demoContent,
@@ -444,7 +444,7 @@ class _GalleryDemoPageState extends State<GalleryDemoPage>
               // dark background for code.
               final Widget codeBackground = SafeArea(
                 child: Container(
-                  padding: const EdgeInsets.only(top: 56),
+                  padding: EdgeInsets.only(top: 56),
                   child: Container(
                     color: ColorTween(
                       begin: Colors.transparent,
@@ -524,7 +524,7 @@ class _DemoSectionOptions extends StatelessWidget {
           mainAxisSize: MainAxisSize.min,
           children: <Widget>[
             Padding(
-              padding: const EdgeInsetsDirectional.only(
+              padding: EdgeInsetsDirectional.only(
                 start: 24,
                 top: 12,
                 end: 24,
@@ -558,7 +558,7 @@ class _DemoSectionOptions extends StatelessWidget {
                 ],
               ),
             ),
-            const SizedBox(height: 12),
+            SizedBox(height: 12),
           ],
         ),
       ),
@@ -586,8 +586,8 @@ class _DemoSectionOptionsItem extends StatelessWidget {
       child: InkWell(
         onTap: onTap,
         child: Container(
-          constraints: const BoxConstraints(minWidth: double.infinity),
-          padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 8),
+          constraints: BoxConstraints(minWidth: double.infinity),
+          padding: EdgeInsets.symmetric(horizontal: 24, vertical: 8),
           child: Text(
             title,
             style: Theme.of(context).textTheme.bodyMedium!.apply(
@@ -622,7 +622,7 @@ class _DemoSectionInfo extends StatelessWidget {
     return Align(
       alignment: AlignmentDirectional.topStart,
       child: Container(
-        padding: const EdgeInsetsDirectional.only(
+        padding: EdgeInsetsDirectional.only(
           start: 24,
           top: 12,
           end: 24,
@@ -642,7 +642,7 @@ class _DemoSectionInfo extends StatelessWidget {
                       isDisplayDesktop(context) ? desktopDisplay1FontDelta : 0,
                 ),
               ),
-              const SizedBox(height: 12),
+              SizedBox(height: 12),
               SelectableText(
                 description,
                 style: textTheme.bodyMedium!.apply(
@@ -670,11 +670,11 @@ class DemoWrapper extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: const EdgeInsets.only(left: 16, right: 16, bottom: 16),
+      padding: EdgeInsets.only(left: 16, right: 16, bottom: 16),
       height: height,
       child: ClipRRect(
         clipBehavior: Clip.antiAliasWithSaveLayer,
-        borderRadius: const BorderRadius.vertical(
+        borderRadius: BorderRadius.vertical(
           top: Radius.circular(10.0),
           bottom: Radius.circular(2.0),
         ),
@@ -683,7 +683,7 @@ class DemoWrapper extends StatelessWidget {
             platform: GalleryOptions.of(context).platform,
           ),
           child: CupertinoTheme(
-            data: const CupertinoThemeData()
+            data: CupertinoThemeData()
                 .copyWith(brightness: Brightness.light),
             child: ApplyTextOptions(
               child: Builder(builder: buildRoute),
@@ -711,10 +711,10 @@ class _DemoSectionCode extends StatelessWidget {
     return Theme(
       data: GalleryThemeData.darkThemeData,
       child: Padding(
-        padding: const EdgeInsets.only(bottom: 16),
+        padding: EdgeInsets.only(bottom: 16),
         child: Container(
           color: isDesktop ? null : GalleryThemeData.darkThemeData.canvasColor,
-          padding: const EdgeInsets.symmetric(horizontal: 16),
+          padding: EdgeInsets.symmetric(horizontal: 16),
           height: maxHeight,
           child: codeWidget,
         ),
@@ -762,13 +762,13 @@ class CodeDisplayPage extends StatelessWidget {
       children: <Widget>[
         Padding(
           padding: isDesktop
-              ? const EdgeInsets.only(bottom: 8)
-              : const EdgeInsets.symmetric(vertical: 8),
+              ? EdgeInsets.only(bottom: 8)
+              : EdgeInsets.symmetric(vertical: 8),
           child: ElevatedButton(
             style: ElevatedButton.styleFrom(
               backgroundColor: Colors.white.withOpacity(0.15),
-              padding: const EdgeInsets.symmetric(horizontal: 8),
-              shape: const RoundedRectangleBorder(
+              padding: EdgeInsets.symmetric(horizontal: 8),
+              shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.all(Radius.circular(4)),
               ),
             ),
@@ -789,7 +789,7 @@ class CodeDisplayPage extends StatelessWidget {
         Expanded(
           child: SingleChildScrollView(
             child: Container(
-              padding: const EdgeInsets.symmetric(vertical: 8),
+              padding: EdgeInsets.symmetric(vertical: 8),
               child: SelectableText.rich(
                 richTextCode,
                 textDirection: TextDirection.ltr,

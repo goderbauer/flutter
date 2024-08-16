@@ -10,13 +10,13 @@ import '../model/product.dart';
 import 'product_card.dart';
 
 /// Height of the text below each product card.
-const double productCardAdditionalHeight = 84.0 * 2;
+double productCardAdditionalHeight = 84.0 * 2;
 
 /// Height of the divider between product cards.
-const double productCardDividerHeight = 84.0;
+double productCardDividerHeight = 84.0;
 
 /// Height of the space at the top of every other column.
-const double columnTopSpace = 84.0;
+double columnTopSpace = 84.0;
 
 class DesktopProductCardColumn extends StatelessWidget {
   const DesktopProductCardColumn({

@@ -16,11 +16,11 @@ Future<String> _handleMessages(String? message) async {
   switch (message) {
     case 'demoDescriptions':
       final List<String> demoDescriptions = Demos.allDescriptions();
-      return const JsonEncoder.withIndent('  ').convert(demoDescriptions);
+      return JsonEncoder.withIndent('  ').convert(demoDescriptions);
     case 'isTestingCraneOnly':
-      return const String.fromEnvironment('onlyCrane', defaultValue: 'false');
+      return String.fromEnvironment('onlyCrane', defaultValue: 'false');
     case 'isTestingReplyOnly':
-      return const String.fromEnvironment('onlyReply', defaultValue: 'false');
+      return String.fromEnvironment('onlyReply', defaultValue: 'false');
     default:
       throw 'unknown message';
   }
@@ -28,5 +28,5 @@ Future<String> _handleMessages(String? message) async {
 
 void main() {
   enableFlutterDriverExtension(handler: _handleMessages);
-  runApp(const GalleryApp(isTestMode: true));
+  runApp(GalleryApp(isTestMode: true));
 }

@@ -41,7 +41,7 @@ class _BottomAppBarDemoState extends State<BottomAppBarDemo>
 
   // Since FloatingActionButtonLocation is not an enum, the index of the
   // selected FloatingActionButtonLocation is used for state restoration.
-  static const List<FloatingActionButtonLocation> _fabLocations = <FloatingActionButtonLocation>[
+  static final List<FloatingActionButtonLocation> _fabLocations = <FloatingActionButtonLocation>[
     FloatingActionButtonLocation.endDocked,
     FloatingActionButtonLocation.centerDocked,
     FloatingActionButtonLocation.endFloat,
@@ -75,7 +75,7 @@ class _BottomAppBarDemoState extends State<BottomAppBarDemo>
         title: Text(localizations.demoBottomAppBarTitle),
       ),
       body: ListView(
-        padding: const EdgeInsets.only(bottom: 88),
+        padding: EdgeInsets.only(bottom: 88),
         children: <Widget>[
           SwitchListTile(
             title: Text(
@@ -90,7 +90,7 @@ class _BottomAppBarDemoState extends State<BottomAppBarDemo>
             onChanged: _onShowNotchChanged,
           ),
           Padding(
-            padding: const EdgeInsets.all(16),
+            padding: EdgeInsets.all(16),
             child: Text(localizations.bottomAppBarPosition),
           ),
           RadioListTile<int>(
@@ -130,18 +130,18 @@ class _BottomAppBarDemoState extends State<BottomAppBarDemo>
       floatingActionButton: _showFab.value
           ? Semantics(
               container: true,
-              sortKey: const OrdinalSortKey(0),
+              sortKey: OrdinalSortKey(0),
               child: FloatingActionButton(
                 onPressed: () {},
                 tooltip: localizations.buttonTextCreate,
-                child: const Icon(Icons.add),
+                child: Icon(Icons.add),
               ),
             )
           : null,
       floatingActionButtonLocation: _fabLocations[_currentFabLocation.value],
       bottomNavigationBar: _DemoBottomAppBar(
         fabLocation: _fabLocations[_currentFabLocation.value],
-        shape: _showNotch.value ? const CircularNotchedRectangle() : null,
+        shape: _showNotch.value ? CircularNotchedRectangle() : null,
       ),
     );
   }
@@ -165,7 +165,7 @@ class _DemoBottomAppBar extends StatelessWidget {
   Widget build(BuildContext context) {
     final GalleryLocalizations localizations = GalleryLocalizations.of(context)!;
     return Semantics(
-      sortKey: const OrdinalSortKey(1),
+      sortKey: OrdinalSortKey(1),
       container: true,
       label: localizations.bottomAppBar,
       child: BottomAppBar(
@@ -176,18 +176,18 @@ class _DemoBottomAppBar extends StatelessWidget {
             children: <Widget>[
               IconButton(
                 tooltip: MaterialLocalizations.of(context).openAppDrawerTooltip,
-                icon: const Icon(Icons.menu),
+                icon: Icon(Icons.menu),
                 onPressed: () {},
               ),
-              if (centerLocations.contains(fabLocation)) const Spacer(),
+              if (centerLocations.contains(fabLocation)) Spacer(),
               IconButton(
                 tooltip: localizations.starterAppTooltipSearch,
-                icon: const Icon(Icons.search),
+                icon: Icon(Icons.search),
                 onPressed: () {},
               ),
               IconButton(
                 tooltip: localizations.starterAppTooltipFavorite,
-                icon: const Icon(Icons.favorite),
+                icon: Icon(Icons.favorite),
                 onPressed: () {},
               )
             ],

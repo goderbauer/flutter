@@ -8,7 +8,7 @@ import 'package:flutter/material.dart';
 
 // Common constants between SlowMotionSetting and SettingsListItem.
 final BorderRadius settingItemBorderRadius = BorderRadius.circular(10);
-const EdgeInsetsDirectional settingItemHeaderMargin = EdgeInsetsDirectional.fromSTEB(32, 0, 32, 8);
+EdgeInsetsDirectional settingItemHeaderMargin = EdgeInsetsDirectional.fromSTEB(32, 0, 32, 8);
 
 class DisplayOption {
 
@@ -47,7 +47,7 @@ class ToggleSetting extends StatelessWidget {
             children: <Widget>[
               Expanded(
                 child: Padding(
-                  padding: const EdgeInsets.all(16),
+                  padding: EdgeInsets.all(16),
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     mainAxisAlignment: MainAxisAlignment.center,
@@ -63,7 +63,7 @@ class ToggleSetting extends StatelessWidget {
                 ),
               ),
               Padding(
-                padding: const EdgeInsetsDirectional.only(end: 8),
+                padding: EdgeInsetsDirectional.only(end: 8),
                 child: Switch(
                   activeColor: colorScheme.primary,
                   value: value,
@@ -104,7 +104,7 @@ class _SettingsListItemState<T> extends State<SettingsListItem<T?>>
     with SingleTickerProviderStateMixin {
   static final Animatable<double> _easeInTween =
       CurveTween(curve: Curves.easeIn);
-  static const Duration _expandDuration = Duration(milliseconds: 150);
+  static final Duration _expandDuration = Duration(milliseconds: 150);
   late AnimationController _controller;
   late Animation<double> _childrenHeightFactor;
   late Animation<double> _headerChevronRotation;
@@ -130,13 +130,13 @@ class _SettingsListItemState<T> extends State<SettingsListItem<T?>>
       end: EdgeInsets.zero,
     ).animate(_controller);
     _headerPadding = EdgeInsetsGeometryTween(
-      begin: const EdgeInsetsDirectional.fromSTEB(16, 10, 0, 10),
-      end: const EdgeInsetsDirectional.fromSTEB(32, 18, 32, 20),
+      begin: EdgeInsetsDirectional.fromSTEB(16, 10, 0, 10),
+      end: EdgeInsetsDirectional.fromSTEB(32, 18, 32, 20),
     ).animate(_controller);
     _headerSubtitleHeight =
         _controller.drive(Tween<double>(begin: 1.0, end: 0.0));
     _childrenPadding = EdgeInsetsGeometryTween(
-      begin: const EdgeInsets.symmetric(horizontal: 32),
+      begin: EdgeInsets.symmetric(horizontal: 32),
       end: EdgeInsets.zero,
     ).animate(_controller);
     _headerBorderRadius = BorderRadiusTween(
@@ -206,8 +206,8 @@ class _SettingsListItemState<T> extends State<SettingsListItem<T?>>
       animation: _controller.view,
       builder: _buildHeaderWithChildren,
       child: Container(
-        constraints: const BoxConstraints(maxHeight: 384),
-        margin: const EdgeInsetsDirectional.only(start: 24, bottom: 40),
+        constraints: BoxConstraints(maxHeight: 384),
+        margin: EdgeInsetsDirectional.only(start: 24, bottom: 40),
         decoration: BoxDecoration(
           border: BorderDirectional(
             start: BorderSide(
@@ -322,13 +322,13 @@ class _CategoryHeader extends StatelessWidget {
                 ),
               ),
               Padding(
-                padding: const EdgeInsetsDirectional.only(
+                padding: EdgeInsetsDirectional.only(
                   start: 8,
                   end: 24,
                 ),
                 child: RotationTransition(
                   turns: chevronRotation,
-                  child: const Icon(Icons.arrow_drop_down),
+                  child: Icon(Icons.arrow_drop_down),
                 ),
               )
             ],

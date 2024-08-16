@@ -8,7 +8,7 @@ import '../../gallery_localizations.dart';
 
 // BEGIN colorsDemo
 
-const double kColorItemHeight = 48;
+double kColorItemHeight = 48;
 
 class _Palette {
   _Palette({
@@ -161,7 +161,7 @@ class _ColorItem extends StatelessWidget {
       container: true,
       child: Container(
         height: kColorItemHeight,
-        padding: const EdgeInsets.symmetric(horizontal: 16),
+        padding: EdgeInsets.symmetric(horizontal: 16),
         color: color,
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -179,7 +179,7 @@ class _PaletteTabView extends StatelessWidget {
   const _PaletteTabView({required this.colors});
 
   final _Palette colors;
-  static const List<int> primaryKeys = <int>[
+  static List<int> primaryKeys = <int>[
     50,
     100,
     200,
@@ -191,7 +191,7 @@ class _PaletteTabView extends StatelessWidget {
     800,
     900
   ];
-  static const List<int> accentKeys = <int>[100, 200, 400, 700];
+  static List<int> accentKeys = <int>[100, 200, 400, 700];
 
   @override
   Widget build(BuildContext context) {

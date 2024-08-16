@@ -38,7 +38,7 @@ class _HorizontalDividerDemo extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: const EdgeInsets.all(10),
+      padding: EdgeInsets.all(10),
       child: Column(
         children: <Widget>[
           Expanded(
@@ -49,7 +49,7 @@ class _HorizontalDividerDemo extends StatelessWidget {
               ),
             ),
           ),
-          const Divider(
+          Divider(
             color: Colors.grey,
             height: 20,
             thickness: 1,
@@ -78,7 +78,7 @@ class _VerticalDividerDemo extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: const EdgeInsets.all(10),
+      padding: EdgeInsets.all(10),
       child: Row(
         children: <Widget>[
           Expanded(
@@ -89,7 +89,7 @@ class _VerticalDividerDemo extends StatelessWidget {
               ),
             ),
           ),
-          const VerticalDivider(
+          VerticalDivider(
             color: Colors.grey,
             thickness: 1,
             indent: 20,

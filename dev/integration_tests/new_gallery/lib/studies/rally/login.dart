@@ -82,7 +82,7 @@ class _MainView extends StatelessWidget {
           maxWidth: desktopMaxWidth,
           usernameController: usernameController,
         ),
-        const SizedBox(height: 12),
+        SizedBox(height: 12),
         _PasswordInput(
           maxWidth: desktopMaxWidth,
           passwordController: passwordController,
@@ -96,11 +96,11 @@ class _MainView extends StatelessWidget {
       ];
     } else {
       listViewChildren = <Widget>[
-        const _SmallLogo(),
+        _SmallLogo(),
         _UsernameInput(
           usernameController: usernameController,
         ),
-        const SizedBox(height: 12),
+        SizedBox(height: 12),
         _PasswordInput(
           passwordController: passwordController,
         ),
@@ -114,14 +114,14 @@ class _MainView extends StatelessWidget {
 
     return Column(
       children: <Widget>[
-        if (isDesktop) const _TopBar(),
+        if (isDesktop) _TopBar(),
         Expanded(
           child: Align(
             alignment: isDesktop ? Alignment.center : Alignment.topCenter,
             child: ListView(
               restorationId: 'login_list_view',
               shrinkWrap: true,
-              padding: const EdgeInsets.symmetric(horizontal: 24),
+              padding: EdgeInsets.symmetric(horizontal: 24),
               children: listViewChildren,
             ),
           ),
@@ -136,12 +136,12 @@ class _TopBar extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    const SizedBox spacing = SizedBox(width: 30);
+    final SizedBox spacing = SizedBox(width: 30);
     final GalleryLocalizations localizations = GalleryLocalizations.of(context)!;
     return Container(
       width: double.infinity,
-      margin: const EdgeInsets.only(top: 8),
-      padding: const EdgeInsets.symmetric(horizontal: 30),
+      margin: EdgeInsets.only(top: 8),
+      padding: EdgeInsets.symmetric(horizontal: 30),
       child: Wrap(
         alignment: WrapAlignment.spaceBetween,
         children: <Widget>[
@@ -153,7 +153,7 @@ class _TopBar extends StatelessWidget {
                   height: 80,
                   child: FadeInImagePlaceholder(
                     image:
-                        const AssetImage('logo.png', package: 'rally_assets'),
+                        AssetImage('logo.png', package: 'rally_assets'),
                     placeholder: LayoutBuilder(builder: (BuildContext context, BoxConstraints constraints) {
                       return SizedBox(
                         width: constraints.maxHeight,
@@ -197,7 +197,7 @@ class _SmallLogo extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const Padding(
+    return Padding(
       padding: EdgeInsets.symmetric(vertical: 64),
       child: SizedBox(
         height: 160,
@@ -227,7 +227,7 @@ class _UsernameInput extends StatelessWidget {
       child: Container(
         constraints: BoxConstraints(maxWidth: maxWidth ?? double.infinity),
         child: TextField(
-          autofillHints: const <String>[AutofillHints.username],
+          autofillHints: <String>[AutofillHints.username],
           textInputAction: TextInputAction.next,
           controller: usernameController,
           decoration: InputDecoration(
@@ -347,14 +347,14 @@ class _LoginButton extends StatelessWidget {
     return Align(
       child: Container(
         constraints: BoxConstraints(maxWidth: maxWidth ?? double.infinity),
-        padding: const EdgeInsets.symmetric(vertical: 30),
+        padding: EdgeInsets.symmetric(vertical: 30),
         child: Row(
           children: <Widget>[
-            const Icon(Icons.check_circle_outline,
+            Icon(Icons.check_circle_outline,
                 color: RallyColors.buttonColor),
-            const SizedBox(width: 12),
+            SizedBox(width: 12),
             Text(GalleryLocalizations.of(context)!.rallyLoginRememberMe),
-            const Expanded(child: SizedBox.shrink()),
+            Expanded(child: SizedBox.shrink()),
             _FilledButton(
               text: GalleryLocalizations.of(context)!.rallyLoginButtonLogin,
               onTap: onTap,
@@ -376,8 +376,8 @@ class _BorderButton extends StatelessWidget {
     return OutlinedButton(
       style: OutlinedButton.styleFrom(
         foregroundColor: Colors.white,
-        side: const BorderSide(color: RallyColors.buttonColor),
-        padding: const EdgeInsets.symmetric(vertical: 14, horizontal: 24),
+        side: BorderSide(color: RallyColors.buttonColor),
+        padding: EdgeInsets.symmetric(vertical: 14, horizontal: 24),
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(12),
         ),
@@ -402,7 +402,7 @@ class _FilledButton extends StatelessWidget {
       style: TextButton.styleFrom(
         foregroundColor: Colors.black,
         backgroundColor: RallyColors.buttonColor,
-        padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 24),
+        padding: EdgeInsets.symmetric(vertical: 10, horizontal: 24),
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(12),
         ),
@@ -410,8 +410,8 @@ class _FilledButton extends StatelessWidget {
       onPressed: onTap,
       child: Row(
         children: <Widget>[
-          const Icon(Icons.lock),
-          const SizedBox(width: 6),
+          Icon(Icons.lock),
+          SizedBox(width: 6),
           Text(text),
         ],
       ),

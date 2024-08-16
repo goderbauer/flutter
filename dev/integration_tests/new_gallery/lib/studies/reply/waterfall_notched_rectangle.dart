@@ -15,7 +15,7 @@ class WaterfallNotchedRectangle extends NotchedShape {
   /// Creates a [WaterfallNotchedRectangle].
   ///
   /// The same object can be used to create multiple shapes.
-  const WaterfallNotchedRectangle();
+  WaterfallNotchedRectangle();
 
   /// Creates a [Path] that describes a rectangle with a smooth circular notch.
   ///
@@ -47,8 +47,8 @@ class WaterfallNotchedRectangle extends NotchedShape {
     // available at: https://goo.gl/Ufzrqn
 
     // s1, s2 are the two knobs controlling the behavior of the bezier curve.
-    const double s1 = 21.0;
-    const double s2 = 6.0;
+    final double s1 = 21.0;
+    final double s2 = 6.0;
 
     final double r = notchRadius;
     final double a = -1.0 * r - s2;

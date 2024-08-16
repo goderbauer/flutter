@@ -63,8 +63,8 @@ class _CupertinoSearchTextFieldDemoState
             CupertinoSearchTextField(
               controller: _queryTextController,
               restorationId: 'search_text_field',
-              padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 12),
-              decoration: const BoxDecoration(
+              padding: EdgeInsets.symmetric(horizontal: 6, vertical: 12),
+              decoration: BoxDecoration(
                 border: Border(
                   bottom: BorderSide(
                     width: 0,

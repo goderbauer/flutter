@@ -26,14 +26,14 @@ class _ProgressIndicatorDemoState extends State<ProgressIndicatorDemo>
   void initState() {
     super.initState();
     _controller = AnimationController(
-      duration: const Duration(milliseconds: 1500),
+      duration: Duration(milliseconds: 1500),
       vsync: this,
       animationBehavior: AnimationBehavior.preserve,
     )..forward();
 
     _animation = CurvedAnimation(
       parent: _controller,
-      curve: const Interval(0.0, 0.9, curve: Curves.fastOutSlowIn),
+      curve: Interval(0.0, 0.9, curve: Curves.fastOutSlowIn),
       reverseCurve: Curves.fastOutSlowIn,
     )..addStatusListener((AnimationStatus status) {
         if (status == AnimationStatus.dismissed) {
@@ -69,15 +69,15 @@ class _ProgressIndicatorDemoState extends State<ProgressIndicatorDemo>
             CircularProgressIndicator(
               semanticsLabel: GalleryLocalizations.of(context)!.loading,
             ),
-            const SizedBox(height: 32),
+            SizedBox(height: 32),
             CircularProgressIndicator(value: _animation.value),
           ],
         );
       case ProgressIndicatorDemoType.linear:
         return Column(
           children: <Widget>[
-            const LinearProgressIndicator(),
-            const SizedBox(height: 32),
+            LinearProgressIndicator(),
+            SizedBox(height: 32),
             LinearProgressIndicator(value: _animation.value),
           ],
         );
@@ -94,7 +94,7 @@ class _ProgressIndicatorDemoState extends State<ProgressIndicatorDemo>
       body: Center(
         child: SingleChildScrollView(
           child: Container(
-            padding: const EdgeInsets.all(8),
+            padding: EdgeInsets.all(8),
             child: AnimatedBuilder(
               animation: _animation,
               builder: _buildIndicators,

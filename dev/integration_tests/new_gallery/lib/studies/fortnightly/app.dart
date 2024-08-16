@@ -12,18 +12,18 @@ import '../../layout/text_scale.dart';
 import 'routes.dart' as routes;
 import 'shared.dart';
 
-const String _fortnightlyTitle = 'Fortnightly';
+String _fortnightlyTitle = 'Fortnightly';
 
 class FortnightlyApp extends StatelessWidget {
   const FortnightlyApp({super.key});
 
-  static const String defaultRoute = routes.defaultRoute;
+  static String defaultRoute = routes.defaultRoute;
 
   @override
   Widget build(BuildContext context) {
     final StatelessWidget home = isDisplayDesktop(context)
-        ? const _FortnightlyHomeDesktop()
-        : const _FortnightlyHomeMobile();
+        ? _FortnightlyHomeDesktop()
+        : _FortnightlyHomeMobile();
     return MaterialApp(
       restorationScopeId: 'fortnightly_app',
       title: _fortnightlyTitle,
@@ -50,7 +50,7 @@ class _FortnightlyHomeMobile extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      drawer: const Drawer(
+      drawer: Drawer(
         child: SafeArea(
           child: NavigationMenu(isCloseable: true),
         ),
@@ -59,7 +59,7 @@ class _FortnightlyHomeMobile extends StatelessWidget {
         automaticallyImplyLeading: false,
         title: Semantics(
           label: _fortnightlyTitle,
-          child: const FadeInImagePlaceholder(
+          child: FadeInImagePlaceholder(
             image: AssetImage(
               'fortnightly/fortnightly_title.png',
               package: 'flutter_gallery_assets',
@@ -70,7 +70,7 @@ class _FortnightlyHomeMobile extends StatelessWidget {
         ),
         actions: <Widget>[
           IconButton(
-            icon: const Icon(Icons.search),
+            icon: Icon(Icons.search),
             tooltip: GalleryLocalizations.of(context)!.shrineTooltipSearch,
             onPressed: () {},
           ),
@@ -80,10 +80,10 @@ class _FortnightlyHomeMobile extends StatelessWidget {
         child: ListView(
           restorationId: 'list_view',
           children: <Widget>[
-            const HashtagBar(),
+            HashtagBar(),
             for (final Widget item in buildArticlePreviewItems(context))
               Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 16),
+                padding: EdgeInsets.symmetric(horizontal: 16),
                 child: item,
               ),
           ],
@@ -98,13 +98,13 @@ class _FortnightlyHomeDesktop extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    const double menuWidth = 200.0;
-    const SizedBox spacer = SizedBox(width: 20);
+    final double menuWidth = 200.0;
+    final SizedBox spacer = SizedBox(width: 20);
     final double headerHeight = 40 * reducedTextScale(context);
 
     return Scaffold(
       body: Padding(
-        padding: const EdgeInsets.all(16),
+        padding: EdgeInsets.all(16),
         child: Column(
           children: <Widget>[
             SizedBox(
@@ -114,7 +114,7 @@ class _FortnightlyHomeDesktop extends StatelessWidget {
                   Container(
                     width: menuWidth,
                     alignment: AlignmentDirectional.centerStart,
-                    margin: const EdgeInsets.only(left: 12),
+                    margin: EdgeInsets.only(left: 12),
                     child: Semantics(
                       label: _fortnightlyTitle,
                       child: Image.asset(
@@ -125,7 +125,7 @@ class _FortnightlyHomeDesktop extends StatelessWidget {
                     ),
                   ),
                   spacer,
-                  const Flexible(
+                  Flexible(
                     flex: 2,
                     child: HashtagBar(),
                   ),
@@ -135,7 +135,7 @@ class _FortnightlyHomeDesktop extends StatelessWidget {
                     child: Container(
                       alignment: AlignmentDirectional.centerEnd,
                       child: IconButton(
-                        icon: const Icon(Icons.search),
+                        icon: Icon(Icons.search),
                         tooltip: GalleryLocalizations.of(context)!
                             .shrineTooltipSearch,
                         onPressed: () {},
@@ -148,7 +148,7 @@ class _FortnightlyHomeDesktop extends StatelessWidget {
             Flexible(
               child: Row(
                 children: <Widget>[
-                  const SizedBox(
+                  SizedBox(
                     width: menuWidth,
                     child: NavigationMenu(),
                   ),
@@ -165,7 +165,7 @@ class _FortnightlyHomeDesktop extends StatelessWidget {
                     child: ListView(
                       children: <Widget>[
                         ...buildStockItems(context),
-                        const SizedBox(height: 32),
+                        SizedBox(height: 32),
                         ...buildVideoPreviewItems(context),
                       ],
                     ),

@@ -7,7 +7,7 @@ import 'package:flutter/material.dart';
 import '../../gallery_localizations.dart';
 import '../../layout/adaptive.dart';
 
-const double appBarDesktopHeight = 128.0;
+double appBarDesktopHeight = 128.0;
 
 class HomePage extends StatelessWidget {
   const HomePage({super.key});
@@ -21,8 +21,8 @@ class HomePage extends StatelessWidget {
     final SafeArea body = SafeArea(
       child: Padding(
         padding: isDesktop
-            ? const EdgeInsets.symmetric(horizontal: 72, vertical: 48)
-            : const EdgeInsets.symmetric(horizontal: 16, vertical: 24),
+            ? EdgeInsets.symmetric(horizontal: 72, vertical: 48)
+            : EdgeInsets.symmetric(horizontal: 16, vertical: 24),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: <Widget>[
@@ -32,12 +32,12 @@ class HomePage extends StatelessWidget {
                 color: colorScheme.onSecondary,
               ),
             ),
-            const SizedBox(height: 10),
+            SizedBox(height: 10),
             SelectableText(
               localizations.starterAppGenericSubtitle,
               style: textTheme.titleMedium,
             ),
-            const SizedBox(height: 48),
+            SizedBox(height: 48),
             SelectableText(
               localizations.starterAppGenericBody,
               style: textTheme.bodyLarge,
@@ -50,11 +50,11 @@ class HomePage extends StatelessWidget {
     if (isDesktop) {
       return Row(
         children: <Widget>[
-          const ListDrawer(),
-          const VerticalDivider(width: 1),
+          ListDrawer(),
+          VerticalDivider(width: 1),
           Expanded(
             child: Scaffold(
-              appBar: const AdaptiveAppBar(
+              appBar: AdaptiveAppBar(
                 isDesktop: true,
               ),
               body: body,
@@ -74,9 +74,9 @@ class HomePage extends StatelessWidget {
       );
     } else {
       return Scaffold(
-        appBar: const AdaptiveAppBar(),
+        appBar: AdaptiveAppBar(),
         body: body,
-        drawer: const ListDrawer(),
+        drawer: ListDrawer(),
         floatingActionButton: FloatingActionButton(
           heroTag: 'Add',
           onPressed: () {},
@@ -101,8 +101,8 @@ class AdaptiveAppBar extends StatelessWidget implements PreferredSizeWidget {
 
   @override
   Size get preferredSize => isDesktop
-      ? const Size.fromHeight(appBarDesktopHeight)
-      : const Size.fromHeight(kToolbarHeight);
+      ? Size.fromHeight(appBarDesktopHeight)
+      : Size.fromHeight(kToolbarHeight);
 
   @override
   Widget build(BuildContext context) {
@@ -115,10 +115,10 @@ class AdaptiveAppBar extends StatelessWidget implements PreferredSizeWidget {
           : SelectableText(localizations.starterAppGenericTitle),
       bottom: isDesktop
           ? PreferredSize(
-              preferredSize: const Size.fromHeight(26),
+              preferredSize: Size.fromHeight(26),
               child: Container(
                 alignment: AlignmentDirectional.centerStart,
-                margin: const EdgeInsetsDirectional.fromSTEB(72, 0, 0, 22),
+                margin: EdgeInsetsDirectional.fromSTEB(72, 0, 0, 22),
                 child: SelectableText(
                   localizations.starterAppGenericTitle,
                   style: themeData.textTheme.titleLarge!.copyWith(
@@ -130,17 +130,17 @@ class AdaptiveAppBar extends StatelessWidget implements PreferredSizeWidget {
           : null,
       actions: <Widget>[
         IconButton(
-          icon: const Icon(Icons.share),
+          icon: Icon(Icons.share),
           tooltip: localizations.starterAppTooltipShare,
           onPressed: () {},
         ),
         IconButton(
-          icon: const Icon(Icons.favorite),
+          icon: Icon(Icons.favorite),
           tooltip: localizations.starterAppTooltipFavorite,
           onPressed: () {},
         ),
         IconButton(
-          icon: const Icon(Icons.search),
+          icon: Icon(Icons.search),
           tooltip: localizations.starterAppTooltipSearch,
           onPressed: () {},
         ),
@@ -157,7 +157,7 @@ class ListDrawer extends StatefulWidget {
 }
 
 class _ListDrawerState extends State<ListDrawer> {
-  static const int numItems = 9;
+  static int numItems = 9;
 
   int selectedItem = 0;
 
@@ -179,11 +179,11 @@ class _ListDrawerState extends State<ListDrawer> {
                 style: textTheme.bodyMedium,
               ),
             ),
-            const Divider(),
+            Divider(),
             ...Iterable<int>.generate(numItems).toList().map((int i) {
               return ListTile(
                 selected: i == selectedItem,
-                leading: const Icon(Icons.favorite),
+                leading: Icon(Icons.favorite),
                 title: Text(
                   localizations.starterAppDrawerItem(i + 1),
                 ),

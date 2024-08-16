@@ -42,7 +42,7 @@ double sumOf<T>(List<T> list, double Function(T elt) getValue) {
 ///
 /// The [primaryAmount] is the balance of the account in USD.
 class AccountData {
-  const AccountData({
+  AccountData({
     required this.name,
     required this.primaryAmount,
     required this.accountNumber,
@@ -62,7 +62,7 @@ class AccountData {
 ///
 /// The [primaryAmount] is the amount due in USD.
 class BillData {
-  const BillData({
+  BillData({
     required this.name,
     required this.primaryAmount,
     required this.dueDate,
@@ -86,7 +86,7 @@ class BillData {
 ///
 /// The [primaryAmount] is the budget cap in USD.
 class BudgetData {
-  const BudgetData({
+  BudgetData({
     required this.name,
     required this.primaryAmount,
     required this.amountUsed,
@@ -114,7 +114,7 @@ class AlertData {
 }
 
 class DetailedEventData {
-  const DetailedEventData({
+  DetailedEventData({
     required this.title,
     required this.date,
     required this.amount,

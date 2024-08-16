@@ -69,7 +69,7 @@ class _DeferredWidgetState extends State<DeferredWidget> {
   @override
   Widget build(BuildContext context) {
     /// If closure to create widget changed, create new instance, otherwise
-    /// treat as const Widget.
+    /// treat as Widget.
     if (_loadedCreator != widget.createWidget && _loadedCreator != null) {
       _loadedCreator = widget.createWidget;
       _loadedChild = _loadedCreator!();
@@ -98,7 +98,7 @@ class DeferredLoadingPlaceholder extends StatelessWidget {
               width: 20,
               color: Colors.grey[700]!,
             ),
-            borderRadius: const BorderRadius.all(Radius.circular(10))),
+            borderRadius: BorderRadius.all(Radius.circular(10))),
         width: 250,
         child: Column(
           mainAxisSize: MainAxisSize.min,
@@ -111,7 +111,7 @@ class DeferredLoadingPlaceholder extends StatelessWidget {
                 '$name is a deferred component which are downloaded and installed at runtime.',
                 style: Theme.of(context).textTheme.bodyLarge),
             Container(height: 20),
-            const Center(child: CircularProgressIndicator()),
+            Center(child: CircularProgressIndicator()),
           ],
         ),
       ),

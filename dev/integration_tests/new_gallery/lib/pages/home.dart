@@ -27,12 +27,12 @@ import 'category_list_item.dart';
 import 'settings.dart';
 import 'splash.dart';
 
-const double _horizontalPadding = 32.0;
-const double _horizontalDesktopPadding = 81.0;
-const double _carouselHeightMin = 240.0;
-const double _carouselItemDesktopMargin = 8.0;
-const double _carouselItemMobileMargin = 4.0;
-const double _carouselItemWidth = 296.0;
+double _horizontalPadding = 32.0;
+double _horizontalDesktopPadding = 81.0;
+double _carouselHeightMin = 240.0;
+double _carouselItemDesktopMargin = 8.0;
+double _carouselItemMobileMargin = 4.0;
+double _carouselItemWidth = 296.0;
 
 class ToggleSplashNotification extends Notification {}
 
@@ -47,90 +47,90 @@ class HomePage extends StatelessWidget {
     final List<Widget> carouselCards = <Widget>[
       _CarouselCard(
         demo: studyDemos['reply'],
-        asset: const AssetImage(
+        asset: AssetImage(
           'assets/studies/reply_card.png',
           package: 'flutter_gallery_assets',
         ),
-        assetColor: const Color(0xFF344955),
-        assetDark: const AssetImage(
+        assetColor: Color(0xFF344955),
+        assetDark: AssetImage(
           'assets/studies/reply_card_dark.png',
           package: 'flutter_gallery_assets',
         ),
-        assetDarkColor: const Color(0xFF1D2327),
+        assetDarkColor: Color(0xFF1D2327),
         textColor: Colors.white,
         studyRoute: reply_routes.homeRoute,
       ),
       _CarouselCard(
         demo: studyDemos['shrine'],
-        asset: const AssetImage(
+        asset: AssetImage(
           'assets/studies/shrine_card.png',
           package: 'flutter_gallery_assets',
         ),
-        assetColor: const Color(0xFFFEDBD0),
-        assetDark: const AssetImage(
+        assetColor: Color(0xFFFEDBD0),
+        assetDark: AssetImage(
           'assets/studies/shrine_card_dark.png',
           package: 'flutter_gallery_assets',
         ),
-        assetDarkColor: const Color(0xFF543B3C),
+        assetDarkColor: Color(0xFF543B3C),
         textColor: shrineBrown900,
         studyRoute: shrine_routes.loginRoute,
       ),
       _CarouselCard(
         demo: studyDemos['rally'],
         textColor: RallyColors.accountColors[0],
-        asset: const AssetImage(
+        asset: AssetImage(
           'assets/studies/rally_card.png',
           package: 'flutter_gallery_assets',
         ),
-        assetColor: const Color(0xFFD1F2E6),
-        assetDark: const AssetImage(
+        assetColor: Color(0xFFD1F2E6),
+        assetDark: AssetImage(
           'assets/studies/rally_card_dark.png',
           package: 'flutter_gallery_assets',
         ),
-        assetDarkColor: const Color(0xFF253538),
+        assetDarkColor: Color(0xFF253538),
         studyRoute: rally_routes.loginRoute,
       ),
       _CarouselCard(
         demo: studyDemos['crane'],
-        asset: const AssetImage(
+        asset: AssetImage(
           'assets/studies/crane_card.png',
           package: 'flutter_gallery_assets',
         ),
-        assetColor: const Color(0xFFFBF6F8),
-        assetDark: const AssetImage(
+        assetColor: Color(0xFFFBF6F8),
+        assetDark: AssetImage(
           'assets/studies/crane_card_dark.png',
           package: 'flutter_gallery_assets',
         ),
-        assetDarkColor: const Color(0xFF591946),
+        assetDarkColor: Color(0xFF591946),
         textColor: cranePurple700,
         studyRoute: crane_routes.defaultRoute,
       ),
       _CarouselCard(
         demo: studyDemos['fortnightly'],
-        asset: const AssetImage(
+        asset: AssetImage(
           'assets/studies/fortnightly_card.png',
           package: 'flutter_gallery_assets',
         ),
         assetColor: Colors.white,
-        assetDark: const AssetImage(
+        assetDark: AssetImage(
           'assets/studies/fortnightly_card_dark.png',
           package: 'flutter_gallery_assets',
         ),
-        assetDarkColor: const Color(0xFF1F1F1F),
+        assetDarkColor: Color(0xFF1F1F1F),
         studyRoute: fortnightly_routes.defaultRoute,
       ),
       _CarouselCard(
         demo: studyDemos['starterApp'],
-        asset: const AssetImage(
+        asset: AssetImage(
           'assets/studies/starter_card.png',
           package: 'flutter_gallery_assets',
         ),
-        assetColor: const Color(0xFFFAF6FE),
-        assetDark: const AssetImage(
+        assetColor: Color(0xFFFAF6FE),
+        assetDark: AssetImage(
           'assets/studies/starter_card_dark.png',
           package: 'flutter_gallery_assets',
         ),
-        assetDarkColor: const Color(0xFF3F3D45),
+        assetDarkColor: Color(0xFF3F3D45),
         textColor: Colors.black,
         studyRoute: starter_app_routes.defaultRoute,
       ),
@@ -141,7 +141,7 @@ class HomePage extends StatelessWidget {
       final List<_DesktopCategoryItem> desktopCategoryItems = <_DesktopCategoryItem>[
         _DesktopCategoryItem(
           category: GalleryDemoCategory.material,
-          asset: const AssetImage(
+          asset: AssetImage(
             'assets/icons/material/material.png',
             package: 'flutter_gallery_assets',
           ),
@@ -149,7 +149,7 @@ class HomePage extends StatelessWidget {
         ),
         _DesktopCategoryItem(
           category: GalleryDemoCategory.cupertino,
-          asset: const AssetImage(
+          asset: AssetImage(
             'assets/icons/cupertino/cupertino.png',
             package: 'flutter_gallery_assets',
           ),
@@ -157,7 +157,7 @@ class HomePage extends StatelessWidget {
         ),
         _DesktopCategoryItem(
           category: GalleryDemoCategory.other,
-          asset: const AssetImage(
+          asset: AssetImage(
             'assets/icons/reference/reference.png',
             package: 'flutter_gallery_assets',
           ),
@@ -168,9 +168,9 @@ class HomePage extends StatelessWidget {
       return Scaffold(
         body: ListView(
           // Makes integration tests possible.
-          key: const ValueKey<String>('HomeListView'),
+          key: ValueKey<String>('HomeListView'),
           primary: true,
-          padding: const EdgeInsetsDirectional.only(
+          padding: EdgeInsetsDirectional.only(
             top: firstHeaderDesktopTopPadding,
           ),
           children: <Widget>[
@@ -189,7 +189,7 @@ class HomePage extends StatelessWidget {
                 ),
               ),
             ),
-            const SizedBox(height: 81),
+            SizedBox(height: 81),
             _DesktopHomeItem(
               child: Row(
                 children: <Widget>[
@@ -206,11 +206,11 @@ class HomePage extends StatelessWidget {
                       child: FadeInImage(
                         image: Theme.of(context).colorScheme.brightness ==
                                 Brightness.dark
-                            ? const AssetImage(
+                            ? AssetImage(
                                 'assets/logo/flutter_logo.png',
                                 package: 'flutter_gallery_assets',
                               )
-                            : const AssetImage(
+                            : AssetImage(
                                 'assets/logo/flutter_logo_color.png',
                                 package: 'flutter_gallery_assets',
                               ),
@@ -219,7 +219,7 @@ class HomePage extends StatelessWidget {
                       ),
                     ),
                   ),
-                  const Expanded(
+                  Expanded(
                     child: Wrap(
                       crossAxisAlignment: WrapCrossAlignment.center,
                       alignment: WrapAlignment.end,
@@ -233,7 +233,7 @@ class HomePage extends StatelessWidget {
                 ],
               ),
             ),
-            const SizedBox(height: 109),
+            SizedBox(height: 109),
           ],
         ),
       );
@@ -348,7 +348,7 @@ class _AnimatedHomePageState extends State<_AnimatedHomePage>
     super.initState();
     _animationController = AnimationController(
       vsync: this,
-      duration: const Duration(milliseconds: 800),
+      duration: Duration(milliseconds: 800),
     );
 
     if (widget.isSplashPageAnimationFinished) {
@@ -386,14 +386,14 @@ class _AnimatedHomePageState extends State<_AnimatedHomePage>
       children: <Widget>[
         ListView(
           // Makes integration tests possible.
-          key: const ValueKey<String>('HomeListView'),
+          key: ValueKey<String>('HomeListView'),
           primary: true,
           restorationId: 'home_list_view',
           children: <Widget>[
-            const SizedBox(height: 8),
+            SizedBox(height: 8),
             Container(
               margin:
-                  const EdgeInsets.symmetric(horizontal: _horizontalPadding),
+                  EdgeInsets.symmetric(horizontal: _horizontalPadding),
               child: _GalleryHeader(),
             ),
             _MobileCarousel(
@@ -403,14 +403,14 @@ class _AnimatedHomePageState extends State<_AnimatedHomePage>
             ),
             Container(
               margin:
-                  const EdgeInsets.symmetric(horizontal: _horizontalPadding),
+                  EdgeInsets.symmetric(horizontal: _horizontalPadding),
               child: _CategoriesHeader(),
             ),
             _AnimatedCategoryItem(
               startDelayFraction: 0.00,
               controller: _animationController,
               child: CategoryListItem(
-                  key: const PageStorageKey<GalleryDemoCategory>(
+                  key: PageStorageKey<GalleryDemoCategory>(
                     GalleryDemoCategory.material,
                   ),
                   restorationId: 'home_material_category_list',
@@ -427,7 +427,7 @@ class _AnimatedHomePageState extends State<_AnimatedHomePage>
               startDelayFraction: 0.05,
               controller: _animationController,
               child: CategoryListItem(
-                  key: const PageStorageKey<GalleryDemoCategory>(
+                  key: PageStorageKey<GalleryDemoCategory>(
                     GalleryDemoCategory.cupertino,
                   ),
                   restorationId: 'home_cupertino_category_list',
@@ -444,7 +444,7 @@ class _AnimatedHomePageState extends State<_AnimatedHomePage>
               startDelayFraction: 0.10,
               controller: _animationController,
               child: CategoryListItem(
-                  key: const PageStorageKey<GalleryDemoCategory>(
+                  key: PageStorageKey<GalleryDemoCategory>(
                     GalleryDemoCategory.other,
                   ),
                   restorationId: 'home_other_category_list',
@@ -489,8 +489,8 @@ class _DesktopHomeItem extends StatelessWidget {
   Widget build(BuildContext context) {
     return Align(
       child: Container(
-        constraints: const BoxConstraints(maxWidth: maxHomeItemWidth),
-        padding: const EdgeInsets.symmetric(
+        constraints: BoxConstraints(maxWidth: maxHomeItemWidth),
+        padding: EdgeInsets.symmetric(
           horizontal: _horizontalDesktopPadding,
         ),
         child: child,
@@ -569,7 +569,7 @@ class _DesktopCategoryHeader extends StatelessWidget {
       child: Row(
         children: <Widget>[
           Padding(
-            padding: const EdgeInsets.all(10),
+            padding: EdgeInsets.all(10),
             child: FadeInImage(
               image: asset,
               placeholder: MemoryImage(kTransparentImage),
@@ -581,7 +581,7 @@ class _DesktopCategoryHeader extends StatelessWidget {
           ),
           Flexible(
             child: Padding(
-              padding: const EdgeInsetsDirectional.only(start: 8),
+              padding: EdgeInsetsDirectional.only(start: 8),
               child: Semantics(
                 header: true,
                 child: SelectableText(
@@ -651,7 +651,7 @@ class _AnimatedCarousel extends StatelessWidget {
         ).animate(
           CurvedAnimation(
             parent: controller,
-            curve: const Interval(
+            curve: Interval(
               0.200,
               0.800,
               curve: Curves.ease,
@@ -700,7 +700,7 @@ class _AnimatedCarouselCard extends StatelessWidget {
         ).animate(
           CurvedAnimation(
             parent: controller,
-            curve: const Interval(
+            curve: Interval(
               0.900,
               1.000,
               curve: Curves.ease,
@@ -764,7 +764,7 @@ class _MobileCarouselState extends State<_MobileCarousel>
     // The viewPortFraction is calculated as the width of the device minus the
     // padding.
     final double width = MediaQuery.of(context).size.width;
-    const double padding = _carouselItemMobileMargin * 2;
+    final double padding = _carouselItemMobileMargin * 2;
     _controller = PageController(
       initialPage: _currentPage.value,
       viewportFraction: (_carouselItemWidth + padding) / width,
@@ -818,7 +818,7 @@ class _MobileCarouselState extends State<_MobileCarousel>
       controller: widget.animationController,
       child: PageView.builder(
         // Makes integration tests possible.
-        key: const ValueKey<String>('studyDemoList'),
+        key: ValueKey<String>('studyDemoList'),
         onPageChanged: (int value) {
           setState(() {
             _currentPage.value = value;
@@ -883,7 +883,7 @@ class _DesktopCarouselState extends State<_DesktopCarousel> {
     return Align(
       child: Container(
         height: widget.height,
-        constraints: const BoxConstraints(maxWidth: maxHomeItemWidth),
+        constraints: BoxConstraints(maxWidth: maxHomeItemWidth),
         child: Stack(
           children: <Widget>[
             ListView.builder(
@@ -894,12 +894,12 @@ class _DesktopCarouselState extends State<_DesktopCarousel> {
               ),
               scrollDirection: Axis.horizontal,
               primary: false,
-              physics: const _SnappingScrollPhysics(),
+              physics: _SnappingScrollPhysics(),
               controller: _controller,
               itemExtent: _carouselItemWidth,
               itemCount: widget.children.length,
               itemBuilder: (BuildContext context, int index) => Padding(
-                padding: const EdgeInsets.symmetric(vertical: 8.0),
+                padding: EdgeInsets.symmetric(vertical: 8.0),
                 child: widget.children[index],
               ),
             ),
@@ -908,7 +908,7 @@ class _DesktopCarouselState extends State<_DesktopCarousel> {
                 onTap: () {
                   _controller.animateTo(
                     _controller.offset - _carouselItemWidth,
-                    duration: const Duration(milliseconds: 200),
+                    duration: Duration(milliseconds: 200),
                     curve: Curves.easeInOut,
                   );
                 },
@@ -919,7 +919,7 @@ class _DesktopCarouselState extends State<_DesktopCarousel> {
                 onTap: () {
                   _controller.animateTo(
                     _controller.offset + _carouselItemWidth,
-                    duration: const Duration(milliseconds: 200),
+                    duration: Duration(milliseconds: 200),
                     curve: Curves.easeInOut,
                   );
                 },
@@ -996,8 +996,8 @@ class _DesktopPageButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    const double buttonSize = 58.0;
-    const double padding = _horizontalDesktopPadding - buttonSize / 2;
+    final double buttonSize = 58.0;
+    final double padding = _horizontalDesktopPadding - buttonSize / 2;
     return ExcludeSemantics(
       child: Align(
         alignment: isEnd
@@ -1016,7 +1016,7 @@ class _DesktopPageButton extends StatelessWidget {
                 : MaterialLocalizations.of(context).previousPageTooltip,
             child: Material(
               color: Colors.black.withOpacity(0.5),
-              shape: const CircleBorder(),
+              shape: CircleBorder(),
               clipBehavior: Clip.antiAlias,
               child: InkWell(
                 onTap: onTap,
@@ -1066,7 +1066,7 @@ class _CarouselCard extends StatelessWidget {
           horizontal: isDesktop
               ? _carouselItemDesktopMargin
               : _carouselItemMobileMargin),
-      margin: const EdgeInsets.symmetric(vertical: 16.0),
+      margin: EdgeInsets.symmetric(vertical: 16.0),
       height: _carouselHeight(0.7, context),
       width: _carouselItemWidth,
       child: Material(
@@ -1088,7 +1088,7 @@ class _CarouselCard extends StatelessWidget {
                 fadeInDuration: entranceAnimationDuration,
               ),
             Padding(
-              padding: const EdgeInsetsDirectional.fromSTEB(16, 0, 16, 16),
+              padding: EdgeInsetsDirectional.fromSTEB(16, 0, 16, 16),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 mainAxisAlignment: MainAxisAlignment.end,
@@ -1160,7 +1160,7 @@ class _StudyWrapperState extends State<StudyWrapper> {
       child: Stack(
         children: <Widget>[
           Semantics(
-            sortKey: const OrdinalSortKey(1),
+            sortKey: OrdinalSortKey(1),
             child: RestorationScope(
               restorationId: 'study_wrapper',
               child: widget.study,
@@ -1176,21 +1176,21 @@ class _StudyWrapperState extends State<StudyWrapper> {
                         ? kBottomNavigationBarHeight + 16.0
                         : 16.0),
                 child: Semantics(
-                  sortKey: const OrdinalSortKey(0),
+                  sortKey: OrdinalSortKey(0),
                   label: GalleryLocalizations.of(context)!.backToGallery,
                   button: true,
                   enabled: true,
                   excludeSemantics: true,
                   child: FloatingActionButton.extended(
                     heroTag: _BackButtonHeroTag(),
-                    key: const ValueKey<String>('Back'),
+                    key: ValueKey<String>('Back'),
                     onPressed: () {
                       Navigator.of(context)
                           .popUntil((Route<void> route) => route.settings.name == '/');
                     },
                     icon: IconTheme(
                       data: IconThemeData(color: colorScheme.onPrimary),
-                      child: const BackButtonIcon(),
+                      child: BackButtonIcon(),
                     ),
                     label: Text(
                       MaterialLocalizations.of(context).backButtonTooltip,

@@ -10,10 +10,10 @@ import '../../gallery_localizations.dart';
 import 'category_menu_page.dart';
 import 'page_status.dart';
 
-const Cubic _accelerateCurve = Cubic(0.548, 0, 0.757, 0.464);
-const Cubic _decelerateCurve = Cubic(0.23, 0.94, 0.41, 1);
-const double _peakVelocityTime = 0.248210;
-const double _peakVelocityProgress = 0.379146;
+Cubic _accelerateCurve = Cubic(0.548, 0, 0.757, 0.464);
+Cubic _decelerateCurve = Cubic(0.23, 0.94, 0.41, 1);
+double _peakVelocityTime = 0.248210;
+double _peakVelocityProgress = 0.379146;
 
 class _FrontLayer extends StatelessWidget {
   const _FrontLayer({
@@ -36,7 +36,7 @@ class _FrontLayer extends StatelessWidget {
 
     return Material(
       elevation: 16,
-      shape: const BeveledRectangleBorder(
+      shape: BeveledRectangleBorder(
         borderRadius:
             BorderRadiusDirectional.only(topStart: Radius.circular(46)),
       ),
@@ -78,13 +78,13 @@ class _BackdropTitle extends AnimatedWidget {
   Widget build(BuildContext context) {
     final Animation<double> animation = CurvedAnimation(
       parent: listenable as Animation<double>,
-      curve: const Interval(0, 0.78),
+      curve: Interval(0, 0.78),
     );
 
     final int textDirectionScalar =
         Directionality.of(context) == TextDirection.ltr ? 1 : -1;
 
-    const ImageIcon slantedMenuIcon =
+    final ImageIcon slantedMenuIcon =
         ImageIcon(AssetImage('packages/shrine_images/slanted_menu.png'));
 
     final Widget directionalSlantedMenuIcon =
@@ -113,7 +113,7 @@ class _BackdropTitle extends AnimatedWidget {
           child: Semantics(
             container: true,
             child: IconButton(
-              padding: const EdgeInsetsDirectional.only(end: 8),
+              padding: EdgeInsetsDirectional.only(end: 8),
               onPressed: onPress,
               tooltip: menuButtonTooltip,
               icon: Stack(children: <Widget>[
@@ -126,7 +126,7 @@ class _BackdropTitle extends AnimatedWidget {
                     begin: Offset.zero,
                     end: Offset(1.0 * textDirectionScalar, 0.0),
                   ).evaluate(animation),
-                  child: const ImageIcon(
+                  child: ImageIcon(
                     AssetImage('packages/shrine_images/diamond.png'),
                   ),
                 ),
@@ -141,7 +141,7 @@ class _BackdropTitle extends AnimatedWidget {
             Opacity(
               opacity: CurvedAnimation(
                 parent: ReverseAnimation(animation),
-                curve: const Interval(0.5, 1),
+                curve: Interval(0.5, 1),
               ).value,
               child: FractionalTranslation(
                 translation: Tween<Offset>(
@@ -154,7 +154,7 @@ class _BackdropTitle extends AnimatedWidget {
             Opacity(
               opacity: CurvedAnimation(
                 parent: animation,
-                curve: const Interval(0.5, 1),
+                curve: Interval(0.5, 1),
               ).value,
               child: FractionalTranslation(
                 translation: Tween<Offset>(
@@ -239,7 +239,7 @@ class _BackdropState extends State<Backdrop>
       secondWeight = 1 - _peakVelocityTime;
       animation = CurvedAnimation(
         parent: _controller.view,
-        curve: const Interval(0, 0.78),
+        curve: Interval(0, 0.78),
       );
     } else {
       // These values are only used when the controller runs from t=1.0 to t=0.0
@@ -286,7 +286,7 @@ class _BackdropState extends State<Backdrop>
   }
 
   Widget _buildStack(BuildContext context, BoxConstraints constraints) {
-    const int layerTitleHeight = 48;
+    final int layerTitleHeight = 48;
     final Size layerSize = constraints.biggest;
     final double layerTop = layerSize.height - layerTitleHeight;
 
@@ -336,12 +336,12 @@ class _BackdropState extends State<Backdrop>
       ),
       actions: <Widget>[
         IconButton(
-          icon: const Icon(Icons.search),
+          icon: Icon(Icons.search),
           tooltip: GalleryLocalizations.of(context)!.shrineTooltipSearch,
           onPressed: () {},
         ),
         IconButton(
-          icon: const Icon(Icons.tune),
+          icon: Icon(Icons.tune),
           tooltip: GalleryLocalizations.of(context)!.shrineTooltipSettings,
           onPressed: () {},
         ),

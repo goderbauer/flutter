@@ -49,7 +49,7 @@ class _ActionChipDemo extends StatelessWidget {
     return Center(
       child: ActionChip(
         onPressed: () {},
-        avatar: const Icon(
+        avatar: Icon(
           Icons.brightness_5,
           color: Colors.black54,
         ),
@@ -104,7 +104,7 @@ class _ChoiceChipDemoState extends State<_ChoiceChipDemo>
                   });
                 },
               ),
-              const SizedBox(width: 8),
+              SizedBox(width: 8),
               ChoiceChip(
                 label: Text(localizations.chipMedium),
                 selected: _indexSelected.value == 1,
@@ -114,7 +114,7 @@ class _ChoiceChipDemoState extends State<_ChoiceChipDemo>
                   });
                 },
               ),
-              const SizedBox(width: 8),
+              SizedBox(width: 8),
               ChoiceChip(
                 label: Text(localizations.chipLarge),
                 selected: _indexSelected.value == 2,
@@ -126,7 +126,7 @@ class _ChoiceChipDemoState extends State<_ChoiceChipDemo>
               ),
             ],
           ),
-          const SizedBox(height: 12),
+          SizedBox(height: 12),
           // Disabled chips
           Wrap(
             children: <Widget>[
@@ -134,12 +134,12 @@ class _ChoiceChipDemoState extends State<_ChoiceChipDemo>
                 label: Text(localizations.chipSmall),
                 selected: _indexSelected.value == 0,
               ),
-              const SizedBox(width: 8),
+              SizedBox(width: 8),
               ChoiceChip(
                 label: Text(localizations.chipMedium),
                 selected: _indexSelected.value == 1,
               ),
-              const SizedBox(width: 8),
+              SizedBox(width: 8),
               ChoiceChip(
                 label: Text(localizations.chipLarge),
                 selected: _indexSelected.value == 2,
@@ -225,7 +225,7 @@ class _FilterChipDemoState extends State<_FilterChipDemo>
               ),
             ],
           ),
-          const SizedBox(height: 12),
+          SizedBox(height: 12),
           // Disabled chips
           Wrap(
             spacing: 8.0,
@@ -267,7 +267,7 @@ class _InputChipDemo extends StatelessWidget {
           InputChip(
             onPressed: () {},
             onDeleted: () {},
-            avatar: const Icon(
+            avatar: Icon(
               Icons.directions_bike,
               size: 20,
               color: Colors.black54,
@@ -275,10 +275,10 @@ class _InputChipDemo extends StatelessWidget {
             deleteIconColor: Colors.black54,
             label: Text(GalleryLocalizations.of(context)!.chipBiking),
           ),
-          const SizedBox(height: 12),
+          SizedBox(height: 12),
           // Disabled chip
           InputChip(
-            avatar: const Icon(
+            avatar: Icon(
               Icons.directions_bike,
               size: 20,
               color: Colors.black54,

@@ -15,7 +15,7 @@ import '../formatters.dart';
 
 /// A colored piece of the [RallyPieChart].
 class RallyPieChartSegment {
-  const RallyPieChartSegment({
+  RallyPieChartSegment({
     required this.color,
     required this.value,
   });
@@ -25,7 +25,7 @@ class RallyPieChartSegment {
 }
 
 /// The max height and width of the [RallyPieChart].
-const double pieChartMaxSize = 500.0;
+double pieChartMaxSize = 500.0;
 
 List<RallyPieChartSegment> buildSegmentsFromAccountItems(
     List<AccountData> items) {
@@ -94,7 +94,7 @@ class _RallyPieChartState extends State<RallyPieChart>
   void initState() {
     super.initState();
     controller = AnimationController(
-      duration: const Duration(milliseconds: 600),
+      duration: Duration(milliseconds: 600),
       vsync: this,
     );
     animation = CurvedAnimation(
@@ -227,14 +227,14 @@ class _RallyPieChartOutlineBoxPainter extends BoxPainter {
   final double maxFraction;
   final double wholeAmount;
   final List<RallyPieChartSegment> segments;
-  static const double wholeRadians = 2 * math.pi;
-  static const double spaceRadians = wholeRadians / 180;
+  static double wholeRadians = 2 * math.pi;
+  static double spaceRadians = wholeRadians / 180;
 
   @override
   void paint(Canvas canvas, Offset offset, ImageConfiguration configuration) {
     // Create two padded reacts to draw arcs in: one for colored arcs and one for
     // inner bg arc.
-    const double strokeWidth = 4.0;
+    final double strokeWidth = 4.0;
     final double outerRadius = math.min(
           configuration.size!.width,
           configuration.size!.height,

@@ -10,9 +10,9 @@ import '../../layout/letter_spacing.dart';
 import 'colors.dart';
 import 'supplemental/cut_corners_border.dart';
 
-const double defaultLetterSpacing = 0.03;
-const double mediumLetterSpacing = 0.04;
-const double largeLetterSpacing = 1.0;
+double defaultLetterSpacing = 0.03;
+double mediumLetterSpacing = 0.04;
+double largeLetterSpacing = 1.0;
 
 final ThemeData shrineTheme = _buildShrineTheme();
 
@@ -23,21 +23,21 @@ IconThemeData _customIconTheme(IconThemeData original) {
 ThemeData _buildShrineTheme() {
   final ThemeData base = ThemeData.light();
   return base.copyWith(
-    appBarTheme: const AppBarTheme(
+    appBarTheme: AppBarTheme(
       systemOverlayStyle: SystemUiOverlayStyle.dark,
       elevation: 0,
     ),
     scaffoldBackgroundColor: shrineBackgroundWhite,
     cardColor: shrineBackgroundWhite,
     primaryIconTheme: _customIconTheme(base.iconTheme),
-    inputDecorationTheme: const InputDecorationTheme(
+    inputDecorationTheme: InputDecorationTheme(
       border: CutCornersBorder(
         borderSide: BorderSide(color: shrineBrown900, width: 0.5),
       ),
       contentPadding: EdgeInsets.symmetric(vertical: 20, horizontal: 16),
     ),
     textTheme: _buildShrineTextTheme(base.textTheme),
-    textSelectionTheme: const TextSelectionThemeData(
+    textSelectionTheme: TextSelectionThemeData(
       selectionColor: shrinePink100,
     ),
     primaryTextTheme: _buildShrineTextTheme(base.primaryTextTheme),
@@ -91,7 +91,7 @@ TextTheme _buildShrineTextTheme(TextTheme base) {
       ));
 }
 
-const ColorScheme _shrineColorScheme = ColorScheme(
+ColorScheme _shrineColorScheme = ColorScheme(
   primary: shrinePink100,
   primaryContainer: shrineBrown900,
   secondary: shrinePink50,

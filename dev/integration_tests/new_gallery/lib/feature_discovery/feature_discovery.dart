@@ -115,10 +115,10 @@ class FeatureDiscovery extends StatefulWidget {
   final Color? color;
 
   @visibleForTesting
-  static const Key overlayKey = Key('overlay key');
+  static Key overlayKey = Key('overlay key');
 
   @visibleForTesting
-  static const Key gestureDetectorKey = Key('gesture detector key');
+  static Key gestureDetectorKey = Key('gesture detector key');
 
   @override
   State<FeatureDiscovery> createState() => _FeatureDiscoveryState();
@@ -280,7 +280,7 @@ class _FeatureDiscoveryState extends State<FeatureDiscovery>
 
   void initAnimationControllers() {
     openController = AnimationController(
-      duration: const Duration(milliseconds: 500),
+      duration: Duration(milliseconds: 500),
       vsync: this,
     )
       ..addListener(() {
@@ -299,7 +299,7 @@ class _FeatureDiscoveryState extends State<FeatureDiscovery>
       });
 
     rippleController = AnimationController(
-      duration: const Duration(milliseconds: 1000),
+      duration: Duration(milliseconds: 1000),
       vsync: this,
     )
       ..addListener(() {
@@ -318,7 +318,7 @@ class _FeatureDiscoveryState extends State<FeatureDiscovery>
       });
 
     tapController = AnimationController(
-      duration: const Duration(milliseconds: 250),
+      duration: Duration(milliseconds: 250),
       vsync: this,
     )
       ..addListener(() {
@@ -338,7 +338,7 @@ class _FeatureDiscoveryState extends State<FeatureDiscovery>
       });
 
     dismissController = AnimationController(
-      duration: const Duration(milliseconds: 250),
+      duration: Duration(milliseconds: 250),
       vsync: this,
     )
       ..addListener(() {

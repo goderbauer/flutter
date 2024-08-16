@@ -71,7 +71,7 @@ abstract class GalleryLocalizations {
     return Localizations.of<GalleryLocalizations>(context, GalleryLocalizations);
   }
 
-  static const LocalizationsDelegate<GalleryLocalizations> delegate = _GalleryLocalizationsDelegate();
+  static LocalizationsDelegate<GalleryLocalizations> delegate = _GalleryLocalizationsDelegate();
 
   /// A list of this localizations delegate along with the default localizations
   /// delegates.
@@ -83,7 +83,7 @@ abstract class GalleryLocalizations {
   /// Additional delegates can be added by appending to this list in
   /// MaterialApp. This list does not have to be used at all if a custom list
   /// of delegates is preferred or required.
-  static const List<LocalizationsDelegate<dynamic>> localizationsDelegates = <LocalizationsDelegate<dynamic>>[
+  static List<LocalizationsDelegate<dynamic>> localizationsDelegates = <LocalizationsDelegate<dynamic>>[
     delegate,
     GlobalMaterialLocalizations.delegate,
     GlobalCupertinoLocalizations.delegate,
@@ -91,7 +91,7 @@ abstract class GalleryLocalizations {
   ];
 
   /// A list of this localizations delegate's supported locales.
-  static const List<Locale> supportedLocales = <Locale>[
+  static List<Locale> supportedLocales = <Locale>[
     Locale('en'),
     Locale('en', 'IS')
   ];
@@ -4910,7 +4910,7 @@ abstract class GalleryLocalizations {
 }
 
 class _GalleryLocalizationsDelegate extends LocalizationsDelegate<GalleryLocalizations> {
-  const _GalleryLocalizationsDelegate();
+  _GalleryLocalizationsDelegate();
 
   @override
   Future<GalleryLocalizations> load(Locale locale) {

@@ -47,17 +47,17 @@ class CupertinoContextMenuDemo extends StatelessWidget {
                     ),
                   ),
                 ],
-                child: const FlutterLogo(size: 250),
+                child: FlutterLogo(size: 250),
               ),
             ),
           ),
-          const SizedBox(height: 20),
+          SizedBox(height: 20),
           Padding(
-            padding: const EdgeInsets.all(30),
+            padding: EdgeInsets.all(30),
             child: Text(
               galleryLocalizations.demoCupertinoContextMenuActionText,
               textAlign: TextAlign.center,
-              style: const TextStyle(
+              style: TextStyle(
                 color: Colors.black,
               ),
             ),

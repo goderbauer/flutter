@@ -49,7 +49,7 @@ class _FirstPage extends StatelessWidget {
     return CupertinoPageScaffold(
       child: CustomScrollView(
         slivers: <Widget>[
-          const CupertinoSliverNavigationBar(
+          CupertinoSliverNavigationBar(
             automaticallyImplyLeading: false,
           ),
           SliverPadding(
@@ -84,7 +84,7 @@ class _SecondPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return CupertinoPageScaffold(
-      navigationBar: const CupertinoNavigationBar(),
+      navigationBar: CupertinoNavigationBar(),
       child: Container(),
     );
   }

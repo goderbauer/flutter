@@ -28,7 +28,7 @@ class _SettingsViewState extends State<SettingsView> {
             for (final String title
                 in DummyDataService.getSettingsTitles(context)) ...<Widget>[
               _SettingsItem(title),
-              const Divider(
+              Divider(
                 color: RallyColors.dividerColor,
                 height: 1,
               )
@@ -57,7 +57,7 @@ class _SettingsItem extends StatelessWidget {
       },
       child: Container(
         alignment: AlignmentDirectional.centerStart,
-        padding: const EdgeInsets.symmetric(vertical: 24, horizontal: 28),
+        padding: EdgeInsets.symmetric(vertical: 24, horizontal: 28),
         child: Text(title),
       ),
     );

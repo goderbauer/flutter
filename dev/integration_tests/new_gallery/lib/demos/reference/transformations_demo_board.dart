@@ -107,7 +107,7 @@ class Board extends Object with IterableMixin<BoardPoint?> {
 
   // Check if the board point is actually on the board.
   bool _validateBoardPoint(BoardPoint boardPoint) {
-    const BoardPoint center = BoardPoint(0, 0);
+    final BoardPoint center = BoardPoint(0, 0);
     final int distanceFromCenter = getDistance(center, boardPoint);
     return distanceFromCenter <= boardRadius;
   }

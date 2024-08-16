@@ -18,7 +18,7 @@ ThemeData _buildCraneTheme() {
   final ThemeData base = ThemeData.light();
 
   return base.copyWith(
-    colorScheme: const ColorScheme.light().copyWith(
+    colorScheme: ColorScheme.light().copyWith(
       primary: cranePurple800,
       secondary: craneRed700,
       error: craneErrorOrange,
@@ -29,7 +29,7 @@ ThemeData _buildCraneTheme() {
     cardColor: cranePrimaryWhite,
     highlightColor: Colors.transparent,
     textTheme: _buildCraneTextTheme(base.textTheme),
-    textSelectionTheme: const TextSelectionThemeData(
+    textSelectionTheme: TextSelectionThemeData(
       selectionColor: cranePurple700,
     ),
     primaryTextTheme: _buildCraneTextTheme(base.primaryTextTheme),

@@ -25,8 +25,8 @@ class _FadeScaleTransitionDemoState extends State<FadeScaleTransitionDemo>
     super.initState();
     _controller = AnimationController(
       value: 0,
-      duration: const Duration(milliseconds: 150),
-      reverseDuration: const Duration(milliseconds: 75),
+      duration: Duration(milliseconds: 150),
+      reverseDuration: Duration(milliseconds: 75),
       vsync: this,
     )..addStatusListener((AnimationStatus status) {
         setState(() {
@@ -93,16 +93,16 @@ class _FadeScaleTransitionDemoState extends State<FadeScaleTransitionDemo>
           visible: !_controller.isDismissed,
           child: FloatingActionButton(
             onPressed: () {},
-            child: const Icon(Icons.add),
+            child: Icon(Icons.add),
           ),
         ),
       ),
       bottomNavigationBar: Column(
         mainAxisSize: MainAxisSize.min,
         children: <Widget>[
-          const Divider(height: 0),
+          Divider(height: 0),
           Padding(
-            padding: const EdgeInsets.symmetric(vertical: 8),
+            padding: EdgeInsets.symmetric(vertical: 8),
             child: Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: <Widget>[
@@ -114,7 +114,7 @@ class _FadeScaleTransitionDemoState extends State<FadeScaleTransitionDemo>
                   },
                   child: Text(localizations.demoFadeScaleShowAlertDialogButton),
                 ),
-                const SizedBox(width: 10),
+                SizedBox(width: 10),
                 ElevatedButton(
                   onPressed: () {
                     if (_isAnimationRunningForwardsOrComplete) {

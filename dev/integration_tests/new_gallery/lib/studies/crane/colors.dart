@@ -4,17 +4,17 @@
 
 import 'package:flutter/material.dart';
 
-const Color cranePurple700 = Color(0xFF720D5D);
-const Color cranePurple800 = Color(0xFF5D1049);
-const Color cranePurple900 = Color(0xFF4E0D3A);
+Color cranePurple700 = Color(0xFF720D5D);
+Color cranePurple800 = Color(0xFF5D1049);
+Color cranePurple900 = Color(0xFF4E0D3A);
 
-const Color craneRed700 = Color(0xFFE30425);
+Color craneRed700 = Color(0xFFE30425);
 
-const Color craneWhite60 = Color(0x99FFFFFF);
-const Color cranePrimaryWhite = Color(0xFFFFFFFF);
-const Color craneErrorOrange = Color(0xFFFF9100);
+Color craneWhite60 = Color(0x99FFFFFF);
+Color cranePrimaryWhite = Color(0xFFFFFFFF);
+Color craneErrorOrange = Color(0xFFFF9100);
 
-const Color craneAlpha = Color(0x00FFFFFF);
+Color craneAlpha = Color(0x00FFFFFF);
 
-const Color craneGrey = Color(0xFF747474);
-const Color craneBlack = Color(0xFF1E252D);
+Color craneGrey = Color(0xFF747474);
+Color craneBlack = Color(0xFF1E252D);

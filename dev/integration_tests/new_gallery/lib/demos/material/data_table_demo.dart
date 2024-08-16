@@ -143,7 +143,7 @@ class _DataTableDemoState extends State<DataTableDemo> with RestorationMixin {
       body: Scrollbar(
         child: ListView(
           restorationId: 'data_table_list_view',
-          padding: const EdgeInsets.all(16),
+          padding: EdgeInsets.all(16),
           children: <Widget>[
             PaginatedDataTable(
               header: Text(localizations.dataTableHeader),

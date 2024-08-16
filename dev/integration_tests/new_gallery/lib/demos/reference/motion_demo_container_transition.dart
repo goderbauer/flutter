@@ -8,7 +8,7 @@ import '../../gallery_localizations.dart';
 
 // BEGIN openContainerTransformDemo
 
-const String _loremIpsumParagraph =
+String _loremIpsumParagraph =
     'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod '
     'tempor incididunt ut labore et dolore magna aliqua. Vulputate dignissim '
     'suspendisse in est. Ut ornare lectus sit amet. Eget nunc lobortis mattis '
@@ -39,7 +39,7 @@ const String _loremIpsumParagraph =
     'amet commodo nulla. Pretium viverra suspendisse potenti nullam ac tortor '
     'vitae';
 
-const double _fabDimension = 56;
+double _fabDimension = 56;
 
 class OpenContainerTransformDemo extends StatefulWidget {
   const OpenContainerTransformDemo({super.key});
@@ -64,7 +64,7 @@ class _OpenContainerTransformDemoState
           builder: (BuildContext context, void Function(void Function()) setModalState) {
             return Container(
               height: 125,
-              padding: const EdgeInsets.all(15),
+              padding: EdgeInsets.all(15),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: <Widget>[
@@ -72,7 +72,7 @@ class _OpenContainerTransformDemoState
                     localizations!.demoContainerTransformModalBottomSheetTitle,
                     style: Theme.of(context).textTheme.bodySmall,
                   ),
-                  const SizedBox(
+                  SizedBox(
                     height: 12,
                   ),
                   ToggleButtons(
@@ -96,7 +96,7 @@ class _OpenContainerTransformDemoState
                         localizations.demoContainerTransformTypeFade,
                       ),
                       Padding(
-                        padding: const EdgeInsets.symmetric(
+                        padding: EdgeInsets.symmetric(
                           horizontal: 10,
                         ),
                         child: Text(
@@ -145,7 +145,7 @@ class _OpenContainerTransformDemoState
               ),
               actions: <Widget>[
                 IconButton(
-                  icon: const Icon(
+                  icon: Icon(
                     Icons.settings,
                   ),
                   onPressed: () {
@@ -155,7 +155,7 @@ class _OpenContainerTransformDemoState
               ],
             ),
             body: ListView(
-              padding: const EdgeInsets.all(8),
+              padding: EdgeInsets.all(8),
               children: <Widget>[
                 _OpenContainerWrapper(
                   transitionType: _transitionType,
@@ -163,14 +163,14 @@ class _OpenContainerTransformDemoState
                     return _DetailsCard(openContainer: openContainer);
                   },
                 ),
-                const SizedBox(height: 16),
+                SizedBox(height: 16),
                 _OpenContainerWrapper(
                   transitionType: _transitionType,
                   closedBuilder: (BuildContext context, void Function() openContainer) {
                     return _DetailsListTile(openContainer: openContainer);
                   },
                 ),
-                const SizedBox(
+                SizedBox(
                   height: 16,
                 ),
                 Row(
@@ -187,7 +187,7 @@ class _OpenContainerTransformDemoState
                         },
                       ),
                     ),
-                    const SizedBox(
+                    SizedBox(
                       width: 8,
                     ),
                     Expanded(
@@ -204,7 +204,7 @@ class _OpenContainerTransformDemoState
                     ),
                   ],
                 ),
-                const SizedBox(
+                SizedBox(
                   height: 16,
                 ),
                 Row(
@@ -221,7 +221,7 @@ class _OpenContainerTransformDemoState
                         },
                       ),
                     ),
-                    const SizedBox(
+                    SizedBox(
                       width: 8,
                     ),
                     Expanded(
@@ -236,7 +236,7 @@ class _OpenContainerTransformDemoState
                         },
                       ),
                     ),
-                    const SizedBox(
+                    SizedBox(
                       width: 8,
                     ),
                     Expanded(
@@ -253,16 +253,16 @@ class _OpenContainerTransformDemoState
                     ),
                   ],
                 ),
-                const SizedBox(
+                SizedBox(
                   height: 16,
                 ),
                 ...List<OpenContainer<bool>>.generate(10, (int index) {
                   return OpenContainer<bool>(
                     transitionType: _transitionType,
                     openBuilder: (BuildContext context, void Function() openContainer) =>
-                        const _DetailsPage(),
+                        _DetailsPage(),
                     tappable: false,
-                    closedShape: const RoundedRectangleBorder(),
+                    closedShape: RoundedRectangleBorder(),
                     closedElevation: 0,
                     closedBuilder: (BuildContext context, void Function() openContainer) {
                       return ListTile(
@@ -286,9 +286,9 @@ class _OpenContainerTransformDemoState
             ),
             floatingActionButton: OpenContainer(
               transitionType: _transitionType,
-              openBuilder: (BuildContext context, void Function() openContainer) => const _DetailsPage(),
+              openBuilder: (BuildContext context, void Function() openContainer) => _DetailsPage(),
               closedElevation: 6,
-              closedShape: const RoundedRectangleBorder(
+              closedShape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.all(
                   Radius.circular(_fabDimension / 2),
                 ),
@@ -327,7 +327,7 @@ class _OpenContainerWrapper extends StatelessWidget {
   Widget build(BuildContext context) {
     return OpenContainer<bool>(
       transitionType: transitionType,
-      openBuilder: (BuildContext context, void Function() openContainer) => const _DetailsPage(),
+      openBuilder: (BuildContext context, void Function() openContainer) => _DetailsPage(),
       tappable: false,
       closedBuilder: closedBuilder,
     );
@@ -370,7 +370,7 @@ class _DetailsCard extends StatelessWidget {
             ),
           ),
           Padding(
-            padding: const EdgeInsets.only(
+            padding: EdgeInsets.only(
               left: 16,
               right: 16,
               bottom: 16,
@@ -422,7 +422,7 @@ class _SmallDetailsCard extends StatelessWidget {
           ),
           Expanded(
             child: Padding(
-              padding: const EdgeInsets.all(10),
+              padding: EdgeInsets.all(10),
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 crossAxisAlignment: CrossAxisAlignment.start,
@@ -432,7 +432,7 @@ class _SmallDetailsCard extends StatelessWidget {
                         .demoMotionPlaceholderTitle,
                     style: textTheme.titleLarge,
                   ),
-                  const SizedBox(
+                  SizedBox(
                     height: 4,
                   ),
                   Text(
@@ -457,7 +457,7 @@ class _DetailsListTile extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final TextTheme textTheme = Theme.of(context).textTheme;
-    const double height = 120.0;
+    final double height = 120.0;
 
     return _InkWellOverlay(
       openContainer: openContainer,
@@ -478,7 +478,7 @@ class _DetailsListTile extends StatelessWidget {
           ),
           Expanded(
             child: Padding(
-              padding: const EdgeInsets.all(20),
+              padding: EdgeInsets.all(20),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: <Widget>[
@@ -487,7 +487,7 @@ class _DetailsListTile extends StatelessWidget {
                         .demoMotionPlaceholderTitle,
                     style: textTheme.titleMedium,
                   ),
-                  const SizedBox(
+                  SizedBox(
                     height: 8,
                   ),
                   Text(
@@ -548,7 +548,7 @@ class _DetailsPage extends StatelessWidget {
             color: Colors.black38,
             height: 250,
             child: Padding(
-              padding: const EdgeInsets.all(70),
+              padding: EdgeInsets.all(70),
               child: Image.asset(
                 'placeholders/placeholder_image.png',
                 package: 'flutter_gallery_assets',
@@ -556,7 +556,7 @@ class _DetailsPage extends StatelessWidget {
             ),
           ),
           Padding(
-            padding: const EdgeInsets.all(20),
+            padding: EdgeInsets.all(20),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: <Widget>[
@@ -567,7 +567,7 @@ class _DetailsPage extends StatelessWidget {
                     fontSize: 30,
                   ),
                 ),
-                const SizedBox(
+                SizedBox(
                   height: 10,
                 ),
                 Text(

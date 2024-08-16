@@ -22,10 +22,10 @@ import 'routes.dart' as routes;
 class RallyApp extends StatelessWidget {
   const RallyApp({super.key});
 
-  static const String loginRoute = routes.loginRoute;
-  static const String homeRoute = routes.homeRoute;
+  static String loginRoute = routes.loginRoute;
+  static String homeRoute = routes.homeRoute;
 
-  static const SharedAxisPageTransitionsBuilder sharedZAxisTransitionBuilder = SharedAxisPageTransitionsBuilder(
+  static SharedAxisPageTransitionsBuilder sharedZAxisTransitionBuilder = SharedAxisPageTransitionsBuilder(
     fillColor: RallyColors.primaryBackground,
     transitionType: SharedAxisTransitionType.scaled,
   );
@@ -50,8 +50,8 @@ class RallyApp extends StatelessWidget {
       locale: GalleryOptions.of(context).locale,
       initialRoute: loginRoute,
       routes: <String, WidgetBuilder>{
-        homeRoute: (BuildContext context) => const HomePage(),
-        loginRoute: (BuildContext context) => const LoginPage(),
+        homeRoute: (BuildContext context) => HomePage(),
+        loginRoute: (BuildContext context) => LoginPage(),
       },
     );
   }
@@ -59,7 +59,7 @@ class RallyApp extends StatelessWidget {
   ThemeData _buildRallyTheme() {
     final ThemeData base = ThemeData.dark();
     return ThemeData(
-      appBarTheme: const AppBarTheme(
+      appBarTheme: AppBarTheme(
         systemOverlayStyle: SystemUiOverlayStyle.light,
         backgroundColor: RallyColors.primaryBackground,
         elevation: 0,
@@ -67,7 +67,7 @@ class RallyApp extends StatelessWidget {
       scaffoldBackgroundColor: RallyColors.primaryBackground,
       focusColor: RallyColors.focusColor,
       textTheme: _buildRallyTextTheme(base.textTheme),
-      inputDecorationTheme: const InputDecorationTheme(
+      inputDecorationTheme: InputDecorationTheme(
         labelStyle: TextStyle(
           color: RallyColors.gray,
           fontWeight: FontWeight.w500,

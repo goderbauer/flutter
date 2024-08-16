@@ -18,7 +18,7 @@ class TextFieldDemo extends StatelessWidget {
         automaticallyImplyLeading: false,
         title: Text(GalleryLocalizations.of(context)!.demoTextFieldTitle),
       ),
-      body: const TextFormFieldDemo(),
+      body: TextFormFieldDemo(),
     );
   }
 }
@@ -212,7 +212,7 @@ class TextFormFieldDemoState extends State<TextFormFieldDemo>
 
   @override
   Widget build(BuildContext context) {
-    const SizedBox sizedBoxSpace = SizedBox(height: 24);
+    final SizedBox sizedBoxSpace = SizedBox(height: 24);
     final GalleryLocalizations localizations = GalleryLocalizations.of(context)!;
 
     return Form(
@@ -221,7 +221,7 @@ class TextFormFieldDemoState extends State<TextFormFieldDemo>
       child: Scrollbar(
         child: SingleChildScrollView(
           restorationId: 'text_field_demo_scroll_view',
-          padding: const EdgeInsets.symmetric(horizontal: 16),
+          padding: EdgeInsets.symmetric(horizontal: 16),
           child: Column(
             children: <Widget>[
               sizedBoxSpace,
@@ -231,7 +231,7 @@ class TextFormFieldDemoState extends State<TextFormFieldDemo>
                 textCapitalization: TextCapitalization.words,
                 decoration: InputDecoration(
                   filled: true,
-                  icon: const Icon(Icons.person),
+                  icon: Icon(Icons.person),
                   hintText: localizations.demoTextFieldWhatDoPeopleCallYou,
                   labelText: localizations.demoTextFieldNameField,
                 ),
@@ -248,7 +248,7 @@ class TextFormFieldDemoState extends State<TextFormFieldDemo>
                 focusNode: _phoneNumber,
                 decoration: InputDecoration(
                   filled: true,
-                  icon: const Icon(Icons.phone),
+                  icon: Icon(Icons.phone),
                   hintText: localizations.demoTextFieldWhereCanWeReachYou,
                   labelText: localizations.demoTextFieldPhoneNumber,
                   prefixText: '+1 ',
@@ -275,7 +275,7 @@ class TextFormFieldDemoState extends State<TextFormFieldDemo>
                 focusNode: _email,
                 decoration: InputDecoration(
                   filled: true,
-                  icon: const Icon(Icons.email),
+                  icon: Icon(Icons.email),
                   hintText: localizations.demoTextFieldYourEmailAddress,
                   labelText: localizations.demoTextFieldEmail,
                 ),
@@ -293,7 +293,7 @@ class TextFormFieldDemoState extends State<TextFormFieldDemo>
                 textInputAction: TextInputAction.next,
                 decoration: InputDecoration(
                   filled: true,
-                  icon: const Icon(Icons.email),
+                  icon: Icon(Icons.email),
                   hintText: localizations.demoTextFieldYourEmailAddress,
                   labelText: localizations.demoTextFieldEmail,
                 ),
@@ -304,7 +304,7 @@ class TextFormFieldDemoState extends State<TextFormFieldDemo>
                 restorationId: 'life_story_field',
                 focusNode: _lifeStory,
                 decoration: InputDecoration(
-                  border: const OutlineInputBorder(),
+                  border: OutlineInputBorder(),
                   hintText: localizations.demoTextFieldTellUsAboutYourself,
                   helperText: localizations.demoTextFieldKeepItShort,
                   labelText: localizations.demoTextFieldLifeStory,
@@ -317,7 +317,7 @@ class TextFormFieldDemoState extends State<TextFormFieldDemo>
                 textInputAction: TextInputAction.next,
                 keyboardType: TextInputType.number,
                 decoration: InputDecoration(
-                  border: const OutlineInputBorder(),
+                  border: OutlineInputBorder(),
                   labelText: localizations.demoTextFieldSalary,
                   suffixText: localizations.demoTextFieldUSD,
                 ),

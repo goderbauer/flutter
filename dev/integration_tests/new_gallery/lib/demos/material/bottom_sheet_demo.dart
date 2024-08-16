@@ -81,7 +81,7 @@ class _BottomSheetContent extends StatelessWidget {
               ),
             ),
           ),
-          const Divider(thickness: 1),
+          Divider(thickness: 1),
           Expanded(
             child: ListView.builder(
               itemCount: 21,

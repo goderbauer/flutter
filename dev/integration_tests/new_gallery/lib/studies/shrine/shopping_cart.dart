@@ -15,8 +15,8 @@ import 'model/app_state_model.dart';
 import 'model/product.dart';
 import 'theme.dart';
 
-const double _startColumnWidth = 60.0;
-const String _ordinalSortKeyName = 'shopping_cart';
+double _startColumnWidth = 60.0;
+String _ordinalSortKeyName = 'shopping_cart';
 
 class ShoppingCartPage extends StatefulWidget {
   const ShoppingCartPage({super.key});
@@ -56,13 +56,13 @@ class _ShoppingCartPageState extends State<ShoppingCartPage> {
                   children: <Widget>[
                     Semantics(
                       sortKey:
-                          const OrdinalSortKey(0, name: _ordinalSortKeyName),
+                          OrdinalSortKey(0, name: _ordinalSortKeyName),
                       child: Row(
                         children: <Widget>[
                           SizedBox(
                             width: _startColumnWidth,
                             child: IconButton(
-                              icon: const Icon(Icons.keyboard_arrow_down),
+                              icon: Icon(Icons.keyboard_arrow_down),
                               onPressed: () => expandingBottomSheet!.close(),
                               tooltip: localizations.shrineTooltipCloseCart,
                             ),
@@ -72,7 +72,7 @@ class _ShoppingCartPageState extends State<ShoppingCartPage> {
                             style: localTheme.textTheme.titleMedium!
                                 .copyWith(fontWeight: FontWeight.w600),
                           ),
-                          const SizedBox(width: 16),
+                          SizedBox(width: 16),
                           Text(
                             localizations.shrineCartItemCount(
                               model.totalCartQuantity,
@@ -81,20 +81,20 @@ class _ShoppingCartPageState extends State<ShoppingCartPage> {
                         ],
                       ),
                     ),
-                    const SizedBox(height: 16),
+                    SizedBox(height: 16),
                     Semantics(
                       sortKey:
-                          const OrdinalSortKey(1, name: _ordinalSortKeyName),
+                          OrdinalSortKey(1, name: _ordinalSortKeyName),
                       child: Column(
                         children: _createShoppingCartRows(model),
                       ),
                     ),
                     Semantics(
                       sortKey:
-                          const OrdinalSortKey(2, name: _ordinalSortKeyName),
+                          OrdinalSortKey(2, name: _ordinalSortKeyName),
                       child: ShoppingCartSummary(model: model),
                     ),
-                    const SizedBox(height: 100),
+                    SizedBox(height: 100),
                   ],
                 ),
                 PositionedDirectional(
@@ -102,10 +102,10 @@ class _ShoppingCartPageState extends State<ShoppingCartPage> {
                   start: 16,
                   end: 16,
                   child: Semantics(
-                    sortKey: const OrdinalSortKey(3, name: _ordinalSortKeyName),
+                    sortKey: OrdinalSortKey(3, name: _ordinalSortKeyName),
                     child: ElevatedButton(
                       style: ElevatedButton.styleFrom(
-                        shape: const BeveledRectangleBorder(
+                        shape: BeveledRectangleBorder(
                           borderRadius: BorderRadius.all(Radius.circular(7)),
                         ),
                         backgroundColor: shrinePink100,
@@ -115,7 +115,7 @@ class _ShoppingCartPageState extends State<ShoppingCartPage> {
                         expandingBottomSheet!.close();
                       },
                       child: Padding(
-                        padding: const EdgeInsets.symmetric(vertical: 12),
+                        padding: EdgeInsets.symmetric(vertical: 12),
                         child: Text(
                           localizations.shrineCartClearButtonCaption,
                           style: TextStyle(
@@ -159,10 +159,10 @@ class ShoppingCartSummary extends StatelessWidget {
 
     return Row(
       children: <Widget>[
-        const SizedBox(width: _startColumnWidth),
+        SizedBox(width: _startColumnWidth),
         Expanded(
           child: Padding(
-            padding: const EdgeInsetsDirectional.only(end: 16),
+            padding: EdgeInsetsDirectional.only(end: 16),
             child: Column(
               children: <Widget>[
                 MergeSemantics(
@@ -181,7 +181,7 @@ class ShoppingCartSummary extends StatelessWidget {
                     ],
                   ),
                 ),
-                const SizedBox(height: 16),
+                SizedBox(height: 16),
                 MergeSemantics(
                   child: Row(
                     children: <Widget>[
@@ -198,7 +198,7 @@ class ShoppingCartSummary extends StatelessWidget {
                     ],
                   ),
                 ),
-                const SizedBox(height: 4),
+                SizedBox(height: 4),
                 MergeSemantics(
                   child: Row(
                     children: <Widget>[
@@ -215,7 +215,7 @@ class ShoppingCartSummary extends StatelessWidget {
                     ],
                   ),
                 ),
-                const SizedBox(height: 4),
+                SizedBox(height: 4),
                 MergeSemantics(
                   child: Row(
                     children: <Widget>[
@@ -264,7 +264,7 @@ class ShoppingCartRow extends StatelessWidget {
     final GalleryLocalizations localizations = GalleryLocalizations.of(context)!;
 
     return Padding(
-      padding: const EdgeInsets.only(bottom: 16),
+      padding: EdgeInsets.only(bottom: 16),
       child: Row(
         key: ValueKey<int>(product.id),
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -279,7 +279,7 @@ class ShoppingCartRow extends StatelessWidget {
               child: SizedBox(
                 width: _startColumnWidth,
                 child: IconButton(
-                  icon: const Icon(Icons.remove_circle_outline),
+                  icon: Icon(Icons.remove_circle_outline),
                   onPressed: onPressed,
                   tooltip: localizations.shrineTooltipRemoveItem,
                 ),
@@ -288,7 +288,7 @@ class ShoppingCartRow extends StatelessWidget {
           ),
           Expanded(
             child: Padding(
-              padding: const EdgeInsetsDirectional.only(end: 16),
+              padding: EdgeInsetsDirectional.only(end: 16),
               child: Column(
                 children: <Widget>[
                   Row(
@@ -302,7 +302,7 @@ class ShoppingCartRow extends StatelessWidget {
                         height: 75,
                         excludeFromSemantics: true,
                       ),
-                      const SizedBox(width: 16),
+                      SizedBox(width: 16),
                       Expanded(
                         child: MergeSemantics(
                           child: Column(
@@ -336,8 +336,8 @@ class ShoppingCartRow extends StatelessWidget {
                       ),
                     ],
                   ),
-                  const SizedBox(height: 16),
-                  const Divider(
+                  SizedBox(height: 16),
+                  Divider(
                     color: shrineBrown900,
                     height: 10,
                   ),

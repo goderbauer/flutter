@@ -15,7 +15,7 @@ import '../../layout/text_scale.dart';
 import 'app.dart';
 import 'theme.dart';
 
-const double _horizontalPadding = 24.0;
+double _horizontalPadding = 24.0;
 
 double desktopLoginScreenMainAreaWidth({required BuildContext context}) {
   return min(
@@ -39,7 +39,7 @@ class LoginPage extends StatelessWidget {
                   child: Center(
                     child: SizedBox(
                       width: desktopLoginScreenMainAreaWidth(context: context),
-                      child: const Column(
+                      child: Column(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: <Widget>[
                           _ShrineLogo(),
@@ -61,11 +61,11 @@ class LoginPage extends StatelessWidget {
               body: SafeArea(
                 child: ListView(
                   restorationId: 'login_list_view',
-                  physics: const ClampingScrollPhysics(),
-                  padding: const EdgeInsets.symmetric(
+                  physics: ClampingScrollPhysics(),
+                  padding: EdgeInsets.symmetric(
                     horizontal: _horizontalPadding,
                   ),
-                  children: const <Widget>[
+                  children: <Widget>[
                     SizedBox(height: 80),
                     _ShrineLogo(),
                     SizedBox(height: 120),
@@ -89,14 +89,14 @@ class _ShrineLogo extends StatelessWidget {
     return ExcludeSemantics(
       child: Column(
         children: <Widget>[
-          const FadeInImagePlaceholder(
+          FadeInImagePlaceholder(
             image: AssetImage('packages/shrine_images/diamond.png'),
             placeholder: SizedBox(
               width: 34,
               height: 34,
             ),
           ),
-          const SizedBox(height: 16),
+          SizedBox(height: 16),
           Text(
             'SHRINE',
             style: Theme.of(context).textTheme.headlineSmall,
@@ -159,18 +159,18 @@ class _CancelAndNextButtons extends StatelessWidget {
     final bool isDesktop = isDisplayDesktop(context);
 
     final EdgeInsets buttonTextPadding = isDesktop
-        ? const EdgeInsets.symmetric(horizontal: 24, vertical: 16)
+        ? EdgeInsets.symmetric(horizontal: 24, vertical: 16)
         : EdgeInsets.zero;
 
     return Padding(
-      padding: isDesktop ? EdgeInsets.zero : const EdgeInsets.all(8),
+      padding: isDesktop ? EdgeInsets.zero : EdgeInsets.all(8),
       child: OverflowBar(
         spacing: isDesktop ? 0 : 8,
         alignment: MainAxisAlignment.end,
         children: <Widget>[
           TextButton(
             style: TextButton.styleFrom(
-              shape: const BeveledRectangleBorder(
+              shape: BeveledRectangleBorder(
                 borderRadius: BorderRadius.all(Radius.circular(7)),
               ),
             ),
@@ -192,7 +192,7 @@ class _CancelAndNextButtons extends StatelessWidget {
           ElevatedButton(
             style: ElevatedButton.styleFrom(
               elevation: 8,
-              shape: const BeveledRectangleBorder(
+              shape: BeveledRectangleBorder(
                 borderRadius: BorderRadius.all(Radius.circular(7)),
               ),
             ),

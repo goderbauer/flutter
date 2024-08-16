@@ -24,7 +24,7 @@ import 'studies/starter/routes.dart' as starter_app_routes;
 typedef PathWidgetBuilder = Widget Function(BuildContext, String?);
 
 class Path {
-  const Path(this.pattern, this.builder);
+  Path(this.pattern, this.builder);
 
   /// A RegEx string for route matching.
   final String pattern;
@@ -72,7 +72,7 @@ class RouteConfiguration {
       (BuildContext context, String? match) => StudyWrapper(
         study: DeferredWidget(crane.loadLibrary,
             () => crane.CraneApp(), // ignore: prefer_const_constructors
-            placeholder: const DeferredLoadingPlaceholder(name: 'Crane')),
+            placeholder: DeferredLoadingPlaceholder(name: 'Crane')),
       ),
     ),
     Path(
@@ -88,17 +88,17 @@ class RouteConfiguration {
       r'^' + reply_routes.homeRoute,
       // ignore: prefer_const_constructors
       (BuildContext context, String? match) =>
-          const StudyWrapper(study: reply.ReplyApp(), hasBottomNavBar: true),
+          StudyWrapper(study: reply.ReplyApp(), hasBottomNavBar: true),
     ),
     Path(
       r'^' + starter_app_routes.defaultRoute,
-      (BuildContext context, String? match) => const StudyWrapper(
+      (BuildContext context, String? match) => StudyWrapper(
         study: starter_app.StarterApp(),
       ),
     ),
     Path(
       r'^/',
-      (BuildContext context, String? match) => const RootPage(),
+      (BuildContext context, String? match) => RootPage(),
     ),
   ];
 

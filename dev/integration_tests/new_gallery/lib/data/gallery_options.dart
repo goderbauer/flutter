@@ -16,7 +16,7 @@ enum CustomTextDirection {
 }
 
 // See http://en.wikipedia.org/wiki/Right-to-left
-const List<String> rtlLanguages = <String>[
+List<String> rtlLanguages = <String>[
   'ar', // Arabic
   'fa', // Farsi
   'he', // Hebrew
@@ -25,7 +25,7 @@ const List<String> rtlLanguages = <String>[
 ];
 
 // Fake locale to represent the system Locale option.
-const Locale systemLocaleOption = Locale('system');
+Locale systemLocaleOption = Locale('system');
 
 Locale? _deviceLocale;
 
@@ -247,7 +247,7 @@ class _ModelBindingState extends State<ModelBinding> {
         // We delay the time dilation change long enough that the user can see
         // that UI has started reacting and then we slam on the brakes so that
         // they see that the time is in fact now dilated.
-        _timeDilationTimer = Timer(const Duration(milliseconds: 150), () {
+        _timeDilationTimer = Timer(Duration(milliseconds: 150), () {
           timeDilation = newModel.timeDilation;
         });
       } else {

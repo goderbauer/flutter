@@ -14,9 +14,9 @@ import 'tabs/budgets.dart';
 import 'tabs/overview.dart';
 import 'tabs/settings.dart';
 
-const int tabCount = 5;
-const int turnsToRotateRight = 1;
-const int turnsToRotateLeft = 3;
+int tabCount = 5;
+int turnsToRotateRight = 1;
+int turnsToRotateLeft = 3;
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -76,10 +76,10 @@ class _HomePageState extends State<HomePage>
           Container(
             width: 150 + 50 * (cappedTextScale(context) - 1),
             alignment: Alignment.topCenter,
-            padding: const EdgeInsets.symmetric(vertical: 32),
+            padding: EdgeInsets.symmetric(vertical: 32),
             child: Column(
               children: <Widget>[
-                const SizedBox(height: 24),
+                SizedBox(height: 24),
                 ExcludeSemantics(
                   child: SizedBox(
                     height: 80,
@@ -89,7 +89,7 @@ class _HomePageState extends State<HomePage>
                     ),
                   ),
                 ),
-                const SizedBox(height: 24),
+                SizedBox(height: 24),
                 // Rotate the tab bar, so the animation is vertical for desktops.
                 RotatedBox(
                   quarterTurns: verticalRotation,
@@ -222,7 +222,7 @@ class _HomePageState extends State<HomePage>
   }
 
   List<Widget> _buildTabViews() {
-    return const <Widget>[
+    return <Widget>[
       OverviewView(),
       AccountsView(),
       BillsView(),
@@ -244,7 +244,7 @@ class _RallyTabBar extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return FocusTraversalOrder(
-      order: const NumericFocusOrder(0),
+      order: NumericFocusOrder(0),
       child: TabBar(
         // Setting isScrollable to true prevents the tabs from being
         // wrapped in [Expanded] widgets, which allows for more
@@ -292,7 +292,7 @@ class _RallyTabState extends State<_RallyTab>
   void initState() {
     super.initState();
     _controller = AnimationController(
-      duration: const Duration(milliseconds: 200),
+      duration: Duration(milliseconds: 200),
       vsync: this,
     );
     _titleSizeAnimation = _controller.view;
@@ -318,12 +318,12 @@ class _RallyTabState extends State<_RallyTab>
     if (widget.isVertical) {
       return Column(
         children: <Widget>[
-          const SizedBox(height: 18),
+          SizedBox(height: 18),
           FadeTransition(
             opacity: _iconFadeAnimation,
             child: widget.icon,
           ),
-          const SizedBox(height: 12),
+          SizedBox(height: 12),
           FadeTransition(
             opacity: _titleFadeAnimation,
             child: SizeTransition(
@@ -332,7 +332,7 @@ class _RallyTabState extends State<_RallyTab>
               child: Center(child: ExcludeSemantics(child: widget.titleText)),
             ),
           ),
-          const SizedBox(height: 18),
+          SizedBox(height: 18),
         ],
       );
     }
@@ -342,11 +342,11 @@ class _RallyTabState extends State<_RallyTab>
     // unit, and there is always 1 expanded tab which is 1 unit + any extra
     // space determined by the multiplier.
     final double width = MediaQuery.of(context).size.width;
-    const int expandedTitleWidthMultiplier = 2;
+    final int expandedTitleWidthMultiplier = 2;
     final double unitWidth = width / (tabCount + expandedTitleWidthMultiplier);
 
     return ConstrainedBox(
-      constraints: const BoxConstraints(minHeight: 56),
+      constraints: BoxConstraints(minHeight: 56),
       child: Row(
         children: <Widget>[
           FadeTransition(

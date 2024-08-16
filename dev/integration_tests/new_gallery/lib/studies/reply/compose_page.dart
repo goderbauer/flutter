@@ -13,7 +13,7 @@ class ComposePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    const String senderEmail = 'flutterfan@gmail.com';
+    final String senderEmail = 'flutterfan@gmail.com';
     String subject = '';
     String? recipient = 'Recipient';
     String recipientAvatar = 'reply/avatars/avatar_0.jpg';
@@ -42,22 +42,22 @@ class ComposePage extends StatelessWidget {
                   _SubjectRow(
                     subject: subject,
                   ),
-                  const _SectionDivider(),
-                  const _SenderAddressRow(
+                  _SectionDivider(),
+                  _SenderAddressRow(
                     senderEmail: senderEmail,
                   ),
-                  const _SectionDivider(),
+                  _SectionDivider(),
                   _RecipientsRow(
                     recipients: recipient,
                     avatar: recipientAvatar,
                   ),
-                  const _SectionDivider(),
+                  _SectionDivider(),
                   Padding(
-                    padding: const EdgeInsets.all(12),
+                    padding: EdgeInsets.all(12),
                     child: TextField(
                       minLines: 6,
                       maxLines: 20,
-                      decoration: const InputDecoration.collapsed(
+                      decoration: InputDecoration.collapsed(
                         hintText: 'New Message...',
                       ),
                       style: Theme.of(context).textTheme.bodyMedium,
@@ -103,11 +103,11 @@ class _SubjectRowState extends State<_SubjectRow> {
     final ColorScheme colorScheme = theme.colorScheme;
 
     return Padding(
-      padding: const EdgeInsets.only(top: 8),
+      padding: EdgeInsets.only(top: 8),
       child: Row(
         children: <Widget>[
           IconButton(
-            key: const ValueKey<String>('ReplyExit'),
+            key: ValueKey<String>('ReplyExit'),
             onPressed: () => Navigator.of(context).pop(),
             icon: Icon(
               Icons.close,
@@ -130,7 +130,7 @@ class _SubjectRowState extends State<_SubjectRow> {
             onPressed: () => Navigator.of(context).pop(),
             icon: IconButton(
               icon: ImageIcon(
-                const AssetImage(
+                AssetImage(
                   'reply/icons/twotone_send.png',
                   package: 'flutter_gallery_assets',
                 ),
@@ -196,7 +196,7 @@ class __SenderAddressRowState extends State<_SenderAddressRow> {
         ),
       ],
       child: Padding(
-        padding: const EdgeInsets.only(
+        padding: EdgeInsets.only(
           left: 12,
           top: 16,
           right: 10,
@@ -233,7 +233,7 @@ class _RecipientsRow extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.symmetric(vertical: 4, horizontal: 12),
+      padding: EdgeInsets.symmetric(vertical: 4, horizontal: 12),
       child: Row(
         children: <Widget>[
           Expanded(
@@ -257,10 +257,10 @@ class _RecipientsRow extends StatelessWidget {
             ),
           ),
           InkResponse(
-            customBorder: const CircleBorder(),
+            customBorder: CircleBorder(),
             onTap: () {},
             radius: 24,
-            child: const Icon(Icons.add_circle_outline),
+            child: Icon(Icons.add_circle_outline),
           ),
         ],
       ),
@@ -273,7 +273,7 @@ class _SectionDivider extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const Divider(
+    return Divider(
       thickness: 1.1,
       indent: 10,
       endIndent: 10,

@@ -47,7 +47,7 @@ class MaterialDemoThemeData {
               : null;
         }),
       ),
-      snackBarTheme: const SnackBarThemeData(
+      snackBarTheme: SnackBarThemeData(
         behavior: SnackBarBehavior.floating,
       ),
       switchTheme: SwitchThemeData(
@@ -69,7 +69,7 @@ class MaterialDemoThemeData {
         }),
       ));
 
-  static const ColorScheme _colorScheme = ColorScheme(
+  static final ColorScheme _colorScheme = ColorScheme(
     primary: Color(0xFF6200EE),
     primaryContainer: Color(0xFF6200EE),
     secondary: Color(0xFFFF5722),

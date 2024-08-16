@@ -21,7 +21,7 @@ export 'package:gallery/data/demos.dart' show pumpDeferredLibraries;
 
 void main() async {
   GoogleFonts.config.allowRuntimeFetching = false;
-  runApp(const GalleryApp());
+  runApp(GalleryApp());
 }
 
 class GalleryApp extends StatelessWidget {
@@ -56,7 +56,7 @@ class GalleryApp extends StatelessWidget {
             themeMode: options.themeMode,
             theme: GalleryThemeData.lightThemeData.copyWith(
               platform: options.platform,
-              pageTransitionsTheme: const PageTransitionsTheme(
+              pageTransitionsTheme: PageTransitionsTheme(
                 builders: <TargetPlatform, PageTransitionsBuilder>{
                   TargetPlatform.android: ZoomPageTransitionsBuilder(
                     allowSnapshotting: false,
@@ -67,7 +67,7 @@ class GalleryApp extends StatelessWidget {
             darkTheme: GalleryThemeData.darkThemeData.copyWith(
               platform: options.platform,
             ),
-            localizationsDelegates: const <LocalizationsDelegate<Object?>>[
+            localizationsDelegates: <LocalizationsDelegate<Object?>>[
               ...GalleryLocalizations.localizationsDelegates,
               LocaleNamesLocalizationsDelegate()
             ],

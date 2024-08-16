@@ -32,8 +32,8 @@ class _AboutDialog extends StatelessWidget {
         textTheme.bodyLarge!.apply(color: colorScheme.onPrimary);
     final GalleryLocalizations localizations = GalleryLocalizations.of(context)!;
 
-    const String name = 'Flutter Gallery'; // Don't need to localize.
-    const String legalese = '© 2021 The Flutter team'; // Don't need to localize.
+    final String name = 'Flutter Gallery'; // Don't need to localize.
+    final String legalese = '© 2021 The Flutter team'; // Don't need to localize.
     final String repoText = localizations.githubRepo(name);
     final String seeSource = localizations.aboutDialogDescription(repoText);
     final int repoLinkIndex = seeSource.indexOf(repoText);
@@ -45,7 +45,7 @@ class _AboutDialog extends StatelessWidget {
       backgroundColor: colorScheme.background,
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
       content: Container(
-        constraints: const BoxConstraints(maxWidth: 400),
+        constraints: BoxConstraints(maxWidth: 400),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           mainAxisSize: MainAxisSize.min,
@@ -59,7 +59,7 @@ class _AboutDialog extends StatelessWidget {
                 ),
               ),
             ),
-            const SizedBox(height: 24),
+            SizedBox(height: 24),
             SelectableText.rich(
               TextSpan(
                 children: <InlineSpan>[
@@ -88,7 +88,7 @@ class _AboutDialog extends StatelessWidget {
                 ],
               ),
             ),
-            const SizedBox(height: 18),
+            SizedBox(height: 18),
             SelectableText(
               legalese,
               style: bodyTextStyle,
@@ -107,7 +107,7 @@ class _AboutDialog extends StatelessWidget {
                   ).black,
                   cardColor: Colors.white,
                 ),
-                child: const LicensePage(
+                child: LicensePage(
                   applicationName: name,
                   applicationLegalese: legalese,
                 ),

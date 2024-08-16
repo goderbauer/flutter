@@ -17,7 +17,7 @@ import 'theme.dart';
 class CraneApp extends StatelessWidget {
   const CraneApp({super.key});
 
-  static const String defaultRoute = routes.defaultRoute;
+  static String defaultRoute = routes.defaultRoute;
 
   @override
   Widget build(BuildContext context) {
@@ -30,7 +30,7 @@ class CraneApp extends StatelessWidget {
       locale: GalleryOptions.of(context).locale,
       initialRoute: CraneApp.defaultRoute,
       routes: <String, WidgetBuilder>{
-        CraneApp.defaultRoute: (BuildContext context) => const _Home(),
+        CraneApp.defaultRoute: (BuildContext context) => _Home(),
       },
       theme: craneTheme.copyWith(
         platform: GalleryOptions.of(context).platform,
@@ -44,7 +44,7 @@ class _Home extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const ApplyTextOptions(
+    return ApplyTextOptions(
       child: Backdrop(
         frontLayer: SizedBox(),
         backLayerItems: <BackLayerItem>[

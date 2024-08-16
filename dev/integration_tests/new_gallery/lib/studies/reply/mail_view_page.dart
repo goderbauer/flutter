@@ -30,7 +30,7 @@ class MailViewPage extends StatelessWidget {
           child: Material(
             color: Theme.of(context).cardColor,
             child: SingleChildScrollView(
-              padding: const EdgeInsetsDirectional.only(
+              padding: EdgeInsetsDirectional.only(
                 top: 42,
                 start: 20,
                 end: 20,
@@ -39,13 +39,13 @@ class MailViewPage extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: <Widget>[
                   _MailViewHeader(email: email),
-                  const SizedBox(height: 32),
+                  SizedBox(height: 32),
                   _MailViewBody(message: email.message),
                   if (email.containsPictures) ...<Widget>[
-                    const SizedBox(height: 28),
-                    const _PictureGrid(),
+                    SizedBox(height: 28),
+                    _PictureGrid(),
                   ],
-                  const SizedBox(height: kToolbarHeight),
+                  SizedBox(height: kToolbarHeight),
                 ],
               ),
             ),
@@ -77,8 +77,8 @@ class _MailViewHeader extends StatelessWidget {
               ),
             ),
             IconButton(
-              key: const ValueKey<String>('ReplyExit'),
-              icon: const Icon(Icons.keyboard_arrow_down),
+              key: ValueKey<String>('ReplyExit'),
+              icon: Icon(Icons.keyboard_arrow_down),
               onPressed: () {
                 Provider.of<EmailStore>(
                   context,
@@ -90,7 +90,7 @@ class _MailViewHeader extends StatelessWidget {
             ),
           ],
         ),
-        const SizedBox(height: 16),
+        SizedBox(height: 16),
         Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: <Widget>[
@@ -100,7 +100,7 @@ class _MailViewHeader extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: <Widget>[
                 SelectableText('${email.sender} - ${email.time}'),
-                const SizedBox(height: 4),
+                SizedBox(height: 4),
                 SelectableText(
                   'To ${email.recipients},',
                   style: textTheme.bodySmall!.copyWith(
@@ -113,7 +113,7 @@ class _MailViewHeader extends StatelessWidget {
               ],
             ),
             Padding(
-              padding: const EdgeInsetsDirectional.only(end: 4),
+              padding: EdgeInsetsDirectional.only(end: 4),
               child: ProfileAvatar(avatar: email.avatar),
             ),
           ],
@@ -157,8 +157,8 @@ class _PictureGrid extends StatelessWidget {
   Widget build(BuildContext context) {
     return GridView.builder(
       shrinkWrap: true,
-      physics: const NeverScrollableScrollPhysics(),
-      gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+      physics: NeverScrollableScrollPhysics(),
+      gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
         crossAxisCount: 2,
         crossAxisSpacing: 4,
         mainAxisSpacing: 4,

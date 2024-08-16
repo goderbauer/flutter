@@ -9,12 +9,12 @@ import '../../gallery_localizations.dart';
 import 'home.dart';
 import 'routes.dart' as routes;
 
-const Color _primaryColor = Color(0xFF6200EE);
+Color _primaryColor = Color(0xFF6200EE);
 
 class StarterApp extends StatelessWidget {
   const StarterApp({super.key});
 
-  static const String defaultRoute = routes.defaultRoute;
+  static String defaultRoute = routes.defaultRoute;
 
   @override
   Widget build(BuildContext context) {
@@ -27,11 +27,11 @@ class StarterApp extends StatelessWidget {
       locale: GalleryOptions.of(context).locale,
       initialRoute: StarterApp.defaultRoute,
       routes: <String, WidgetBuilder>{
-        StarterApp.defaultRoute: (BuildContext context) => const _Home(),
+        StarterApp.defaultRoute: (BuildContext context) => _Home(),
       },
       theme: ThemeData(
         highlightColor: Colors.transparent,
-        colorScheme: const ColorScheme(
+        colorScheme: ColorScheme(
           primary: _primaryColor,
           primaryContainer: Color(0xFF3700B3),
           secondary: Color(0xFF03DAC6),
@@ -46,7 +46,7 @@ class StarterApp extends StatelessWidget {
           onSurface: Colors.black,
           brightness: Brightness.light,
         ),
-        dividerTheme: const DividerThemeData(
+        dividerTheme: DividerThemeData(
           thickness: 1,
           color: Color(0xFFE5E5E5),
         ),
@@ -61,7 +61,7 @@ class _Home extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const ApplyTextOptions(
+    return ApplyTextOptions(
       child: HomePage(),
     );
   }

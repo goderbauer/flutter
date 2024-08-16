@@ -9,7 +9,7 @@ import '../../gallery_localizations.dart';
 // BEGIN cupertinoNavigationDemo
 
 class _TabInfo {
-  const _TabInfo(this.title, this.icon);
+  _TabInfo(this.title, this.icon);
 
   final String title;
   final IconData icon;
@@ -76,7 +76,7 @@ class _CupertinoDemoTab extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return CupertinoPageScaffold(
-      navigationBar: const CupertinoNavigationBar(),
+      navigationBar: CupertinoNavigationBar(),
       backgroundColor: CupertinoColors.systemBackground,
       child: Center(
         child: Icon(

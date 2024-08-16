@@ -37,7 +37,7 @@ class _CupertinoSegmentedControlDemoState
   @override
   Widget build(BuildContext context) {
     final GalleryLocalizations localizations = GalleryLocalizations.of(context)!;
-    const double segmentedControlMaxWidth = 500.0;
+    final double segmentedControlMaxWidth = 500.0;
     final Map<int, Widget> children = <int, Widget>{
       0: Text(localizations.colorsIndigo),
       1: Text(localizations.colorsTeal),
@@ -59,7 +59,7 @@ class _CupertinoSegmentedControlDemoState
         child: SafeArea(
           child: ListView(
             children: <Widget>[
-              const SizedBox(height: 16),
+              SizedBox(height: 16),
               SizedBox(
                 width: segmentedControlMaxWidth,
                 child: CupertinoSegmentedControl<int>(
@@ -71,7 +71,7 @@ class _CupertinoSegmentedControlDemoState
               SizedBox(
                 width: segmentedControlMaxWidth,
                 child: Padding(
-                  padding: const EdgeInsets.all(16),
+                  padding: EdgeInsets.all(16),
                   child: CupertinoSlidingSegmentedControl<int>(
                     children: children,
                     onValueChanged: onValueChanged,
@@ -80,7 +80,7 @@ class _CupertinoSegmentedControlDemoState
                 ),
               ),
               Container(
-                padding: const EdgeInsets.all(16),
+                padding: EdgeInsets.all(16),
                 height: 300,
                 alignment: Alignment.center,
                 child: children[currentSegment.value],

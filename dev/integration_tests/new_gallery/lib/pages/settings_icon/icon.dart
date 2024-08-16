@@ -70,7 +70,7 @@ class _SettingsIconPainter extends CustomPainter {
 
   /// Pink paint with horizontal gradient.
   Paint get _pinkPaint {
-    const LinearGradient shader = LinearGradient(colors: <Color>[pinkLeft, pinkRight]);
+    final LinearGradient shader = LinearGradient(colors: <Color>[pinkLeft, pinkRight]);
     final Rect shaderRect = _fixedRect.translate(
       _size(-(stickLength - colorLength(time)) / 2),
       0,
@@ -81,7 +81,7 @@ class _SettingsIconPainter extends CustomPainter {
 
   /// Teal paint with horizontal gradient.
   Paint get _tealPaint {
-    const LinearGradient shader = LinearGradient(colors: <Color>[tealLeft, tealRight]);
+    final LinearGradient shader = LinearGradient(colors: <Color>[tealLeft, tealRight]);
     final Rect shaderRect = _fixedRect.translate(
       _size((stickLength - colorLength(time)) / 2),
       0,

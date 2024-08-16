@@ -29,26 +29,26 @@ class BottomDrawer extends StatelessWidget {
       onVerticalDragEnd: onVerticalDragEnd,
       child: Material(
         color: theme.bottomSheetTheme.backgroundColor,
-        borderRadius: const BorderRadius.only(
+        borderRadius: BorderRadius.only(
           topLeft: Radius.circular(12),
           topRight: Radius.circular(12),
         ),
         child: ListView(
-          padding: const EdgeInsets.all(12),
-          physics: const NeverScrollableScrollPhysics(),
+          padding: EdgeInsets.all(12),
+          physics: NeverScrollableScrollPhysics(),
           children: <Widget>[
-            const SizedBox(height: 28),
+            SizedBox(height: 28),
             leading,
-            const SizedBox(height: 8),
-            const Divider(
+            SizedBox(height: 8),
+            Divider(
               color: ReplyColors.blue200,
               thickness: 0.25,
               indent: 18,
               endIndent: 160,
             ),
-            const SizedBox(height: 16),
+            SizedBox(height: 16),
             Padding(
-              padding: const EdgeInsetsDirectional.only(start: 18),
+              padding: EdgeInsetsDirectional.only(start: 18),
               child: Text(
                 'FOLDERS',
                 style: theme.textTheme.bodySmall!.copyWith(
@@ -57,7 +57,7 @@ class BottomDrawer extends StatelessWidget {
                 ),
               ),
             ),
-            const SizedBox(height: 4),
+            SizedBox(height: 4),
             trailing,
           ],
         ),

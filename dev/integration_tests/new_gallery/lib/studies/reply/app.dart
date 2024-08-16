@@ -29,7 +29,7 @@ class ReplyApp extends StatefulWidget {
   static Route<void> createComposeRoute(RouteSettings settings) {
     return PageRouteBuilder<void>(
       pageBuilder: (BuildContext context, Animation<double> animation, Animation<double> secondaryAnimation) =>
-          const ComposePage(),
+          ComposePage(),
       transitionsBuilder: (BuildContext context, Animation<double> animation, Animation<double> secondaryAnimation, Widget child) {
         return FadeThroughTransition(
           fillColor: Theme.of(context).cardColor,
@@ -91,7 +91,7 @@ class _ReplyAppState extends State<ReplyApp> with RestorationMixin {
         initialRoute: ReplyApp.homeRoute,
         onGenerateRoute: (RouteSettings settings) => switch (settings.name) {
           ReplyApp.homeRoute => MaterialPageRoute<void>(
-              builder: (BuildContext context) => const AdaptiveNav(),
+              builder: (BuildContext context) => AdaptiveNav(),
               settings: settings,
             ),
           ReplyApp.composeRoute => ReplyApp.createComposeRoute(settings),
@@ -147,19 +147,19 @@ class _RestorableEmailState extends RestorableListenable<EmailStore> {
 ThemeData _buildReplyLightTheme(BuildContext context) {
   final ThemeData base = ThemeData.light();
   return base.copyWith(
-    bottomAppBarTheme: const BottomAppBarTheme(color: ReplyColors.blue700),
+    bottomAppBarTheme: BottomAppBarTheme(color: ReplyColors.blue700),
     bottomSheetTheme: BottomSheetThemeData(
       backgroundColor: ReplyColors.blue700,
       modalBackgroundColor: Colors.white.withOpacity(0.7),
     ),
     navigationRailTheme: NavigationRailThemeData(
       backgroundColor: ReplyColors.blue700,
-      selectedIconTheme: const IconThemeData(color: ReplyColors.orange500),
+      selectedIconTheme: IconThemeData(color: ReplyColors.orange500),
       selectedLabelTextStyle:
           GoogleFonts.workSansTextTheme().headlineSmall!.copyWith(
                 color: ReplyColors.orange500,
               ),
-      unselectedIconTheme: const IconThemeData(color: ReplyColors.blue200),
+      unselectedIconTheme: IconThemeData(color: ReplyColors.blue200),
       unselectedLabelTextStyle:
           GoogleFonts.workSansTextTheme().headlineSmall!.copyWith(
                 color: ReplyColors.blue200,
@@ -172,7 +172,7 @@ ThemeData _buildReplyLightTheme(BuildContext context) {
       ReplyColors.lightChipBackground,
       Brightness.light,
     ),
-    colorScheme: const ColorScheme.light(
+    colorScheme: ColorScheme.light(
       primary: ReplyColors.blue700,
       primaryContainer: ReplyColors.blue800,
       secondary: ReplyColors.orange500,
@@ -189,7 +189,7 @@ ThemeData _buildReplyLightTheme(BuildContext context) {
 ThemeData _buildReplyDarkTheme(BuildContext context) {
   final ThemeData base = ThemeData.dark();
   return base.copyWith(
-    bottomAppBarTheme: const BottomAppBarTheme(
+    bottomAppBarTheme: BottomAppBarTheme(
       color: ReplyColors.darkBottomAppBarBackground,
     ),
     bottomSheetTheme: BottomSheetThemeData(
@@ -198,12 +198,12 @@ ThemeData _buildReplyDarkTheme(BuildContext context) {
     ),
     navigationRailTheme: NavigationRailThemeData(
       backgroundColor: ReplyColors.darkBottomAppBarBackground,
-      selectedIconTheme: const IconThemeData(color: ReplyColors.orange300),
+      selectedIconTheme: IconThemeData(color: ReplyColors.orange300),
       selectedLabelTextStyle:
           GoogleFonts.workSansTextTheme().headlineSmall!.copyWith(
                 color: ReplyColors.orange300,
               ),
-      unselectedIconTheme: const IconThemeData(color: ReplyColors.greyLabel),
+      unselectedIconTheme: IconThemeData(color: ReplyColors.greyLabel),
       unselectedLabelTextStyle:
           GoogleFonts.workSansTextTheme().headlineSmall!.copyWith(
                 color: ReplyColors.greyLabel,
@@ -216,7 +216,7 @@ ThemeData _buildReplyDarkTheme(BuildContext context) {
       ReplyColors.darkChipBackground,
       Brightness.dark,
     ),
-    colorScheme: const ColorScheme.dark(
+    colorScheme: ColorScheme.dark(
       primary: ReplyColors.blue200,
       primaryContainer: ReplyColors.blue300,
       secondary: ReplyColors.orange300,
@@ -239,8 +239,8 @@ ChipThemeData _buildChipTheme(
     disabledColor: primaryColor.withOpacity(0.87),
     selectedColor: primaryColor.withOpacity(0.05),
     secondarySelectedColor: chipBackground,
-    padding: const EdgeInsets.all(4),
-    shape: const StadiumBorder(),
+    padding: EdgeInsets.all(4),
+    shape: StadiumBorder(),
     labelStyle: GoogleFonts.workSansTextTheme().bodyMedium!.copyWith(
           color: brightness == Brightness.dark
               ? ReplyColors.white50

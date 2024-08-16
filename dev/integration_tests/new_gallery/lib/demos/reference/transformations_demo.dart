@@ -23,11 +23,11 @@ class _TransformationsDemoState extends State<TransformationsDemo>
     with TickerProviderStateMixin {
   final GlobalKey _targetKey = GlobalKey();
   // The radius of a hexagon tile in pixels.
-  static const double _kHexagonRadius = 16.0;
+  static final double _kHexagonRadius = 16.0;
   // The margin between hexagons.
-  static const double _kHexagonMargin = 1.0;
+  static final double _kHexagonMargin = 1.0;
   // The radius of the entire board in hexagons, not including the center.
-  static const int _kBoardRadius = 8;
+  static final int _kBoardRadius = 8;
 
   Board _board = Board(
     boardRadius: _kBoardRadius,
@@ -58,7 +58,7 @@ class _TransformationsDemoState extends State<TransformationsDemo>
       begin: _transformationController.value,
       end: _homeMatrix,
     ).animate(_controllerReset);
-    _controllerReset.duration = const Duration(milliseconds: 400);
+    _controllerReset.duration = Duration(milliseconds: 400);
     _animationReset!.addListener(_onAnimateReset);
     _controllerReset.forward();
   }
@@ -174,7 +174,7 @@ class _TransformationsDemoState extends State<TransformationsDemo>
       },
       tooltip: 'Reset',
       color: Theme.of(context).colorScheme.surface,
-      icon: const Icon(Icons.replay),
+      icon: Icon(Icons.replay),
     );
   }
 
@@ -190,7 +190,7 @@ class _TransformationsDemoState extends State<TransformationsDemo>
               return Container(
                 width: double.infinity,
                 height: 150,
-                padding: const EdgeInsets.all(12),
+                padding: EdgeInsets.all(12),
                 child: EditBoardPoint(
                   boardPoint: _board.selected!,
                   onColorSelection: (Color color) {
@@ -206,7 +206,7 @@ class _TransformationsDemoState extends State<TransformationsDemo>
       },
       tooltip: 'Edit',
       color: Theme.of(context).colorScheme.surface,
-      icon: const Icon(Icons.edit),
+      icon: Icon(Icons.edit),
     );
   }
 
@@ -220,7 +220,7 @@ class _TransformationsDemoState extends State<TransformationsDemo>
 // CustomPainter is what is passed to CustomPaint and actually draws the scene
 // when its `paint` method is called.
 class _BoardPainter extends CustomPainter {
-  const _BoardPainter({required this.board});
+  _BoardPainter({required this.board});
 
   final Board board;
 

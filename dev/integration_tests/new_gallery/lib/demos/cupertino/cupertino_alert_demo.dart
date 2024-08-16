@@ -221,7 +221,7 @@ class _CupertinoAlertDemoState extends State<CupertinoAlertDemo>
   ) {
     return CupertinoDialogRoute<String>(
       context: context,
-      builder: (BuildContext context) => const ApplyTextOptions(
+      builder: (BuildContext context) => ApplyTextOptions(
         child: CupertinoDessertDialog(),
       ),
     );
@@ -315,7 +315,7 @@ class _CupertinoAlertDemoState extends State<CupertinoAlertDemo>
               Expanded(child: Center(child: showAlertButton)),
               if (lastSelectedValue.value != null)
                 Padding(
-                  padding: const EdgeInsets.all(16),
+                  padding: EdgeInsets.all(16),
                   child: Text(
                     localizations.dialogSelectedOption(lastSelectedValue.value!),
                     style: CupertinoTheme.of(context).textTheme.textStyle,

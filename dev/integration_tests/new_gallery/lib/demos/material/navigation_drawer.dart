@@ -22,7 +22,7 @@ class NavDrawerDemo extends StatelessWidget {
       accountEmail: Text(
         localization.demoNavigationDrawerUserEmail,
       ),
-      currentAccountPicture: const CircleAvatar(
+      currentAccountPicture: CircleAvatar(
         child: FlutterLogo(size: 42.0),
       ),
     );
@@ -33,7 +33,7 @@ class NavDrawerDemo extends StatelessWidget {
           title: Text(
             localization.demoNavigationDrawerToPageOne,
           ),
-          leading: const Icon(Icons.favorite),
+          leading: Icon(Icons.favorite),
           onTap: () {
             Navigator.pop(context);
           },
@@ -42,7 +42,7 @@ class NavDrawerDemo extends StatelessWidget {
           title: Text(
             localization.demoNavigationDrawerToPageTwo,
           ),
-          leading: const Icon(Icons.comment),
+          leading: Icon(Icons.comment),
           onTap: () {
             Navigator.pop(context);
           },
@@ -59,7 +59,7 @@ class NavDrawerDemo extends StatelessWidget {
         container: true,
         child: Center(
           child: Padding(
-            padding: const EdgeInsets.all(50.0),
+            padding: EdgeInsets.all(50.0),
             child: Text(
               localization.demoNavigationDrawerText,
             ),

@@ -24,13 +24,13 @@ import 'profile_avatar.dart';
 import 'search_page.dart';
 import 'waterfall_notched_rectangle.dart';
 
-const String _assetsPackage = 'flutter_gallery_assets';
-const String _iconAssetLocation = 'reply/icons';
-const String _folderIconAssetLocation = '$_iconAssetLocation/twotone_folder.png';
+String _assetsPackage = 'flutter_gallery_assets';
+String _iconAssetLocation = 'reply/icons';
+String _folderIconAssetLocation = '$_iconAssetLocation/twotone_folder.png';
 final GlobalKey<NavigatorState> desktopMailNavKey = GlobalKey<NavigatorState>();
 final GlobalKey<NavigatorState> mobileMailNavKey = GlobalKey<NavigatorState>();
-const double _kFlingVelocity = 2.0;
-const Duration _kAnimationDuration = Duration(milliseconds: 300);
+double _kFlingVelocity = 2.0;
+Duration _kAnimationDuration = Duration(milliseconds: 300);
 
 class AdaptiveNav extends StatefulWidget {
   const AdaptiveNav({super.key});
@@ -232,12 +232,12 @@ class _DesktopNavState extends State<_DesktopNav>
               );
             },
           ),
-          const VerticalDivider(thickness: 1, width: 1),
+          VerticalDivider(thickness: 1, width: 1),
           Expanded(
             child: Center(
               child: ConstrainedBox(
-                constraints: const BoxConstraints(maxWidth: 1340),
-                child: const _SharedAxisTransitionSwitcher(
+                constraints: BoxConstraints(maxWidth: 1340),
+                child: _SharedAxisTransitionSwitcher(
                   defaultChild: _MailNavigator(
                     child: MailboxBody(),
                   ),
@@ -273,10 +273,10 @@ class _NavigationRailHeader extends StatelessWidget {
                 height: 56,
                 child: Row(
                   children: <Widget>[
-                    const SizedBox(width: 6),
+                    SizedBox(width: 6),
                     InkWell(
-                      key: const ValueKey<String>('ReplyLogo'),
-                      borderRadius: const BorderRadius.all(Radius.circular(16)),
+                      key: ValueKey<String>('ReplyLogo'),
+                      borderRadius: BorderRadius.all(Radius.circular(16)),
                       onTap: () {
                         extended.value = !extended.value;
                       },
@@ -284,14 +284,14 @@ class _NavigationRailHeader extends StatelessWidget {
                         children: <Widget>[
                           Transform.rotate(
                             angle: animation.value * math.pi,
-                            child: const Icon(
+                            child: Icon(
                               Icons.arrow_left,
                               color: ReplyColors.white50,
                               size: 16,
                             ),
                           ),
-                          const _ReplyLogo(),
-                          const SizedBox(width: 10),
+                          _ReplyLogo(),
+                          SizedBox(width: 10),
                           Align(
                             alignment: AlignmentDirectional.centerStart,
                             widthFactor: animation.value,
@@ -312,7 +312,7 @@ class _NavigationRailHeader extends StatelessWidget {
                     if (animation.value > 0)
                       Opacity(
                         opacity: animation.value,
-                        child: const Row(
+                        child: Row(
                           children: <Widget>[
                             SizedBox(width: 18),
                             ProfileAvatar(
@@ -330,14 +330,14 @@ class _NavigationRailHeader extends StatelessWidget {
                   ],
                 ),
               ),
-              const SizedBox(height: 20),
+              SizedBox(height: 20),
               Padding(
-                padding: const EdgeInsetsDirectional.only(
+                padding: EdgeInsetsDirectional.only(
                   start: 8,
                 ),
                 child: _ReplyFab(extended: extended.value),
               ),
-              const SizedBox(height: 8),
+              SizedBox(height: 8),
             ],
           ),
         );
@@ -374,18 +374,18 @@ class _NavigationRailFolderSection extends StatelessWidget {
                 height: 485,
                 width: 256,
                 child: ListView(
-                  padding: const EdgeInsets.all(12),
-                  physics: const NeverScrollableScrollPhysics(),
+                  padding: EdgeInsets.all(12),
+                  physics: NeverScrollableScrollPhysics(),
                   children: <Widget>[
-                    const Divider(
+                    Divider(
                       color: ReplyColors.blue200,
                       thickness: 0.4,
                       indent: 14,
                       endIndent: 16,
                     ),
-                    const SizedBox(height: 16),
+                    SizedBox(height: 16),
                     Padding(
-                      padding: const EdgeInsetsDirectional.only(
+                      padding: EdgeInsetsDirectional.only(
                         start: 16,
                       ),
                       child: Text(
@@ -396,10 +396,10 @@ class _NavigationRailFolderSection extends StatelessWidget {
                         ),
                       ),
                     ),
-                    const SizedBox(height: 8),
+                    SizedBox(height: 8),
                     for (final String folder in folders.keys)
                       InkWell(
-                        borderRadius: const BorderRadius.all(
+                        borderRadius: BorderRadius.all(
                           Radius.circular(36),
                         ),
                         onTap: () {},
@@ -407,7 +407,7 @@ class _NavigationRailFolderSection extends StatelessWidget {
                           children: <Widget>[
                             Row(
                               children: <Widget>[
-                                const SizedBox(width: 12),
+                                SizedBox(width: 12),
                                 ImageIcon(
                                   AssetImage(
                                     folders[folder]!,
@@ -416,7 +416,7 @@ class _NavigationRailFolderSection extends StatelessWidget {
                                   color: navigationRailTheme
                                       .unselectedLabelTextStyle!.color,
                                 ),
-                                const SizedBox(width: 24),
+                                SizedBox(width: 24),
                                 Text(
                                   folder,
                                   style: textTheme.bodyLarge!.copyWith(
@@ -424,7 +424,7 @@ class _NavigationRailFolderSection extends StatelessWidget {
                                         .unselectedLabelTextStyle!.color,
                                   ),
                                 ),
-                                const SizedBox(height: 72),
+                                SizedBox(height: 72),
                               ],
                             ),
                           ],
@@ -490,7 +490,7 @@ class _MobileNavState extends State<_MobileNav> with TickerProviderStateMixin {
     _bottomAppBarController = AnimationController(
       vsync: this,
       value: 1,
-      duration: const Duration(milliseconds: 250),
+      duration: Duration(milliseconds: 250),
     );
 
     _drawerCurve = CurvedAnimation(
@@ -604,7 +604,7 @@ class _MobileNavState extends State<_MobileNav> with TickerProviderStateMixin {
       children: <Widget>[
         NotificationListener<ScrollNotification>(
           onNotification: _handleScrollNotification,
-          child: const _MailNavigator(
+          child: _MailNavigator(
             child: MailboxBody(),
           ),
         ),
@@ -681,7 +681,7 @@ class _MobileNavState extends State<_MobileNav> with TickerProviderStateMixin {
         ),
         floatingActionButton: _bottomDrawerVisible
             ? null
-            : const Padding(
+            : Padding(
                 padding: EdgeInsetsDirectional.only(bottom: 8),
                 child: _ReplyFab(),
               ),
@@ -727,9 +727,9 @@ class _AnimatedBottomAppBar extends StatelessWidget {
           sizeFactor: bottomAppBarCurve,
           axisAlignment: -1,
           child: Padding(
-            padding: const EdgeInsetsDirectional.only(top: 2),
+            padding: EdgeInsetsDirectional.only(top: 2),
             child: BottomAppBar(
-              shape: const WaterfallNotchedRectangle(),
+              shape: WaterfallNotchedRectangle(),
               notchMargin: 6,
               child: Container(
                 color: Colors.transparent,
@@ -738,29 +738,29 @@ class _AnimatedBottomAppBar extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: <Widget>[
                     InkWell(
-                      key: const ValueKey<String>('navigation_button'),
-                      borderRadius: const BorderRadius.all(Radius.circular(16)),
+                      key: ValueKey<String>('navigation_button'),
+                      borderRadius: BorderRadius.all(Radius.circular(16)),
                       onTap: toggleBottomDrawerVisibility,
                       child: Row(
                         children: <Widget>[
-                          const SizedBox(width: 16),
+                          SizedBox(width: 16),
                           RotationTransition(
                             turns: Tween<double>(
                               begin: 0.0,
                               end: 1.0,
                             ).animate(dropArrowCurve),
-                            child: const Icon(
+                            child: Icon(
                               Icons.arrow_drop_up,
                               color: ReplyColors.white50,
                             ),
                           ),
-                          const SizedBox(width: 8),
-                          const _ReplyLogo(),
-                          const SizedBox(width: 10),
+                          SizedBox(width: 8),
+                          _ReplyLogo(),
+                          SizedBox(width: 10),
                           _FadeThroughTransitionSwitcher(
                             fillColor: Colors.transparent,
                             child: onMailView
-                                ? const SizedBox(width: 48)
+                                ? SizedBox(width: 48)
                                 : FadeTransition(
                                     opacity: fadeOut,
                                     child: Text(
@@ -823,7 +823,7 @@ class _BottomAppBarActionItems extends StatelessWidget {
                   key: UniqueKey(),
                   alignment: Alignment.centerRight,
                   child: IconButton(
-                    icon: const Icon(Icons.settings),
+                    icon: Icon(Icons.settings),
                     color: ReplyColors.white50,
                     onPressed: () {},
                   ),
@@ -833,9 +833,9 @@ class _BottomAppBarActionItems extends StatelessWidget {
                       mainAxisAlignment: MainAxisAlignment.end,
                       children: <Widget>[
                         IconButton(
-                          key: const ValueKey<String>('star_email_button'),
+                          key: ValueKey<String>('star_email_button'),
                           icon: ImageIcon(
-                            const AssetImage(
+                            AssetImage(
                               '$_iconAssetLocation/twotone_star.png',
                               package: _assetsPackage,
                             ),
@@ -857,7 +857,7 @@ class _BottomAppBarActionItems extends StatelessWidget {
                           color: ReplyColors.white50,
                         ),
                         IconButton(
-                          icon: const ImageIcon(
+                          icon: ImageIcon(
                             AssetImage(
                               '$_iconAssetLocation/twotone_delete.png',
                               package: _assetsPackage,
@@ -874,7 +874,7 @@ class _BottomAppBarActionItems extends StatelessWidget {
                           color: ReplyColors.white50,
                         ),
                         IconButton(
-                          icon: const Icon(Icons.more_vert),
+                          icon: Icon(Icons.more_vert),
                           onPressed: () {},
                           color: ReplyColors.white50,
                         ),
@@ -883,8 +883,8 @@ class _BottomAppBarActionItems extends StatelessWidget {
                   : Align(
                       alignment: Alignment.centerRight,
                       child: IconButton(
-                        key: const ValueKey<String>('ReplySearch'),
-                        icon: const Icon(Icons.search),
+                        key: ValueKey<String>('ReplySearch'),
+                        icon: Icon(Icons.search),
                         color: ReplyColors.white50,
                         onPressed: () {
                           Provider.of<EmailStore>(
@@ -971,7 +971,7 @@ class _BottomDrawerDestinations extends StatelessWidget {
 }
 
 class _Destination {
-  const _Destination({
+  _Destination({
     required this.type,
     required this.textLabel,
     required this.icon,
@@ -1072,7 +1072,7 @@ class _ReplyLogo extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const ImageIcon(
+    return ImageIcon(
       AssetImage(
         'reply/reply_logo.png',
         package: _assetsPackage,
@@ -1095,7 +1095,7 @@ class _ReplyFab extends StatefulWidget {
 class _ReplyFabState extends State<_ReplyFab>
     with SingleTickerProviderStateMixin {
   static final UniqueKey fabKey = UniqueKey();
-  static const double _mobileFabDimension = 56;
+  static final double _mobileFabDimension = 56;
 
   void onPressed() {
     final bool onSearchPage = Provider.of<EmailStore>(
@@ -1125,7 +1125,7 @@ class _ReplyFabState extends State<_ReplyFab>
   Widget build(BuildContext context) {
     final bool isDesktop = isDisplayDesktop(context);
     final ThemeData theme = Theme.of(context);
-    const CircleBorder circleFabBorder = CircleBorder();
+    final CircleBorder circleFabBorder = CircleBorder();
 
     return Selector<EmailStore, bool>(
       selector: (BuildContext context, EmailStore emailStore) => emailStore.onMailView,
@@ -1138,7 +1138,7 @@ class _ReplyFabState extends State<_ReplyFab>
                   key: fabKey,
                   color: Colors.black,
                 )
-              : const Icon(
+              : Icon(
                   Icons.create,
                   color: Colors.black,
                 ),
@@ -1155,14 +1155,14 @@ class _ReplyFabState extends State<_ReplyFab>
             child: animation.value == 0
                 ? FloatingActionButton(
                     tooltip: tooltip,
-                    key: const ValueKey<String>('ReplyFab'),
+                    key: ValueKey<String>('ReplyFab'),
                     onPressed: onPressed,
                     child: fabSwitcher,
                   )
                 : Align(
                     alignment: AlignmentDirectional.centerStart,
                     child: FloatingActionButton.extended(
-                      key: const ValueKey<String>('ReplyFab'),
+                      key: ValueKey<String>('ReplyFab'),
                       label: Row(
                         children: <Widget>[
                           fabSwitcher,
@@ -1191,7 +1191,7 @@ class _ReplyFabState extends State<_ReplyFab>
           // TODO(x): State restoration of compose page on mobile is blocked because OpenContainer does not support restorablePush, https://github.com/flutter/gallery/issues/570.
           return OpenContainer(
             openBuilder: (BuildContext context, void Function() closedContainer) {
-              return const ComposePage();
+              return ComposePage();
             },
             openColor: theme.cardColor,
             closedShape: circleFabBorder,
@@ -1201,7 +1201,7 @@ class _ReplyFabState extends State<_ReplyFab>
               return Tooltip(
                 message: tooltip,
                 child: InkWell(
-                  key: const ValueKey<String>('ReplyFab'),
+                  key: ValueKey<String>('ReplyFab'),
                   customBorder: circleFabBorder,
                   onTap: openContainer,
                   child: SizedBox(
@@ -1267,7 +1267,7 @@ class _SharedAxisTransitionSwitcher extends StatelessWidget {
               child: child,
             );
           },
-          child: onSearchPage ? const SearchPage() : defaultChild,
+          child: onSearchPage ? SearchPage() : defaultChild,
         );
       },
     );

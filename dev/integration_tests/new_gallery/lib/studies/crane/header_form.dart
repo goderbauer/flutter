@@ -6,13 +6,13 @@ import 'package:flutter/material.dart';
 import '../../layout/adaptive.dart';
 import 'colors.dart';
 
-const double textFieldHeight = 60.0;
-const double appPaddingLarge = 120.0;
-const double appPaddingSmall = 24.0;
+double textFieldHeight = 60.0;
+double appPaddingLarge = 120.0;
+double appPaddingSmall = 24.0;
 
 class HeaderFormField {
 
-  const HeaderFormField({
+  HeaderFormField({
     required this.index,
     required this.iconData,
     required this.title,
@@ -49,14 +49,14 @@ class HeaderForm extends StatelessWidget {
               return GridView.count(
                 crossAxisCount: crossAxisCount,
                 childAspectRatio: itemWidth / textFieldHeight,
-                physics: const NeverScrollableScrollPhysics(),
+                physics: NeverScrollableScrollPhysics(),
                 children: <Widget>[
                   for (final HeaderFormField field in fields)
                     if ((field.index + 1) % crossAxisCount == 0)
                       _HeaderTextField(field: field)
                     else
                       Padding(
-                        padding: const EdgeInsetsDirectional.only(end: 16),
+                        padding: EdgeInsetsDirectional.only(end: 16),
                         child: _HeaderTextField(field: field),
                       ),
                 ],
@@ -67,7 +67,7 @@ class HeaderForm extends StatelessWidget {
               children: <Widget>[
                 for (final HeaderFormField field in fields)
                   Padding(
-                    padding: const EdgeInsets.only(bottom: 8),
+                    padding: EdgeInsets.only(bottom: 8),
                     child: _HeaderTextField(field: field),
                   )
               ],
@@ -94,7 +94,7 @@ class _HeaderTextField extends StatelessWidget {
           borderRadius: BorderRadius.circular(4),
           borderSide: BorderSide.none,
         ),
-        contentPadding: const EdgeInsets.all(16),
+        contentPadding: EdgeInsets.all(16),
         fillColor: cranePurple700,
         filled: true,
         hintText: field.title,

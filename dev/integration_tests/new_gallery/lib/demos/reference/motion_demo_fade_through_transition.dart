@@ -68,15 +68,15 @@ class _FadeThroughTransitionDemoState extends State<FadeThroughTransitionDemo> {
         },
         items: <BottomNavigationBarItem>[
           BottomNavigationBarItem(
-            icon: const Icon(Icons.photo_library),
+            icon: Icon(Icons.photo_library),
             label: localizations.demoFadeThroughAlbumsDestination,
           ),
           BottomNavigationBarItem(
-            icon: const Icon(Icons.photo),
+            icon: Icon(Icons.photo),
             label: localizations.demoFadeThroughPhotosDestination,
           ),
           BottomNavigationBarItem(
-            icon: const Icon(Icons.search),
+            icon: Icon(Icons.search),
             label: localizations.demoFadeThroughSearchDestination,
           ),
         ],
@@ -102,9 +102,9 @@ class _ExampleCard extends StatelessWidget {
                   child: ColoredBox(
                     color: Colors.black26,
                     child: Padding(
-                      padding: const EdgeInsets.all(30),
+                      padding: EdgeInsets.all(30),
                       child: Ink.image(
-                        image: const AssetImage(
+                        image: AssetImage(
                           'placeholders/placeholder_image.png',
                           package: 'flutter_gallery_assets',
                         ),
@@ -113,7 +113,7 @@ class _ExampleCard extends StatelessWidget {
                   ),
                 ),
                 Padding(
-                  padding: const EdgeInsets.all(8),
+                  padding: EdgeInsets.all(8),
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: <Widget>[

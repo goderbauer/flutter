@@ -54,7 +54,7 @@ class _NavRailDemoState extends State<NavRailDemo> with RestorationMixin {
             leading: FloatingActionButton(
               onPressed: () {},
               tooltip: localization.buttonTextCreate,
-              child: const Icon(Icons.add),
+              child: Icon(Icons.add),
             ),
             selectedIndex: _selectedIndex.value,
             onDestinationSelected: (int index) {
@@ -65,10 +65,10 @@ class _NavRailDemoState extends State<NavRailDemo> with RestorationMixin {
             labelType: NavigationRailLabelType.selected,
             destinations: <NavigationRailDestination>[
               NavigationRailDestination(
-                icon: const Icon(
+                icon: Icon(
                   Icons.favorite_border,
                 ),
-                selectedIcon: const Icon(
+                selectedIcon: Icon(
                   Icons.favorite,
                 ),
                 label: Text(
@@ -76,10 +76,10 @@ class _NavRailDemoState extends State<NavRailDemo> with RestorationMixin {
                 ),
               ),
               NavigationRailDestination(
-                icon: const Icon(
+                icon: Icon(
                   Icons.bookmark_border,
                 ),
-                selectedIcon: const Icon(
+                selectedIcon: Icon(
                   Icons.book,
                 ),
                 label: Text(
@@ -87,10 +87,10 @@ class _NavRailDemoState extends State<NavRailDemo> with RestorationMixin {
                 ),
               ),
               NavigationRailDestination(
-                icon: const Icon(
+                icon: Icon(
                   Icons.star_border,
                 ),
-                selectedIcon: const Icon(
+                selectedIcon: Icon(
                   Icons.star,
                 ),
                 label: Text(
@@ -99,7 +99,7 @@ class _NavRailDemoState extends State<NavRailDemo> with RestorationMixin {
               ),
             ],
           ),
-          const VerticalDivider(thickness: 1, width: 1),
+          VerticalDivider(thickness: 1, width: 1),
           Expanded(
             child: Center(
               child: Text(

@@ -6,7 +6,7 @@ import 'package:flutter/widgets.dart';
 
 import 'email_model.dart';
 
-const String _avatarsLocation = 'reply/avatars';
+String _avatarsLocation = 'reply/avatars';
 
 class EmailStore with ChangeNotifier {
   static final List<Email> _inbox = <Email>[

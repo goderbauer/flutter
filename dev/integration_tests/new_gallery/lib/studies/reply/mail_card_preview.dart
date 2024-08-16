@@ -14,8 +14,8 @@ import 'model/email_model.dart';
 import 'model/email_store.dart';
 import 'profile_avatar.dart';
 
-const String _assetsPackage = 'flutter_gallery_assets';
-const String _iconAssetLocation = 'reply/icons';
+String _assetsPackage = 'flutter_gallery_assets';
+String _iconAssetLocation = 'reply/icons';
 
 class MailPreviewCard extends StatelessWidget {
   const MailPreviewCard({
@@ -45,7 +45,7 @@ class MailPreviewCard extends StatelessWidget {
         return MailViewPage(id: id, email: email);
       },
       openColor: theme.cardColor,
-      closedShape: const RoundedRectangleBorder(
+      closedShape: RoundedRectangleBorder(
 
       ),
       closedElevation: 0,
@@ -66,7 +66,7 @@ class MailPreviewCard extends StatelessWidget {
         } else {
           return Dismissible(
             key: ObjectKey(email),
-            dismissThresholds: const <DismissDirection, double>{
+            dismissThresholds: <DismissDirection, double>{
               DismissDirection.startToEnd: 0.8,
               DismissDirection.endToStart: 0.4,
             },
@@ -91,7 +91,7 @@ class MailPreviewCard extends StatelessWidget {
               backgroundColor: colorScheme.primary,
               iconColor: ReplyColors.blue50,
               alignment: Alignment.centerLeft,
-              padding: const EdgeInsetsDirectional.only(start: 20),
+              padding: EdgeInsetsDirectional.only(start: 20),
             ),
             confirmDismiss: (DismissDirection direction) async {
               if (direction == DismissDirection.endToStart) {
@@ -113,7 +113,7 @@ class MailPreviewCard extends StatelessWidget {
                   ? colorScheme.onSecondary
                   : colorScheme.onBackground,
               alignment: Alignment.centerRight,
-              padding: const EdgeInsetsDirectional.only(end: 20),
+              padding: EdgeInsetsDirectional.only(end: 20),
             ),
             child: mailPreview,
           );
@@ -197,7 +197,7 @@ class _MailPreview extends StatelessWidget {
           return ConstrainedBox(
             constraints: BoxConstraints(maxHeight: constraints.maxHeight),
             child: Padding(
-              padding: const EdgeInsets.all(20),
+              padding: EdgeInsets.all(20),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 mainAxisSize: MainAxisSize.min,
@@ -214,9 +214,9 @@ class _MailPreview extends StatelessWidget {
                               '${email.sender} - ${email.time}',
                               style: textTheme.bodySmall,
                             ),
-                            const SizedBox(height: 4),
+                            SizedBox(height: 4),
                             Text(email.subject, style: textTheme.headlineSmall),
-                            const SizedBox(height: 16),
+                            SizedBox(height: 16),
                           ],
                         ),
                       ),
@@ -229,7 +229,7 @@ class _MailPreview extends StatelessWidget {
                     ],
                   ),
                   Padding(
-                    padding: const EdgeInsetsDirectional.only(
+                    padding: EdgeInsetsDirectional.only(
                       end: 20,
                     ),
                     child: Text(
@@ -240,7 +240,7 @@ class _MailPreview extends StatelessWidget {
                     ),
                   ),
                   if (email.containsPictures) ...<Widget>[
-                    const Flexible(
+                    Flexible(
                       child: Column(
                         children: <Widget>[
                           SizedBox(height: 20),
@@ -284,7 +284,7 @@ class _PicturePreview extends StatelessWidget {
         scrollDirection: Axis.horizontal,
         itemBuilder: (BuildContext context, int index) {
           return Padding(
-            padding: const EdgeInsetsDirectional.only(end: 4),
+            padding: EdgeInsetsDirectional.only(end: 4),
             child: Image.asset(
               'reply/attachments/paris_${index + 1}.jpg',
               gaplessPlayback: true,
@@ -324,7 +324,7 @@ class _MailPreviewActionBar extends StatelessWidget {
         if (isDesktop) ...<Widget>[
           IconButton(
             icon: ImageIcon(
-              const AssetImage(
+              AssetImage(
                 '$_iconAssetLocation/twotone_star.png',
                 package: _assetsPackage,
               ),
@@ -334,7 +334,7 @@ class _MailPreviewActionBar extends StatelessWidget {
           ),
           IconButton(
             icon: ImageIcon(
-              const AssetImage(
+              AssetImage(
                 '$_iconAssetLocation/twotone_delete.png',
                 package: _assetsPackage,
               ),
@@ -349,7 +349,7 @@ class _MailPreviewActionBar extends StatelessWidget {
             ),
             onPressed: () {},
           ),
-          const SizedBox(width: 12),
+          SizedBox(width: 12),
         ],
         ProfileAvatar(avatar: avatar),
       ],

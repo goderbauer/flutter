@@ -10,8 +10,8 @@ import '../constants.dart';
 import '../layout/adaptive.dart';
 import 'home.dart';
 
-const double homePeekDesktop = 210.0;
-const double homePeekMobile = 60.0;
+double homePeekDesktop = 210.0;
+double homePeekMobile = 60.0;
 
 class SplashPageAnimation extends InheritedWidget {
   const SplashPageAnimation({
@@ -133,9 +133,9 @@ class _SplashPageState extends State<SplashPage>
 
             if (isDisplayDesktop(context)) {
               frontLayer = Padding(
-                padding: const EdgeInsets.only(top: 136),
+                padding: EdgeInsets.only(top: 136),
                 child: ClipRRect(
-                  borderRadius: const BorderRadius.vertical(
+                  borderRadius: BorderRadius.vertical(
                     top: Radius.circular(40),
                   ),
                   child: frontLayer,
@@ -186,7 +186,7 @@ class _SplashBackLayer extends StatelessWidget {
     if (isSplashCollapsed) {
       if (isDisplayDesktop(context)) {
         child = Padding(
-          padding: const EdgeInsets.only(top: 50),
+          padding: EdgeInsets.only(top: 50),
           child: Align(
             alignment: Alignment.topCenter,
             child: MouseRegion(
@@ -216,7 +216,7 @@ class _SplashBackLayer extends StatelessWidget {
     return ExcludeSemantics(
       child: Material(
         // This is the background color of the gifs.
-        color: const Color(0xFF030303),
+        color: Color(0xFF030303),
         child: Padding(
           padding: EdgeInsets.only(
             bottom: isDisplayDesktop(context)

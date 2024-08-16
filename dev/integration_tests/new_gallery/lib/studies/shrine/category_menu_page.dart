@@ -32,7 +32,7 @@ class CategoryMenuPage extends StatelessWidget {
 
   Widget _buttonText(String caption, TextStyle style) {
     return Padding(
-      padding: const EdgeInsets.symmetric(vertical: 16),
+      padding: EdgeInsets.symmetric(vertical: 16),
       child: Text(
         caption,
         style: style,
@@ -45,7 +45,7 @@ class CategoryMenuPage extends StatelessWidget {
     return Container(
       width: 56 * GalleryOptions.of(context).textScaleFactor(context),
       height: 1,
-      color: const Color(0xFF8F716D),
+      color: Color(0xFF8F716D),
     );
   }
 
@@ -116,12 +116,12 @@ class CategoryMenuPage extends StatelessWidget {
               width: desktopCategoryMenuPageWidth(context: context),
               child: Column(
                 children: <Widget>[
-                  const SizedBox(height: 64),
+                  SizedBox(height: 64),
                   Image.asset(
                     'packages/shrine_images/diamond.png',
                     excludeFromSemantics: true,
                   ),
-                  const SizedBox(height: 16),
+                  SizedBox(height: 16),
                   Semantics(
                     container: true,
                     child: Text(
@@ -129,7 +129,7 @@ class CategoryMenuPage extends StatelessWidget {
                       style: Theme.of(context).textTheme.headlineSmall,
                     ),
                   ),
-                  const Spacer(),
+                  Spacer(),
                   for (final Category category in categories)
                     _buildCategory(category, context),
                   _divider(context: context),
@@ -151,14 +151,14 @@ class CategoryMenuPage extends StatelessWidget {
                       ),
                     ),
                   ),
-                  const Spacer(),
+                  Spacer(),
                   IconButton(
-                    icon: const Icon(Icons.search),
+                    icon: Icon(Icons.search),
                     tooltip:
                         GalleryLocalizations.of(context)!.shrineTooltipSearch,
                     onPressed: () {},
                   ),
-                  const SizedBox(height: 72),
+                  SizedBox(height: 72),
                 ],
               ),
             ),
@@ -174,7 +174,7 @@ class CategoryMenuPage extends StatelessWidget {
             excluding: !menuPageIsVisible(context),
             child: Center(
               child: Container(
-                padding: const EdgeInsets.only(top: 40),
+                padding: EdgeInsets.only(top: 40),
                 color: shrinePink100,
                 child: ListView(
                   children: <Widget>[

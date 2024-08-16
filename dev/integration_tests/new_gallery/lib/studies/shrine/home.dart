@@ -12,7 +12,7 @@ import 'expanding_bottom_sheet.dart';
 import 'model/app_state_model.dart';
 import 'supplemental/asymmetric_view.dart';
 
-const String _ordinalSortKeyName = 'home';
+String _ordinalSortKeyName = 'home';
 
 class ProductPage extends StatelessWidget {
   const ProductPage({super.key});
@@ -54,7 +54,7 @@ class HomePage extends StatelessWidget {
         children: <Widget>[
           Semantics(
             container: true,
-            sortKey: const OrdinalSortKey(1, name: _ordinalSortKeyName),
+            sortKey: OrdinalSortKey(1, name: _ordinalSortKeyName),
             child: backdrop,
           ),
           ExcludeSemantics(child: scrim),
@@ -64,7 +64,7 @@ class HomePage extends StatelessWidget {
                 : AlignmentDirectional.bottomEnd,
             child: Semantics(
               container: true,
-              sortKey: const OrdinalSortKey(0, name: _ordinalSortKeyName),
+              sortKey: OrdinalSortKey(0, name: _ordinalSortKeyName),
               child: expandingBottomSheet,
             ),
           ),

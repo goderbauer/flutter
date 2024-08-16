@@ -21,7 +21,7 @@ class BannerDemo extends StatefulWidget {
 }
 
 class _BannerDemoState extends State<BannerDemo> with RestorationMixin {
-  static const int _itemCount = 20;
+  static final int _itemCount = 20;
 
   @override
   String get restorationId => 'banner_demo';
@@ -106,7 +106,7 @@ class _BannerDemoState extends State<BannerDemo> with RestorationMixin {
                 value: BannerDemoAction.reset,
                 child: Text(localizations.bannerDemoResetText),
               ),
-              const PopupMenuDivider(),
+              PopupMenuDivider(),
               CheckedPopupMenuItem<BannerDemoAction>(
                 value: BannerDemoAction.showMultipleActions,
                 checked: _showMultipleActions.value,

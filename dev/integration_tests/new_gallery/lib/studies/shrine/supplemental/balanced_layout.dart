@@ -10,16 +10,16 @@ import 'layout_cache.dart';
 
 /// A placeholder id for an empty element. See [_iterateUntilBalanced]
 /// for more information.
-const int _emptyElement = -1;
+int _emptyElement = -1;
 
 /// To avoid infinite loops, improvements to the layout are only performed
 /// when a column's height changes by more than
 /// [_deviationImprovementThreshold] pixels.
-const int _deviationImprovementThreshold = 10;
+int _deviationImprovementThreshold = 10;
 
 /// Height of a product image, paired with the product's id.
 class _TaggedHeightData {
-  const _TaggedHeightData({
+  _TaggedHeightData({
     required this.index,
     required this.height,
   });
@@ -36,7 +36,7 @@ class _TaggedHeightData {
 /// Used for iteration.
 List<_TaggedHeightData> _toListAndAddEmpty(Set<_TaggedHeightData> set) {
   final List<_TaggedHeightData> result = List<_TaggedHeightData>.from(set);
-  result.add(const _TaggedHeightData(index: _emptyElement, height: 0));
+  result.add(_TaggedHeightData(index: _emptyElement, height: 0));
   return result;
 }
 

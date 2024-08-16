@@ -59,7 +59,7 @@ class FinancialEntityView extends StatelessWidget {
               segments: segments,
             ),
           ),
-          const SizedBox(height: 24),
+          SizedBox(height: 24),
           Container(
             height: 1,
             constraints: BoxConstraints(maxWidth: maxWidth),
@@ -111,7 +111,7 @@ class FinancialEntityCategoryView extends StatelessWidget {
       excludeSemantics: true,
       // TODO(x): State restoration of FinancialEntityCategoryDetailsPage on mobile is blocked because OpenContainer does not support restorablePush, https://github.com/flutter/gallery/issues/570.
       child: OpenContainer(
-        transitionDuration: const Duration(milliseconds: 350),
+        transitionDuration: Duration(milliseconds: 350),
         openBuilder: (BuildContext context, void Function() openContainer) =>
             FinancialEntityCategoryDetailsPage(),
         openColor: RallyColors.primaryBackground,
@@ -125,13 +125,13 @@ class FinancialEntityCategoryView extends StatelessWidget {
               children: <Widget>[
                 Container(
                   padding:
-                      const EdgeInsets.symmetric(vertical: 16, horizontal: 8),
+                      EdgeInsets.symmetric(vertical: 16, horizontal: 8),
                   child: Row(
                     children: <Widget>[
                       Container(
                         alignment: Alignment.center,
                         height: 32 + 60 * (cappedTextScale(context) - 1),
-                        padding: const EdgeInsets.symmetric(horizontal: 12),
+                        padding: EdgeInsets.symmetric(horizontal: 12),
                         child: VerticalFractionBar(
                           color: indicatorColor,
                           fraction: indicatorFraction,
@@ -169,14 +169,14 @@ class FinancialEntityCategoryView extends StatelessWidget {
                         ),
                       ),
                       Container(
-                        constraints: const BoxConstraints(minWidth: 32),
-                        padding: const EdgeInsetsDirectional.only(start: 12),
+                        constraints: BoxConstraints(minWidth: 32),
+                        padding: EdgeInsetsDirectional.only(start: 12),
                         child: suffix,
                       ),
                     ],
                   ),
                 ),
-                const Divider(
+                Divider(
                   height: 1,
                   indent: 16,
                   endIndent: 16,
@@ -193,7 +193,7 @@ class FinancialEntityCategoryView extends StatelessWidget {
 
 /// Data model for [FinancialEntityCategoryView].
 class FinancialEntityCategoryModel {
-  const FinancialEntityCategoryModel(
+  FinancialEntityCategoryModel(
     this.indicatorColor,
     this.indicatorFraction,
     this.title,
@@ -218,7 +218,7 @@ FinancialEntityCategoryView buildFinancialEntityFromAccountData(
   final String amount = usdWithSignFormat(context).format(model.primaryAmount);
   final String shortAccountNumber = model.accountNumber.substring(6);
   return FinancialEntityCategoryView(
-    suffix: const Icon(Icons.chevron_right, color: Colors.grey),
+    suffix: Icon(Icons.chevron_right, color: Colors.grey),
     title: model.name,
     subtitle: '• • • • • • $shortAccountNumber',
     semanticsLabel: GalleryLocalizations.of(context)!.rallyAccountAmount(
@@ -239,7 +239,7 @@ FinancialEntityCategoryView buildFinancialEntityFromBillData(
 ) {
   final String amount = usdWithSignFormat(context).format(model.primaryAmount);
   return FinancialEntityCategoryView(
-    suffix: const Icon(Icons.chevron_right, color: Colors.grey),
+    suffix: Icon(Icons.chevron_right, color: Colors.grey),
     title: model.name,
     subtitle: model.dueDate,
     semanticsLabel: GalleryLocalizations.of(context)!.rallyBillAmount(
@@ -345,7 +345,7 @@ class FinancialEntityCategoryDetailsPage extends StatelessWidget {
             ),
             Expanded(
               child: Padding(
-                padding: isDesktop ? const EdgeInsets.all(40) : EdgeInsets.zero,
+                padding: isDesktop ? EdgeInsets.all(40) : EdgeInsets.zero,
                 child: ListView(
                   shrinkWrap: true,
                   children: <Widget>[
@@ -383,13 +383,13 @@ class _DetailedEventCard extends StatelessWidget {
     return TextButton(
       style: TextButton.styleFrom(
         foregroundColor: Colors.black,
-        padding: const EdgeInsets.symmetric(horizontal: 16),
+        padding: EdgeInsets.symmetric(horizontal: 16),
       ),
       onPressed: () {},
       child: Column(
         children: <Widget>[
           Container(
-            padding: const EdgeInsets.symmetric(vertical: 16),
+            padding: EdgeInsets.symmetric(vertical: 16),
             width: double.infinity,
             child: isDesktop
                 ? Row(

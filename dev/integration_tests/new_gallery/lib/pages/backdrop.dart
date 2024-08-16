@@ -14,9 +14,9 @@ import 'home.dart';
 import 'settings.dart';
 import 'settings_icon/icon.dart' as settings_icon;
 
-const double _settingsButtonWidth = 64;
-const double _settingsButtonHeightDesktop = 56;
-const double _settingsButtonHeightMobile = 40;
+double _settingsButtonWidth = 64;
+double _settingsButtonHeightDesktop = 56;
+double _settingsButtonHeightMobile = 40;
 
 class Backdrop extends StatefulWidget {
   const Backdrop({
@@ -52,7 +52,7 @@ class _BackdropState extends State<Backdrop> with TickerProviderStateMixin {
             : settingsPanelDesktopAnimationDuration);
     _iconController = AnimationController(
       vsync: this,
-      duration: const Duration(milliseconds: 500),
+      duration: Duration(milliseconds: 500),
     );
     _settingsPageFocusNode = FocusNode();
     _isSettingsOpenNotifier = ValueNotifier<bool>(false);
@@ -60,7 +60,7 @@ class _BackdropState extends State<Backdrop> with TickerProviderStateMixin {
         SettingsPage(
           animationController: _settingsPanelController,
         );
-    _homePage = widget.homePage ?? const HomePage();
+    _homePage = widget.homePage ?? HomePage();
   }
 
   @override
@@ -92,7 +92,7 @@ class _BackdropState extends State<Backdrop> with TickerProviderStateMixin {
     ).animate(
       CurvedAnimation(
         parent: _settingsPanelController,
-        curve: const Interval(
+        curve: Interval(
           0.0,
           0.4,
           curve: Curves.ease,
@@ -114,7 +114,7 @@ class _BackdropState extends State<Backdrop> with TickerProviderStateMixin {
     ).animate(
       CurvedAnimation(
         parent: _settingsPanelController,
-        curve: const Interval(
+        curve: Interval(
           0.0,
           0.4,
           curve: Curves.ease,
@@ -176,7 +176,7 @@ class _BackdropState extends State<Backdrop> with TickerProviderStateMixin {
             ),
           ],
           if (isDesktop) ...<Widget>[
-            Semantics(sortKey: const OrdinalSortKey(2), child: homePage),
+            Semantics(sortKey: OrdinalSortKey(2), child: homePage),
             ValueListenableBuilder<bool>(
               valueListenable: _isSettingsOpenNotifier,
               builder: (BuildContext context, bool isSettingsOpen, Widget? child) {
@@ -184,7 +184,7 @@ class _BackdropState extends State<Backdrop> with TickerProviderStateMixin {
                   return ExcludeSemantics(
                     child: Listener(
                       onPointerDown: (_) => _toggleSettings(),
-                      child: const ModalBarrier(dismissible: false),
+                      child: ModalBarrier(dismissible: false),
                     ),
                   );
                 } else {
@@ -193,7 +193,7 @@ class _BackdropState extends State<Backdrop> with TickerProviderStateMixin {
               },
             ),
             Semantics(
-              sortKey: const OrdinalSortKey(3),
+              sortKey: OrdinalSortKey(3),
               child: ScaleTransition(
                 alignment: Directionality.of(context) == TextDirection.ltr
                     ? Alignment.topRight
@@ -210,7 +210,7 @@ class _BackdropState extends State<Backdrop> with TickerProviderStateMixin {
                     borderRadius: BorderRadius.circular(40),
                     color: Theme.of(context).colorScheme.secondaryContainer,
                     child: Container(
-                      constraints: const BoxConstraints(
+                      constraints: BoxConstraints(
                         maxHeight: 560,
                         maxWidth: desktopSettingsWidth,
                         minWidth: desktopSettingsWidth,
@@ -265,7 +265,7 @@ class _SettingsIcon extends AnimatedWidget {
     return Align(
       alignment: AlignmentDirectional.topEnd,
       child: Semantics(
-        sortKey: const OrdinalSortKey(1),
+        sortKey: OrdinalSortKey(1),
         button: true,
         enabled: true,
         label: _settingsSemanticLabel(isSettingsOpenNotifier.value, context),
@@ -275,7 +275,7 @@ class _SettingsIcon extends AnimatedWidget {
               ? _settingsButtonHeightDesktop
               : _settingsButtonHeightMobile + safeAreaTopPadding,
           child: Material(
-            borderRadius: const BorderRadiusDirectional.only(
+            borderRadius: BorderRadiusDirectional.only(
               bottomStart: Radius.circular(10),
             ),
             color:
@@ -292,7 +292,7 @@ class _SettingsIcon extends AnimatedWidget {
                 );
               },
               child: Padding(
-                padding: const EdgeInsetsDirectional.only(start: 3, end: 18),
+                padding: EdgeInsetsDirectional.only(start: 3, end: 18),
                 child: settings_icon.SettingsIcon(animationController.value),
               ),
             ),

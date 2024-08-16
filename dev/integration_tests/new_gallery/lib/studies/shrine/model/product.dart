@@ -7,7 +7,7 @@ import 'package:flutter/material.dart';
 import '../../../gallery_localizations.dart';
 
 class Category {
-  const Category({
+  Category({
     required this.name,
   });
 
@@ -42,7 +42,7 @@ List<Category> categories = <Category>[
 ];
 
 class Product {
-  const Product({
+  Product({
     required this.category,
     required this.id,
     required this.isFeatured,

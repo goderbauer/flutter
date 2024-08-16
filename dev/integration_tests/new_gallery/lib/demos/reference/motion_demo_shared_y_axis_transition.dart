@@ -26,7 +26,7 @@ class _SharedYAxisTransitionDemoState extends State<SharedYAxisTransitionDemo>
   void initState() {
     super.initState();
     _controller = AnimationController(
-      duration: const Duration(milliseconds: 300),
+      duration: Duration(milliseconds: 300),
       vsync: this,
     );
   }
@@ -47,7 +47,7 @@ class _SharedYAxisTransitionDemoState extends State<SharedYAxisTransitionDemo>
     ],
   );
 
-  static const List<String> _alphabet = <String>[
+  static final List<String> _alphabet = <String>[
     'A',
     'B',
     'C',
@@ -88,18 +88,18 @@ class _SharedYAxisTransitionDemoState extends State<SharedYAxisTransitionDemo>
       ),
       body: Column(
         children: <Widget>[
-          const SizedBox(height: 5),
+          SizedBox(height: 5),
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: <Widget>[
               Padding(
-                padding: const EdgeInsets.only(left: 15),
+                padding: EdgeInsets.only(left: 15),
                 child: Text(localizations.demoSharedYAxisAlbumCount),
               ),
               Padding(
-                padding: const EdgeInsets.only(right: 7),
+                padding: EdgeInsets.only(right: 7),
                 child: InkWell(
-                  customBorder: const RoundedRectangleBorder(
+                  customBorder: RoundedRectangleBorder(
                     borderRadius: BorderRadius.all(
                       Radius.circular(4),
                     ),
@@ -123,7 +123,7 @@ class _SharedYAxisTransitionDemoState extends State<SharedYAxisTransitionDemo>
                       RotationTransition(
                         turns: Tween<double>(begin: 0.0, end: 1.0)
                             .animate(_controller.view),
-                        child: const Icon(Icons.arrow_drop_down),
+                        child: Icon(Icons.arrow_drop_down),
                       ),
                     ],
                   ),
@@ -131,7 +131,7 @@ class _SharedYAxisTransitionDemoState extends State<SharedYAxisTransitionDemo>
               ),
             ],
           ),
-          const SizedBox(height: 10),
+          SizedBox(height: 10),
           Expanded(
             child: PageTransitionSwitcher(
               reverse: _isAlphabetical,
@@ -167,14 +167,14 @@ class _AlbumTile extends StatelessWidget {
           leading: Container(
             height: 60,
             width: 60,
-            decoration: const BoxDecoration(
+            decoration: BoxDecoration(
               borderRadius: BorderRadius.all(
                 Radius.circular(4),
               ),
               color: Colors.grey,
             ),
             child: Padding(
-              padding: const EdgeInsets.all(6),
+              padding: EdgeInsets.all(6),
               child: Image.asset(
                 'placeholders/placeholder_image.png',
                 package: 'flutter_gallery_assets',
@@ -192,7 +192,7 @@ class _AlbumTile extends StatelessWidget {
             '${localizations.demoSharedYAxisAlbumTileDurationUnit}',
           ),
         ),
-        const Divider(height: 20, thickness: 1),
+        Divider(height: 20, thickness: 1),
       ],
     );
   }

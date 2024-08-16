@@ -80,7 +80,7 @@ class _CupertinoPickerDemoState extends State<CupertinoPickerDemo> {
             Text(GalleryLocalizations.of(context)!.demoCupertinoPickerDate),
             Text(
               DateFormat.yMMMMd().format(date),
-              style: const TextStyle(color: CupertinoColors.inactiveGray),
+              style: TextStyle(color: CupertinoColors.inactiveGray),
             ),
           ],
         ),
@@ -113,7 +113,7 @@ class _CupertinoPickerDemoState extends State<CupertinoPickerDemo> {
             Text(GalleryLocalizations.of(context)!.demoCupertinoPickerTime),
             Text(
               DateFormat.jm().format(time),
-              style: const TextStyle(color: CupertinoColors.inactiveGray),
+              style: TextStyle(color: CupertinoColors.inactiveGray),
             ),
           ],
         ),
@@ -146,7 +146,7 @@ class _CupertinoPickerDemoState extends State<CupertinoPickerDemo> {
             Flexible(
               child: Text(
                 DateFormat.yMMMd().add_jm().format(dateTime),
-                style: const TextStyle(color: CupertinoColors.inactiveGray),
+                style: TextStyle(color: CupertinoColors.inactiveGray),
               ),
             ),
           ],
@@ -181,7 +181,7 @@ class _CupertinoPickerDemoState extends State<CupertinoPickerDemo> {
               '${timer.inHours}:'
               '${(timer.inMinutes % 60).toString().padLeft(2, '0')}:'
               '${(timer.inSeconds % 60).toString().padLeft(2, '0')}',
-              style: const TextStyle(color: CupertinoColors.inactiveGray),
+              style: TextStyle(color: CupertinoColors.inactiveGray),
             ),
           ],
         ),
@@ -228,7 +228,7 @@ class _CupertinoPickerDemoState extends State<CupertinoPickerDemo> {
             Text(GalleryLocalizations.of(context)!.demoCupertinoPicker),
             Text(
               daysOfWeek[_selectedWeekday],
-              style: const TextStyle(color: CupertinoColors.inactiveGray),
+              style: TextStyle(color: CupertinoColors.inactiveGray),
             ),
           ],
         ),
@@ -248,7 +248,7 @@ class _CupertinoPickerDemoState extends State<CupertinoPickerDemo> {
         style: CupertinoTheme.of(context).textTheme.textStyle,
         child: ListView(
           children: <Widget>[
-            const SizedBox(height: 32),
+            SizedBox(height: 32),
             _buildDatePicker(context),
             _buildTimePicker(context),
             _buildDateAndTimePicker(context),
@@ -270,7 +270,7 @@ class _BottomPicker extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       height: 216,
-      padding: const EdgeInsets.only(top: 6),
+      padding: EdgeInsets.only(top: 6),
       margin: EdgeInsets.only(
         bottom: MediaQuery.of(context).viewInsets.bottom,
       ),
@@ -301,7 +301,7 @@ class _Menu extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      decoration: const BoxDecoration(
+      decoration: BoxDecoration(
         border: Border(
           top: BorderSide(color: CupertinoColors.inactiveGray, width: 0),
           bottom: BorderSide(color: CupertinoColors.inactiveGray, width: 0),
@@ -309,7 +309,7 @@ class _Menu extends StatelessWidget {
       ),
       height: 44,
       child: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 16),
+        padding: EdgeInsets.symmetric(horizontal: 16),
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: children,

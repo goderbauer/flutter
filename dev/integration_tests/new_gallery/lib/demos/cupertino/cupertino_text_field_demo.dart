@@ -21,10 +21,10 @@ class CupertinoTextFieldDemo extends StatelessWidget {
       child: SafeArea(
         child: ListView(
           restorationId: 'text_field_demo_list_view',
-          padding: const EdgeInsets.all(16),
+          padding: EdgeInsets.all(16),
           children: <Widget>[
             Padding(
-              padding: const EdgeInsets.symmetric(vertical: 8),
+              padding: EdgeInsets.symmetric(vertical: 8),
               child: CupertinoTextField(
                 textInputAction: TextInputAction.next,
                 restorationId: 'email_address_text_field',
@@ -35,7 +35,7 @@ class CupertinoTextFieldDemo extends StatelessWidget {
               ),
             ),
             Padding(
-              padding: const EdgeInsets.symmetric(vertical: 8),
+              padding: EdgeInsets.symmetric(vertical: 8),
               child: CupertinoTextField(
                 textInputAction: TextInputAction.next,
                 restorationId: 'login_password_text_field',
@@ -47,7 +47,7 @@ class CupertinoTextFieldDemo extends StatelessWidget {
             ),
             // Disabled text field
             Padding(
-              padding: const EdgeInsets.symmetric(vertical: 8),
+              padding: EdgeInsets.symmetric(vertical: 8),
               child: CupertinoTextField(
                 enabled: false,
                 textInputAction: TextInputAction.next,
@@ -61,14 +61,14 @@ class CupertinoTextFieldDemo extends StatelessWidget {
             CupertinoTextField(
               textInputAction: TextInputAction.done,
               restorationId: 'pin_number_text_field',
-              prefix: const Icon(
+              prefix: Icon(
                 CupertinoIcons.padlock_solid,
                 size: 28,
               ),
-              padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 12),
+              padding: EdgeInsets.symmetric(horizontal: 6, vertical: 12),
               clearButtonMode: OverlayVisibilityMode.editing,
               keyboardType: TextInputType.number,
-              decoration: const BoxDecoration(
+              decoration: BoxDecoration(
                 border: Border(
                   bottom: BorderSide(
                     width: 0,

@@ -8,15 +8,15 @@ import 'package:gallery/main.dart';
 
 void main() {
   testWidgets('Home page hides settings semantics when closed', (WidgetTester tester) async {
-    await tester.pumpWidget(const GalleryApp());
+    await tester.pumpWidget(GalleryApp());
 
-    await tester.pump(const Duration(seconds: 1));
+    await tester.pump(Duration(seconds: 1));
 
     expect(find.bySemanticsLabel('Settings'), findsOneWidget);
     expect(find.bySemanticsLabel('Close settings'), findsNothing);
 
     await tester.tap(find.bySemanticsLabel('Settings'));
-    await tester.pump(const Duration(seconds: 1));
+    await tester.pump(Duration(seconds: 1));
 
     // The test no longer finds Setting and Close settings since the semantics
     // are excluded when settings mode is activated.
@@ -25,11 +25,11 @@ void main() {
   });
 
   testWidgets('Home page list view is the primary list view', (WidgetTester tester) async {
-    await tester.pumpWidget(const GalleryApp());
+    await tester.pumpWidget(GalleryApp());
     await tester.pumpAndSettle();
 
     final ListView listview =
-        tester.widget(find.byKey(const ValueKey<String>('HomeListView')));
+        tester.widget(find.byKey(ValueKey<String>('HomeListView')));
 
     expect(listview.primary, true);
   });

@@ -56,15 +56,15 @@ class _TextButtonDemo extends StatelessWidget {
               onPressed: () {},
               child: Text(localizations.buttonText),
             ),
-            const SizedBox(width: 12),
+            SizedBox(width: 12),
             TextButton.icon(
-              icon: const Icon(Icons.add, size: 18),
+              icon: Icon(Icons.add, size: 18),
               label: Text(localizations.buttonText),
               onPressed: () {},
             ),
           ],
         ),
-        const SizedBox(height: 12),
+        SizedBox(height: 12),
         // Disabled buttons
         Row(
           mainAxisAlignment: MainAxisAlignment.center,
@@ -73,9 +73,9 @@ class _TextButtonDemo extends StatelessWidget {
               onPressed: null,
               child: Text(localizations.buttonText),
             ),
-            const SizedBox(width: 12),
+            SizedBox(width: 12),
             TextButton.icon(
-              icon: const Icon(Icons.add, size: 18),
+              icon: Icon(Icons.add, size: 18),
               label: Text(localizations.buttonText),
               onPressed: null,
             ),
@@ -104,15 +104,15 @@ class _ElevatedButtonDemo extends StatelessWidget {
               onPressed: () {},
               child: Text(localizations.buttonText),
             ),
-            const SizedBox(width: 12),
+            SizedBox(width: 12),
             ElevatedButton.icon(
-              icon: const Icon(Icons.add, size: 18),
+              icon: Icon(Icons.add, size: 18),
               label: Text(localizations.buttonText),
               onPressed: () {},
             ),
           ],
         ),
-        const SizedBox(height: 12),
+        SizedBox(height: 12),
         // Disabled buttons
         Row(
           mainAxisAlignment: MainAxisAlignment.center,
@@ -121,9 +121,9 @@ class _ElevatedButtonDemo extends StatelessWidget {
               onPressed: null,
               child: Text(localizations.buttonText),
             ),
-            const SizedBox(width: 12),
+            SizedBox(width: 12),
             ElevatedButton.icon(
-              icon: const Icon(Icons.add, size: 18),
+              icon: Icon(Icons.add, size: 18),
               label: Text(localizations.buttonText),
               onPressed: null,
             ),
@@ -152,15 +152,15 @@ class _OutlinedButtonDemo extends StatelessWidget {
               onPressed: () {},
               child: Text(localizations.buttonText),
             ),
-            const SizedBox(width: 12),
+            SizedBox(width: 12),
             OutlinedButton.icon(
-              icon: const Icon(Icons.add, size: 18),
+              icon: Icon(Icons.add, size: 18),
               label: Text(localizations.buttonText),
               onPressed: () {},
             ),
           ],
         ),
-        const SizedBox(height: 12),
+        SizedBox(height: 12),
         // Disabled buttons
         Row(
           mainAxisAlignment: MainAxisAlignment.center,
@@ -169,9 +169,9 @@ class _OutlinedButtonDemo extends StatelessWidget {
               onPressed: null,
               child: Text(localizations.buttonText),
             ),
-            const SizedBox(width: 12),
+            SizedBox(width: 12),
             OutlinedButton.icon(
-              icon: const Icon(Icons.add, size: 18),
+              icon: Icon(Icons.add, size: 18),
               label: Text(localizations.buttonText),
               onPressed: null,
             ),
@@ -230,17 +230,17 @@ class _ToggleButtonsDemoState extends State<_ToggleButtonsDemo>
               });
             },
             isSelected: isSelected.map((RestorableBool element) => element.value).toList(),
-            children: const <Widget>[
+            children: <Widget>[
               Icon(Icons.format_bold),
               Icon(Icons.format_italic),
               Icon(Icons.format_underline),
             ],
           ),
-          const SizedBox(height: 12),
+          SizedBox(height: 12),
           // Disabled toggle buttons
           ToggleButtons(
             isSelected: isSelected.map((RestorableBool element) => element.value).toList(),
-            children: const <Widget>[
+            children: <Widget>[
               Icon(Icons.format_bold),
               Icon(Icons.format_italic),
               Icon(Icons.format_underline),
@@ -267,11 +267,11 @@ class _FloatingActionButtonDemo extends StatelessWidget {
           FloatingActionButton(
             onPressed: () {},
             tooltip: localizations.buttonTextCreate,
-            child: const Icon(Icons.add),
+            child: Icon(Icons.add),
           ),
-          const SizedBox(width: 12),
+          SizedBox(width: 12),
           FloatingActionButton.extended(
-            icon: const Icon(Icons.add),
+            icon: Icon(Icons.add),
             label: Text(localizations.buttonTextCreate),
             onPressed: () {},
           ),

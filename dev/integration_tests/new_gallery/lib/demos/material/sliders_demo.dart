@@ -71,7 +71,7 @@ class _SlidersState extends State<_Sliders> with RestorationMixin {
   Widget build(BuildContext context) {
     final GalleryLocalizations localizations = GalleryLocalizations.of(context)!;
     return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 40),
+      padding: EdgeInsets.symmetric(horizontal: 40),
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: <Widget>[
@@ -121,7 +121,7 @@ class _SlidersState extends State<_Sliders> with RestorationMixin {
                   .demoSlidersContinuousWithEditableNumericalValue),
             ],
           ),
-          const SizedBox(height: 80),
+          SizedBox(height: 80),
           Column(
             mainAxisSize: MainAxisSize.min,
             children: <Widget>[
@@ -200,7 +200,7 @@ class _RangeSlidersState extends State<_RangeSliders> with RestorationMixin {
     );
 
     return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 40),
+      padding: EdgeInsets.symmetric(horizontal: 40),
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: <Widget>[
@@ -226,7 +226,7 @@ class _RangeSlidersState extends State<_RangeSliders> with RestorationMixin {
               Text(GalleryLocalizations.of(context)!.demoSlidersContinuous),
             ],
           ),
-          const SizedBox(height: 80),
+          SizedBox(height: 80),
           Column(
             mainAxisSize: MainAxisSize.min,
             children: <Widget>[
@@ -302,16 +302,16 @@ Path _leftTriangle(double size, Offset thumbCenter) =>
     _rightTriangle(size, thumbCenter, invert: true);
 
 class _CustomRangeThumbShape extends RangeSliderThumbShape {
-  const _CustomRangeThumbShape();
+  _CustomRangeThumbShape();
 
-  static const double _thumbSize = 4;
-  static const double _disabledThumbSize = 3;
+  static final double _thumbSize = 4;
+  static final double _disabledThumbSize = 3;
 
   @override
   Size getPreferredSize(bool isEnabled, bool isDiscrete) {
     return isEnabled
-        ? const Size.fromRadius(_thumbSize)
-        : const Size.fromRadius(_disabledThumbSize);
+        ? Size.fromRadius(_thumbSize)
+        : Size.fromRadius(_disabledThumbSize);
   }
 
   static final Animatable<double> sizeTween = Tween<double>(
@@ -353,16 +353,16 @@ class _CustomRangeThumbShape extends RangeSliderThumbShape {
 }
 
 class _CustomThumbShape extends SliderComponentShape {
-  const _CustomThumbShape();
+  _CustomThumbShape();
 
-  static const double _thumbSize = 4;
-  static const double _disabledThumbSize = 3;
+  static final double _thumbSize = 4;
+  static final double _disabledThumbSize = 3;
 
   @override
   Size getPreferredSize(bool isEnabled, bool isDiscrete) {
     return isEnabled
-        ? const Size.fromRadius(_thumbSize)
-        : const Size.fromRadius(_disabledThumbSize);
+        ? Size.fromRadius(_thumbSize)
+        : Size.fromRadius(_disabledThumbSize);
   }
 
   static final Animatable<double> sizeTween = Tween<double>(
@@ -400,11 +400,11 @@ class _CustomThumbShape extends SliderComponentShape {
 }
 
 class _CustomValueIndicatorShape extends SliderComponentShape {
-  const _CustomValueIndicatorShape();
+  _CustomValueIndicatorShape();
 
-  static const double _indicatorSize = 4;
-  static const double _disabledIndicatorSize = 3;
-  static const double _slideUpHeight = 40;
+  static final double _indicatorSize = 4;
+  static final double _disabledIndicatorSize = 3;
+  static final double _slideUpHeight = 40;
 
   @override
   Size getPreferredSize(bool isEnabled, bool isDiscrete) {
@@ -506,7 +506,7 @@ class _CustomSlidersState extends State<_CustomSliders> with RestorationMixin {
     final ThemeData theme = Theme.of(context);
     final GalleryLocalizations localizations = GalleryLocalizations.of(context)!;
     return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 40),
+      padding: EdgeInsets.symmetric(horizontal: 40),
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: <Widget>[
@@ -526,8 +526,8 @@ class _CustomSlidersState extends State<_CustomSliders> with RestorationMixin {
                   overlayColor: theme.colorScheme.onSurface.withOpacity(0.12),
                   thumbColor: Colors.deepPurple,
                   valueIndicatorColor: Colors.deepPurpleAccent,
-                  thumbShape: const _CustomThumbShape(),
-                  valueIndicatorShape: const _CustomValueIndicatorShape(),
+                  thumbShape: _CustomThumbShape(),
+                  valueIndicatorShape: _CustomValueIndicatorShape(),
                   valueIndicatorTextStyle: theme.textTheme.bodyLarge!
                       .copyWith(color: theme.colorScheme.onSurface),
                 ),
@@ -548,12 +548,12 @@ class _CustomSlidersState extends State<_CustomSliders> with RestorationMixin {
               Text(localizations.demoSlidersDiscreteSliderWithCustomTheme),
             ],
           ),
-          const SizedBox(height: 80),
+          SizedBox(height: 80),
           Column(
             mainAxisSize: MainAxisSize.min,
             children: <Widget>[
               SliderTheme(
-                data: const SliderThemeData(
+                data: SliderThemeData(
                   trackHeight: 2,
                   activeTrackColor: Colors.deepPurple,
                   inactiveTrackColor: Colors.black26,

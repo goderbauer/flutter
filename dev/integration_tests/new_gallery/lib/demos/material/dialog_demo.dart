@@ -286,7 +286,7 @@ class _DialogDemoItem extends StatelessWidget {
           Icon(icon, size: 36, color: color),
           Flexible(
             child: Padding(
-              padding: const EdgeInsetsDirectional.only(start: 16),
+              padding: EdgeInsetsDirectional.only(start: 16),
               child: Text(text),
             ),
           ),

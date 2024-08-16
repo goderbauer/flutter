@@ -21,7 +21,7 @@ class CupertinoScrollbarDemo extends StatelessWidget {
       child: CupertinoScrollbar(
         thickness: 6.0,
         thicknessWhileDragging: 10.0,
-        radius: const Radius.circular(34.0),
+        radius: Radius.circular(34.0),
         radiusWhileDragging: Radius.zero,
         child: ListView.builder(
           itemCount: 120,

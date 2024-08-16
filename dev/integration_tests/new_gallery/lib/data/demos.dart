@@ -32,8 +32,8 @@ import '../gallery_localizations.dart';
 import '../gallery_localizations_en.dart';
 import 'icons.dart';
 
-const String _docsBaseUrl = 'https://api.flutter.dev/flutter';
-const String _docsAnimationsUrl =
+String _docsBaseUrl = 'https://api.flutter.dev/flutter';
+String _docsAnimationsUrl =
     'https://pub.dev/documentation/animations/latest/animations';
 
 enum GalleryDemoCategory {
@@ -57,7 +57,7 @@ enum GalleryDemoCategory {
 }
 
 class GalleryDemo {
-  const GalleryDemo({
+  GalleryDemo({
     required this.title,
     required this.category,
     required this.subtitle,
@@ -83,11 +83,11 @@ class GalleryDemo {
 }
 
 TextSpan noOpCodeDisplayer(BuildContext context) {
-  return const TextSpan(text: '');
+  return TextSpan(text: '');
 }
 
 class GalleryDemoConfiguration {
-  const GalleryDemoConfiguration({
+  GalleryDemoConfiguration({
     required this.title,
     required this.description,
     required this.documentationUrl,
@@ -1176,35 +1176,35 @@ class Demos {
             description: localizations.demoSharedAxisDescription,
             documentationUrl:
                 '$_docsAnimationsUrl/SharedAxisTransition-class.html',
-            buildRoute: (_) => const SharedXAxisTransitionDemo(),
+            buildRoute: (_) => SharedXAxisTransitionDemo(),
                       ),
           GalleryDemoConfiguration(
             title: localizations.demoSharedYAxisTitle,
             description: localizations.demoSharedAxisDescription,
             documentationUrl:
                 '$_docsAnimationsUrl/SharedAxisTransition-class.html',
-            buildRoute: (_) => const SharedYAxisTransitionDemo(),
+            buildRoute: (_) => SharedYAxisTransitionDemo(),
                       ),
           GalleryDemoConfiguration(
             title: localizations.demoSharedZAxisTitle,
             description: localizations.demoSharedAxisDescription,
             documentationUrl:
                 '$_docsAnimationsUrl/SharedAxisTransition-class.html',
-            buildRoute: (_) => const SharedZAxisTransitionDemo(),
+            buildRoute: (_) => SharedZAxisTransitionDemo(),
                       ),
           GalleryDemoConfiguration(
             title: localizations.demoFadeThroughTitle,
             description: localizations.demoFadeThroughDescription,
             documentationUrl:
                 '$_docsAnimationsUrl/FadeThroughTransition-class.html',
-            buildRoute: (_) => const FadeThroughTransitionDemo(),
+            buildRoute: (_) => FadeThroughTransitionDemo(),
                       ),
           GalleryDemoConfiguration(
             title: localizations.demoFadeScaleTitle,
             description: localizations.demoFadeScaleDescription,
             documentationUrl:
                 '$_docsAnimationsUrl/FadeScaleTransition-class.html',
-            buildRoute: (_) => const FadeScaleTransitionDemo(),
+            buildRoute: (_) => FadeScaleTransitionDemo(),
                       ),
         ],
         category: GalleryDemoCategory.other,
