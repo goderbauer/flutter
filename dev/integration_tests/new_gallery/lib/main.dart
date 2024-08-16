@@ -56,6 +56,13 @@ class GalleryApp extends StatelessWidget {
             themeMode: options.themeMode,
             theme: GalleryThemeData.lightThemeData.copyWith(
               platform: options.platform,
+              pageTransitionsTheme: const PageTransitionsTheme(
+                builders: <TargetPlatform, PageTransitionsBuilder>{
+                  TargetPlatform.android: ZoomPageTransitionsBuilder(
+                    allowSnapshotting: false,
+                  ),
+                },
+              ),
             ),
             darkTheme: GalleryThemeData.darkThemeData.copyWith(
               platform: options.platform,
