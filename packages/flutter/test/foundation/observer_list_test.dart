@@ -6,7 +6,7 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter_test/flutter_test.dart';
 
 void main() {
-  test('ObserverList', () async {
+  test('ObserverList', () {
     final ObserverList<int> list = ObserverList<int>();
     for (int i = 0; i < 10; ++i) {
       list.add(i);
@@ -23,7 +23,7 @@ void main() {
       }
     }
   });
-  test('HashedObserverList', () async {
+  test('HashedObserverList', () {
     final HashedObserverList<int> list = HashedObserverList<int>();
     for (int i = 0; i < 10; ++i) {
       list.add(i);

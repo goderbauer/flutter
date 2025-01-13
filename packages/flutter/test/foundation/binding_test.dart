@@ -28,7 +28,7 @@ class FooLibraryBinding extends BindingBase with FooBinding {
 }
 
 void main() {
-  test('BindingBase.debugBindingType', () async {
+  test('BindingBase.debugBindingType', () {
     expect(BindingBase.debugBindingType(), isNull);
     FooLibraryBinding.ensureInitialized();
     expect(BindingBase.debugBindingType(), FooLibraryBinding);

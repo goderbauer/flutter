@@ -9,7 +9,6 @@ import 'package:flutter/foundation.dart';
 
 import '_background_isolate_binary_messenger_io.dart'
     if (dart.library.js_util) '_background_isolate_binary_messenger_web.dart';
-
 import 'binary_messenger.dart';
 import 'binding.dart';
 import 'debug.dart';
@@ -18,7 +17,6 @@ import 'message_codecs.dart';
 
 export '_background_isolate_binary_messenger_io.dart'
     if (dart.library.js_util) '_background_isolate_binary_messenger_web.dart';
-
 export 'binary_messenger.dart' show BinaryMessenger;
 export 'binding.dart' show RootIsolateToken;
 export 'message_codec.dart' show MessageCodec, MethodCall, MethodCodec;
@@ -633,7 +631,7 @@ class OptionalMethodChannel extends MethodChannel {
   const OptionalMethodChannel(super.name, [super.codec, super.binaryMessenger]);
 
   @override
-  Future<T?> invokeMethod<T>(String method, [dynamic arguments]) async {
+  Future<T?> invokeMethod<T>(String method, [dynamic arguments]) {
     return super._invokeMethod<T>(method, missingOk: true, arguments: arguments);
   }
 }

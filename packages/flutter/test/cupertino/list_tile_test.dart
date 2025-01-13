@@ -196,7 +196,7 @@ void main() {
           data: const MediaQueryData(),
           child: CupertinoListSection(
             children: <Widget>[
-              CupertinoListTile(title: const Text('CupertinoListTile'), onTap: () async {}),
+              CupertinoListTile(title: const Text('CupertinoListTile'), onTap: () {}),
             ],
           ),
         ),

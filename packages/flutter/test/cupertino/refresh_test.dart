@@ -1225,7 +1225,7 @@ void main() {
               physics: const BouncingScrollPhysics(),
               slivers: <Widget>[
                 CupertinoSliverRefreshControl(
-                  onRefresh: () async => Future<void>.delayed(const Duration(days: 2000)),
+                  onRefresh: () => Future<void>.delayed(const Duration(days: 2000)),
                 ),
               ],
             ),

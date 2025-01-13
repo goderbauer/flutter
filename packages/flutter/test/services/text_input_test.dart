@@ -206,7 +206,7 @@ void main() {
       TextInput.setChannel(SystemChannels.textInput);
     });
 
-    test('text input client handler responds to reattach with setClient', () async {
+    test('text input client handler responds to reattach with setClient', () {
       final FakeTextInputClient client = FakeTextInputClient(const TextEditingValue(text: 'test1'));
       TextInput.attach(client, client.configuration);
       fakeTextChannel.validateOutgoingMethodCalls(<MethodCall>[
@@ -227,7 +227,7 @@ void main() {
 
     test(
       'text input client handler responds to reattach with setClient (null TextEditingValue)',
-      () async {
+      () {
         final FakeTextInputClient client = FakeTextInputClient(TextEditingValue.empty);
         TextInput.attach(client, client.configuration);
         fakeTextChannel.validateOutgoingMethodCalls(<MethodCall>[
@@ -337,7 +337,7 @@ void main() {
       expect(configuration.keyboardAppearance, Brightness.light);
     });
 
-    test('text serializes to JSON', () async {
+    test('text serializes to JSON', () {
       const TextInputConfiguration configuration = TextInputConfiguration(
         readOnly: true,
         obscureText: true,
@@ -356,7 +356,7 @@ void main() {
       expect(json['actionLabel'], 'xyzzy');
     });
 
-    test('number serializes to JSON', () async {
+    test('number serializes to JSON', () {
       const TextInputConfiguration configuration = TextInputConfiguration(
         inputType: TextInputType.numberWithOptions(decimal: true),
         obscureText: true,
@@ -375,7 +375,7 @@ void main() {
       expect(json['actionLabel'], 'xyzzy');
     });
 
-    test('basic structure', () async {
+    test('basic structure', () {
       const TextInputType text = TextInputType.text;
       const TextInputType number = TextInputType.number;
       const TextInputType number2 = TextInputType.number;
@@ -910,7 +910,7 @@ void main() {
     });
   });
 
-  test('TextEditingValue.isComposingRangeValid', () async {
+  test('TextEditingValue.isComposingRangeValid', () {
     // The composing range is empty.
     expect(TextEditingValue.empty.isComposingRangeValid, isFalse);
 
@@ -1170,7 +1170,7 @@ void main() {
       expect(fakeTextChannel.outgoingCalls.last.method, 'TextInput.hide');
     });
 
-    test('the platform input control receives isMultiline true on attach', () async {
+    test('the platform input control receives isMultiline true on attach', () {
       final FakeTextInputControl control = FakeTextInputControl();
       TextInput.setInputControl(control);
 
@@ -1204,7 +1204,7 @@ void main() {
       ]);
     }, skip: !kIsWeb); // https://github.com/flutter/flutter/issues/125875
 
-    test('notifies changes to the attached client', () async {
+    test('notifies changes to the attached client', () {
       final FakeTextInputControl control = FakeTextInputControl();
       TextInput.setInputControl(control);
 

@@ -221,7 +221,7 @@ Future<DateTime?> showDatePicker({
   final ValueChanged<DatePickerEntryMode>? onDatePickerModeChange,
   final Icon? switchToInputEntryModeIcon,
   final Icon? switchToCalendarEntryModeIcon,
-}) async {
+}) {
   initialDate = initialDate == null ? null : DateUtils.dateOnly(initialDate);
   firstDate = DateUtils.dateOnly(firstDate);
   lastDate = DateUtils.dateOnly(lastDate);
@@ -1173,7 +1173,7 @@ Future<DateTimeRange?> showDateRangePicker({
   final Icon? switchToInputEntryModeIcon,
   final Icon? switchToCalendarEntryModeIcon,
   SelectableDayForRangePredicate? selectableDayPredicate,
-}) async {
+}) {
   initialDateRange = initialDateRange == null ? null : DateUtils.datesOnly(initialDateRange);
   firstDate = DateUtils.dateOnly(firstDate);
   lastDate = DateUtils.dateOnly(lastDate);

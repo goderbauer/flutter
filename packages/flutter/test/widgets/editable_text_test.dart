@@ -10433,7 +10433,7 @@ void main() {
     expect(renderObject.textHeightBehavior, equals(customTextHeightBehavior));
   });
 
-  test('Asserts if composing text is not valid', () async {
+  test('Asserts if composing text is not valid', () {
     void expectToAssert(TextEditingValue value, bool shouldAssert) {
       dynamic initException;
       dynamic updateException;

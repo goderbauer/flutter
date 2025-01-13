@@ -600,7 +600,7 @@ void main() {
 
     testWidgets('Active children are laid out with correct offset', (WidgetTester tester) async {
       // Regression test for https://github.com/flutter/flutter/issues/123497
-      Future<void> buildWidget(double width) async {
+      Future<void> buildWidget(double width) {
         return tester.pumpWidget(
           Directionality(
             textDirection: TextDirection.ltr,

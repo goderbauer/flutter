@@ -247,7 +247,7 @@ void main() {
 
   group('$WeakMap', () {
     for (final Object item in _weakValueTests) {
-      test('assigns and removes value, $item', () async {
+      test('assigns and removes value, $item', () {
         final WeakMap<Object, Object> weakMap = WeakMap<Object, Object>();
         weakMap[item] = 1;
         expect(weakMap[item], 1);
@@ -257,7 +257,7 @@ void main() {
     }
 
     for (final Object item in _weakValueTests) {
-      test('returns null for absent value, $item', () async {
+      test('returns null for absent value, $item', () {
         final WeakMap<Object, Object> weakMap = WeakMap<Object, Object>();
         expect(weakMap[item], null);
       });
@@ -3133,7 +3133,7 @@ class _TestWidgetInspectorService extends TestWidgetInspectorService {
       () {
         late final String pubRootTest;
 
-        setUpAll(() async {
+        setUpAll(() {
           pubRootTest = generateTestPubRootDirectory(service);
         });
 

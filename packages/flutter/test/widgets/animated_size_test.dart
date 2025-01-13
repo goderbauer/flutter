@@ -324,7 +324,7 @@ void main() {
     });
 
     testWidgets('works wrapped in IntrinsicHeight and Wrap', (WidgetTester tester) async {
-      Future<void> pumpWidget(Size size, [Duration? duration]) async {
+      Future<void> pumpWidget(Size size, [Duration? duration]) {
         return tester.pumpWidget(
           Center(
             child: IntrinsicHeight(

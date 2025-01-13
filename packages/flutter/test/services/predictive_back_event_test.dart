@@ -6,7 +6,7 @@ import 'package:flutter/services.dart';
 import 'package:flutter_test/flutter_test.dart';
 
 void main() {
-  test('fromMap can be created with valid Map - SwipeEdge.left', () async {
+  test('fromMap can be created with valid Map - SwipeEdge.left', () {
     final PredictiveBackEvent event = PredictiveBackEvent.fromMap(const <String?, Object?>{
       'touchOffset': <double>[0.0, 100.0],
       'progress': 0.0,
@@ -16,7 +16,7 @@ void main() {
     expect(event.isButtonEvent, isFalse);
   });
 
-  test('fromMap can be created with valid Map - SwipeEdge.right', () async {
+  test('fromMap can be created with valid Map - SwipeEdge.right', () {
     final PredictiveBackEvent event = PredictiveBackEvent.fromMap(const <String?, Object?>{
       'touchOffset': <double>[0.0, 100.0],
       'progress': 0.0,
@@ -26,7 +26,7 @@ void main() {
     expect(event.isButtonEvent, isFalse);
   });
 
-  test('fromMap can be created with valid Map - isButtonEvent zero position', () async {
+  test('fromMap can be created with valid Map - isButtonEvent zero position', () {
     final PredictiveBackEvent event = PredictiveBackEvent.fromMap(const <String?, Object?>{
       'touchOffset': <double>[0.0, 0.0],
       'progress': 0.0,
@@ -35,7 +35,7 @@ void main() {
     expect(event.isButtonEvent, isTrue);
   });
 
-  test('fromMap can be created with valid Map - isButtonEvent null position', () async {
+  test('fromMap can be created with valid Map - isButtonEvent null position', () {
     final PredictiveBackEvent event = PredictiveBackEvent.fromMap(const <String?, Object?>{
       'touchOffset': null,
       'progress': 0.0,
@@ -44,7 +44,7 @@ void main() {
     expect(event.isButtonEvent, isTrue);
   });
 
-  test('fromMap throws when given invalid progress', () async {
+  test('fromMap throws when given invalid progress', () {
     expect(
       () => PredictiveBackEvent.fromMap(const <String?, Object?>{
         'touchOffset': <double>[0.0, 100.0],
@@ -55,7 +55,7 @@ void main() {
     );
   });
 
-  test('fromMap throws when given invalid swipeEdge', () async {
+  test('fromMap throws when given invalid swipeEdge', () {
     expect(
       () => PredictiveBackEvent.fromMap(const <String?, Object?>{
         'touchOffset': <double>[0.0, 100.0],
@@ -66,7 +66,7 @@ void main() {
     );
   });
 
-  test('equality when created with the same parameters', () async {
+  test('equality when created with the same parameters', () {
     final PredictiveBackEvent eventA = PredictiveBackEvent.fromMap(const <String?, Object?>{
       'touchOffset': <double>[0.0, 100.0],
       'progress': 0.0,
@@ -82,7 +82,7 @@ void main() {
     expect(eventA.toString(), equals(eventB.toString()));
   });
 
-  test('when created with different parameters', () async {
+  test('when created with different parameters', () {
     final PredictiveBackEvent eventA = PredictiveBackEvent.fromMap(const <String?, Object?>{
       'touchOffset': <double>[0.0, 100.0],
       'progress': 0.0,

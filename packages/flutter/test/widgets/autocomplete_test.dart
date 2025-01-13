@@ -999,7 +999,7 @@ void main() {
       MaterialApp(
         home: Scaffold(
           body: RawAutocomplete<String>(
-            optionsBuilder: (TextEditingValue textEditingValue) async {
+            optionsBuilder: (TextEditingValue textEditingValue) {
               final Iterable<String> options = kOptions.where((String option) {
                 return option.contains(textEditingValue.text.toLowerCase());
               });
@@ -1485,7 +1485,7 @@ void main() {
       MaterialApp(
         home: Scaffold(
           body: RawAutocomplete<String>(
-            optionsBuilder: (TextEditingValue textEditingValue) async {
+            optionsBuilder: (TextEditingValue textEditingValue) {
               final Iterable<String> options = kOptions.where((String option) {
                 return option.contains(textEditingValue.text.toLowerCase());
               });
@@ -1563,7 +1563,7 @@ void main() {
       MaterialApp(
         home: Scaffold(
           body: RawAutocomplete<String>(
-            optionsBuilder: (TextEditingValue textEditingValue) async {
+            optionsBuilder: (TextEditingValue textEditingValue) {
               final Iterable<String> options = kOptions.where((String option) {
                 return option.contains(textEditingValue.text.toLowerCase());
               });
@@ -1650,7 +1650,7 @@ void main() {
       MaterialApp(
         home: Scaffold(
           body: RawAutocomplete<String>(
-            optionsBuilder: (TextEditingValue textEditingValue) async {
+            optionsBuilder: (TextEditingValue textEditingValue) {
               final Iterable<String> options = kOptions.where((String option) {
                 return option.contains(textEditingValue.text.toLowerCase());
               });
@@ -1725,7 +1725,7 @@ void main() {
       MaterialApp(
         home: Scaffold(
           body: RawAutocomplete<String>(
-            optionsBuilder: (TextEditingValue textEditingValue) async {
+            optionsBuilder: (TextEditingValue textEditingValue) {
               if (textEditingValue.text == 'ele') {
                 timesOptionsBuilderCalledWithEle += 1;
                 if (timesOptionsBuilderCalledWithEle > 1) {

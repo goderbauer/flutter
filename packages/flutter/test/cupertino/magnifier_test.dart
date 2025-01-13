@@ -35,7 +35,7 @@ void main() {
     await magnifierShown;
   }
 
-  tearDown(() async {
+  tearDown(() {
     magnifierController.removeFromOverlay();
   });
 

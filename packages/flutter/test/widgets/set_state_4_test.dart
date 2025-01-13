@@ -21,7 +21,7 @@ class ChangerState extends State<Changer> {
   }
 
   void test2() {
-    setState(() async {});
+    setState(() {});
   }
 
   @override

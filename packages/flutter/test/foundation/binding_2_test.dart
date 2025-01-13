@@ -10,7 +10,7 @@ import 'package:flutter_test/flutter_test.dart';
 class TestBinding extends BindingBase {}
 
 void main() {
-  test('BindingBase.debugCheckZone', () async {
+  test('BindingBase.debugCheckZone', () {
     final BindingBase binding = TestBinding();
     binding.debugCheckZone('test1');
     BindingBase.debugZoneErrorsAreFatal = true;

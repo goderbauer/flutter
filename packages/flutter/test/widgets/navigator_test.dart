@@ -2448,7 +2448,7 @@ void main() {
     final GlobalKey<NavigatorState> testKey = GlobalKey<NavigatorState>();
     await tester.pumpWidget(SizedBox(key: testKey));
 
-    expect(() async {
+    expect(() {
       Navigator.of(testKey.currentContext!);
     }, throwsFlutterError);
   });

@@ -19,7 +19,7 @@ void main() {
   late TextEditingController controller;
   late FocusNode focusNode;
 
-  setUp(() async {
+  setUp(() {
     calls.clear();
     isFeatureAvailableReturnValue = true;
     binding.defaultBinaryMessenger.setMockMethodCallHandler(SystemChannels.scribe, (

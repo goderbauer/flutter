@@ -986,6 +986,6 @@ abstract class BindingBase {
 }
 
 /// Terminate the Flutter application.
-Future<void> _exitApplication() async {
+Future<void> _exitApplication() {
   exit(0);
 }

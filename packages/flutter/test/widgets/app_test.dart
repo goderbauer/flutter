@@ -688,7 +688,7 @@ void main() {
     }
 
     final List<bool> frameworkHandlesBacks = <bool>[];
-    setUp(() async {
+    setUp(() {
       frameworkHandlesBacks.clear();
       TestDefaultBinaryMessengerBinding.instance.defaultBinaryMessenger.setMockMethodCallHandler(
         SystemChannels.platform,

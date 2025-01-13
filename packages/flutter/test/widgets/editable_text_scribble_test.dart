@@ -16,7 +16,7 @@ void main() {
   late TextEditingController controller;
   late FocusNode focusNode;
 
-  setUp(() async {
+  setUp(() {
     controller = TextEditingController();
     focusNode = FocusNode(debugLabel: 'EditableText Node');
   });

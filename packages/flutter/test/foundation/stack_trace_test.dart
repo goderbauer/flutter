@@ -30,7 +30,7 @@ void main() {
     expect(filtered[2], equals('<asynchronous suspension>'));
   });
 
-  test('FlutterError.defaultStackFilter (async test body)', () async {
+  test('FlutterError.defaultStackFilter (async test body)', () {
     final List<String> filtered =
         FlutterError.defaultStackFilter(
           StackTrace.current.toString().trimRight().split('\n'),

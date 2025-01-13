@@ -1162,7 +1162,7 @@ mixin WidgetInspectorService {
 
     _registerSignalServiceExtension(
       name: WidgetInspectorServiceExtensions.disposeAllGroups.name,
-      callback: () async {
+      callback: () {
         disposeAllGroups();
         return null;
       },
@@ -1170,7 +1170,7 @@ mixin WidgetInspectorService {
     );
     _registerObjectGroupServiceExtension(
       name: WidgetInspectorServiceExtensions.disposeGroup.name,
-      callback: (String name) async {
+      callback: (String name) {
         disposeGroup(name);
         return null;
       },
@@ -1183,7 +1183,7 @@ mixin WidgetInspectorService {
     );
     _registerServiceExtensionWithArg(
       name: WidgetInspectorServiceExtensions.disposeId.name,
-      callback: (String? objectId, String objectGroup) async {
+      callback: (String? objectId, String objectGroup) {
         disposeId(objectId, objectGroup);
         return null;
       },
@@ -1191,7 +1191,7 @@ mixin WidgetInspectorService {
     );
     _registerServiceExtensionVarArgs(
       name: WidgetInspectorServiceExtensions.setPubRootDirectories.name,
-      callback: (List<String> args) async {
+      callback: (List<String> args) {
         setPubRootDirectories(args);
         return null;
       },
@@ -1199,7 +1199,7 @@ mixin WidgetInspectorService {
     );
     _registerServiceExtensionVarArgs(
       name: WidgetInspectorServiceExtensions.addPubRootDirectories.name,
-      callback: (List<String> args) async {
+      callback: (List<String> args) {
         addPubRootDirectories(args);
         return null;
       },
@@ -1207,7 +1207,7 @@ mixin WidgetInspectorService {
     );
     _registerServiceExtensionVarArgs(
       name: WidgetInspectorServiceExtensions.removePubRootDirectories.name,
-      callback: (List<String> args) async {
+      callback: (List<String> args) {
         removePubRootDirectories(args);
         return null;
       },

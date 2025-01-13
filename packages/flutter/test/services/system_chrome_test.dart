@@ -225,7 +225,7 @@ void main() {
     expect(log.single, isMethodCall('SystemChrome.setSystemUIChangeListener', arguments: null));
   });
 
-  test('toString works as intended', () async {
+  test('toString works as intended', () {
     const SystemUiOverlayStyle systemUiOverlayStyle = SystemUiOverlayStyle();
 
     expect(

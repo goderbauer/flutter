@@ -82,7 +82,7 @@ mixin RendererBinding
       registerBoolServiceExtension(
         name: RenderingServiceExtensions.invertOversizedImages.name,
         getter: () async => debugInvertOversizedImages,
-        setter: (bool value) async {
+        setter: (bool value) {
           if (debugInvertOversizedImages != value) {
             debugInvertOversizedImages = value;
             return _forceRepaint();

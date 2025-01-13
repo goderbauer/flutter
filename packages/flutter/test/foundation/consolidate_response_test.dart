@@ -62,14 +62,14 @@ void main() {
       ]);
     });
 
-    test('forwards errors from HttpClientResponse', () async {
+    test('forwards errors from HttpClientResponse', () {
       response = MockHttpClientResponse(error: Exception('Test Error'));
       response.contentLength = -1;
 
       expect(consolidateHttpClientResponseBytes(response), throwsException);
     });
 
-    test('Propagates error to Future return value if onBytesReceived throws', () async {
+    test('Propagates error to Future return value if onBytesReceived throws', () {
       response.contentLength = -1;
       final Future<List<int>> result = consolidateHttpClientResponseBytes(
         response,

@@ -71,7 +71,7 @@ void main() {
     }, skip: kIsWeb); // [intended]
   }
 
-  test('Scribe.startStylusHandwriting calls through to platform channel', () async {
+  test('Scribe.startStylusHandwriting calls through to platform channel', () {
     final List<MethodCall> calls = <MethodCall>[];
     binding.defaultBinaryMessenger.setMockMethodCallHandler(SystemChannels.scribe, (
       MethodCall methodCall,

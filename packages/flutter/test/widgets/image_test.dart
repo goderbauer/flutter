@@ -39,7 +39,7 @@ void main() {
 
   testWidgets('Verify Image does not use disposed handles', (WidgetTester tester) async {
     final ui.Image image100x100 =
-        (await tester.runAsync(() async => createTestImage(width: 100, height: 100)))!;
+        (await tester.runAsync(() => createTestImage(width: 100, height: 100)))!;
 
     final _TestImageProvider imageProvider1 = _TestImageProvider();
     final _TestImageProvider imageProvider2 = _TestImageProvider();
@@ -429,7 +429,7 @@ void main() {
 
   testWidgets('Verify Image stops listening to ImageStream', (WidgetTester tester) async {
     final ui.Image image100x100 =
-        (await tester.runAsync(() async => createTestImage(width: 100, height: 100)))!;
+        (await tester.runAsync(() => createTestImage(width: 100, height: 100)))!;
     // Web does not override the toString, whereas VM does
     final String imageString = image100x100.toString();
 
@@ -896,7 +896,7 @@ void main() {
       final _TestImageProvider imageProvider1 = _TestImageProvider();
       final _TestImageProvider imageProvider2 = _TestImageProvider();
       final ui.Image image100x100 =
-          (await tester.runAsync(() async => createTestImage(width: 100, height: 100)))!;
+          (await tester.runAsync(() => createTestImage(width: 100, height: 100)))!;
 
       await tester.pumpWidget(
         Container(key: key, child: Image(excludeFromSemantics: true, image: imageProvider1)),

@@ -303,7 +303,7 @@ void main() {
       );
     });
 
-    test('can check the mock handler', () async {
+    test('can check the mock handler', () {
       Future<dynamic> handler(MethodCall call) => Future<dynamic>.value();
 
       const MethodChannel channel = MethodChannel('test_handler');

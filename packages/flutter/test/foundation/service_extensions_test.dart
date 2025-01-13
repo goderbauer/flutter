@@ -180,7 +180,7 @@ void main() {
     };
   });
 
-  tearDownAll(() async {
+  tearDownAll(() {
     // See widget_inspector_test.dart for tests of the ext.flutter.inspector
     // service extensions included in this count.
     int widgetInspectorExtensionCount = 29;
@@ -834,7 +834,7 @@ void main() {
     expect(data, isTrue);
     expect(completed, isTrue);
     completed = false;
-    data = await rootBundle.loadStructuredData('test', (String value) async {
+    data = await rootBundle.loadStructuredData('test', (String value) {
       throw Error();
     });
     expect(data, isTrue);
@@ -858,7 +858,7 @@ void main() {
     testedExtensions.add(ServicesServiceExtensions.evict.name);
   });
 
-  test('Service extensions - exit', () async {
+  test('Service extensions - exit', () {
     // no test for _calling_ 'exit', because that should terminate the process!
     // Not expecting extension to be available for web platform.
     expect(binding.extensions.containsKey(FoundationServiceExtensions.exit.name), !isBrowser);

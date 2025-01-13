@@ -404,13 +404,13 @@ void main() {
 
   group('LengthLimitingTextInputFormatter', () {
     group('truncate', () {
-      test('Removes characters from the end', () async {
+      test('Removes characters from the end', () {
         const TextEditingValue value = TextEditingValue(text: '01234567890');
         final TextEditingValue truncated = LengthLimitingTextInputFormatter.truncate(value, 10);
         expect(truncated.text, '0123456789');
       });
 
-      test('Counts surrogate pairs as single characters', () async {
+      test('Counts surrogate pairs as single characters', () {
         const String stringOverflowing = '😆01234567890';
         const TextEditingValue value = TextEditingValue(
           text: stringOverflowing,
@@ -425,7 +425,7 @@ void main() {
         expect(truncated.selection.extentOffset, stringTruncated.length);
       });
 
-      test('Counts grapheme clusters as single characters', () async {
+      test('Counts grapheme clusters as single characters', () {
         const String stringOverflowing = '👨‍👩‍👦01234567890';
         const TextEditingValue value = TextEditingValue(
           text: stringOverflowing,
@@ -444,7 +444,7 @@ void main() {
     group('formatEditUpdate', () {
       const int maxLength = 10;
 
-      test('Passes through when under limit', () async {
+      test('Passes through when under limit', () {
         const TextEditingValue oldValue = TextEditingValue(text: 'aaa');
         const TextEditingValue newValue = TextEditingValue(text: 'aaab');
         final LengthLimitingTextInputFormatter formatter = LengthLimitingTextInputFormatter(
@@ -454,7 +454,7 @@ void main() {
         expect(formatted.text, newValue.text);
       });
 
-      test('Uses old value when at the limit', () async {
+      test('Uses old value when at the limit', () {
         const TextEditingValue oldValue = TextEditingValue(text: 'aaaaaaaaaa');
         const TextEditingValue newValue = TextEditingValue(text: 'aaaaabbbbbaaaaa');
         final LengthLimitingTextInputFormatter formatter = LengthLimitingTextInputFormatter(
@@ -464,7 +464,7 @@ void main() {
         expect(formatted.text, oldValue.text);
       });
 
-      test('Truncates newValue when oldValue already over limit', () async {
+      test('Truncates newValue when oldValue already over limit', () {
         const TextEditingValue oldValue = TextEditingValue(text: 'aaaaaaaaaaaaaaaaaaaa');
         const TextEditingValue newValue = TextEditingValue(text: 'bbbbbbbbbbbbbbbbbbbb');
         final LengthLimitingTextInputFormatter formatter = LengthLimitingTextInputFormatter(
@@ -478,7 +478,7 @@ void main() {
     group('get enforcement from target platform', () {
       // The enforcement on Web will be always `MaxLengthEnforcement.truncateAfterCompositionEnds`
 
-      test('with TargetPlatform.windows', () async {
+      test('with TargetPlatform.windows', () {
         final MaxLengthEnforcement enforcement =
             LengthLimitingTextInputFormatter.getDefaultMaxLengthEnforcement(TargetPlatform.windows);
         if (kIsWeb) {
@@ -488,7 +488,7 @@ void main() {
         }
       });
 
-      test('with TargetPlatform.macOS', () async {
+      test('with TargetPlatform.macOS', () {
         final MaxLengthEnforcement enforcement =
             LengthLimitingTextInputFormatter.getDefaultMaxLengthEnforcement(TargetPlatform.macOS);
         expect(enforcement, MaxLengthEnforcement.truncateAfterCompositionEnds);

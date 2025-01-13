@@ -35,7 +35,7 @@ Object getAssertionErrorWithLongMessage() {
   throw 'assert failed';
 }
 
-Future<StackTrace> getSampleStack() async {
+Future<StackTrace> getSampleStack() {
   return Future<StackTrace>.sync(() => StackTrace.current);
 }
 
@@ -44,19 +44,19 @@ Future<void> main() async {
 
   final StackTrace sampleStack = await getSampleStack();
 
-  setUp(() async {
+  setUp(() {
     expect(debugPrint, equals(debugPrintThrottled));
     debugPrint = (String? message, {int? wrapWidth}) {
       console.add(message);
     };
   });
 
-  tearDown(() async {
+  tearDown(() {
     expect(console, isEmpty);
     debugPrint = debugPrintThrottled;
   });
 
-  test('Error reporting - assert with message', () async {
+  test('Error reporting - assert with message', () {
     expect(console, isEmpty);
     FlutterError.dumpErrorToConsole(
       FlutterErrorDetails(
@@ -93,7 +93,7 @@ Future<void> main() async {
     FlutterError.resetErrorCount();
   });
 
-  test('Error reporting - assert with long message', () async {
+  test('Error reporting - assert with long message', () {
     expect(console, isEmpty);
     FlutterError.dumpErrorToConsole(
       FlutterErrorDetails(exception: getAssertionErrorWithLongMessage()),
@@ -130,7 +130,7 @@ Future<void> main() async {
     FlutterError.resetErrorCount();
   });
 
-  test('Error reporting - assert with no message', () async {
+  test('Error reporting - assert with no message', () {
     expect(console, isEmpty);
     FlutterError.dumpErrorToConsole(
       FlutterErrorDetails(
@@ -175,7 +175,7 @@ Future<void> main() async {
     FlutterError.resetErrorCount();
   });
 
-  test('Error reporting - NoSuchMethodError', () async {
+  test('Error reporting - NoSuchMethodError', () {
     expect(console, isEmpty);
     final Object exception = NoSuchMethodError.withInvocation(
       5,
@@ -202,7 +202,7 @@ Future<void> main() async {
     FlutterError.resetErrorCount();
   });
 
-  test('Error reporting - NoSuchMethodError', () async {
+  test('Error reporting - NoSuchMethodError', () {
     expect(console, isEmpty);
     FlutterError.dumpErrorToConsole(const FlutterErrorDetails(exception: 'hello'));
     expect(
@@ -222,7 +222,7 @@ Future<void> main() async {
   });
 
   // Regression test for https://github.com/flutter/flutter/issues/62223
-  test('Error reporting - empty stack', () async {
+  test('Error reporting - empty stack', () {
     expect(console, isEmpty);
     FlutterError.dumpErrorToConsole(
       FlutterErrorDetails(exception: 'exception - empty stack', stack: StackTrace.fromString('')),
@@ -242,7 +242,7 @@ Future<void> main() async {
     FlutterError.resetErrorCount();
   });
 
-  test('Stack traces are not truncated', () async {
+  test('Stack traces are not truncated', () {
     const String stackString = '''
 #0      _AssertionError._doThrowNew (dart:core-patch/errors_patch.dart:42:39)
 #1      _AssertionError._throwNew (dart:core-patch/errors_patch.dart:38:5)

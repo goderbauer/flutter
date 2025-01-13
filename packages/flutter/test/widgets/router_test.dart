@@ -1686,7 +1686,7 @@ void main() {
   });
 
   group('RouteInformation uri api', () {
-    test('can produce correct uri from location', () async {
+    test('can produce correct uri from location', () {
       final RouteInformation info1 = RouteInformation(uri: Uri.parse('/a?abc=def&abc=jkl#mno'));
       expect(info1.location, '/a?abc=def&abc=jkl#mno');
       final Uri uri1 = info1.uri;
@@ -1709,7 +1709,7 @@ void main() {
       expect(uri2.queryParametersAll.length, 0);
     });
 
-    test('can produce correct location from uri', () async {
+    test('can produce correct location from uri', () {
       final RouteInformation info1 = RouteInformation(uri: Uri.parse('http://mydomain.com'));
       expect(info1.uri.toString(), 'http://mydomain.com');
       expect(info1.location, '/');

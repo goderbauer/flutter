@@ -447,7 +447,7 @@ void main() {
       viewsController = FakeIosPlatformViewsController();
     });
 
-    test('create iOS view of unregistered type', () async {
+    test('create iOS view of unregistered type', () {
       expect(() {
         return PlatformViewsService.initUiKitView(
           id: 0,

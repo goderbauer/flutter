@@ -88,7 +88,7 @@ abstract final class Feedback {
   ///
   ///  * [wrapForTap] to trigger platform-specific feedback before executing a
   ///    [GestureTapCallback].
-  static Future<void> forTap(BuildContext context) async {
+  static Future<void> forTap(BuildContext context) {
     context.findRenderObject()!.sendSemanticsEvent(const TapSemanticEvent());
     switch (defaultTargetPlatform) {
       case TargetPlatform.android:

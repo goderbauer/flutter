@@ -961,7 +961,7 @@ abstract class _DarwinViewState<
 class _UiKitViewState
     extends _DarwinViewState<UiKitView, UiKitViewController, RenderUiKitView, _UiKitPlatformView> {
   @override
-  Future<UiKitViewController> createNewViewController(int id) async {
+  Future<UiKitViewController> createNewViewController(int id) {
     return PlatformViewsService.initUiKitView(
       id: id,
       viewType: widget.viewType,
@@ -988,7 +988,7 @@ class _AppKitViewState
     extends
         _DarwinViewState<AppKitView, AppKitViewController, RenderAppKitView, _AppKitPlatformView> {
   @override
-  Future<AppKitViewController> createNewViewController(int id) async {
+  Future<AppKitViewController> createNewViewController(int id) {
     return PlatformViewsService.initAppKitView(
       id: id,
       viewType: widget.viewType,

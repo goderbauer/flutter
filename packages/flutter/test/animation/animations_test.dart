@@ -299,7 +299,7 @@ FlutterError
     expect(curved.value, moreOrLessEquals(0.0));
   });
 
-  test('CurvedAnimation stops listening to parent when disposed.', () async {
+  test('CurvedAnimation stops listening to parent when disposed.', () {
     const Interval forwardCurve = Interval(0.0, 0.5);
     const Interval reverseCurve = Interval(0.5, 1.0);
 

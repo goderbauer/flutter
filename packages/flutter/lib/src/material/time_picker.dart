@@ -3204,7 +3204,7 @@ Future<TimeOfDay?> showTimePicker({
   Orientation? orientation,
   Icon? switchToInputEntryModeIcon,
   Icon? switchToTimerEntryModeIcon,
-}) async {
+}) {
   assert(debugCheckHasMaterialLocalizations(context));
 
   final Widget dialog = TimePickerDialog(

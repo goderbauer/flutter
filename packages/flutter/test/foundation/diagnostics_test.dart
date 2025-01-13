@@ -191,7 +191,7 @@ void validatePropertyJsonSerializationHelper(
 }
 
 void main() {
-  test('TreeDiagnosticsMixin control test', () async {
+  test('TreeDiagnosticsMixin control test', () {
     void goldenStyleTest(
       String description, {
       DiagnosticsTreeStyle? style,
@@ -367,7 +367,7 @@ void main() {
     );
   });
 
-  test('TreeDiagnosticsMixin tree with properties test', () async {
+  test('TreeDiagnosticsMixin tree with properties test', () {
     void goldenStyleTest(
       String description, {
       String? name,

@@ -7,7 +7,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 
 void main() {
-  test('Element diagnostics json includes widgetRuntimeType', () async {
+  test('Element diagnostics json includes widgetRuntimeType', () {
     final Element element = _TestElement();
 
     final Map<String, Object?> json = element.toDiagnosticsNode().toJsonMap(

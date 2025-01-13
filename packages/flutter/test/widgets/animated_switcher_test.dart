@@ -295,7 +295,7 @@ void main() {
   testWidgets('AnimatedSwitcher updates widgets without animating if they are isomorphic.', (
     WidgetTester tester,
   ) async {
-    Future<void> pumpChild(Widget child) async {
+    Future<void> pumpChild(Widget child) {
       return tester.pumpWidget(
         Directionality(
           textDirection: TextDirection.rtl,
@@ -402,7 +402,7 @@ void main() {
   testWidgets(
     'AnimatedSwitcher does not duplicate animations if the same child is entered twice.',
     (WidgetTester tester) async {
-      Future<void> pumpChild(Widget child) async {
+      Future<void> pumpChild(Widget child) {
         return tester.pumpWidget(
           Directionality(
             textDirection: TextDirection.ltr,

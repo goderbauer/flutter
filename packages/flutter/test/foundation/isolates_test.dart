@@ -41,11 +41,11 @@ Future<int> test1Async(int value) async {
   return value + 1;
 }
 
-Future<int> test2Async(int value) async {
+Future<int> test2Async(int value) {
   throw 2;
 }
 
-Future<int> test3Async(int value) async {
+Future<int> test3Async(int value) {
   Isolate.exit();
 }
 

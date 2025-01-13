@@ -706,7 +706,7 @@ void main() {
       return tester.pump();
     }
 
-    setUp(() async {
+    setUp(() {
       invoked = false;
       hovering = false;
       focusing = false;
@@ -720,7 +720,7 @@ void main() {
       );
     });
 
-    tearDown(() async {
+    tearDown(() {
       focusNode.dispose();
     });
 
