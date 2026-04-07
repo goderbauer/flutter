@@ -18,14 +18,14 @@ void main() {
   testWidgets(
     'Soft restart removes and re-inserts previewed widget into the widget tree',
     (tester) async {
-      const String kTestText = 'Foo';
+      const kTestText = 'Foo';
       final controller = FakeWidgetPreviewScaffoldController();
       final widgetPreview = WidgetPreviewerWidgetScaffolding(
         child: WidgetPreviewWidget(
           controller: controller,
           preview: WidgetPreview.test(
             builder: () => const Text(kTestText),
-            previewData: Preview(),
+            previewData: const Preview(),
           ),
         ),
       );
@@ -35,8 +35,8 @@ void main() {
       final WidgetPreviewWidgetState state = tester
           .state<WidgetPreviewWidgetState>(find.byWidget(widgetPreview.child));
 
-      bool removedFromTree = false;
-      final Completer<void> completer = Completer<void>();
+      var removedFromTree = false;
+      final completer = Completer<void>();
       state.softRestartListenable.addListener(() {
         if (state.softRestartListenable.value) {
           expect(removedFromTree, false);

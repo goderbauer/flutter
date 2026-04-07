@@ -6,7 +6,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:widget_preview_scaffold/src/utils/color_utils.dart';
+import '../utils/color_utils.dart';
 
 import 'ide_theme.dart';
 
@@ -24,7 +24,7 @@ ThemeData themeFor({
   required IdeTheme ideTheme,
   required ThemeData theme,
 }) {
-  final colorTheme = isDarkTheme
+  final ThemeData colorTheme = isDarkTheme
       ? _darkTheme(ideTheme: ideTheme, theme: theme)
       : _lightTheme(ideTheme: ideTheme, theme: theme);
 
@@ -35,14 +35,14 @@ ThemeData themeFor({
 }
 
 ThemeData _darkTheme({required IdeTheme ideTheme, required ThemeData theme}) {
-  final background = isValidDarkColor(ideTheme.backgroundColor)
+  final Color background = isValidDarkColor(ideTheme.backgroundColor)
       ? ideTheme.backgroundColor!
       : theme.colorScheme.surface;
   return _baseTheme(theme: theme, backgroundColor: background);
 }
 
 ThemeData _lightTheme({required IdeTheme ideTheme, required ThemeData theme}) {
-  final background = isValidLightColor(ideTheme.backgroundColor)
+  final Color background = isValidLightColor(ideTheme.backgroundColor)
       ? ideTheme.backgroundColor!
       : theme.colorScheme.surface;
   return _baseTheme(theme: theme, backgroundColor: background);
@@ -105,17 +105,17 @@ ThemeData _baseTheme({
     ),
     expansionTileTheme: ExpansionTileThemeData(
       backgroundColor: backgroundColor.brighten(),
-      shape: RoundedRectangleBorder(
+      shape: const RoundedRectangleBorder(
         borderRadius: BorderRadius.all(kCardRadius),
       ),
-      collapsedShape: RoundedRectangleBorder(
+      collapsedShape: const RoundedRectangleBorder(
         borderRadius: BorderRadius.all(kCardRadius),
       ),
     ),
     listTileTheme: ListTileThemeData(
       dense: true,
       tileColor: backgroundColor.brighten(),
-      shape: RoundedRectangleBorder(
+      shape: const RoundedRectangleBorder(
         borderRadius: BorderRadius.all(kCardRadius),
       ),
     ),

@@ -35,8 +35,8 @@ void expectTheme({
   required ThemeData materialTheme,
   required CupertinoThemeData cupertinoTheme,
 }) {
-  ThemeData actualMaterialTheme = Theme.of(context);
-  CupertinoThemeData actualCupertinoTheme = CupertinoTheme.of(context);
+  final ThemeData actualMaterialTheme = Theme.of(context);
+  final CupertinoThemeData actualCupertinoTheme = CupertinoTheme.of(context);
   expect(actualMaterialTheme, localizeThemeData(materialTheme));
   expect(
     actualCupertinoTheme,
@@ -66,11 +66,11 @@ WidgetPreviewerWidgetScaffolding previewForBrightness({
 final PreviewThemeData previewThemeData = PreviewThemeData(
   materialLight: ThemeData.light().copyWith(primaryColor: Colors.red),
   materialDark: ThemeData.dark().copyWith(primaryColor: Colors.blue),
-  cupertinoLight: CupertinoThemeData(
+  cupertinoLight: const CupertinoThemeData(
     brightness: Brightness.light,
     primaryColor: Colors.yellow,
   ),
-  cupertinoDark: CupertinoThemeData(
+  cupertinoDark: const CupertinoThemeData(
     brightness: Brightness.dark,
     primaryColor: Colors.green,
   ),
@@ -80,7 +80,7 @@ void main() {
   testWidgets('Theming is correctly propagated down to the previewed widget', (
     tester,
   ) async {
-    final key = GlobalKey();
+    final GlobalKey<State<StatefulWidget>> key = GlobalKey();
 
     // Check that both Material and Cupertino light themes are available to the previewed widget.
     WidgetPreviewerWidgetScaffolding widgetPreview = previewForBrightness(
@@ -114,7 +114,7 @@ void main() {
   testWidgets('Default theme is used if no preview theme is specified', (
     tester,
   ) async {
-    final key = GlobalKey();
+    final GlobalKey<State<StatefulWidget>> key = GlobalKey();
     // Check that both Material and Cupertino light themes are available to the previewed widget.
     WidgetPreviewerWidgetScaffolding widgetPreview = previewForBrightness(
       key: key,
@@ -125,7 +125,7 @@ void main() {
     expectTheme(
       context: key.currentContext!,
       materialTheme: ThemeData(),
-      cupertinoTheme: CupertinoThemeData(),
+      cupertinoTheme: const CupertinoThemeData(),
     );
 
     // Check that both Material and Cupertino dark themes are available to the previewed widget.
@@ -135,17 +135,17 @@ void main() {
     expectTheme(
       context: key.currentContext!,
       materialTheme: ThemeData(),
-      cupertinoTheme: CupertinoThemeData(),
+      cupertinoTheme: const CupertinoThemeData(),
     );
   });
 
   testWidgets('$BrightnessToggleButton correctly toggles preview brightness', (
     tester,
   ) async {
-    final key = GlobalKey();
+    final GlobalKey<State<StatefulWidget>> key = GlobalKey();
 
     // Check that both Material and Cupertino light themes are available to the previewed widget.
-    WidgetPreviewerWidgetScaffolding widgetPreview = previewForBrightness(
+    final WidgetPreviewerWidgetScaffolding widgetPreview = previewForBrightness(
       key: key,
       brightness: Brightness.light,
       previewTheme: () => previewThemeData,
@@ -184,7 +184,7 @@ void main() {
   testWidgets(
     "Updated brightness property doesn't override state set by $BrightnessToggleButton",
     (tester) async {
-      final key = GlobalKey();
+      final GlobalKey<State<StatefulWidget>> key = GlobalKey();
 
       // Start with no explicit brightness set. This should use the system brightness (light).
       WidgetPreviewerWidgetScaffolding widgetPreview = previewForBrightness(

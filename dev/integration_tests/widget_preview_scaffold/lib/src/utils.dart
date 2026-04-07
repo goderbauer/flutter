@@ -185,7 +185,7 @@ final class OutlineDecoration extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final color = Theme.of(context).focusColor;
+    final Color color = Theme.of(context).focusColor;
     final border = BorderSide(color: color);
     return Container(
       decoration: BoxDecoration(

@@ -7,6 +7,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/widget_previews.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:widget_preview_scaffold/src/utils.dart';
+import 'package:widget_preview_scaffold/src/widget_preview.dart';
 import 'package:widget_preview_scaffold/src/widget_preview_rendering.dart';
 
 import 'utils/widget_preview_scaffold_test_utils.dart';
@@ -17,7 +18,7 @@ base class BrightnessPreview extends MultiPreview {
   final String name;
 
   @override
-  final previews = const <Preview>[
+  List<Preview> get previews => const <Preview>[
     FixedSizePreview(brightness: Brightness.light),
     FixedSizePreview(brightness: Brightness.dark),
   ];
@@ -31,10 +32,10 @@ base class BrightnessPreview extends MultiPreview {
 
   @override
   List<Preview> transform() {
-    final parentPreviews = super.transform();
+    final List<Preview> parentPreviews = super.transform();
     final transformed = <Preview>[];
     for (final preview in parentPreviews) {
-      final builder = preview.toBuilder()
+      final PreviewBuilder builder = preview.toBuilder()
         ..name =
             '$name - ${preview.name} - Brightness(${preview.brightness!.name})'
         ..addWrapper(_wrapper);
@@ -57,8 +58,8 @@ base class FixedSizePreview extends Preview {
 
   @override
   Preview transform() {
-    final parent = super.transform();
-    final builder = parent.toBuilder()
+    final Preview parent = super.transform();
+    final PreviewBuilder builder = parent.toBuilder()
       ..name = 'Fixed Size'
       ..addWrapper(_wrapper);
     return builder.build();
@@ -66,11 +67,11 @@ base class FixedSizePreview extends Preview {
 }
 
 WidgetPreviewerWidgetScaffolding previewsForCustomMultiPreview() {
-  final previews = buildMultiWidgetPreview(
+  final Iterable<WidgetPreview> previews = buildMultiWidgetPreview(
     packageName: '',
     scriptUri: '',
-    preview: BrightnessPreview(name: 'MyPreview'),
-    previewFunction: () => Text('Foo'),
+    preview: const BrightnessPreview(name: 'MyPreview'),
+    previewFunction: () => const Text('Foo'),
     line: -1,
     column: -1,
   );
@@ -90,7 +91,7 @@ void main() {
   testWidgets('Custom preview annotations are properly transformed and rendered', (
     tester,
   ) async {
-    WidgetPreviewerWidgetScaffolding widgetPreview =
+    final WidgetPreviewerWidgetScaffolding widgetPreview =
         previewsForCustomMultiPreview();
     await tester.pumpWidget(widgetPreview);
     // This test mimics applying @BrightnessPreview(name: 'MyPreview'), which expands into two

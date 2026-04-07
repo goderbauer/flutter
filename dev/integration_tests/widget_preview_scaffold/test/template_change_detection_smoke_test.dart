@@ -33,9 +33,8 @@ void main() {
     )) {
       stdout.writeln(
         'The widget_preview_scaffold contents do not match the widget_preview_scaffold '
-        'templates. Run "dart dev/integration_tests/widget_preview_scaffold/'
-        'update_widget_preview_scaffold.dart" to update widget_preview_scaffold with the latest '
-        'template contents.',
+        'templates. Run "dart dev/integration_tests/widget_preview_scaffold/update_widget_preview_scaffold.dart" '
+        'to update widget_preview_scaffold with the latest template contents.',
       );
       fail('widget_preview_scaffold is not up to date.');
     }

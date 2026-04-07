@@ -5,7 +5,9 @@
 import 'dart:ui';
 
 Color? tryParseColor(String? input) {
-  if (input == null) return null;
+  if (input == null) {
+    return null;
+  }
 
   try {
     return parseCssHexColor(input);
@@ -34,7 +36,7 @@ Color parseCssHexColor(String input) {
   if (input.length == 8) {
     input = '${input.substring(6)}${input.substring(0, 6)}';
   }
-  final value = int.parse(input, radix: 16);
+  final int value = int.parse(input, radix: 16);
 
   return Color(value);
 }

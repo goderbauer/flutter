@@ -15,7 +15,7 @@ import 'utils/widget_preview_scaffold_test_utils.dart';
 /// Looks for the first [TextSpan] in [selectableText] that contains [text] and
 /// taps it if it has a gesture recognizer set.
 bool tryTapFirstSpanContaining(SelectableText selectableText, String text) {
-  final textSpan = selectableText.textSpan;
+  final TextSpan? textSpan = selectableText.textSpan;
   if (textSpan == null) {
     return false;
   }
@@ -24,7 +24,7 @@ bool tryTapFirstSpanContaining(SelectableText selectableText, String text) {
       return true;
     }
     if (v.text?.contains(text) ?? false) {
-      final recognizer = v.recognizer;
+      final GestureRecognizer? recognizer = v.recognizer;
       if (recognizer != null && recognizer is TapGestureRecognizer) {
         recognizer.onTap?.call();
       }
@@ -44,7 +44,7 @@ void main() {
       previews: () => [
         WidgetPreview.test(
           builder: () => throw Exception('Error!'),
-          previewData: Preview(),
+          previewData: const Preview(),
         ),
       ],
     );
@@ -58,22 +58,22 @@ void main() {
     await tester.pumpWidget(TestWidgetPreviewScaffold(controller: controller));
 
     // Ensure the WidgetPreviewErrorWidget exists.
-    final errorWidgetFinder = find.byType(WidgetPreviewErrorWidget);
+    final Finder errorWidgetFinder = find.byType(WidgetPreviewErrorWidget);
     expect(errorWidgetFinder, findsOne);
 
-    final findAndTapErrorWidgetTest = find.byWidgetPredicate(
+    final Finder findAndTapErrorWidgetTest = find.byWidgetPredicate(
       (widget) =>
           widget is SelectableText &&
           tryTapFirstSpanContaining(widget, 'test/error_widget_test.dart'),
     );
 
-    final findAndTapDartCoreLibrary = find.byWidgetPredicate(
+    final Finder findAndTapDartCoreLibrary = find.byWidgetPredicate(
       (widget) =>
           widget is SelectableText &&
           tryTapFirstSpanContaining(widget, 'dart:'),
     );
 
-    final findAndTapPackageUri = find.byWidgetPredicate(
+    final Finder findAndTapPackageUri = find.byWidgetPredicate(
       (widget) =>
           widget is SelectableText &&
           tryTapFirstSpanContaining(widget, 'package:'),

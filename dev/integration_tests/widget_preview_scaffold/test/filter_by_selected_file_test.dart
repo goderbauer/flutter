@@ -31,14 +31,14 @@ Future<void> testImpl({
   );
   final previews = <WidgetPreview>[
     WidgetPreview.test(
-      builder: () => Text('widget1'),
+      builder: () => const Text('widget1'),
       scriptUri: script1Uri.toString(),
-      previewData: Preview(group: 'group'),
+      previewData: const Preview(group: 'group'),
     ),
     WidgetPreview.test(
-      builder: () => Text('widget2'),
+      builder: () => const Text('widget2'),
       scriptUri: script2Uri.toString(),
-      previewData: Preview(group: 'group'),
+      previewData: const Preview(group: 'group'),
     ),
   ];
   final controller = FakeWidgetPreviewScaffoldController(
@@ -153,8 +153,8 @@ void main() {
   testWidgets('Filter previews based on currently selected file (POSIX)', (
     tester,
   ) async {
-    final kScript1 = Uri.parse('file:///script1');
-    final kScript2 = Uri.parse('file:///script2');
+    final Uri kScript1 = Uri.parse('file:///script1');
+    final Uri kScript2 = Uri.parse('file:///script2');
     await testImpl(
       tester: tester,
       script1Uri: kScript1,
@@ -169,8 +169,8 @@ void main() {
     tester,
   ) async {
     // Regression test for https://github.com/flutter/flutter/issues/175524
-    final kScript1 = Uri.parse('file:///c:/script1');
-    final kScript2 = Uri.parse('file:///C:/script2');
+    final Uri kScript1 = Uri.parse('file:///c:/script1');
+    final Uri kScript2 = Uri.parse('file:///C:/script2');
     const kTextEditorScript1 = 'file:///C%3A/script1';
     const kTextEditorScript2 = 'file:///c%3A/script2';
     await testImpl(
@@ -189,12 +189,12 @@ void main() {
     final dtdServices = FakeWidgetPreviewScaffoldDtdServices();
     final previews = <WidgetPreview>[
       WidgetPreview.test(
-        builder: () => Text('widget1'),
-        previewData: Preview(group: 'group'),
+        builder: () => const Text('widget1'),
+        previewData: const Preview(group: 'group'),
       ),
       WidgetPreview.test(
-        builder: () => Text('widget2'),
-        previewData: Preview(group: 'group'),
+        builder: () => const Text('widget2'),
+        previewData: const Preview(group: 'group'),
       ),
     ];
     final controller = FakeWidgetPreviewScaffoldController(

@@ -55,7 +55,7 @@ void main() {
           line: -1,
           column: -1,
           builder: () => const Text('Foo'),
-          previewData: Preview(),
+          previewData: const Preview(),
           packageName: '',
         ),
       );

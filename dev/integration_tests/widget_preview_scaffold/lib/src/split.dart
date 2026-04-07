@@ -15,7 +15,7 @@ double degToRad(num deg) => deg * (math.pi / 180.0);
 
 /// A small double value, used to ensure that comparisons between double are
 /// valid.
-const defaultEpsilon = 1 / 1000;
+const double defaultEpsilon = 1 / 1000;
 
 /// A widget that takes a list of children, lays them out along [axis], and
 /// allows the user to resize them.
@@ -85,9 +85,11 @@ final class SplitPane extends StatefulWidget {
   Key dividerKey(int index) => Key('$this dividerKey $index');
 
   static Axis axisFor(BuildContext context, double horizontalAspectRatio) {
-    final screenSize = MediaQuery.of(context).size;
-    final aspectRatio = screenSize.width / screenSize.height;
-    if (aspectRatio >= horizontalAspectRatio) return Axis.horizontal;
+    final Size screenSize = MediaQuery.of(context).size;
+    final double aspectRatio = screenSize.width / screenSize.height;
+    if (aspectRatio >= horizontalAspectRatio) {
+      return Axis.horizontal;
+    }
     return Axis.vertical;
   }
 
@@ -112,18 +114,20 @@ final class _SplitPaneState extends State<SplitPane> {
   }
 
   Widget _buildLayout(BuildContext _, BoxConstraints constraints) {
-    final width = constraints.maxWidth;
-    final height = constraints.maxHeight;
+    final double width = constraints.maxWidth;
+    final double height = constraints.maxHeight;
     final axisSize = isHorizontal ? width : height;
 
-    final availableSize = axisSize - _totalSplitterSize();
+    final double availableSize = axisSize - _totalSplitterSize();
 
     // Size calculation helpers.
     double minSizeForIndex(int index) {
-      if (widget.minSizes == null) return 0.0;
+      if (widget.minSizes == null) {
+        return 0.0;
+      }
 
       double totalMinSize = 0;
-      for (final minSize in widget.minSizes!) {
+      for (final double minSize in widget.minSizes!) {
         totalMinSize += minSize;
       }
 
@@ -146,14 +150,14 @@ final class _SplitPaneState extends State<SplitPane> {
 
     double sizeForIndex(int index) => availableSize * fractions[index];
 
-    double fractionDeltaRequired = 0.0;
-    double fractionDeltaAvailable = 0.0;
+    var fractionDeltaRequired = 0.0;
+    var fractionDeltaAvailable = 0.0;
 
     double deltaFromMinimumSize(int index) =>
         fractions[index] - minFractionForIndex(index);
 
-    for (int i = 0; i < fractions.length; ++i) {
-      final delta = deltaFromMinimumSize(i);
+    for (var i = 0; i < fractions.length; ++i) {
+      final double delta = deltaFromMinimumSize(i);
       if (delta < 0) {
         fractionDeltaRequired -= delta;
       } else {
@@ -169,8 +173,8 @@ final class _SplitPaneState extends State<SplitPane> {
       double scaleFactor = fractionDeltaRequired / fractionDeltaAvailable;
       assert(scaleFactor <= 1 + defaultEpsilon);
       scaleFactor = math.min(scaleFactor, 1.0);
-      for (int i = 0; i < fractions.length; ++i) {
-        final delta = deltaFromMinimumSize(i);
+      for (var i = 0; i < fractions.length; ++i) {
+        final double delta = deltaFromMinimumSize(i);
         if (delta < 0) {
           // This is equivalent to adding delta but avoids rounding error.
           fractions[i] = minFractionForIndex(i);
@@ -185,13 +189,13 @@ final class _SplitPaneState extends State<SplitPane> {
 
     // Determine what fraction to give each child, including enough space to
     // display the divider.
-    final sizes = List.generate(fractions.length, (i) => sizeForIndex(i));
+    final List<double> sizes = List.generate(fractions.length, (i) => sizeForIndex(i));
 
     void updateSpacing(DragUpdateDetails dragDetails, int splitterIndex) {
-      final dragDelta = isHorizontal
+      final double dragDelta = isHorizontal
           ? dragDetails.delta.dx
           : dragDetails.delta.dy;
-      final fractionalDelta = dragDelta / axisSize;
+      final double fractionalDelta = dragDelta / axisSize;
 
       // Returns the actual delta applied to elements before the splitter.
       double updateSpacingBeforeSplitterIndex(double delta) {
@@ -199,7 +203,7 @@ final class _SplitPaneState extends State<SplitPane> {
         var index = splitterIndex;
         while (index >= 0) {
           fractions[index] += delta;
-          final minFraction = minFractionForIndex(index);
+          final double minFraction = minFractionForIndex(index);
           if (fractions[index] >= minFraction) {
             clampFraction(index);
             return startingDelta;
@@ -217,10 +221,10 @@ final class _SplitPaneState extends State<SplitPane> {
       // Returns the actual delta applied to elements after the splitter.
       double updateSpacingAfterSplitterIndex(double delta) {
         final startingDelta = delta;
-        var index = splitterIndex + 1;
+        int index = splitterIndex + 1;
         while (index < fractions.length) {
           fractions[index] += delta;
-          final minFraction = minFractionForIndex(index);
+          final double minFraction = minFractionForIndex(index);
           if (fractions[index] >= minFraction) {
             clampFraction(index);
             return startingDelta;
@@ -240,12 +244,12 @@ final class _SplitPaneState extends State<SplitPane> {
         // the shrinking children first so that we do not over-increase the size
         // of the growing children and cause layout overflow errors.
         if (fractionalDelta <= 0.0) {
-          final appliedDelta = updateSpacingBeforeSplitterIndex(
+          final double appliedDelta = updateSpacingBeforeSplitterIndex(
             fractionalDelta,
           );
           updateSpacingAfterSplitterIndex(-appliedDelta);
         } else {
-          final appliedDelta = updateSpacingAfterSplitterIndex(
+          final double appliedDelta = updateSpacingAfterSplitterIndex(
             -fractionalDelta,
           );
           updateSpacingBeforeSplitterIndex(-appliedDelta);
@@ -255,7 +259,7 @@ final class _SplitPaneState extends State<SplitPane> {
     }
 
     final children = <Widget>[];
-    for (int i = 0; i < widget.children.length; i++) {
+    for (var i = 0; i < widget.children.length; i++) {
       children.addAll([
         SizedBox(
           width: isHorizontal ? sizes[i] : width,
@@ -290,12 +294,12 @@ final class _SplitPaneState extends State<SplitPane> {
   }
 
   double _totalSplitterSize() {
-    final numSplitters = widget.children.length - 1;
+    final int numSplitters = widget.children.length - 1;
     if (widget.splitters == null) {
       return numSplitters * DefaultSplitter.splitterWidth;
     } else {
       var totalSize = 0.0;
-      for (final splitter in widget.splitters!) {
+      for (final PreferredSizeWidget splitter in widget.splitters!) {
         totalSize += isHorizontal
             ? splitter.preferredSize.width
             : splitter.preferredSize.height;

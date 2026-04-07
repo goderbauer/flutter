@@ -21,7 +21,7 @@ abstract class WidgetPreviewScaffoldChangeDetector {
     required Directory widgetPreviewScaffoldProject,
     required Directory widgetPreviewScaffoldTemplateDir,
   }) {
-    bool updateDetected = false;
+    var updateDetected = false;
     for (final FileSystemEntity entity in Directory(
       widgetPreviewScaffoldTemplateDir.absolute.path,
     ).listSync(recursive: true)) {
@@ -44,7 +44,7 @@ abstract class WidgetPreviewScaffoldChangeDetector {
           updateDetected = true;
         }
       } else if (entity is File) {
-        final File scaffoldFile = File(resolvedScaffoldPath);
+        final scaffoldFile = File(resolvedScaffoldPath);
         if (!scaffoldFile.existsSync()) {
           stdout.writeln(
             'ERROR: Failed to find file at $resolvedScaffoldPath.',

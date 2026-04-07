@@ -6,9 +6,9 @@ import 'dart:async';
 
 import 'package:dtd/dtd.dart';
 import 'package:json_rpc_2/json_rpc_2.dart';
-import 'package:widget_preview_scaffold/src/dtd/dtd_connection_info.dart';
-import 'package:widget_preview_scaffold/src/dtd/editor_service.dart';
-import 'package:widget_preview_scaffold/src/dtd/utils.dart';
+import 'dtd_connection_info.dart';
+import 'editor_service.dart';
+import 'utils.dart';
 
 /// Provides services, streams, and RPC invocations to interact with Flutter developer tooling.
 class WidgetPreviewScaffoldDtdServices with DtdEditorService {
@@ -64,9 +64,9 @@ class WidgetPreviewScaffoldDtdServices with DtdEditorService {
   late final bool isWindows;
 
   Future<void> _determineIfWindows() async {
-    isWindows = (BoolResponse.fromDTDResponse(
+    isWindows = BoolResponse.fromDTDResponse(
       (await _call(kIsWindows))!,
-    )).value!;
+    ).value!;
   }
 
   /// Trigger a hot restart of the widget preview scaffold.
@@ -76,11 +76,11 @@ class WidgetPreviewScaffoldDtdServices with DtdEditorService {
   ///
   /// Returns null if [uri] can not be resolved.
   Future<Uri?> resolveUri(Uri uri) async {
-    final response = await _call(kResolveUri, params: {'uri': uri.toString()});
+    final DTDResponse? response = await _call(kResolveUri, params: {'uri': uri.toString()});
     if (response == null) {
       return null;
     }
-    final result = StringResponse.fromDTDResponse(response).value;
+    final String? result = StringResponse.fromDTDResponse(response).value;
     return result == null ? null : Uri.parse(result);
   }
 
@@ -90,7 +90,7 @@ class WidgetPreviewScaffoldDtdServices with DtdEditorService {
   /// Returns null if [key] is not in the map.
   Future<Object?> getPreference(String key) async {
     try {
-      final response = await _call(kGetPreference, params: {'key': key});
+      final DTDResponse? response = await _call(kGetPreference, params: {'key': key});
       return switch (response?.type) {
         'StringResponse' => StringResponse.fromDTDResponse(response!).value,
         'BoolResponse' => BoolResponse.fromDTDResponse(response!).value,

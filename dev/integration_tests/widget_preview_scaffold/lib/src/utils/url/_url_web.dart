@@ -7,7 +7,7 @@
 import 'package:web/web.dart';
 
 Map<String, String> loadQueryParams({String Function(String)? urlModifier}) {
-  var url = getWebUrl()!;
+  String url = getWebUrl()!;
   url = urlModifier?.call(url) ?? url;
   return Uri.parse(url).queryParameters;
 }
@@ -19,13 +19,13 @@ void webRedirect(String url) {
 }
 
 void updateQueryParameter(String key, String? value, {bool reload = false}) {
-  final newQueryParams = Map.of(loadQueryParams());
+  final Map<String, String> newQueryParams = Map.of(loadQueryParams());
   if (value == null) {
     newQueryParams.remove(key);
   } else {
     newQueryParams[key] = value;
   }
-  final newUri = Uri.parse(
+  final Uri newUri = Uri.parse(
     window.location.toString(),
   ).replace(queryParameters: newQueryParams);
   window.history.replaceState(window.history.state, '', newUri.toString());

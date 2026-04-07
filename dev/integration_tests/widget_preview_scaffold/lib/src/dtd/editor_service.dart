@@ -6,8 +6,8 @@ import 'dart:async';
 
 import 'package:dtd/dtd.dart';
 import 'package:flutter/foundation.dart';
-import 'package:widget_preview_scaffold/src/dtd/dtd_services.dart';
-import 'package:widget_preview_scaffold/src/dtd/utils.dart';
+import 'dtd_services.dart';
+import 'utils.dart';
 
 /// Provides support for interacting with the Editor DTD service registered by IDE plugins.
 mixin DtdEditorService {
@@ -49,9 +49,9 @@ mixin DtdEditorService {
   Future<void> initializeEditorService(
     WidgetPreviewScaffoldDtdServices dtdServices,
   ) async {
-    final editorKindMap = EditorEventKind.values.asNameMap();
+    final Map<String, EditorEventKind> editorKindMap = EditorEventKind.values.asNameMap();
     dtd.onEvent(kEditorService).listen((data) {
-      final kind = editorKindMap[data.kind];
+      final EditorEventKind? kind = editorKindMap[data.kind];
       switch (kind) {
         // Unknown event. Use null here so we get exhaustiveness checking for
         // the rest.
@@ -102,7 +102,7 @@ mixin DtdEditorService {
   }
 
   Future<void> _updateSelectedSourceFile() async {
-    final response = await dtd.safeCall(kEditorService, kGetActiveLocation);
+    final DTDResponse? response = await dtd.safeCall(kEditorService, kGetActiveLocation);
     if (response != null) {
       _selectedSourceFile.value = ActiveLocation.fromJson(
         response.result,
@@ -158,7 +158,7 @@ class EditorTheme {
 
   EditorTheme.fromJson(Map<String, Object?> map)
     : this(
-        isDarkMode: map[Field.isDarkMode] as bool,
+        isDarkMode: map[Field.isDarkMode]! as bool,
         backgroundColor: map[Field.backgroundColor] as String?,
         foregroundColor: map[Field.foregroundColor] as String?,
         fontSize: map[Field.fontSize] as int?,
@@ -182,7 +182,7 @@ class ThemeChangedEvent extends EditorEvent {
 
   ThemeChangedEvent.fromJson(Map<String, Object?> map)
     : this(
-        theme: EditorTheme.fromJson(map[Field.theme] as Map<String, Object?>),
+        theme: EditorTheme.fromJson(map[Field.theme]! as Map<String, Object?>),
       );
 
   final EditorTheme theme;
@@ -215,10 +215,10 @@ class ActiveLocation {
     : this(
         textDocument: map.containsKey(Field.textDocument)
             ? TextDocument.fromJson(
-                map[Field.textDocument] as Map<String, Object?>,
+                map[Field.textDocument]! as Map<String, Object?>,
               )
             : null,
-        selections: (map[Field.selections] as List<Object?>)
+        selections: (map[Field.selections]! as List<Object?>)
             .cast<Map<String, Object?>>()
             .map(EditorSelection.fromJson)
             .toList(),
@@ -239,12 +239,13 @@ class ActiveLocation {
 ///
 /// The [version] is an integer corresponding to LSP's
 /// [VersionedTextDocumentIdentifier](https://microsoft.github.io/language-server-protocol/specifications/lsp/3.17/specification/#versionedTextDocumentIdentifier)
+@immutable
 class TextDocument {
-  TextDocument({required this.uriAsString, required this.version});
+  const TextDocument({required this.uriAsString, required this.version});
 
   TextDocument.fromJson(Map<String, Object?> map)
     : this(
-        uriAsString: map[Field.uri] as String,
+        uriAsString: map[Field.uri]! as String,
         version: map[Field.version] as int?,
       );
 
@@ -274,10 +275,10 @@ class EditorSelection {
   EditorSelection.fromJson(Map<String, Object?> map)
     : this(
         active: CursorPosition.fromJson(
-          map[Field.active] as Map<String, Object?>,
+          map[Field.active]! as Map<String, Object?>,
         ),
         anchor: CursorPosition.fromJson(
-          map[Field.anchor] as Map<String, Object?>,
+          map[Field.anchor]! as Map<String, Object?>,
         ),
       );
 
@@ -297,9 +298,9 @@ class EditorRange {
   EditorRange.fromJson(Map<String, Object?> map)
     : this(
         start: CursorPosition.fromJson(
-          map[Field.start] as Map<String, Object?>,
+          map[Field.start]! as Map<String, Object?>,
         ),
-        end: CursorPosition.fromJson(map[Field.end] as Map<String, Object?>),
+        end: CursorPosition.fromJson(map[Field.end]! as Map<String, Object?>),
       );
 
   /// The range's start position.
@@ -317,13 +318,14 @@ class EditorRange {
 /// Representation of a single cursor position in the editor.
 ///
 /// The cursor position is after the given [character] of the [line].
+@immutable
 class CursorPosition {
-  CursorPosition({required this.character, required this.line});
+  const CursorPosition({required this.character, required this.line});
 
   CursorPosition.fromJson(Map<String, Object?> map)
     : this(
-        character: map[Field.character] as int,
-        line: map[Field.line] as int,
+        character: map[Field.character]! as int,
+        line: map[Field.line]! as int,
       );
 
   /// The zero-based character number of this position.

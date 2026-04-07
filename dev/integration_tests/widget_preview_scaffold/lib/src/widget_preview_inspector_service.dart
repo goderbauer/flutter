@@ -3,9 +3,11 @@
 // found in the LICENSE file.
 
 import 'package:flutter/widgets.dart';
-import 'package:widget_preview_scaffold/src/dtd/dtd_services.dart';
-import 'package:widget_preview_scaffold/src/dtd/editor_service.dart';
-import 'package:widget_preview_scaffold/src/widget_preview_rendering.dart';
+
+import 'dtd/dtd_services.dart';
+import 'dtd/editor_service.dart';
+import 'widget_preview.dart';
+import 'widget_preview_rendering.dart';
 
 /// A custom [WidgetInspectorService] responsible for routing navigation events
 /// to the IDE.
@@ -37,14 +39,14 @@ class WidgetPreviewScaffoldInspectorService with WidgetInspectorService {
     // Save the location of preview annotation applications so we can override
     // the navigation target in `postEvent`.
     if (object is PreviewWidgetElement) {
-      final previewData = (object.widget as PreviewWidget).preview;
+      final WidgetPreview previewData = (object.widget as PreviewWidget).preview;
       _nextNavigationLocation = CodeLocation(
         uri: previewData.scriptUri,
         line: previewData.line,
         column: previewData.column,
       );
     }
-    final result = super.setSelection(object, groupName);
+    final bool result = super.setSelection(object, groupName);
     _nextNavigationLocation = null;
     return result;
   }

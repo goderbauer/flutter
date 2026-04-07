@@ -20,7 +20,7 @@ class ZoomControls extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    const iconColor = Colors.black;
+    const Color iconColor = Colors.black;
     return _ControlDecorator(
       child: Row(
         mainAxisSize: MainAxisSize.min,
@@ -28,19 +28,19 @@ class ZoomControls extends StatelessWidget {
           IconButton(
             tooltip: 'Zoom in',
             onPressed: _zoomIn,
-            icon: Icon(Icons.zoom_in_sharp),
+            icon: const Icon(Icons.zoom_in_sharp),
             color: iconColor,
           ),
           IconButton(
             tooltip: 'Zoom out',
             onPressed: _zoomOut,
-            icon: Icon(Icons.zoom_out),
+            icon: const Icon(Icons.zoom_out),
             color: iconColor,
           ),
           IconButton(
             tooltip: 'Reset zoom',
             onPressed: _reset,
-            icon: Icon(Icons.zoom_out_map),
+            icon: const Icon(Icons.zoom_out_map),
             color: iconColor,
           ),
         ],
@@ -81,7 +81,7 @@ class _ControlDecorator extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: EdgeInsets.all(densePadding),
+      padding: const EdgeInsets.all(densePadding),
       decoration: BoxDecoration(
         color: Colors.grey[300],
         borderRadius: defaultBorderRadius,
@@ -99,7 +99,7 @@ class LayoutTypeSelector extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final theme = Theme.of(context);
+    final ThemeData theme = Theme.of(context);
     return _ControlDecorator(
       child: ValueListenableBuilder<LayoutType>(
         valueListenable: controller.layoutTypeListenable,
@@ -110,7 +110,7 @@ class LayoutTypeSelector extends StatelessWidget {
                 style: theme.iconButtonTheme.style,
                 visualDensity: VisualDensity.compact,
                 onPressed: () => controller.layoutType = LayoutType.gridView,
-                icon: Icon(Icons.grid_on),
+                icon: const Icon(Icons.grid_on),
                 color: selectedLayout == LayoutType.gridView
                     ? Colors.blue
                     : Colors.black,
@@ -118,7 +118,7 @@ class LayoutTypeSelector extends StatelessWidget {
               IconButton(
                 onPressed: () => controller.layoutType = LayoutType.listView,
                 visualDensity: VisualDensity.compact,
-                icon: Icon(Icons.view_list),
+                icon: const Icon(Icons.view_list),
                 color: selectedLayout == LayoutType.listView
                     ? Colors.blue
                     : Colors.black,
@@ -142,13 +142,13 @@ class WidgetInspectorToggle extends StatelessWidget {
       child: ValueListenableBuilder(
         valueListenable: controller.widgetInspectorVisible,
         builder: (context, widgetInspectorVisible, _) {
-          final theme = Theme.of(context);
+          final ThemeData theme = Theme.of(context);
           return IconButton(
             style: theme.iconButtonTheme.style,
             visualDensity: VisualDensity.compact,
             onPressed: controller.toggleWidgetInspectorVisible,
             // TODO(bkonyi): replace with widget inspector icon.
-            icon: Icon(Icons.image_search),
+            icon: const Icon(Icons.image_search),
             color: widgetInspectorVisible ? Colors.blue : Colors.black,
           );
         },
@@ -177,7 +177,7 @@ class FilterBySelectedFileToggle extends StatelessWidget {
         builder: (context, value, child) {
           return IconButton(
             onPressed: controller.toggleFilterBySelectedFile,
-            icon: Icon(Icons.file_open),
+            icon: const Icon(Icons.file_open),
             color: value ? Colors.blue : Colors.black,
             tooltip: kTooltip,
           );
@@ -203,7 +203,7 @@ class SoftRestartButton extends StatelessWidget {
       child: IconButton(
         tooltip: 'Hot restart',
         onPressed: _onRestart,
-        icon: Icon(Icons.refresh),
+        icon: const Icon(Icons.refresh),
         color: Colors.black,
       ),
     );
@@ -227,7 +227,7 @@ class WidgetPreviewerRestartButton extends StatelessWidget {
       child: IconButton(
         tooltip: 'Restart the Widget Previewer',
         onPressed: controller.dtdServices.hotRestartPreviewer,
-        icon: Icon(Icons.restart_alt),
+        icon: const Icon(Icons.restart_alt),
         color: Colors.black,
       ),
     );
@@ -250,7 +250,7 @@ class BrightnessToggleButton extends StatelessWidget {
     return ValueListenableBuilder<Brightness>(
       valueListenable: brightnessListenable,
       builder: (context, brightness, _) {
-        final brightness = brightnessListenable.value;
+        final Brightness brightness = brightnessListenable.value;
         return _ControlDecorator(
           child: IconButton(
             tooltip: 'Switch to ${brightness.isLight ? 'dark' : 'light'} mode',

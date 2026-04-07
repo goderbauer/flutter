@@ -6,6 +6,7 @@ import 'package:flutter/widget_previews.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:widget_preview_scaffold/src/controls.dart';
+import 'package:widget_preview_scaffold/src/dtd/editor_service.dart';
 import 'package:widget_preview_scaffold/src/split.dart';
 import 'package:widget_preview_scaffold/src/widget_preview.dart';
 import 'package:widget_preview_scaffold/src/widget_preview_inspector_service.dart';
@@ -18,8 +19,8 @@ void main() {
     'WidgetInspector is manually injected into each WidgetPreviewWidget',
     (tester) async {
       final WidgetsBinding binding = WidgetsFlutterBinding.ensureInitialized();
-      const int kNumPreviewedWidgets = 3;
-      const String kTestText = 'Foo';
+      const kNumPreviewedWidgets = 3;
+      const kTestText = 'Foo';
       final controller = FakeWidgetPreviewScaffoldController();
       final widgetPreview = WidgetPreviewerWidgetScaffolding(
         child: Column(
@@ -29,7 +30,7 @@ void main() {
                 controller: controller,
                 preview: WidgetPreview.test(
                   builder: () => Text('$kTestText$i'),
-                  previewData: Preview(),
+                  previewData: const Preview(),
                 ),
               ),
           ],
@@ -64,8 +65,8 @@ void main() {
     tester,
   ) async {
     final WidgetsBinding binding = WidgetsFlutterBinding.ensureInitialized();
-    final WidgetPreviewerWidgetScaffolding widgetPreview =
-        WidgetPreviewerWidgetScaffolding(child: SizedBox());
+    final widgetPreview =
+        WidgetPreviewerWidgetScaffolding(child: const SizedBox());
 
     await tester.pumpWidget(widgetPreview);
 
@@ -101,7 +102,7 @@ void main() {
     );
     await controller.initialize();
 
-    final service = WidgetInspectorService.instance;
+    final WidgetInspectorService service = WidgetInspectorService.instance;
     service.isSelectMode = true;
 
     const kLine = 123;
@@ -114,8 +115,8 @@ void main() {
           WidgetPreviewWidget(
             controller: controller,
             preview: WidgetPreview.test(
-              builder: () => Text(''),
-              previewData: Preview(),
+              builder: () => const Text(''),
+              previewData: const Preview(),
               line: kLine,
               column: kColumn,
               scriptUri: kScriptUri,
@@ -126,7 +127,7 @@ void main() {
     );
 
     await tester.pumpWidget(widgetPreview);
-    final element = find.byType(PreviewWidget).evaluate().first;
+    final Element element = find.byType(PreviewWidget).evaluate().first;
 
     // Select the WidgetPreviewWidget, which acts as the root entry of the
     // preview within the inspector.
@@ -141,7 +142,7 @@ void main() {
     // The navigation event should be to the location of the preview provided
     // to the WidgetPreviewWidget, not the actual creation location of the
     // WidgetPreviewWidget.annotation location
-    final codeLocation = dtd.navigationEvents.single;
+    final CodeLocation codeLocation = dtd.navigationEvents.single;
     expect(codeLocation.uri, kScriptUri);
     expect(codeLocation.line, kLine);
     expect(codeLocation.column, kColumn);

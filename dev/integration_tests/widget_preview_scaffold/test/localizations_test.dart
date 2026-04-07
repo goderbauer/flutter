@@ -49,7 +49,7 @@ void main() {
   testWidgets(
     'Localization data is correctly propagated down to the previewed widget',
     (tester) async {
-      final key = GlobalKey();
+      final GlobalKey<State<StatefulWidget>> key = GlobalKey();
       PreviewLocalizationsData previewLocalizationsData = forLocale('en');
 
       // Check that both en and es localizations are available to the previewed widget.

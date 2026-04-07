@@ -16,7 +16,7 @@ void main() {
     test('can be used without override', () {
       theme = themeFor(
         isDarkTheme: true,
-        ideTheme: IdeTheme(),
+        ideTheme: const IdeTheme(),
         theme: ThemeData(colorScheme: darkColorScheme),
       );
       expect(theme.brightness, equals(Brightness.dark));
@@ -24,7 +24,7 @@ void main() {
 
       theme = themeFor(
         isDarkTheme: false,
-        ideTheme: IdeTheme(),
+        ideTheme: const IdeTheme(),
         theme: ThemeData(colorScheme: lightColorScheme),
       );
       expect(theme.brightness, equals(Brightness.light));
@@ -34,7 +34,7 @@ void main() {
     test('can be inferred from override background color', () {
       theme = themeFor(
         isDarkTheme: false, // Will be overridden by white BG
-        ideTheme: IdeTheme(backgroundColor: Colors.white70),
+        ideTheme: const IdeTheme(backgroundColor: Colors.white70),
         theme: ThemeData(colorScheme: lightColorScheme),
       );
       expect(theme.brightness, equals(Brightness.light));
@@ -42,7 +42,7 @@ void main() {
 
       theme = themeFor(
         isDarkTheme: true, // Will be overridden by black BG
-        ideTheme: IdeTheme(backgroundColor: Colors.black),
+        ideTheme: const IdeTheme(backgroundColor: Colors.black),
         theme: ThemeData(colorScheme: darkColorScheme),
       );
       expect(theme.brightness, equals(Brightness.dark));
@@ -52,7 +52,7 @@ void main() {
     test('will not be inferred for colors that are not dark/light enough', () {
       theme = themeFor(
         isDarkTheme: false, // Will not be overridden - not dark enough
-        ideTheme: IdeTheme(backgroundColor: Colors.orange),
+        ideTheme: const IdeTheme(backgroundColor: Colors.orange),
         theme: ThemeData(colorScheme: lightColorScheme),
       );
       expect(theme.brightness, equals(Brightness.light));
@@ -60,7 +60,7 @@ void main() {
 
       theme = themeFor(
         isDarkTheme: true, // Will not be overridden - not light enough
-        ideTheme: IdeTheme(backgroundColor: Colors.orange),
+        ideTheme: const IdeTheme(backgroundColor: Colors.orange),
         theme: ThemeData(colorScheme: darkColorScheme),
       );
       expect(theme.brightness, equals(Brightness.dark));

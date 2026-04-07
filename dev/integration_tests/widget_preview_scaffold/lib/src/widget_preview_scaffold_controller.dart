@@ -6,9 +6,11 @@ import 'dart:async';
 
 import 'package:flutter/foundation.dart';
 import 'package:path/path.dart' as path;
-import 'package:widget_preview_scaffold/src/widget_preview_rendering.dart';
+
 import 'dtd/dtd_services.dart';
+import 'dtd/editor_service.dart';
 import 'widget_preview.dart';
+import 'widget_preview_rendering.dart';
 
 /// Define the Enum for Layout Types
 enum LayoutType { gridView, listView }
@@ -89,7 +91,7 @@ class WidgetPreviewScaffoldController {
 
   /// Enable or disable filtering by selected source file.
   Future<void> toggleFilterBySelectedFile() async {
-    final updated = !_filterBySelectedFile.value;
+    final bool updated = !_filterBySelectedFile.value;
     await dtdServices.setPreference(kFilterBySelectedFilePreference, updated);
     _filterBySelectedFile.value = updated;
   }
@@ -121,10 +123,10 @@ class WidgetPreviewScaffoldController {
   void _updateFilteredPreviewSet({
     bool editorServiceAvailabilityUpdated = false,
   }) {
-    final previews = _previews();
+    final WidgetPreviews previews = _previews();
     final previewGroups = <String, WidgetPreviewGroup>{};
     for (final preview in previews) {
-      final group = preview.previewData.group;
+      final String group = preview.previewData.group;
       previewGroups
           .putIfAbsent(
             group,
@@ -141,7 +143,7 @@ class WidgetPreviewScaffoldController {
       return;
     }
 
-    final selectedSourceFile = dtdServices.selectedSourceFile.value;
+    final TextDocument? selectedSourceFile = dtdServices.selectedSourceFile.value;
     // If the Editor service has only just become available and we're filtering
     // by selected file, we need to explicitly set the filtered preview set as
     // empty, otherwise `selectedSourceFile` will interpreted as a non-source
@@ -159,7 +161,7 @@ class WidgetPreviewScaffoldController {
     if (selectedSourceFile != null) {
       // Convert to a file path for comparing to avoid issues with optional encoding in URIs.
       // See https://github.com/flutter/flutter/issues/175524.
-      final selectedSourcePath = context.fromUri(
+      final String selectedSourcePath = context.fromUri(
         selectedSourceFile.uriAsString,
       );
       _filteredPreviewSet.value = previewGroups.values
